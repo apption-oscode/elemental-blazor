@@ -10,7 +10,7 @@
     <Authors>Apption</Authors>
     <Company>Apption</Company>
     <Product>Elemental Blazor</Product>
-    <Description>The Elemental Framework for Blazor provides a series of key controls for the Blazor framework.</Description>
+    <Description>The Elemental Framework for Blazor provides a series of basic controls for the Blazor framework. Buttons, Dropdowns, Search Bar and a Table.</Description>
     <Copyright>Copyright Apption 2020</Copyright>
     <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
