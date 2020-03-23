@@ -3,6 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>Apption.Elemental</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>Apption</Authors>
+    <Company>Apption</Company>
+    <Product>Elemental Blazor</Product>
+    <Description>The Elemental Framework for Blazor provides a series of key controls for the Blazor framework.</Description>
+    <Copyright>Copyright Apption 2020</Copyright>
+    <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
+    <PackageTags>c# blazor</PackageTags>
+    <RepositoryType>Git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +37,10 @@
 
 
   <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="compilerconfig.json" />
   </ItemGroup>
 
