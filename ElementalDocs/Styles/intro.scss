@@ -1,0 +1,41 @@
+﻿@import 'box-shadow';
+@import 'colors';
+
+.jumbotron {
+    display: flex;
+    justify-content: center;
+
+    .title {
+        margin: 5rem auto;
+        font-size: 3rem;
+    }
+}
+
+.component {
+    width: 1200px;
+    background-color: $white;
+    margin: auto;
+    padding: 2rem;
+
+    .title {
+        font-size: 2rem;
+        line-height: 3rem;
+        margin: 0 0 1rem;
+
+        &.space {
+            margin-top: 5rem;
+        }
+    }
+
+    &.dropdown-item {
+        .showcase {
+            width: 200px;
+        }
+    }
+
+    .source {
+        .title {
+            margin: 3rem 0 1rem;
+        }
+    }
+}

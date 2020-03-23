@@ -1,0 +1,94 @@
+﻿@page "/search"
+
+@inject IJSRuntime JSRuntime
+
+<div class="component search">
+    <div class="title">Search</div>
+    <div class="details">
+        Default event fires after <code>500 ms</code>
+    </div>
+    <div class="details">
+        Most recent input: <code>@_mostRecentInput</code>
+    </div>
+    <div class="showcase">
+        <SearchBar OnInputChange="HandleInputChange" />
+    </div>
+
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@(@"<SearchBar OnInputChange=""HandleInputChange"" />")</code></pre>
+        <pre><code class="language-csharp">@defaultSourceCode</code></pre>
+    </div>
+
+    <div class="title space">Search with Optional Parameters</div>
+    <div class="details">
+        Event override fires after <code>@_eventFireAfter ms</code>
+    </div>
+    <div class="details">
+        Most recent input: <code>@_customMostRecentInput</code>
+    </div>
+    <div class="showcase">
+        <SearchBar OnInputChange="HandleCustomInputChange" EventTimer="_eventFireAfter" Placeholder="@_placeholder" />
+    </div>
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@(@"<SearchBar OnInputChange=""HandleCustomInputChange"" EventTimer=""_eventFireAfter"" Placeholder=""@_placeholder"" />")</code></pre>
+        <pre><code class="language-csharp">@customSourceCode</code></pre>
+    </div>
+</div>
+
+
+@code {
+
+    private int _eventFireAfter = 1000;
+    private string _placeholder = "Placeholder text";
+    private string _customMostRecentInput = "";
+
+    private void HandleCustomInputChange(string newInput)
+    {
+        _customMostRecentInput = newInput;
+        StateHasChanged();
+    }
+
+
+    private string customSourceCode = @"@code {
+    private int _eventFireAfter = 1000;
+    private string _placeholder = ""Placeholder text"";
+    private string _customMostRecentInput = """";
+
+    private void HandleCustomInputChange(string newInput)
+    {
+        _customMostRecentInput = newInput;
+        StateHasChanged();
+    }
+}";
+
+
+
+
+
+    private string _mostRecentInput = "";
+    private void HandleInputChange(string newInput)
+    {
+        _mostRecentInput = newInput;
+        StateHasChanged();
+    }
+
+
+    private string defaultSourceCode = @"@code {
+    
+    private string _mostRecentInput = """";
+
+    private void HandleInputChange(string newInput)
+    {
+        _mostRecentInput = newInput;
+        StateHasChanged();
+    }
+}";
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("initHighlight");
+    }
+}

@@ -1,0 +1,28 @@
+﻿<button class="@GetButtonStyle()">
+    @ChildContent
+</button>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public Style ButtonStyle { get; set; }
+
+    private string GetButtonStyle()
+    {
+        var css = "e button";
+        switch (ButtonStyle)
+        {
+            case Style.Dark:
+                return css + " dark";
+            default:
+                return css;
+        }
+    }
+
+    public enum Style
+    {
+        Default,
+        Dark
+    }
+}

@@ -1,0 +1,37 @@
+﻿@import 'colors';
+@import 'box-shadow';
+@import 'constants';
+
+
+
+button.e.button {
+    padding: 0.5rem 1rem;
+    margin: auto;
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    color: $grey-600;
+    background-color: $grey-100;
+    border: 1px solid $grey-100;
+
+    &.dark {
+        background-color: $grey-700;
+        border: 1px solid $grey-700;
+        color: $white;
+    }
+
+    transition: all 0.4s $cubic-bezier;
+
+    &:hover {
+        background-color: $white;
+        @include BoxShadow(1);
+
+        &.dark {
+            background-color: $grey-800;
+        }
+    }
+}

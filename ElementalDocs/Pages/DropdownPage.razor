@@ -1,0 +1,266 @@
+﻿@page "/dropdown"
+
+@inject IJSRuntime JSRuntime
+
+<div class="component dropdown-content">
+    <div class="title">Dropdown</div>
+    <div class="details">
+        Selected Items: @_itemList
+    </div>
+    <div class="showcase">
+        <Dropdown 
+            Label="Classifiers" 
+            DropdownItems="dropdownItems" 
+            OnChange="HandleDropdownChange"
+        />
+    </div>
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@(@"<Dropdown Label=""Classifiers"" DropdownItems=""dropdownItems"" OnChange=""HandleDropdownChange"" />")</code></pre>
+        <pre><code class="language-csharp">@(@"@code {
+
+    private void HandleDropdownChange(IEnumerable<string> selectedItems)
+    {
+        _selectedItems = selectedItems.ToList();
+        StateHasChanged();
+    }
+
+    public List<string> _selectedItems = new List<string>();
+    public List<string> dropdownItems = new List<string>
+    {
+        ""Number"",
+        ""Date"",
+        ""Plain English"",
+        ""Money"",
+        ""String"",
+        ""First Name"",
+        ""Last Name"",
+        ""Dolor ipsum"",
+        ""1"",
+        ""2"",
+        ""3"",
+        ""4"",
+        ""5"",
+        ""6"",
+        ""7"",
+        ""8"",
+        ""9"",
+        ""10"",
+        ""11"",
+        ""12"",
+    };
+}")</code></pre>
+    </div>
+
+
+    <div class="title space">Dropdown with custom Rendering</div>
+    <div class="details">
+        Selected Items: 
+        @foreach(var (label, iconClass) in _selectedCustomItems)
+        {
+            <i class="@iconClass"></i>
+        }
+    </div>
+    <div class="showcase">
+        <Dropdown 
+            Label="Classifiers" 
+            DropdownItems="customDropdownItems" 
+            OnChange="HandleCustomDropdownChange"
+            Renderer="CustomRendering"
+        />
+    </div>
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@(@"<Dropdown 
+    Label=""Classifiers"" 
+    DropdownItems=""customDropdownItems""
+    OnChange=""HandleCustomDropdownChange""
+    Renderer=""CustomRendering""
+/>")</code></pre>
+        <pre><code class="language-csharp">@(@"@code {
+
+    private RenderFragment CustomRendering((string label, string iconClass) item, bool isSelected)
+    {
+        return @<div style=""display:contents;"">
+                    <div class=""@($""e checkbox checkicon {(isSelected ? ""checked"" : """")}"")"">
+                        <i class=""@item.iconClass""></i>
+                    </div>
+                    <div class=""e text"">@item.label</div>
+                </div>;
+    }
+
+    private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
+    private List<(string, string)> customDropdownItems = new List<(string, string)>()
+    {
+        (""Number"", ""fa fa-hashtag""),
+        (""PII Attribute"", ""fa fa-user-tag""),
+        (""PII Individual"", ""fa fa-fingerprint""),
+        (""Finance"", ""fa fa-dollar-sign""),
+        (""Data Masking"", ""fa fa-user-secret""),
+        (""High Null Count"", ""fa fa-ban""),
+        (""Bias"", ""fa fa-balance-scale""),
+        (""Outliers"", ""fa fa-bug""),
+    };
+
+    private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
+    {
+        _selectedCustomItems = selectedItems.ToList();
+        StateHasChanged();
+    }
+}")</code></pre>
+    </div>
+
+
+    <div class="title space">Dropdown with custom Accessor</div>
+    <div class="details">
+        Selected Heroes: @_selectedAccessorString
+    </div>
+    <div class="showcase">
+        <Dropdown 
+            Label="The Avengers™" 
+            DropdownItems="accessorItems" 
+            OnChange="HandleAccessorDropdownChange"
+            Accessor="CustomAccessor"
+        />
+    </div>
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@(@"<Dropdown 
+    Label=""The Avengers™"" 
+    DropdownItems=""accessorItems""
+    OnChange=""HandleAccessorDropdownChange""
+    Accessor=""CustomAccessor""
+/>")</code></pre>
+        <pre><code class="language-csharp">@(@"@code {
+
+    private string CustomAccessor((int, string label, bool) item)
+    {
+        return item.label;
+    }
+
+    private void HandleAccessorDropdownChange(IEnumerable<(int, string, bool)> selectedItems)
+    {
+        _selectedAccessorItems = selectedItems.ToList();
+        StateHasChanged();
+    }
+
+    private List<(int, string, bool)> _selectedAccessorItems = new List<(int, string, bool)>();
+    private List<(int, string, bool)> accessorItems = new List<(int, string, bool)>()
+    {
+        (5, ""Dr. Strange"", true),
+        (6, ""Iron Man"", false),
+        (3, ""Spiderman"", true),
+        (1, ""The Hulk"", false),
+        (4, ""Thanos"", false),
+        (7, ""Black Panther"", false),
+        (9, ""Thor"", true),
+    };
+}")</code></pre>
+    </div>
+
+</div>
+
+
+@code {
+
+    private string _selectedAccessorString => string.Join(", ", _selectedAccessorItems.Select(i => i.Item2));
+
+    private string CustomAccessor((int, string label, bool) item)
+    {
+        return item.label;
+    }
+
+    private void HandleAccessorDropdownChange(IEnumerable<(int, string, bool)> selectedItems)
+    {
+        _selectedAccessorItems = selectedItems.ToList();
+        StateHasChanged();
+    }
+
+    private List<(int, string, bool)> _selectedAccessorItems = new List<(int, string, bool)>();
+    private List<(int, string, bool)> accessorItems = new List<(int, string, bool)>()
+    {
+        (5, "Dr. Strange", true),
+        (6, "Iron Man", false),
+        (3, "Spiderman", true),
+        (1, "The Hulk", false),
+        (4, "Thanos", false),
+        (7, "Black Panther", false),
+        (9, "Thor", true),
+    };
+
+
+
+
+
+    private RenderFragment CustomRendering((string label, string iconClass) item, bool isSelected)
+    {
+        return @<div style="display:contents;">
+                <div class="@($"e checkbox checkicon {(isSelected ? "checked" : "")}")">
+                    <i class="@item.iconClass"></i>
+                </div>
+                <div class="e text">@item.label</div>
+            </div>;
+    }
+
+    private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
+    private List<(string, string)> customDropdownItems = new List<(string, string)>()
+    {
+        ("Number", "fa fa-hashtag"),
+        ("PII Attribute", "fa fa-user-tag"),
+        ("PII Individual", "fa fa-fingerprint"),
+        ("Finance", "fa fa-dollar-sign"),
+        ("Data Masking", "fa fa-user-secret"),
+        ("High Null Count", "fa fa-ban"),
+        ("Bias", "fa fa-balance-scale"),
+        ("Outliers", "fa fa-bug"),
+    };
+
+    private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
+    {
+        _selectedCustomItems = selectedItems.ToList();
+        StateHasChanged();
+    }
+
+
+
+
+
+    private void HandleDropdownChange(IEnumerable<string> selectedItems)
+    {
+        _selectedItems = selectedItems.ToList();
+        StateHasChanged();
+    }
+
+    private string _itemList => string.Join(", ", _selectedItems);
+
+    public List<string> _selectedItems = new List<string>();
+    public List<string> dropdownItems = new List<string>
+    {
+        "Number",
+        "Date",
+        "Plain English",
+        "Money",
+        "String",
+        "First Name",
+        "Last Name",
+        "Dolor ipsum",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+    };
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("initHighlight");
+    }
+}

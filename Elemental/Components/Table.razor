@@ -1,0 +1,132 @@
+﻿@typeparam T
+
+
+<div class="@_tableClass">
+    <div class="e table-header" style="@_headerStyle">
+        @foreach(var (header, index) in Headers.Select((h, index) => (h, index)))
+        {
+            <div class="e table-cell" @onclick="() => ToggleSortOnColumn(index)">
+                @header
+                <span class="e table-sort" ><i class="@GetSortIconClass(index)"></i></span>
+            </div>
+        }
+    </div>
+    <div class="e table-rows" style="@_rowStyle">
+        @foreach(var row in GetSortedDataset())
+        {
+            <div class="@GetRowColor(row)">
+                @foreach(var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+                {
+                    if(Renderers?[index] is null)
+                    {
+                        <div class="e table-cell">@accessor?.Invoke(row)</div>
+                    }
+                    else
+                    {
+                        <div class="e table-cell">@Renderers[index](row)</div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+@code {
+    [Parameter]
+    public string GridTemplateColumns { get; set; }
+    [Parameter]
+    public List<string> Headers { get; set; }
+    [Parameter]
+    public List<Func<T, string>> Accessors { get; set; }
+    [Parameter]
+    public List<Func<T, RenderFragment>> Renderers{ get; set; }
+    [Parameter]
+    public List<T> Dataset { get; set; }
+    [Parameter]
+    public Func<T, RowColor> ColorAccessor { get; set; }
+    [Parameter]
+    public string MaxHeight { get; set; }
+
+    private string _tableClass => $"e table";
+    private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
+    private string _rowStyle => $"{_gridStyle} max-height: {MaxHeight};";
+    private string _headerStyle => $"{_gridStyle}";
+
+
+    private (int column, bool sortAscending) _sorting = (0, true);
+
+    private void ToggleSortOnColumn(int column)
+    {
+        if(column == _sorting.column)
+        {
+            _sorting.sortAscending = !_sorting.sortAscending;
+        }
+        else
+        {
+            _sorting.column = column;
+            _sorting.sortAscending = true;
+        }
+        StateHasChanged();
+    }
+
+    private IEnumerable<T> GetSortedDataset()
+    {
+        if (_sorting.sortAscending)
+        {
+            return Dataset.OrderBy(data => Accessors[_sorting.column].Invoke(data));
+        }
+        else
+        {
+            return Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data));
+        }
+    }
+
+    private string GetSortIconClass(int column)
+    {
+        if(column == _sorting.column)
+        {
+            return _sorting.sortAscending ? "fad fa-sort-down" : "fad fa-sort-up";
+        }
+        return "fad fa-sort";
+    }
+
+    private string GetGridTemplateColumns()
+    {
+        if(string.IsNullOrWhiteSpace(GridTemplateColumns))
+        {
+            return $"repeat({Headers?.Count ?? 1}, minmax(0, 1fr))";
+        }
+        else
+        {
+            return GridTemplateColumns;
+        }
+    }
+
+    private string GetRowColor(T row)
+    {
+        string rowClass = "e table-row";
+        switch (ColorAccessor?.Invoke(row))
+        {
+            case RowColor.Blue:
+                return rowClass + " blue";
+            case RowColor.Red:
+                return rowClass + " red";
+            case RowColor.Yellow:
+                return rowClass + " yellow";
+            default:
+                return rowClass;
+        }
+    }
+
+    public enum RowColor
+    {
+        Default,
+        Red,
+        Yellow,
+        Blue
+    }
+}

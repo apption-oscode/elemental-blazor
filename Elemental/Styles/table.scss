@@ -1,0 +1,93 @@
+﻿@import 'colors';
+@import 'box-shadow';
+@import 'constants';
+@import 'scrollbar';
+
+
+@mixin row-color($border-color, $background-color, $hover-color) {
+    .e.table-cell {
+        background-color: $background-color;
+
+        &:nth-child(1) {
+            border-left: 0.25rem solid $border-color;
+        }
+    }
+    &:hover {
+        .e.table-cell {
+            background-color: $hover-color;
+        }
+    }
+}
+
+.e.table {
+
+    .e.table-header {
+        display: grid;
+
+        .e.table-cell {
+            font-size: 0.9rem;
+            line-height: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+            padding-left: 0.75rem;
+            background-color: $grey-600;
+            color: $white;
+            word-wrap: break-word;
+
+            &:hover {
+                background-color: $grey-700;
+            }
+        }
+    }
+
+    .e.table-rows {
+        display: grid;
+        overflow: auto;
+        overflow: overlay;
+
+        @include Scrollbar();
+
+        .e.table-row {
+            display: contents;
+
+            .e.table-cell {
+                word-wrap: break-word;
+                font-size: 0.9rem;
+                padding: 0.5rem 0 0.5rem 0.75rem;
+                transition: all 0.4s $cubic-bezier;
+
+                & + .e.table-cell {
+                    /*border-left: 1px solid $grey-300;*/
+                }
+
+                &:nth-child(1) {
+                    padding-left: 0.5rem;
+                }
+
+                a {
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            @include row-color($transparent, $transparent, $grey-200);
+
+            &:nth-of-type(2n+1) {
+                @include row-color($transparent, $grey-100, $grey-200);
+            }
+
+            &.red {
+                @include row-color($red-400, $red-100, $red-200);
+            }
+
+            &.blue {
+                @include row-color($blue-400, $blue-100, $blue-200);
+            }
+
+            &.yellow {
+                @include row-color($orange-400, $orange-100, $orange-200);
+            }
+        }
+    }
+}

@@ -1,0 +1,61 @@
+﻿@import 'colors';
+@import 'constants';
+@import 'box-shadow';
+
+
+.e.searchbar {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    background-color: $grey-100;
+    border-radius: $border-radius;
+
+    & > i {
+        color: $grey-400;
+        width: 2rem;
+        text-align: center;
+    }
+
+    input {
+        flex-grow: 1;
+        color: $grey-600;
+        background-color: $transparent;
+        line-height: 1.6rem;
+        border: none;
+
+        &::-webkit-input-placeholder {
+            color: $grey-500;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .e.clear-search {
+        visibility: hidden;
+        background-color: $grey-200;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.2rem;
+        height: 1.2rem;
+
+        transition: background-color 0.4s $cubic-bezier;
+
+        i {
+            color: $grey-600;
+            font-size: 0.6rem;
+        }
+
+        &:hover {
+            background-color: $grey-300;
+            cursor: pointer;
+        }
+
+        &.visible {
+            visibility: visible;
+        }
+    }
+}

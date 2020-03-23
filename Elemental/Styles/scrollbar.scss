@@ -1,0 +1,22 @@
+﻿@import 'colors';
+@import 'constants';
+
+@mixin Scrollbar() {
+    &::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $grey-200;
+        border-radius: $border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $grey-500;
+        border-radius: $border-radius;
+
+        &:hover {
+            background: $grey-600;
+        }
+    }
+}
