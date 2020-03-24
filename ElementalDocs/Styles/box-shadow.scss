@@ -1,4 +1,12 @@
-﻿@mixin BoxShadow ($dp) {
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+@mixin BoxShadow ($dp) {
     @if $dp==-1 {
         box-shadow: inset 4px 8px 8px -8px rgba(0,0,0,0.16);
     }
