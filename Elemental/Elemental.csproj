@@ -33,7 +33,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\css\" />
-    <Content Include="wwwroot\css\elemental.css" />
   </ItemGroup>
 
 
