@@ -1,8 +1,10 @@
-// Copyright (c) 2020 Apption Corporation
-// 
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
 
 @page "/dropdown"
 
@@ -14,11 +16,9 @@
         Selected Items: @_itemList
     </div>
     <div class="showcase">
-        <Dropdown 
-            Label="Classifiers" 
-            DropdownItems="dropdownItems" 
-            OnChange="HandleDropdownChange"
-        />
+        <Dropdown Label="Classifiers"
+                  DropdownItems="dropdownItems"
+                  OnChange="HandleDropdownChange" />
     </div>
     <div class="source">
         <div class="title">Source</div>
@@ -61,19 +61,17 @@
 
     <div class="title space">Dropdown with custom Rendering</div>
     <div class="details">
-        Selected Items: 
-        @foreach(var (label, iconClass) in _selectedCustomItems)
+        Selected Items:
+        @foreach (var (label, iconClass) in _selectedCustomItems)
         {
             <i class="@iconClass"></i>
         }
     </div>
     <div class="showcase">
-        <Dropdown 
-            Label="Classifiers" 
-            DropdownItems="customDropdownItems" 
-            OnChange="HandleCustomDropdownChange"
-            Renderer="CustomRendering"
-        />
+        <Dropdown Label="Classifiers"
+                  DropdownItems="customDropdownItems"
+                  OnChange="HandleCustomDropdownChange"
+                  Renderer="CustomRendering" />
     </div>
     <div class="source">
         <div class="title">Source</div>
@@ -122,12 +120,10 @@
         Selected Heroes: @_selectedAccessorString
     </div>
     <div class="showcase">
-        <Dropdown 
-            Label="The Avengers™" 
-            DropdownItems="accessorItems" 
-            OnChange="HandleAccessorDropdownChange"
-            Accessor="CustomAccessor"
-        />
+        <Dropdown Label="The Avengers™"
+                  DropdownItems="accessorItems"
+                  OnChange="HandleAccessorDropdownChange"
+                  Accessor="CustomAccessor" />
     </div>
     <div class="source">
         <div class="title">Source</div>
@@ -184,7 +180,7 @@
 
     private List<(int, string, bool)> _selectedAccessorItems = new List<(int, string, bool)>();
     private List<(int, string, bool)> accessorItems = new List<(int, string, bool)>()
-    {
+{
         (5, "Dr. Strange", true),
         (6, "Iron Man", false),
         (3, "Spiderman", true),
@@ -200,17 +196,17 @@
 
     private RenderFragment CustomRendering((string label, string iconClass) item, bool isSelected)
     {
-        return @<div style="display:contents;">
-                <div class="@($"e checkbox checkicon {(isSelected ? "checked" : "")}")">
-                    <i class="@item.iconClass"></i>
-                </div>
-                <div class="e text">@item.label</div>
-            </div>;
-    }
+        return@<div style="display:contents;">
+        <div class="@($"e checkbox checkicon {(isSelected ? "checked" : "")}")">
+            <i class="@item.iconClass"></i>
+        </div>
+        <div class="e text">@item.label</div>
+    </div>;
+}
 
-    private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
-    private List<(string, string)> customDropdownItems = new List<(string, string)>()
-    {
+private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
+private List<(string, string)> customDropdownItems = new List<(string, string)>()
+{
         ("Number", "fa fa-hashtag"),
         ("PII Attribute", "fa fa-user-tag"),
         ("PII Individual", "fa fa-fingerprint"),
@@ -221,27 +217,27 @@
         ("Outliers", "fa fa-bug"),
     };
 
-    private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
-    {
-        _selectedCustomItems = selectedItems.ToList();
-        StateHasChanged();
-    }
+private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
+{
+_selectedCustomItems = selectedItems.ToList();
+StateHasChanged();
+}
 
 
 
 
 
-    private void HandleDropdownChange(IEnumerable<string> selectedItems)
-    {
-        _selectedItems = selectedItems.ToList();
-        StateHasChanged();
-    }
+private void HandleDropdownChange(IEnumerable<string> selectedItems)
+{
+_selectedItems = selectedItems.ToList();
+StateHasChanged();
+}
 
-    private string _itemList => string.Join(", ", _selectedItems);
+private string _itemList => string.Join(", ", _selectedItems);
 
-    public List<string> _selectedItems = new List<string>();
-    public List<string> dropdownItems = new List<string>
-    {
+public List<string> _selectedItems = new List<string>();
+public List<string> dropdownItems = new List<string>
+{
         "Number",
         "Date",
         "Plain English",
@@ -265,8 +261,8 @@
     };
 
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntime.InvokeVoidAsync("initHighlight");
-    }
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+await JSRuntime.InvokeVoidAsync("initHighlight");
+}
 }
