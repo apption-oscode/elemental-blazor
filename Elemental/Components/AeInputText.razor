@@ -1,0 +1,43 @@
+﻿@inherits Elemental.Data.AeInputTextBase
+
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="e e-form-control-wrapper">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <label class="e e-form-control-label" for="@Id">@Label</label>
+    }
+    <input class="e e-form-control" id="@Id" value="@_inputValue" @onchange="HandleOnChange" />
+    <div class="e e-form-control-validation">
+        <ValidationMessage For="@ValidationFor" />
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public Action<string> Setter { get; set; }
+    [Parameter]
+    public Func<string> Getter { get; set; }
+
+
+    private string _inputValue;
+
+
+    protected override void OnInitialized()
+    {
+        if(Getter != null)
+        {
+            _inputValue = Getter().ToString();
+        }
+    }
+
+    private void HandleOnChange(ChangeEventArgs e)
+    {
+        if(Setter != null)
+        {
+            Setter.Invoke(e.Value.ToString());
+        }
+        _inputValue = e.Value.ToString();
+    }
+} 
