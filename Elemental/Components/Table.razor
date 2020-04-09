@@ -1,29 +1,33 @@
-// Copyright (c) 2020 Apption Corporation
-// 
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+
 
 @typeparam T
 
 
 <div class="@_tableClass">
     <div class="e table-header" style="@_headerStyle">
-        @foreach(var (header, index) in Headers.Select((h, index) => (h, index)))
+        @foreach (var (header, index) in Headers.Select((h, index) => (h, index)))
         {
             <div class="e table-cell" @onclick="() => ToggleSortOnColumn(index)">
                 @header
-                <span class="e table-sort" ><i class="@GetSortIconClass(index)"></i></span>
+                <span class="e table-sort"><i class="@GetSortIconClass(index)"></i></span>
             </div>
         }
     </div>
     <div class="e table-rows" style="@_rowStyle">
-        @foreach(var row in GetSortedDataset())
+        @foreach (var row in GetSortedDataset())
         {
             <div class="@GetRowColor(row)">
-                @foreach(var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+                @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
                 {
-                    if(Renderers?[index] is null)
+                    if (Renderers?[index] is null)
                     {
                         <div class="e table-cell">@accessor?.Invoke(row)</div>
                     }
@@ -49,7 +53,7 @@
     [Parameter]
     public List<Func<T, string>> Accessors { get; set; }
     [Parameter]
-    public List<Func<T, RenderFragment>> Renderers{ get; set; }
+    public List<Func<T, RenderFragment>> Renderers { get; set; }
     [Parameter]
     public List<T> Dataset { get; set; }
     [Parameter]
@@ -67,7 +71,7 @@
 
     private void ToggleSortOnColumn(int column)
     {
-        if(column == _sorting.column)
+        if (column == _sorting.column)
         {
             _sorting.sortAscending = !_sorting.sortAscending;
         }
@@ -93,7 +97,7 @@
 
     private string GetSortIconClass(int column)
     {
-        if(column == _sorting.column)
+        if (column == _sorting.column)
         {
             return _sorting.sortAscending ? "fad fa-sort-down" : "fad fa-sort-up";
         }
@@ -102,7 +106,7 @@
 
     private string GetGridTemplateColumns()
     {
-        if(string.IsNullOrWhiteSpace(GridTemplateColumns))
+        if (string.IsNullOrWhiteSpace(GridTemplateColumns))
         {
             return $"repeat({Headers?.Count ?? 1}, minmax(0, 1fr))";
         }

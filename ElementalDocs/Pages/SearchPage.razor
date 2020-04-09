@@ -1,8 +1,11 @@
-// Copyright (c) 2020 Apption Corporation
-// 
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
 
 @page "/search"
 
@@ -58,15 +61,15 @@
 
 
     private string customSourceCode = @"@code {
-    private int _eventFireAfter = 1000;
-    private string _placeholder = ""Placeholder text"";
-    private string _customMostRecentInput = """";
+private int _eventFireAfter = 1000;
+private string _placeholder = ""Placeholder text"";
+private string _customMostRecentInput = """";
 
-    private void HandleCustomInputChange(string newInput)
-    {
-        _customMostRecentInput = newInput;
-        StateHasChanged();
-    }
+private void HandleCustomInputChange(string newInput)
+{
+    _customMostRecentInput = newInput;
+    StateHasChanged();
+}
 }";
 
 
@@ -82,14 +85,14 @@
 
 
     private string defaultSourceCode = @"@code {
-    
-    private string _mostRecentInput = """";
 
-    private void HandleInputChange(string newInput)
-    {
-        _mostRecentInput = newInput;
-        StateHasChanged();
-    }
+private string _mostRecentInput = """";
+
+private void HandleInputChange(string newInput)
+{
+    _mostRecentInput = newInput;
+    StateHasChanged();
+}
 }";
 
 

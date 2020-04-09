@@ -13,6 +13,10 @@
 @import 'dropdown-page';
 @import 'searchbar-page';
 
+html {
+    overflow: overlay;
+}
+
 body {
     background-color: $grey-100;
     font-size: 16px;

@@ -1,0 +1,41 @@
+﻿@typeparam T
+
+@using Microsoft.AspNetCore.Components.Forms
+ 
+<h3>ModelForm</h3>
+@if(Model != null)
+{
+    <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        @foreach (var prop in Model.GetType().GetProperties())
+        {
+            @if (prop.PropertyType == typeof(string))
+            {
+            @*var cvt = (IConverter<S, T>)instance;
+            var cinput = Expression.Parameter(typeof(S), "input");
+            var converter = Expression.Constant(instance);
+            var call = Expression.Call(converter, nameof(IConverter<string, string>.Convert), new Type[] { }, cinput);
+            var validationExpression = Expression.Lambda<Expression<Func<string>>>(call, cinput)*@
+
+                <AeInputText Setter="(s => prop.SetValue(Model, s))" Getter="() => prop.GetValue(Model).ToString()"/>
+                @*<SwInputText Label="Catalogue" @bind-Value="Form.Catalogue" ValidationFor="validationExpression"*@
+            }
+        }
+    </EditForm>
+}
+
+
+@code {
+    [Parameter]
+    public T Model { get; set; }
+
+    [Parameter]
+    public Action<T> OnValidSubmit { get; set; }
+
+    private void HandleValidSubmit()
+    {
+        OnValidSubmit?.Invoke(Model);
+    }
+}
+
