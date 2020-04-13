@@ -11,8 +11,10 @@ namespace Elemental.Data
     {
         [Parameter]
         public string Id { get; set; }
+
         [Parameter]
         public string Label { get; set; }
+
         [Parameter]
         public Expression<Func<string>> ValidationFor { get; set; }
 

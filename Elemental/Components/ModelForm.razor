@@ -8,17 +8,11 @@
     <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        @foreach (var prop in Model.GetType().GetProperties())
+        @foreach (var prop in typeof(T).GetProperties())
         {
             @if (prop.PropertyType == typeof(string))
             {
-            @*var cvt = (IConverter<S, T>)instance;
-            var cinput = Expression.Parameter(typeof(S), "input");
-            var converter = Expression.Constant(instance);
-            var call = Expression.Call(converter, nameof(IConverter<string, string>.Convert), new Type[] { }, cinput);
-            var validationExpression = Expression.Lambda<Expression<Func<string>>>(call, cinput)*@
-
-                <AeInputText Setter="(s => prop.SetValue(Model, s))" Getter="() => prop.GetValue(Model).ToString()"/>
+                <AePropertyInputText PropertyInfo="prop" Instance="Model"/>
                 @*<SwInputText Label="Catalogue" @bind-Value="Form.Catalogue" ValidationFor="validationExpression"*@
             }
         }

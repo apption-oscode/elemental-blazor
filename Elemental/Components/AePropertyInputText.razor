@@ -1,0 +1,22 @@
+﻿<AeInputText @bind-Value="StringProperty" 
+             Label="@PropertyInfo.Name"
+             ValidationFor="PropertyInfo.GenerateValidatorFunction(Instance)"/>
+
+@code {
+
+    //<AeInputText />
+
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    [Parameter]
+    public object Instance { get; set; }
+
+    public string StringProperty {
+        get => PropertyInfo.GetValue(Instance) as string;
+        set {
+            PropertyInfo.SetValue(Instance, value);
+        }
+    }
+
+}
