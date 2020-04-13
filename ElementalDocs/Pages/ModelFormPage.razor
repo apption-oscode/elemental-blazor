@@ -10,60 +10,9 @@
 
 
 <div class="component model-form">
-    <div class="title">Blazor Form</div>
-    <div class="showcase">
-        <EditForm Model="_starship" OnValidSubmit="HandleValidSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-
-            <p>
-                <label>
-                    Identifier:
-                    <InputText @bind-Value="_starship.Identifier" />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Description (optional):
-                    <InputTextArea @bind-Value="_starship.Description" />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Primary Classification:
-                    <InputSelect @bind-Value="_starship.Classification">
-                        <option value="">Select classification ...</option>
-                        <option value="Exploration">Exploration</option>
-                        <option value="Diplomacy">Diplomacy</option>
-                        <option value="Defense">Defense</option>
-                    </InputSelect>
-                </label>
-            </p>
-            <p>
-                <label>
-                    Maximum Accommodation:
-                    <InputNumber @bind-Value="_starship.MaximumAccommodation" />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Engineering Approval:
-                    <InputCheckbox @bind-Value="_starship.IsValidatedDesign" />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Production Date:
-                    <InputDate @bind-Value="_starship.ProductionDate" />
-                </label>
-            </p>
-
-            <button type="submit">Submit</button>
-        </EditForm>
-    </div>
     <div class="title">Model Form</div>
     <div class="showcase">
-        <ModelForm Model="@_starship"/>
+        <ModelForm Model="@_starship" OnValidSubmit="HandleValidSubmit"/>
     </div>
 </div>
 

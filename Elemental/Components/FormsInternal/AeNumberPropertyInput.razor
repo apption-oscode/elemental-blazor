@@ -1,0 +1,34 @@
+﻿@typeparam T
+
+<AeNumberInput @bind-Value="PropertyValue"
+             Label="@GetLabel()"
+             ValidationFor="PropertyInfo.GenerateValidatorFunction<int>(Instance)"
+             />
+
+@code {
+
+    //<AeInputText />
+
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    [Parameter]
+    public T Instance { get; set; }
+
+    public int PropertyValue
+    {
+        get => (int)PropertyInfo.GetValue(Instance);
+        set
+        {
+            PropertyInfo.SetValue(Instance, value);
+        }
+    }
+
+    private string GetLabel() => PropertyInfo.Name + (IsRequired() ? "" : " (Optional)");
+
+    private bool IsRequired()
+    {
+        return System.ComponentModel.DataAnnotations.RequiredAttribute.IsDefined(PropertyInfo, typeof(System.ComponentModel.DataAnnotations.RequiredAttribute));
+    }
+
+}

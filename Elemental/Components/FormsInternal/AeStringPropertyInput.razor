@@ -1,0 +1,42 @@
+﻿@typeparam T
+@using System.ComponentModel.DataAnnotations
+
+<AeStringInput @bind-Value="PropertyValue"
+             Label="@GetLabel()"
+             UseTextArea="@(HasStringLength() is null)"
+             ValidationFor="PropertyInfo.GenerateValidatorFunction<string>(Instance)"
+             />
+
+@code {
+
+    //<AeInputText />
+
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    [Parameter]
+    public T Instance { get; set; }
+
+    public string PropertyValue
+    {
+        get => PropertyInfo.GetValue(Instance) as string;
+        set
+        {
+            PropertyInfo.SetValue(Instance, value);
+        }
+    }
+
+    private string GetLabel() => PropertyInfo.Name + (IsRequired() ? "" : " (Optional)");
+
+    private bool IsRequired()
+    {
+        return RequiredAttribute.IsDefined(PropertyInfo, typeof(RequiredAttribute));
+    }
+
+    private int? HasStringLength()
+    {
+        var att = StringLengthAttribute.GetCustomAttribute(PropertyInfo, typeof(StringLengthAttribute)) as StringLengthAttribute;
+        return att?.MaximumLength;        
+    }
+
+}

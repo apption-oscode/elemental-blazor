@@ -8,25 +8,22 @@ namespace Elemental.Code
 {
     public static class ExpressionTools
     {
-        public static Expression<Func<string>> GenerateValidatorFunction(this PropertyInfo prop, ConstantExpression instanceExpr)
+        public static Expression<Func<T>> GenerateValidatorFunction<T>(this PropertyInfo prop, ConstantExpression instanceExpr)
         {
             var propExpr = Expression.Property(instanceExpr, prop);
-            if (prop.PropertyType == typeof(string))
+            if (prop.PropertyType == typeof(T))
             {
-                return Expression.Lambda<Func<string>>(propExpr);//.Compile();
+                return Expression.Lambda<Func<T>>(propExpr);//.Compile();
             }
             else
             {
-                var toString = typeof(Object).GetMethod("ToString");
-                //MemberExpression m = Expression.MakeMemberAccess(e, prop);
-                var toStringValue = Expression.Call(propExpr, toString);
-                return Expression.Lambda<Func<string>>(toStringValue);//.Compile();
+                throw new InvalidOperationException($"Property Type is {prop.PropertyType} - expected type is {typeof(T)} ");
             }
         }
 
-        public static Expression<Func<string>> GenerateValidatorFunction(this PropertyInfo prop, object instance)
+        public static Expression<Func<T>> GenerateValidatorFunction<T>(this PropertyInfo prop, object instance)
         {
-            return prop.GenerateValidatorFunction(Expression.Constant(instance));
+            return prop.GenerateValidatorFunction<T>(Expression.Constant(instance));
         }
     }
 }

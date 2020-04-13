@@ -1,4 +1,4 @@
-﻿@inherits Elemental.Data.AeInputTextBase
+﻿@inherits Elemental.Data.AeInputBase<DateTime>
 
 @using Microsoft.AspNetCore.Components.Forms
 
@@ -7,18 +7,9 @@
     {
         <label class="e e-form-control-label" for="@Id">@Label</label>
     }
-    <input class="e e-form-control" id="@Id" @bind="@CurrentValue" />
+
+    <input class="e e-form-control" id="@Id" type="date" @bind="@CurrentValue" />
     <div class="e e-form-control-validation">
         <ValidationMessage For="@ValidationFor" />
     </div>
 </div>
-
-
-@code {
-
-    protected override void OnInitialized()
-    {
-    }
-
-
-} 

@@ -1,22 +1,35 @@
 ﻿@typeparam T
 
+@using Elemental.Components.FormsInternal
 @using Microsoft.AspNetCore.Components.Forms
  
 <h3>ModelForm</h3>
 @if(Model != null)
 {
-    <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        @foreach (var prop in typeof(T).GetProperties())
+<EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    @foreach (var prop in typeof(T).GetProperties())
+    {
+        @if (prop.PropertyType == typeof(string))
         {
-            @if (prop.PropertyType == typeof(string))
-            {
-                <AePropertyInputText PropertyInfo="prop" Instance="Model"/>
-                @*<SwInputText Label="Catalogue" @bind-Value="Form.Catalogue" ValidationFor="validationExpression"*@
-            }
+            <AeStringPropertyInput PropertyInfo="prop" Instance="Model" />
         }
-    </EditForm>
+        @if (prop.PropertyType == typeof(int))
+        {
+            <AeNumberPropertyInput PropertyInfo="prop" Instance="Model" />
+        }
+        @if (prop.PropertyType == typeof(bool))
+        {
+            <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" />
+        }
+        @if (prop.PropertyType == typeof(DateTime))
+        {
+            <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" />
+        }
+    }
+    <button type="submit">Submit</button>
+</EditForm>
 }
 
 
@@ -24,12 +37,25 @@
     [Parameter]
     public T Model { get; set; }
 
-    [Parameter]
-    public Action<T> OnValidSubmit { get; set; }
 
-    private void HandleValidSubmit()
-    {
-        OnValidSubmit?.Invoke(Model);
-    }
+    /// <summary>
+    /// A callback that will be invoked when the form is submitted.
+    ///
+    /// If using this parameter, you are responsible for triggering any validation
+    /// manually, e.g., by calling <see cref="EditContext.Validate"/>.
+    /// </summary>
+    [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+
+    /// <summary>
+    /// A callback that will be invoked when the form is submitted and the
+    /// <see cref="EditContext"/> is determined to be valid.
+    /// </summary>
+    [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+
+    /// <summary>
+    /// A callback that will be invoked when the form is submitted and the
+    /// <see cref="EditContext"/> is determined to be invalid.
+    /// </summary>
+    [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 }
 

@@ -1,0 +1,15 @@
+﻿@inherits Elemental.Data.AeInputBase<int>
+
+@using Microsoft.AspNetCore.Components.Forms
+
+    <div class="e e-form-control-wrapper">
+        @if (!string.IsNullOrWhiteSpace(Label))
+        {
+            <label class="e e-form-control-label" for="@Id">@Label</label>
+        }
+        @* step attribute could also be used *@
+        <input class="e e-form-control" id="@Id" step="1" type="number" @bind="@CurrentValue"  />        
+        <div class="e e-form-control-validation">
+            <ValidationMessage For="@ValidationFor" />
+        </div>
+    </div>
