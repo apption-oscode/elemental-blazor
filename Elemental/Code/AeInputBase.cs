@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Elemental.Data
 {
+    // https://chrissainty.com/building-custom-input-components-for-blazor-using-inputbase/
     public class AeInputBase<T> : InputBase<T>
     {
         [Parameter]
@@ -22,8 +23,7 @@ namespace Elemental.Data
 
         [Parameter]
         public bool UseTextArea { get; set; } = false;
-
-        public FieldIdentifier MyProperty { get; set; }
+        
         protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
         {
             if (typeof(T) == typeof(string))

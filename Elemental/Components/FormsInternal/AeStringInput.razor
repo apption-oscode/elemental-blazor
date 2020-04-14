@@ -10,10 +10,11 @@
         }
         @if (UseTextArea)
         {
-            <textarea class="e e-form-control" id="@Id" @bind="@CurrentValue"/>
+            <textarea class="e e-form-control" id="@Id" @bind="@CurrentValue" />
         }
         else
         {
+            @*<input class="e e-form-control" id="@Id" @bind="@CurrentValue" />*@
             <input class="e e-form-control" id="@Id" @bind="@CurrentValue" />
         }
         <div class="e e-form-control-validation">
