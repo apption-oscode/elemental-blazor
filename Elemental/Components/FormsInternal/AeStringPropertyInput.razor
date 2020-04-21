@@ -1,11 +1,21 @@
 ﻿@typeparam T
 @using System.ComponentModel.DataAnnotations
 
-<AeStringInput @bind-Value="PropertyValue"
-             Label="@GetLabel()"
-             UseTextArea="@(HasStringLength() is null)"
-             ValidationFor="PropertyInfo.GenerateValidatorFunction<string>(Instance)"
-             />
+<div class="e e-form-control-wrapper">
+    @if (!string.IsNullOrWhiteSpace(GetLabel()))
+    {
+        <label class="e e-form-control-label" for="@GetID()">@GetLabel()</label>
+    }
+
+    @if (HasStringLength() is null)
+    {
+        <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" />
+    }
+    else
+    {
+        <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" />
+    }
+</div>
 
 @code {
 
@@ -26,6 +36,8 @@
         }
     }
 
+    private string GetID() => PropertyInfo.Name;
+
     private string GetLabel() => PropertyInfo.Name + (IsRequired() ? "" : " (Optional)");
 
     private bool IsRequired()
@@ -33,10 +45,15 @@
         return RequiredAttribute.IsDefined(PropertyInfo, typeof(RequiredAttribute));
     }
 
+    private void StringChanged(ChangeEventArgs args)
+    {
+        PropertyValue = args.Value as string;
+    }
+
     private int? HasStringLength()
     {
         var att = StringLengthAttribute.GetCustomAttribute(PropertyInfo, typeof(StringLengthAttribute)) as StringLengthAttribute;
-        return att?.MaximumLength;        
+        return att?.MaximumLength;
     }
 
 }

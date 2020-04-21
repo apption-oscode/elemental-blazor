@@ -1,9 +1,12 @@
 ﻿@typeparam T
 
-<AeBoolInput @bind-Value="PropertyValue"
-             Label="@GetLabel()"
-             ValidationFor="PropertyInfo.GenerateValidatorFunction<bool>(Instance)"
-             />
+    <div class="e e-form-control-wrapper">
+        @if (!string.IsNullOrWhiteSpace(GetLabel()))
+        {
+            <label class="e e-form-control-label" for="@GetID()">@GetLabel()</label>
+        }
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
+    </div>
 
 @code {
 
@@ -23,6 +26,8 @@
             PropertyInfo.SetValue(Instance, value);
         }
     }
+
+    private string GetID() => PropertyInfo.Name;
 
     private string GetLabel() => PropertyInfo.Name + (IsRequired() ? "" : " (Optional)");
 
