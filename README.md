@@ -41,3 +41,9 @@ will render into:
 Standard component for search with a `OnInputChange` to directly send updates to the blazor backend.
 
 ![SearchBar image](docs/images/SearchBar.png)
+
+## Table 
+
+In the Elemental Table component, to separate the data from the layout, the source data is a list of objects and header and lines are obtained using a series of functions.
+
+![Table image](docs/images/Table.png)
