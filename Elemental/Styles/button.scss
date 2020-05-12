@@ -48,7 +48,7 @@
     transition: all 0.4s $cubic-bezier;
 
     &:hover {
-        background-color: $grey-500;
+        background-color: $grey-700;
         @include BoxShadow(1);
 
         &.dark {
@@ -56,15 +56,15 @@
         }
 
         &.light {
-            background-color: $white;
+            background-color: $grey-300;
         }
 
         &.blue {
-            background-color: $blue-600;
+            background-color: $blue-800;
         }
 
         &.red {
-            background-color: $red-600;
+            background-color: $red-800;
         }
     }
 }
