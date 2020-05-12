@@ -128,6 +128,10 @@
   .e.e-dropdown:hover .e.content-wrapper {
     visibility: visible;
     opacity: 1; }
+  .e.e-dropdown.single .single-render {
+    display: flex; }
+    .e.e-dropdown.single .single-render .e.checkbox {
+      display: none; }
 
 .e.e-dropdown-item {
   display: flex;

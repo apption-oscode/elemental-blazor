@@ -10,8 +10,6 @@
 
 @code {
 
-    //<AeInputText />
-
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
@@ -29,7 +27,15 @@
 
     private string GetID() => PropertyInfo.Name;
 
-    private string GetLabel() => PropertyInfo.Name + (IsRequired() ? "" : " (Optional)");
+    private string GetLabel()
+    {
+
+        var label = AeLabelAttribute.IsDefined(PropertyInfo, typeof(AeLabelAttribute))
+            ? (AeLabelAttribute.GetCustomAttribute(PropertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).Label
+            : PropertyInfo.Name;
+
+        return label + (IsRequired() ? "" : " (Optional)");
+    }
 
     private bool IsRequired()
     {

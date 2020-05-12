@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elemental.Components.FormsInternal;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ElementalDocs.Data
@@ -7,6 +8,7 @@ namespace ElementalDocs.Data
     {
         [Required]
         [StringLength(16, ErrorMessage = "Identifier too long (16 character limit).")]
+        [AeLabelAttribute("Idstaaay")]
         public string Identifier { get; set; }
 
         public string Description { get; set; }

@@ -3,40 +3,40 @@
 @using Elemental.Components.FormsInternal
 @using Microsoft.AspNetCore.Components.Forms
  
-<h3>ModelForm</h3>
 @if(Model != null)
 {
-<EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    @foreach (var prop in typeof(T).GetProperties())
-    {
-        @if (prop.PropertyType == typeof(string))
+    <EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        @foreach (var prop in typeof(T).GetProperties())
         {
-            <AeStringPropertyInput PropertyInfo="prop" Instance="Model" />
+            <div class="e e-property">
+                @if (prop.PropertyType == typeof(string))
+                {
+                    <AeStringPropertyInput PropertyInfo="prop" Instance="Model" />
+                }
+                @if (prop.PropertyType == typeof(int))
+                {
+                    <AeNumberPropertyInput PropertyInfo="prop" Instance="Model" />
+                }
+                @if (prop.PropertyType == typeof(bool))
+                {
+                    <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" />
+                }
+                @if (prop.PropertyType == typeof(DateTime))
+                {
+                    <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" />
+                }
+            </div>
         }
-        @if (prop.PropertyType == typeof(int))
-        {
-            <AeNumberPropertyInput PropertyInfo="prop" Instance="Model" />
-        }
-        @if (prop.PropertyType == typeof(bool))
-        {
-            <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" />
-        }
-        @if (prop.PropertyType == typeof(DateTime))
-        {
-            <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" />
-        }
-    }
-    <button type="submit">Submit</button>
-</EditForm>
+        <button type="submit">Submit</button>
+    </EditForm>
 }
 
 
 @code {
     [Parameter]
     public T Model { get; set; }
-
 
     /// <summary>
     /// A callback that will be invoked when the form is submitted.
