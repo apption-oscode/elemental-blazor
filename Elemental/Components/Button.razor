@@ -6,25 +6,43 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
+@inject NavigationManager NavigationManager
 
 
-<button class="@GetButtonStyle()">
+<div class="@GetButtonStyle()" @onclick="HandleNavigation">
     @ChildContent
-</button>
+</div>
 
 @code {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
     [Parameter]
     public Style ButtonStyle { get; set; }
+    [Parameter]
+    public string To { get; set; }
+
+    private void HandleNavigation()
+    {
+        if (!string.IsNullOrWhiteSpace(To))
+        {
+            NavigationManager.NavigateTo(To);
+        }
+    }
+
 
     private string GetButtonStyle()
     {
         var css = "e button";
         switch (ButtonStyle)
         {
+            case Style.Light:
+                return css + " light";
             case Style.Dark:
                 return css + " dark";
+            case Style.Blue:
+                return css + " blue";
+            case Style.Red:
+                return css + " red";
             default:
                 return css;
         }
@@ -33,6 +51,9 @@
     public enum Style
     {
         Default,
-        Dark
+        Dark,
+        Light,
+        Blue,
+        Red,
     }
 }
