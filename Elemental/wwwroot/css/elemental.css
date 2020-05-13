@@ -224,6 +224,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 .e.button {
+  display: inline-block;
   padding: 0.5rem 1rem;
   margin: 0.2rem;
   border-radius: 4px;
