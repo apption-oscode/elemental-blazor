@@ -80,7 +80,6 @@
 
     protected override void OnInitialized()
     {
-        _selectedItems = InitialValues?.ToHashSet() ?? new HashSet<T>();
         if(Renderer is null)
         {
             Renderer = new Func<T, bool, RenderFragment>((item, selected) =>
@@ -91,6 +90,11 @@
                         </DefaultDropdownItem>;
             });
         }
+    }
+
+    protected override void OnParametersSet()
+    {
+        _selectedItems = InitialValues?.ToHashSet() ?? new HashSet<T>();
     }
 
     private string GetLabel(T item)
