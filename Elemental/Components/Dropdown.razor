@@ -69,8 +69,10 @@
     public List<T> DropdownItems { get; set; }
     [Parameter]
     public Func<T, bool, RenderFragment> Renderer { get; set; }
+    [Parameter]
+    public IEnumerable<T> InitialValues { get; set; }
 
-    private HashSet<T> _selectedItems = new HashSet<T>();
+    private HashSet<T> _selectedItems;
 
     private string _dropdownClass => $"e e-dropdown {(Multiselect ? "" : "single")}";
     private int _numberSelected => _selectedItems.Count;
@@ -78,6 +80,7 @@
 
     protected override void OnInitialized()
     {
+        _selectedItems = InitialValues?.ToHashSet() ?? new HashSet<T>();
         if(Renderer is null)
         {
             Renderer = new Func<T, bool, RenderFragment>((item, selected) =>
