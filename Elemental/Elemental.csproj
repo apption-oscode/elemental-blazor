@@ -6,7 +6,6 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Apption.Elemental</PackageId>
-    <Version>0.0.6</Version>
     <Authors>Apption</Authors>
     <Company>Apption</Company>
     <Product>Elemental Blazor</Product>
@@ -17,6 +16,10 @@
     <PackageTags>c# blazor</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <MajorVersion>0</MajorVersion>
+    <MinorVersion>0</MinorVersion>
+    <Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
+    <Version>$(MajorVersion).$(MinorVersion).$(Revision)</Version>
   </PropertyGroup>
 
   <ItemGroup>
