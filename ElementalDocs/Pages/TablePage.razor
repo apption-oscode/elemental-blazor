@@ -133,6 +133,27 @@
 
 }")</code></pre>
     </div>
+    <div class="title">Table</div>
+    <div class="showcase">
+        <Table Accessors="accessorFunctions"
+               Renderers="renderFunctions"
+               ColorAccessor="colorFunction"
+               Dataset="dummyData"
+               Headers="headers"
+               IsExport="true" />
+    </div>
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@(@"
+<Table Accessors=""accessorFunctions""
+       Renderers = ""renderFunctions""
+       ColorAccessor = ""colorFunction""
+       Dataset = ""dummyData""
+       Headers = ""headers""
+       IsExport=""true""/>
+
+")</code></pre>
+    </div>
 </div>
 
 
@@ -155,13 +176,13 @@
 
     // Define the headers at the top of the table
     private List<string> headers = new List<string>
-{
+    {
         "Type", "Category", "Location"
     };
 
     // Typeparam class to hold row data, can be anything
     private List<DummyData> dummyData = new List<DummyData>
-{
+    {
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
@@ -174,9 +195,9 @@
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
     };
 
-    // Accessor functions to retrieve cell value
+        // Accessor functions to retrieve cell value
     private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
-{
+    {
         new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
@@ -184,42 +205,42 @@
 
     // [Optional] Can define custom rendering for columns, order matters
     private List<Func<DummyData, RenderFragment>> renderFunctions = new List<Func<DummyData, RenderFragment>>
-{
+    {
         null,
         new Func<DummyData, RenderFragment>(dummyData => { return @<i class="@dummyData.CategoryIconClass"></i>; }),
         null,
     };
 
-        // [Optional] Can define custom colors per row
-        private Func<DummyData, Table<DummyData>.RowColor> colorFunction = dummyData =>
+    // [Optional] Can define custom colors per row
+    private Func<DummyData, Table<DummyData>.RowColor> colorFunction = dummyData =>
+    {
+        switch (dummyData.Importance)
         {
-            switch (dummyData.Importance)
-            {
-                case 3:
-                    return Table<DummyData>.RowColor.Red;
-                case 2:
-                    return Table<DummyData>.RowColor.Yellow;
-                case 1:
-                    return Table<DummyData>.RowColor.Blue;
-                case 0:
-                default:
-                    return Table<DummyData>.RowColor.Default;
-            }
-        };
-
-
-        class DummyData
-        {
-            public string Type { get; set; }
-            public string Category { get; set; }
-            public string CategoryIconClass { get; set; }
-            public string Location { get; set; }
-            public int Importance { get; set; }
+            case 3:
+                return Table<DummyData>.RowColor.Red;
+            case 2:
+                return Table<DummyData>.RowColor.Yellow;
+            case 1:
+                return Table<DummyData>.RowColor.Blue;
+            case 0:
+            default:
+                return Table<DummyData>.RowColor.Default;
         }
+    };
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("initHighlight");
-        }
+
+    class DummyData
+    {
+        public string Type { get; set; }
+        public string Category { get; set; }
+        public string CategoryIconClass { get; set; }
+        public string Location { get; set; }
+        public int Importance { get; set; }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("initHighlight");
+    }
 }
 

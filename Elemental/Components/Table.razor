@@ -7,10 +7,16 @@
 *@
 
 
-
 @typeparam T
+@using System.Text;
+@inject IJSRuntime JSRuntime;
 
-
+@if (IsExport)
+{
+    <Button ButtonStyle="Button.Style.Blue">
+        <span @onclick="HandleExportClicked">Export to Csv</span>
+    </Button>
+}
 <div class="@_tableClass">
     <div class="e table-header" style="@_headerStyle">
         @foreach (var (header, index) in Headers.Select((h, index) => (h, index)))
@@ -60,6 +66,8 @@
     public Func<T, RowColor> ColorAccessor { get; set; }
     [Parameter]
     public string MaxHeight { get; set; }
+    [Parameter]
+    public bool IsExport { get; set; } = false;
 
     private string _tableClass => $"e table";
     private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
@@ -138,5 +146,32 @@
         Red,
         Yellow,
         Blue
+    }
+
+    private async Task HandleExportClicked()
+    {
+        var builder = new StringBuilder();
+        foreach (var h in Headers)
+        {
+            builder.Append(h +",");
+        }
+        //Remove the last ,
+        builder.Length--;
+        builder.Append(Environment.NewLine);
+
+        foreach (var row in Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data)))
+        {
+
+            foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+            {
+                builder.Append(accessor?.Invoke(row) + ",");
+            }
+            //Remove the last ,
+            builder.Length--;
+            builder.Append(Environment.NewLine);
+        }
+        string fileName = "table.csv";
+        var bytes = Encoding.UTF8.GetBytes(builder.ToString());
+        await JSRuntime.InvokeAsync<object>("saveAsFile", fileName, Convert.ToBase64String(bytes));
     }
 }
