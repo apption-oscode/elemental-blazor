@@ -1,0 +1,88 @@
+﻿@using System.Text
+@inject IJSRuntime JS
+@typeparam T
+
+
+@if (_type == ExportType.CSV)
+{
+    <Button ButtonStyle="Button.Style.Blue">
+        <span @onclick="HandleExportClicked">
+            <i class="fad fa-file-excel"></i>
+            Export to CSV
+        </span>
+    </Button>
+}
+
+
+@code {
+    [Parameter]
+    public Table<T> Table { get; set; }
+    [Parameter]
+    public string Type { get; set; }
+    [Parameter]
+    public string Filename { get; set; }
+
+    private (int column, bool sortAscending) _sorting = (0, true);
+    private ExportType _type { get { return (ExportType)Enum.Parse(typeof(ExportType), Type, true); } }
+
+    private async Task HandleExportClicked()
+    {
+        if (GetExportType(Type) == ExportType.CSV)
+        {
+            await ExportToCSV();
+        }
+
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        return base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task ExportToCSV()
+    {
+        var builder = new StringBuilder();
+        foreach (var h in Table.Headers)
+        {
+            builder.Append(h + ",");
+        }
+        //Remove the last ,
+        builder.Length--;
+        builder.Append(Environment.NewLine);
+
+        foreach (var row in Table.Dataset.OrderByDescending(data => Table.Accessors[_sorting.column].Invoke(data)))
+        {
+
+            foreach (var (accessor, index) in Table.Accessors.Select((a, i) => (a, i)))
+            {
+                builder.Append(accessor?.Invoke(row) + ",");
+            }
+            //Remove the last ,
+            builder.Length--;
+            builder.Append(Environment.NewLine);
+        }
+        var bytes = Encoding.UTF8.GetBytes(builder.ToString());
+        await JS.InvokeAsync<object>("saveAsFile", Filename +".csv", Convert.ToBase64String(bytes));
+    }
+
+    private ExportType GetExportType (string t)
+    {
+        if (Enum.IsDefined(typeof(ExportType), _type))
+        {
+            switch (_type)
+            {
+                case ExportType.CSV:
+                    return ExportType.CSV;
+                default:
+                    return ExportType.CSV;
+            }
+        }
+        return ExportType.NONE;
+    }
+
+    private enum ExportType
+    {
+        NONE = 1,
+        CSV = 2
+    }
+}

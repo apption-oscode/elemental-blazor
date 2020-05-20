@@ -18,8 +18,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <MajorVersion>0</MajorVersion>
     <MinorVersion>0</MinorVersion>
-    <Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
-    <Version>$(MajorVersion).$(MinorVersion).$(Revision)</Version>
+    <Version>$(MajorVersion).$(MinorVersion).7</Version>
   </PropertyGroup>
 
   <ItemGroup>
