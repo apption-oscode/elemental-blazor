@@ -55,7 +55,16 @@
 
             foreach (var (accessor, index) in Table.Accessors.Select((a, i) => (a, i)))
             {
-                builder.Append(accessor?.Invoke(row) + ",");
+                var value = accessor?.Invoke(row);
+                if (value.IndexOfAny(new char[] {'"',',' }) != -1)
+                {
+                    builder.AppendFormat("\"{0}\"", value.Replace("\"", "\"\""));
+                    builder.Append(",");
+                }
+                else
+                {
+                    builder.Append(accessor?.Invoke(row) + ",");
+                }
             }
             //Remove the last ,
             builder.Length--;
