@@ -63,10 +63,10 @@
 
 
 ")</code></pre>
-        <h3>_Host.cshtml</h3>
+        <h3>Startup.cs</h3>
         <pre><code class="language-csharp">@(@"
-//Add this line to the end of head session
-<script src=""_content/Apption.Elemental/js/saveAsFile.js""></script>
+//Add this line to the end of ConfigureServices function
+services.AddElemental();            
 
 
 ")</code></pre>
