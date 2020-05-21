@@ -9,7 +9,7 @@
 @inject NavigationManager NavigationManager
 
 
-<div class="@GetButtonStyle()" @onclick="HandleNavigation">
+<div class="@GetButtonStyle() @(IsDisabled? "disabled":"")" @onclick="HandleNavigation">
     @ChildContent
 </div>
 
@@ -20,6 +20,8 @@
     public Style ButtonStyle { get; set; }
     [Parameter]
     public string To { get; set; }
+    [Parameter]
+    public bool IsDisabled { get; set; } = false;
 
     private void HandleNavigation()
     {

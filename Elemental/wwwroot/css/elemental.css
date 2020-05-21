@@ -259,6 +259,10 @@
     .e.button:hover.red {
       background-color: #9b2c2c; }
 
+    .e.button.disabled {
+        opacity: .65;
+        pointer-events: none;
+    }
 /**
  * Copyright (c) 2020 Apption Corporation
  * 
