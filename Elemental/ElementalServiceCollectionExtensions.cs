@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ElementalServiceCollectionExtensions
     {
-        public static void AddElemental (this IServiceCollection services)
+        public static void AddElemental(this IServiceCollection services)
         {
             services.AddSingleton<ICSVDataExportService, CSVDataExportService>();
         }

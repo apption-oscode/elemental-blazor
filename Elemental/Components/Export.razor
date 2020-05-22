@@ -1,23 +1,19 @@
 ﻿@using System.Text
+@*@inject ICSVDataExportService CSVService
+@inject NavigationManager NavigationManager*@
 @inject IJSRuntime JS
-@inject ICSVDataExportService CSVService
 @typeparam T
 
-<style>
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-</style>
-@if (_type == ExportType.CSV)
-{
+
     <Button ButtonStyle="Button.Style.Blue">
-        <a @onclick="HandleExportClicked" href="/ExportFile/ToCSV?filename=@(Filename + "." + Type)">
-            <i class="fad fa-file-excel"></i>
-            Export to CSV
-        </a>
+        @if (_type == ExportType.CSV)
+        {
+            <span @onclick="HandleExportClicked">
+                <i class="fad fa-file-excel"></i>
+                Export to CSV
+            </span>
+        }
     </Button>
-}
 
 
 @code {
@@ -36,10 +32,11 @@
         if (GetExportType(Type) == ExportType.CSV)
         {
             //Alternative: Use JavaScript to download the file
-            //await ExportToCSV();
+            await ExportToCSV();
 
             //Use Controller to download the file
-            CSVService.SaveTable(Table);
+            //CSVService.SaveTable(Table);
+            //NavigationManager.NavigateTo($"/ExportFile/ToCSV?filename={Filename}.{Type}", true);
         }
 
     }
@@ -62,9 +59,9 @@
             foreach (var (accessor, index) in Table.Accessors.Select((a, i) => (a, i)))
             {
                 var value = accessor?.Invoke(row);
-                
+
                 //Skip , or " inside data
-                if (value.IndexOfAny(new char[] {'"',',' }) != -1)
+                if (value.IndexOfAny(new char[] { '"', ',' }) != -1)
                 {
                     builder.AppendFormat("\"{0}\"", value.Replace("\"", "\"\""));
                     builder.Append(",");
@@ -79,10 +76,10 @@
             builder.Append(Environment.NewLine);
         }
         var bytes = Encoding.UTF8.GetBytes(builder.ToString());
-        await JS.InvokeAsync<object>("saveAsFile", Filename +".csv", Convert.ToBase64String(bytes));
+        await JS.InvokeAsync<object>("saveAsFile", Filename + ".csv", Convert.ToBase64String(bytes));
     }
 
-    private ExportType GetExportType (string t)
+    private ExportType GetExportType(string t)
     {
         if (Enum.IsDefined(typeof(ExportType), _type))
         {

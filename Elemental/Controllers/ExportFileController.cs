@@ -6,23 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Elemental.Services;
 using Elemental.Components;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Elemental.Controllers
 {
     public class ExportFileController : ControllerBase
-    {
-        private ICSVDataExportService _csvService;
-        public ExportFileController (ICSVDataExportService csvService)
-        {
-            _csvService = csvService;
-        }
-
+    { 
         [HttpGet]
-        public IActionResult ToCSV(string filename)
+        public IActionResult ToCSV([FromServices] ICSVDataExportService csvService, string filename)
         {
-            var table = _csvService.GetTable();
+            ITable table;
+            lock (csvService)
+            {
+                table = csvService.GetTable();
+                csvService.Dispose();
+            }
             var content = table.ExportToCSVInByte();
+
             return File(content, "application/octet-stream", filename);
         }
     }

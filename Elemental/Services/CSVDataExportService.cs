@@ -9,9 +9,10 @@ namespace Elemental.Services
     {
         ITable GetTable();
         void SaveTable(ITable t);
+        void Dispose();
     }
 
-    public class CSVDataExportService : ICSVDataExportService
+    public class CSVDataExportService : ICSVDataExportService, IDisposable
     {
         private ITable _table;
         public ITable GetTable()
@@ -21,7 +22,13 @@ namespace Elemental.Services
         
         public void SaveTable(ITable t)
         {
+            //var content = t.ExportToCSVInByte();
             _table = t;
+        }
+
+        public void Dispose()
+        {
+            _table = null;
         }
     }
 }

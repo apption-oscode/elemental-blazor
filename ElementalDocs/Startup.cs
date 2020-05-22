@@ -22,7 +22,8 @@ namespace ElementalDocs
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddElemental();            
+            //Use in downloading
+            //services.AddElemental();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +49,7 @@ namespace ElementalDocs
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
-                endpoints.MapDefaultControllerRoute();
+                //endpoints.MapDefaultControllerRoute();
             });
         }
     }
