@@ -16,9 +16,6 @@
     <PackageTags>c# blazor</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <MajorVersion>0</MajorVersion>
-    <MinorVersion>0</MinorVersion>
-    <Version>$(MajorVersion).$(MinorVersion).8</Version>
   </PropertyGroup>
 
   <ItemGroup>
