@@ -71,6 +71,16 @@
             opacity: 1;
         }
     }
+
+    &.single {
+        .single-render{
+            display: flex;
+            
+            .e.checkbox {
+                display: none;
+            }
+        }
+    }
 }
 .e.e-dropdown-item {
     display: flex;

@@ -19,13 +19,12 @@
 
 @code {
 
-    //<AeInputText />
-
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
     [Parameter]
     public T Instance { get; set; }
+
 
     public string PropertyValue
     {
@@ -38,16 +37,18 @@
 
     private string GetID() => PropertyInfo.Name;
 
-    private string GetLabel() => PropertyInfo.Name + (IsRequired() ? "" : " (Optional)");
+    private string GetLabel() {
+
+        var label = AeLabelAttribute.IsDefined(PropertyInfo, typeof(AeLabelAttribute))
+            ? (AeLabelAttribute.GetCustomAttribute(PropertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).Label
+            : PropertyInfo.Name;
+
+        return  label + (IsRequired() ? "" : " (Optional)");
+    }
 
     private bool IsRequired()
     {
         return RequiredAttribute.IsDefined(PropertyInfo, typeof(RequiredAttribute));
-    }
-
-    private void StringChanged(ChangeEventArgs args)
-    {
-        PropertyValue = args.Value as string;
     }
 
     private int? HasStringLength()

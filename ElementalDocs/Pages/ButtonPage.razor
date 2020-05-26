@@ -8,6 +8,8 @@
 
 @page "/buttons"
 
+@inject IJSRuntime JSRuntime
+
 
 <div class="component button">
     <div class="title">Buttons</div>
@@ -15,10 +17,99 @@
         <Button>
             Default
         </Button>
+        <Button ButtonStyle="Button.Style.Blue">
+            Blue
+        </Button>
+        <Button ButtonStyle="Button.Style.Red">
+            Red
+        </Button>
+        <Button ButtonStyle="Button.Style.Light">
+            Light
+        </Button>
         <Button ButtonStyle="Button.Style.Dark">
             Dark
-        </Button>
+        </Button>        
+    </div>    
+
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@_buttonsHtml</code></pre>
     </div>
 
+    <div class="title">Disabled Buttons</div>
+    <div class="showcase">
+        <Button IsDisabled="true">
+            Default
+        </Button>
+        <Button ButtonStyle="Button.Style.Blue" IsDisabled="true">
+            Blue
+        </Button>
+        <Button ButtonStyle="Button.Style.Red" IsDisabled="true">
+            Red
+        </Button>
+        <Button ButtonStyle="Button.Style.Light" IsDisabled="true">
+            Light
+        </Button>
+        <Button ButtonStyle="Button.Style.Dark" IsDisabled="true">
+            Dark
+        </Button>        
+    </div>
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@_disabledbuttonsHtml</code></pre>
+    </div>
+
+    <div class="title">Navigating Buttons</div>
+    <div class="showcase">
+        <Button To="/">Back to Home</Button>
+    </div>
+    <div class="source">
+        <div class="title">Source</div>
+        <pre><code class="language-html">@_buttonNavHtml</code></pre>
+    </div>
 </div>
+
+
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("initHighlight");
+    }
+
+    private string _buttonNavHtml = @"<Button To=""/"">Back to Home</Button>";
+    private string _buttonsHtml = @"<Button>
+    Default
+</Button>
+<Button ButtonStyle=""Button.Style.Blue"">
+    Blue
+</Button>
+<Button ButtonStyle=""Button.Style.Red"" >
+    Red
+</Button>
+<Button ButtonStyle=""Button.Style.Light"">
+    Light
+</Button>
+<Button ButtonStyle=""Button.Style.Dark"" >
+    Dark
+</Button> ";
+
+    private string _disabledbuttonsHtml = @"<Button>
+    Default
+</Button>
+<Button ButtonStyle=""Button.Style.Blue"" IsDisabled=""true"">
+    Blue
+</Button>
+<Button ButtonStyle=""Button.Style.Red"" IsDisabled=""true"">
+    Red
+</Button>
+<Button ButtonStyle=""Button.Style.Light"" IsDisabled=""true"">
+    Light
+</Button>
+<Button ButtonStyle=""Button.Style.Dark"" IsDisabled=""true"">
+    Dark
+</Button> ";
+
+}
 

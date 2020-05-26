@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -16,6 +16,9 @@
     <PackageTags>c# blazor</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <MajorVersion>0</MajorVersion>
+    <MinorVersion>0</MinorVersion>
+    <Version>$(MajorVersion).$(MinorVersion).8</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
 

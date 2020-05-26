@@ -12,9 +12,10 @@
 
 
 
-button.e.button {
+.e.button {
+    display: inline-block;
     padding: 0.5rem 1rem;
-    margin: auto;
+    margin: 0.2rem;
     border-radius: $border-radius;
     cursor: pointer;
 
@@ -22,24 +23,49 @@ button.e.button {
         outline: none;
     }
 
-    color: $grey-600;
-    background-color: $grey-100;
-    border: 1px solid $grey-100;
+    color: $white;
+    background-color: $grey-600;
 
     &.dark {
         background-color: $grey-700;
-        border: 1px solid $grey-700;
+        color: $white;
+    }
+
+    &.light {
+        background-color: $grey-100;
+        color: $grey-600;
+    }
+
+    &.blue {
+        background-color: $blue-700;
+        color: $white;
+    }
+
+    &.red {
+        background-color: $red-700;
         color: $white;
     }
 
     transition: all 0.4s $cubic-bezier;
 
     &:hover {
-        background-color: $white;
+        background-color: $grey-700;
         @include BoxShadow(1);
 
         &.dark {
             background-color: $grey-800;
+        }
+
+        &.light {
+            background-color: $grey-300;
+        }
+
+        &.blue {
+            background-color: $blue-800;
+        }
+
+        &.red {
+            background-color: $red-800;
         }
     }
 }

@@ -163,6 +163,12 @@
 .component.search .details {
   margin-bottom: 1rem; }
 
+.component.button .showcase {
+  display: flex; }
+
+.component.button .source {
+  margin-bottom: 4rem; }
+
 html {
   overflow: overlay; }
 

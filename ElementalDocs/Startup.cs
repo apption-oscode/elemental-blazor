@@ -1,3 +1,4 @@
+using Elemental.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,8 @@ namespace ElementalDocs
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            //Use in downloading
+            //services.AddElemental();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +49,7 @@ namespace ElementalDocs
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                //endpoints.MapDefaultControllerRoute();
             });
         }
     }

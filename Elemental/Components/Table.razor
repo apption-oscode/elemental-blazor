@@ -6,10 +6,9 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
-
-
+@implements ITable
+@using System.Text
 @typeparam T
-
 
 <div class="@_tableClass">
     <div class="e table-header" style="@_headerStyle">
@@ -60,6 +59,7 @@
     public Func<T, RowColor> ColorAccessor { get; set; }
     [Parameter]
     public string MaxHeight { get; set; }
+
 
     private string _tableClass => $"e table";
     private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
@@ -138,5 +138,42 @@
         Red,
         Yellow,
         Blue
+    }
+
+    public byte[] ExportToCSVInByte()
+    {
+        var builder = new StringBuilder();
+        (int column, bool sortAscending) _sorting = (0, true);
+
+        foreach (var h in Headers)
+        {
+            builder.Append(h + ",");
+        }
+        //Remove the last ,
+        builder.Length--;
+        builder.Append(Environment.NewLine);
+
+        foreach (var row in Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data)))
+        {
+
+            foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+            {
+                var value = accessor?.Invoke(row);
+                if (value.IndexOfAny(new char[] { '"', ',' }) != -1)
+                {
+                    builder.AppendFormat("\"{0}\"", value.Replace("\"", "\"\""));
+                    builder.Append(",");
+                }
+                else
+                {
+                    builder.Append(accessor?.Invoke(row) + ",");
+                }
+            }
+            //Remove the last ,
+            builder.Length--;
+            builder.Append(Environment.NewLine);
+        }
+        var bytes = Encoding.UTF8.GetBytes(builder.ToString());
+        return bytes;
     }
 }

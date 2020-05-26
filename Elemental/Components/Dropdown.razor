@@ -8,20 +8,32 @@
 
 @typeparam T
 
-<div class="e e-dropdown">
-    <Button ButtonStyle="(_allSelected ? Button.Style.Default : Button.Style.Dark)">
+<div class="@_dropdownClass">
+    <Button ButtonStyle="(_allSelected ? Button.Style.Light : Button.Style.Dark)">
         <div class="e label">
             <div class="e text">
-                @Label
-            </div>
-            <div class="e e-control">
-                @if (_allSelected)
+                @if (Multiselect || _selectedItems.Count == 0)
                 {
-                    <div class="e square">All</div>
+                    @Label
                 }
                 else
                 {
-                    <div class="e square">@_numberSelected</div>
+                    <div class="single-render">
+                        @Renderer(_selectedItems.FirstOrDefault(), false)
+                    </div>
+                }
+            </div>
+            <div class="e e-control">
+                @if (Multiselect)
+                {
+                    if (_allSelected)
+                    {
+                        <div class="e square">All</div>
+                    }
+                    else
+                    {
+                        <div class="e square">@_numberSelected</div>
+                    }
                 }
             </div>
             <i class="fa fa-caret-down"></i>
@@ -48,6 +60,8 @@
     [Parameter]
     public string Label { get; set; }
     [Parameter]
+    public bool Multiselect { get; set; } = false;
+    [Parameter]
     public Action<IEnumerable<T>> OnChange { get; set; }
     [Parameter]
     public Func<T, string> Accessor { get; set; }
@@ -55,10 +69,12 @@
     public List<T> DropdownItems { get; set; }
     [Parameter]
     public Func<T, bool, RenderFragment> Renderer { get; set; }
+    [Parameter]
+    public IEnumerable<T> InitialValues { get; set; }
 
-    private HashSet<T> _selectedItems = new HashSet<T>();
+    private HashSet<T> _selectedItems;
 
-    private string _buttonClass => $"e button {(_allSelected ? "" : "dark")}";
+    private string _dropdownClass => $"e e-dropdown {(Multiselect ? "" : "single")}";
     private int _numberSelected => _selectedItems.Count;
     private bool _allSelected => _numberSelected == DropdownItems.Count() || _numberSelected == 0;
 
@@ -74,6 +90,11 @@
                         </DefaultDropdownItem>;
             });
         }
+    }
+
+    protected override void OnParametersSet()
+    {
+        _selectedItems = InitialValues?.ToHashSet() ?? new HashSet<T>();
     }
 
     private string GetLabel(T item)
@@ -96,13 +117,20 @@
 
     private void OnItemClick(T item, bool isSelected)
     {
-        if (!isSelected)
+        if (isSelected)
         {
-            _selectedItems.Add(item);
+            _selectedItems.Remove(item);
         }
         else
         {
-            _selectedItems.Remove(item);
+            if (Multiselect)
+            {
+                _selectedItems.Add(item);
+            }
+            else
+            {
+                _selectedItems = new HashSet<T>() { item };
+            }
         }
         NotifyStateChanged();
     }
