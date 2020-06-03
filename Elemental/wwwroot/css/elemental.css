@@ -356,18 +356,23 @@
   display: grid;
   overflow: auto;
   overflow: overlay; }
-  .e.table .e.table-rows::-webkit-scrollbar {
+  .e.table .e.table-scroll {
+    overflow-y: auto;
+    position: relative; }
+  .e.table .e.table-scroll::-webkit-scrollbar {
     width: 0.25rem; }
-  .e.table .e.table-rows::-webkit-scrollbar-track {
+  .e.table .e.table-scroll::-webkit-scrollbar-track {
     background: #edf2f7;
     border-radius: 4px; }
-  .e.table .e.table-rows::-webkit-scrollbar-thumb {
+  .e.table .e.table-scroll::-webkit-scrollbar-thumb {
     background: #a0aec0;
     border-radius: 4px; }
-    .e.table .e.table-rows::-webkit-scrollbar-thumb:hover {
+    .e.table .e.table-scroll::-webkit-scrollbar-thumb:hover {
       background: #718096; }
-  .e.table .e.table-rows .e.table-row {
-    display: contents; }
+    .e.table .e.table-rows .e.table-row {
+        display: grid;
+        position: absolute;
+        width: 100%; }
     .e.table .e.table-rows .e.table-row .e.table-cell {
       word-wrap: break-word;
       font-size: 0.9rem;

@@ -7,6 +7,7 @@
 *@
 
 @implements ITable
+@inject IJSRuntime JSRuntime
 @using System.Text
 @typeparam T
 
@@ -20,23 +21,25 @@
             </div>
         }
     </div>
-    <div class="e table-rows" style="@_rowStyle">
-        @foreach (var row in GetSortedDataset())
-        {
-            <div class="@GetRowColor(row)">
-                @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
-                {
-                    if (Renderers?[index] is null)
+    <div class="e table-scroll" style="@_scrollStyle" @onscroll="OnScroll" @ref="tableRef">
+        <div class="e table-rows" style="@_rowsStyle">
+            @foreach (var row in Rows.Skip(scrollViewResult.SkipItems).Take(scrollViewResult.TakeItems).Select((item, i) => new { item, i }))
+            {
+                <div class="@GetRowColor(row.item)" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;">
+                    @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
                     {
-                        <div class="e table-cell">@accessor?.Invoke(row)</div>
+                        if (Renderers?[index] is null)
+                        {
+                            <div class="e table-cell">@accessor?.Invoke(row.item)</div>
+                        }
+                        else
+                        {
+                            <div class="e table-cell">@Renderers[index](row.item)</div>
+                        }
                     }
-                    else
-                    {
-                        <div class="e table-cell">@Renderers[index](row)</div>
-                    }
-                }
-            </div>
-        }
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -58,16 +61,44 @@
     [Parameter]
     public Func<T, RowColor> ColorAccessor { get; set; }
     [Parameter]
-    public string MaxHeight { get; set; }
-
+    public int MaxHeight { get; set; } = 600;
+    [Parameter]
+    public int RowHeight { get; set; } = 32;  //In px
 
     private string _tableClass => $"e table";
     private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
-    private string _rowStyle => $"{_gridStyle} max-height: {MaxHeight};";
+    private string _rowsStyle => $"{_gridStyle}; grid-template-rows: repeat({scrollViewResult.TakeItems},{RowHeight}px); height:{scrollViewResult.Height}px;";
+    private string _rowStyle => $"{_gridStyle}; grid-template-rows:{RowHeight}px;";
+    private string _scrollStyle => $"max-height: {MaxHeight}px;";
     private string _headerStyle => $"{_gridStyle}";
 
-
     private (int column, bool sortAscending) _sorting = (0, true);
+
+    private ElementReference tableRef;
+    private ScrollView scrollView;
+    private ScrollViewResult scrollViewResult;
+    private IEnumerable<T> Rows { get => GetSortedDataset(); }
+
+    protected override void OnInitialized()
+    {
+        scrollView = new ScrollView();
+        scrollViewResult = new ScrollViewResult();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
+
+            scrollViewResult.Height = Rows.Count() * RowHeight;
+            scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
+            scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + MaxHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
+            StateHasChanged();
+        }
+    }
+
 
     private void ToggleSortOnColumn(int column)
     {
@@ -140,6 +171,15 @@
         Blue
     }
 
+    private async Task OnScroll()
+    {
+        scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
+        scrollViewResult.Height = Rows.Count() * RowHeight;
+        scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
+        scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + scrollView.ClientHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
+        StateHasChanged();
+    }
+
     public byte[] ExportToCSVInByte()
     {
         var builder = new StringBuilder();
@@ -175,5 +215,19 @@
         }
         var bytes = Encoding.UTF8.GetBytes(builder.ToString());
         return bytes;
+    }
+
+    public class ScrollView
+    {
+        public int ClientHeight { get; set; }
+
+        public int ScrollTop { get; set; }
+    }
+
+    public class ScrollViewResult
+    {
+        public int Height { get; set; }
+        public int SkipItems { get; set; }
+        public int TakeItems { get; set; }
     }
 }

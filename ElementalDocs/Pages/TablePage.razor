@@ -104,7 +104,8 @@
                ColorAccessor="colorFunction"
                Dataset="GetOverflowData()"
                Headers="headers"
-               MaxHeight="600px" />
+               MaxHeight="600"
+               RowHeight="32"/>
     </div>
     <div class="source">
         <div class="title">Source</div>
@@ -142,7 +143,7 @@
     {
         var result = new List<DummyData>();
 
-        for (var i = 0; i < 15; i++)
+        for (var i = 0; i < 100; i++)
         {
             result.AddRange(dummyData.Select(d => d));
         }
