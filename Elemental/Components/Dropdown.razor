@@ -8,7 +8,7 @@
 
 @typeparam T
 
-<div class="@_dropdownClass">
+<div class="@_dropdownClass" @onclick="ToggleVisible">
     <Button ButtonStyle="(_allSelected ? Button.Style.Light : Button.Style.Dark)">
         <div class="e label">
             <div class="e text">
@@ -74,7 +74,9 @@
 
     private HashSet<T> _selectedItems;
 
-    private string _dropdownClass => $"e e-dropdown {(Multiselect ? "" : "single")}";
+
+    private bool _visible = false;
+    private string _dropdownClass => $"e e-dropdown {(Multiselect ? "multi" : "single")} {(_visible && !Multiselect ? "visible" : "")}";
     private int _numberSelected => _selectedItems.Count;
     private bool _allSelected => _numberSelected == DropdownItems.Count() || _numberSelected == 0;
 
@@ -90,11 +92,13 @@
                         </DefaultDropdownItem>;
             });
         }
+
+        _selectedItems = InitialValues?.ToHashSet() ?? new HashSet<T>();
     }
 
-    protected override void OnParametersSet()
+    private void ToggleVisible()
     {
-        _selectedItems = InitialValues?.ToHashSet() ?? new HashSet<T>();
+        _visible = !_visible;
     }
 
     private string GetLabel(T item)

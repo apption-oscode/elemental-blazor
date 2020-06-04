@@ -125,13 +125,16 @@
         border-radius: 4px; }
         .e.e-dropdown .e.content-wrapper .e.content::-webkit-scrollbar-thumb:hover {
           background: #718096; }
-  .e.e-dropdown:hover .e.content-wrapper {
+  .e.e-dropdown.multi:hover .e.content-wrapper {
     visibility: visible;
     opacity: 1; }
   .e.e-dropdown.single .single-render {
     display: flex; }
     .e.e-dropdown.single .single-render .e.checkbox {
       display: none; }
+  .e.e-dropdown.single.visible .e.content-wrapper {
+    visibility: visible;
+    opacity: 1; }
 
 .e.e-dropdown-item {
   display: flex;
@@ -231,7 +234,6 @@
   cursor: pointer;
   color: #fff;
   background-color: #718096;
-  align-self: center;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .e.button:focus {
     outline: none; }
@@ -259,10 +261,6 @@
     .e.button:hover.red {
       background-color: #9b2c2c; }
 
-    .e.button.disabled {
-        opacity: .65;
-        pointer-events: none;
-    }
 /**
  * Copyright (c) 2020 Apption Corporation
  * 
