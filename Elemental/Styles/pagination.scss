@@ -20,6 +20,9 @@
     transition: background-color .3s;
     border-radius: $border-radius;
 }
+.e.pagination.item a {
+    cursor: pointer;
+}
 
 .e.pagination.item.active {
     background-color: $grey-500;

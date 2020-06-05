@@ -539,6 +539,9 @@
   transition: background-color .3s;
   border-radius: 4px; }
 
+.e.pagination.item a {
+  cursor: pointer; }
+
 .e.pagination.item.active {
   background-color: #a0aec0; }
 
