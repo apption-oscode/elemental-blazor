@@ -8,28 +8,28 @@
 
 
 @page "/table"
-
+@using Elemental.Code
 @inject IJSRuntime JSRuntime
 
-<div class="component table">
-    <div class="title">Table</div>
-    <div class="showcase">
-        <Table Accessors="accessorFunctions"
-               Renderers="renderFunctions"
-               ColorAccessor="colorFunction"
-               Dataset="dummyData"
-               Headers="headers" />
-    </div>
-    <div class="source">
-        <div class="title">Source</div>
-        <pre><code class="language-html">@(@"<Table 
+    <div class="component table">
+        <div class="title">Table</div>
+        <div class="showcase">
+            <Table Accessors="accessorFunctions"
+                   Renderers="renderFunctions"
+                   ColorAccessor="colorFunction"
+                   Dataset="dummyData"
+                   Headers="headers" />
+        </div>
+        <div class="source">
+            <div class="title">Source</div>
+            <pre><code class="language-html">@(@"<Table 
     Accessors=""accessorFunctions"" 
     Renderers=""renderFunctions"" 
     ColorAccessor=""colorFunction"" 
     Dataset=""dummyData"" 
     Headers=""headers"" 
 />")</code></pre>
-        <pre><code class="language-csharp">@(@"@code {
+            <pre><code class="language-csharp">@(@"@code {
 
     // Define the headers at the top of the table
     private List<string> headers = new List<string>
@@ -95,35 +95,36 @@
         public int Importance { get; set; }
     }
 }")</code></pre>
-    </div>
+        </div>
 
-    <div class="title space">Table Overflow</div>
-    <div class="showcase">
-        <Table Accessors="accessorFunctions"
-               Renderers="renderFunctions"
-               ColorAccessor="colorFunction"
-               Dataset="GetOverflowData()"
-               Headers="headers"
-               MaxHeight="600"
-               RowHeight="32"/>
-    </div>
-    <div class="source">
-        <div class="title">Source</div>
-        <pre><code class="language-html">@(@"<Table 
+        <div class="title space">Table Overflow with Virtual Scrolling</div>
+        <div class="showcase">
+            <Table Accessors="accessorFunctions"
+                   Renderers="renderFunctions"
+                   ColorAccessor="colorFunction"
+                   Dataset="GetOverflowData()"
+                   Headers="headers"
+                   MaxHeight="600"
+                   RowHeight="32" />
+        </div>
+        <div class="source">
+            <div class="title">Source</div>
+            <pre><code class="language-html">@(@"<Table 
     Accessors=""accessorFunctions"" 
     Renderers=""renderFunctions"" 
     ColorAccessor=""colorFunction"" 
     Dataset=""GetOverflowData()"" 
     Headers=""headers"" 
-    MaxHeight=""600px""
+    MaxHeight=""600""
+    RowHeight=""32""
 />")</code></pre>
-        <pre><code class="language-csharp">@(@"@code{
+            <pre><code class="language-csharp">@(@"@code{
 
     private List<DummyData> GetOverflowData()
     {
         var result = new List<DummyData>();
 
-        for(var i=0;i < 15; i++)
+        for(var i=0;i < 100; i++)
         {
             result.AddRange(dummyData.Select(d => d));
         }
@@ -133,8 +134,74 @@
     ...
 
 }")</code></pre>
+            <h3>_Host.cshtml</h3>
+            <pre><code class="language-html">@(@"
+//Add this line to the end of head
+<script src=""_content/Apption.Elemental/js/virtualScrolling.js""></script>
+         
+")</code></pre>
+        </div>
+
+        <div class="title space">Table Overflow with Pagination</div>
+        <div class="showcase">
+            <Table Accessors="accessorFunctions"
+                   Renderers="renderFunctions"
+                   ColorAccessor="colorFunction"
+                   Dataset="GetOverflowData().Page(pageStatus.CurrentPage-1, pageStatus.PageSize).ToList()"
+                   Headers="headers"
+                   MaxHeight="600"
+                   RowHeight="32" />
+            <Pagination PageStatus="pageStatus" OnPageClicked="OnPageClicked" />
+        </div>
+        <div class="source">
+            <div class="title">Source</div>
+            <pre><code class="language-html">@(@"<Table 
+    Accessors=""accessorFunctions"" 
+    Renderers=""renderFunctions"" 
+    ColorAccessor=""colorFunction"" 
+    Dataset=""GetOverflowData().Page(pageStatus.CurrentPage-1, pageStatus.PageSize).ToList()"" 
+    Headers=""headers"" 
+    MaxHeight=""600""
+    RowHeight=""32""
+/>
+<Pagination 
+    PageStatus=""pageStatus"" 
+    OnPageClicked=""OnPageClicked"" 
+/>
+")</code></pre>
+            <pre><code class="language-csharp">@(@"@code{
+
+    private List<DummyData> GetOverflowData()
+    {
+        var result = new List<DummyData>();
+
+        for(var i=0;i < 100; i++)
+        {
+            result.AddRange(dummyData.Select(d => d));
+        }
+        return result;
+    }
+
+    private Elemental.Code.PageStatus pageStatus;
+    private List<DummyData> items;
+
+    protected override void OnInitialized()
+    {
+        var pageSize = 15;
+        var totalItems = GetOverflowData().Count();
+        var pageCount = (int)Math.Ceiling((double)totalItems / pageSize);
+        pageStatus = new Elemental.Code.PageStatus(pageCount, pageSize);
+    }
+
+    private void OnPageClicked(int cur)
+    {
+        pageStatus.CurrentPage = cur;
+    }
+
+}")</code></pre>
+        </div>
+
     </div>
-</div>
 
 
 @code {
@@ -150,7 +217,21 @@
         return result;
     }
 
+    private PageStatus pageStatus;
+    private List<DummyData> items;
 
+    protected override void OnInitialized()
+    {
+        var pageSize = 15;
+        var totalItems = GetOverflowData().Count();
+        var pageCount = (int)Math.Ceiling((double)totalItems / pageSize);
+        pageStatus = new PageStatus(pageCount, pageSize);
+    }
+
+    private void OnPageClicked(int cur)
+    {
+        pageStatus.CurrentPage = cur;
+    }
 
 
 
@@ -175,7 +256,7 @@
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
     };
 
-        // Accessor functions to retrieve cell value
+    // Accessor functions to retrieve cell value
     private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
     {
         new Func<DummyData, string>(dummyData => { return dummyData.Type; }),

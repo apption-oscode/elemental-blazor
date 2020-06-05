@@ -350,13 +350,9 @@
     .e.table .e.table-header .e.table-cell:hover {
       background-color: #4a5568; }
 
-.e.table .e.table-rows {
-  display: grid;
-  overflow: auto;
-  overflow: overlay; }
-  .e.table .e.table-scroll {
-    overflow-y: auto;
-    position: relative; }
+.e.table .e.table-scroll {
+  overflow-y: auto;
+  position: relative; }
   .e.table .e.table-scroll::-webkit-scrollbar {
     width: 0.25rem; }
   .e.table .e.table-scroll::-webkit-scrollbar-track {
@@ -367,10 +363,15 @@
     border-radius: 4px; }
     .e.table .e.table-scroll::-webkit-scrollbar-thumb:hover {
       background: #718096; }
-    .e.table .e.table-rows .e.table-row {
-        display: grid;
-        position: absolute;
-        width: 100%; }
+
+.e.table .e.table-rows {
+  display: grid;
+  overflow: auto;
+  overflow: overlay; }
+  .e.table .e.table-rows .e.table-row {
+    display: grid;
+    position: absolute;
+    width: 100%; }
     .e.table .e.table-rows .e.table-row .e.table-cell {
       word-wrap: break-word;
       font-size: 0.9rem;
@@ -492,3 +493,53 @@
       cursor: pointer; }
     .e.searchbar .e.clear-search.visible {
       visibility: visible; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.e.pagination {
+  display: flex;
+  justify-content: center;
+  align-content: center; }
+
+.e.pagination.item {
+  padding: 0.5rem 0.75rem;
+  transition: background-color .3s;
+  border-radius: 4px; }
+
+.e.pagination.item.active {
+  background-color: #a0aec0; }
+
+.e.pagination.item:hover:not(.active) {
+  background-color: #e2e8f0; }

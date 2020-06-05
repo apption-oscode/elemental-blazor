@@ -48,15 +48,22 @@
         }
     }
 
+    .e.table-scroll {
+        overflow-y: auto;
+        position: relative;
+
+        @include Scrollbar();
+    }
+
     .e.table-rows {
         display: grid;
         overflow: auto;
         overflow: overlay;
 
-        @include Scrollbar();
-
         .e.table-row {
-            display: contents;
+            display: grid;
+            position: absolute;
+            width: 100%;
 
             .e.table-cell {
                 word-wrap: break-word;

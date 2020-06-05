@@ -1,0 +1,30 @@
+﻿/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+@import 'colors';
+@import 'constants';
+
+.e.pagination {
+    display: flex;
+    justify-content:center;
+    align-content:center;
+}
+
+.e.pagination.item {
+    padding: 0.5rem 0.75rem;
+    transition: background-color .3s;
+    border-radius: $border-radius;
+}
+
+.e.pagination.item.active {
+    background-color: $grey-500;
+}
+
+.e.pagination.item:hover:not(.active) {
+    background-color: $grey-300;
+}
