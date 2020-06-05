@@ -377,7 +377,19 @@
       word-wrap: break-word;
       font-size: 0.9rem;
       padding: 0.5rem 0 0.5rem 0.75rem;
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      overflow: auto;
+      overflow: overlay; }
+      .e.table .e.table-rows .e.table-row .e.table-cell::-webkit-scrollbar {
+        width: 0.25rem; }
+      .e.table .e.table-rows .e.table-row .e.table-cell::-webkit-scrollbar-track {
+        background: #edf2f7;
+        border-radius: 4px; }
+      .e.table .e.table-rows .e.table-row .e.table-cell::-webkit-scrollbar-thumb {
+        background: #a0aec0;
+        border-radius: 4px; }
+        .e.table .e.table-rows .e.table-row .e.table-cell::-webkit-scrollbar-thumb:hover {
+          background: #718096; }
       .e.table .e.table-rows .e.table-row .e.table-cell + .e.table-cell {
         /*border-left: 1px solid $grey-300;*/ }
       .e.table .e.table-rows .e.table-row .e.table-cell:nth-child(1) {

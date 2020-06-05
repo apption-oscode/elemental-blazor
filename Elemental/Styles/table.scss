@@ -70,6 +70,9 @@
                 font-size: 0.9rem;
                 padding: 0.5rem 0 0.5rem 0.75rem;
                 transition: all 0.4s $cubic-bezier;
+                overflow: auto;
+                overflow: overlay;
+                @include Scrollbar();
 
                 & + .e.table-cell {
                     /*border-left: 1px solid $grey-300;*/

@@ -105,7 +105,7 @@
                    Dataset="GetOverflowData()"
                    Headers="headers"
                    MaxHeight="600"
-                   RowHeight="32" />
+                   RowHeight="36"/>
         </div>
         <div class="source">
             <div class="title">Source</div>
@@ -116,7 +116,7 @@
     Dataset=""GetOverflowData()"" 
     Headers=""headers"" 
     MaxHeight=""600""
-    RowHeight=""32""
+    RowHeight=""36""
 />")</code></pre>
             <pre><code class="language-csharp">@(@"@code{
 
@@ -126,12 +126,33 @@
 
         for(var i=0;i < 100; i++)
         {
-            result.AddRange(dummyData.Select(d => d));
+            result.AddRange(dummyLongData.Select(d => d));
         }
         return result;
     }
 
-    ...
+    // Typeparam class to hold row data, can be anything
+    private List<DummyData> dummyLongData = new List<DummyData>
+    {
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = @""Lorem ipsum dolor sit amet, consectetur adipiscing elit.Curabitur ut tortor quis quam lacinia posuere.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nunc augue tortor, gravida ut convallis sit amet, sodales nec diam.Nulla facilisi. Vivamus eget dolor sollicitudin, vehicula libero eu, tristique turpis.
+Pellentesque gravida, mauris et sollicitudin sollicitudin, nibh velit feugiat nisl, ac semper tellus enim quis orci.Sed ultricies magna sit amet tortor dapibus accumsan. Pellentesque quis tincidunt libero. 
+Duis volutpat turpis vitae pulvinar faucibus. Donec viverra scelerisque tellus, non rhoncus ante placerat eu.Nullam tortor massa, volutpat at rhoncus ut, pharetra sed erat. Ut luctus odio nec velit semper,
+sit amet pellentesque felis tempor. Donec feugiat lectus in dignissim condimentum. Vestibulum quis consectetur ligula, sed tincidunt tortor. Suspendisse eu urna rhoncus, tristique mi sed, ullamcorper nibh.
+Proin dolor risus, hendrerit sed libero ornare, eleifend tincidunt dolor. Etiam sodales mi molestie consectetur dapibus. Aliquam a suscipit odio. Sed nunc quam, convallis id nunc quis, porta blandit dolor. 
+Quisque mollis non tortor at lobortis. Morbi viverra risus sed sapien varius, eget fringilla quam efficitur."", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 1, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 1, Location = @""Sed ultricies magna sit amet tortor dapibus accumsan. Pellentesque quis tincidunt libero. 
+Duis volutpat turpis vitae pulvinar faucibus. Donec viverra scelerisque tellus, non rhoncus ante placerat eu.Nullam tortor massa, volutpat at rhoncus ut, pharetra sed erat. Ut luctus odio nec velit semper,
+sit amet pellentesque felis tempor. Donec feugiat lectus in dignissim condimentum. Vestibulum quis consectetur ligula, sed tincidunt tortor. Suspendisse eu urna rhoncus, tristique mi sed, ullamcorper nibh."", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 2, Location = ""SQLDEV_1/COSTS"", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 3, Location = ""SQLDEV_1/COSTS"", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 0, Location = ""SQLDEV_1/PROFITS"", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 3, Location = ""SQLDEV_1/PROFITS"", Type = ""Finance"" },
+    };
 
 }")</code></pre>
             <h3>_Host.cshtml</h3>
@@ -150,7 +171,7 @@
                    Dataset="GetOverflowData().Page(pageStatus.CurrentPage-1, pageStatus.PageSize).ToList()"
                    Headers="headers"
                    MaxHeight="600"
-                   RowHeight="32" />
+                   RowHeight="36"/>
             <Pagination PageStatus="pageStatus" OnPageClicked="OnPageClicked" />
         </div>
         <div class="source">
@@ -162,7 +183,7 @@
     Dataset=""GetOverflowData().Page(pageStatus.CurrentPage-1, pageStatus.PageSize).ToList()"" 
     Headers=""headers"" 
     MaxHeight=""600""
-    RowHeight=""32""
+    RowHeight=""36""
 />
 <Pagination 
     PageStatus=""pageStatus"" 
@@ -177,7 +198,7 @@
 
         for(var i=0;i < 100; i++)
         {
-            result.AddRange(dummyData.Select(d => d));
+            result.AddRange(dummyLongData.Select(d => d));
         }
         return result;
     }
@@ -212,7 +233,7 @@
 
         for (var i = 0; i < 100; i++)
         {
-            result.AddRange(dummyData.Select(d => d));
+            result.AddRange(dummyLongData.Select(d => d));
         }
         return result;
     }
@@ -250,6 +271,28 @@
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 1, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 1, Location = "SQLDEV_1/COSTS", Type = "Finance" },
+        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 2, Location = "SQLDEV_1/COSTS", Type = "Finance" },
+        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/COSTS", Type = "Finance" },
+        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 0, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
+        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
+    };
+
+    private List<DummyData> dummyLongData = new List<DummyData>
+    {
+        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor quis quam lacinia posuere. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc augue tortor, gravida ut convallis sit amet, sodales nec diam. Nulla facilisi. Vivamus eget dolor sollicitudin, vehicula libero eu, tristique turpis. 
+Pellentesque gravida, mauris et sollicitudin sollicitudin, nibh velit feugiat nisl, ac semper tellus enim quis orci. Sed ultricies magna sit amet tortor dapibus accumsan. Pellentesque quis tincidunt libero. 
+Duis volutpat turpis vitae pulvinar faucibus. Donec viverra scelerisque tellus, non rhoncus ante placerat eu.Nullam tortor massa, volutpat at rhoncus ut, pharetra sed erat. Ut luctus odio nec velit semper, 
+sit amet pellentesque felis tempor. Donec feugiat lectus in dignissim condimentum. Vestibulum quis consectetur ligula, sed tincidunt tortor. Suspendisse eu urna rhoncus, tristique mi sed, ullamcorper nibh. 
+Proin dolor risus, hendrerit sed libero ornare, eleifend tincidunt dolor. Etiam sodales mi molestie consectetur dapibus. Aliquam a suscipit odio. Sed nunc quam, convallis id nunc quis, porta blandit dolor. 
+Quisque mollis non tortor at lobortis. Morbi viverra risus sed sapien varius, eget fringilla quam efficitur.", Type = "Number" },
+        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
+        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
+        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
+        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 1, Location = "FILESYSTEM", Type = "Number" },
+        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 1, Location = @"Sed ultricies magna sit amet tortor dapibus accumsan. Pellentesque quis tincidunt libero. 
+Duis volutpat turpis vitae pulvinar faucibus. Donec viverra scelerisque tellus, non rhoncus ante placerat eu.Nullam tortor massa, volutpat at rhoncus ut, pharetra sed erat. Ut luctus odio nec velit semper,
+sit amet pellentesque felis tempor. Donec feugiat lectus in dignissim condimentum. Vestibulum quis consectetur ligula, sed tincidunt tortor. Suspendisse eu urna rhoncus, tristique mi sed, ullamcorper nibh.", Type = "Finance" },
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 2, Location = "SQLDEV_1/COSTS", Type = "Finance" },
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/COSTS", Type = "Finance" },
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 0, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
