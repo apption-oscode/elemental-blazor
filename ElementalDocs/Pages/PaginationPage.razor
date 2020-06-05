@@ -12,28 +12,13 @@
 @inject IJSRuntime JSRuntime
 
     <div class="component pagination">
-        <div class="title space">Table Overflow with Pagination</div>
-        <div class="showcase">
-            <Table Accessors="accessorFunctions"
-                   Renderers="renderFunctions"
-                   ColorAccessor="colorFunction"
-                   Dataset="GetOverflowData().Page(pageStatus.CurrentPage-1, pageStatus.PageSize).ToList()"
-                   Headers="headers"
-                   MaxHeight="600"
-                   RowHeight="32" />
+        <div class="title space">Pagination</div>
+        <div class="showcase">            
             <Pagination PageStatus="pageStatus" OnPageClicked="OnPageClicked" />
         </div>
         <div class="source">
             <div class="title">Source</div>
-            <pre><code class="language-html">@(@"<Table 
-    Accessors=""accessorFunctions"" 
-    Renderers=""renderFunctions"" 
-    ColorAccessor=""colorFunction"" 
-    Dataset=""GetOverflowData().Page(pageStatus.CurrentPage-1, pageStatus.PageSize).ToList()"" 
-    Headers=""headers"" 
-    MaxHeight=""600""
-    RowHeight=""32""
-/>
+            <pre><code class="language-html">@(@"
 <Pagination 
     PageStatus=""pageStatus"" 
     OnPageClicked=""OnPageClicked"" 
@@ -41,18 +26,19 @@
 ")</code></pre>
             <pre><code class="language-csharp">@(@"@code{
 
-    private List<DummyData> GetOverflowData()
+    
+private List<DummyData> GetOverflowData()
     {
         var result = new List<DummyData>();
 
-        for(var i=0;i < 100; i++)
+        for (var i = 0; i < 100; i++)
         {
             result.AddRange(dummyData.Select(d => d));
         }
         return result;
     }
 
-    private Elemental.Code.PageStatus pageStatus;
+    private PageStatus pageStatus;
     private List<DummyData> items;
 
     protected override void OnInitialized()
@@ -60,13 +46,28 @@
         var pageSize = 15;
         var totalItems = GetOverflowData().Count();
         var pageCount = (int)Math.Ceiling((double)totalItems / pageSize);
-        pageStatus = new Elemental.Code.PageStatus(pageCount, pageSize);
+        pageStatus = new PageStatus(pageCount, pageSize);
     }
 
     private void OnPageClicked(int cur)
     {
         pageStatus.CurrentPage = cur;
     }
+
+    // Typeparam class to hold row data, can be anything
+    private List<DummyData> dummyData = new List<DummyData>
+    {
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 0, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Hashtag"", CategoryIconClass=""fa fa-hashtag"", Importance = 1, Location = ""FILESYSTEM"", Type = ""Number"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 1, Location = ""SQLDEV_1/COSTS"", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 2, Location = ""SQLDEV_1/COSTS"", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 3, Location = ""SQLDEV_1/COSTS"", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 0, Location = ""SQLDEV_1/PROFITS"", Type = ""Finance"" },
+        new DummyData { Category = ""Dollar"", CategoryIconClass=""fa fa-dollar-sign"", Importance = 3, Location = ""SQLDEV_1/PROFITS"", Type = ""Finance"" },
+    };
 
 }")</code></pre>
         </div>
@@ -101,14 +102,6 @@
         pageStatus.CurrentPage = cur;
     }
 
-
-
-    // Define the headers at the top of the table
-    private List<string> headers = new List<string>
-    {
-        "Type", "Category", "Location"
-    };
-
     // Typeparam class to hold row data, can be anything
     private List<DummyData> dummyData = new List<DummyData>
     {
@@ -122,40 +115,7 @@
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/COSTS", Type = "Finance" },
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 0, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
-    };
-
-    // Accessor functions to retrieve cell value
-    private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
-    {
-        new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
-        new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
-        new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
-    };
-
-    // [Optional] Can define custom rendering for columns, order matters
-    private List<Func<DummyData, RenderFragment>> renderFunctions = new List<Func<DummyData, RenderFragment>>
-    {
-        null,
-        new Func<DummyData, RenderFragment>(dummyData => { return @<i class="@dummyData.CategoryIconClass"></i>; }),
-        null,
-    };
-
-    // [Optional] Can define custom colors per row
-    private Func<DummyData, Table<DummyData>.RowColor> colorFunction = dummyData =>
-    {
-        switch (dummyData.Importance)
-        {
-            case 3:
-                return Table<DummyData>.RowColor.Red;
-            case 2:
-                return Table<DummyData>.RowColor.Yellow;
-            case 1:
-                return Table<DummyData>.RowColor.Blue;
-            case 0:
-            default:
-                return Table<DummyData>.RowColor.Default;
-        }
-    };
+    };    
 
     class DummyData
     {
