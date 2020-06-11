@@ -20,8 +20,10 @@
             border-left: 0.25rem solid $border-color;
         }
     }
+
     &:hover {
         .e.table-cell {
+            transition: 0.4s $cubic-bezier;
             background-color: $hover-color;
         }
     }
@@ -69,7 +71,6 @@
                 word-wrap: break-word;
                 font-size: 0.9rem;
                 padding: 0.5rem 0 0.5rem 0.75rem;
-                transition: all 0.4s $cubic-bezier;
                 overflow: auto;
                 overflow: overlay;
                 @include Scrollbar();

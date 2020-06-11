@@ -377,7 +377,6 @@
       word-wrap: break-word;
       font-size: 0.9rem;
       padding: 0.5rem 0 0.5rem 0.75rem;
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       overflow: auto;
       overflow: overlay; }
       .e.table .e.table-rows .e.table-row .e.table-cell::-webkit-scrollbar {
@@ -401,30 +400,35 @@
       .e.table .e.table-rows .e.table-row .e.table-cell:nth-child(1) {
         border-left: 0.25rem solid transparent; }
     .e.table .e.table-rows .e.table-row:hover .e.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #edf2f7; }
     .e.table .e.table-rows .e.table-row:nth-of-type(2n+1) .e.table-cell {
       background-color: #f7fafc; }
       .e.table .e.table-rows .e.table-row:nth-of-type(2n+1) .e.table-cell:nth-child(1) {
         border-left: 0.25rem solid transparent; }
     .e.table .e.table-rows .e.table-row:nth-of-type(2n+1):hover .e.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #edf2f7; }
     .e.table .e.table-rows .e.table-row.red .e.table-cell {
       background-color: #fff5f5; }
       .e.table .e.table-rows .e.table-row.red .e.table-cell:nth-child(1) {
         border-left: 0.25rem solid #fc8181; }
     .e.table .e.table-rows .e.table-row.red:hover .e.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #fed7d7; }
     .e.table .e.table-rows .e.table-row.blue .e.table-cell {
       background-color: #ebf8ff; }
       .e.table .e.table-rows .e.table-row.blue .e.table-cell:nth-child(1) {
         border-left: 0.25rem solid #63b3ed; }
     .e.table .e.table-rows .e.table-row.blue:hover .e.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #bee3f8; }
     .e.table .e.table-rows .e.table-row.yellow .e.table-cell {
       background-color: #fffaf0; }
       .e.table .e.table-rows .e.table-row.yellow .e.table-cell:nth-child(1) {
         border-left: 0.25rem solid #f6ad55; }
     .e.table .e.table-rows .e.table-row.yellow:hover .e.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #feebc8; }
 
 /**
