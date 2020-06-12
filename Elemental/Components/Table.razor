@@ -88,7 +88,8 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
+        var tempHeight = Rows.Count() * RowHeight;
+        if (firstRender || scrollViewResult.Height != tempHeight)
         {
             scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
 
