@@ -22,7 +22,13 @@
         </div>
         <div class="source">
             <div class="title">Source</div>
-            <pre><code class="language-html">@(@"<Table 
+            <pre><code class="language-html">@(@"
+// Note:
+// If you see a scrollbar inside an data field, you can eliminate them by specifying a RowHeight field
+// because all the fields have a fixed height. The default RowHeight is 33 in px, and the default table
+// height (MaxHeight) is 600 in px.
+// See example in the below section
+<Table 
     Accessors=""accessorFunctions"" 
     Renderers=""renderFunctions"" 
     ColorAccessor=""colorFunction"" 
@@ -95,6 +101,13 @@
         public int Importance { get; set; }
     }
 }")</code></pre>
+            <h3>_Host.cshtml</h3>
+            <pre><code class="language-html">@(@"
+//Add this line to the end of head
+<script src=""_content/Apption.Elemental/js/virtualScrolling.js""></script>
+         
+")</code></pre>
+            
         </div>
 
         <div class="title space">Table Overflow with Virtual Scrolling</div>
@@ -155,12 +168,6 @@ sit amet pellentesque felis tempor. Donec feugiat lectus in dignissim condimentu
     };
 
 }")</code></pre>
-            <h3>_Host.cshtml</h3>
-            <pre><code class="language-html">@(@"
-//Add this line to the end of head
-<script src=""_content/Apption.Elemental/js/virtualScrolling.js""></script>
-         
-")</code></pre>
         </div>
 
         <div class="title space">Table Overflow with Pagination</div>
@@ -226,7 +233,7 @@ sit amet pellentesque felis tempor. Donec feugiat lectus in dignissim condimentu
 
 
 @code {
-
+    
     private List<DummyData> GetOverflowData()
     {
         var result = new List<DummyData>();
