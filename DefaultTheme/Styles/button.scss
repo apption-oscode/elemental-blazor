@@ -1,0 +1,24 @@
+﻿@import 'colors';
+@import 'constants';
+
+$btn-display: inline-block !default;
+$btn-padding: 0.5rem 1rem !default;
+$btn-margin: 0.2rem !default;
+$btn-border-radius: 0px !default;
+$btn-cursor: pointer !default;
+$btn-color: $white !default;
+$btn-background-color: $grey-600 !default;
+
+.ae.button {
+    display: $btn-display;
+    padding: $btn-padding;
+    margin: $btn-margin;
+    border-radius: $btn-border-radius;
+    cursor: $btn-cursor;
+    color: $btn-color;
+    background-color: $btn-background-color;
+
+
+
+
+}
