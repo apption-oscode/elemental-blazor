@@ -1,6 +1,6 @@
 ﻿[
   {
-    "outputFile": "wwwroot/elemental-theme-default.css",
+    "outputFile": "wwwroot/elemental.css",
     "inputFile": "Styles/theme.scss"
   }
 ]

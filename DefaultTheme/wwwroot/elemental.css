@@ -117,3 +117,8 @@
       color: #fff;
       background-color: #c53030;
       border-color: #c53030; }
+
+.ae.flex {
+  display: flex; }
+  .ae.flex.vertical {
+    flex-direction: column; }
