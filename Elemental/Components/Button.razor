@@ -9,7 +9,7 @@
 @inject NavigationManager NavigationManager
 
 
-<div class="@GetButtonStyle() @(IsDisabled? "disabled":"")" @onclick="HandleNavigation">
+<div class="@_classname" @onclick="HandleNavigation">
     @ChildContent
 </div>
 
@@ -17,11 +17,16 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
     [Parameter]
-    public Style ButtonStyle { get; set; }
+    public string Style { get; set; }
+    [Parameter]
+    public string Classname { get; set; }
     [Parameter]
     public string To { get; set; }
     [Parameter]
     public bool IsDisabled { get; set; } = false;
+
+
+    private string _classname => $"ae button {Classname} {(IsDisabled ? "disabled" : "")}";
 
     private void HandleNavigation()
     {
@@ -29,33 +34,5 @@
         {
             NavigationManager.NavigateTo(To);
         }
-    }
-
-
-    private string GetButtonStyle()
-    {
-        var css = "ae button";
-        switch (ButtonStyle)
-        {
-            case Style.Light:
-                return css + " light";
-            case Style.Dark:
-                return css + " dark";
-            case Style.Blue:
-                return css + " blue";
-            case Style.Red:
-                return css + " red";
-            default:
-                return css;
-        }
-    }
-
-    public enum Style
-    {
-        Default,
-        Dark,
-        Light,
-        Blue,
-        Red,
     }
 }
