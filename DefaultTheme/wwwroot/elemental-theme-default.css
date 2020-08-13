@@ -25,11 +25,95 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 .ae.button {
+  position: relative;
   display: inline-block;
-  padding: 0.5rem 1rem;
-  margin: 0.2rem;
-  border-radius: 0px;
+  height: 1.2rem;
+  padding: 0.25rem 1rem;
+  border-radius: 2px;
+  line-height: 1.2rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  border: 1px solid;
+  box-shadow: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
   color: #fff;
-  background-color: #718096; }
+  background-color: #718096;
+  border-color: #718096; }
+  .ae.button:focus {
+    outline: none; }
+  .ae.button:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14); }
+  .ae.button:hover {
+    color: #fff;
+    background-color: #4a5568;
+    border-color: #4a5568; }
+  .ae.button.dark {
+    color: #fff;
+    background-color: #4a5568;
+    border-color: #4a5568; }
+    .ae.button.dark:hover {
+      color: #fff;
+      background-color: #2d3748;
+      border-color: #2d3748; }
+  .ae.button.light {
+    color: #718096;
+    background-color: #f7fafc;
+    border-color: #f7fafc; }
+    .ae.button.light:hover {
+      color: #718096;
+      background-color: #e2e8f0;
+      border-color: #e2e8f0; }
+  .ae.button.blue {
+    color: #fff;
+    background-color: #3182ce;
+    border-color: #3182ce; }
+    .ae.button.blue:hover {
+      color: #fff;
+      background-color: #2b6cb0;
+      border-color: #2b6cb0; }
+  .ae.button.red {
+    color: #fff;
+    background-color: #e53e3e;
+    border-color: #e53e3e; }
+    .ae.button.red:hover {
+      color: #fff;
+      background-color: #c53030;
+      border-color: #c53030; }
