@@ -1,11 +1,11 @@
 ﻿@inherits HtmlElement
 
-<div class="@_classname" style="@Style" id="@Id">
+<div class="@_classname" @attributes="InputAttributes">
     @ChildContent
 </div>
 
 @code {
     [Parameter]
     public bool Vertical { get; set; }
-    private string _classname => $"ae flex {Classname} {(Vertical ? "vertical" : "")}";
+    private string _classname => $"ae flex {_inputClass} {(Vertical ? "vertical" : "")}";
 }

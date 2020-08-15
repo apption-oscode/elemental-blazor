@@ -2,27 +2,14 @@
 @inherits DemoPage
 
 <Flex Style="padding: 0 2rem" Vertical>
-    @*<DemoSection Title="Buttons" HtmlSource="@_buttonsHtml">
-        <Introduction>
-        </Introduction>
-        <ChildContent>
-            <Flex>
-                <Button>Default</Button>
-                <Button Classname="blue">Blue</Button>
-                <Button Classname="red">Red</Button>
-                <Button Classname="light">Light</Button>
-                <Button Classname="dark">Dark</Button>
-            </Flex>
-        </ChildContent>
-    </DemoSection>*@
-
-    <DemoSection Path="./Samples/Buttons/Buttons.razor" /> 
-
+    <DemoSection Path="./Samples/Buttons/Examples/BasicButtons.razor">
+        <Flex>
+            <ElementalDocs.Samples.Buttons.Examples.BasicButtons />
+        </Flex>
+    </DemoSection> 
 </Flex>
 
 
 @code {
-
-
 
 }

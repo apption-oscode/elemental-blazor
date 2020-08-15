@@ -10,7 +10,7 @@
 @inject NavigationManager NavigationManager
 
 
-<div class="@_classname" @onclick="HandleNavigation" id="@Id">
+<div class="@_classname" @onclick="HandleNavigation" @attributes="@InputAttributesWithoutClass">
     @ChildContent
 </div>
 
@@ -20,8 +20,7 @@
     [Parameter]
     public bool Disabled { get; set; } = false;
 
-
-    private string _classname => $"ae button {Classname} {(Disabled ? "disabled" : "")}";
+    private string _classname => $"ae button {_inputClass} {(Disabled ? "disabled" : "")}";
 
     private void HandleNavigation()
     {

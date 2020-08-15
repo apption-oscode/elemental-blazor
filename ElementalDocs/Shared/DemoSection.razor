@@ -1,47 +1,60 @@
-﻿@using System.IO
+﻿@using Elemental;
 
-@*<Flex Vertical>
-    <Title Level="2">@Title</Title>
-    @Introduction
-    <Flex Vertical>
-        <title Level="3">Example</title>
-        @ChildContent
-    </Flex>
-    <Flex Vertical>
-        <Title Level="3">Source</Title>
-        <div class="source">
-            @if (!string.IsNullOrWhiteSpace(HtmlSource))
-            {
-                <pre><code class="language-html">@HtmlSource</code></pre>
-            }
-            @if (!string.IsNullOrWhiteSpace(CSharpSource))
-            {
-                <pre><code class="language-csharp">@CSharpSource</code></pre>
-            }
-        </div>
-    </Flex>
-</Flex>*@
-
-
-
-
-
-<div>@Path</div>
-
-@foreach(var line in _text)
+@if(file != null)
 {
-    <div>@line</div>
+    <Flex Vertical>
+        @if(file.Title != null)
+        {
+            <Typography Variant="h2">@file.Title</Typography>
+        }
+        @if(file.Description != null)
+        {
+            <Typography>@file.Description</Typography>
+        }
+        @if(file.Html != null)
+        {
+            <Flex Vertical>
+                <Typography Variant="h3">Example</Typography>
+                @ChildContent
+            </Flex>
+        }
+        @if(file.Code.Count > 0 || file.Html.Count > 0)
+        {
+            <Flex Vertical>
+                <Typography Variant="h3">Source</Typography>
+                <div class="source">
+                    @if (file.Html.Count > 0)
+                    {
+                        <pre><code class="language-html">@(string.Join(System.Environment.NewLine, file.Html))</code></pre>
+                    }
+                    @if (file.Code.Count > 0)
+                    {
+                        <pre><code class="language-csharp">
+                            hello
+                            here
+                            test
+                        </code></pre>
+                    }
+                </div>
+            </Flex>
+        }
+    </Flex>
+}
+else
+{
+    <div>File not found: @Path</div>
 }
 
 @code {
     [Parameter]
     public string Path { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-    private string[] _text = new string[0];
+    private ParsedFile file;
 
-        protected override void OnInitialized()
-        {
-
-            _text = File.ReadAllLines(Path);
-        }
+    protected override void OnInitialized()
+    {
+        file = new ParsedFile(Path);
+    }
 }
