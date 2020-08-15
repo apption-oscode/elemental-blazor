@@ -22,20 +22,14 @@
         {
             <Flex Vertical>
                 <Typography Variant="h3">Source</Typography>
-                <div class="source">
-                    @if (file.Html.Count > 0)
-                    {
-                        <pre><code class="language-html">@(string.Join(System.Environment.NewLine, file.Html))</code></pre>
-                    }
-                    @if (file.Code.Count > 0)
-                    {
-                        <pre><code class="language-csharp">
-                            hello
-                            here
-                            test
-                        </code></pre>
-                    }
-                </div>
+                @if (file.Html.Count > 0)
+                {
+                    <pre style="margin: 0"><code class="language-html">@(string.Join(System.Environment.NewLine, file.Html))</code></pre>
+                }
+                @if (file.Code.Count > 0)
+                {
+                    <pre style="margin: 0"><code class="language-csharp">@(string.Join(System.Environment.NewLine, file.Code))</code></pre>
+                }
             </Flex>
         }
     </Flex>
