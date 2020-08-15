@@ -1,0 +1,34 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Test Component
+    Description: Lorem ipsum dolor sit amet.
+*@
+
+<div class="test-1">one</div>
+<div class="test-1">one</div>
+<div class="test-1">one</div>
+<div class="test-2">
+    <div class="inside">two</div>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public string MyParameter { get; set; }
+
+    private int _number = 3;
+
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+}
