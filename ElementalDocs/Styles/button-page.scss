@@ -1,12 +1,12 @@
 ﻿
 
 
-.component.button {
-    .showcase {
-        display: flex;
-    }
+#buttons-page {
 
-    .source {
-        margin-bottom: 4rem;
+    padding: 2rem;
+
+    .ae.button {
+        margin-right: 0.25rem;
+        margin-bottom: 0.5rem;
     }
 }

@@ -1,0 +1,47 @@
+﻿@using System.IO
+
+@*<Flex Vertical>
+    <Title Level="2">@Title</Title>
+    @Introduction
+    <Flex Vertical>
+        <title Level="3">Example</title>
+        @ChildContent
+    </Flex>
+    <Flex Vertical>
+        <Title Level="3">Source</Title>
+        <div class="source">
+            @if (!string.IsNullOrWhiteSpace(HtmlSource))
+            {
+                <pre><code class="language-html">@HtmlSource</code></pre>
+            }
+            @if (!string.IsNullOrWhiteSpace(CSharpSource))
+            {
+                <pre><code class="language-csharp">@CSharpSource</code></pre>
+            }
+        </div>
+    </Flex>
+</Flex>*@
+
+
+
+
+
+<div>@Path</div>
+
+@foreach(var line in _text)
+{
+    <div>@line</div>
+}
+
+@code {
+    [Parameter]
+    public string Path { get; set; }
+
+    private string[] _text = new string[0];
+
+        protected override void OnInitialized()
+        {
+
+            _text = File.ReadAllLines(Path);
+        }
+}

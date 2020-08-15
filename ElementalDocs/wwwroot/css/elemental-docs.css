@@ -163,11 +163,11 @@
 .component.search .details {
   margin-bottom: 1rem; }
 
-.component.button .showcase {
-  display: flex; }
-
-.component.button .source {
-  margin-bottom: 4rem; }
+#buttons-page {
+  padding: 2rem; }
+  #buttons-page .ae.button {
+    margin-right: 0.25rem;
+    margin-bottom: 0.5rem; }
 
 html {
   overflow: overlay; }

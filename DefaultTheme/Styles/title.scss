@@ -1,0 +1,41 @@
+﻿@import 'utils';
+@import 'colors';
+
+
+$titleOptions: (
+    "h1": (
+        "margin-bottom": .5rem,
+        "line-height": 1.25,
+        "font-size": 2.5rem,
+        "font-weight": 600,
+        "color": $text-primary,
+    ),
+    "h2": (
+        "margin-bottom": .5rem,
+        "line-height": 1.35,
+        "font-size": 1.75rem,
+        "font-weight": 600,
+        "color": $text-primary,
+    ),
+    "h3": (
+        "margin-bottom": .5rem,
+        "line-height": 1.3,
+        "font-size": 1.5rem,
+        "font-weight": 600,
+        "color": $text-primary,
+    ),
+    "h4": (
+        "margin-bottom": .5rem,
+        "line-height": 1.2,
+        "font-size": 1.25rem,
+        "font-weight": 600,
+        "color": $text-primary,
+    ),
+) !default;
+
+
+@each $element, $values in $titleOptions {
+    #{$element}.ae.title {
+        @include set-values($values);
+    }
+}

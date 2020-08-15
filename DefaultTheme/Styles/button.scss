@@ -3,116 +3,70 @@
 @import 'box-shadow';
 @import 'utils';
 
-$btn-display: inline-block !default;
-$btn-position: relative !default;
-$btn-height: 1.2rem !default;
-$btn-padding: 0.25rem 1rem !default;
-$btn-border: 1px solid !default;
-$btn-border-radius: 2px !default;
 
-$btn-line-height: $btn-height !default;
-$btn-font-weight: 400 !default;
-$btn-font-size: 0.8rem !default;
-$btn-white-space: nowrap !default;
-$btn-text-align: center !default;
-
-$btn-cursor: pointer !default;
-$btn-user-select: none !default;
-$btn-transition: all .3s $cubic-bezier !default;
-$btn-box-shadow: 0 !default;
-$btn-hover-box-shadow: 1 !default;
-
-$btn-colors: ( 
+$buttonOptions: ( 
     "default": (
+        "position": relative,
+        "display": inline-block,
+        "height": 1.2rem,
+        "padding": .25rem 1rem,
+        "border-radius": 2px,
+        "line-height": 1.5,
+        "font-size": 0.8rem,
+        "font-weight": 400,
+        "white-space": nowrap,
+        "text-align": center,
+        "border": none,
+        "transition": all .3s $cubic-bezier,
+        "cursor": pointer,
         "color": $white,
-        "bg-color": $grey-600,
+        "background-color": $grey-600,
         "border-color": $grey-600,
-        "hover-color": $white,
-        "hover-bg-color": $grey-700,
-        "hover-border-color": $grey-700
+        ":hover": (
+            "box-shadow": $box-shadow-1,
+            "background-color": $grey-700,
+            "border-color": $grey-700,
+        ),
     ),
     "dark": (
-        "color": $white,
-        "bg-color": $grey-700,
+        "background-color": $grey-700,
         "border-color": $grey-700,
-        "hover-color": $white,
-        "hover-bg-color": $grey-800,
-        "hover-border-color": $grey-800
+        ":hover": (
+            "background-color": $grey-800,
+            "border-color": $grey-800,
+        ),
     ),
     "light": (
         "color": $grey-600,
-        "bg-color": $grey-100,
+        "background-color": $grey-100,
         "border-color": $grey-100,
-        "hover-color": $grey-600,
-        "hover-bg-color": $grey-300,
-        "hover-border-color": $grey-300
+        ":hover": (
+            "background-color": $grey-300,
+            "border-color": $grey-300,
+        ),
     ),
     "blue": (
-        "color": $white,
-        "bg-color": $blue-600,
+        "background-color": $blue-600,
         "border-color": $blue-600,
-        "hover-color": $white,
-        "hover-bg-color": $blue-700,
-        "hover-border-color": $blue-700
+        ":hover": (
+            "background-color": $blue-700,
+            "border-color": $blue-700,
+        ),
     ),
     "red": (
-        "color": $white,
-        "bg-color": $red-600,
+        "background-color": $red-600,
         "border-color": $red-600,
-        "hover-color": $white,
-        "hover-bg-color": $red-700,
-        "hover-border-color": $red-700
+        ":hover": (
+            "background-color": $red-700,
+            "border-color": $red-700,
+        ),
     ),
 ) !default;
 
 
-
-@mixin button-coloring($values) {
-    color: map-get($values, "color");
-    background-color: map-get($values, "bg-color");
-    border-color: map-get($values, "border-color");
-
-    &:hover {
-        color: map-get($values, "hover-color");
-        background-color: map-get($values, "hover-bg-color");
-        border-color: map-get($values, "hover-border-color");
-    }
-}
-
-
 .ae.button {
-    position: $btn-position;
-    display: $btn-display;
-    height: $btn-height;
-    padding: $btn-padding;
-    border-radius: $btn-border-radius;
-    line-height: $btn-line-height;
-    font-size: $btn-font-size;
-    font-weight: $btn-font-weight;
-    white-space: $btn-white-space;
-    text-align: $btn-text-align;
-    border: $btn-border;
-
-    @include BoxShadow($btn-box-shadow);
-    transition: $btn-transition;
-    cursor: $btn-cursor;
-
     &:focus {
         outline: none;
     }
-
-    &:hover {
-        @include BoxShadow($btn-hover-box-shadow);
-    }
-
-    @each $name, $values in $btn-colors {
-        @if $name == "default"{
-            @include button-coloring($values);
-        }
-        @else {
-            &.#{$name} {
-                @include button-coloring($values);
-            }
-        }
-    }
+    @include set-variations($buttonOptions);
 }

@@ -6,31 +6,26 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
+@inherits HtmlElement
 @inject NavigationManager NavigationManager
 
 
-<div class="@_classname" @onclick="HandleNavigation">
+<div class="@_classname" @onclick="HandleNavigation" id="@Id">
     @ChildContent
 </div>
 
 @code {
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
-    [Parameter]
-    public string Style { get; set; }
-    [Parameter]
-    public string Classname { get; set; }
-    [Parameter]
     public string To { get; set; }
     [Parameter]
-    public bool IsDisabled { get; set; } = false;
+    public bool Disabled { get; set; } = false;
 
 
-    private string _classname => $"ae button {Classname} {(IsDisabled ? "disabled" : "")}";
+    private string _classname => $"ae button {Classname} {(Disabled ? "disabled" : "")}";
 
     private void HandleNavigation()
     {
-        if (!string.IsNullOrWhiteSpace(To))
+        if (!string.IsNullOrWhiteSpace(To) && !Disabled)
         {
             NavigationManager.NavigateTo(To);
         }

@@ -1,0 +1,25 @@
+﻿@inherits HtmlElement
+
+@if (Level == "4")
+{
+    <h4 class="@_classname" style="@Style">@ChildContent</h4>
+}
+else if (Level == "3")
+{
+    <h3 class="@_classname" style="@Style">@ChildContent</h3>
+}
+else if (Level == "2")
+{
+    <h2 class="@_classname" style="@Style">@ChildContent</h2>
+}
+else 
+{
+    <h1 class="@_classname" style="@Style">@ChildContent</h1>
+}
+
+@code {
+    [Parameter]
+    public string Level { get; set; }
+
+    private string _classname => $"ae title";
+}

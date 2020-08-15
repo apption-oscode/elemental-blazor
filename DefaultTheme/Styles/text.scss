@@ -1,0 +1,32 @@
+﻿@import 'colors';
+@import 'utils';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+
+
+$textOptions: (
+    "default": (
+        "color": $text-primary,
+        "overflow-wrap": break-word,
+        "font-size": 1rem,
+        "font-family": "'Open Sans', sans-serif"
+    ),
+    "hint": (
+        "color": $text-hint,
+    ),
+    "warning": (
+        "color": $orange-600,
+    ),
+    "danger": (
+        "color": $red-600,
+    ),
+) !default;
+
+
+.ae.text {
+    @include set-variations($textOptions);
+}
+
+.test {
+    background: blue;
+}

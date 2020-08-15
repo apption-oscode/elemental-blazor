@@ -1,0 +1,12 @@
+﻿@inherits HtmlElement
+
+<div class="@_classname">
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter]
+    public string TextType { get; set; }
+    private string _classname => $"ae text {TextType}";
+}

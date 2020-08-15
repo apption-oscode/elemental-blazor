@@ -12,3 +12,29 @@
     $nested-value: map-get($nested-map, $key2);
     @return $nested-value;
 }
+
+@mixin set-values($values) {
+    @each $prop, $value in $values {
+        @if($prop == ":hover"){
+            &:hover {
+               @include set-values($value);
+            }
+        }
+        @else {
+            #{$prop}: $value;
+        }
+    }
+}
+
+@mixin set-variations($variations) {
+    @each $name, $values in $variations {
+        @if($name == "default") {
+            @include set-values($values);
+        }
+        @else {
+            &.#{$name} {
+                @include set-values($values);
+            }
+        }
+    }
+}
