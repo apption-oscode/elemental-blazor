@@ -9,6 +9,10 @@
 @import 'colors.scss';
 @import 'box-shadow';
 
+body {
+    overflow: overlay;
+}
+
 .sidenav {
     position: fixed;
     z-index: 10;
@@ -39,9 +43,24 @@
     }
 }
 
+.demo-section + .demo-section {
+    margin-top: 5rem;
+
+    &:before {
+        border-top: 1px solid $grey-300;
+        display: block;
+        position: relative;
+        top: -1rem;
+        margin: 0 auto;
+        width: 66%;
+        content: "";
+    }
+}
+
 .button-page-container {
     .ae.button + .ae.button {
         margin-left: 4px;
         margin-bottom: 8px;
     }
+
 }
