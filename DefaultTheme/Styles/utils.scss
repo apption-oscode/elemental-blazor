@@ -15,8 +15,8 @@
 
 @mixin set-values($values) {
     @each $prop, $value in $values {
-        @if($prop == ":hover"){
-            &:hover {
+        @if(str-index($prop, ":") == 1){
+            &#{$prop} {
                @include set-values($value);
             }
         }
