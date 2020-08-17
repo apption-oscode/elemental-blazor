@@ -6,54 +6,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@import 'colors';
-@import 'box-shadow';
+@import 'colors.scss';
 
-@import 'intro';
-@import 'dropdown-page';
-@import 'searchbar-page';
-@import 'button-page';
-
-
-html {
-    overflow: overlay;
+.body {
+    background-color: $blue-100;
 }
 
-body {
-    background-color: $grey-100;
-    font-size: 16px;
-    font-family: 'Muli', sans-serif;
-}
+.sidenav {
 
+    border-right: 1px solid $grey-200;
 
-.layout {
-    margin-left: 250px;
-}
-
-#sidenav {
-    box-sizing: border-box;
-    position: fixed;
-    width: 250px;
-    background-color: $grey-100;
-    display: flex;
-    flex-direction: column;
-    padding: 4rem 0;
-    height: 100vh;
-    border-right: 1px solid $grey-300;
-
-    a {
-        padding: 1rem;
-        text-decoration: none;
-        font-size: 1.5rem;
-        color: $grey-800;
-        background-color: $grey-100;
-
-        &:hover {
-            background-color: $grey-200;
-        }
-
-        &.active {
-            background-color: $grey-300;
-        }
+    .nav-link {
+        text-decoration: none;   
     }
 }

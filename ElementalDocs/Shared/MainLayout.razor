@@ -9,10 +9,12 @@
 @inherits LayoutComponentBase
 
 
-<SideNav />
-<div class="layout">
-    <div class="jumbotron">
-        <div class="title">Elemental</div>
-    </div>
-    @Body
-</div>
+<Flex>
+    <SideNav />
+    <Flex Vertical style="flex-grow: 1">
+        <Typography Variant="h1" style="text-align: center;">Elemental</Typography>
+        <Flex Vertical style="margin: auto; width: 1200px">
+            @Body
+        </Flex>
+    </Flex>
+</Flex>

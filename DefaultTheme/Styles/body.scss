@@ -1,0 +1,15 @@
+﻿@import 'colors';
+@import 'utils';
+
+
+$bodyOptions: (
+    "color": $grey-700,
+    "font-size": 1rem,
+    "font-family": "Open Sans"
+) !default;
+
+
+
+body {
+    @include set-values($bodyOptions);
+}
