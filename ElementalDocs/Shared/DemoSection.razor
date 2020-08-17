@@ -24,10 +24,12 @@
                 <Typography Variant="h3">Source</Typography>
                 @if (file.Html.Count > 0)
                 {
+                    <Typography style="margin-top: 0;" Variant="h4">Markup</Typography>
                     <pre style="margin: 0"><code class="language-html">@(string.Join(System.Environment.NewLine, file.Html))</code></pre>
                 }
                 @if (file.Code.Count > 0)
                 {
+                    <Typography style="margin-top: 0;" Variant="h4">C#</Typography>
                     <pre style="margin: 0"><code class="language-csharp">@(string.Join(System.Environment.NewLine, file.Code))</code></pre>
                 }
             </Flex>

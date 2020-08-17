@@ -204,6 +204,9 @@ body {
     .ae.button.red:hover {
       background-color: #c53030;
       border-color: #c53030; }
+  .ae.button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed; }
 
 /*
     Third party
