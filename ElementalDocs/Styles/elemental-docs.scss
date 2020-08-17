@@ -7,16 +7,41 @@
  */
 
 @import 'colors.scss';
-
-.body {
-    background-color: $blue-100;
-}
+@import 'box-shadow';
 
 .sidenav {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    
+    width: 250px;
+    height: 100vh;
 
     border-right: 1px solid $grey-200;
+    background-color: $white;
+
+    display: flex;
+    flex-direction: column;
 
     .nav-link {
-        text-decoration: none;   
+        text-decoration: none;
+        padding: 1rem 1rem;
+
+        &.active {
+            background-color: $grey-100;
+        }
+
+        &:hover {
+            background-color: $grey-100;
+        }
+
+    }
+}
+
+.button-page-container {
+    .ae.button + .ae.button {
+        margin-left: 4px;
+        margin-bottom: 8px;
     }
 }

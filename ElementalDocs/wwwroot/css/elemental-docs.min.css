@@ -1,1 +1,1 @@
-﻿.body{background-color:#ebf8ff;}.sidenav{border-right:1px solid #edf2f7;}.sidenav .nav-link{text-decoration:none;}
+﻿.sidenav{position:fixed;z-index:10;top:0;left:0;width:250px;height:100vh;border-right:1px solid #edf2f7;background-color:#fff;display:flex;flex-direction:column;}.sidenav .nav-link{text-decoration:none;padding:1rem 1rem;}.sidenav .nav-link.active{background-color:#f7fafc;}.sidenav .nav-link:hover{background-color:#f7fafc;}.button-page-container .ae.button+.ae.button{margin-left:4px;margin-bottom:8px;}

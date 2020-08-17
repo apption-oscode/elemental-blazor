@@ -23,17 +23,17 @@ $buttonOptions: (
         "background-color": $grey-600,
         "border-color": $grey-600,
         ":hover": (
-            "box-shadow": $box-shadow-1,
+            /*"box-shadow": $box-shadow-1,*/
             "background-color": $grey-700,
             "border-color": $grey-700,
         ),
     ),
     "dark": (
-        "background-color": $grey-700,
-        "border-color": $grey-700,
+        "background-color": $grey-800,
+        "border-color": $grey-800,
         ":hover": (
-            "background-color": $grey-800,
-            "border-color": $grey-800,
+            "background-color": $grey-700,
+            "border-color": $grey-700,
         ),
     ),
     "light": (
