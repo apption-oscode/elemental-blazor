@@ -9,7 +9,8 @@ $typgraphyOptions: (
         "color": $text-primary,
         "overflow-wrap": break-word,
         "font-size": 1rem,
-        "font-family": 'Open Sans'
+        "font-family": 'Open Sans',
+        "line-height": 1.75,
     ),
     "h1": (
         "margin-bottom": .5rem,
@@ -34,6 +35,9 @@ $typgraphyOptions: (
         "line-height": 1.2,
         "font-size": 1.25rem,
         "font-weight": 600,
+    ),
+    "p": (
+        "line-height": 1.5,
     ),
     "hint": (
         "color": $text-hint,

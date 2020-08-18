@@ -7,31 +7,27 @@
 *@
 
 <Flex Vertical class="sidenav">
-    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
-        <Typography>Home</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/buttons" Match="NavLinkMatch.All">
-        <Typography>Buttons</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/search" Match="NavLinkMatch.All">
-        <Typography>Searchbar</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/dropdown" ActiveClass="active" Match="NavLinkMatch.All">
-        <Typography>Dropdown</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/table" Match="NavLinkMatch.All">
-        <Typography>Table</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/modelform" Match="NavLinkMatch.All">
-        <Typography>ModelForm</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/blazorform" Match="NavLinkMatch.All">
-        <Typography>Blazor Form</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/pagination" Match="NavLinkMatch.All">
-        <Typography>Pagination</Typography>
-    </NavLink>
-    <NavLink class="nav-link" href="/export" Match="NavLinkMatch.All">
-        <Typography>Export to CSV</Typography>
-    </NavLink>
+    @foreach(var link in sidenavLinks)
+    {
+        <NavLink class="nav-link" href="@link.Link" Match="NavLinkMatch.All">
+            <Typography>@link.Label</Typography>
+        </NavLink>
+    }
 </Flex>
+
+@code {
+
+    private List<dynamic> sidenavLinks = new List<dynamic>()
+    {
+        new { Label = "Home", Link = "/" },
+        new { Label = "Buttons", Link = "/buttons" },
+        new { Label = "Inputs", Link = "/inputs" },
+        new { Label = "Searchbar", Link = "/search" },
+        new { Label = "Dropdown", Link = "/dropdown" },
+        new { Label = "Table", Link = "/table" },
+        new { Label = "ModelForm", Link = "/modelform" },
+        new { Label = "BlazorForm", Link = "/blazorform" },
+        new { Label = "Pagination", Link = "/pagination" },
+        new { Label = "Export to CSV", Link = "/export" },
+    };
+}

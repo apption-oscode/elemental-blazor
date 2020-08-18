@@ -68,7 +68,8 @@ body {
   color: #4a5568;
   overflow-wrap: break-word;
   font-size: 1rem;
-  font-family: "Open Sans"; }
+  font-family: "Open Sans";
+  line-height: 1.75; }
   .ae.typography.h1 {
     margin-bottom: 0.5rem;
     line-height: 1.25;
@@ -89,6 +90,8 @@ body {
     line-height: 1.2;
     font-size: 1.25rem;
     font-weight: 600; }
+  .ae.typography.p {
+    line-height: 1.5; }
   .ae.typography.hint {
     color: #cbd5e0; }
   .ae.typography.warning {
@@ -207,6 +210,78 @@ body {
   .ae.button.disabled {
     opacity: 0.5;
     cursor: not-allowed; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.input {
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  color: #4a5568;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 2px;
+  transition: all 0.3s; }
+  .ae.input:hover {
+    border-color: #90cdf4; }
+  .ae.input:focus {
+    border-color: #90cdf4;
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba(144, 205, 244, 0.2); }
+
+.ae.input-wrapper {
+  display: flex;
+  align-items: baseline; }
+  .ae.input-wrapper .input-sider {
+    border: 1px solid #e2e8f0;
+    background-color: #edf2f7;
+    color: #4a5568;
+    line-height: 1.5;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: baseline; }
+  .ae.input-wrapper .pre {
+    border-radius: 2px 0 0 2px;
+    border-right-width: 0; }
+  .ae.input-wrapper .post {
+    border-radius: 0 2px 2px 0;
+    border-left-width: 0; }
+  .ae.input-wrapper .ae.input.has-pre {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+  .ae.input-wrapper .ae.input.has-post {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0; }
 
 /*
     Third party

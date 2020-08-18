@@ -68,3 +68,8 @@ body {
 .button-page-container .ae.button + .ae.button {
   margin-left: 4px;
   margin-bottom: 8px; }
+
+.input-page-container .input-container {
+  max-width: 400px; }
+  .input-page-container .input-container.multiple .ae.input-wrapper {
+    margin: 1rem 0; }

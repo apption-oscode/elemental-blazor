@@ -15,8 +15,8 @@
 
 @mixin set-values($values) {
     @each $prop, $value in $values {
-        @if(str-index($prop, ":") == 1){
-            &#{$prop} {
+        @if(str-index($prop, "&") == 1){
+            #{$prop} {
                @include set-values($value);
             }
         }

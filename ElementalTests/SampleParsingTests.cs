@@ -10,10 +10,10 @@ namespace ElementalTests
     public class SampleParsingTests
     {
         private const string _testFilePath = "./Resources/ParsingTestComponent.razor";
-        private const int _testFileLineCount = 34;
+        private const int _testFileLineCount = 38;
         private const string _testTitle = "Test Component";
         private const string _testDescription = "Lorem ipsum dolor sit amet.";
-        private const int _testHtmlLength = 6;
+        private const int _testHtmlLength = 9;
         private const int _testCodeLength = 14;
 
         [Fact]

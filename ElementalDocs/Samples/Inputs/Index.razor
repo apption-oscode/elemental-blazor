@@ -1,0 +1,20 @@
+﻿@page "/inputs"
+@inherits DemoPage
+
+<Flex Vertical class="input-page-container">
+    <DemoSection Path="./Samples/Inputs/Examples/BasicInputs.razor">
+        <Flex class="input-container">
+            <ElementalDocs.Samples.Inputs.Examples.BasicInputs />
+        </Flex>
+    </DemoSection>
+    <DemoSection Path="./Samples/Inputs/Examples/PrePostInputs.razor">
+        <Flex Vertical class="input-container multiple">
+            <ElementalDocs.Samples.Inputs.Examples.PrePostInputs />
+        </Flex>
+    </DemoSection>
+    <DemoSection Path="./Samples/Inputs/Examples/ActionablePrePostInputs.razor">
+        <Flex Vertical class="input-container">
+            <ElementalDocs.Samples.Inputs.Examples.ActionablePrePostInputs />
+        </Flex>
+    </DemoSection>
+</Flex>

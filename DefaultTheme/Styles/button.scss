@@ -22,7 +22,7 @@ $buttonOptions: (
         "color": $white,
         "background-color": $grey-600,
         "border-color": $grey-600,
-        ":hover": (
+        "&:hover": (
             "background-color": $grey-700,
             "border-color": $grey-700,
         ),
@@ -30,7 +30,7 @@ $buttonOptions: (
     "dark": (
         "background-color": $grey-800,
         "border-color": $grey-800,
-        ":hover": (
+        "&:hover": (
             "background-color": $grey-700,
             "border-color": $grey-700,
         ),
@@ -39,7 +39,7 @@ $buttonOptions: (
         "color": $grey-600,
         "background-color": $grey-100,
         "border-color": $grey-100,
-        ":hover": (
+        "&:hover": (
             "background-color": $grey-300,
             "border-color": $grey-300,
         ),
@@ -47,7 +47,7 @@ $buttonOptions: (
     "blue": (
         "background-color": $blue-600,
         "border-color": $blue-600,
-        ":hover": (
+        "&:hover": (
             "background-color": $blue-700,
             "border-color": $blue-700,
         ),
@@ -55,7 +55,7 @@ $buttonOptions: (
     "red": (
         "background-color": $red-600,
         "border-color": $red-600,
-        ":hover": (
+        "&:hover": (
             "background-color": $red-700,
             "border-color": $red-700,
         ),

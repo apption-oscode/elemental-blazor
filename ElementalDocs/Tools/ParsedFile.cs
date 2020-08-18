@@ -63,8 +63,11 @@ namespace ElementalDocs
             return lines
                 .SkipWhile(l => !l.Equals("*@"))
                 .Skip(1)
+                .SkipWhile(l => string.IsNullOrWhiteSpace(l))
                 .TakeWhile(l => !l.Equals("@code {"))
-                .Where(l => !string.IsNullOrWhiteSpace(l))
+                .Reverse()
+                .SkipWhile(l => string.IsNullOrWhiteSpace(l))
+                .Reverse()
                 .ToList();
         }
 
