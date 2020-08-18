@@ -6,9 +6,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
-@inherits HtmlElement
-
-@using System.Timers;
+@inherits HtmlInputElement
 
 @if(Pre is null && Post is null)
 {
@@ -35,47 +33,11 @@ else
 
 @code {
     [Parameter]
-    public string Placeholder { get; set; }
-    [Parameter]
-    public string Label { get; set; }
-    [Parameter]
-    public Action<string> OnInputChange { get; set; }
-    [Parameter]
-    public int EventTimer { get; set; } = 500;
-    [Parameter]
-    public string DefaultValue { get; set; }
-    [Parameter]
     public RenderFragment Pre { get; set; }
     [Parameter]
     public RenderFragment Post { get; set; }
 
-    private string _inputValue = "";
-    private Timer inputTimer;
-
     private string _wrapperClassname => $"ae input-wrapper {_inputClass}";
     private string _wrappedInputClassname => $"ae input {(Pre != null ? "has-pre" : "")} {(Post != null ? "has-post" : "")}";
     private string _classname => $"ae input {_inputClass}";
-
-
-    protected override void OnInitialized()
-    {
-        inputTimer = new Timer(EventTimer);
-        inputTimer.Elapsed += OnTimerFire;
-        inputTimer.AutoReset = false;
-        _inputValue = DefaultValue;
-    }
-
-    private void HandleKeyUp(KeyboardEventArgs e)
-    {
-        inputTimer.Stop();
-        inputTimer.Start();
-    }
-
-    private void OnTimerFire(Object source, ElapsedEventArgs e)
-    {
-        InvokeAsync(() =>
-        {
-            OnInputChange?.Invoke(_inputValue);
-        });
-    }
 }

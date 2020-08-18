@@ -1,5 +1,6 @@
 ﻿@import 'colors';
 @import 'utils';
+@import 'constants';
 
 
 $inputOptions: (
@@ -23,9 +24,6 @@ $inputOptions: (
         "outline": 0,
         "box-shadow": 0 0 0 2px rgba($blue-300, 0.2),
     ),
-) !default;
-
-$inputSiderOptions: (
 ) !default;
 
 $inputWrapperOptions: (
@@ -61,8 +59,41 @@ $inputWrapperOptions: (
     )
 ) !default;
 
+
+$searchInputOptions: (
+    "display": flex,
+    "align-items": baseline,
+    ".ae.input": (
+        "padding-left": 2rem,
+    ),
+    ".ae.search-icon": (
+        "width": 1rem,
+        "margin": 0 -1.5rem 0 0.5rem,
+        "z-index": 1,
+        "color": $text-hint,
+    ),
+    ".ae.clear-icon": (
+        "padding": 0.5rem,
+        "margin-left": -2rem,
+        "color": $text-hint,
+        "opacity": 0,
+        "transition": all .3s $cubic-bezier,
+        "&:hover": (
+            "cursor": pointer,
+            "color": $text-primary,
+        ),
+        "&.visible": (
+            "opacity": 1,
+        ),
+    ),
+) !default;
+
 .ae.input {
     @include set-values($inputOptions)
+}
+
+.ae.search-wrapper {
+    @include set-values($searchInputOptions);
 }
 
 .ae.input-wrapper {

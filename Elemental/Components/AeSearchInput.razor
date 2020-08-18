@@ -1,0 +1,29 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+@inherits HtmlInputElement
+
+
+<div class="@_classname" @attributes="InputAttributesWithoutClass">
+    <i class="fas fa-search ae search-icon"></i>
+    <input class="ae input search" type="text" @bind-value="_inputValue" @bind-value:event="oninput" @onkeyup="HandleKeyUp" placeholder="@Placeholder" />
+    <i class="@_clearIconClassname"></i>
+</div>
+
+@code {
+
+    private string _classname => $"ae search-wrapper {_inputClass}";
+    private string _clearIconClassname => $"fas fa-times ae clear-icon {(_inputValue?.Length > 0 ? "visible" : "")}";
+
+
+    private void ClearSearch()
+    {
+        _inputValue = "";
+        OnTimerFire(null, null);
+    }
+}

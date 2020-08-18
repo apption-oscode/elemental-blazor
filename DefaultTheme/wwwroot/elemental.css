@@ -238,13 +238,40 @@ body {
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
 .ae.input {
   margin: 0;
   display: inline-block;
   width: 100%;
   min-width: 0;
   padding: 0.5rem 0.75rem;
-  color: #4a5568;
+  color: #2d3748;
   font-size: 0.9rem;
   line-height: 1.5;
   background-color: #fff;
@@ -258,13 +285,35 @@ body {
     outline: 0;
     box-shadow: 0 0 0 2px rgba(144, 205, 244, 0.2); }
 
+.ae.search-wrapper {
+  display: flex;
+  align-items: baseline; }
+  .ae.search-wrapper .ae.input {
+    padding-left: 2rem; }
+  .ae.search-wrapper .ae.search-icon {
+    width: 1rem;
+    margin: 0 -1.5rem 0 0.5rem;
+    z-index: 1;
+    color: #cbd5e0; }
+  .ae.search-wrapper .ae.clear-icon {
+    padding: 0.5rem;
+    margin-left: -2rem;
+    color: #cbd5e0;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .ae.search-wrapper .ae.clear-icon:hover {
+      cursor: pointer;
+      color: #2d3748; }
+    .ae.search-wrapper .ae.clear-icon.visible {
+      opacity: 1; }
+
 .ae.input-wrapper {
   display: flex;
   align-items: baseline; }
   .ae.input-wrapper .input-sider {
     border: 1px solid #e2e8f0;
     background-color: #edf2f7;
-    color: #4a5568;
+    color: #2d3748;
     line-height: 1.5;
     font-size: 0.9rem;
     padding: 0.5rem 0.75rem;

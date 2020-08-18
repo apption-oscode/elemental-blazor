@@ -28,6 +28,20 @@ body {
     display: flex;
     flex-direction: column;
 
+    .logo {
+       
+        background-color: $blue-700;
+        padding: 0.5rem 0.5rem 0.25rem;
+
+        &:hover {
+            background-color: $blue-600;
+        }
+
+        img {
+            height: 1.5rem;
+        }
+    }
+
     .nav-link {
         text-decoration: none;
         padding: 1rem 1rem;
@@ -39,7 +53,6 @@ body {
         &:hover {
             background-color: $grey-100;
         }
-
     }
 }
 

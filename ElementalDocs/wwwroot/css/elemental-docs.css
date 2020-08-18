@@ -46,6 +46,13 @@ body {
   background-color: #fff;
   display: flex;
   flex-direction: column; }
+  .sidenav .logo {
+    background-color: #2b6cb0;
+    padding: 0.5rem 0.5rem 0.25rem; }
+    .sidenav .logo:hover {
+      background-color: #3182ce; }
+    .sidenav .logo img {
+      height: 1.5rem; }
   .sidenav .nav-link {
     text-decoration: none;
     padding: 1rem 1rem; }
