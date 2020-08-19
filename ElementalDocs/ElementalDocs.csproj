@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Samples\Typography\Examples\Texts.razor" />
+    <Compile Remove="Samples\AeTypography\**" />
+    <Content Remove="Samples\AeTypography\**" />
+    <EmbeddedResource Remove="Samples\AeTypography\**" />
+    <None Remove="Samples\AeTypography\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Samples\AeTypography\Examples\Body" />
+    <Content Remove="Samples\Typography\Examples\Texts.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +22,6 @@
   <ItemGroup>
     <Content Include="..\Elemental\wwwroot\css\elemental.css" Link="elemental.css" />
     <Content Include="..\Elemental\wwwroot\css\elemental.min.css" Link="elemental.min.css" />
-    <Content Include="Samples\AeTypography\Examples\Body" />
   </ItemGroup>
 
   <ItemGroup>

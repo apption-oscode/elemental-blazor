@@ -72,9 +72,10 @@ body {
     width: 66%;
     content: ""; }
 
-.button-page-container .ae.button + .ae.button {
-  margin-left: 4px;
+.button-page-container .ae.button {
   margin-bottom: 8px; }
+  .button-page-container .ae.button + .ae.button {
+    margin-left: 4px; }
 
 .input-page-container .input-container {
   max-width: 400px; }
