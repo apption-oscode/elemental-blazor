@@ -1,8 +1,0 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-      <SourceScriptFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\elemental-styles\*" />
-  </ItemGroup>
-  <Target Name="CopyScriptsToProject" BeforeTargets="Build">
-      <Copy SourceFiles="@(SourceScriptFiles)" DestinationFolder="$(ProjectDir)\Styles\apption-elemental\default\" />
-  </Target>
-</Project>

@@ -1,9 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <PackageId>Apption.Elemental.Theme.Default</PackageId>
+    <Authors>Apption</Authors>
+    <Product>Elemental Blazor Theme</Product>
+    <Description>Theme for Apption Elemental.</Description>
+    <Copyright>Copyright Apption 2020</Copyright>
+    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>c# blazor apption elemental theme</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
