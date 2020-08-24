@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Tests", "Elementa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Theme", "Elemental.Theme\Elemental.Theme.csproj", "{F7DD851E-204F-47B2-95BA-15DA4126E55A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elemental.Theme.Default", "Elemental.Theme.Default\Elemental.Theme.Default.csproj", "{EC2C7EE4-B512-40A1-862F-49D82AA1E28A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Theme.Default", "Elemental.Theme.Default\Elemental.Theme.Default.csproj", "{EC2C7EE4-B512-40A1-862F-49D82AA1E28A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
