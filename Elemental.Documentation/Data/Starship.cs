@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ElementalDocs.Data
+namespace Elemental.Documentation.Data
 {
     public class Starship
     {

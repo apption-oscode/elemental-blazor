@@ -1,11 +1,8 @@
-﻿using ElementalDocs;
-using System;
-using System.Collections.Generic;
+﻿using Elemental.Documentation;
 using System.Linq;
-using System.Text;
 using Xunit;
 
-namespace ElementalTests
+namespace Elemental.Tests
 {
     public class SampleParsingTests
     {

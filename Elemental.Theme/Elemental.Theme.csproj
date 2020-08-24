@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <PackageId>Apption.Elemental.Theme.Default</PackageId>
+    <PackageId>Apption.Elemental.Theme</PackageId>
     <Authors>Apption</Authors>
     <Product>Elemental Blazor Theme</Product>
     <Description>Theme for Apption Elemental.</Description>
@@ -39,4 +39,12 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup Label="Packaging">
+    <Content Include="build\Apption.Elemental.Theme.targets" PackagePath="build\Apption.Elemental.Theme.targets"/>
+
+    <Content Include="Styles/*.scss">
+      <Pack>true</Pack>
+      <PackagePath>contentFiles\elemental-theme\</PackagePath>
+    </Content>
+  </ItemGroup>
 </Project>

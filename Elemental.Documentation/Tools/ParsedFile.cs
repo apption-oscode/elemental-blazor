@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ElementalDocs
+namespace Elemental.Documentation
 {
     public class ParsedFile
     {
