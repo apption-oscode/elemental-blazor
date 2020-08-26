@@ -3,27 +3,27 @@
 
 @if (Variant == "h1")
 {
-    <h1 class="@_classname" @attributes="@InputAttributes" >@ChildContent</h1>
+    <h1 class="@_classname" @attributes="@InputAttributesWithoutClass" >@ChildContent</h1>
 }
 else if (Variant == "h2")
 {
-    <h2 class="@_classname" @attributes="@InputAttributes">@ChildContent</h2>
+    <h2 class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</h2>
 }
 else if (Variant == "h3")
 {
-    <h3 class="@_classname" @attributes="@InputAttributes">@ChildContent</h3>
+    <h3 class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</h3>
 }
 else if (Variant == "h4")
 {
-    <h4 class="@_classname" @attributes="@InputAttributes">@ChildContent</h4>
+    <h4 class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</h4>
 }
 else if (Variant == "paragraph")
 {
-    <p class="@_classname" @attributes="@InputAttributes">@ChildContent</p>
+    <p class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</p>
 }
 else 
 {
-    <div class="@_classname" @attributes="@InputAttributes">@ChildContent</div>
+    <div class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</div>
 }
 
 
