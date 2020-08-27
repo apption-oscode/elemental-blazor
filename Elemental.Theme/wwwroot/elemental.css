@@ -331,6 +331,102 @@ body {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0; }
 
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.card {
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  color: #fff;
+  background-color: #718096;
+  border-color: #718096; }
+  .ae.card .ae.title {
+    font-size: 1.5rem;
+    border-bottom: solid;
+    padding: 0.5rem; }
+  .ae.card .ae.content {
+    padding: 0.5rem; }
+  .ae.card.dark {
+    background-color: #2d3748;
+    border-color: #2d3748; }
+  .ae.card.light {
+    color: #718096;
+    background-color: #f7fafc;
+    border-color: #f7fafc; }
+  .ae.card.blue {
+    background-color: #3182ce;
+    border-color: #3182ce; }
+  .ae.card.red {
+    background-color: #e53e3e;
+    border-color: #e53e3e; }
+
 /*
     Third party
 */
