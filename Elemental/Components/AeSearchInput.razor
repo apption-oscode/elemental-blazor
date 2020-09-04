@@ -10,15 +10,21 @@
 
 
 <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    <i class="fas fa-search ae search-icon"></i>
+    <i class="@_searchIconClassname"></i>
     <input class="ae input search" type="text" @bind-value="_inputValue" @bind-value:event="oninput" @onkeyup="HandleKeyUp" placeholder="@Placeholder" />
-    <i class="@_clearIconClassname"></i>
+    <i class="@_clearIconClassname" @onclick="ClearSearch"></i>
 </div>
 
 @code {
 
+    [Parameter]
+    public string SearchIconFAClass { get; set; } = "fas fa-search";
+    [Parameter]
+    public string ClearIconFAClass { get; set; } = "fas fa-times";
+
     private string _classname => $"ae search-wrapper {_inputClass}";
-    private string _clearIconClassname => $"fas fa-times ae clear-icon {(_inputValue?.Length > 0 ? "visible" : "")}";
+    private string _searchIconClassname => $"{SearchIconFAClass} ae search-icon";
+    private string _clearIconClassname => $"{ClearIconFAClass} ae clear-icon {(_inputValue?.Length > 0 ? "visible" : "")}";
 
 
     private void ClearSearch()

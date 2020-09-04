@@ -40,11 +40,15 @@
   </ItemGroup>
 
   <ItemGroup Label="Packaging">
-    <Content Include="build\Apption.Elemental.Theme.targets" PackagePath="build\Apption.Elemental.Theme.targets"/>
+    <Content Include="build\Apption.Elemental.Theme.targets" PackagePath="build\Apption.Elemental.Theme.targets" />
 
     <Content Include="Styles/*.scss">
       <Pack>true</Pack>
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Styles\dropdown.scss" />
   </ItemGroup>
 </Project>
