@@ -67,7 +67,7 @@ body {
 .ae.typography {
   color: #4a5568;
   overflow-wrap: break-word;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: "Open Sans";
   line-height: 1.75; }
   .ae.typography.h1 {
@@ -330,6 +330,90 @@ body {
   .ae.input-wrapper .ae.input.has-post {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.dropdown-wrapper .ae.button i {
+  margin: 0 -0.5rem 0 0.5rem; }
+
+.ae.dropdown-wrapper .ae.content-wrapper {
+  background-color: #fff;
+  min-width: 10rem;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 4px;
+  margin-top: 0.25rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13); }
+  .ae.dropdown-wrapper .ae.content-wrapper .ae.dropdown-item {
+    cursor: pointer;
+    padding: 0.25rem 1rem; }
+    .ae.dropdown-wrapper .ae.content-wrapper .ae.dropdown-item:hover {
+      background-color: #f7fafc; }
+
+.ae.dropdown-wrapper.visible .ae.content-wrapper {
+  opacity: 1;
+  visibility: visible; }
 
 /*
     Third party
