@@ -5,7 +5,7 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Custom Rendered Dropdowns
+    Title: Custom Rendered Dropdown Items
     Description: You can pass in render fragments to customize the dropdown items
 *@
 
@@ -24,9 +24,9 @@
     protected override void OnInitialized()
     {
         _dropdownItems = new List<RenderFragment>();
-        _dropdownItems.Add(@<div>First</div>);
-        _dropdownItems.Add(@<div>Second</div>);
-        _dropdownItems.Add(@<div>Third</div>);
+        _dropdownItems.Add(@<div><i class="fal fa-egg-fried"></i>Eggs</div>);
+        _dropdownItems.Add(@<div><i class="fal fa-coffee"></i>Coffee</div>);
+        _dropdownItems.Add(@<div><i class="fal fa-bacon"></i>Bacon</div>);
     }
 
     private void HandleDropdownChange(RenderFragment selectedItem)

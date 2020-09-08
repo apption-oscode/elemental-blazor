@@ -12,14 +12,16 @@
 @typeparam T
 
 <div class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
-    <AeButton OnClick="ToggleVisiblity">
-        @Label
-        <AeIcon Icon="fas fa-caret-down" />
-    </AeButton>
+    <span @onclick="ToggleVisiblity">
+        @_labelFragment
+    </span>
+    
     <div class="ae content-wrapper">
         @foreach(var item in Items)
         {
-            <AeTypography class="ae dropdown-item" @onclick="() => HandleItemClick(item)">@item</AeTypography>
+            <div class="ae dropdown-item" @onclick="() => HandleItemClick(item)">
+                @Renderer(item)
+            </div>
         }
     </div>
 </div>
@@ -28,12 +30,43 @@
     [Parameter]
     public string Label { get; set; }
     [Parameter]
+    public RenderFragment LabelRenderFragment { get; set; }
+    [Parameter]
     public Action<T> OnChange { get; set; }
     [Parameter]
     public IEnumerable<T> Items { get; set; }
+    [Parameter]
+    public Func<T, RenderFragment> Renderer { get; set; }
 
     private string _wrapperClassname => $"ae dropdown-wrapper {_inputClass}";
     private string _id = $"ae-{Guid.NewGuid().ToString()}";
+
+    private RenderFragment _labelFragment;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if(Renderer is null)
+        {
+            Renderer = new Func<T, RenderFragment>(item =>
+            {
+                return @<AeTypography>@item</AeTypography>;
+            });
+        }
+
+        if(Label != null)
+        {
+            _labelFragment = @<AeButton>
+                                @Label
+                                <AeIcon Icon="fas fa-caret-down" />
+                            </AeButton>;
+        }
+        else
+        {
+            _labelFragment = LabelRenderFragment;
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
