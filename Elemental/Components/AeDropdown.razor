@@ -8,6 +8,7 @@
 
 @inherits HtmlElement
 @inject IJSRuntime JSRuntime
+@implements IDisposable
 @typeparam T
 
 <div class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
@@ -54,5 +55,13 @@
     {
         ToggleVisiblity();
         OnChange?.Invoke(item);
+    }
+
+    public void Dispose()
+    {
+        InvokeAsync(async () =>
+        {
+            await JSRuntime.InvokeVoidAsync("aedropdown.dispose", _id);
+        });
     }
 }
