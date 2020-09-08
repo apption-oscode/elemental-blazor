@@ -25,7 +25,7 @@
         <div class="e table-rows" style="@_rowsStyle">
             @foreach (var row in Rows.Skip(scrollViewResult.SkipItems).Take(scrollViewResult.TakeItems).Select((item, i) => new { item, i }))
             {
-                <div class="@GetRowColor(row.item)" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;">
+                <div class="@GetRowColor(row.item)" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;" @onclick="(() => OnRowClick.InvokeAsync(row.item))">
                     @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
                     {
                         if (Renderers?[index] is null)
@@ -64,6 +64,8 @@
     public int MaxHeight { get; set; } = 600;
     [Parameter]
     public int RowHeight { get; set; } = 33;  //In px
+    [Parameter]
+    public EventCallback<T> OnRowClick { get; set; }
 
     private string _tableClass => $"e table";
     private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
@@ -88,7 +90,8 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
+        var tempHeight = Rows.Count() * RowHeight;
+        if (firstRender || scrollViewResult.Height != tempHeight)
         {
             scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
 
