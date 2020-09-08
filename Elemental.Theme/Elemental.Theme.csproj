@@ -47,8 +47,4 @@
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Styles\dropdown.scss" />
-  </ItemGroup>
 </Project>

@@ -1,0 +1,36 @@
+﻿@*
+  Copyright (c) 2020 Apption Corporation
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+@inherits HtmlElement
+
+  <div class="@_classname">
+    @if (Image != null)
+    {
+      <img class="ae image" src="@Image" />
+    }
+
+    @if ( Title != null)
+    {
+      <div class="ae title">
+        @Title
+      </div>
+    }
+      <div class="ae content">
+        @ChildContent
+      </div>
+  </div>
+
+@code {
+  [Parameter]
+  public string Title { get; set; }
+  [Parameter]
+  public string Image { get; set; }
+
+
+  private string _classname => $"ae card {_inputClass}";
+}
