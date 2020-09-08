@@ -68,6 +68,12 @@
         }
     }
 
+    private void HandleItemClick(T item)
+    {
+        ToggleVisiblity();
+        OnChange?.Invoke(item);
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -84,11 +90,6 @@
         });
     }
 
-    private void HandleItemClick(T item)
-    {
-        ToggleVisiblity();
-        OnChange?.Invoke(item);
-    }
 
     public void Dispose()
     {
