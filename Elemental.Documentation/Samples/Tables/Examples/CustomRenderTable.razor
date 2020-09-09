@@ -5,11 +5,13 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Basic Table
-    Description: Basic table element with sorting
+    Title: Custom Rendered Cells
+    Description: You can specify the RenderFragment via a function to customize how a cell is rendered
 *@
 
 <AeTable Accessors="accessorFunctions"
+       Renderers="renderFunctions"
+       ColorAccessor="colorFunction"
        Dataset="dummyData"
        Headers="headers" />
 
@@ -43,6 +45,31 @@
         new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
+    };
+
+    // [Optional] Can define custom rendering for columns, order matters
+    private List<Func<DummyData, RenderFragment>> renderFunctions = new List<Func<DummyData, RenderFragment>>
+    {
+        null,
+        new Func<DummyData, RenderFragment>(dummyData => { return @<i class="@dummyData.CategoryIconClass"></i>; }),
+        null,
+    };
+
+    // [Optional] Can define custom colors per row
+    private Func<DummyData, string> colorFunction = dummyData =>
+    {
+        switch (dummyData.Importance)
+        {
+            case 3:
+                return "red";
+            case 2:
+                return "yellow";
+            case 1:
+                return "blue";
+            case 0:
+            default:
+                return "";
+        }
     };
 
     class DummyData

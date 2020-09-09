@@ -40,12 +40,13 @@ $tableRowOptions: (
             "word-wrap": break-word,
             "padding": .5rem 0 .5rem .75rem,
             "&": $scrollbarOptions,
-            "transition": .4s $cubic-bezier,
+            
             "&:nth-child(1)": (
                 "padding-left": .5rem,
                 "border-left": .25rem solid $transparent,
             ),
             "&:hover":(
+                "transition": .4s $cubic-bezier,
                 "background-color": $grey-200,
             ),
             "& a": (

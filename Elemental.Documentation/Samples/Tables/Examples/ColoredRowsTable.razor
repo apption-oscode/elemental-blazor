@@ -5,11 +5,12 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Basic Table
-    Description: Basic table element with sorting
+    Title: Colored Rows Table
+    Description: You can define a function to color the row, more color variations can be added via themeing
 *@
 
 <AeTable Accessors="accessorFunctions"
+       ColorAccessor="colorFunction"
        Dataset="dummyData"
        Headers="headers" />
 
@@ -43,6 +44,23 @@
         new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
+    };
+
+    // [Optional] Can define custom colors per row
+    private Func<DummyData, string> colorFunction = dummyData =>
+    {
+        switch (dummyData.Importance)
+        {
+            case 3:
+                return "red";
+            case 2:
+                return "yellow";
+            case 1:
+                return "blue";
+            case 0:
+            default:
+                return "";
+        }
     };
 
     class DummyData
