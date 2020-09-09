@@ -511,6 +511,231 @@ body {
     background-color: #e53e3e;
     border-color: #e53e3e; }
 
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/*@mixin Scrollbar() {
+    &::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $grey-200;
+        border-radius: $border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $grey-500;
+        border-radius: $border-radius;
+
+        &:hover {
+            background: $grey-600;
+        }
+    }
+}*/
+.ae.table .ae.table-header {
+  display: grid; }
+  .ae.table .ae.table-header .ae.table-cell {
+    cursor: pointer;
+    user-select: none;
+    padding-left: 0.75rem;
+    background-color: #718096;
+    color: #fff;
+    word-wrap: break-word; }
+    .ae.table .ae.table-header .ae.table-cell:hover {
+      background-color: #4a5568; }
+
+.ae.table .ae.table-scroll {
+  overflow-y: auto;
+  position: relative; }
+  .ae.table .ae.table-scroll::-webkit-scrollbar {
+    width: 0.25rem; }
+  .ae.table .ae.table-scroll::-webkit-scrollbar-track {
+    background: #edf2f7;
+    border-radius: 8px; }
+  .ae.table .ae.table-scroll::-webkit-scrollbar-thumb {
+    background: #a0aec0;
+    border-radius: 8px; }
+    .ae.table .ae.table-scroll::-webkit-scrollbar-thumb:hover {
+      background: #718096; }
+
+.ae.table .ae.table-rows {
+  display: grid;
+  overflow: overlay; }
+  .ae.table .ae.table-rows .ae.table-row {
+    display: grid;
+    position: absolute;
+    width: 100%; }
+    .ae.table .ae.table-rows .ae.table-row .ae.table-cell {
+      background-color: #fff;
+      word-wrap: break-word;
+      padding: 0.5rem 0 0.5rem 0.75rem;
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+      .ae.table .ae.table-rows .ae.table-row .ae.table-cell::-webkit-scrollbar {
+        width: 0.25rem; }
+      .ae.table .ae.table-rows .ae.table-row .ae.table-cell::-webkit-scrollbar-track {
+        background: #edf2f7;
+        border-radius: 8px; }
+      .ae.table .ae.table-rows .ae.table-row .ae.table-cell::-webkit-scrollbar-thumb {
+        background: #a0aec0;
+        border-radius: 8px; }
+        .ae.table .ae.table-rows .ae.table-row .ae.table-cell::-webkit-scrollbar-thumb:hover {
+          background: #718096; }
+      .ae.table .ae.table-rows .ae.table-row .ae.table-cell:nth-child(1) {
+        padding-left: 0.5rem;
+        border-left: 0.25rem solid transparent; }
+      .ae.table .ae.table-rows .ae.table-row .ae.table-cell:hover {
+        background-color: #edf2f7; }
+      .ae.table .ae.table-rows .ae.table-row .ae.table-cell a:hover {
+        text-decoration: underline; }
+    .ae.table .ae.table-rows .ae.table-row:hover .ae.table-cell {
+      background-color: #edf2f7; }
+      .ae.table .ae.table-rows .ae.table-row:hover .ae.table-cell:nth-child(1) {
+        border-left: 0.25rem solid transparent; }
+    .ae.table .ae.table-rows .ae.table-row:hover:hover .ae.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-color: #edf2f7; }
+    .ae.table .ae.table-rows .ae.table-row:nth-of-type(2n+1) .ae.table-cell {
+      background-color: #f7fafc; }
+      .ae.table .ae.table-rows .ae.table-row:nth-of-type(2n+1) .ae.table-cell:nth-child(1) {
+        border-left: 0.25rem solid transparent; }
+    .ae.table .ae.table-rows .ae.table-row:nth-of-type(2n+1):hover .ae.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-color: #edf2f7; }
+    .ae.table .ae.table-rows .ae.table-row.red .ae.table-cell {
+      background-color: #fff5f5; }
+      .ae.table .ae.table-rows .ae.table-row.red .ae.table-cell:nth-child(1) {
+        border-left: 0.25rem solid #fc8181; }
+    .ae.table .ae.table-rows .ae.table-row.red:hover .ae.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-color: #fed7d7; }
+    .ae.table .ae.table-rows .ae.table-row.blue .ae.table-cell {
+      background-color: #ebf8ff; }
+      .ae.table .ae.table-rows .ae.table-row.blue .ae.table-cell:nth-child(1) {
+        border-left: 0.25rem solid #63b3ed; }
+    .ae.table .ae.table-rows .ae.table-row.blue:hover .ae.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-color: #bee3f8; }
+    .ae.table .ae.table-rows .ae.table-row.yellow .ae.table-cell {
+      background-color: #fffaf0; }
+      .ae.table .ae.table-rows .ae.table-row.yellow .ae.table-cell:nth-child(1) {
+        border-left: 0.25rem solid #f6ad55; }
+    .ae.table .ae.table-rows .ae.table-row.yellow:hover .ae.table-cell {
+      transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-color: #feebc8; }
+
 /*
     Third party
 */
