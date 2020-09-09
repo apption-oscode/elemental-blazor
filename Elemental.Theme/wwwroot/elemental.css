@@ -393,6 +393,8 @@ body {
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 .ae.card {
+  min-width: 15rem;
+  min-height: 10rem;
   position: relative;
   display: inline-block;
   border-radius: 2px;
@@ -409,10 +411,16 @@ body {
   border-color: #718096; }
   .ae.card .ae.title {
     font-size: 1.5rem;
-    border-bottom: solid;
     padding: 0.5rem; }
   .ae.card .ae.content {
+    border-top: solid;
     padding: 0.5rem; }
+  .ae.card.large {
+    min-width: 25rem;
+    min-height: 15rem; }
+  .ae.card.small {
+    min-width: 12rem;
+    min-height: 7rem; }
   .ae.card.dark {
     background-color: #2d3748;
     border-color: #2d3748; }
