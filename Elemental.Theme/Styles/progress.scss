@@ -1,0 +1,40 @@
+﻿@import 'colors';
+@import 'constants';
+@import 'box-shadow';
+@import 'utils';
+
+
+$progressOptions: ( 
+  "default": (
+    "font-size": 0.8rem, 
+    "font-weight": 400, 
+    "line-height": 1.5,
+    "position": relative,
+ 
+
+    ".outer": ( 
+      "min-width": 10rem,
+      "min-height": 1rem,
+      "display": inline-block, 
+      "background-color": $grey-600, 
+      "border-color": $grey-600,
+    ),
+
+    ".fill": (
+      "min-height": 1rem,
+      "vertical-align": middle,
+      "background-color": $blue-500,
+    ),
+
+    ".text": (
+      "display": inline-block,
+      "line-height": 1.35,
+      "vertical-align": top,
+    ),
+
+  )
+)  !default;
+
+.ae.progress {
+  @include set-variations($progressOptions);
+}

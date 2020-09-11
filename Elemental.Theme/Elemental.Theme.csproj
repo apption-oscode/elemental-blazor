@@ -50,5 +50,6 @@
 
   <ItemGroup>
     <None Remove="Styles\card.scss" />
+    <None Remove="Styles\progress.scss" />
   </ItemGroup>
 </Project>
