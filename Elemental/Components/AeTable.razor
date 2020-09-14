@@ -1,4 +1,4 @@
-@*
+﻿@*
     Copyright (c) 2020 Apption Corporation
 
     This Source Code Form is subject to the terms of the Mozilla Public
@@ -6,23 +6,24 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
+@inherits HtmlElement
 @implements ITable
 @inject IJSRuntime JSRuntime
 @using System.Text
 @typeparam T
 
-<div class="@_tableClass">
-    <div class="e table-header" style="@_headerStyle">
+<div class="@_tableClass" @attributes="InputAttributesWithoutClass">
+    <div class="ae table-header" style="@_gridStyle">
         @foreach (var (header, index) in Headers.Select((h, index) => (h, index)))
         {
-            <div class="e table-cell" @onclick="() => ToggleSortOnColumn(index)">
+            <AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
                 @header
-                <span class="e table-sort"><i class="@GetSortIconClass(index)"></i></span>
-            </div>
+                <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
+            </AeTypography>
         }
     </div>
-    <div class="e table-scroll" style="@_scrollStyle" @onscroll="OnScroll" @ref="tableRef">
-        <div class="e table-rows" style="@_rowsStyle">
+    <div class="ae table-scroll" style="@_scrollStyle" @onscroll="OnScroll" @ref="tableRef">
+        <div class="ae table-rows" style="@_rowsStyle">
             @foreach (var row in Rows.Skip(scrollViewResult.SkipItems).Take(scrollViewResult.TakeItems).Select((item, i) => new { item, i }))
             {
                 <div class="@GetRowColor(row.item)" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;" @onclick="(() => OnRowClick.InvokeAsync(row.item))">
@@ -30,11 +31,11 @@
                     {
                         if (Renderers?[index] is null)
                         {
-                            <div class="e table-cell">@accessor?.Invoke(row.item)</div>
+                            <div class="ae table-cell">@accessor?.Invoke(row.item)</div>
                         }
                         else
                         {
-                            <div class="e table-cell">@Renderers[index](row.item)</div>
+                            <div class="ae table-cell">@Renderers[index](row.item)</div>
                         }
                     }
                 </div>
@@ -59,7 +60,7 @@
     [Parameter]
     public List<T> Dataset { get; set; }
     [Parameter]
-    public Func<T, RowColor> ColorAccessor { get; set; }
+    public Func<T, string> ColorAccessor { get; set; }
     [Parameter]
     public int MaxHeight { get; set; } = 600;
     [Parameter]
@@ -67,12 +68,11 @@
     [Parameter]
     public EventCallback<T> OnRowClick { get; set; }
 
-    private string _tableClass => $"e table";
+    private string _tableClass => $"ae table {_inputClass}";
     private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
     private string _rowsStyle => $"{_gridStyle}; grid-template-rows: repeat({scrollViewResult.TakeItems},{RowHeight}px); height:{scrollViewResult.Height}px;";
     private string _rowStyle => $"{_gridStyle}; grid-template-rows:{RowHeight}px;";
     private string _scrollStyle => $"max-height: {MaxHeight}px;";
-    private string _headerStyle => $"{_gridStyle}";
 
     private (int column, bool sortAscending) _sorting = (0, true);
 
@@ -83,6 +83,8 @@
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+
         scrollView = new ScrollView();
         scrollViewResult = new ScrollViewResult();
     }
@@ -152,26 +154,7 @@
 
     private string GetRowColor(T row)
     {
-        string rowClass = "e table-row";
-        switch (ColorAccessor?.Invoke(row))
-        {
-            case RowColor.Blue:
-                return rowClass + " blue";
-            case RowColor.Red:
-                return rowClass + " red";
-            case RowColor.Yellow:
-                return rowClass + " yellow";
-            default:
-                return rowClass;
-        }
-    }
-
-    public enum RowColor
-    {
-        Default,
-        Red,
-        Yellow,
-        Blue
+        return $"ae table-row {ColorAccessor?.Invoke(row)}";
     }
 
     private async Task OnScroll()

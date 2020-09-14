@@ -1,0 +1,101 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+@inherits HtmlElement
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+@typeparam T
+
+<div class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
+    <span @onclick="ToggleVisiblity">
+        @_labelFragment
+    </span>
+    
+    <div class="ae content-wrapper">
+        @foreach(var item in Items)
+        {
+            <div class="ae dropdown-item" @onclick="() => HandleItemClick(item)">
+                @Renderer(item)
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Label { get; set; }
+    [Parameter]
+    public RenderFragment LabelRenderFragment { get; set; }
+    [Parameter]
+    public Action<T> OnChange { get; set; }
+    [Parameter]
+    public IEnumerable<T> Items { get; set; }
+    [Parameter]
+    public Func<T, RenderFragment> Renderer { get; set; }
+
+    private string _wrapperClassname => $"ae dropdown-wrapper {_inputClass}";
+    private string _id = $"ae-{Guid.NewGuid().ToString()}";
+
+    private RenderFragment _labelFragment;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if(Renderer is null)
+        {
+            Renderer = new Func<T, RenderFragment>(item =>
+            {
+                return @<AeTypography>@item</AeTypography>;
+            });
+        }
+
+        if(Label != null)
+        {
+            _labelFragment = @<AeButton>
+                                @Label
+                                <AeIcon Icon="fas fa-caret-down" />
+                            </AeButton>;
+        }
+        else
+        {
+            _labelFragment = LabelRenderFragment;
+        }
+    }
+
+    private void HandleItemClick(T item)
+    {
+        ToggleVisiblity();
+        OnChange?.Invoke(item);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("aedropdown.initialize", _id);
+        }
+    }
+
+    private void ToggleVisiblity()
+    {
+        InvokeAsync(async () =>
+        {
+            await JSRuntime.InvokeVoidAsync("aedropdown.toggleVisibility", _id);
+        });
+    }
+
+
+    public void Dispose()
+    {
+        InvokeAsync(async () =>
+        {
+            await JSRuntime.InvokeVoidAsync("aedropdown.dispose", _id);
+        });
+    }
+}

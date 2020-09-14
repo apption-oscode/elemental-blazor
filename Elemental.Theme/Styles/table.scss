@@ -1,0 +1,148 @@
+﻿@import 'colors';
+@import 'box-shadow';
+@import 'constants';
+@import 'utils';
+@import 'scrollbar';
+
+$tableHeaderOptions: (
+    "display": grid,
+    ".ae.table-cell": (
+        "cursor": pointer,
+        "user-select": none,
+        "padding-left": 0.75rem,
+        "background-color": $grey-600,
+        "color": $white,
+        "word-wrap": break-word,
+        "&:hover": (
+            "background-color": $grey-700,
+        )
+    )
+) !default;
+
+$tableScrollOptions: (
+    "overflow-y": auto,
+    "position": relative,
+    "&": $scrollbarOptions,
+) !default;
+
+$tableRowContainerOptions: (
+    "display": grid,
+    "overflow": overlay,
+) !default;
+
+$tableRowOptions: (
+    "default": (
+        "display": grid,
+        "position": absolute,
+        "width": 100%,
+        ".ae.table-cell": (
+            "background-color": $white,
+            "word-wrap": break-word,
+            "padding": .5rem 0 .5rem .75rem,
+            "&": $scrollbarOptions,
+            
+            "&:nth-child(1)": (
+                "padding-left": .5rem,
+                "border-left": .25rem solid $transparent,
+            ),
+            "&:hover":(
+                "transition": .4s $cubic-bezier,
+                "background-color": $grey-200,
+            ),
+            "& a": (
+                "&:hover": (
+                    "text-decoration": underline,
+                )
+            ),
+        ),
+        "&:hover":(
+            ".ae.table-cell": (
+                "background-color": $grey-200,
+                "&:nth-child(1)": (
+                    "border-left": .25rem solid $transparent,
+                ),
+            ),
+            "&:hover": (
+                ".ae.table-cell": (
+                    "transition": .4s $cubic-bezier,
+                    "background-color": $grey-200,
+                ),
+            ),
+        ),
+        "&:nth-of-type(2n+1)": (
+            ".ae.table-cell": (
+                "background-color": $grey-100,
+                "&:nth-child(1)": (
+                    "border-left": .25rem solid $transparent,
+                ),
+            ),
+            "&:hover": (
+                ".ae.table-cell": (
+                    "transition": .4s $cubic-bezier,
+                    "background-color": $grey-200,
+                ),
+            ),
+        ),
+    ),
+    "red": (
+        ".ae.table-cell": (
+                "background-color": $red-100,
+                "&:nth-child(1)": (
+                    "border-left": .25rem solid $red-400,
+                ),
+            ),
+            "&:hover": (
+                ".ae.table-cell": (
+                    "transition": .4s $cubic-bezier,
+                    "background-color": $red-200,
+                ),
+            ),
+    ),
+    "blue": (
+        ".ae.table-cell": (
+                "background-color": $blue-100,
+                "&:nth-child(1)": (
+                    "border-left": .25rem solid $blue-400,
+                ),
+            ),
+            "&:hover": (
+                ".ae.table-cell": (
+                    "transition": .4s $cubic-bezier,
+                    "background-color": $blue-200,
+                ),
+            ),
+    ),
+    "yellow": (
+        ".ae.table-cell": (
+                "background-color": $orange-100,
+                "&:nth-child(1)": (
+                    "border-left": .25rem solid $orange-400,
+                ),
+            ),
+            "&:hover": (
+                ".ae.table-cell": (
+                    "transition": .4s $cubic-bezier,
+                    "background-color": $orange-200,
+                ),
+            ),
+    ),
+) !default;
+
+.ae.table {
+
+    .ae.table-header {
+        @include set-values($tableHeaderOptions);
+    }
+
+    .ae.table-scroll {
+        @include set-values($tableScrollOptions);
+    }
+
+    .ae.table-rows {
+        @include set-values($tableRowContainerOptions);
+
+        .ae.table-row {
+            @include set-variations($tableRowOptions);
+        }
+    }
+}

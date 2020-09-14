@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Samples\Dropdown\" />
-  </ItemGroup>
-
 </Project>

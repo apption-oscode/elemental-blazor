@@ -51,5 +51,10 @@
   <ItemGroup>
     <None Remove="Styles\card.scss" />
     <None Remove="Styles\progress.scss" />
+    <Content Remove="Styles\scrollbar.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Styles\table.scss" />
   </ItemGroup>
 </Project>
