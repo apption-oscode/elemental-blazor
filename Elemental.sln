@@ -16,8 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Tests", "Elementa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Theme", "Elemental.Theme\Elemental.Theme.csproj", "{F7DD851E-204F-47B2-95BA-15DA4126E55A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Theme.Default", "Elemental.Theme.Default\Elemental.Theme.Default.csproj", "{EC2C7EE4-B512-40A1-862F-49D82AA1E28A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,10 +38,6 @@ Global
 		{F7DD851E-204F-47B2-95BA-15DA4126E55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7DD851E-204F-47B2-95BA-15DA4126E55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7DD851E-204F-47B2-95BA-15DA4126E55A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC2C7EE4-B512-40A1-862F-49D82AA1E28A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC2C7EE4-B512-40A1-862F-49D82AA1E28A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC2C7EE4-B512-40A1-862F-49D82AA1E28A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC2C7EE4-B512-40A1-862F-49D82AA1E28A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

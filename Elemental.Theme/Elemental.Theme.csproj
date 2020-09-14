@@ -48,12 +48,4 @@
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Styles\scrollbar.scss" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Styles\table.scss" />
-  </ItemGroup>
 </Project>
