@@ -8,13 +8,13 @@
 
 @inherits HtmlElement
 
-  <div class="@_classname">
-    @if (Image != null)
+  <div class="@_classname" @attributes="InputAttributesWithoutClass">
+    @if (@Image != null)
     {
       <img class="ae image" src="@Image" />
     }
 
-    @if ( Title != null)
+    @if (@Title != null)
     {
       <div class="ae title">
         @Title
@@ -26,6 +26,7 @@
   </div>
 
 @code {
+  
   [Parameter]
   public string Title { get; set; }
   [Parameter]
