@@ -1,0 +1,29 @@
+﻿@import 'constants';
+@import 'utils';
+
+$sideNavWidth: 200px !default;
+$topNavHeight: 64px !default;
+
+$layoutOptions: (
+    "display": flex,
+
+    ".ae.side-nav":(
+        "width": $sideNavWidth,
+    ),
+    ".ae.content-wrapper":(
+        "display": flex,
+        "flex-direction": column,
+        "flex-grow": 1,
+        ".ae.top-nav": (
+            "height": $topNavHeight,
+        )
+    ),
+) !default;
+
+
+
+
+
+.ae.layout {
+    @include set-values($layoutOptions);
+}

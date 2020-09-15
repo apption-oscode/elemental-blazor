@@ -1,0 +1,38 @@
+﻿@inherits HtmlElement
+
+
+<div class="@_layoutClassname" @attributes="InputAttributesWithoutClass">
+    @if (SideNavigation != null)
+    {
+        <div class="@_sideNavClassname">
+            @SideNavigation
+        </div>
+    }
+    <div class="@_wrapperClassname">
+        @if (TopNavigation != null)
+        {
+            <div class="@_topNavClassname">
+                @TopNavigation
+            </div>
+        }
+        <div class="@_contentClassname">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment TopNavigation { get; set; }
+    [Parameter]
+    public RenderFragment SideNavigation { get; set; }
+
+
+    private string _layoutClassname => $"ae layout {_inputClass}";
+    private string _sideNavClassname => $"ae side-nav";
+    private string _wrapperClassname => $"ae content-wrapper {(SideNavigation == null ? "" : "has-side-nav")}";
+    private string _topNavClassname => $"ae top-nav";
+    private string _contentClassname => $"ae content-body";
+
+}

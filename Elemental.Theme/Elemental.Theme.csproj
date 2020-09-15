@@ -53,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Styles\layout.scss" />
     <None Remove="Styles\table.scss" />
   </ItemGroup>
 </Project>
