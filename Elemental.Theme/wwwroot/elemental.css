@@ -136,13 +136,19 @@ body {
 .ae.layout {
   display: flex; }
   .ae.layout .ae.side-nav {
-    width: 200px; }
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; }
   .ae.layout .ae.content-wrapper {
     display: flex;
     flex-direction: column;
     flex-grow: 1; }
     .ae.layout .ae.content-wrapper .ae.top-nav {
       height: 64px; }
+    .ae.layout .ae.content-wrapper.has-side-nav {
+      margin-left: 250px; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
