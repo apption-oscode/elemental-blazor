@@ -1,18 +1,23 @@
 ﻿@page "/cards"
 @inherits DemoPage
 
-  <AeFlex Vertical class="card-page-container">
-    <DemoSection Path="./Samples/Cards/Examples/BasicCards.razor">
-      <AeFlex>
-        <Elemental.Documentation.Samples.Cards.Examples.BasicCards />
-      </AeFlex>
-    </DemoSection>
-    <DemoSection Path="./Samples/Cards/Examples/ImageCards.razor">
-      <AeFlex>
-        <Elemental.Documentation.Samples.Cards.Examples.ImageCards />
-      </AeFlex>
-    </DemoSection>
-  </AeFlex>
+<Flex Vertical class="card-page-container">
+  <DemoSection Path="./Samples/Cards/Examples/BasicCards.razor">
+    <Flex>
+      <Elemental.Documentation.Samples.Cards.Examples.BasicCards />
+    </Flex>
+  </DemoSection>
+  <DemoSection Path="./Samples/Cards/Examples/ImageCards.razor">
+    <Flex>
+      <Elemental.Documentation.Samples.Cards.Examples.ImageCards />
+    </Flex>
+  </DemoSection>
+  <DemoSection Path="./Samples/Cards/Examples/SizedCards.razor">
+    <Flex>
+      <Elemental.Documentation.Samples.Cards.Examples.SizedCards />
+    </Flex>
+  </DemoSection>
+</Flex>
 
 @code {
 

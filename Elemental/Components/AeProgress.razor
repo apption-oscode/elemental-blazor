@@ -9,29 +9,23 @@
 @inherits HtmlElement
 
   <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    @if (@Image != null)
-    {
-      <img class="ae image" src="@Image" />
-    }
-
-    @if (@Title != null)
-    {
-      <div class="ae title">
-        @Title
+    <div class="outer">
+      <div class="fill" style="width:@Percent%">
       </div>
+    </div>
+    @if (@showPercent == true)
+    {
+      <span class="text">@Percent %</span>
     }
-      <div class="ae content">
-        @ChildContent
-      </div>
   </div>
 
 @code {
   
   [Parameter]
-  public string Title { get; set; }
+  public float Percent { get; set; }
   [Parameter]
-  public string Image { get; set; }
+  public bool showPercent { get; set; }
 
 
-  private string _classname => $"ae card {_inputClass}";
+  private string _classname => $"ae progress {_inputClass}";
 }

@@ -49,6 +49,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Styles\card.scss" />
+    <None Remove="Styles\progress.scss" />
     <Content Remove="Styles\scrollbar.scss" />
   </ItemGroup>
 
