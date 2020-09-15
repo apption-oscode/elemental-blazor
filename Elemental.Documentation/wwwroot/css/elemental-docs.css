@@ -35,6 +35,12 @@
 body {
   overflow: overlay; }
 
+#top-nav {
+  background-color: #2b6cb0;
+  height: 100%; }
+  #top-nav .white {
+    color: #fff; }
+
 .sidenav {
   border-right: 1px solid #edf2f7;
   background-color: #fff;
@@ -43,7 +49,10 @@ body {
   flex-direction: column; }
   .sidenav .logo {
     background-color: #2b6cb0;
-    padding: 0.5rem 0.5rem 0.25rem; }
+    height: 48px;
+    padding: 0 0.25rem;
+    display: flex;
+    align-items: center; }
     .sidenav .logo:hover {
       background-color: #3182ce; }
     .sidenav .logo img {
@@ -88,7 +97,7 @@ body {
     position: initial;
     top: initial;
     left: initial;
-    height: 464px;
+    height: 448px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,7 +109,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center; }
+    text-align: center;
+    position: initial !important;
+    z-index: 1 !important; }
   .layout-page-container .layout-container .ae.content-body {
     background-color: #4299e1;
     height: 400px;

@@ -2,7 +2,7 @@
 @import 'utils';
 
 $sideNavWidth: 250px !default;
-$topNavHeight: 64px !default;
+$topNavHeight: 48px !default;
 
 $layoutOptions: (
     "display": flex,
@@ -20,10 +20,13 @@ $layoutOptions: (
         "flex-grow": 1,
         ".ae.top-nav": (
             "height": $topNavHeight,
+            "position": sticky,
+            "top": 0,
+            "z-index": 10,
         ),
         "&.has-side-nav":(
             "margin-left": $sideNavWidth,
-        )
+        ),
     ),
 ) !default;
 

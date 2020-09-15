@@ -146,7 +146,10 @@ body {
     flex-direction: column;
     flex-grow: 1; }
     .ae.layout .ae.content-wrapper .ae.top-nav {
-      height: 64px; }
+      height: 48px;
+      position: sticky;
+      top: 0;
+      z-index: 10; }
     .ae.layout .ae.content-wrapper.has-side-nav {
       margin-left: 250px; }
 
