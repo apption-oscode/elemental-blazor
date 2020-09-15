@@ -26,6 +26,15 @@ $progressOptions: (
       "background-color": $blue-500,
     ),
 
+    ".full": (
+      "min-height": 1rem,
+      "width": 100%,
+      "vertical-align": middle,
+      "text-align": center,
+      "color": $white,
+      "background-color": $green-500,
+    ),
+
     ".text": (
       "display": inline-block,
       "line-height": 1.35,
