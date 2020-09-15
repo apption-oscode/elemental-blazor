@@ -10,8 +10,16 @@
 
   <div class="@_classname" @attributes="InputAttributesWithoutClass">
     <div class="outer">
-      <div class="fill" style="width:@Percent%">
-      </div>
+      @if (@Percent < 100)
+      {
+        <div class="fill" style="width:@Percent%">
+        </div>
+      }
+      else
+      {
+        <div class="full">
+        </div>
+      }
     </div>
     @if (@showPercent == true)
     {
