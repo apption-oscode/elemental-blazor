@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
     <PackageTags>c# blazor</PackageTags>
     <RepositoryType>Git</RepositoryType>
-    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
