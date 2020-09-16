@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
     <PackageTags>c# blazor</PackageTags>
     <RepositoryType>Git</RepositoryType>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
