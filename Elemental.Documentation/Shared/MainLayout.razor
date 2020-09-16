@@ -9,12 +9,26 @@
 @inherits LayoutComponentBase
 
 
-<AeFlex>
+<AeLayout>
+    <SideNavigation>
+        <SideNav />
+    </SideNavigation>
+    <ChildContent>
+        <AeTypography Variant="h1" style="text-align: center;">Elemental</AeTypography>
+        <AeFlex Vertical style="max-width: 1200px; padding: 0rem 2rem 5rem">
+            @Body
+        </AeFlex>
+    </ChildContent>
+</AeLayout>
+
+
+@*<AeFlex>
     <SideNav />
+
     <AeFlex Vertical style="flex-grow: 1; margin-left: 250px;">
         <AeTypography Variant="h1" style="text-align: center;">Elemental</AeTypography>
         <AeFlex Vertical style="max-width: 1200px; padding: 0rem 2rem 5rem">
             @Body
         </AeFlex>
     </AeFlex>
-</AeFlex>
+</AeFlex>*@

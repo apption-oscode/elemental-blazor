@@ -6,6 +6,8 @@
 
 $cardOptions: ( 
   "default": ( 
+    "min-width": 15rem,
+    "min-height": 10rem,
     "position": relative, 
     "display": inline-block,      
     "border-radius": 2px, 
@@ -20,15 +22,30 @@ $cardOptions: (
     "color": $white, 
     "background-color": $grey-600, 
     "border-color": $grey-600,
+
+    ".ae.image": (
+    ),
+
     ".ae.title": (
       "font-size": 1.5rem,
-      "border-bottom": solid,
       "padding": 0.5rem,
     ),
+
     ".ae.content": (
+      "border-top": solid,
       "padding": 0.5rem,
     ),
   ), 
+
+  "large": (
+    "min-width": 25rem,
+    "min-height": 15rem,
+  ),
+
+  "small": (
+    "min-width": 12rem,
+    "min-height": 7rem,
+  ),
 
   "dark": ( 
     "background-color": $grey-800, 
