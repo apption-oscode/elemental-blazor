@@ -27,7 +27,7 @@ $collapseOptions: (
       "padding": 0.5rem,
     ),
 
-    ".ae.body": (
+    ".ae.body": (`
       "border-top": solid,
       "padding-left": 0.5rem,
       "padding-right": 0.5rem,
@@ -35,29 +35,22 @@ $collapseOptions: (
     ),
   ), 
 
-  "large": (
-    "min-width": 25rem,
-    "min-height": 15rem,
-  ),
-
-  "small": (
-    "min-width": 12rem,
-    "min-height": 7rem,
-  ),
-
   "dark": ( 
     "background-color": $grey-800, 
     "border-color": $grey-800, 
   ), 
+
   "light": ( 
     "color": $grey-600, 
     "background-color": $grey-100, 
     "border-color": $grey-100,
   ), 
+
   "blue": ( 
     "background-color": $blue-600, 
     "border-color": $blue-600,
   ), 
+
   "red": ( 
     "background-color": $red-600, 
     "border-color": $red-600, 
