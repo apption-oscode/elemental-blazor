@@ -12,7 +12,7 @@ $menuOptions: (
     "height": 100%,  
     "box-shadow": inset 4px 8px 8px -8px rgba(0,0,0,0.16),
 
-    "links": (
+    ".links": (
       "display": none,
       "position": absolute,
       "background-color": $blue-700,
@@ -21,7 +21,7 @@ $menuOptions: (
       "left": 0,
       "flex-direction": column,
 
-      "link": (
+      ".link": (
         "padding": 1rem,
         "text-decoration": none,
         "border-bottom": 2px solid $transparent,
@@ -38,18 +38,18 @@ $menuOptions: (
 
     ),
 
-    "&.open .links"(
+    "&.open .links":(
       "display": flex,
     ),
 
-    "toggle": (
+    ".toggle": (
       "cursor": pointer,
       "color": white,
       "position": absolute,
       "top": 0,
       "right": 0,
 
-      "i" (
+      ".i":(
         "font-size": 1.5rem,
         "padding": .75rem,
       ),

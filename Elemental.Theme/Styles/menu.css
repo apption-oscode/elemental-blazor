@@ -1,0 +1,95 @@
+﻿/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.menu {
+  background-color: #2b6cb0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  box-shadow: inset 4px 8px 8px -8px rgba(0, 0, 0, 0.16); }
+  .ae.menu .links {
+    display: none;
+    position: absolute;
+    background-color: #2b6cb0;
+    top: 48px;
+    width: 100%;
+    left: 0;
+    flex-direction: column; }
+    .ae.menu .links .link {
+      padding: 1rem;
+      text-decoration: none;
+      border-bottom: 2px solid transparent; }
+      .ae.menu .links .link:hover {
+        background-color: #3182ce; }
+      .ae.menu .links .link:active {
+        background-color: #3182ce; }
+  .ae.menu.open .links {
+    display: flex; }
+  .ae.menu .toggle {
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .ae.menu .toggle .i {
+      font-size: 1.5rem;
+      padding: 0.75rem; }
