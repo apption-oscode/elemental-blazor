@@ -1,0 +1,65 @@
+﻿@import 'colors';
+@import 'constants';
+@import 'box-shadow';
+@import 'utils';
+
+$menuOptions: ( 
+  "default": ( 
+    "background-color": $blue-700,
+    "overflow": hidden,
+    "display": flex,
+    "align-items": center,
+    "height": 100%,  
+    "box-shadow": inset 4px 8px 8px -8px rgba(0,0,0,0.16),
+
+    "links": (
+      "display": none,
+      "position": absolute,
+      "background-color": $blue-700,
+      "top": 48px,
+      "width": 100%,
+      "left": 0,
+      "flex-direction": column,
+
+      "link": (
+        "padding": 1rem,
+        "text-decoration": none,
+        "border-bottom": 2px solid $transparent,
+
+        "&:hover":(
+          "background-color": $blue-600,
+        ),
+
+        "&:active":(
+          "background-color": $blue-600,
+        ),
+        
+      ),
+
+    ),
+
+    "&.open .links"(
+      "display": flex,
+    ),
+
+    "toggle": (
+      "cursor": pointer,
+      "color": white,
+      "position": absolute,
+      "top": 0,
+      "right": 0,
+
+      "i" (
+        "font-size": 1.5rem,
+        "padding": .75rem,
+      ),
+
+    ),
+
+  ),
+    
+)  !default;
+
+.ae.menu {
+  @include set-variations($menuOptions);
+}

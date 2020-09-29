@@ -1,0 +1,55 @@
+﻿@*
+  Copyright (c) 2020 Apption Corporation
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+@using Microsoft.AspNetCore.Components.Routing
+
+@inherits HtmlElement
+
+<div class="@_classname" @attributes="InputAttributesWithoutClass">
+  <a href="/" class="logo" @onclick="() => ToggleNav(true)">
+    <img src="/img/apption-logo-white.svg" />
+  </a>
+  <div class="links">
+    @foreach (var link in Links)
+    {
+      <NavLink class="link" href="@link.href" ActiveClass="active">
+        <AeTypography>
+          @link.label
+        </AeTypography>
+      </NavLink>
+    }
+  </div>
+
+  <div class="toggle" @onclick="() => ToggleNav()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+</div>
+
+@code {
+
+  private bool _isOpen = false;
+  private string _classname => $"ae menu {(_isOpen ? "open" : "")}";
+
+  [Parameter]
+  public List<(string label, string href, int priority)> Links { get; set; }
+
+  private void ToggleNav(bool forceClose = false)
+  {
+    if (forceClose)
+    {
+      _isOpen = false;
+    }
+    else
+    {
+      _isOpen = !_isOpen;
+    }
+    StateHasChanged();
+  }
+
+}
