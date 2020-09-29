@@ -1076,12 +1076,6 @@ body {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     text-align: left; }
-  .ae.collapse.large {
-    min-width: 25rem;
-    min-height: 15rem; }
-  .ae.collapse.small {
-    min-width: 12rem;
-    min-height: 7rem; }
   .ae.collapse.dark {
     background-color: #2d3748;
     border-color: #2d3748; }
