@@ -7,37 +7,106 @@
 *@
 
 @using Microsoft.AspNetCore.Components.Routing
-
 @inherits HtmlElement
+@inject GetDimensionsService Service
 
-<div class="@_classname" @attributes="InputAttributesWithoutClass">
-  <a href="/" class="logo" @onclick="() => ToggleNav(true)">
-    <img src="/img/apption-logo-white.svg" />
-  </a>
-  <div class="links">
+<div @ref="OuterBounds" class="@_classname" @attributes="InputAttributesWithoutClass">
+  <span @ref="WideMenu" class="links">
     @foreach (var link in Links)
     {
-      <NavLink class="link" href="@link.href" ActiveClass="active">
-        <AeTypography>
+      if (@link.priority <= @target)
+      {
+        <NavLink class="link" href="@link.href" ActiveClass="active">
           @link.label
-        </AeTypography>
-      </NavLink>
+        </NavLink>
+      }
     }
-  </div>
-
-  <div class="toggle" @onclick="() => ToggleNav()">
-    <i class="fas fa-bars"></i>
-  </div>
-
+    @if (showButton || alwaysShowButton)
+    {
+      <span class="toggle" @onclick="() => ToggleNav()">
+        <i class="fas fa-bars"></i>
+      </span>
+    }
+  </span>
+  <span class="dropdown">
+    @foreach (var link in Links)
+    {
+      if (@link.priority > @target)
+      {
+        <NavLink class="link" href="@link.href" ActiveClass="active">
+          @link.label
+        </NavLink>
+      }
+    }
+  </span>
 </div>
 
 @code {
 
+  ElementReference OuterBounds;
+  ElementReference WideMenu;
+
+  public int outerWidth { get; set; }
+  public int menuWidth { get; set; }
+  private int target = 0 ;
+  private bool showButton = false;
+  private bool alwaysShowButton = false;
   private bool _isOpen = false;
   private string _classname => $"ae menu {(_isOpen ? "open" : "")}";
 
   [Parameter]
   public List<(string label, string href, int priority)> Links { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    target = returnTarget();
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await GetDimensions();
+    if (firstRender)
+    {    }
+    adjustMenu();
+  }
+
+  private int returnTarget()
+  {
+    int temp = 0;
+    foreach (var lnk in Links)
+    {
+      if (lnk.priority > target)
+      {
+        temp = lnk.priority;
+      }
+    }
+    return temp;
+  }
+
+  async Task GetDimensions()
+  {
+    var boundDimension = await Service.GetDimensions(OuterBounds);
+    var menuDimension = await Service.GetDimensions(WideMenu);
+
+    outerWidth = boundDimension.Width;
+    menuWidth = menuDimension.Width;
+  }
+
+  private void adjustMenu()
+  {
+    if (outerWidth < menuWidth)
+    {
+      showButton = true;
+      alwaysShowButton = true;
+      target -= 1;
+      StateHasChanged();
+    } else
+    {
+      showButton = false;
+    }
+  }
+
 
   private void ToggleNav(bool forceClose = false)
   {
@@ -51,5 +120,4 @@
     }
     StateHasChanged();
   }
-
 }

@@ -6,15 +6,35 @@
 $menuOptions: ( 
   "default": ( 
     "background-color": $blue-700,
-    "overflow": hidden,
-    "display": flex,
+    "overflow": visible,
     "align-items": center,
-    "height": 100%,  
+    "height": auto,  
     "box-shadow": inset 4px 8px 8px -8px rgba(0,0,0,0.16),
 
-    ".links": (
+   "&.open .links":(
+      "display": flex,
+   ),
+
+    ".links":(
+        "display": flex,
+        "position": initial,
+        "flex-direction": row,
+        "width": max-content,
+
+        ".link": (
+            "&:hover":(
+              "background-color": $blue-600,
+            ),
+            "&.active": (
+                "padding": 0.5rem,
+                "text-decoration": none,
+                "color": $white,
+            ),
+        ),
+    ),
+
+    ".dropdown": (
       "display": none,
-      "position": absolute,
       "background-color": $blue-700,
       "top": 48px,
       "width": 100%,
@@ -24,6 +44,7 @@ $menuOptions: (
       ".link": (
         "padding": 1rem,
         "text-decoration": none,
+        "color": $white,
         "border-bottom": 2px solid $transparent,
 
         "&:hover":(
@@ -38,16 +59,19 @@ $menuOptions: (
 
     ),
 
-    "&.open .links":(
+  "&.open .dropdown":(
       "display": flex,
     ),
 
     ".toggle": (
+      "padding": 0.5rem,
       "cursor": pointer,
       "color": white,
-      "position": absolute,
-      "top": 0,
-      "right": 0,
+      "text-align": right,
+      
+      ".fas":(
+        "text-align": center,
+      ),
 
       ".i":(
         "font-size": 1.5rem,

@@ -5,11 +5,20 @@
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-  Title: Basic Cards
-  Description: Standard set of cards in a variety of default values
+  Title: Basic Menu
+  Description: Basic Menu, will render as many elements horizontaly as can fit. It will hide other elements under the button according to priority
 *@
 
-<AeMenu links=@_Links> </AeMenu>
+<div style="width:600px;margin:1rem">
+    <AeMenu links=@_Links> </AeMenu>
+</div>
+<div style="width:300px;margin:1rem">
+  <AeMenu links=@_Links> </AeMenu>
+</div>
+<div style="width:150px;margin:1rem">
+  <AeMenu links=@_Links> </AeMenu>
+</div>
+
 
 @code {
 
