@@ -21,7 +21,7 @@
         </NavLink>
       }
     }
-    @if (showButton || alwaysShowButton)
+    @if (showButton)
     {
       <span class="toggle" @onclick="() => ToggleNav()">
         <i class="fas fa-bars"></i>
@@ -46,11 +46,15 @@
   ElementReference OuterBounds;
   ElementReference WideMenu;
 
+  //variables to store relevant size data
   public int outerWidth { get; set; }
   public int menuWidth { get; set; }
+  public Dictionary<int, float> pastWidth;
+  //target priority, elements with a higher number will not be shown
   private int target = 0 ;
+  //should we display the hamburger button?
   private bool showButton = false;
-  private bool alwaysShowButton = false;
+
   private bool _isOpen = false;
   private string _classname => $"ae menu {(_isOpen ? "open" : "")}";
 
@@ -63,14 +67,7 @@
     target = returnTarget();
   }
 
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    await GetDimensions();
-    if (firstRender)
-    {    }
-    adjustMenu();
-  }
-
+  //default priority is to display all elements horizontally
   private int returnTarget()
   {
     int temp = 0;
@@ -84,6 +81,16 @@
     return temp;
   }
 
+  //check each rneder to make sure all elements fit
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender) {    }
+
+    await GetDimensions();
+    adjustMenu();
+  }
+
+  //use the Service to get dimensions of supplied elements and store them
   async Task GetDimensions()
   {
     var boundDimension = await Service.GetDimensions(OuterBounds);
@@ -93,20 +100,39 @@
     menuWidth = menuDimension.Width;
   }
 
+
   private void adjustMenu()
   {
+    //if there is an overflow, adjust target priority to display fewer objects
     if (outerWidth < menuWidth)
     {
-      showButton = true;
-      alwaysShowButton = true;
+      try
+      {  pastWidth.Add(target, menuWidth);  }
+      catch { }
       target -= 1;
+      showButton = true;
       StateHasChanged();
-    } else
-    {
-      showButton = false;
     }
+    //if not check to see if we could now fit the previous priority again
+    else if (pastWidth.ContainsKey(target + 1) && pastWidth[target + 1] < outerWidth)
+    {
+       target += 1;
+    }
+    showButton = showButtonLogic();
   }
 
+  //should we display the hamburger button? Not if everything is displayed horizontally
+  private bool showButtonLogic()
+  {
+    foreach (var lnk in Links)
+    {
+      if (lnk.priority > target)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 
   private void ToggleNav(bool forceClose = false)
   {
