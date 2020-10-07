@@ -18,4 +18,9 @@
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Samples\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

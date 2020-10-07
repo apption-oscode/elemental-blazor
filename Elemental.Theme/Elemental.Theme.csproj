@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Apption.Elemental.Theme</PackageId>
     <Authors>Apption</Authors>
     <Product>Elemental Blazor Theme</Product>
     <Description>Theme for Apption Elemental.</Description>
     <Copyright>Copyright Apption 2020</Copyright>
-    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -47,7 +48,7 @@
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
   </ItemGroup>
-
+   
   <ItemGroup>
     <None Remove="Styles\card.scss" />
     <None Remove="Styles\collapse.scss" />
