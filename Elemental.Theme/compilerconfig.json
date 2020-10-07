@@ -1,6 +1,7 @@
-﻿[
+[
   {
     "outputFile": "wwwroot/elemental.css",
-    "inputFile": "Styles/theme.scss"
+    "inputFile": "Styles/theme.scss",
+    "sourceMap": false
   }
 ]

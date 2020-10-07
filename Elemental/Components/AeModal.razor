@@ -1,0 +1,48 @@
+﻿@*
+  Copyright (c) 2020 Apption Corporation
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+@inherits HtmlElement
+
+@if (Show)
+{
+<div class="@_classname" @attributes="InputAttributesWithoutClass">
+  <div class="ae background" @onclick="CloseModal">
+  </div>
+  <div class="ae wrapper">
+    @if (@Title != null)
+    {
+      <div class="ae title">
+        @Title
+      </div>
+    }
+    <div class="ae content">
+      @ChildContent
+    </div>
+    <div class="ae footer">
+      <AeButton class="blue" OnClick="CloseModal">Close</AeButton>
+    </div>
+  </div>
+</div>
+}
+
+  @code {
+
+    [Parameter]
+    public bool Show { get; set; } = true;
+    [Parameter]
+    public string Title { get; set; }
+
+    private void CloseModal()
+    {
+      Show = false;
+      StateHasChanged();
+    }
+
+
+private string _classname => $"ae modal {_inputClass}";
+  }

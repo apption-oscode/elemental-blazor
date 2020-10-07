@@ -552,7 +552,8 @@ body {
     padding: 0.5rem; }
   .ae.card .ae.content {
     border-top: solid;
-    padding: 0.5rem; }
+    padding: 0.5rem;
+    text-align: left; }
   .ae.card.large {
     min-width: 25rem;
     min-height: 15rem; }
@@ -885,6 +886,318 @@ body {
     .ae.table .ae.table-rows .ae.table-row.yellow:hover .ae.table-cell {
       transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #feebc8; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.modal {
+  z-index: 1000;
+  max-width: 20rem;
+  min-height: 10rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  border-radius: 2px;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  color: #fff;
+  background-color: #718096;
+  border-color: #718096; }
+  .ae.modal .ae.background {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); }
+  .ae.modal .ae.title {
+    font-size: 1.5rem;
+    padding: 0.5rem; }
+  .ae.modal .ae.content {
+    border-top: solid;
+    padding: 0.5rem;
+    text-align: left; }
+  .ae.modal .ae.footer {
+    border-top: solid;
+    padding: 0.5rem;
+    text-align: right; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.collapse {
+  min-width: 15rem;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  color: #fff;
+  background-color: #718096;
+  border-color: #718096; }
+  .ae.collapse .ae.header {
+    font-size: 1.5rem;
+    padding: 0.5rem; }
+  .ae.collapse .ae.body {
+    border-top: solid;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: left; }
+  .ae.collapse.dark {
+    background-color: #2d3748;
+    border-color: #2d3748; }
+  .ae.collapse.light {
+    color: #718096;
+    background-color: #f7fafc;
+    border-color: #f7fafc; }
+  .ae.collapse.blue {
+    background-color: #3182ce;
+    border-color: #3182ce; }
+  .ae.collapse.red {
+    background-color: #e53e3e;
+    border-color: #e53e3e; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.menu {
+  background-color: #2b6cb0;
+  overflow: visible;
+  align-items: center;
+  height: auto;
+  box-shadow: inset 4px 8px 8px -8px rgba(0, 0, 0, 0.16); }
+  .ae.menu.open .links {
+    display: flex; }
+  .ae.menu .links {
+    display: flex;
+    position: initial;
+    flex-direction: row;
+    width: max-content; }
+    .ae.menu .links .link:hover {
+      background-color: #3182ce; }
+    .ae.menu .links .link.active {
+      padding: 0.5rem;
+      text-decoration: none;
+      color: #fff; }
+  .ae.menu .dropdown {
+    display: none;
+    background-color: #2b6cb0;
+    top: 48px;
+    width: 100%;
+    left: 0;
+    flex-direction: column; }
+    .ae.menu .dropdown .link {
+      padding: 1rem;
+      text-decoration: none;
+      color: #fff;
+      border-bottom: 2px solid transparent; }
+      .ae.menu .dropdown .link:hover {
+        background-color: #3182ce; }
+      .ae.menu .dropdown .link:active {
+        background-color: #3182ce; }
+  .ae.menu.open .dropdown {
+    display: flex; }
+  .ae.menu .toggle {
+    padding: 0.5rem;
+    cursor: pointer;
+    color: white;
+    text-align: right; }
+    .ae.menu .toggle .fas {
+      text-align: center; }
+    .ae.menu .toggle .i {
+      font-size: 1.5rem;
+      padding: 0.75rem; }
 
 /*
     Third party

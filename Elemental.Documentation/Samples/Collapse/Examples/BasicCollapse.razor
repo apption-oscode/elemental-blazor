@@ -4,16 +4,13 @@
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  Title: Basic Collapsible
+  Description: Basic example of a collapsible componenet
 *@
 
-@inherits HtmlElement
-
-  <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    
-  </div>
-
-@code {
-
-
-  private string _classname => $"ae menu {_inputClass}";
-}
+<AeCollapse header="Example Header">
+  <p>Some Text</p>
+  <p>Some Text</p>
+  <p>Some Text</p>
+</AeCollapse>
