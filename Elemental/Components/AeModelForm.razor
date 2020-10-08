@@ -1,5 +1,7 @@
 ﻿@typeparam T
 
+@using Elemental.Components.Forms
+@using System.Reflection
 @using Elemental.Components.FormsInternal
 @using Microsoft.AspNetCore.Components.Forms
  
@@ -8,8 +10,9 @@
     <EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        @foreach (var prop in typeof(T).GetProperties())
+        @foreach (var prop in GetProperties())
         {
+            <p>
             <div class="e e-property">
                 @if (prop.PropertyType == typeof(string))
                 {
@@ -28,8 +31,9 @@
                     <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" />
                 }
             </div>
+            </p>
         }
-        <button type="submit">Submit</button>
+        <button type="Submit">@Submit</button>
     </EditForm>
 }
 
@@ -57,5 +61,12 @@
     /// <see cref="EditContext"/> is determined to be invalid.
     /// </summary>
     [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+
+    [Parameter] public string Submit { get; set; } //= "Submit";
+
+    private List<PropertyInfo> GetProperties()
+    {
+        return typeof(T).GetProperties().Where(p => !AeLabelAttribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
+    }
 }
 

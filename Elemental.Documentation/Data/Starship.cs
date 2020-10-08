@@ -1,4 +1,4 @@
-﻿using Elemental.Components.FormsInternal;
+﻿using Elemental.Components.Forms;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,6 +6,10 @@ namespace Elemental.Documentation.Data
 {
     public class Starship
     {
+
+        [AeFormIgnore]
+        private int ID { get; set; } = 1;
+
         [Required]
         [StringLength(16, ErrorMessage = "Identifier too long (16 character limit).")]
         public string Identifier { get; set; }

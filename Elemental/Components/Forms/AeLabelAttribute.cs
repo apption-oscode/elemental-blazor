@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Elemental.Components.FormsInternal
+namespace Elemental.Components.Forms
 {
     public class AeLabelAttribute : Attribute
     {
