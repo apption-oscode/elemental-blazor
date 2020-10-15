@@ -12,15 +12,22 @@
 <div class="component model-form">
     <div class="title">Model Form</div>
     <div class="showcase">
-        <ModelForm Model="@_starship" OnValidSubmit="HandleValidSubmit"/>
+        <AeModelForm Model="@_starship" OnValidSubmit="HandleValidSubmit" CancelLabel="Cancel" OnCancel="CreateStarship" />
     </div>
 </div>
 
 @code {
+    private Starship _starship;
 
-
-    private Starship _starship = new Starship() {  ProductionDate = DateTime.Today};
-
+    private async Task<Starship> CreateStarship()
+    {
+        return new Starship() {  ProductionDate = DateTime.Today}; 
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _starship = await CreateStarship();
+    }
 
     private void HandleValidSubmit()
     {

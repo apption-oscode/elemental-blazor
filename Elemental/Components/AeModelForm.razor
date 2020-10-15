@@ -29,7 +29,14 @@
                 }
             </div>
         }
-        <button type="submit">Submit</button>
+        <div class="ae flex  ">
+        <button id="submit" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" type="submit">@SubmitLabel</button>
+        @if (!string.IsNullOrWhiteSpace(CancelLabel) && OnCancel != null)
+        {
+            <button id="cancel" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px"  @onclick="ReloadForm">@CancelLabel</button>            
+        }
+        </div>
+
     </EditForm>
 }
 
@@ -37,6 +44,32 @@
 @code {
     [Parameter]
     public T Model { get; set; }
+
+    /// <summary>
+    /// Text that will be displayed for the Submit button. Will be "Submit" by default
+    /// </summary>
+    [Parameter]
+    public string SubmitLabel { get; set; } = "Submit";
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [Parameter]
+    public string CancelLabel { get; set; } = null;
+
+    private async Task ReloadForm()
+    {
+        Model= await OnCancel();
+        this.StateHasChanged();
+    }
+
+    /// <summary>
+    /// A callback that will be invoked when the form is cancelled
+    ///
+    /// This call is expected to revert all the changes to the Model instance and return a model before modifications
+    /// </summary>
+    [Parameter] public Func<Task<T>> OnCancel { get; set; }
+
 
     /// <summary>
     /// A callback that will be invoked when the form is submitted.

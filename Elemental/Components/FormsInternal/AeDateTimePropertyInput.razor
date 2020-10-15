@@ -1,16 +1,13 @@
 ﻿@typeparam T
 
 <div class="e e-form-control-wrapper">
-    @if (!string.IsNullOrWhiteSpace(GetLabel()))
-    {
-        <label class="e e-form-control-label" for="@GetID()">@GetLabel()</label>
-    }
+    <AeFormLabel PropertyInfo="@PropertyInfo"/>
+    <p>
     <Microsoft.AspNetCore.Components.Forms.InputDate @bind-Value="PropertyValue" />
+    </p>
 </div>
 
 @code {
-
-    //<AeInputText />
 
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
@@ -28,20 +25,5 @@
     }
 
     private string GetID() => PropertyInfo.Name;
-
-    private string GetLabel()
-    {
-
-        var label = AeLabelAttribute.IsDefined(PropertyInfo, typeof(AeLabelAttribute))
-            ? (AeLabelAttribute.GetCustomAttribute(PropertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).Label
-            : PropertyInfo.Name;
-
-        return label + (IsRequired() ? "" : " (Optional)");
-    }
-
-    private bool IsRequired()
-    {
-        return System.ComponentModel.DataAnnotations.RequiredAttribute.IsDefined(PropertyInfo, typeof(System.ComponentModel.DataAnnotations.RequiredAttribute));
-    }
 
 }

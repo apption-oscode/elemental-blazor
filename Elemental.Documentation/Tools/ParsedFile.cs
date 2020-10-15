@@ -33,6 +33,10 @@ namespace Elemental.Documentation
 
         public static string[] ReadLines(string pathname)
         {
+            if (!File.Exists(pathname))
+            {
+                return new[] { $"Title: N/A (File {pathname} not found)", $"Description: N/A (File {pathname} not found)",$"File {pathname} not found" };
+            }
             return File.ReadAllLines(pathname);
         }
 

@@ -1,0 +1,16 @@
+﻿@if (!string.IsNullOrWhiteSpace(@FormTools.GetLabel(PropertyInfo)))
+{
+    <label class="e e-form-control-label" for="@GetID()">
+        <AeTypography Variant="p">@FormTools.GetLabel(PropertyInfo)</AeTypography>
+    </label>
+}
+
+
+
+@code {
+
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    private string GetID() => PropertyInfo.Name;
+}

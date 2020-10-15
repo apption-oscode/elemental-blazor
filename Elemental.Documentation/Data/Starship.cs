@@ -8,24 +8,26 @@ namespace Elemental.Documentation.Data
     {
         [Required]
         [StringLength(16, ErrorMessage = "Identifier too long (16 character limit).")]
+        [AeLabel(placeholder:"Starship identifier...")]
         public string Identifier { get; set; }
 
+        [AeLabel(size:50,placeholder:"Describe your starship including crew size")]
         public string Description { get; set; }
 
         [Required]
         public string Classification { get; set; }
 
         [Range(1, 100000, ErrorMessage = "Accommodation invalid (1-100000).")]
-        [AeLabelAttribute("Maximum Accomodation")]
+        [AeLabel(label: "Maximum Accomodation")]
         public int MaximumAccommodation { get; set; }
 
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "This form disallows unapproved ships.")]
-        [AeLabelAttribute("Validated Design")]
+        [AeLabel("Validated Design")]
         public bool IsValidatedDesign { get; set; }
 
         [Required]
-        [AeLabelAttribute("Production Date")]
+        [AeLabel("Production Date")]
         public DateTime ProductionDate { get; set; }
     }
 }
