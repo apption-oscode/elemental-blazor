@@ -95,8 +95,6 @@
     /// </summary>
     [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 
-    [Parameter] public string Submit { get; set; } //= "Submit";
-
     private List<PropertyInfo> GetProperties()
     {
         return typeof(T).GetProperties().Where(p => !AeLabelAttribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
