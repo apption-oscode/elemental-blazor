@@ -114,7 +114,7 @@
       StateHasChanged();
     }
     //if not check to see if we could now fit the previous priority again
-    else if (pastWidth.ContainsKey(target + 1) && pastWidth[target + 1] < outerWidth)
+    else if (pastWidth != null && pastWidth.ContainsKey(target + 1) && pastWidth[target + 1] < outerWidth)
     {
        target += 1;
     }

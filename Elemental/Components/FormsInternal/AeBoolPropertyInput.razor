@@ -2,11 +2,10 @@
 @using Elemental.Components.Forms
 
 <div class="e e-form-control-wrapper">
-    @if (!string.IsNullOrWhiteSpace(GetLabel()))
-    {
-        <label class="e e-form-control-label" for="@GetID()">@GetLabel()</label>
-    }
-    <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
+    <p>
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
+        <AeFormLabel PropertyInfo="@PropertyInfo"/>
+    </p>
 </div>
 
 @code {
@@ -28,18 +27,4 @@
 
     private string GetID() => PropertyInfo.Name;
 
-    private string GetLabel()
-    {
-
-        var label = AeLabelAttribute.IsDefined(PropertyInfo, typeof(AeLabelAttribute))
-            ? (AeLabelAttribute.GetCustomAttribute(PropertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).Label
-            : PropertyInfo.Name;
-
-        return label + (IsRequired() ? "" : " (Optional)");
-    }
-
-    private bool IsRequired()
-    {
-        return System.ComponentModel.DataAnnotations.RequiredAttribute.IsDefined(PropertyInfo, typeof(System.ComponentModel.DataAnnotations.RequiredAttribute));
-    }
 }
