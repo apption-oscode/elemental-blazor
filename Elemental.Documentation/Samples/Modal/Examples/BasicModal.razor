@@ -1,28 +1,28 @@
 ﻿@*
-  Copyright (c) 2020 Apption Corporation
+    Copyright (c) 2020 Apption Corporation
 
-  This Source Code Form is subject to the terms of the Mozilla Public
-  License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-  Title: Basic Modal
-  Description: Basic example of a modal box
+    Title: Basic Modal
+    Description: Basic example of a modal box
 *@
 
 <AeButton OnClick="ShowModal">Show Modal Box</AeButton>
 
-<AeModal show=@_showModal title="Default">
-  <p>Content</p>
-  <p>Content</p>
-  <p>Content</p>
+<AeModal @bind-Show=@_showModal Title="Default">
+    <p>Content</p>
+    <p>Content</p>
+    <p>Content</p>
 </AeModal>
 
 @code {
-  private bool _showModal = false;
+    private bool _showModal = false;
 
-  private void ShowModal()
-  {
-    _showModal = true;
-    StateHasChanged();
-  }
+    private void ShowModal()
+    {
+        _showModal = true;
+        StateHasChanged();
+    }
 }
