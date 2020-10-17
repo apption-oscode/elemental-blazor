@@ -1,0 +1,37 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Modal
+    Description: Basic example of a modal box
+*@
+@using Elemental.Services
+
+    <AeButton OnClick="ShowModal" style="margin-right:2rem;">Show Modal Box</AeButton>
+
+    <AeButton OnClick="ShowModalTable">Show Modal Table</AeButton>
+
+@code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; }
+
+    private void ShowModal()
+    {
+        RenderFragment modalContent =@<div>
+                                        <p>Content</p>
+                                        <p>Content</p>
+                                        <p>Content</p>
+                                    </div>;
+        var modalParameter = new Elemental.Code.ModalParameter() { Class = "modal", Content = modalContent, DisableBackgroundCancel = true, HideCloseButton = false, Title = "Default" };
+        ModalService.ShowModal(modalParameter);
+    }
+
+    private void ShowModalTable()
+    {
+        ModalService.ShowModal<Elemental.Documentation.Samples.Tables.Examples.BasicTable>("Basic Table", new Dictionary<string, object>());
+    }
+
+}

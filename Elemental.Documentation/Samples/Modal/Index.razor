@@ -1,13 +1,41 @@
 ﻿@page "/modal"
 @inherits DemoPage
 
-<Flex Vertical class="modal-page-container">
-  <DemoSection Path="./Samples/Modal/Examples/BasicModal.razor">
-    <Flex>
-      <Elemental.Documentation.Samples.Modal.Examples.BasicModal />
-    </Flex>
-  </DemoSection>
-</Flex>
+<AeFlex Vertical class="modal-page-container">
+    <div class="source">
+        <div class="title">App.razor</div>
+        <pre><code class="language-html">
+@(@"<CascadingModal>
+    <Router AppAssembly=""..."">
+            
+    </Router>
+</CascadingModal>")
+</code></pre>
+        <div class="title">Startup.cs</div>
+        <pre><code class="language-csharp">
+@(@"public void ConfigureServices(IServiceCollection services)
+{            
+    services.AddElemental();
+}")
+</code></pre>
+        <div class="title">_Host.cshtml</div>
+        <pre><code class="language-html">
+@(@"
+<script src=""_content/Apption.Elemental/js/modal-helper.js""></script>
+")
+</code></pre>
+    </div>
+    <DemoSection Path="./Samples/Modal/Examples/BasicModal.razor">
+        <AeFlex>
+            <Elemental.Documentation.Samples.Modal.Examples.BasicModal />
+        </AeFlex>
+    </DemoSection>
+    <DemoSection Path="./Samples/Modal/Examples/CustomizeModal.razor">
+        <AeFlex>
+            <Elemental.Documentation.Samples.Modal.Examples.CustomizeModal />
+        </AeFlex>
+    </DemoSection>
+</AeFlex>
 
 @code {
 

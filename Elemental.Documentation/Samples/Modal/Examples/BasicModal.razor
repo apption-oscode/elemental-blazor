@@ -8,21 +8,23 @@
     Title: Basic Modal
     Description: Basic example of a modal box
 *@
+@using Elemental.Services
 
 <AeButton OnClick="ShowModal">Show Modal Box</AeButton>
 
-<AeModal @bind-Show=@_showModal Title="Default">
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-</AeModal>
-
 @code {
-    private bool _showModal = false;
+    [CascadingParameter]
+    public IModalService ModalService { get; set; }
 
     private void ShowModal()
     {
-        _showModal = true;
-        StateHasChanged();
+        RenderFragment modalContent = @<div>
+                                            <p>Content</p>
+                                            <p>Content</p>
+                                            <p>Content</p>
+                                        </div>;
+        ModalService.ShowModal(modalContent, "Default");
     }
+
+
 }

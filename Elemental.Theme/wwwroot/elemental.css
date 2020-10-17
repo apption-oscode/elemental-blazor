@@ -949,47 +949,46 @@ body {
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 .ae.modal {
-  z-index: 1000;
-  max-width: 20rem;
-  min-height: 10rem;
+  z-index: 99;
   position: fixed;
-  left: 0;
-  right: 0;
-  margin-right: auto;
-  margin-left: auto;
   display: block;
-  border-radius: 2px;
-  line-height: 1.5;
-  font-size: 0.8rem;
-  font-weight: 400;
-  white-space: nowrap;
-  text-align: center;
   border: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: pointer;
-  color: #fff;
-  background-color: #718096;
-  border-color: #718096; }
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .ae.modal .ae.background {
     z-index: -1;
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); }
-  .ae.modal .ae.title {
-    font-size: 1.5rem;
-    padding: 0.5rem; }
-  .ae.modal .ae.content {
-    border-top: solid;
-    padding: 0.5rem;
-    text-align: left; }
-  .ae.modal .ae.footer {
-    border-top: solid;
-    padding: 0.5rem;
-    text-align: right; }
+    background-color: rgba(0, 0, 0, 0.2); }
+  .ae.modal .ae.wrapper {
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #2d3748;
+    border-color: #718096;
+    border-radius: 2px;
+    line-height: 1.5;
+    font-size: 0.8rem;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    min-width: 20rem;
+    min-height: 10rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14); }
+    .ae.modal .ae.wrapper .ae.title {
+      font-size: 1.5rem;
+      padding: 0.5rem; }
+    .ae.modal .ae.wrapper .ae.content {
+      padding: 0.5rem;
+      text-align: left; }
+    .ae.modal .ae.wrapper .ae.footer {
+      padding: 0.5rem;
+      text-align: right; }
 
 /**
  * Copyright (c) 2020 Apption Corporation

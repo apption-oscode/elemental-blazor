@@ -6,46 +6,88 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
-@inherits HtmlElement
-
-@if (Show)
+@inject IJSRuntime JSRuntime
+@if (_show)
 {
-    <div class="@_classname" @attributes="InputAttributesWithoutClass">
-        <div class="ae background" @onclick="CloseModal">
-        </div>
+    <div class="@_classname">
+        @if (!_disableBackgroundCancel)
+        {
+            <div class="ae background" @onclick="CloseModal"></div>
+        }
+        else
+        {
+            <div class="ae background"></div>
+        }
         <div class="ae wrapper">
-            @if (@Title != null)
+            @if (_title != null)
             {
                 <div class="ae title">
-                    @Title
+                    @_title
                 </div>
             }
             <div class="ae content">
-                @ChildContent
+                @_content
             </div>
             <div class="ae footer">
-                <AeButton class="blue" OnClick="CloseModal">Close</AeButton>
+                @if (!_hideCloseButton)
+                {
+                    <AeButton class="blue" OnClick="CloseModal">Close</AeButton>
+                }
             </div>
         </div>
     </div>
 }
 
 @code {
+    [CascadingParameter]
+    private IModalService CascadedUIService { get; set; }
 
-    [Parameter]
-    public bool Show { get; set; } = true;
-    [Parameter]
-    public EventCallback<bool> ShowChanged { get; set; }
-    [Parameter]
-    public string Title { get; set; }
-
-    private void CloseModal()
-    {
-        Show = false;
-        ShowChanged.InvokeAsync(Show);
-        StateHasChanged();
-    }
 
 
     private string _classname => $"ae modal {_inputClass}";
+    private string _title;
+    private RenderFragment _content;
+    private bool _show;
+    private bool _hideCloseButton;
+    private bool _disableBackgroundCancel;
+    private string _inputClass;
+
+    protected override void OnInitialized()
+    {
+        if (CascadedUIService == null)
+        {
+            throw new InvalidOperationException($"{GetType()} requires a cascading parameter of type {nameof(IModalService)}.");
+        }
+
+        ((ModalService)CascadedUIService).OnModalShow += Update;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_show)
+            await JSRuntime.InvokeVoidAsync("modalHelper.setModalPosition");
+
+    }
+
+    private async void Update(ModalParameter modal)
+    {
+        _content = modal.Content;
+        _title = modal.Title;
+        _hideCloseButton = modal.HideCloseButton;
+        _disableBackgroundCancel = modal.DisableBackgroundCancel;
+        _inputClass = modal.Class;
+
+        _show = true;
+        await JSRuntime.InvokeVoidAsync("modalHelper.lockBodyScrolling");
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void CloseModal()
+    {
+        _show = false;
+        await JSRuntime.InvokeVoidAsync("modalHelper.unlockBodyScrolling");
+
+        await InvokeAsync(StateHasChanged);
+    }
+
 }
