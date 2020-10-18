@@ -8,16 +8,18 @@ namespace Elemental.Services
 {
     public class ModalService : IModalService
     {
-        internal event Action<ModalParameter> OnModalShow;
-        internal event Action<ModalParameter> OnModalCloseRequested;
+        internal event Action<ModalReference> OnModalShow;
+        //internal event Action<ModalReference> OnModalCloseRequested;
 
-        public void ShowModal(RenderFragment content, string title)
+        public ModalReference ShowModal(RenderFragment content, string title)
         {
             var modal = new ModalParameter() { Content = content, Title = title };
-            OnModalShow?.Invoke(modal);
+            var modalReference = new ModalReference(modal);
+            OnModalShow?.Invoke(modalReference);
+            return modalReference;
         }
 
-        public void ShowModal<T>(string title, Dictionary<string, object> parameters) where T : ComponentBase
+        public ModalReference ShowModal<T>(string title, Dictionary<string, object> parameters) where T : ComponentBase
         {
             if (!typeof(ComponentBase).IsAssignableFrom(typeof(T)))
             {
@@ -33,18 +35,20 @@ namespace Elemental.Services
                 }
                 builder.CloseComponent();
             });
-            ShowModal(modalContent, title);
+            return ShowModal(modalContent, title);
         }
-        public void ShowModal(ModalParameter modal)
+        public ModalReference ShowModal(ModalParameter modal)
         {
-            OnModalShow?.Invoke(modal);
+            var modalReference = new ModalReference(modal);
+            OnModalShow?.Invoke(modalReference);
+            return modalReference;
         }
     }
 
     public interface IModalService
     {
-        void ShowModal(RenderFragment content, string title);
-        void ShowModal(ModalParameter modal);
-        void ShowModal<T>(string title, Dictionary<string, object> parameters) where T : ComponentBase;
+        ModalReference ShowModal(RenderFragment content, string title);
+        ModalReference ShowModal(ModalParameter modal);
+        ModalReference ShowModal<T>(string title, Dictionary<string, object> parameters) where T : ComponentBase;
     }
 }

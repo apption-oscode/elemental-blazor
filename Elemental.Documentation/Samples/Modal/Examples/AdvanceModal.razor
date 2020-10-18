@@ -1,0 +1,30 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Advance use case of modal
+    Description: Useful when we want to pass the value from modal to its parent component
+*@
+@using Elemental.Services
+@using Elemental.Code 
+
+<AeButton OnClick="@(async () => await ShowModal())">Show Modal form</AeButton>
+<AeTypography Variant="p">User input: @_userInput</AeTypography>
+
+@code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; }
+    private string _userInput;
+
+    private async Task ShowModal()
+    {
+        ModalReference modal = ModalService.ShowModal<Elemental.Documentation.Samples.Modal.Examples.BasicForm>("Form", new Dictionary<string, object>());
+        ModalResult result = await modal.Result;
+        _userInput = (string)result.Data;
+        StateHasChanged();
+    }
+
+}

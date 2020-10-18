@@ -7,37 +7,38 @@
 *@
 
 @inject IJSRuntime JSRuntime
-@if (_show)
-{
-    <div class="@_classname">
-        @if (!_disableBackgroundCancel)
-        {
-            <div class="ae background" @onclick="CloseModal"></div>
-        }
-        else
-        {
-            <div class="ae background"></div>
-        }
-        <div class="ae wrapper">
-            @if (_title != null)
+<CascadingValue Value="this">
+    @if (_show)
+    {
+        <div class="@_classname">
+            @if (!_disableBackgroundCancel)
             {
-                <div class="ae title">
-                    @_title
-                </div>
+                <div class="ae background" @onclick="CloseModal"></div>
             }
-            <div class="ae content">
-                @_content
-            </div>
-            <div class="ae footer">
-                @if (!_hideCloseButton)
+            else
+            {
+                <div class="ae background"></div>
+            }
+            <div class="ae wrapper">
+                @if (_title != null)
                 {
-                    <AeButton class="blue" OnClick="CloseModal">Close</AeButton>
+                    <div class="ae title">
+                        @_title
+                    </div>
                 }
+                <div class="ae content">
+                    @_content
+                </div>
+                <div class="ae footer">
+                    @if (!_hideCloseButton)
+                    {
+                        <AeButton class="blue" OnClick="CloseModal">Close</AeButton>
+                    }
+                </div>
             </div>
         </div>
-    </div>
-}
-
+    }
+</CascadingValue>
 @code {
     [CascadingParameter]
     private IModalService CascadedUIService { get; set; }
@@ -51,6 +52,8 @@
     private bool _hideCloseButton;
     private bool _disableBackgroundCancel;
     private string _inputClass;
+    private ModalReference _modalReference;
+    public ModalResult ModalResult { get; set; }
 
     protected override void OnInitialized()
     {
@@ -69,8 +72,10 @@
 
     }
 
-    private async void Update(ModalParameter modal)
+    private async void Update(ModalReference modalReference)
     {
+        var modal = modalReference.ModalParameter;
+        _modalReference = modalReference;
         _content = modal.Content;
         _title = modal.Title;
         _hideCloseButton = modal.HideCloseButton;
@@ -86,7 +91,7 @@
     {
         _show = false;
         await JSRuntime.InvokeVoidAsync("modalHelper.unlockBodyScrolling");
-
+        _modalReference.Dismiss(ModalResult);
         await InvokeAsync(StateHasChanged);
     }
 
