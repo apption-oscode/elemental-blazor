@@ -23,7 +23,10 @@ namespace Elemental.Documentation
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<GetDimensionsService>();
-            services.AddElemental();
+
+            //Use in modal
+            services.AddScoped<Elemental.Services.UIControlsService>();
+
             //Use in downloading
             //services.AddElemental();
         }

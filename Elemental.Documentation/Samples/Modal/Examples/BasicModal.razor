@@ -9,12 +9,10 @@
     Description: Basic example of a modal box. The above changes is mandatory to use elemental modal.
 *@
 @using Elemental.Services
-
+@inject UIControlsService UIControlService
 <AeButton OnClick="ShowModal">Show Modal Box</AeButton>
 
 @code {
-    [CascadingParameter]
-    public IModalService ModalService { get; set; }
 
     private void ShowModal()
     {
@@ -23,7 +21,7 @@
                                             <p>Content</p>
                                             <p>Content</p>
                                         </div>;
-        ModalService.ShowModal(modalContent, "Default");
+        UIControlService.ToggleModal("Default", modalContent);
     }
 
 

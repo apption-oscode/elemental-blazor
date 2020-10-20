@@ -5,26 +5,23 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Advance use case of modal
-    Description: Useful when we want to pass the value from modal to its parent component
+    Title: Override modal
+    Description: Completely override the modal
 *@
 @using Elemental.Services
-@using Elemental.Code 
+@inject UIControlsService UIControlService
 
-<AeButton OnClick="@(async () => await ShowModal())">Show Modal form</AeButton>
-<AeTypography Variant="p">User input: @_userInput</AeTypography>
+<AeButton OnClick="@ShowModal">Show Modal</AeButton>
 
-@code {
-    [CascadingParameter]
-    public IModalService ModalService { get; set; }
+@code {    
     private string _userInput;
 
-    private async Task ShowModal()
+    private List<string> _choiceList = new List<string>() { "Choice 1", "Choice 2", "Choice 3" };
+    private void ShowModal()
     {
-        ModalReference modal = ModalService.ShowModal<Elemental.Documentation.Samples.Modal.Examples.BasicForm>("Form", new Dictionary<string, object>());
-        ModalResult result = await modal.Result;
-        _userInput = (string)result.Data;
-        StateHasChanged();
+        RenderFragment modalContent = @<UserChoiceModal ChoiceTextList="_choiceList" OnDecision="e => UIControlService.ToggleModal()" HeaderText="Default" />;
+        //var modalParameter = new Elemental.Code.ModalParameter() { Class = "modal", Content = modalContent, DisableBackgroundCancel = false };
+        UIControlService.ToggleModal(modalContent);
     }
 
 }

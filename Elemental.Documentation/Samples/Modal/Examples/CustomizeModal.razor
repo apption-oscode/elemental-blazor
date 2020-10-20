@@ -6,32 +6,37 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Customize Modal
-    Description: Customize modal with class name, background option or the close button
+    Description: Customize modal with class name, background option or the footer
 *@
 @using Elemental.Services
+@inject UIControlsService UIControlService
+<AeTypography>Disable Background Cancel and custom footer</AeTypography>
+<AeButton OnClick="ShowModal" style="margin-right:2rem;">Show Modal Box</AeButton>
 
-    <AeButton OnClick="ShowModal" style="margin-right:2rem;">Show Modal Box</AeButton>
-
-    <AeButton OnClick="ShowModalTable">Show Modal Table</AeButton>
+<AeTypography>Show a component</AeTypography>
+<AeButton OnClick="ShowModalTable">Show Modal Table</AeButton>
 
 @code {
-    [CascadingParameter]
-    public IModalService ModalService { get; set; }
 
     private void ShowModal()
     {
-        RenderFragment modalContent =@<div>
+        RenderFragment modalBody = @<div>
                                         <p>Content</p>
                                         <p>Content</p>
                                         <p>Content</p>
                                     </div>;
-        var modalParameter = new Elemental.Code.ModalParameter() { Class = "modal", Content = modalContent, DisableBackgroundCancel = true, HideCloseButton = false, Title = "Default" };
-        ModalService.ShowModal(modalParameter);
+        RenderFragment modalFooter = @<div style="display:flex;justify-content:space-between;">
+                                        <AeButton class="blue">Save</AeButton>  
+                                        <AeButton class="red" OnClick="() => { UIControlService.ToggleModal(); StateHasChanged(); }">Close</AeButton>  
+                                      </div>;
+        var modalParameter = new Elemental.Code.ModalParameter() { Class = "modal", Body = modalBody, DisableBackgroundCancel = true, Title = "Default", Footer = modalFooter };
+        UIControlService.ToggleModal(modalParameter);
     }
 
     private void ShowModalTable()
     {
-        ModalService.ShowModal<Elemental.Documentation.Samples.Tables.Examples.BasicTable>("Basic Table", new Dictionary<string, object>());
+        RenderFragment table = @<Elemental.Documentation.Samples.Tables.Examples.BasicTable></Elemental.Documentation.Samples.Tables.Examples.BasicTable>;
+        UIControlService.ToggleModal("Basic Table", table);
     }
 
 }

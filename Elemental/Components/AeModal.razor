@@ -7,92 +7,84 @@
 *@
 
 @inject IJSRuntime JSRuntime
-<CascadingValue Value="this">
-    @if (_show)
+@inject UIControlsService UI
+
+<div class="@_classname">
+    @if (!_disableBackgroundCancel)
     {
-        <div class="@_classname">
-            @if (!_disableBackgroundCancel)
+        <div class="ae modal-background" @onclick="CloseModal"></div>
+    }
+    else
+    {
+        <div class="ae modal-background"></div>
+    }
+    @if (_content is null)
+    {
+        <div class="ae modal-wrapper">
+            @if (_title != null)
             {
-                <div class="ae background" @onclick="CloseModal"></div>
-            }
-            else
-            {
-                <div class="ae background"></div>
-            }
-            <div class="ae wrapper">
-                @if (_title != null)
-                {
-                    <div class="ae title">
-                        @_title
-                    </div>
-                }
-                <div class="ae content">
-                    @_content
+                <div class="ae modal-title">
+                    @_title
                 </div>
-                <div class="ae footer">
-                    @if (!_hideCloseButton)
-                    {
-                        <AeButton class="blue" OnClick="CloseModal">Close</AeButton>
-                    }
-                </div>
+            }
+            <div class="ae modal-body">
+                @_body
+            </div>
+            <div class="ae modal-footer">
+                @_footer
             </div>
         </div>
     }
-</CascadingValue>
+    else
+    {
+        @_content
+    }
+</div>
+
 @code {
-    [CascadingParameter]
-    private IModalService CascadedUIService { get; set; }
-
-
-
-    private string _classname => $"ae modal {_inputClass}";
+    private string _classname => $"ae modal {(_content is null && _body is null ? "hidden" : "")} {_inputClass}";
     private string _title;
+    private RenderFragment _body;
+    private RenderFragment _footer;
     private RenderFragment _content;
     private bool _show;
     private bool _hideCloseButton;
     private bool _disableBackgroundCancel;
     private string _inputClass;
-    private ModalReference _modalReference;
-    public ModalResult ModalResult { get; set; }
 
     protected override void OnInitialized()
     {
-        if (CascadedUIService == null)
-        {
-            throw new InvalidOperationException($"{GetType()} requires a cascading parameter of type {nameof(IModalService)}.");
-        }
-
-        ((ModalService)CascadedUIService).OnModalShow += Update;
+        UI.OnModalChange += Update;
+        _show = false;
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (_show)
-            await JSRuntime.InvokeVoidAsync("modalHelper.setModalPosition");
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (_show)
+    //        await JSRuntime.InvokeVoidAsync("modalHelper.setModalPosition");
 
-    }
+    //}
 
-    private async void Update(ModalReference modalReference)
+    private async void Update()
     {
-        var modal = modalReference.ModalParameter;
-        _modalReference = modalReference;
+        var modal = UI.ModalParameter;
         _content = modal.Content;
+        _body = modal.Body;
+        RenderFragment defaultFooter = @<AeButton class="blue" OnClick="CloseModal">Close</AeButton>;
+        _footer = modal.Footer is null ? defaultFooter : modal.Footer;
         _title = modal.Title;
-        _hideCloseButton = modal.HideCloseButton;
         _disableBackgroundCancel = modal.DisableBackgroundCancel;
         _inputClass = modal.Class;
 
-        _show = true;
-        await JSRuntime.InvokeVoidAsync("modalHelper.lockBodyScrolling");
+        if (_content != null || _body != null)
+            await JSRuntime.InvokeVoidAsync("modalHelper.lockBodyScrolling");
         await InvokeAsync(StateHasChanged);
     }
 
     private async void CloseModal()
     {
-        _show = false;
-        await JSRuntime.InvokeVoidAsync("modalHelper.unlockBodyScrolling");
-        _modalReference.Dismiss(ModalResult);
-        await InvokeAsync(StateHasChanged);
+        UI.ToggleModal();
+        //await JSRuntime.InvokeVoidAsync("modalHelper.unlockBodyScrolling");
     }
 
 }
