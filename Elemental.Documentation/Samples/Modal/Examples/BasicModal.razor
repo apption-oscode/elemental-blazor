@@ -1,28 +1,28 @@
 ﻿@*
-  Copyright (c) 2020 Apption Corporation
+    Copyright (c) 2020 Apption Corporation
 
-  This Source Code Form is subject to the terms of the Mozilla Public
-  License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-  Title: Basic Modal
-  Description: Basic example of a modal box
+    Title: Basic Modal
+    Description: Basic example of a modal box. The above changes is mandatory to use elemental modal.
 *@
-
+@using Elemental.Services
+@inject UIControlsService UIControlService
 <AeButton OnClick="ShowModal">Show Modal Box</AeButton>
 
-<AeModal show=@_showModal title="Default">
-  <p>Content</p>
-  <p>Content</p>
-  <p>Content</p>
-</AeModal>
-
 @code {
-  private bool _showModal = false;
 
-  private void ShowModal()
-  {
-    _showModal = true;
-    StateHasChanged();
-  }
+    private void ShowModal()
+    {
+        RenderFragment modalContent = @<div>
+                                            <p>Content</p>
+                                            <p>Content</p>
+                                            <p>Content</p>
+                                        </div>;
+        UIControlService.ToggleModal("Default", modalContent);
+    }
+
+
 }

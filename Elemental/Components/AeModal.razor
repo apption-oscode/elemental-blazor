@@ -1,48 +1,90 @@
 ﻿@*
-  Copyright (c) 2020 Apption Corporation
+    Copyright (c) 2020 Apption Corporation
 
-  This Source Code Form is subject to the terms of the Mozilla Public
-  License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
-@inherits HtmlElement
+@inject IJSRuntime JSRuntime
+@inject UIControlsService UI
 
-@if (Show)
-{
-<div class="@_classname" @attributes="InputAttributesWithoutClass">
-  <div class="ae background" @onclick="CloseModal">
-  </div>
-  <div class="ae wrapper">
-    @if (@Title != null)
+<div class="@_classname">
+    @if (!_disableBackgroundCancel)
     {
-      <div class="ae title">
-        @Title
-      </div>
+        <div class="ae modal-background" @onclick="CloseModal"></div>
     }
-    <div class="ae content">
-      @ChildContent
-    </div>
-    <div class="ae footer">
-      <AeButton class="blue" OnClick="CloseModal">Close</AeButton>
-    </div>
-  </div>
+    else
+    {
+        <div class="ae modal-background"></div>
+    }
+    @if (_content is null)
+    {
+        <div class="ae modal-wrapper">
+            @if (_title != null)
+            {
+                <div class="ae modal-title">
+                    @_title
+                </div>
+            }
+            <div class="ae modal-body">
+                @_body
+            </div>
+            <div class="ae modal-footer">
+                @_footer
+            </div>
+        </div>
+    }
+    else
+    {
+        @_content
+    }
 </div>
-}
 
-  @code {
+@code {
+    private string _classname => $"ae modal {(_content is null && _body is null ? "hidden" : "")} {_inputClass}";
+    private string _title;
+    private RenderFragment _body;
+    private RenderFragment _footer;
+    private RenderFragment _content;
+    private bool _show;
+    private bool _hideCloseButton;
+    private bool _disableBackgroundCancel;
+    private string _inputClass;
 
-    [Parameter]
-    public bool Show { get; set; } = true;
-    [Parameter]
-    public string Title { get; set; }
-
-    private void CloseModal()
+    protected override void OnInitialized()
     {
-      Show = false;
-      StateHasChanged();
+        UI.OnModalChange += Update;
+        _show = false;
     }
 
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (_show)
+    //        await JSRuntime.InvokeVoidAsync("modalHelper.setModalPosition");
 
-private string _classname => $"ae modal {_inputClass}";
-  }
+    //}
+
+    private async void Update()
+    {
+        var modal = UI.ModalParameter;
+        _content = modal.Content;
+        _body = modal.Body;
+        RenderFragment defaultFooter = @<AeButton class="blue" OnClick="CloseModal">Close</AeButton>;
+        _footer = modal.Footer is null ? defaultFooter : modal.Footer;
+        _title = modal.Title;
+        _disableBackgroundCancel = modal.DisableBackgroundCancel;
+        _inputClass = modal.Class;
+
+        if (_content != null || _body != null)
+            await JSRuntime.InvokeVoidAsync("modalHelper.lockBodyScrolling");
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void CloseModal()
+    {
+        UI.ToggleModal();
+        //await JSRuntime.InvokeVoidAsync("modalHelper.unlockBodyScrolling");
+    }
+
+}
