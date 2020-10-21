@@ -985,7 +985,7 @@ body {
     .ae.modal .ae.modal-wrapper .ae.modal-title {
       font-size: 1.5rem;
       padding: 0.5rem; }
-    .ae.modal .ae.modal-wrapper .ae.modal-content {
+    .ae.modal .ae.modal-wrapper .ae.modal-body {
       padding: 0.5rem;
       text-align: left; }
     .ae.modal .ae.modal-wrapper .ae.modal-footer {
