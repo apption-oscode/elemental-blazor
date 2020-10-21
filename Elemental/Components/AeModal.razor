@@ -47,15 +47,12 @@
     private RenderFragment _body;
     private RenderFragment _footer;
     private RenderFragment _content;
-    private bool _show;
-    private bool _hideCloseButton;
     private bool _disableBackgroundCancel;
     private string _inputClass;
 
     protected override void OnInitialized()
     {
         UI.OnModalChange += Update;
-        _show = false;
     }
 
     //protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -81,10 +78,9 @@
         await InvokeAsync(StateHasChanged);
     }
 
-    private async void CloseModal()
+    private void CloseModal()
     {
         UI.ToggleModal();
-        //await JSRuntime.InvokeVoidAsync("modalHelper.unlockBodyScrolling");
     }
 
 }
