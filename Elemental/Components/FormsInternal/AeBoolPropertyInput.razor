@@ -1,17 +1,22 @@
 ﻿@typeparam T
 @using Elemental.Components.Forms
 
-<div class="e e-form-control-wrapper">
-    <p>
-        <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
+    
         <AeFormLabel PropertyInfo="@PropertyInfo"/>
-    </p>
-</div>
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
+    <div class="errortext">
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModalFormTools.GetExpression<bool>(Instance,PropertyInfo))" />
+    </div>
 
 @code {
 
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
     [Parameter]
     public T Instance { get; set; }

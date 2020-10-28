@@ -2,10 +2,8 @@
 @using System.ComponentModel.DataAnnotations
 @using Elemental.Components.Forms
 
-<div class="e e-form-control-wrapper">
     <AeFormLabel PropertyInfo="@PropertyInfo"/>
-
-    <p>
+ 
     @if (HasStringLength() is null)
     {
         <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@FormTools.GetPlaceHolder(PropertyInfo)" cols="@FormTools.GetSize(PropertyInfo)"/>
@@ -14,8 +12,10 @@
     {
         <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" class="ae input" placeholder="@FormTools.GetPlaceHolder(PropertyInfo)" size="@FormTools.GetSize(PropertyInfo)" />
     }
-    </p>
-</div>
+    <div class="errortext">
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModalFormTools.GetExpression<string>(Instance,PropertyInfo))" />
+    </div>
+
 
 @code {
     [Parameter]
@@ -23,6 +23,8 @@
 
     [Parameter]
     public T Instance { get; set; }
+
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
 
     public string PropertyValue

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2020 Apption Corporation
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,27 +15,31 @@
  */
 
 @import 'colors';
+@import 'box-shadow';
 @import 'constants';
+@import 'scrollbar';
 
-.e.pagination {
-    display: flex;
-    justify-content:center;
-    align-content:center;
+
+@mixin row-color($border-color, $background-color, $hover-color) {
+    .e.modelform-cell {
+        background-color: $background-color;
+    }
+
+    &:hover {
+        .e.modelform-cell {
+            transition: 0.4s $cubic-bezier;
+            background-color: $hover-color;
+        }
+    }
 }
 
-.e.pagination.item {
-    padding: 0.5rem 0.75rem;
-    transition: background-color .3s;
-    border-radius: $border-radius;
-}
-.e.pagination.item a {
-    cursor: pointer;
-}
+.ae.modelform {
 
-.e.pagination.item.active {
-    background-color: $grey-500;
-}
+    .ae.modelform-rows {
 
-.e.pagination.item:hover:not(.active) {
-    background-color: $grey-300;
+        .ae.modelform-row {
+            display: grid;
+            grid-template-columns: 250px auto 250px;
+        }
+    }
 }

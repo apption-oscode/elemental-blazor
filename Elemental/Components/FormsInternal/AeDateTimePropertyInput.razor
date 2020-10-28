@@ -1,17 +1,26 @@
 ﻿@typeparam T
 @using Elemental.Components.Forms
 
-<div class="e e-form-control-wrapper">
+
     <AeFormLabel PropertyInfo="@PropertyInfo"/>
-    <p>
+
+
     <Microsoft.AspNetCore.Components.Forms.InputDate @bind-Value="PropertyValue" />
-    </p>
-</div>
+
+    <div class="errortext">
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModalFormTools.GetExpression<DateTime>(Instance,PropertyInfo))" />
+    </div>
+
 
 @code {
 
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
     [Parameter]
     public T Instance { get; set; }
