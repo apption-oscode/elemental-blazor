@@ -32,6 +32,7 @@
         <div class="ae modelform-rows" style="@_rowsStyle">
         @foreach (var prop in GetProperties())
         {
+            <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
             <div class="ae modelform-row @RowColor">
                 @if (prop.PropertyType == typeof(string))
                 {
@@ -66,6 +67,7 @@
                     <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
             </div>
+            </CascadingValue>
         }
         </div>
         <div class="ae flex  ">
@@ -105,6 +107,12 @@
     /// </summary>
     [Parameter]
     public string CancelLabel { get; set; } = null;
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [Parameter]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
 
     private async Task ReloadForm()
     {
