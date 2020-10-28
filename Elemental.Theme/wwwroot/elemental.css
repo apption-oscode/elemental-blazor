@@ -1348,11 +1348,12 @@ body {
 .ae.modelform .ae.modelform-rows .ae.modelform-row {
   display: grid;
   grid-template-columns: 250px auto; }
-  .ae.modelform .ae.modelform-rows .ae.modelform-row .ae.ae-form-control-label, .ae.modelform .ae.modelform-rows .ae.modelform-row .e.e-form-control-label {
+  .ae.modelform .ae.modelform-rows .ae.modelform-row .ae.ae-form-control-label {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-    margin-right: 0.5rem; }
+    margin-right: 0.5rem;
+    font-weight: bold; }
   .ae.modelform .ae.modelform-rows .ae.modelform-row .errortext {
     grid-column-start: 2;
     color: #e53e3e;
