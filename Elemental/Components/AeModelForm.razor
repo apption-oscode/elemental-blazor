@@ -1,5 +1,23 @@
-﻿@typeparam T
+﻿@*
+    Copyright 2020 Apption Corporation
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
+*@
+
+@typeparam T
+
+@inherits HtmlElement
 @using Elemental.Components.Forms
 @using System.Reflection
 @using Elemental.Components.FormsInternal
@@ -7,32 +25,49 @@
  
 @if(Model != null)
 {
+<div class="@_modelFormClass">
     <EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
+        <div class="ae modelform-rows" style="@_rowsStyle">
         @foreach (var prop in GetProperties())
         {
-            <p>
-            <div class="e e-property">
+            <div class="ae modelform-row @RowColor">
                 @if (prop.PropertyType == typeof(string))
                 {
-                    <AeStringPropertyInput PropertyInfo="prop" Instance="Model" />
+                    <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
                 }
                 @if (prop.PropertyType == typeof(int))
                 {
-                    <AeNumberPropertyInput PropertyInfo="prop" Instance="Model" />
+                    <AeNumberPropertyInput T=int PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(long))
+                {
+                    <AeNumberPropertyInput T=long PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(float))
+                {
+                    <AeNumberPropertyInput T=float PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(double))
+                {
+                    <AeNumberPropertyInput T=double PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(Decimal))
+                {
+                    <AeNumberPropertyInput T=Decimal PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
                 @if (prop.PropertyType == typeof(bool))
                 {
-                    <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" />
+                    <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
                 @if (prop.PropertyType == typeof(DateTime))
                 {
-                    <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" />
+                    <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
             </div>
-            </p>
         }
+        </div>
         <div class="ae flex  ">
         <button id="submit" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" type="submit">@SubmitLabel</button>
         @if (!string.IsNullOrWhiteSpace(CancelLabel) && OnCancel != null)
@@ -42,12 +77,22 @@
         </div>
 
     </EditForm>
+</div>
 }
 
 
 @code {
+    private string _gridStyle => $"grid-template-columns: 40px auto 50px;";
+    private string _modelFormClass => $"ae modelform {_inputClass}";
+    private string _rowsStyle => $"{_gridStyle}; grid-template-rows: auto;";
+    private string _rowStyle => $"{_gridStyle}; grid-template-rows:15px;";
+
+
     [Parameter]
     public T Model { get; set; }
+
+    [Parameter]
+    public string RowColor { get; set; } = "blue";
 
     /// <summary>
     /// Text that will be displayed for the Submit button. Will be "Submit" by default
@@ -94,6 +139,11 @@
     /// <see cref="EditContext"/> is determined to be invalid.
     /// </summary>
     [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; } = ModelFormStyle.Normal;
 
     private List<PropertyInfo> GetProperties()
     {

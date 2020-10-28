@@ -1,9 +1,14 @@
 ﻿@if (!string.IsNullOrWhiteSpace(@FormTools.GetLabel(PropertyInfo)))
 {
-    <label class="e e-form-control-label" for="@GetID()">
+    <label class="ae ae-form-control-label" for="@GetID()">
         <AeTypography Variant="p">@FormTools.GetLabel(PropertyInfo)</AeTypography>
     </label>
 }
+else
+{
+    <div></div>
+}
+
 
 
 
@@ -11,6 +16,11 @@
 
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
     private string GetID() => PropertyInfo.Name;
 }
