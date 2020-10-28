@@ -3,14 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Elemental.Components.FormsInternal
+namespace Elemental.Code
 {
-    public class FormTools
+    public enum ModelFormStyle
     {
+        Normal, Compact
+    }
+    public static class AeModelFormTools
+    {
+        public static System.Linq.Expressions.Expression<Func<S>> GetExpression<S>(object instance, PropertyInfo propertyInfo)
+        {
+            var constant = Expression.Constant(instance);
+            var memberExpression = Expression.Property(constant, propertyInfo.GetGetMethod());
+            return Expression.Lambda<Func<S>>(memberExpression);
+        }
 
         private static bool IsRequired(PropertyInfo propertyInfo)
         {
@@ -31,6 +42,8 @@ namespace Elemental.Components.FormsInternal
                 : null;
         }
 
+
+
         public static string GetLabel(PropertyInfo propertyInfo)
         {
 
@@ -39,7 +52,7 @@ namespace Elemental.Components.FormsInternal
                 : null;
             if (label is null)
             {
-                label = FormTools.Labelize(propertyInfo.Name);
+                label = Labelize(propertyInfo.Name);
             }
             return label + (IsRequired(propertyInfo) ? "" : " (Optional)");
         }

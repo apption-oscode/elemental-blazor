@@ -1,7 +1,7 @@
-﻿@if (!string.IsNullOrWhiteSpace(@FormTools.GetLabel(PropertyInfo)))
+﻿@if (!string.IsNullOrWhiteSpace(@GetLabel()))
 {
     <label class="ae ae-form-control-label" for="@GetID()">
-        <AeTypography Variant="p">@FormTools.GetLabel(PropertyInfo)</AeTypography>
+        <AeTypography Variant="p">@GetLabel()</AeTypography>
     </label>
 }
 else
@@ -9,11 +9,7 @@ else
     <div></div>
 }
 
-
-
-
 @code {
-
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
@@ -23,4 +19,23 @@ else
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
     private string GetID() => PropertyInfo.Name;
+
+    private string GetLabel()
+    {
+        var propName = PropertyInfo.Name;
+        if (LabelForPropertyFunc != null)
+        {
+            return LabelForPropertyFunc(propName);
+        }
+        else
+        {
+            return AeModelFormTools.GetLabel(PropertyInfo);
+        }
+    }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
 }

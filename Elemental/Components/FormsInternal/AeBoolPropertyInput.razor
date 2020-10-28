@@ -5,7 +5,7 @@
         <AeFormLabel PropertyInfo="@PropertyInfo"/>
         <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
     <div class="errortext">
-        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModalFormTools.GetExpression<bool>(Instance,PropertyInfo))" />
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<bool>(Instance,PropertyInfo))" />
     </div>
 
 @code {

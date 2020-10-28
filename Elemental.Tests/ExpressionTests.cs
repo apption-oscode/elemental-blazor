@@ -39,7 +39,7 @@ namespace Elemental.Tests
             var starshipType = typeof(Starship);
             var starshipInstance = new Starship() { Identifier = "HAHA" };
             var idProp = starshipType.GetProperty("Identifier");
-            var expr = AeModalFormTools.GetExpression<string>(starshipInstance, idProp);
+            var expr = AeModelFormTools.GetExpression<string>(starshipInstance, idProp);
 
             var compiled = expr.Compile();
             var result = compiled();

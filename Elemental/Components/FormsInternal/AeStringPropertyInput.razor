@@ -6,18 +6,19 @@
  
     @if (HasStringLength() is null)
     {
-        <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@FormTools.GetPlaceHolder(PropertyInfo)" cols="@FormTools.GetSize(PropertyInfo)"/>
+        <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" cols="@AeModelFormTools.GetSize(PropertyInfo)"/>
     }
     else
     {
-        <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" class="ae input" placeholder="@FormTools.GetPlaceHolder(PropertyInfo)" size="@FormTools.GetSize(PropertyInfo)" />
+        <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" size="@AeModelFormTools.GetSize(PropertyInfo)" />
     }
     <div class="errortext">
-        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModalFormTools.GetExpression<string>(Instance,PropertyInfo))" />
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance,PropertyInfo))" />
     </div>
 
 
 @code {
+
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
