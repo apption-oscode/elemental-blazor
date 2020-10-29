@@ -112,7 +112,7 @@
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
     [Parameter]
-    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+    public Func<PropertyInfo,string> LabelForPropertyFunc { get; set; } = null;
 
     private async Task ReloadForm()
     {

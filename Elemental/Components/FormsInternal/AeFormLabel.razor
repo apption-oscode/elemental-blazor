@@ -22,10 +22,9 @@ else
 
     private string GetLabel()
     {
-        var propName = PropertyInfo.Name;
         if (LabelForPropertyFunc != null)
         {
-            return LabelForPropertyFunc(propName);
+            return LabelForPropertyFunc(PropertyInfo);
         }
         else
         {
@@ -36,6 +35,6 @@ else
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
-    [CascadingParameter]
-    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<System.Reflection.PropertyInfo,string> LabelForPropertyFunc { get; set; } = null;
 }
