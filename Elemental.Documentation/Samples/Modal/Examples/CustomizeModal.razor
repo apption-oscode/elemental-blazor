@@ -11,10 +11,10 @@
 @using Elemental.Services
 @inject UIControlsService UIControlService
 <AeTypography>Disable Background Cancel and custom footer</AeTypography>
-<AeButton OnClick="ShowModal" style="margin-right:2rem;">Show Modal Box</AeButton>
+<AeButton @onclick="ShowModal" style="margin-right:2rem;">Show Modal Box</AeButton>
 
 <AeTypography>Show a component</AeTypography>
-<AeButton OnClick="ShowModalTable">Show Modal Table</AeButton>
+<AeButton @onclick="ShowModalTable">Show Modal Table</AeButton>
 
 @code {
 
@@ -27,7 +27,7 @@
                                     </div>;
         RenderFragment modalFooter = @<div style="display:flex;justify-content:space-between;">
                                         <AeButton class="blue">Save</AeButton>  
-                                        <AeButton class="red" OnClick="() => { UIControlService.ToggleModal(); StateHasChanged(); }">Close</AeButton>  
+                                        <AeButton class="red" @onclick="() => { UIControlService.ToggleModal(); StateHasChanged(); }">Close</AeButton>  
                                       </div>;
         var modalParameter = new Elemental.Code.ModalParameter() { Class = "modal", Body = modalBody, DisableBackgroundCancel = true, Title = "Default", Footer = modalFooter };
         UIControlService.ToggleModal(modalParameter);
