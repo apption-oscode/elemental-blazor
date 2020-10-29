@@ -31,14 +31,17 @@
             return;
         }
 
-        if(OnClickEvent.HasDelegate)
-        {
-            await OnClickEvent.InvokeAsync(args);
-        }
-
         if (!string.IsNullOrWhiteSpace(To))
         {
             NavigationManager.NavigateTo(To);
         }
+        else
+        {
+            if (OnClickEvent.HasDelegate)
+            {
+                await OnClickEvent.InvokeAsync(args);
+            }
+        }
+
     }
 }
