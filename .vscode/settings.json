@@ -2,7 +2,5 @@
     "licenseInjector.owner": "Apption",
     "licenseInjector.ignore": "node_modules,bin,wwwroot",
     "licenser.author": "Apption Corporation",
-    "licenser.license": "MPLv2",
-    "licenser.useSingleLineStyle": false,
-    "licenser.projectName": "Elemental Blazor Components"
+    "licenser.useSingleLineStyle": false
 }

@@ -1,21 +1,21 @@
 ﻿@typeparam T
 @using System.ComponentModel.DataAnnotations
+@using Elemental.Components.Forms
 
-<div class="e e-form-control-wrapper">
-    @if (!string.IsNullOrWhiteSpace(GetLabel()))
-    {
-        <label class="e e-form-control-label" for="@GetID()">@GetLabel()</label>
-    }
-
+    <AeFormLabel PropertyInfo="@PropertyInfo"/>
+ 
     @if (HasStringLength() is null)
     {
-        <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" />
+        <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" cols="@AeModelFormTools.GetSize(PropertyInfo)"/>
     }
     else
     {
-        <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" />
+        <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" size="@AeModelFormTools.GetSize(PropertyInfo)" />
     }
-</div>
+    <div class="errortext">
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance,PropertyInfo))" />
+    </div>
+
 
 @code {
 
@@ -24,6 +24,8 @@
 
     [Parameter]
     public T Instance { get; set; }
+
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
 
     public string PropertyValue
@@ -37,19 +39,7 @@
 
     private string GetID() => PropertyInfo.Name;
 
-    private string GetLabel() {
 
-        var label = AeLabelAttribute.IsDefined(PropertyInfo, typeof(AeLabelAttribute))
-            ? (AeLabelAttribute.GetCustomAttribute(PropertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).Label
-            : PropertyInfo.Name;
-
-        return  label + (IsRequired() ? "" : " (Optional)");
-    }
-
-    private bool IsRequired()
-    {
-        return RequiredAttribute.IsDefined(PropertyInfo, typeof(RequiredAttribute));
-    }
 
     private int? HasStringLength()
     {

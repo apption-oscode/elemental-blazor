@@ -43,10 +43,8 @@
 
     private RenderFragment _labelFragment;
 
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
-        base.OnInitialized();
-
         if(Renderer is null)
         {
             Renderer = new Func<T, RenderFragment>(item =>

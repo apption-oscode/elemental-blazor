@@ -9,31 +9,11 @@
 @inherits HtmlElement
 
   <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    <div class="outer">
-      @if (@Percent < 100)
-      {
-        <div class="fill" style="width:@Percent%">
-        </div>
-      }
-      else
-      {
-        <div class="full">
-        </div>
-      }
-    </div>
-    @if (@showPercent == true)
-    {
-      <span class="text">@Percent %</span>
-    }
+    
   </div>
 
 @code {
-  
-  [Parameter]
-  public float Percent { get; set; }
-  [Parameter]
-  public bool showPercent { get; set; }
 
 
-  private string _classname => $"ae progress {_inputClass}";
+  private string _classname => $"ae menu {_inputClass}";
 }

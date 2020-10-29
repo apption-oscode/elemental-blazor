@@ -33,6 +33,10 @@ namespace Elemental.Documentation
 
         public static string[] ReadLines(string pathname)
         {
+            if (!File.Exists(pathname))
+            {
+                return new[] { $"Title: N/A (File {pathname} not found)", $"Description: N/A (File {pathname} not found)",$"File {pathname} not found" };
+            }
             return File.ReadAllLines(pathname);
         }
 
@@ -61,10 +65,10 @@ namespace Elemental.Documentation
         public static List<string> ParseHtml(string[] lines)
         {
             return lines
-                .SkipWhile(l => !l.Equals("*@"))
+                .SkipWhile(l => !l.Trim().Equals("*@"))
                 .Skip(1)
                 .SkipWhile(l => string.IsNullOrWhiteSpace(l))
-                .TakeWhile(l => !l.Equals("@code {"))
+                .TakeWhile(l => !l.Trim().Equals("@code {"))
                 .Reverse()
                 .SkipWhile(l => string.IsNullOrWhiteSpace(l))
                 .Reverse()
@@ -74,7 +78,7 @@ namespace Elemental.Documentation
         public static List<string> ParseCode(string[] lines)
         {
             return lines
-                .SkipWhile(l => !l.Equals("@code {"))
+                .SkipWhile(l => !l.Trim().Equals("@code {"))
                 .ToList();
         }
     }

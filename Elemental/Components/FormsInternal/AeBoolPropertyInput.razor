@@ -1,17 +1,22 @@
 ﻿@typeparam T
+@using Elemental.Components.Forms
 
-<div class="e e-form-control-wrapper">
-    @if (!string.IsNullOrWhiteSpace(GetLabel()))
-    {
-        <label class="e e-form-control-label" for="@GetID()">@GetLabel()</label>
-    }
-    <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
-</div>
+    
+        <AeFormLabel PropertyInfo="@PropertyInfo"/>
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
+    <div class="errortext">
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<bool>(Instance,PropertyInfo))" />
+    </div>
 
 @code {
 
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
     [Parameter]
     public T Instance { get; set; }
@@ -27,18 +32,4 @@
 
     private string GetID() => PropertyInfo.Name;
 
-    private string GetLabel()
-    {
-
-        var label = AeLabelAttribute.IsDefined(PropertyInfo, typeof(AeLabelAttribute))
-            ? (AeLabelAttribute.GetCustomAttribute(PropertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).Label
-            : PropertyInfo.Name;
-
-        return label + (IsRequired() ? "" : " (Optional)");
-    }
-
-    private bool IsRequired()
-    {
-        return System.ComponentModel.DataAnnotations.RequiredAttribute.IsDefined(PropertyInfo, typeof(System.ComponentModel.DataAnnotations.RequiredAttribute));
-    }
 }
