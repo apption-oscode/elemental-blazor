@@ -34,7 +34,7 @@
         {
             <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
             <div class="ae modelform-row @RowColor">
-                @if (prop.PropertyType == typeof(string))
+                @if (GetNonNullableType(prop) == typeof(string))
                 {
                     <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
                 }
@@ -58,11 +58,31 @@
                 {
                     <AeNumberPropertyInput T=Decimal PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
-                @if (prop.PropertyType == typeof(bool))
+                @if (prop.PropertyType == typeof(int?))
+                {
+                    <AeNumberPropertyInput T=int? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(long?))
+                {
+                    <AeNumberPropertyInput T=long? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(float?))
+                {
+                    <AeNumberPropertyInput T=float? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(double?))
+                {
+                    <AeNumberPropertyInput T=double? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(Decimal?))
+                {
+                    <AeNumberPropertyInput T=Decimal? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (GetNonNullableType(prop) == typeof(bool))
                 {
                     <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
-                @if (prop.PropertyType == typeof(DateTime))
+                @if (GetNonNullableType(prop) == typeof(DateTime))
                 {
                     <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
@@ -156,6 +176,11 @@
     private List<PropertyInfo> GetProperties()
     {
         return typeof(T).GetProperties().Where(p => !AeLabelAttribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
+    }
+
+    private Type GetNonNullableType(PropertyInfo prop)
+    {
+        return AeModelFormTools.GetNonNullableType(prop);
     }
 }
 

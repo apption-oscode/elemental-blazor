@@ -39,5 +39,9 @@ namespace Elemental.Documentation.Data
         [Required]
         [AeLabel("Production Date")]
         public DateTime ProductionDate { get; set; }
+        
+        public DateTime? FirstFlightDate { get; set; }
+
+        public int? SubLightEngines { get; set; }
     }
 }
