@@ -23,6 +23,42 @@ namespace Elemental.Code
             return Expression.Lambda<Func<S>>(memberExpression);
         }
 
+        public static bool IsNullable(PropertyInfo propertyInfo)
+        {
+            return IsNullable(propertyInfo.PropertyType);
+        }
+
+        public static bool IsNullable(Type type)
+        {
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static Type GetNonNullableType(PropertyInfo prop)
+        {
+            var type = prop.PropertyType;
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                return Nullable.GetUnderlyingType(type);
+            }
+            return type;
+        }
+
+        public static Nullable<T> AsNullableValue<T>(PropertyInfo prop, object instance) where T : struct
+        {
+            if (IsNullable(prop))
+            {
+                return prop.GetValue(instance) as Nullable<T>;
+            }
+            else
+            {
+                return new Nullable<T>((T)prop.GetValue(instance));
+            }
+        }
+
         private static bool IsRequired(PropertyInfo propertyInfo)
         {
             return RequiredAttribute.IsDefined(propertyInfo, typeof(RequiredAttribute));

@@ -26,7 +26,11 @@
 
     public T PropertyValue
     {
-        get => (T)PropertyInfo.GetValue(Instance);
+        get {
+            var val = PropertyInfo.GetValue(Instance);
+            if (val is null) return default(T);
+            return (T)val;
+        }
         set
         {
             PropertyInfo.SetValue(Instance, value);

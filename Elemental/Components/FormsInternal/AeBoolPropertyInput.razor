@@ -5,7 +5,12 @@
         <AeFormLabel PropertyInfo="@PropertyInfo"/>
         <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="PropertyValue" />
     <div class="errortext">
-        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<bool>(Instance,PropertyInfo))" />
+@if (AeModelFormTools.IsNullable(PropertyInfo))
+{
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<bool?>(Instance,PropertyInfo))" />
+} else {
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<bool>(Instance,PropertyInfo))" />
+}
     </div>
 
 @code {
@@ -23,7 +28,17 @@
 
     public bool PropertyValue
     {
-        get => (bool)PropertyInfo.GetValue(Instance);
+        get {
+            var result = AeModelFormTools.AsNullableValue<bool>(PropertyInfo,Instance);
+            if (result is null)
+            {
+                return false;
+            }
+            else
+            {
+                return (bool)result;
+            }
+        }
         set
         {
             PropertyInfo.SetValue(Instance, value);
