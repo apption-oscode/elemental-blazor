@@ -49,7 +49,7 @@
   //variables to store relevant size data
   public int outerWidth { get; set; }
   public int menuWidth { get; set; }
-  public Dictionary<int, float> pastWidth;
+  public Dictionary<int, float> pastWidth = new Dictionary<int, float>();
   //target priority, elements with a higher number will not be shown
   private int target = 0 ;
   //should we display the hamburger button?

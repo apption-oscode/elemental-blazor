@@ -1366,6 +1366,107 @@ body {
     transform: scale(1.5);
     margin-left: 0.25rem; }
 
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px; }
+  .ae.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0; }
+  .ae.toggle .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s; }
+  .ae.toggle .slider:before {
+    position: absolute;
+    content: "";
+    top: 6px;
+    left: 6px;
+    right: 32px;
+    bottom: 6px;
+    background-color: #fff;
+    transition: 0.4s; }
+  .ae.toggle input:checked + .slider {
+    background-color: #2196F3; }
+  .ae.toggle input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3; }
+  .ae.toggle input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    translate: translateX(26px); }
+  .ae.toggle.round .slider {
+    border-radius: 34px; }
+  .ae.toggle.round .slider:before {
+    border-radius: 50%; }
+
 /*
     Third party
 */
