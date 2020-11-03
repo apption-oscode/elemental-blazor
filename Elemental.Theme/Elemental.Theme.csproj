@@ -48,4 +48,8 @@
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Styles\toggle.scss" />
+  </ItemGroup>
 </Project>
