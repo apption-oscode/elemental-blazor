@@ -1466,6 +1466,18 @@ body {
     border-radius: 34px; }
   .ae.toggle.round .slider:before {
     border-radius: 50%; }
+  .ae.toggle.small {
+    width: 30px;
+    height: 19px; }
+    .ae.toggle.small .slider:before {
+      top: 3px;
+      left: 3px;
+      right: 16px;
+      bottom: 3px; }
+    .ae.toggle.small input:checked + .slider:before {
+      -webkit-transform: translateX(13px);
+      -ms-transform: translateX(13px);
+      translate: translateX(13px); }
 
 /*
     Third party
