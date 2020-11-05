@@ -15,7 +15,7 @@ $tableHeaderOptions: (
         "word-wrap": break-word,
         "&:hover": (
             "background-color": $grey-700,
-        )
+        ),
     )
 ) !default;
 
@@ -35,6 +35,9 @@ $tableRowOptions: (
         "display": grid,
         "position": absolute,
         "width": 100%,
+        "&:focus": (
+            //style for selected rows
+        ),
         ".ae.table-cell": (
             "background-color": $white,
             "word-wrap": break-word,
