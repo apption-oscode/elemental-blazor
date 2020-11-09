@@ -25,6 +25,7 @@ namespace Elemental.Documentation.Data
         public string Description { get; set; }
 
         [Required]
+        [AeLabel(validValues:new[] { "Class1Fighter", "Class1Discovery"})]
         public string Classification { get; set; }
 
         [Range(1, 100000, ErrorMessage = "Accommodation invalid (1-100000).")]

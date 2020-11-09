@@ -1,0 +1,74 @@
+﻿@typeparam T
+@using System.ComponentModel.DataAnnotations
+@using Elemental.Components.Forms
+@using System.Reflection
+
+    <AeFormLabel PropertyInfo="@PropertyInfo"/>
+ 
+    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
+        @if (!AeModelFormTools.IsRequired(PropertyInfo))
+        {
+        <option value="">Select classification ...</option>
+        }
+        @foreach (var value in getValidValues())
+        {
+        <option value="@value">@(GetLabel(value))</option>
+        }
+    </Microsoft.AspNetCore.Components.Forms.InputSelect>
+
+@code {
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    [Parameter]
+    public T Instance { get; set; }
+
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
+
+    private IEnumerable<string> getValidValues()
+    {
+        return PropertyInfo.DowndownValues();
+    }
+
+   
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    private string GetLabel(string value)
+    {
+        if (LabelForPropertyFunc != null)
+        {
+            return LabelForPropertyFunc(value);
+        }
+        else
+        {
+            return AeModelFormTools.Labelize(value);
+        }
+    }
+
+
+
+    public string PropertyValue
+    {
+        get => PropertyInfo.GetValue(Instance) as string;
+        set
+        {
+            PropertyInfo.SetValue(Instance, value);
+        }
+    }
+
+    private string GetID() => PropertyInfo.Name;
+
+
+
+    private int? HasStringLength()
+    {
+        var att = StringLengthAttribute.GetCustomAttribute(PropertyInfo, typeof(StringLengthAttribute)) as StringLengthAttribute;
+        return att?.MaximumLength;
+    }
+
+}

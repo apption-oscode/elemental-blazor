@@ -22,19 +22,12 @@ else
 
     private string GetLabel()
     {
-        if (LabelForPropertyFunc != null)
-        {
-            return LabelForPropertyFunc(PropertyInfo);
-        }
-        else
-        {
-            return AeModelFormTools.GetLabel(PropertyInfo);
-        }
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc);
     }
 
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
     [CascadingParameter(Name= "LabelForPropertyFunc")]
-    public Func<System.Reflection.PropertyInfo,string> LabelForPropertyFunc { get; set; } = null;
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
 }

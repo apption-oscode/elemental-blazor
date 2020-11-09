@@ -28,6 +28,18 @@ namespace Elemental.Code
             return IsNullable(propertyInfo.PropertyType);
         }
 
+        public static bool IsDropDown(this PropertyInfo propertyInfo)
+        {
+            return AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
+                ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues?.Length > 0
+                : false;
+        }
+
+        public static string[] DowndownValues(this PropertyInfo propertyInfo)
+        {
+            return (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues;
+        }
+
         public static bool IsNullable(Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
@@ -59,7 +71,7 @@ namespace Elemental.Code
             }
         }
 
-        private static bool IsRequired(PropertyInfo propertyInfo)
+        public static bool IsRequired(PropertyInfo propertyInfo)
         {
             return RequiredAttribute.IsDefined(propertyInfo, typeof(RequiredAttribute));
         }
@@ -80,7 +92,7 @@ namespace Elemental.Code
 
 
 
-        public static string GetLabel(PropertyInfo propertyInfo)
+        public static string GetLabel(PropertyInfo propertyInfo, Func<string,string> labelFunc)
         {
 
             var label = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
@@ -88,7 +100,14 @@ namespace Elemental.Code
                 : null;
             if (label is null)
             {
-                label = Labelize(propertyInfo.Name);
+                if (!(labelFunc is null))
+                {
+                    label = labelFunc(propertyInfo.Name);
+                }
+                else
+                {
+                    label = Labelize(propertyInfo.Name);
+                }
             }
             return label + (IsRequired(propertyInfo) ? "" : " (Optional)");
         }
@@ -96,6 +115,7 @@ namespace Elemental.Code
         public static string Labelize(string propName)
         {
             var blocks = BreakUppercase(propName);
+            blocks = blocks.SelectMany(s => BreakNumbers(s));
             if (isPascalCase(blocks))
             {
                 return string.Join(" ", blocks);
@@ -115,6 +135,11 @@ namespace Elemental.Code
         private static IEnumerable<string> BreakUppercase(string str)
         {
             return Regex.Split(str, @"(?<!^)(?=[A-Z])");
+        }
+
+        private static IEnumerable<string> BreakNumbers(string str)
+        {
+            return Regex.Split(str, @"(?<!^)(?=[0-9])");
         }
 
         private static bool isUnderscore(string name)
