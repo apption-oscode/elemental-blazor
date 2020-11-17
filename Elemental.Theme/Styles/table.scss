@@ -5,17 +5,39 @@
 @import 'scrollbar';
 
 $tableHeaderOptions: (
-    "display": grid,
-    ".ae.table-cell": (
-        "cursor": pointer,
-        "user-select": none,
-        "padding-left": 0.75rem,
-        "background-color": $grey-600,
-        "color": $white,
-        "word-wrap": break-word,
-        "&:hover": (
-            "background-color": $grey-700,
+    "default":(
+        "display": grid,
+        ".ae.table-cell": (
+            "cursor": pointer,
+            "user-select": none,
+            "padding-left": 0.75rem,
+            "background-color": $grey-600,
+            "color": $white,
+            "word-wrap": break-word,
+            "&:hover": (
+                "background-color": $grey-700,
+            ),
         ),
+    ),
+    "simple":(
+        "display": inline-grid,
+        ".ae.table-cell": (
+            "font-family": 'Source Code Pro',
+            "border-color": $grey-500 !important,
+            "background-color": $grey-600,
+            "text-align": center,
+            "padding": 0,
+            "width": 122px,
+            "border-top": 1px solid,
+            "border-right": 1px solid,  
+        ),
+        ".corner":(
+            "border-color": $grey-500 !important,
+            "background-color": $grey-600,
+            "border-right": 1px solid,
+            "border-top": 1px solid,
+            "border-left": 1px solid,
+        )
     )
 ) !default;
 
@@ -36,7 +58,34 @@ $tableRowOptions: (
         "position": absolute,
         "width": 100%,
         "&:focus": (
-            //style for selected rows
+            "outline": none,
+            "font-weight": bold,
+            "&:hover":(
+                ".ae.table-cell": (
+                    "background-color": $grey-300,
+                ),
+                "&:hover": (
+                    ".ae.table-cell": (
+                        "background-color": $grey-300,
+                    ),
+                ),
+            ),
+            ".ae.table-cell": (
+                "background-color": $grey-300,
+                "&:hover":(
+                    "background-color": $grey-300,
+                ),
+            ),
+            "&:nth-of-type(2n+1)": (
+                ".ae.table-cell": (
+                    "background-color": $grey-300,
+                ),
+                "&:hover": (
+                    ".ae.table-cell": (
+                        "background-color": $grey-300,
+                    ),
+                ),
+            ),
         ),
         ".ae.table-cell": (
             "background-color": $white,
@@ -83,6 +132,81 @@ $tableRowOptions: (
                 ".ae.table-cell": (
                     "transition": .4s $cubic-bezier,
                     "background-color": $grey-200,
+                ),
+            ),
+        ),
+    ),
+    "simple":(
+        "&:focus": (
+            "outline": none,
+            "font-weight": bold,
+            ".ae.table-cell": (
+                "background-color": $grey-300,
+                "&:hover":(
+                    "background-color": $grey-300,
+                ),
+            ),
+            "&:nth-of-type(2n+1)": (
+                ".ae.table-cell": (
+                    "background-color": $grey-300,
+                ),
+                "&:hover": (
+                    ".ae.table-cell": (
+                        "background-color": $grey-300,
+                    ),
+                ),
+            ),
+        ),
+        "font-size": 0.75rem,
+        "width": 400px,
+        "text-align": center,
+        ".row-number": (
+            "width": 75px,
+        ),
+        "&:nth-of-type(1)": (
+            ".ae.table-cell": (
+                "border-top": 1px solid,
+            ),
+        ),
+        ".ae.table-cell": (
+            "border-color": $grey-400 !important,
+            "border-bottom": 1px solid,
+            "border-right": 1px solid,
+            "&:nth-child(1)": (
+                "border-left": 1px solid,
+                "font-family": 'Source Code Pro',
+                "color": $white,
+                "background-color": $grey-600,
+            ),
+            "padding": 0,
+            "padding-top": 0.2rem,
+        ),
+        "&:hover":(
+            ".ae.table-cell": (
+                "background-color": $white,
+                "&:nth-child(1)": (
+                    "border-left": 1px solid,
+                    "color": $white,
+                    "font-family": 'Source Code Pro',
+                    "background-color": $grey-600,
+                ),
+            ),
+        ),
+        "&:nth-of-type(2n+1)": (
+            ".ae.table-cell": (
+                "background-color": $white,
+                "&:nth-child(1)": (
+                    "border-left": 1px solid,
+                    "background-color": $grey-600,
+                ),
+            ),
+            "&:hover": (
+                ".ae.table-cell": (
+                    "background-color": $white,
+                    "&:nth-child(1)": (
+                        "border-left": 1px solid,
+                        "background-color": $grey-600,
+                    ),
                 ),
             ),
         ),
@@ -134,7 +258,7 @@ $tableRowOptions: (
 .ae.table {
 
     .ae.table-header {
-        @include set-values($tableHeaderOptions);
+        @include set-variations($tableHeaderOptions);
     }
 
     .ae.table-scroll {

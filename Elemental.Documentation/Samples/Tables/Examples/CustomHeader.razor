@@ -5,52 +5,61 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Callback Tables
-    Description: Basic table element with a provided callback function on row selection.
-    It is cruicial to set "T" to be equal to be equal to the data class.
-    OnRowClick runs the callback only on click, while OnRowFocus will also run when tabbing through the table
+    Title: Custom Header
+    Description: Table with a supplied function returning a render fragment
+    This function must take the following arguments:
+    string header, representing the string element from the header list
+    int index, representing the current column. Also useful for returning different RenderFragments for different columns
+    The following CSS classes are used by default:
+    "table-cell" targets the entire cell
+    "ae table-sort" targets the clickable icons that sort the table
 *@
 
-<AeTypography>Selected Row Data:</AeTypography>
-<AeTypography>@_type, @_category, @_location</AeTypography>
-<br />
-<AeTypography Variant="h4">On Click Callback Table</AeTypography>
 <AeTable Accessors="accessorFunctions"
          Dataset="dummyData"
          Headers="headers"
-         T="DummyData"
-         OnRowClick="@testCall" />
-<br />
-<AeTypography Variant="h4">On Focus Callback Table</AeTypography>
-<AeTable Accessors="accessorFunctions"
-         Dataset="dummyData"
-         Headers="headers"
-         T="DummyData"
-         OnRowFocus="@testCall" />
+         CustomHeader="@customHeader" />
 
 
 @code {
 
-    private string _category;
-    private string _location;
-    private string _type = "nothing selected yet";
-
-    private void testCall(DummyData data)
+//Defined Custom header render fragment
+Func<string, int, RenderFragment> customHeader = (header, index) =>
+{
+    if (index == 1)
     {
-        _category = data.Category;
-        _location = data.Location;
-        _type = data.Type;
-        StateHasChanged();
+        return @<img src="https://via.placeholder.com/400x25">;
     }
+    else if (index == 2)
+    {
+        return @<AeButton To="/tables">Go To Top</AeButton>;
+    }
+    else
+    {
+        return @<AeTypography class="table-cell">@header</AeTypography>;
+    }
+};
 
-    // Define the headers at the top of the table
-    private List<string> headers = new List<string>
+
+static List<string> _dropdownItems = new List<string>
+{
+        "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
+};
+
+static void HandleDropdownChange(string selectedItem)
+{
+
+}
+
+
+// Define the headers at the top of the table
+private List<string> headers = new List<string>
 {
         "Type", "Category", "Location"
-    };
+};
 
-    // Typeparam class to hold row data, can be anything
-    private List<DummyData> dummyData = new List<DummyData>
+// Typeparam class to hold row data, can be anything
+private List<DummyData> dummyData = new List<DummyData>
 {
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
@@ -64,20 +73,20 @@
         new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
     };
 
-    // Accessor functions to retrieve cell value
-    private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
+// Accessor functions to retrieve cell value
+private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
 {
         new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
     };
 
-    class DummyData
-    {
-        public string Type { get; set; }
-        public string Category { get; set; }
-        public string CategoryIconClass { get; set; }
-        public string Location { get; set; }
-        public int Importance { get; set; }
-    }
+class DummyData
+{
+public string Type { get; set; }
+public string Category { get; set; }
+public string CategoryIconClass { get; set; }
+public string Location { get; set; }
+public int Importance { get; set; }
+}
 }
