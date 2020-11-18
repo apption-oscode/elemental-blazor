@@ -19,6 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Theme", "Elementa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{A24AE759-C61E-4EF5-951E-0659AAD792E7}"
 	ProjectSection(SolutionItems) = preProject
+		azure-pipelines-devel.yml = azure-pipelines-devel.yml
 		azure-pipelines-master.yml = azure-pipelines-master.yml
 	EndProjectSection
 EndProject
