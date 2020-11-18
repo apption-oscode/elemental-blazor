@@ -6,13 +6,13 @@ namespace Elemental.Components.Forms
 {
     public class AeFormCategoryAttribute : Attribute
     {
-        public AeFormCategoryAttribute(string category, int order)
+        public AeFormCategoryAttribute(string category, int categoryOrder = 0)
         {
             Category = category;
-            Order = order;
+            CategoryOrder = categoryOrder;
         }
 
         public string Category { get; }
-        public int Order { get; }
+        public int CategoryOrder { get; set; }
     }
 }

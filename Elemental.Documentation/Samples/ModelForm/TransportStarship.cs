@@ -23,22 +23,22 @@ namespace Elemental.Documentation.Data
         public string CaptainsEmail { get; set; }
 
         [AeLabel(size:50,placeholder:"Describe your starship including crew size")]
-        [AeFormCategory("Details",2)]
+        [AeFormCategory("Details", CategoryOrder = 2)]
         public string Description { get; set; }
 
         [Required]
         [AeLabel(validValues:new[] { "Class1Fighter", "Class1Discovery"})]
-        [AeFormCategory("Details", 2)]
+        [AeFormCategory("Details", CategoryOrder = 2)]
         public string Classification { get; set; }
 
         [Range(1, 100000, ErrorMessage = "Accommodation invalid (1-100000).")]
-        [AeFormCategory("Details", 2)]
+        [AeFormCategory("Details", CategoryOrder = 2)]
         [AeLabel(label: "Maximum Accomodation")]
         public int MaximumAccommodation { get; set; }
 
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "This form disallows unapproved ships.")]
-        [AeFormCategory("Details", 2)]
+        [AeFormCategory("Details", CategoryOrder = 2)]
         [AeLabel("Validated Design")]
         public bool IsValidatedDesign { get; set; }
 

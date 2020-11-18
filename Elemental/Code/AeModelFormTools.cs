@@ -125,10 +125,10 @@ namespace Elemental.Code
             var result = new List<(string category, List<PropertyInfo> properties)>() { (null, propsNoCat) };
             result.AddRange(allProps.Where(p => Attribute.IsDefined(p, typeof(AeFormCategoryAttribute)))
                 .Select(property => (((Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Category, 
-                (Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Order),
+                (Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).CategoryOrder),
                 property))
                 .GroupBy(p => p.Item1)
-                .OrderBy(gp => gp.Key.Order)
+                .OrderBy(gp => gp.Key.CategoryOrder)
                 .Select(gp => (gp.Key.Category, gp.Select(tp => tp.property).ToList())));              
             return result;
 

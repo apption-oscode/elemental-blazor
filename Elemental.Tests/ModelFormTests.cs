@@ -26,7 +26,7 @@ namespace Elemental.Tests
         {
             var s1 = typeof(TransportStarship).GetAeModelFormCategories();
             Assert.Equal(3, s1.Count);
-            Assert.Collection(s1, e => Assert.Null(e.category), e => Assert.Equal("Identification", e.category));
+            Assert.Collection(s1, e => Assert.Null(e.category), e => Assert.Equal("Identification", e.category), e => Assert.Equal("Details", e.category));
             //var (c1, l1) = s1[0];
 
         }
