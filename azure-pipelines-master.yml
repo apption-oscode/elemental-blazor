@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  name: Apption Pool
+#Your build pipeline references an undefined variable named ‘NugetApiKey’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+variables:
+  NetCoreVersion: '3.1.401'
+  NugetApiKey: 'oy2fiwsvrj5blihcqaoawc4mivs3hwderi3rzazi2dh7cu'
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk $(NetCoreVersion)'
+  inputs:
+    version: '$(NetCoreVersion)'
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    arguments: '--no-restore --verbosity normal'
+
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push elemental'
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push Elemental/bin/Release/Apption.Elemental.$(Build.BuildNumber).nupkg --api-key $(NugetApiKey) --source https://api.nuget.org/v3/index.json'
+
+# Build Theme
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**/Elemental.Theme.csproj'
+    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push theme'
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push Elemental.Theme/bin/Release/Apption.Elemental.Theme.$(Build.BuildNumber).nupkg --api-key $(NugetApiKey) --source https://api.nuget.org/v3/index.json'
+
