@@ -31,7 +31,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Components\Forms\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 

@@ -112,6 +112,28 @@ namespace Elemental.Code
             return label + (IsRequired(propertyInfo) ? "" : " (Optional)");
         }
 
+        public static List<PropertyInfo> GetAeModelProperties(this Type type)
+        {
+            return type.GetProperties().Where(p => !Attribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
+        }
+
+        public static List<(string category, List<PropertyInfo> properties)> GetAeModelFormCategories(this Type type)
+        {
+            var allProps = GetAeModelProperties(type);
+            var propsNoCat = allProps.Where(p => !Attribute.IsDefined(p, typeof(AeFormCategoryAttribute))).ToList();
+  
+            var result = new List<(string category, List<PropertyInfo> properties)>() { (null, propsNoCat) };
+            result.AddRange(allProps.Where(p => Attribute.IsDefined(p, typeof(AeFormCategoryAttribute)))
+                .Select(property => (((Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Category, 
+                (Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Order),
+                property))
+                .GroupBy(p => p.Item1)
+                .OrderBy(gp => gp.Key.Order)
+                .Select(gp => (gp.Key.Category, gp.Select(tp => tp.property).ToList())));              
+            return result;
+
+        }
+
         public static string Labelize(string propName)
         {
             var blocks = BreakUppercase(propName);
