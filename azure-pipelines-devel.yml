@@ -13,8 +13,8 @@ steps:
 - task: AzureKeyVault@1
   inputs:
     azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
-    KeyVaultName: 'Datahunter-Key-Vault'
-    SecretsFilter: 'Elemental-NugetAPIKey'
+    KeyVaultName: 'ElementalVault '
+    SecretsFilter: 'NugetAPISecret'
     RunAsPreJob: true
 
 - task: UseDotNet@2
