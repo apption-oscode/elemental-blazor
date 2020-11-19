@@ -34,7 +34,7 @@ namespace Elemental.Tests
         [Fact]
         public async Task TestPropertyName()
         {
-            AeModelFormTools.Exec<InteractiveStarship>(p => p.Classification);
+            Assert.Equal("Classification", AeModelFormTools.WithPropertyExpression<InteractiveStarship>(p => p.Classification));
         }
     }
 }
