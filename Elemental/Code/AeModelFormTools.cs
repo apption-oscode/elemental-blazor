@@ -30,12 +30,16 @@ namespace Elemental.Code
 
         public static bool IsDropDown(this PropertyInfo propertyInfo)
         {
-            return AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
+            var hasValidValues = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
                 ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues?.Length > 0
                 : false;
+            var hasDropDown = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
+                ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).IsDropDown
+                : false;
+            return hasValidValues || hasDropDown;
         }
 
-        public static string[] DowndownValues(this PropertyInfo propertyInfo)
+        public static string[] DropdownValues(this PropertyInfo propertyInfo)
         {
             return (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues;
         }
@@ -92,7 +96,7 @@ namespace Elemental.Code
 
 
 
-        public static string GetLabel(PropertyInfo propertyInfo, Func<string,string> labelFunc)
+        public static string GetLabel(PropertyInfo propertyInfo, Func<string, string> labelFunc)
         {
 
             var label = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
@@ -121,15 +125,15 @@ namespace Elemental.Code
         {
             var allProps = GetAeModelProperties(type);
             var propsNoCat = allProps.Where(p => !Attribute.IsDefined(p, typeof(AeFormCategoryAttribute))).ToList();
-  
+
             var result = new List<(string category, List<PropertyInfo> properties)>() { (null, propsNoCat) };
             result.AddRange(allProps.Where(p => Attribute.IsDefined(p, typeof(AeFormCategoryAttribute)))
-                .Select(property => (((Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Category, 
+                .Select(property => (((Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Category,
                 (Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).CategoryOrder),
                 property))
                 .GroupBy(p => p.Item1)
                 .OrderBy(gp => gp.Key.CategoryOrder)
-                .Select(gp => (gp.Key.Category, gp.Select(tp => tp.property).ToList())));              
+                .Select(gp => (gp.Key.Category, gp.Select(tp => tp.property).ToList())));
             return result;
 
         }
@@ -170,6 +174,25 @@ namespace Elemental.Code
                 return true;
             //might need more rules
             return false;
+        }
+
+        private static string GetMemberName(Expression expression)
+        {
+            switch (expression.NodeType)
+            {
+                case ExpressionType.MemberAccess:
+                    return ((MemberExpression)expression).Member.Name;
+                case ExpressionType.Convert:
+                    return GetMemberName(((UnaryExpression)expression).Operand);
+                default:
+                    throw new NotSupportedException(expression.NodeType.ToString());
+            }
+        }
+
+        public static string WithPropertyExpression<T>(Expression<Func<T, object>> expression)
+        {
+            return GetMemberName(expression.Body);
+            
         }
     }
 }

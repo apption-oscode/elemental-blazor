@@ -30,5 +30,11 @@ namespace Elemental.Tests
             //var (c1, l1) = s1[0];
 
         }
+
+        [Fact]
+        public async Task TestPropertyName()
+        {
+            AeModelFormTools.Exec<InteractiveStarship>(p => p.Classification);
+        }
     }
 }

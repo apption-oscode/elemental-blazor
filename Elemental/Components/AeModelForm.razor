@@ -38,6 +38,8 @@
         }
         @foreach (var prop in category.properties)
         {
+            <CascadingValue Value="@OnChange" Name="OnChangeCallback">
+            <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
             <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
             <div class="ae modelform-row @RowColor">
                 @if (GetNonNullableType(prop) == typeof(string))
@@ -101,6 +103,8 @@
                 }
             </div>
             </CascadingValue>
+            </CascadingValue>
+            </CascadingValue>
         }
         }
         </div>
@@ -126,6 +130,19 @@
     public List<(string category, List<PropertyInfo> properties)> GetCategories()
     {
         return typeof(T).GetAeModelFormCategories();    
+    }
+
+    private bool isConfigured = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ModelFormContext.RefreshModel = async () => await this.InvokeAsync(() => this.StateHasChanged());
+        ModelFormContext.SetProperties(GetProperties());
+        if (!isConfigured)
+        {
+            await OnConfigure.InvokeAsync(ModelFormContext);
+            isConfigured = true;
+        }
     }
 
     [Parameter]
@@ -165,6 +182,13 @@
     /// </summary>
     [Parameter] public Func<Task<T>> OnCancel { get; set; }
 
+    /// <summary>
+    /// A callback that will be invoked when the form is created
+    ///
+    /// This call is designed to let the user access the context and configure drop downs and other dynamic items
+    /// </summary>
+    [Parameter] public EventCallback<ModelFormContext<T>> OnConfigure { get; set; }
+
 
     /// <summary>
     /// A callback that will be invoked when the form is submitted.
@@ -190,6 +214,13 @@
     /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
     /// </summary>
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; } = ModelFormStyle.Normal;
+
+    public ModelFormContext<T> ModelFormContext { get; } = new ModelFormContext<T>();
+
+    /// <summary>
+    /// This method will be called when a property is changed.
+    /// </summary>
+    [Parameter] public EventCallback<ModelFormChangeArgs<T>> OnChange { get; set; }
 
     private List<PropertyInfo> GetProperties()
     {

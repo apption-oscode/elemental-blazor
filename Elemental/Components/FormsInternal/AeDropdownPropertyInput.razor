@@ -2,13 +2,14 @@
 @using System.ComponentModel.DataAnnotations
 @using Elemental.Components.Forms
 @using System.Reflection
+@using Microsoft.AspNetCore.Components.Forms
 
     <AeFormLabel PropertyInfo="@PropertyInfo"/>
  
     <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
         @if (!AeModelFormTools.IsRequired(PropertyInfo))
         {
-        <option value="">Select classification ...</option>
+        <option value="">@AeModelFormTools.GetPlaceHolder(PropertyInfo)</option>
         }
         @foreach (var value in getValidValues())
         {
@@ -27,7 +28,7 @@
 
     private IEnumerable<string> getValidValues()
     {
-        return PropertyInfo.DowndownValues();
+        return ModelFormContext.GetValidValues(PropertyInfo);
     }
 
    
@@ -37,6 +38,12 @@
     /// </summary>
     [CascadingParameter(Name= "LabelForPropertyFunc")]
     public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    [CascadingParameter(Name= "ModelFormContext")]
+    public ModelFormContext<T> ModelFormContext { get; set; } = null;
+
+    [CascadingParameter(Name= "OnChangeCallback")]
+    public EventCallback<ModelFormChangeArgs<T>> OnChangeCallback { get; set; }
 
     private string GetLabel(string value)
     {
@@ -56,8 +63,9 @@
     {
         get => PropertyInfo.GetValue(Instance) as string;
         set
-        {
+        {            
             PropertyInfo.SetValue(Instance, value);
+            OnChangeCallback.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         }
     }
 
