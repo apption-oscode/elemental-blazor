@@ -13,8 +13,8 @@ steps:
 - task: AzureKeyVault@1
   inputs:
     azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
-    KeyVaultName: 'Datahunter-Key-Vault'
-    SecretsFilter: 'Elemental*'
+    KeyVaultName: 'ElementalVault '
+    SecretsFilter: 'NugetAPISecret'
     RunAsPreJob: true
 
 - task: UseDotNet@2
@@ -39,7 +39,7 @@ steps:
   inputs:
     command: custom
     custom: nuget
-    arguments: 'push Elemental/bin/Release/Apption.Elemental.$(Build.BuildNumber).nupkg --api-key $(Elemental-NugetAPIKey) --source https://api.nuget.org/v3/index.json'
+    arguments: 'push Elemental/bin/Release/Apption.Elemental.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
 
 # Build Theme
 - task: DotNetCoreCLI@2
@@ -53,5 +53,5 @@ steps:
   inputs:
     command: custom
     custom: nuget
-    arguments: 'push Elemental.Theme/bin/Release/Apption.Elemental.Theme.$(Build.BuildNumber).nupkg --api-key $(Elemental-NugetAPIKey) --source https://api.nuget.org/v3/index.json'
+    arguments: 'push Elemental.Theme/bin/Release/Apption.Elemental.Theme.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
 
