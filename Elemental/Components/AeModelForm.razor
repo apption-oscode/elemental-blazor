@@ -30,7 +30,13 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="ae modelform-rows" style="@_rowsStyle">
-        @foreach (var prop in GetProperties())
+        @foreach (var category in GetCategories())
+        {        
+        @if (!string.IsNullOrWhiteSpace(category.category))
+        {
+            <AeTypography Variant="h3">@category.category</AeTypography>
+        }
+        @foreach (var prop in category.properties)
         {
             <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
             <div class="ae modelform-row @RowColor">
@@ -96,6 +102,7 @@
             </div>
             </CascadingValue>
         }
+        }
         </div>
         <div class="ae flex  ">
         <button id="submit" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" type="submit">@SubmitLabel</button>
@@ -116,6 +123,10 @@
     private string _rowsStyle => $"{_gridStyle}; grid-template-rows: auto;";
     private string _rowStyle => $"{_gridStyle}; grid-template-rows:15px;";
 
+    public List<(string category, List<PropertyInfo> properties)> GetCategories()
+    {
+        return typeof(T).GetAeModelFormCategories();    
+    }
 
     [Parameter]
     public T Model { get; set; }

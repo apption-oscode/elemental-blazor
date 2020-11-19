@@ -13,8 +13,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
-    Title: Model Form
-    Description: Form is generated from .NET object model. Standard form annotations are used, few others have been added to handle labels, order, etc.
+    Title: Model Form with Categories
+    Description: This sample uses Category annotations to group and order the different form elements into categories
 *@
 
 <AeModelForm 
@@ -26,11 +26,11 @@
 
 @code {
 
-    private Starship _starship;
+    private TransportStarship _starship;
 
-    private async Task<Starship> CreateStarship()
+    private async Task<TransportStarship> CreateStarship()
     {
-        return new Starship() {  ProductionDate = DateTime.Today}; 
+        return new TransportStarship() {  ProductionDate = DateTime.Today}; 
     }
     
     protected override async Task OnInitializedAsync()
