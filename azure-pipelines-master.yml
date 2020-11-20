@@ -1,0 +1,57 @@
+name: '1.0.$(date:yy)$(DayOfYear)$(rev:.r)'
+
+trigger:
+- main
+
+pool:
+  name: Apption Pool
+
+variables:
+  NetCoreVersion: '3.1.401'
+
+steps:
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
+    KeyVaultName: 'Datahunter-Key-Vault'
+    SecretsFilter: 'Elemental*'
+    RunAsPreJob: true
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk $(NetCoreVersion)'
+  inputs:
+    version: '$(NetCoreVersion)'
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    arguments: '--no-restore --verbosity normal'
+
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push elemental'
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push Elemental/bin/Release/Apption.Elemental.$(Build.BuildNumber).nupkg --api-key $(Elemental-NugetAPIKey) --source https://api.nuget.org/v3/index.json'
+
+# Build Theme
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**/Elemental.Theme.csproj'
+    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push theme'
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push Elemental.Theme/bin/Release/Apption.Elemental.Theme.$(Build.BuildNumber).nupkg --api-key $(Elemental-NugetAPIKey) --source https://api.nuget.org/v3/index.json'
+

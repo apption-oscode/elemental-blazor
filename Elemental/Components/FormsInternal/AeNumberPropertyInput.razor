@@ -1,28 +1,51 @@
 ﻿@typeparam T
 @using Elemental.Components.Forms
 
-    <div class="e e-form-control-wrapper">
-    <AeFormLabel PropertyInfo="@PropertyInfo"/>
-    <p>
-        <Microsoft.AspNetCore.Components.Forms.InputNumber @bind-Value="PropertyValue" />
-    </p>
-    </div>
+
+<AeFormLabel PropertyInfo="@PropertyInfo"/>
+
+<Microsoft.AspNetCore.Components.Forms.InputNumber @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
+
+<div class="errortext">
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<T>(Instance,PropertyInfo))" />
+</div>
+
 
 @code {
 
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
-    [Parameter]
-    public T Instance { get; set; }
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
-    public int PropertyValue
+    [Parameter]
+    public object Instance { get; set; }
+
+    public T PropertyValue
     {
-        get => (int)PropertyInfo.GetValue(Instance);
+        get {
+            var val = PropertyInfo.GetValue(Instance);
+            if (val is null) return default(T);
+            return (T)val;
+        }
         set
         {
             PropertyInfo.SetValue(Instance, value);
         }
+    }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    private string GetLabel()
+    {
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
     }
 
     private string GetID() => PropertyInfo.Name;

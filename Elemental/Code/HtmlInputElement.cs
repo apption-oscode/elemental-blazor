@@ -31,7 +31,10 @@ namespace Elemental.Code
         public int EventTimer { get; set; } = 500;
         [Parameter]
         public string DefaultValue { get; set; }
-
+        [Parameter]
+        public Action<string, KeyboardEventArgs> OnInputChangeWithLastKey { get; set; }
+        
+        protected KeyboardEventArgs _lastKey;
         protected string _inputValue = "";
         protected Timer inputTimer;
 
@@ -48,6 +51,7 @@ namespace Elemental.Code
         protected void HandleKeyUp(KeyboardEventArgs e)
         {
             inputTimer.Stop();
+            _lastKey = e;
             inputTimer.Start();
         }
 
@@ -56,6 +60,7 @@ namespace Elemental.Code
             InvokeAsync(() =>
             {
                 OnInputChange?.Invoke(_inputValue);
+                OnInputChangeWithLastKey?.Invoke(_inputValue, _lastKey);
             });
         }
     }

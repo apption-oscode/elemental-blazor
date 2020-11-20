@@ -1,5 +1,23 @@
-﻿@typeparam T
+﻿@*
+    Copyright 2020 Apption Corporation
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
+*@
+
+@typeparam T
+
+@inherits HtmlElement
 @using Elemental.Components.Forms
 @using System.Reflection
 @using Elemental.Components.FormsInternal
@@ -7,32 +25,89 @@
  
 @if(Model != null)
 {
+<div class="@_modelFormClass">
     <EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        @foreach (var prop in GetProperties())
+        <div class="ae modelform-rows" style="@_rowsStyle">
+        @foreach (var category in GetCategories())
+        {        
+        @if (!string.IsNullOrWhiteSpace(category.category))
         {
-            <p>
-            <div class="e e-property">
-                @if (prop.PropertyType == typeof(string))
+            <AeTypography Variant="h3">@category.category</AeTypography>
+        }
+        @foreach (var prop in category.properties)
+        {
+            <CascadingValue Value="@OnChange" Name="OnChangeCallback">
+            <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
+            <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
+            <div class="ae modelform-row @RowColor">
+                @if (GetNonNullableType(prop) == typeof(string))
                 {
-                    <AeStringPropertyInput PropertyInfo="prop" Instance="Model" />
+                    @if (prop.IsDropDown())
+                    {
+                    <AeDropdownPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>                        
+                    }
+                    else
+                    {
+                    <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
+                    }
                 }
                 @if (prop.PropertyType == typeof(int))
                 {
-                    <AeNumberPropertyInput PropertyInfo="prop" Instance="Model" />
+                    <AeNumberPropertyInput T=int PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
-                @if (prop.PropertyType == typeof(bool))
+                @if (prop.PropertyType == typeof(long))
                 {
-                    <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" />
+                    <AeNumberPropertyInput T=long PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
-                @if (prop.PropertyType == typeof(DateTime))
+                @if (prop.PropertyType == typeof(float))
                 {
-                    <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" />
+                    <AeNumberPropertyInput T=float PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(double))
+                {
+                    <AeNumberPropertyInput T=double PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(Decimal))
+                {
+                    <AeNumberPropertyInput T=Decimal PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(int?))
+                {
+                    <AeNumberPropertyInput T=int? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(long?))
+                {
+                    <AeNumberPropertyInput T=long? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(float?))
+                {
+                    <AeNumberPropertyInput T=float? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(double?))
+                {
+                    <AeNumberPropertyInput T=double? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (prop.PropertyType == typeof(Decimal?))
+                {
+                    <AeNumberPropertyInput T=Decimal? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (GetNonNullableType(prop) == typeof(bool))
+                {
+                    <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                }
+                @if (GetNonNullableType(prop) == typeof(DateTime))
+                {
+                    <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                 }
             </div>
-            </p>
+            </CascadingValue>
+            </CascadingValue>
+            </CascadingValue>
         }
+        }
+        </div>
         <div class="ae flex  ">
         <button id="submit" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" type="submit">@SubmitLabel</button>
         @if (!string.IsNullOrWhiteSpace(CancelLabel) && OnCancel != null)
@@ -42,12 +117,39 @@
         </div>
 
     </EditForm>
+</div>
 }
 
 
 @code {
+    private string _gridStyle => $"grid-template-columns: 40px auto 50px;";
+    private string _modelFormClass => $"ae modelform {_inputClass}";
+    private string _rowsStyle => $"{_gridStyle}; grid-template-rows: auto;";
+    private string _rowStyle => $"{_gridStyle}; grid-template-rows:15px;";
+
+    public List<(string category, List<PropertyInfo> properties)> GetCategories()
+    {
+        return typeof(T).GetAeModelFormCategories();    
+    }
+
+    private bool isConfigured = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ModelFormContext.RefreshModel = async () => await this.InvokeAsync(() => this.StateHasChanged());
+        ModelFormContext.SetProperties(GetProperties());
+        if (!isConfigured)
+        {
+            await OnConfigure.InvokeAsync(ModelFormContext);
+            isConfigured = true;
+        }
+    }
+
     [Parameter]
     public T Model { get; set; }
+
+    [Parameter]
+    public string RowColor { get; set; } = "blue";
 
     /// <summary>
     /// Text that will be displayed for the Submit button. Will be "Submit" by default
@@ -61,6 +163,12 @@
     [Parameter]
     public string CancelLabel { get; set; } = null;
 
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [Parameter]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
     private async Task ReloadForm()
     {
         Model= await OnCancel();
@@ -73,6 +181,13 @@
     /// This call is expected to revert all the changes to the Model instance and return a model before modifications
     /// </summary>
     [Parameter] public Func<Task<T>> OnCancel { get; set; }
+
+    /// <summary>
+    /// A callback that will be invoked when the form is created
+    ///
+    /// This call is designed to let the user access the context and configure drop downs and other dynamic items
+    /// </summary>
+    [Parameter] public EventCallback<ModelFormContext<T>> OnConfigure { get; set; }
 
 
     /// <summary>
@@ -95,9 +210,26 @@
     /// </summary>
     [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; } = ModelFormStyle.Normal;
+
+    public ModelFormContext<T> ModelFormContext { get; } = new ModelFormContext<T>();
+
+    /// <summary>
+    /// This method will be called when a property is changed.
+    /// </summary>
+    [Parameter] public EventCallback<ModelFormChangeArgs<T>> OnChange { get; set; }
+
     private List<PropertyInfo> GetProperties()
     {
-        return typeof(T).GetProperties().Where(p => !AeLabelAttribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
+        return typeof(T).GetAeModelProperties();
+    }
+
+    private Type GetNonNullableType(PropertyInfo prop)
+    {
+        return AeModelFormTools.GetNonNullableType(prop);
     }
 }
 

@@ -9,7 +9,7 @@
   Description: Example of a progress bar recieving progress updates
 *@
 
-<AeButton style="margin-bottom:1rem" class="red" OnClick="UpdateProgress">Add Progress</AeButton>
+<AeButton style="margin-bottom:1rem" class="red" @onclick="UpdateProgress">Add Progress</AeButton>
 <AeProgress Percent=@_progress showPercent=true />
 
 @code {

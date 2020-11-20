@@ -11,7 +11,7 @@
 @using Elemental.Services
 @inject UIControlsService UIControlService
 
-<AeButton OnClick="@ShowModal">Show Modal</AeButton>
+<AeButton @onclick="@ShowModal">Show Modal</AeButton>
 
 @code {    
     private List<string> _choiceList = new List<string>() { "Choice 1", "Choice 2", "Choice 3" };

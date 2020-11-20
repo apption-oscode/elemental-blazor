@@ -6,8 +6,8 @@
         <div class="ae modal-body">@text</div>
     }
     <div class="ae modal-footer">
-        <AeButton class="blue" OnClick="() => OnDecision?.Invoke(true)">Confirm</AeButton>
-        <AeButton class="red" OnClick="() => OnDecision?.Invoke(false)">Cancel</AeButton>
+        <AeButton class="blue" @onclick="() => OnDecision?.Invoke(true)">Confirm</AeButton>
+        <AeButton class="red" @onclick="() => OnDecision?.Invoke(false)">Cancel</AeButton>
     </div>
 </div>
 

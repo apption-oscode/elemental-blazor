@@ -1,16 +1,35 @@
-﻿@if (!string.IsNullOrWhiteSpace(@FormTools.GetLabel(PropertyInfo)))
+﻿@if (!string.IsNullOrWhiteSpace(@GetLabel()))
 {
-    <label class="e e-form-control-label" for="@GetID()">
-        <AeTypography Variant="p">@FormTools.GetLabel(PropertyInfo)</AeTypography>
+    <label class="ae ae-form-control-label" for="@GetID()">
+        <AeTypography Variant="p">@GetLabel()</AeTypography>
     </label>
 }
-
-
+else
+{
+    <div></div>
+}
 
 @code {
-
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
+
+    [Parameter] public bool ShowOptional { get; set; } = true;
+
     private string GetID() => PropertyInfo.Name;
+
+    private string GetLabel()
+    {
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, ShowOptional);
+    }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
 }
