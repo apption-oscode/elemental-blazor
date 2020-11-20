@@ -4,13 +4,12 @@
     lockBodyScrolling: function () {        
         this.scrollTop = document.documentElement.scrollTop;
         this.scrollLeft = document.documentElement.scrollLeft;
-        if (this.scrollTop > window.innerHeight) {
-            document.getElementsByTagName('html')[0].style.overflowY = 'scroll';
-            document.getElementsByTagName('body')[0].style.top = -(document.documentElement.scrollTop) + 'px';        
-            document.getElementsByTagName('body')[0].style.position = 'fixed';
-            document.getElementsByTagName('body')[0].style.width = '100%';
-            document.getElementsByClassName('modal')[0].style.top = -(document.documentElement.scrollTop) + 'px';
-        }
+        document.getElementsByTagName('html')[0].style.overflowY = 'scroll';
+        document.getElementsByTagName('body')[0].style.top = -(document.documentElement.scrollTop) + 'px';        
+        document.getElementsByTagName('body')[0].style.position = 'fixed';
+        document.getElementsByTagName('body')[0].style.width = '100%';
+        document.getElementsByClassName('modal')[0].style.top = -(document.documentElement.scrollTop) + 'px';
+        
     },
 
     unlockBodyScrolling: function () {
