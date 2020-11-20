@@ -1,7 +1,10 @@
 name: '1.0.$(date:yy)$(DayOfYear)$(rev:.r)-beta'
 
 trigger:
-- develop
+  batch: true
+  branches:
+    include:
+    - develop
 
 pool:
   name: Apption Pool
