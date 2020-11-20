@@ -76,7 +76,7 @@ namespace Elemental.Code
         }
 
         public static bool IsRequired(PropertyInfo propertyInfo)
-        {
+        {            
             return RequiredAttribute.IsDefined(propertyInfo, typeof(RequiredAttribute));
         }
 

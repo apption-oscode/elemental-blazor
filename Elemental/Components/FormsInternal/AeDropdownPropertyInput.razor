@@ -4,7 +4,7 @@
 @using System.Reflection
 @using Microsoft.AspNetCore.Components.Forms
 
-    <AeFormLabel PropertyInfo="@PropertyInfo"/>
+    <AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false"/>
  
     @if (HasValidValues())
     {
@@ -46,7 +46,7 @@
     private string GetPlaceholder()
     {
         var label = AeModelFormTools.GetPlaceHolder(PropertyInfo);
-        if (string.IsNullOrWhitespace(label))
+        if (string.IsNullOrWhiteSpace(label))
             return "-";
         return label;
     }
