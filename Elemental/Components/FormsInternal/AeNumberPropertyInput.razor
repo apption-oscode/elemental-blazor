@@ -4,7 +4,7 @@
 
 <AeFormLabel PropertyInfo="@PropertyInfo"/>
 
-<Microsoft.AspNetCore.Components.Forms.InputNumber @bind-Value="PropertyValue" />
+<Microsoft.AspNetCore.Components.Forms.InputNumber @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
 
 <div class="errortext">
     <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<T>(Instance,PropertyInfo))" />
@@ -35,6 +35,17 @@
         {
             PropertyInfo.SetValue(Instance, value);
         }
+    }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    private string GetLabel()
+    {
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
     }
 
     private string GetID() => PropertyInfo.Name;

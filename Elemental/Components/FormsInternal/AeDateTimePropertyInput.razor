@@ -5,7 +5,7 @@
     <AeFormLabel PropertyInfo="@PropertyInfo"/>
 
 
-    <Microsoft.AspNetCore.Components.Forms.InputDate @bind-Value="PropertyValue" />
+    <Microsoft.AspNetCore.Components.Forms.InputDate @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
 
 @if (AeModelFormTools.IsNullable(PropertyInfo))
 {
@@ -33,6 +33,17 @@ else
 
     [Parameter]
     public T Instance { get; set; }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    private string GetLabel()
+    {
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
+    }
 
     public DateTime? PropertyValue
     {
