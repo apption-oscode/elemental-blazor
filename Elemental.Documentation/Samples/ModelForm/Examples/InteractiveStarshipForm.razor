@@ -50,8 +50,7 @@
 
     private async Task OnConfigure(ModelFormContext<InteractiveStarship> context)
     {
-        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });
-        await context.UpdateValidValues("SubClassification", new[] { "a1", "a2", "a3" });
+        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });        
     }
 
     private void HandleValidSubmit()

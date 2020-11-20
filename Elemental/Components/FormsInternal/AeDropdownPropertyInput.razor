@@ -6,6 +6,8 @@
 
     <AeFormLabel PropertyInfo="@PropertyInfo"/>
  
+    @if (HasValidValues())
+    {
     <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
         @if (!AeModelFormTools.IsRequired(PropertyInfo))
         {
@@ -16,6 +18,11 @@
         <option value="@value">@(GetLabel(value))</option>
         }
     </Microsoft.AspNetCore.Components.Forms.InputSelect>
+    }
+    else
+    {
+        <select class="ae input"><option value="-">-</option></select>
+    }
 
 @code {
     [Parameter]
@@ -29,6 +36,11 @@
     private IEnumerable<string> getValidValues()
     {
         return ModelFormContext.GetValidValues(PropertyInfo);
+    }
+
+    private bool HasValidValues()
+    {
+        return ModelFormContext.GetValidValues(PropertyInfo) != null;
     }
 
    
