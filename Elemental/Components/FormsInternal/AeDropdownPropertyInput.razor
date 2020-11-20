@@ -8,16 +8,16 @@
  
     @if (HasValidValues())
     {
-    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
-        @if (!AeModelFormTools.IsRequired(PropertyInfo))
-        {
-        <option value="">@AeModelFormTools.GetPlaceHolder(PropertyInfo)</option>
-        }
-        @foreach (var value in getValidValues())
-        {
-        <option value="@value">@(GetLabel(value))</option>
-        }
-    </Microsoft.AspNetCore.Components.Forms.InputSelect>
+        <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
+            @if (!AeModelFormTools.IsRequired(PropertyInfo))
+            {
+            <option value="">@GetPlaceholder()</option>
+            }
+            @foreach (var value in getValidValues())
+            {
+            <option value="@value">@(GetLabel(value))</option>
+            }
+        </Microsoft.AspNetCore.Components.Forms.InputSelect>
     }
     else
     {
@@ -43,6 +43,13 @@
         return ModelFormContext.GetValidValues(PropertyInfo) != null;
     }
 
+    private string GetPlaceholder()
+    {
+        var label = AeModelFormTools.GetPlaceHolder(PropertyInfo);
+        if (string.IsNullOrWhitespace(label))
+            return "-";
+        return label;
+    }
    
 
     /// <summary>

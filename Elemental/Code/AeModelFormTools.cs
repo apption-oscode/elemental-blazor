@@ -96,7 +96,7 @@ namespace Elemental.Code
 
 
 
-        public static string GetLabel(PropertyInfo propertyInfo, Func<string, string> labelFunc)
+        public static string GetLabel(PropertyInfo propertyInfo, Func<string, string> labelFunc, bool includeOptional = true)
         {
 
             var label = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
@@ -113,7 +113,10 @@ namespace Elemental.Code
                     label = Labelize(propertyInfo.Name);
                 }
             }
-            return label + (IsRequired(propertyInfo) ? "" : " (Optional)");
+            if (includeOptional && !IsRequired(propertyInfo))
+                return label + " (Optional)";
+            else
+                return label;
         }
 
         public static List<PropertyInfo> GetAeModelProperties(this Type type)

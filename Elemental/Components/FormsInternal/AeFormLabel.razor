@@ -18,11 +18,13 @@ else
     /// </summary>
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
+    [Parameter] public bool ShowOptional { get; set; } = true;
+
     private string GetID() => PropertyInfo.Name;
 
     private string GetLabel()
     {
-        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc);
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, ShowOptional);
     }
 
     /// <summary>
