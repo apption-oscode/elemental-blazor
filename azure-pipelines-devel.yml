@@ -1,7 +1,7 @@
 name: '1.0.$(date:yy)$(DayOfYear)$(rev:.r)-beta'
 
 trigger:
-- main
+- develop
 
 pool:
   name: Apption Pool
