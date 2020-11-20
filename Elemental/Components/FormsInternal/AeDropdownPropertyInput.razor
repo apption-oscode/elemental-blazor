@@ -49,8 +49,16 @@
         if (string.IsNullOrWhiteSpace(label))
             return "-";
         return label;
+    }       
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var firstValue = getValidValues().FirstOrDefault();
+        if (firstRender && AeModelFormTools.IsRequired(PropertyInfo) && firstValue != null)
+        {
+            PropertyValue = firstValue;
+        }
     }
-   
 
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
