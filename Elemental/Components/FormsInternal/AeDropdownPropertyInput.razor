@@ -53,7 +53,7 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var firstValue = getValidValues().FirstOrDefault();
+        var firstValue = getValidValues()?.FirstOrDefault();
         if (firstRender && AeModelFormTools.IsRequired(PropertyInfo) && firstValue != null)
         {
             PropertyValue = firstValue;
