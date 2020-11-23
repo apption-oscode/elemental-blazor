@@ -659,8 +659,10 @@ body {
     background-color: #48bb78; }
   .ae.progress .text {
     display: inline-block;
+    padding-left: 0.25rem;
     line-height: 1.35;
-    vertical-align: top; }
+    vertical-align: top;
+    horizontal-align: left; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
@@ -1549,10 +1551,10 @@ body {
     width: 30px;
     height: 19px; }
     .ae.toggle.small .slider:before {
-      top: 3px;
-      left: 3px;
+      top: 4px;
+      left: 4px;
       right: 16px;
-      bottom: 3px; }
+      bottom: 5px; }
     .ae.toggle.small input:checked + .slider:before {
       -webkit-transform: translateX(13px);
       -ms-transform: translateX(13px);

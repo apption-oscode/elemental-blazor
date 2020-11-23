@@ -4,7 +4,7 @@
 
 <AeFormLabel PropertyInfo="@PropertyInfo"/>
 
-<Microsoft.AspNetCore.Components.Forms.InputNumber @bind-Value="PropertyValue" />
+<Microsoft.AspNetCore.Components.Forms.InputNumber class="ae input" @bind-Value="PropertyValue" />
 
 <div class="errortext">
     <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<T>(Instance,PropertyInfo))" />

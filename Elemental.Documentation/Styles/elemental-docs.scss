@@ -28,6 +28,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 
     .logo {
         background-color: $blue-700;
