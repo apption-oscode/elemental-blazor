@@ -14,13 +14,15 @@ namespace Elemental.Components.Forms
 
         private readonly int? _inputLength;
         private readonly string[] _validValues;
+        private readonly bool _isDropDown;
 
-        public AeLabelAttribute(string label = null, string placeholder = null, int order = 0, int size = 0, string[] validValues = null)
+        public AeLabelAttribute(string label = null, string placeholder = null, int order = 0, int size = 0, string[] validValues = null, bool isDropDown = false)
         {
             _label = label;
             _order = order;
             _inputLength = size;
             this._validValues = validValues;
+            _isDropDown = isDropDown;
             if (size == 0)
                 _inputLength = null;
             _placeHolder = placeholder;
@@ -48,5 +50,8 @@ namespace Elemental.Components.Forms
         }
 
         public virtual string[] ValidValues => _validValues;
+
+        public virtual bool IsDropDown => _isDropDown;
+        
     }
 }

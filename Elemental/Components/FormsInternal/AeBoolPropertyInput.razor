@@ -3,7 +3,7 @@
 
     
         <AeFormLabel PropertyInfo="@PropertyInfo"/>
-        <Microsoft.AspNetCore.Components.Forms.InputCheckbox class="ae input" @bind-Value="PropertyValue" />
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
     <div class="errortext">
 @if (AeModelFormTools.IsNullable(PropertyInfo))
 {
@@ -22,6 +22,17 @@
     /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
     /// </summary>
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    private string GetLabel()
+    {
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
+    }
 
     [Parameter]
     public T Instance { get; set; }
