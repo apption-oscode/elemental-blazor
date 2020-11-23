@@ -68,10 +68,10 @@ $toggleOptions: (
     "height": 19px, 
 
     ".slider:before": (
-      "top": 3px,
-      "left": 3px,
+      "top": 4px,
+      "left": 4px,
       "right": 16px,
-      "bottom": 3px,
+      "bottom": 5px,
     ),
 
     "& input:checked + .slider:before": (

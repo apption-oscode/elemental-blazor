@@ -6,13 +6,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Custom Header
-    Description: Table with a supplied function returning a render fragment
-    This function must take the following arguments:
-    string header, representing the string element from the header list
-    int index, representing the current column. Also useful for returning different RenderFragments for different columns
-    The following CSS classes are used by default:
-    "table-cell" targets the entire cell
-    "ae table-sort" targets the clickable icons that sort the table
+    Description: Table with a supplied function returning a render fragment. This function must take the string header and int index arguments, and return a RenderFragment.
 *@
 
 <AeTable Accessors="accessorFunctions"

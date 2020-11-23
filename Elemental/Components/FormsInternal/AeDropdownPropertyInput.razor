@@ -24,6 +24,10 @@
         <select class="ae input"><option value="-">-</option></select>
     }
 
+    <div class="errortext">
+        <!--We can't actually fail to input a dropdown properly, this is here for style/spaceing consistency-->
+    </div>
+
 @code {
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }

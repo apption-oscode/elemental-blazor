@@ -6,27 +6,26 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Simple Table
-    Description: Simple looking table element with sorting
+    Description: Simple looking table element with sorting. Used by setting the SimpleTable attribute to True. Maintains the functionality of the regular table, but with a more data oriented aesthetic
 *@
 
 <AeTable Accessors="accessorFunctions"
-       Dataset="dummyData"
-       Headers="headers" 
-       SimpleTable="true"
-         />
+         Dataset="dummyData"
+         Headers="headers"
+         SimpleTable="true" />
 
 
 @code {
 
     // Define the headers at the top of the table
     private List<string> headers = new List<string>
-    {
+{
         "Type", "Category", "Location"
     };
 
     // Typeparam class to hold row data, can be anything
     private List<DummyData> dummyData = new List<DummyData>
-    {
+{
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
@@ -41,7 +40,7 @@
 
     // Accessor functions to retrieve cell value
     private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
-    {
+{
         new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Location; }),

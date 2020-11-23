@@ -5,7 +5,8 @@
     <AeFormLabel PropertyInfo="@PropertyInfo"/>
 
 
-    <Microsoft.AspNetCore.Components.Forms.InputDate @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
+
+    <Microsoft.AspNetCore.Components.Forms.InputDate class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
 
 @if (AeModelFormTools.IsNullable(PropertyInfo))
 {
