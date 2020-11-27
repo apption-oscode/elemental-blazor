@@ -43,24 +43,31 @@
         <div class="ae table-rows" style="@_rowsStyle">
             @foreach (var row in Rows.Skip(scrollViewResult.SkipItems).Take(scrollViewResult.TakeItems).Select((item, i) => new { item, i }))
             {
-                <div tabindex="0" class="@GetRowColor(row.item) @_simple" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;" @onclick="(() => OnRowClick.InvokeAsync(row.item))" @onfocus="(() => OnRowFocus.InvokeAsync(row.item))">
+            <div tabindex="0" class="@GetRowColor(row.item) @_simple" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;" @onclick="(() => OnRowClick.InvokeAsync(row.item))" @onfocus="(() => OnRowFocus.InvokeAsync(row.item))">
 
-                    @if (SimpleTable)
+                @if (SimpleTable)
+                {
+                    @if (@CustomRowLabels != null)
+                    {
+                        @CustomRowLabels(row.i + 1)
+                    }
+                    else
                     {
                         <div class="ae table-cell row-label">@(row.i+1)</div>
                     }
-                    @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+                }
+                @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+                {
+                    if (Renderers?[index] is null)
                     {
-                        if (Renderers?[index] is null)
-                        {
-                            <div class="ae table-cell">@accessor?.Invoke(row.item)</div>
-                        }
-                        else
-                        {
-                            <div class="ae table-cell">@Renderers[index](row.item)</div>
-                        }
+                        <div class="ae table-cell">@accessor?.Invoke(row.item)</div>
                     }
-                </div>
+                    else
+                    {
+                        <div class="ae table-cell">@Renderers[index](row.item)</div>
+                    }
+                }
+            </div>
             }
         </div>
     </div>
@@ -94,7 +101,9 @@
   [Parameter]
   public bool SimpleTable { get; set; } = false;
   [Parameter]
-  public Func<string, int, RenderFragment> CustomHeader { get; set; } 
+  public Func<string, int, RenderFragment> CustomHeader { get; set; }
+  [Parameter]
+  public Func<int, RenderFragment> CustomRowLabels { get; set; }
 
   private RenderFragment defaultHeader(string header, int index)
   {
