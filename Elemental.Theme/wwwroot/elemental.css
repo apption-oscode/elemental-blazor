@@ -90,8 +90,14 @@ body {
     line-height: 1.2;
     font-size: 1.25rem;
     font-weight: 600; }
+  .ae.typography.a {
+    text-decoration: none;
+    color: #4299e1;
+    cursor: pointer; }
+    .ae.typography.a:hover {
+      text-decoration: underline; }
   .ae.typography.p {
-    line-height: 1.5; }
+    line-height: 1.75; }
   .ae.typography.hint {
     color: #cbd5e0; }
   .ae.typography.warning {
@@ -531,48 +537,33 @@ body {
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 .ae.card {
-  min-width: 15rem;
-  min-height: 10rem;
   position: relative;
-  display: inline-block;
   border-radius: 2px;
-  line-height: 1.5;
-  font-size: 0.8rem;
-  font-weight: 400;
-  white-space: nowrap;
-  text-align: center;
-  border: none;
+  border: 1px solid;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: pointer;
-  color: #fff;
-  background-color: #718096;
-  border-color: #718096; }
-  .ae.card .ae.title {
-    font-size: 1.5rem;
-    padding: 0.5rem; }
-  .ae.card .ae.content {
-    border-top: solid;
-    padding: 0.5rem;
-    text-align: left; }
-  .ae.card.large {
-    min-width: 25rem;
-    min-height: 15rem; }
-  .ae.card.small {
-    min-width: 12rem;
-    min-height: 7rem; }
-  .ae.card.dark {
-    background-color: #2d3748;
-    border-color: #2d3748; }
-  .ae.card.light {
-    color: #718096;
-    background-color: #f7fafc;
-    border-color: #f7fafc; }
-  .ae.card.blue {
-    background-color: #3182ce;
-    border-color: #3182ce; }
-  .ae.card.red {
-    background-color: #e53e3e;
-    border-color: #e53e3e; }
+  background-color: #fff;
+  border-color: #edf2f7; }
+  .ae.card:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14); }
+  .ae.card .ae.card-header {
+    display: flex;
+    font-weight: bold;
+    border-bottom: 1px solid;
+    padding: 1.25rem;
+    border-color: #edf2f7; }
+  .ae.card .ae.card-content {
+    padding: 1.25rem; }
+  .ae.card .ae.card-footer {
+    display: flex;
+    border-top: 1px solid;
+    border-color: #edf2f7;
+    padding: 1.25rem; }
+  .ae.card.small .ae.card-header {
+    padding: 0.75rem; }
+  .ae.card.small .ae.card-content {
+    padding: 0.75rem; }
+  .ae.card.small .ae.card-footer {
+    padding: 0.75rem; }
 
 /**
  * Copyright (c) 2020 Apption Corporation

@@ -36,4 +36,10 @@
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\ParsingTestComponent.scss">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -36,6 +36,14 @@ $typgraphyOptions: (
         "font-size": 1.25rem,
         "font-weight": 600,
     ),
+    "a": (
+        "text-decoration": none,
+        "color": $blue-500,
+        "cursor": pointer,
+        "&:hover": (
+            "text-decoration": underline,
+        ),
+    ),
     "p": (
         "line-height": 1.75,
     ),
