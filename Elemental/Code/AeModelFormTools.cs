@@ -28,6 +28,22 @@ namespace Elemental.Code
             return IsNullable(propertyInfo.PropertyType);
         }
 
+        public static bool IsDropDown(this PropertyInfo propertyInfo)
+        {
+            var hasValidValues = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
+                ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues?.Length > 0
+                : false;
+            var hasDropDown = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
+                ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).IsDropDown
+                : false;
+            return hasValidValues || hasDropDown;
+        }
+
+        public static string[] DropdownValues(this PropertyInfo propertyInfo)
+        {
+            return (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues;
+        }
+
         public static bool IsNullable(Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
@@ -59,8 +75,8 @@ namespace Elemental.Code
             }
         }
 
-        private static bool IsRequired(PropertyInfo propertyInfo)
-        {
+        public static bool IsRequired(PropertyInfo propertyInfo)
+        {            
             return RequiredAttribute.IsDefined(propertyInfo, typeof(RequiredAttribute));
         }
 
@@ -80,7 +96,7 @@ namespace Elemental.Code
 
 
 
-        public static string GetLabel(PropertyInfo propertyInfo)
+        public static string GetLabel(PropertyInfo propertyInfo, Func<string, string> labelFunc, bool includeOptional = true)
         {
 
             var label = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
@@ -88,14 +104,47 @@ namespace Elemental.Code
                 : null;
             if (label is null)
             {
-                label = Labelize(propertyInfo.Name);
+                if (!(labelFunc is null))
+                {
+                    label = labelFunc(propertyInfo.Name);
+                }
+                else
+                {
+                    label = Labelize(propertyInfo.Name);
+                }
             }
-            return label + (IsRequired(propertyInfo) ? "" : " (Optional)");
+            if (includeOptional && !IsRequired(propertyInfo))
+                return label + " (Optional)";
+            else
+                return label;
+        }
+
+        public static List<PropertyInfo> GetAeModelProperties(this Type type)
+        {
+            return type.GetProperties().Where(p => !Attribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
+        }
+
+        public static List<(string category, List<PropertyInfo> properties)> GetAeModelFormCategories(this Type type)
+        {
+            var allProps = GetAeModelProperties(type);
+            var propsNoCat = allProps.Where(p => !Attribute.IsDefined(p, typeof(AeFormCategoryAttribute))).ToList();
+
+            var result = new List<(string category, List<PropertyInfo> properties)>() { (null, propsNoCat) };
+            result.AddRange(allProps.Where(p => Attribute.IsDefined(p, typeof(AeFormCategoryAttribute)))
+                .Select(property => (((Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Category,
+                (Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).CategoryOrder),
+                property))
+                .GroupBy(p => p.Item1)
+                .OrderBy(gp => gp.Key.CategoryOrder)
+                .Select(gp => (gp.Key.Category, gp.Select(tp => tp.property).ToList())));
+            return result;
+
         }
 
         public static string Labelize(string propName)
         {
             var blocks = BreakUppercase(propName);
+            blocks = blocks.SelectMany(s => BreakNumbers(s));
             if (isPascalCase(blocks))
             {
                 return string.Join(" ", blocks);
@@ -117,12 +166,36 @@ namespace Elemental.Code
             return Regex.Split(str, @"(?<!^)(?=[A-Z])");
         }
 
+        private static IEnumerable<string> BreakNumbers(string str)
+        {
+            return Regex.Split(str, @"(?<!^)(?=[0-9])");
+        }
+
         private static bool isUnderscore(string name)
         {
             if (name.Contains("_"))
                 return true;
             //might need more rules
             return false;
+        }
+
+        private static string GetMemberName(Expression expression)
+        {
+            switch (expression.NodeType)
+            {
+                case ExpressionType.MemberAccess:
+                    return ((MemberExpression)expression).Member.Name;
+                case ExpressionType.Convert:
+                    return GetMemberName(((UnaryExpression)expression).Operand);
+                default:
+                    throw new NotSupportedException(expression.NodeType.ToString());
+            }
+        }
+
+        public static string WithPropertyExpression<T>(Expression<Func<T, object>> expression)
+        {
+            return GetMemberName(expression.Body);
+            
         }
     }
 }

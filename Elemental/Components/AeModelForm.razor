@@ -30,13 +30,28 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="ae modelform-rows" style="@_rowsStyle">
-        @foreach (var prop in GetProperties())
+        @foreach (var category in GetCategories())
+        {        
+        @if (!string.IsNullOrWhiteSpace(category.category))
         {
+            <AeTypography Variant="h3">@category.category</AeTypography>
+        }
+        @foreach (var prop in category.properties)
+        {
+            <CascadingValue Value="@OnChange" Name="OnChangeCallback">
+            <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
             <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
             <div class="ae modelform-row @RowColor">
                 @if (GetNonNullableType(prop) == typeof(string))
                 {
+                    @if (prop.IsDropDown())
+                    {
+                    <AeDropdownPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>                        
+                    }
+                    else
+                    {
                     <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
+                    }
                 }
                 @if (prop.PropertyType == typeof(int))
                 {
@@ -88,6 +103,9 @@
                 }
             </div>
             </CascadingValue>
+            </CascadingValue>
+            </CascadingValue>
+        }
         }
         </div>
         <div class="ae flex  ">
@@ -109,6 +127,23 @@
     private string _rowsStyle => $"{_gridStyle}; grid-template-rows: auto;";
     private string _rowStyle => $"{_gridStyle}; grid-template-rows:15px;";
 
+    public List<(string category, List<PropertyInfo> properties)> GetCategories()
+    {
+        return typeof(T).GetAeModelFormCategories();    
+    }
+
+    private bool isConfigured = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ModelFormContext.RefreshModel = async () => await this.InvokeAsync(() => this.StateHasChanged());
+        ModelFormContext.SetProperties(GetProperties());
+        if (!isConfigured)
+        {
+            await OnConfigure.InvokeAsync(ModelFormContext);
+            isConfigured = true;
+        }
+    }
 
     [Parameter]
     public T Model { get; set; }
@@ -132,7 +167,7 @@
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
     [Parameter]
-    public Func<PropertyInfo,string> LabelForPropertyFunc { get; set; } = null;
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
 
     private async Task ReloadForm()
     {
@@ -146,6 +181,13 @@
     /// This call is expected to revert all the changes to the Model instance and return a model before modifications
     /// </summary>
     [Parameter] public Func<Task<T>> OnCancel { get; set; }
+
+    /// <summary>
+    /// A callback that will be invoked when the form is created
+    ///
+    /// This call is designed to let the user access the context and configure drop downs and other dynamic items
+    /// </summary>
+    [Parameter] public EventCallback<ModelFormContext<T>> OnConfigure { get; set; }
 
 
     /// <summary>
@@ -173,9 +215,16 @@
     /// </summary>
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; } = ModelFormStyle.Normal;
 
+    public ModelFormContext<T> ModelFormContext { get; } = new ModelFormContext<T>();
+
+    /// <summary>
+    /// This method will be called when a property is changed.
+    /// </summary>
+    [Parameter] public EventCallback<ModelFormChangeArgs<T>> OnChange { get; set; }
+
     private List<PropertyInfo> GetProperties()
     {
-        return typeof(T).GetProperties().Where(p => !AeLabelAttribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
+        return typeof(T).GetAeModelProperties();
     }
 
     private Type GetNonNullableType(PropertyInfo prop)

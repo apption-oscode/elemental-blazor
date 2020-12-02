@@ -44,9 +44,9 @@
         //do something if form is valid
     }
 
-    private string GetLabel(PropertyInfo input)
+    private string GetLabel(string input)
     {
-        return input.Name;
+        return input?.ToLowerInvariant();
     }
 
 }

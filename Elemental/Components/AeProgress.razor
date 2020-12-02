@@ -1,19 +1,40 @@
 ﻿@*
-  Copyright (c) 2020 Apption Corporation
+    Copyright (c) 2020 Apption Corporation
 
-  This Source Code Form is subject to the terms of the Mozilla Public
-  License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
 @inherits HtmlElement
 
-  <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    
-  </div>
+<div class="@_classname" @attributes="InputAttributesWithoutClass">
+    <div class="outer">
+        @if (@Percent < 100)
+        {
+            <div class="fill" style="width:@Percent%">
+            </div>
+        }
+        else
+        {
+            <div class="full">
+            </div>
+        }
+    </div>
+    @if (@showPercent == true)
+    {
+        <span class="text">@Percent %</span>
+    }
+
+</div>
 
 @code {
 
+    [Parameter]
+    public float Percent { get; set; }
+    [Parameter]
+    public bool showPercent { get; set; }
 
-  private string _classname => $"ae menu {_inputClass}";
-}
+
+    private string _classname => $"ae progress {_inputClass}";
+} 

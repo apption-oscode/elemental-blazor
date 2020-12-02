@@ -2,19 +2,24 @@
 @inherits DemoPage
 
 <AeFlex Vertical class="card-page-container">
-  <DemoSection Path="./Samples/Cards/Examples/BasicCards.razor">
-    <AeFlex>
-      <Elemental.Documentation.Samples.Cards.Examples.BasicCards />
-    </AeFlex>
-  </DemoSection>
-  <DemoSection Path="./Samples/Cards/Examples/ImageCards.razor">
-    <AeFlex>
-      <Elemental.Documentation.Samples.Cards.Examples.ImageCards />
-    </AeFlex>
-  </DemoSection>
-  <DemoSection Path="./Samples/Cards/Examples/SizedCards.razor">
-    <AeFlex>
-      <Elemental.Documentation.Samples.Cards.Examples.SizedCards />
-    </AeFlex>
-  </DemoSection>
+    <DemoSection Path="./Samples/Cards/Examples/BasicCards.razor">
+        <AeFlex Vertical class="basics">
+            <Elemental.Documentation.Samples.Cards.Examples.BasicCards />
+        </AeFlex>
+    </DemoSection>
+    <DemoSection Path="./Samples/Cards/Examples/CardSamples.razor">
+        <AeFlex class="samples">
+            <Elemental.Documentation.Samples.Cards.Examples.CardSamples/>
+        </AeFlex>
+    </DemoSection>
+    @*<DemoSection Path="./Samples/Cards/Examples/ImageCards.razor">
+          <AeFlex>
+            <Elemental.Documentation.Samples.Cards.Examples.ImageCards />
+          </AeFlex>
+        </DemoSection>
+        <DemoSection Path="./Samples/Cards/Examples/SizedCards.razor">
+          <AeFlex>
+            <Elemental.Documentation.Samples.Cards.Examples.SizedCards />
+          </AeFlex>
+        </DemoSection>*@
 </AeFlex>

@@ -12,6 +12,7 @@ namespace Elemental.Tests
         private const string _testDescription = "Lorem ipsum dolor sit amet.";
         private const int _testHtmlLength = 9;
         private const int _testCodeLength = 14;
+        private const int _testScssLength = 3;
 
         [Fact]
         public void CanReadFile()
@@ -63,6 +64,17 @@ namespace Elemental.Tests
         }
 
         [Fact]
+        public void CanFindScss()
+        {
+            var shouldBeNull = ParsedFile.ReadScssLines("./garbagePath");
+            Assert.Null(shouldBeNull);
+
+            var lines = ParsedFile.ReadScssLines(_testFilePath);
+            var code = ParsedFile.ParseScss(lines);
+            Assert.Equal(_testScssLength, code.Count);
+        }
+
+        [Fact]
         public void CanSetupParsedFile()
         {
             var file = new ParsedFile(_testFilePath);
@@ -71,6 +83,7 @@ namespace Elemental.Tests
             Assert.Equal(_testDescription, file.Description);
             Assert.Equal(_testHtmlLength, file.Html.Count);
             Assert.Equal(_testCodeLength, file.Code.Count);
+            Assert.Equal(_testScssLength, file.Scss.Count);
         }
     }
 }

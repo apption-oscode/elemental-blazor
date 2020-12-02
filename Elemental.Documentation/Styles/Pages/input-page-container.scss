@@ -1,0 +1,13 @@
+﻿
+
+.input-page-container {
+    .input-container {
+        max-width: 400px;
+
+        &.multiple {
+            .ae.input-wrapper {
+                margin: 1rem 0;
+            }
+        }
+    }
+}

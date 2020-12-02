@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Elemental.Documentation.Data
 {
-    public class Starship
+    public class InteractiveStarship
     {
 
         [AeFormIgnore]
@@ -25,7 +25,12 @@ namespace Elemental.Documentation.Data
         public string Description { get; set; }
 
         [Required]
+        [AeLabel(isDropDown:true)]
         public string Classification { get; set; }
+
+        [Required]
+        [AeLabel(isDropDown: true)]
+        public string SubClassification { get; set; }
 
         [Range(1, 100000, ErrorMessage = "Accommodation invalid (1-100000).")]
         [AeLabel(label: "Maximum Accomodation")]

@@ -67,7 +67,7 @@
         var modal = UI.ModalParameter;
         _content = modal.Content;
         _body = modal.Body;
-        RenderFragment defaultFooter = @<AeButton class="blue" OnClick="CloseModal">Close</AeButton>;
+        RenderFragment defaultFooter = @<AeButton class="blue" @onclick="CloseModal">Close</AeButton>;
         _footer = modal.Footer is null ? defaultFooter : modal.Footer;
         _title = modal.Title;
         _disableBackgroundCancel = modal.DisableBackgroundCancel;

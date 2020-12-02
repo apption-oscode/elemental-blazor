@@ -6,65 +6,43 @@
 
 $cardOptions: ( 
   "default": ( 
-    "min-width": 15rem,
-    "min-height": 10rem,
     "position": relative, 
-    "display": inline-block,      
     "border-radius": 2px, 
-    "line-height": 1.5, 
-    "font-size": 0.8rem, 
-    "font-weight": 400, 
-    "white-space": nowrap, 
-    "text-align": center, 
-    "border": none, 
+    "border": 1px solid, 
     "transition": all .3s $cubic-bezier, 
-    "cursor": pointer, 
-    "color": $white, 
-    "background-color": $grey-600, 
-    "border-color": $grey-600,
-
-    ".ae.image": (
+    "background-color": $white, 
+    "border-color": $grey-200,
+    "&:hover": (
+        "box-shadow": $box-shadow-1,
     ),
-
-    ".ae.title": (
-      "font-size": 1.5rem,
-      "padding": 0.5rem,
+    ".ae.card-header": (
+        "display": flex,
+        "font-weight": bold,
+        "border-bottom": 1px solid,
+        "padding": 1.25rem,
+        "border-color": $grey-200,
     ),
-
-    ".ae.content": (
-      "border-top": solid,
-      "padding": 0.5rem,
-      "text-align": left,
+    ".ae.card-content": (
+        "padding": 1.25rem,
     ),
-  ), 
-
-  "large": (
-    "min-width": 25rem,
-    "min-height": 15rem,
+    ".ae.card-footer": (
+        "display": flex,
+        "border-top": 1px solid,
+        "border-color": $grey-200,
+        "padding": 1.25rem,
+    ),
   ),
-
   "small": (
-    "min-width": 12rem,
-    "min-height": 7rem,
-  ),
-
-  "dark": ( 
-    "background-color": $grey-800, 
-    "border-color": $grey-800, 
-  ), 
-  "light": ( 
-    "color": $grey-600, 
-    "background-color": $grey-100, 
-    "border-color": $grey-100,
-  ), 
-  "blue": ( 
-    "background-color": $blue-600, 
-    "border-color": $blue-600,
-  ), 
-  "red": ( 
-    "background-color": $red-600, 
-    "border-color": $red-600, 
-  ), 
+    ".ae.card-header": (
+        "padding": 0.75rem,
+    ),
+    ".ae.card-content": (
+        "padding": 0.75rem,
+    ),
+    ".ae.card-footer": (
+        "padding": 0.75rem,
+    )
+  )
 )  !default;
 
 .ae.card {

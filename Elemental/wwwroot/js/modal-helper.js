@@ -9,6 +9,7 @@
         document.getElementsByTagName('body')[0].style.position = 'fixed';
         document.getElementsByTagName('body')[0].style.width = '100%';
         document.getElementsByClassName('modal')[0].style.top = -(document.documentElement.scrollTop) + 'px';
+        
     },
 
     unlockBodyScrolling: function () {
