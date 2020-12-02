@@ -7,7 +7,6 @@
  */
 
 @import 'colors.scss';
-@import 'box-shadow';
 
 body {
     overflow: overlay;
@@ -21,6 +20,7 @@ body {
         color: $white;
     }
 }
+
 
 .sidenav {
     border-right: 1px solid $grey-200;
@@ -69,7 +69,6 @@ body {
         position: relative;
         top: -1rem;
         margin: 0 auto;
-        width: 66%;
         content: "";
     }
 }
