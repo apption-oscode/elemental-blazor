@@ -17,11 +17,15 @@ else if (Variant == "h4")
 {
     <h4 class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</h4>
 }
-else if (Variant == "paragraph")
+else if (Variant == "p")
 {
     <p class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</p>
 }
-else 
+else if (Variant == "a")
+{
+    <a class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</a>
+}
+else
 {
     <div class="@_classname" @attributes="@InputAttributesWithoutClass">@ChildContent</div>
 }

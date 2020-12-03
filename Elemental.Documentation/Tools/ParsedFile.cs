@@ -14,6 +14,7 @@ namespace Elemental.Documentation
         public object Description { get; private set; }
         public List<string> Html { get; private set; }
         public List<string> Code { get; private set; }
+        public List<string> Scss { get; private set; }
 
         public ParsedFile (string path)
         {
@@ -28,6 +29,8 @@ namespace Elemental.Documentation
             Description = ParseDescription(lines);
             Html = ParseHtml(lines);
             Code = ParseCode(lines);
+
+            Scss = ScssIfExists(Pathname);
         }
 
 
@@ -38,6 +41,15 @@ namespace Elemental.Documentation
                 return new[] { $"Title: N/A (File {pathname} not found)", $"Description: N/A (File {pathname} not found)",$"File {pathname} not found" };
             }
             return File.ReadAllLines(pathname);
+        }
+        public static string[] ReadScssLines(string pathname)
+        {
+            var scssPathname = Path.ChangeExtension(pathname, ".scss");
+            if (!File.Exists(scssPathname))
+            {
+                return null;
+            }
+            return File.ReadAllLines(scssPathname);
         }
 
         public static string ParseTitle(string[] lines)
@@ -80,6 +92,17 @@ namespace Elemental.Documentation
             return lines
                 .SkipWhile(l => !l.Trim().Equals("@code {"))
                 .ToList();
+        }
+
+        public static List<string> ParseScss(string[] lines)
+        {
+            return lines?.ToList();
+        }
+
+        public static List<string> ScssIfExists(string pathname)
+        {
+            var lines = ReadScssLines(pathname);
+            return ParseScss(lines);
         }
     }
 }
