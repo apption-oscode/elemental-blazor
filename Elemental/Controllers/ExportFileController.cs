@@ -18,29 +18,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc;
 using Elemental.Services;
 using Elemental.Components;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+
+/// <summary>
+/// Not used since mvc is involved here in a class library
+/// </summary>
 namespace Elemental.Controllers
 {
-    public class ExportFileController : ControllerBase
+    //public class ExportFileController : ControllerBase
+    public class ExportFileController
     { 
-        [HttpGet]
-        public IActionResult ToCSV([FromServices] ICSVDataExportService csvService, string filename)
-        {
-            ITable table;
-            lock (csvService)
-            {
-                table = csvService.GetTable();
-                csvService.Dispose();
-            }
-            var content = table.ExportToCSVInByte();
+        //[HttpGet]
+        //public IActionResult ToCSV([FromServices] ICSVDataExportService csvService, string filename)
+        //{
+        //    ITable table;
+        //    lock (csvService)
+        //    {
+        //        table = csvService.GetTable();
+        //        csvService.Dispose();
+        //    }
+        //    var content = table.ExportToCSVInByte();
 
-            return File(content, "application/octet-stream", filename);
-        }
+        //    return File(content, "application/octet-stream", filename);
+        //}
     }
 }
