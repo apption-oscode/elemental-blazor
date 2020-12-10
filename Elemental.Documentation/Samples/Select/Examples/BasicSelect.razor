@@ -1,0 +1,46 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Multi-Select dropdown
+    Description: Dropdown style selector, the OnChange function will be invoked once for every item you selected before closing
+*@
+
+<AeButton style="width:3rem;" @onclick="clearSelected" >Clear</AeButton>
+
+<AeTypography>Selected item: </AeTypography>
+
+@foreach (string _item in _selectedItem)
+{
+    <AeTypography>@_item</AeTypography>
+}
+
+
+
+<AeSelect Label="Basic Select"
+          Items="_dropdownItems"
+          OnChange="HandleDropdownChange" />
+
+@code {
+
+  private List<string> _selectedItem = new List<string>();
+
+  private List<string> _dropdownItems = new List<string>
+    {
+        "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
+    };
+
+  private void clearSelected() {
+      _selectedItem.Clear();
+  }
+
+  //This is invoked once for every item you selected before closing
+  private void HandleDropdownChange(string selectedItem)
+  {
+      _selectedItem.Add(selectedItem);
+      StateHasChanged();
+  }
+}
