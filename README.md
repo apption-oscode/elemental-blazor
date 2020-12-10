@@ -20,6 +20,8 @@ Elemental styled buttons come with a built-in property for dark/light theme.
 
 ## Dropdown
 
+NB! AeDropdown is for single select only, old multi-select dropdowns should be replaced with AeSelect
+
 Elemental dropdown binds to a property a list of objects in a single component.
 
 ![Dropdown image](docs/images/Dropdown.png)
