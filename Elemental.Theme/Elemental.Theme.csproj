@@ -50,6 +50,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Styles\navbar.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Styles\toggle.scss" />
   </ItemGroup>
 </Project>

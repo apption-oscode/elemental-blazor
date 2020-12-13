@@ -1,0 +1,47 @@
+﻿
+
+@inherits HtmlElement
+
+@using Microsoft.AspNetCore.Components.Routing;
+
+<div class="@_classname" @attributes="InputAttributesWithoutClass">
+    @foreach(var link in Links)
+    {
+        if (link.ChildLinks?.Any() == true)
+        {
+            <div class="ae nav-dropdown">
+                <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
+                    <AeTypography>
+                        @link.Label 
+                        <i class="fas fa-caret-down" />
+                    </AeTypography>
+                </NavLink>
+                <div class="ae nav-dropdown-content">
+                    @foreach(var child in link.ChildLinks)
+                    {
+                        <NavLink class="ae navlink" href="@child.To" Match="NavLinkMatch.All">
+                            <AeTypography>
+                                @child.Label
+                            </AeTypography> 
+                        </NavLink>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
+                <AeTypography>
+                    @link.Label
+                </AeTypography>
+            </NavLink>
+        }
+    }
+</div>
+@code {
+
+    [Parameter]
+    public List<AeNavLink> Links { get; set; }
+
+    private string _classname => $"ae navbar {_inputClass}";
+} 
