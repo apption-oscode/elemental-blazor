@@ -143,10 +143,9 @@ body {
   display: flex; }
   .ae.layout .ae.side-nav {
     width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh; }
+    height: 100vh;
+    position: sticky;
+    top: 0; }
   .ae.layout .ae.content-wrapper {
     display: flex;
     flex-direction: column;
@@ -156,8 +155,6 @@ body {
       position: sticky;
       top: 0;
       z-index: 10; }
-    .ae.layout .ae.content-wrapper.has-side-nav {
-      margin-left: 250px; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
