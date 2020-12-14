@@ -10,13 +10,16 @@
         if (link.ChildLinks?.Any() == true)
         {
             <div class="ae nav-dropdown">
-                <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
+                <NavLink class="ae navlink label" href="@link.To" Match="NavLinkMatch.Prefix">
                     <AeTypography>
                         @link.Label 
                         <i class="fas fa-caret-down" />
                     </AeTypography>
                 </NavLink>
                 <div class="ae nav-dropdown-content">
+                    <NavLink class="ae navlink invisible" href="@link.To">
+                        <AeTypography>Hide me</AeTypography>
+                    </NavLink>
                     @foreach(var child in link.ChildLinks)
                     {
                         <NavLink class="ae navlink" href="@child.To" Match="NavLinkMatch.All">

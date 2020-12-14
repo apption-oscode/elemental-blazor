@@ -16,27 +16,42 @@ $navbarOptions: (
         ),
         ".ae.typography": (
             "color": $white,
+        ),
+        "&.invisible": (
+            "opacity": 0,
         )
     ),
     ".ae.nav-dropdown": (
         "float": left,
         "overflow": hidden,
+        "font-family": inherit,
+        "margin": 0,
+        ".ae.nav-dropdown-button": (
+            "border": none,    
+        ),
         ".ae.nav-dropdown-content": (
             "display": none,
             "position": absolute,
-            "background-color": $blue-100,
             "min-width": 160px,
-            "box-shadow": $box-shadow-1,
             "z-index": 1,
             ".ae.navlink": (
+                "box-shadow": $box-shadow-1,
+                "background-color": $blue-100,
                 "float": none,
                 "text-align": left,
+                "display": block,
                 "&:hover": (
-                    "background-color": $blue-800,
+                    "background-color": $red-700,
+                ),
+                ".ae.typography": (
+                    "color": $text-primary,
                 )
             )
         ),
         "&:hover": (
+            ".ae.navlink.label":(
+                "background-color": $blue-700,
+            ),
             ".ae.nav-dropdown-content": (
                 "display": block,
             )

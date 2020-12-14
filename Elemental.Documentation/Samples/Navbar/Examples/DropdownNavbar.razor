@@ -1,0 +1,57 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Dropdown Navbar
+    Description: Navigation bar with dropdown
+*@
+
+
+<AeNavbar Links="_navLinks" />
+
+
+@code {
+    @using Elemental.Code;
+
+    private List<AeNavLink> _navLinks = new List<AeNavLink>
+    {
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "Home",
+        },
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "News",
+        },
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "Dropdown",
+            ChildLinks = new List<AeNavLink>()
+            {
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 1"
+                },
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 2"
+                },
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 3"
+                },
+            }
+        },
+    };
+}
+
+
