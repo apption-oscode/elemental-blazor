@@ -1,0 +1,77 @@
+﻿
+
+@inherits HtmlElement
+
+@using Microsoft.AspNetCore.Components.Routing;
+
+<div class="@_classname" @attributes="InputAttributesWithoutClass">
+    <ul class="ae navlinks">
+        @if (Brand != null)
+        {
+            <li>
+                @Brand
+            </li>
+        }
+
+        @foreach (var link in Links)
+        {
+            if (link.ChildLinks?.Any() == true)
+            {
+                <li class="ae nav-dropdown">
+                    <NavLink class="ae navlink dropdown-label" Match="NavLinkMatch.Prefix">
+                        <AeTypography>
+                            @link.Label
+                            <i class="fas fa-caret-down" />
+                        </AeTypography>
+                    </NavLink>
+                    <div class="ae nav-dropdown-content">
+                        @foreach (var child in link.ChildLinks)
+                        {
+                            <NavLink class="ae navlink" href="@child.To" Match="NavLinkMatch.All">
+                                <AeTypography>
+                                    @child.Label
+                                </AeTypography>
+                            </NavLink>
+                        }
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
+                        <AeTypography>
+                            @link.Label
+                        </AeTypography>
+                    </NavLink>
+                </li>
+            }
+        }
+        <li style="flex-grow: 1;"></li>
+        <li class="ae responsive-icon">
+            <a href="javascript:void(0);" class="ae navlink" @onclick="ToggleResponsive">
+                <AeTypography>
+                    &#9776;
+                </AeTypography>
+            </a>
+        </li>
+    </ul>
+</div>
+@code {
+    [Parameter]
+    public RenderFragment Brand { get; set; }
+    [Parameter]
+    public List<AeNavLink> Links { get; set; }
+    [Parameter]
+    public bool ForceResponsive { get; set; } = false;
+
+    private string _classname => $"ae navbar {_inputClass} {(_isOpen ? "open" : "")} {(ForceResponsive ? "force-responsive": "" )}";
+    private bool _isOpen = false;
+
+    private void ToggleResponsive()
+    {
+        _isOpen = !_isOpen;
+        StateHasChanged();
+    }
+
+} 

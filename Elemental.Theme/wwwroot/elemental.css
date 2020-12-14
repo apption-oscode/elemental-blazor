@@ -143,10 +143,9 @@ body {
   display: flex; }
   .ae.layout .ae.side-nav {
     width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh; }
+    height: 100vh;
+    position: sticky;
+    top: 0; }
   .ae.layout .ae.content-wrapper {
     display: flex;
     flex-direction: column;
@@ -156,8 +155,6 @@ body {
       position: sticky;
       top: 0;
       z-index: 10; }
-    .ae.layout .ae.content-wrapper.has-side-nav {
-      margin-left: 250px; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
@@ -1550,6 +1547,106 @@ body {
       -webkit-transform: translateX(13px);
       -ms-transform: translateX(13px);
       translate: translateX(13px); }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.navbar {
+  overflow: hidden;
+  background-color: #3182ce; }
+  .ae.navbar .ae.navlinks {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+    .ae.navbar .ae.navlinks li {
+      display: inline-block; }
+    .ae.navbar .ae.navlinks .ae.navlink {
+      display: inline-block;
+      text-align: center;
+      padding: 1rem;
+      text-decoration: none; }
+      .ae.navbar .ae.navlinks .ae.navlink:hover {
+        background-color: #2b6cb0; }
+      .ae.navbar .ae.navlinks .ae.navlink .ae.typography {
+        color: #fff; }
+    .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content {
+      display: none;
+      position: absolute;
+      min-width: 160px;
+      z-index: 1; }
+      .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14);
+        background-color: #ebf8ff;
+        text-align: left;
+        display: block; }
+        .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink:hover {
+          background-color: #bee3f8; }
+        .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink .ae.typography {
+          color: #4a5568; }
+    .ae.navbar .ae.navlinks .ae.nav-dropdown:hover .ae.dropdown-label {
+      background-color: #2b6cb0; }
+    .ae.navbar .ae.navlinks .ae.nav-dropdown:hover .ae.nav-dropdown-content {
+      display: block; }
+    .ae.navbar .ae.navlinks .ae.responsive-icon .ae.navlink {
+      display: none; }
+  .ae.navbar.open .ae.navlinks {
+    position: relative;
+    flex-direction: column; }
+    .ae.navbar.open .ae.navlinks .ae.navlink {
+      display: block; }
+    .ae.navbar.open .ae.navlinks .ae.nav-dropdown:hover .ae.nav-dropdown-content {
+      position: relative; }
+    .ae.navbar.open .ae.navlinks .ae.responsive-icon {
+      position: absolute;
+      right: 0;
+      background-color: #2b6cb0; }
+      .ae.navbar.open .ae.navlinks .ae.responsive-icon .ae.navlink {
+        display: block; }
+  @media screen and (max-width: 1024px) {
+    .ae.navbar .ae.navlinks .ae.navlink {
+      display: none; }
+    .ae.navbar .ae.navlinks .ae.responsive-icon .ae.navlink {
+      display: block; }
+    .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink {
+      box-shadow: none; } }
+  .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.navlink {
+    display: none; }
+  .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.responsive-icon .ae.navlink {
+    display: block; }
+  .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink {
+    box-shadow: none; }
 
 /*
     Third party

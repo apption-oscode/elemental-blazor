@@ -9,10 +9,9 @@ $layoutOptions: (
 
     ".ae.side-nav":(
         "width": $sideNavWidth,
-        "position": fixed,
-        "top": 0,
-        "left": 0,
         "height": 100vh,
+        "position": sticky,
+        "top": 0,
     ),
     ".ae.content-wrapper":(
         "display": flex,
@@ -25,7 +24,6 @@ $layoutOptions: (
             "z-index": 10,
         ),
         "&.has-side-nav":(
-            "margin-left": $sideNavWidth,
         ),
     ),
 ) !default;
