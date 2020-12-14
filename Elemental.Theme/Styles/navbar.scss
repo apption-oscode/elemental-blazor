@@ -7,6 +7,7 @@ $navbarOptions: (
     "overflow": hidden,
     "background-color": $blue-600,
     ".ae.navlinks": (
+        "display": flex,
         "margin": 0,
         "padding": 0,
         "overflow": hidden,

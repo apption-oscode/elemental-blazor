@@ -5,11 +5,14 @@
 @using Microsoft.AspNetCore.Components.Routing;
 
 <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    @if (Brand != null)
-    {
-        @Brand
-    }
     <ul class="ae navlinks">
+        @if (Brand != null)
+        {
+            <li>
+                @Brand
+            </li>
+        }
+
         @foreach (var link in Links)
         {
             if (link.ChildLinks?.Any() == true)
