@@ -1595,7 +1595,11 @@ body {
     .ae.navbar .ae.navlink .ae.typography {
       color: #fff; }
     .ae.navbar .ae.navlink.invisible {
-      opacity: 0; }
+      visibility: hidden;
+      width: 0;
+      white-space: nowrap;
+      padding-left: 0;
+      padding-right: 0; }
   .ae.navbar .ae.nav-dropdown {
     float: left;
     overflow: hidden;
