@@ -48,13 +48,4 @@
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Styles\navbar.scss" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Styles\media-mixins.scss" />
-    <None Remove="Styles\toggle.scss" />
-  </ItemGroup>
 </Project>
