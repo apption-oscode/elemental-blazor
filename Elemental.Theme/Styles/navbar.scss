@@ -46,6 +46,9 @@ $navbarOptions: (
                 )
             ),
             "&:hover": (
+                ".ae.dropdown-label":(
+                    "background-color": $blue-700,
+                ),
                 ".ae.nav-dropdown-content": (
                     "display": block,
                 )
