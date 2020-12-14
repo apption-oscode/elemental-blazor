@@ -5,44 +5,50 @@
 @using Microsoft.AspNetCore.Components.Routing;
 
 <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    @foreach(var link in Links)
+    @if (Brand != null)
     {
-        if (link.ChildLinks?.Any() == true)
-        {
-            <div class="ae nav-dropdown">
-                <NavLink class="ae navlink label" href="@link.To" Match="NavLinkMatch.Prefix">
-                    <AeTypography>
-                        @link.Label 
-                        <i class="fas fa-caret-down" />
-                    </AeTypography>
-                </NavLink>
-                <div class="ae nav-dropdown-content">
-                    <NavLink class="ae navlink invisible" href="@link.To">
-                        <AeTypography>Hide me</AeTypography>
-                    </NavLink>
-                    @foreach(var child in link.ChildLinks)
-                    {
-                        <NavLink class="ae navlink" href="@child.To" Match="NavLinkMatch.All">
-                            <AeTypography>
-                                @child.Label
-                            </AeTypography> 
-                        </NavLink>
-                    }
-                </div>
-            </div>
-        }
-        else
-        {
-            <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
-                <AeTypography>
-                    @link.Label
-                </AeTypography>
-            </NavLink>
-        }
+        @Brand
     }
+    <ul class="ae navlinks">
+        @foreach (var link in Links)
+        {
+            if (link.ChildLinks?.Any() == true)
+            {
+                <li class="ae nav-dropdown">
+                    <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
+                        <AeTypography>
+                            @link.Label
+                            <i class="fas fa-caret-down" />
+                        </AeTypography>
+                    </NavLink>
+                    <div class="ae nav-dropdown-content">
+                        @foreach (var child in link.ChildLinks)
+                        {
+                            <NavLink class="ae navlink" href="@child.To" Match="NavLinkMatch.All">
+                                <AeTypography>
+                                    @child.Label
+                                </AeTypography>
+                            </NavLink>
+                        }
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
+                        <AeTypography>
+                            @link.Label
+                        </AeTypography>
+                    </NavLink>
+                </li>
+            }
+        }
+    </ul>
 </div>
 @code {
-
+    [Parameter]
+    public RenderFragment Brand { get; set; }
     [Parameter]
     public List<AeNavLink> Links { get; set; }
 

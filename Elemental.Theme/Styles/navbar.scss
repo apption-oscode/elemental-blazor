@@ -6,60 +6,50 @@
 $navbarOptions: (
     "overflow": hidden,
     "background-color": $blue-600,
-    ".ae.navlink": (
-        "float": left,
-        "text-align": center,
-        "padding": 1rem,
-        "text-decoration": none,
-        "&:hover": (
-            "background-color": $blue-700,
-        ),
-        ".ae.typography": (
-            "color": $white,
-        ),
-        "&.invisible": (
-            "visibility": hidden,
-            "width": 0,
-            "white-space": nowrap,
-            "padding-left": 0,
-            "padding-right": 0,
-        )
-    ),
-    ".ae.nav-dropdown": (
-        "float": left,
-        "overflow": hidden,
-        "font-family": inherit,
+    ".ae.navlinks": (
         "margin": 0,
-        ".ae.nav-dropdown-button": (
-            "border": none,    
+        "padding": 0,
+        "overflow": hidden,
+        "& li": (
+            "display": inline-block,
         ),
-        ".ae.nav-dropdown-content": (
-            "display": none,
-            "position": absolute,
-            "min-width": 160px,
-            "z-index": 1,
-            ".ae.navlink": (
-                "box-shadow": $box-shadow-1,
-                "background-color": $blue-100,
-                "float": none,
-                "text-align": left,
-                "display": block,
-                "&:hover": (
-                    "background-color": $blue-200,
-                ),
-                ".ae.typography": (
-                    "color": $text-primary,
+        ".ae.navlink": (
+            "display": inline-block,
+            "text-align": center,
+            "padding": 1rem,
+            "text-decoration": none,
+            "&:hover": (
+                "background-color": $blue-700,
+            ),
+            ".ae.typography": (
+                "color": $white,
+            ),
+        ),
+        ".ae.nav-dropdown": (
+            ".ae.nav-dropdown-content": (
+                "display": none,
+                "position": absolute,
+                "min-width": 160px,
+                "z-index": 1,
+                ".ae.navlink": (
+                    "box-shadow": $box-shadow-1,
+                    "background-color": $blue-100,
+                    "text-align": left,
+                    "display": block,
+                    "&:hover": (
+                        "background-color": $blue-200,
+                    ),
+                    ".ae.typography": (
+                        "color": $text-primary,
+                    )
+                )
+            ),
+            "&:hover": (
+                ".ae.nav-dropdown-content": (
+                    "display": block,
                 )
             )
         ),
-        "&:hover": (
-            ".ae.navlink.label":(
-                "background-color": $blue-700,
-            ),
-            ".ae.nav-dropdown-content": (
-                "display": block,
-            )
-        )
     )
 ) !default;
 

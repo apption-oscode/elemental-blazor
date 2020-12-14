@@ -1585,46 +1585,36 @@ body {
 .ae.navbar {
   overflow: hidden;
   background-color: #3182ce; }
-  .ae.navbar .ae.navlink {
-    float: left;
-    text-align: center;
-    padding: 1rem;
-    text-decoration: none; }
-    .ae.navbar .ae.navlink:hover {
-      background-color: #2b6cb0; }
-    .ae.navbar .ae.navlink .ae.typography {
-      color: #fff; }
-    .ae.navbar .ae.navlink.invisible {
-      visibility: hidden;
-      width: 0;
-      white-space: nowrap;
-      padding-left: 0;
-      padding-right: 0; }
-  .ae.navbar .ae.nav-dropdown {
-    float: left;
-    overflow: hidden;
-    font-family: inherit;
-    margin: 0; }
-    .ae.navbar .ae.nav-dropdown .ae.nav-dropdown-button {
-      border: none; }
-    .ae.navbar .ae.nav-dropdown .ae.nav-dropdown-content {
+  .ae.navbar .ae.navlinks {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+    .ae.navbar .ae.navlinks li {
+      display: inline-block; }
+    .ae.navbar .ae.navlinks .ae.navlink {
+      display: inline-block;
+      text-align: center;
+      padding: 1rem;
+      text-decoration: none; }
+      .ae.navbar .ae.navlinks .ae.navlink:hover {
+        background-color: #2b6cb0; }
+      .ae.navbar .ae.navlinks .ae.navlink .ae.typography {
+        color: #fff; }
+    .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content {
       display: none;
       position: absolute;
       min-width: 160px;
       z-index: 1; }
-      .ae.navbar .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink {
+      .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14);
         background-color: #ebf8ff;
-        float: none;
         text-align: left;
         display: block; }
-        .ae.navbar .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink:hover {
+        .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink:hover {
           background-color: #bee3f8; }
-        .ae.navbar .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink .ae.typography {
+        .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink .ae.typography {
           color: #4a5568; }
-    .ae.navbar .ae.nav-dropdown:hover .ae.navlink.label {
-      background-color: #2b6cb0; }
-    .ae.navbar .ae.nav-dropdown:hover .ae.nav-dropdown-content {
+    .ae.navbar .ae.navlinks .ae.nav-dropdown:hover .ae.nav-dropdown-content {
       display: block; }
 
 /*

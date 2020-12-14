@@ -1,0 +1,40 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Branded Navbar
+    Description: Add your Brand via RenderFragment. Brands will always remain visible in a responsive viewport
+*@
+
+
+<AeNavbar Links="_navLinks">
+    <Brand>
+        <div class="nav-logo">
+            <img src="/img/datahunter-logo.png" />
+        </div>
+    </Brand>
+</AeNavbar>
+
+
+@code {
+    @using Elemental.Code;
+
+    private List<AeNavLink> _navLinks = new List<AeNavLink>
+    {
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "Home",
+        },
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "News",
+        },
+    };
+}
+
+
