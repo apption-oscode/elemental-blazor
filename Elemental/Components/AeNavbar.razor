@@ -47,6 +47,14 @@
                 </li>
             }
         }
+        <li style="flex-grow: 1;"></li>
+        <li class="ae responsive-icon">
+            <a href="javascript:void(0);" class="ae navlink">
+                <AeTypography>
+                    &#9776;
+                </AeTypography>
+            </a>
+        </li>
     </ul>
 </div>
 @code {
@@ -56,4 +64,5 @@
     public List<AeNavLink> Links { get; set; }
 
     private string _classname => $"ae navbar {_inputClass}";
+
 } 

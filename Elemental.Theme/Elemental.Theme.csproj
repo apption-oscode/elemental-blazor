@@ -54,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Styles\media-mixins.scss" />
     <None Remove="Styles\toggle.scss" />
   </ItemGroup>
 </Project>

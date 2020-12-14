@@ -1619,6 +1619,13 @@ body {
       background-color: #2b6cb0; }
     .ae.navbar .ae.navlinks .ae.nav-dropdown:hover .ae.nav-dropdown-content {
       display: block; }
+    .ae.navbar .ae.navlinks .ae.responsive-icon .ae.navlink {
+      display: none; }
+  @media screen and (max-width: 1024px) {
+    .ae.navbar .ae.navlinks .ae.navlink {
+      display: none; }
+    .ae.navbar .ae.navlinks .ae.responsive-icon .ae.navlink {
+      display: block; } }
 
 /*
     Third party
