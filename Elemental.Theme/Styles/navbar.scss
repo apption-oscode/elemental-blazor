@@ -99,6 +99,13 @@ $navbarResponsiveOptions: (
                 "display": block,
             ),
         ),
+        ".ae.nav-dropdown": (
+            ".ae.nav-dropdown-content":(
+                ".ae.navlink": (
+                    "box-shadow": none,
+                )
+            )
+        )
     )    
 ) !default;
 

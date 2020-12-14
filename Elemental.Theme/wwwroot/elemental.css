@@ -1638,11 +1638,15 @@ body {
     .ae.navbar .ae.navlinks .ae.navlink {
       display: none; }
     .ae.navbar .ae.navlinks .ae.responsive-icon .ae.navlink {
-      display: block; } }
+      display: block; }
+    .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink {
+      box-shadow: none; } }
   .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.navlink {
     display: none; }
   .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.responsive-icon .ae.navlink {
     display: block; }
+  .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content .ae.navlink {
+    box-shadow: none; }
 
 /*
     Third party
