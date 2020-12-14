@@ -1,0 +1,70 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Responsive Navbar
+    Description: When the screen shrinks the responsive toggle will appear
+*@
+
+
+<AeNavbar Links="_navLinks" ForceResponsive>
+    <Brand>
+        <a class="ae typography nav-logo-wrapper" href="https://www.apption.com">
+            <div class="nav-logo">
+                <img src="/img/apption-logo-white.svg" />
+            </div>
+        </a>
+    </Brand>
+</AeNavbar>
+
+
+@code {
+    @using Elemental.Code;
+
+    private List<AeNavLink> _navLinks = new List<AeNavLink>
+    {
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "Home",
+        },
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "News",
+        },
+        new AeNavLink()
+        {
+            Label = "Dropdown",
+            To = "#",
+            ChildLinks = new List<AeNavLink>()
+            {
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 1"
+                },
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 2"
+                },
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 3"
+                },
+            }
+        },
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "Contact"
+        }
+    };
+}
+
+

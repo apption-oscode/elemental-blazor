@@ -214,6 +214,26 @@
   /** Blue **/
   /** Indigo **/
   /** Purple **/
+  /** Pink **/
+  /**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+  /** Transparent **/
+  /** Black **/
+  /** White **/
+  /** Gray **/
+  /** Red **/
+  /** Orange **/
+  /** Yellow **/
+  /** Green **/
+  /** Teal **/
+  /** Blue **/
+  /** Indigo **/
+  /** Purple **/
   /** Pink **/ }
   .navbar-page-container .nav-logo-wrapper {
     display: flex;
@@ -225,7 +245,18 @@
         max-width: 100%;
         max-height: 100%; }
     .navbar-page-container .nav-logo-wrapper:hover {
-      background-color: #2c5282; }
+      background-color: #2b6cb0; }
+  .navbar-page-container .nav-logo-wrapper {
+    display: flex;
+    padding: 1rem 1rem 0;
+    height: 100%; }
+    .navbar-page-container .nav-logo-wrapper .nav-logo {
+      width: 160px; }
+      .navbar-page-container .nav-logo-wrapper .nav-logo img {
+        max-width: 100%;
+        max-height: 100%; }
+    .navbar-page-container .nav-logo-wrapper:hover {
+      background-color: #2b6cb0; }
 
 body {
   overflow: overlay; }

@@ -1621,11 +1621,28 @@ body {
       display: block; }
     .ae.navbar .ae.navlinks .ae.responsive-icon .ae.navlink {
       display: none; }
+  .ae.navbar.open .ae.navlinks {
+    position: relative;
+    flex-direction: column; }
+    .ae.navbar.open .ae.navlinks .ae.navlink {
+      display: block; }
+    .ae.navbar.open .ae.navlinks .ae.nav-dropdown:hover .ae.nav-dropdown-content {
+      position: relative; }
+    .ae.navbar.open .ae.navlinks .ae.responsive-icon {
+      position: absolute;
+      right: 0;
+      background-color: #2b6cb0; }
+      .ae.navbar.open .ae.navlinks .ae.responsive-icon .ae.navlink {
+        display: block; }
   @media screen and (max-width: 1024px) {
     .ae.navbar .ae.navlinks .ae.navlink {
       display: none; }
     .ae.navbar .ae.navlinks .ae.responsive-icon .ae.navlink {
       display: block; } }
+  .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.navlink {
+    display: none; }
+  .ae.navbar.force-responsive:not(.open) .ae.navlinks .ae.responsive-icon .ae.navlink {
+    display: block; }
 
 /*
     Third party

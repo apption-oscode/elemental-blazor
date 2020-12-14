@@ -49,7 +49,7 @@
         }
         <li style="flex-grow: 1;"></li>
         <li class="ae responsive-icon">
-            <a href="javascript:void(0);" class="ae navlink">
+            <a href="javascript:void(0);" class="ae navlink" @onclick="ToggleResponsive">
                 <AeTypography>
                     &#9776;
                 </AeTypography>
@@ -62,7 +62,16 @@
     public RenderFragment Brand { get; set; }
     [Parameter]
     public List<AeNavLink> Links { get; set; }
+    [Parameter]
+    public bool ForceResponsive { get; set; } = false;
 
-    private string _classname => $"ae navbar {_inputClass}";
+    private string _classname => $"ae navbar {_inputClass} {(_isOpen ? "open" : "")} {(ForceResponsive ? "force-responsive": "" )}";
+    private bool _isOpen = false;
+
+    private void ToggleResponsive()
+    {
+        _isOpen = !_isOpen;
+        StateHasChanged();
+    }
 
 } 

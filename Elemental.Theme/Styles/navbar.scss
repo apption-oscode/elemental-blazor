@@ -63,6 +63,30 @@ $navbarOptions: (
             ),
         ),
     ),
+    "open": (
+        ".ae.navlinks": (
+            "position": relative,
+            "flex-direction": column,
+            ".ae.navlink": (
+                "display": block,
+            ),
+            ".ae.nav-dropdown": (
+                "&:hover": (
+                    ".ae.nav-dropdown-content": (
+                        "position": relative,
+                    ),
+                )
+            ),
+            ".ae.responsive-icon": (
+                "position": absolute,
+                "right": 0,
+                "background-color": $blue-700,
+                ".ae.navlink": (
+                    "display": block,
+                )
+            )
+        ),
+    ),
 ) !default;
 
 $navbarResponsiveOptions: (
@@ -82,6 +106,11 @@ $navbarResponsiveOptions: (
     @include set-variations($navbarOptions);
 
     @media screen and (max-width: $desktop-width) {
+        @include set-values($navbarResponsiveOptions);
+    }
+
+    &.force-responsive:not(.open) {
+
         @include set-values($navbarResponsiveOptions);
     }
 }
