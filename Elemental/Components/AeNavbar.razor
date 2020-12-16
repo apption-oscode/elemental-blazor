@@ -3,6 +3,7 @@
 @inherits HtmlElement
 
 @using Microsoft.AspNetCore.Components.Routing;
+@using Elemental.Components.NavbarInternal; 
 
 <div class="@_classname" @attributes="InputAttributesWithoutClass">
     <ul class="ae navlinks">
@@ -13,75 +14,12 @@
             </li>
         }
 
-        @foreach (var link in Links)
-        {
-            if (link.ChildLinks?.Any() == true)
-            {
-                <li class="ae nav-dropdown">
-                    <NavLink class="ae navlink dropdown-label" Match="NavLinkMatch.Prefix">
-                        <AeTypography>
-                            @link.Label
-                            <i class="fas fa-caret-down" />
-                        </AeTypography>
-                    </NavLink>
-                    <div class="ae nav-dropdown-content">
-                        @foreach (var child in link.ChildLinks)
-                        {
-                            <NavLink class="ae navlink" href="@child.To" Match="NavLinkMatch.All">
-                                <AeTypography>
-                                    @child.Label
-                                </AeTypography>
-                            </NavLink>
-                        }
-                    </div>
-                </li>
-            }
-            else
-            {
-                <li>
-                    <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
-                        <AeTypography>
-                            @link.Label
-                        </AeTypography>
-                    </NavLink>
-                </li>
-            }
-        }
+        <AeNavLinkGroup Links="Links" />
+        
         <li style="flex-grow: 1;"></li>
-        @foreach (var link in RightLinks)
-        {
-            if (link.ChildLinks?.Any() == true)
-            {
-                <li class="ae nav-dropdown">
-                    <NavLink class="ae navlink dropdown-label" Match="NavLinkMatch.Prefix">
-                        <AeTypography>
-                            @link.Label
-                            <i class="fas fa-caret-down" />
-                        </AeTypography>
-                    </NavLink>
-                    <div class="ae nav-dropdown-content">
-                        @foreach (var child in link.ChildLinks)
-                        {
-                            <NavLink class="ae navlink" href="@child.To" Match="NavLinkMatch.All">
-                                <AeTypography>
-                                    @child.Label
-                                </AeTypography>
-                            </NavLink>
-                        }
-                    </div>
-                </li>
-            }
-            else
-            {
-                <li>
-                    <NavLink class="ae navlink" href="@link.To" Match="NavLinkMatch.Prefix">
-                        <AeTypography>
-                            @link.Label
-                        </AeTypography>
-                    </NavLink>
-                </li>
-            }
-        }
+        
+        <AeNavLinkGroup Links="RightLinks" />
+        
         <li class="ae responsive-icon">
             <a href="javascript:void(0);" class="ae navlink" @onclick="ToggleResponsive">
                 <AeTypography>
