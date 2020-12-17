@@ -4,6 +4,7 @@
 @import 'box-shadow';
 
 $dropdownOptions: (
+    "outline": none,
     ".ae.button i": (
         "margin": 0 -.5rem 0 .5rem
     ),
@@ -20,6 +21,18 @@ $dropdownOptions: (
         ".ae.dropdown-item":(
             "cursor": pointer,
             "padding": .25rem 1rem,
+            "&:hover": (
+                "background-color": $grey-100,
+            )
+        ),
+        ".ae.button-wrapper":(
+            "flex-direction": row,
+            ".check":(
+                "width": 1.5rem,
+                "float": left,
+                "padding": 9px 8px,
+            ),
+            "cursor": pointer,
             "&:hover": (
                 "background-color": $grey-100,
             )

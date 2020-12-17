@@ -449,28 +449,37 @@ body {
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-.ae.dropdown-wrapper .ae.button i {
-  margin: 0 -0.5rem 0 0.5rem; }
-
-.ae.dropdown-wrapper .ae.content-wrapper {
-  background-color: #fff;
-  min-width: 10rem;
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border-radius: 4px;
-  margin-top: 0.25rem;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13); }
-  .ae.dropdown-wrapper .ae.content-wrapper .ae.dropdown-item {
-    cursor: pointer;
-    padding: 0.25rem 1rem; }
-    .ae.dropdown-wrapper .ae.content-wrapper .ae.dropdown-item:hover {
-      background-color: #f7fafc; }
-
-.ae.dropdown-wrapper.visible .ae.content-wrapper {
-  opacity: 1;
-  visibility: visible; }
+.ae.dropdown-wrapper {
+  outline: none; }
+  .ae.dropdown-wrapper .ae.button i {
+    margin: 0 -0.5rem 0 0.5rem; }
+  .ae.dropdown-wrapper .ae.content-wrapper {
+    background-color: #fff;
+    min-width: 10rem;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 4px;
+    margin-top: 0.25rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13); }
+    .ae.dropdown-wrapper .ae.content-wrapper .ae.dropdown-item {
+      cursor: pointer;
+      padding: 0.25rem 1rem; }
+      .ae.dropdown-wrapper .ae.content-wrapper .ae.dropdown-item:hover {
+        background-color: #f7fafc; }
+    .ae.dropdown-wrapper .ae.content-wrapper .ae.button-wrapper {
+      flex-direction: row;
+      cursor: pointer; }
+      .ae.dropdown-wrapper .ae.content-wrapper .ae.button-wrapper .check {
+        width: 1.5rem;
+        float: left;
+        padding: 9px 8px; }
+      .ae.dropdown-wrapper .ae.content-wrapper .ae.button-wrapper:hover {
+        background-color: #f7fafc; }
+  .ae.dropdown-wrapper.visible .ae.content-wrapper {
+    opacity: 1;
+    visibility: visible; }
 
 /**
  * Copyright (c) 2020 Apption Corporation

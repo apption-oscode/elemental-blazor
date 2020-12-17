@@ -13,7 +13,7 @@
 
 
 
-<div class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
+<div tabindex="0" @onblur="HandleBlur" class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
     <span @onclick="SelectClicked">
         @_labelFragment
     </span>
@@ -21,26 +21,25 @@
     <div class="ae content-wrapper">
         @foreach (var item in Items)
         {
-        <div class="ae button-wrapper" style="flex-direction:row">
-            @if (_Selected.Contains(item))
-            {
-                <i class="far fa-check-square" style="width: 1.5rem; float:left; padding:9px 8px;"></i>
-            }
-            else
-            {
-                <i class="far fa-square" style="width: 1.5rem; float:left; padding:9px 8px;"></i>
-            }
-            <div class="ae dropdown-item"  @onclick="() => HandleItemClick(item)">
-                @Renderer(item)
+            <div class="ae button-wrapper" @onclick="() => HandleItemClick(item)">
+                @if (_Selected.Contains(item))
+                {
+                    <i class="far fa-check-square check" ></i>
+                }
+                else
+                {
+                    <i class="far fa-square check"></i>
+                }
+                <div class="ae dropdown-item">
+                    @Renderer(item)
+                </div>
             </div>
-        </div>
         }
+        <AeButton @onclick="HandleClear">Clear</AeButton>
     </div>
 </div>
 
 @code {
-  //add all selected items to list, and on close invoke them all same way regular dropdown does?
-  //maybe change the onclick to new function that toggles visibility but also on clse does some stuff?
 
   [Parameter]
   public string Label { get; set; }
@@ -60,6 +59,15 @@
 
   private RenderFragment _labelFragment;
 
+  private void HandleBlur()
+  {
+        if (_open)
+        {
+            HandleClose();
+        }
+        _open = false;
+  }
+
   protected override void OnParametersSet()
   {
       if(Renderer is null)
@@ -75,7 +83,7 @@
             _labelFragment = @<AeButton>
                                 @Label
                                 <AeIcon Icon="fas fa-caret-down" />
-                            </AeButton>;
+                                </AeButton>;
       }
       else
       {
@@ -89,6 +97,12 @@
       {
           OnChange?.Invoke(item);
       }
+  }
+
+  private void HandleClear()
+  {
+      _Selected.Clear();
+      StateHasChanged();
   }
 
   private void HandleItemClick(T item)
@@ -117,7 +131,6 @@
       if (_open)
       {
           HandleClose();
-          _Selected.Clear();
       }
       _open = !_open;
   }
