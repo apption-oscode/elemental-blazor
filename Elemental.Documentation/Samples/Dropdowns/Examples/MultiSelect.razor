@@ -6,7 +6,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Basic Multi-Select dropdown
-    Description: Dropdown style selector, the OnChange function will be invoked once for every item you selected before closing
+    Description: Dropdown style selector, the OnChange function will be invoked once for every item you selected or deselected before closing. The boolean will be tru for selected and false for deselected
 *@
 
 <AeButton style="width:3rem;" @onclick="clearSelected" >Clear</AeButton>
@@ -38,9 +38,15 @@
   }
 
   //This is invoked once for every item you selected before closing
-  private void HandleDropdownChange(string selectedItem)
+  private void HandleDropdownChange(string selectedItem, bool selected)
   {
-      _selectedItem.Add(selectedItem);
+      if (selected)
+      {
+          _selectedItem.Add(selectedItem);
+      } else
+      {
+          _selectedItem.Remove(selectedItem);
+      }
       StateHasChanged();
   }
 }

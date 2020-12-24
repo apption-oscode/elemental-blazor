@@ -40,13 +40,14 @@
 </div>
 
 @code {
+  //CLEAR BUTTON NEED FIXING, IT ONLY CLEARED SELECTED
 
   [Parameter]
   public string Label { get; set; }
   [Parameter]
   public RenderFragment LabelRenderFragment { get; set; }
   [Parameter]
-  public Action<T> OnChange { get; set; }
+  public Action<T, bool> OnChange { get; set; }
   [Parameter]
   public IEnumerable<T> Items { get; set; }
   [Parameter]
@@ -55,7 +56,9 @@
   private string _wrapperClassname => $"ae dropdown-wrapper {_inputClass}";
   private string _id = $"ae-{Guid.NewGuid().ToString()}";
   private bool _open = false;
-  private List<T> _Selected = new List<T>();
+  private List<T> _Selected = new List<T>(); //all items currently check odd
+  private List<T> _Changed = new List<T>(); //items newly selected/ deselected
+  private System.Collections.Concurrent.ConcurrentDictionary<T, bool> _NewSelection = new System.Collections.Concurrent.ConcurrentDictionary<T, bool>(); //whether an item is selected or deselected
 
   private RenderFragment _labelFragment;
 
@@ -93,14 +96,19 @@
 
   private void HandleClose()
   {
-      foreach (T item in _Selected)
+      foreach (T item in _Changed)
       {
-          OnChange?.Invoke(item);
+          OnChange?.Invoke(item, _NewSelection[item]);
       }
   }
 
   private void HandleClear()
   {
+      foreach (T item in _Selected)
+      {
+            _Changed.Add(item);
+            _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
+      }
       _Selected.Clear();
       StateHasChanged();
   }
@@ -109,10 +117,14 @@
   {
       if (_Selected.Contains(item))
       {
+          _Changed.Add(item);
+          _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
           _Selected.Remove(item);
       }
       else
       {
+          _Changed.Add(item);
+          _NewSelection.AddOrUpdate(item, true, (key, oldValue) => true);
           _Selected.Add(item);
       }
   }
@@ -131,6 +143,10 @@
       if (_open)
       {
           HandleClose();
+      } else
+      {
+          _Changed.Clear();
+          _NewSelection.Clear();
       }
       _open = !_open;
   }
