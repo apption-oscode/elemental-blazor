@@ -1,0 +1,31 @@
+﻿@import 'colors';
+@import 'constants';
+@import 'utils';
+@import 'box-shadow';
+
+    .listItem {
+    position: relative;
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    }
+
+/*
+$listOptions:(
+
+    ".list-group-item" : (
+    "position": relative,
+    "display": block,
+    "padding": .5rem 1rem,
+    "text-decoration": none,
+    "background-color": #fff,
+    "border": 1px solid rgba(0,0,0,.125),
+    ),
+) !default;
+
+.ae.list {
+@include set-variations($listOptions);
+}
+*/

@@ -1,0 +1,21 @@
+﻿@*
+    Copyright if necessary //todo
+*@
+
+@inherits HtmlElement
+@typeparam T
+
+<ul class="ae list" @attributes="InputAttributesWithoutClass">
+    @foreach (var item in Items)
+    {
+        <li class="@_classname">@item</li>
+
+    }
+</ul>
+
+@code{
+    [Parameter]
+    public IEnumerable<T> Items { get; set; }
+
+    private string _classname => $"ae list {_inputClass}";
+}
