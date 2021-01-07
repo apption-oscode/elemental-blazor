@@ -3,19 +3,18 @@
 *@
 
 @inherits HtmlElement
-@typeparam T
 
-<ul class="ae list" @attributes="InputAttributesWithoutClass">
+<ul class="@_classname" @attributes="InputAttributesWithoutClass">
     @foreach (var item in Items)
     {
-        <li class="@_classname">@item</li>
+        <li class="ae list-item">@item</li>
 
     }
 </ul>
 
 @code{
     [Parameter]
-    public IEnumerable<T> Items { get; set; }
+    public IEnumerable<string> Items { get; set; }
 
     private string _classname => $"ae list {_inputClass}";
 }
