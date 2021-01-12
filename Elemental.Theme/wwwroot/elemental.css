@@ -1684,15 +1684,13 @@ body {
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-.ae.list {
-  padding-left: 0; }
-  .ae.list .ae.list-item {
-    position: relative;
-    display: block;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125); }
+.ae.list .ae.list-item {
+  position: relative;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  list-style-position: inside; }
 
 /*
     Third party

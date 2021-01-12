@@ -3,15 +3,24 @@
 
 
 $listOptions:(
-    "padding-left": 0,
+    /*"padding-left": 0,
+    ".ae.list-item:first-child" :(
+        "border-radius": 15px 15px 0 0,
+    ),
+    ".ae.list-item:last-child" :(
+        "border-radius": 0 0 15px 15px,
+    ),
+    */
+
     ".ae.list-item" : (
         "position": relative,
-        "display": block,
         "padding": .5rem 1rem,
         "text-decoration": none,
         "background-color": #fff,
         "border": 1px solid rgba(0,0,0,.125),
+        "list-style-position": inside,
     ),   
+    
 ) !default;
 
 .ae.list {
