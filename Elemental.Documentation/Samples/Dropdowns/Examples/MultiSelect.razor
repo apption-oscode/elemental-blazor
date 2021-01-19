@@ -11,14 +11,26 @@
 
 <AeButton style="width:3rem;" @onclick="clearSelected" >Clear</AeButton>
 
-<AeTypography>Selected item: </AeTypography>
+<AeTypography>Selected items: </AeTypography>
 
-@foreach (string _item in _selectedItem)
+@foreach (string _item in _selectedItems)
 {
     <AeTypography>@_item</AeTypography>
 }
 
+<AeTypography>Removed items: </AeTypography>
 
+@foreach (string _item in _removed)
+{
+    <AeTypography>@_item</AeTypography>
+}
+
+<AeTypography>Added items: </AeTypography>
+
+@foreach (string _item in _added)
+{
+    <AeTypography>@_item</AeTypography>
+}
 
 <AeSelect T="string" 
         Label="Basic Select"
@@ -26,8 +38,9 @@
           OnChange="@HandleDropdownChange" />
 
 @code {
-
-  private List<string> _selectedItem = new List<string>();
+    private List<string> _selectedItems = new List<string>();
+    private List<string> _added = new List<string>();
+    private List<string> _removed = new List<string>();
 
   private List<string> _dropdownItems = new List<string>
     {
@@ -35,19 +48,16 @@
     };
 
   private void clearSelected() {
-      _selectedItem.Clear();
+      _selectedItems.Clear();
   }
 
   //This is invoked once for every item you selected before closing
-  private void HandleDropdownChange((string selectedItem, bool isSelected) arg)
+  private void HandleDropdownChange(AeSelectChange<string> arg)
   {
-      if (arg.isSelected)
-      {
-          _selectedItem.Add(arg.selectedItem);
-      } else
-      {
-          _selectedItem.Remove(arg.selectedItem);
-      }
+      _removed = arg.RemovedItems.ToList();
+      _added = arg.AddedItems.ToList();
+      _selectedItems.AddRange(_added);
+      _selectedItems = _selectedItems.Except(_removed).ToList();
       StateHasChanged();
   }
 }

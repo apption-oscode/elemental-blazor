@@ -47,7 +47,7 @@
   [Parameter]
   public RenderFragment LabelRenderFragment { get; set; }
   [Parameter]
-  public EventCallback<(T, bool)> OnChange { get; set; }
+  public EventCallback<AeSelectChange<T>> OnChange { get; set; }
   [Parameter]
   public IEnumerable<T> Items { get; set; }
   [Parameter] 
@@ -86,7 +86,8 @@
             _labelFragment = @<AeButton>
                                 @Label
                                 <AeIcon Icon="fas fa-caret-down" />
-                                </AeButton>;
+                                </AeButton>
+    ;
       }
       else
       {
@@ -95,11 +96,12 @@
   }
 
   private async Task HandleClose()
-  {
-      foreach (T item in _Changed)
-      {
-          await OnChange.InvokeAsync((item, _NewSelection[item]));
-      }
+    {
+      var changed = new AeSelectChange<T>();
+      changed.AddedItems = _Changed.Where(t => _NewSelection[t]).ToList();
+      changed.RemovedItems = _Changed.Where(t => !_NewSelection[t]).ToList();
+      await OnChange.InvokeAsync(changed);
+
   }
 
   private void HandleClear()
