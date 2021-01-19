@@ -47,10 +47,10 @@
   [Parameter]
   public RenderFragment LabelRenderFragment { get; set; }
   [Parameter]
-  public Action<T, bool> OnChange { get; set; }
+  public EventCallback<(T, bool)> OnChange { get; set; }
   [Parameter]
   public IEnumerable<T> Items { get; set; }
-  [Parameter]
+  [Parameter] 
   public Func<T, RenderFragment> Renderer { get; set; }
 
   private string _wrapperClassname => $"ae dropdown-wrapper {_inputClass}";
@@ -94,11 +94,11 @@
       }
   }
 
-  private void HandleClose()
+  private async Task HandleClose()
   {
       foreach (T item in _Changed)
       {
-          OnChange?.Invoke(item, _NewSelection[item]);
+          await OnChange.InvokeAsync((item, _NewSelection[item]));
       }
   }
 

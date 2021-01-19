@@ -20,9 +20,10 @@
 
 
 
-<AeSelect Label="Basic Select"
+<AeSelect T="string" 
+        Label="Basic Select"
           Items="_dropdownItems"
-          OnChange="HandleDropdownChange" />
+          OnChange="@HandleDropdownChange" />
 
 @code {
 
@@ -38,14 +39,14 @@
   }
 
   //This is invoked once for every item you selected before closing
-  private void HandleDropdownChange(string selectedItem, bool selected)
+  private void HandleDropdownChange((string selectedItem, bool isSelected) arg)
   {
-      if (selected)
+      if (arg.isSelected)
       {
-          _selectedItem.Add(selectedItem);
+          _selectedItem.Add(arg.selectedItem);
       } else
       {
-          _selectedItem.Remove(selectedItem);
+          _selectedItem.Remove(arg.selectedItem);
       }
       StateHasChanged();
   }
