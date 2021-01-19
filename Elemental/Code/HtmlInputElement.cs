@@ -26,7 +26,7 @@ namespace Elemental.Code
         [Parameter]
         public string Placeholder { get; set; }
         [Parameter]
-        public Action<string> OnInputChange { get; set; }
+        public EventCallback<string> OnInputChange { get; set; }
         [Parameter]
         public int EventTimer { get; set; } = 500;
         [Parameter]
@@ -57,9 +57,9 @@ namespace Elemental.Code
 
         protected void OnTimerFire(Object source, ElapsedEventArgs e)
         {
-            InvokeAsync(() =>
+            InvokeAsync(async () =>
             {
-                OnInputChange?.Invoke(_inputValue);
+                await OnInputChange.InvokeAsync(_inputValue);
                 OnInputChangeWithLastKey?.Invoke(_inputValue, _lastKey);
             });
         }
