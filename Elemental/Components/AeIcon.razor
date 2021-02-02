@@ -13,6 +13,23 @@
 @code {
     [Parameter]
     public string Icon { get; set; }
+    [Parameter]
+    public RXIcon.RXStyle? IconStyle { get; set; }
 
-    private string _classname => $"ae icon {Icon} {_inputClass}";
+    private string _classname => $"ae icon ri-{Icon}-{_iconStyle} {_inputClass}";
+
+
+    private string _iconStyle
+    {
+        get
+        {
+            switch (IconStyle)
+            {
+                case RXIcon.RXStyle.Fill:
+                    return "fill";                
+                default:
+                    return "line";
+            }
+        }
+    }
 }
