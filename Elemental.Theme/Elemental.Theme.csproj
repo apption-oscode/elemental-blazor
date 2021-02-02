@@ -48,6 +48,10 @@
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Styles\layoutV2.scss" />
+  </ItemGroup>
 	
 	
 

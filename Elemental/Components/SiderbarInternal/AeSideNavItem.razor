@@ -1,0 +1,85 @@
+﻿@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components.Routing
+
+@implements IDisposable
+
+
+<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick" @onmousemove="HandleItemHover" @onmouseout="() => _showTooltip = false">
+    @if (!string.IsNullOrEmpty(Link.IconName))
+    {
+        <AeIcon Icon="@Link.IconName" IconStyle="Link.IconStyle" />
+    }
+    <div class="label">@Link.Label</div>
+    <span class="tooltip-text @(_showTooltip ? "show" : "")">@Link.Label</span>
+</a>
+
+
+@code {
+    [Parameter]
+    public AeNavLink Link { get; set; }
+    [Parameter]
+    public Action<AeNavLink> ToggleSublink { get; set; }
+    [Parameter]
+    public bool IsCollapsed { get; set; }
+    private bool _active = false;
+
+    private bool _showTooltip = false;
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            InitializedNavItem();
+        }
+    }
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        base.InvokeAsync(() =>
+        {
+            InitializedNavItem();
+        });
+    }
+
+    private void HandleLinkClick()
+    {
+        if (Link.ChildLinks != null)
+            NavigationManager.NavigateTo(Link.ChildLinks.First().To, false);
+        else
+            NavigationManager.NavigateTo(Link.To, false);
+        ToggleSublink.Invoke(Link);
+    }
+
+    private void HandleItemHover()
+    {
+        if (IsCollapsed)
+        {
+            _showTooltip = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+    private void InitializedNavItem()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var path = uri.LocalPath;
+
+        if (path == Link?.To || (Link.ChildLinks != null && Link.ChildLinks.Any(l => l.To == path)))
+        {
+            _active = true;
+            ToggleSublink.Invoke(Link);
+        }
+        else
+            _active = false;
+        StateHasChanged();
+    }
+}

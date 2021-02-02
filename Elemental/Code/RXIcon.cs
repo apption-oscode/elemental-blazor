@@ -12,12 +12,12 @@ namespace Elemental.Code
         public string Classname { get; set; }
         public RXStyle Style { get; set; }
 
-
         public enum RXStyle
         {
             Line,
             Fill
         }
+        
   //<i class="ri-admin-line ri-fw"></i> <!-- fixed width -->
   //< i class="ri-admin-line ri-xxs"></i> <!-- 0.5em -->
   //<i class="ri-admin-line ri-xs"></i> <!-- 0.75em -->

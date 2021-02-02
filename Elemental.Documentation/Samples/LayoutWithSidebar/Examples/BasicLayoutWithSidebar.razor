@@ -1,0 +1,91 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Layout with Sidebar
+    Description: The most basic of page layout with sidebar
+*@
+
+<AeTypography Variant="h2">Instruction</AeTypography>
+<AeTypography>
+    Include the following line to <i>&lt;head&gt;</i>
+</AeTypography>
+<div class="code-wrapper">
+    <pre style="margin: 0"><code class="language-html">
+        @(@"<script src=""_content/Apption.Elemental/js/browser-resize.js""></script>")
+    </code></pre>
+</div>
+<AeTypography style="margin-top: .75rem;" Variant="h4">C#</AeTypography>
+
+<div class="code-wrapper">
+    <pre style="margin: 0"><code class="language-html">
+@(@"
+<AeLayoutV2 Links=""_navLinks"">
+    <Brand>
+        <a class=""ae typography nav-logo-wrapper"" href=""https://www.apption.com"">
+            <div class=""nav-logo"">
+                <img src=""/img/apption-logo-white.svg"" />
+            </div>
+        </a>
+    </Brand>
+    <BrandSmall>
+        <a class=""ae typography nav-logo-wrapper"" href=""https://www.apption.com"">
+            <div class=""nav-logo"">
+                <img src=""/img/apption-logo-white.svg"" />
+            </div>
+        </a>
+    </BrandSmall>
+    <ChildContent>Content Body</ChildContent>
+</AeLayoutV2>
+
+")
+</code></pre>
+</div>
+
+@code {
+    @using Elemental.Code;
+
+    private List<AeNavLink> _navLinks = new List<AeNavLink>
+{
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "Home",
+        },
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "News",
+        },
+        new AeNavLink()
+        {
+            To = "#",
+            Label = "About",
+        },
+        new AeNavLink()
+        {
+            Label = "Dropdown",
+            ChildLinks = new List<AeNavLink>()
+    {
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 1"
+                },
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 2"
+                },
+                new AeNavLink()
+                {
+                    To = "#",
+                    Label = "Link 3"
+                },
+            }
+        },
+    };
+}

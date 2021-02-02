@@ -163,6 +163,181 @@ body {
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.layout-v2 {
+  display: flex;
+  flex-direction: row; }
+  .ae.layout-v2 .ae.top-nav {
+    padding-right: 2rem;
+    padding-left: 0.5rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14);
+    height: 0vh;
+    display: flex;
+    align-items: center; }
+    .ae.layout-v2 .ae.top-nav .nav-expand {
+      padding: 0.25rem 0.25rem;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      text-align: center;
+      min-width: 40px;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border-radius: 2px;
+      opacity: 0.9; }
+      .ae.layout-v2 .ae.top-nav .nav-expand:hover {
+        background-color: #2d3748;
+        color: #fff; }
+  .ae.layout-v2 .ae.side-nav {
+    position: fixed;
+    top: 0vh;
+    left: 0;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    color: #4a5568;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14); }
+    .ae.layout-v2 .ae.side-nav .header {
+      text-align: center; }
+    .ae.layout-v2 .ae.side-nav .menu {
+      flex-grow: 1; }
+      .ae.layout-v2 .ae.side-nav .menu .item {
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        text-decoration: none;
+        cursor: pointer;
+        border-left: 4px solid transparent; }
+        .ae.layout-v2 .ae.side-nav .menu .item.active {
+          background-color: #e2e8f0;
+          border-left-color: #2d3748; }
+        .ae.layout-v2 .ae.side-nav .menu .item:hover:not(.active) {
+          background-color: #edf2f7; }
+        .ae.layout-v2 .ae.side-nav .menu .item i {
+          padding-left: 0.5rem;
+          font-size: 1.5rem;
+          text-align: center;
+          min-width: 40px; }
+        .ae.layout-v2 .ae.side-nav .menu .item .label {
+          padding-left: 1rem; }
+        .ae.layout-v2 .ae.side-nav .menu .item .tooltip-text {
+          display: inline-block;
+          z-index: 1;
+          visibility: hidden;
+          position: absolute;
+          border-radius: 4px;
+          padding: 0.25rem 0.5rem;
+          left: 40px;
+          opacity: 0;
+          white-space: pre-line;
+          color: #ffffff;
+          background-color: #4a5568;
+          transition: all 0.1s ease-in;
+          margin-top: 25px; }
+          .ae.layout-v2 .ae.side-nav .menu .item .tooltip-text.show {
+            visibility: visible;
+            opacity: 1; }
+        .ae.layout-v2 .ae.side-nav .menu .item .tooltip-wrapper {
+          position: absolute;
+          top: 0;
+          right: 0; }
+      .ae.layout-v2 .ae.side-nav .menu .subnav-wrapper {
+        display: none; }
+        .ae.layout-v2 .ae.side-nav .menu .subnav-wrapper.expanded {
+          display: flex;
+          flex-direction: column;
+          background-color: #e2e8f0; }
+        .ae.layout-v2 .ae.side-nav .menu .subnav-wrapper .item.active {
+          background-color: #cbd5e0; }
+        .ae.layout-v2 .ae.side-nav .menu .subnav-wrapper i {
+          font-size: 1.25rem; }
+        .ae.layout-v2 .ae.side-nav .menu .subnav-wrapper .item.indent i {
+          margin-left: 16px; }
+    .ae.layout-v2 .ae.side-nav .bottom .toggle-expand {
+      display: flex;
+      justify-content: center;
+      height: 3rem;
+      font-size: 1.5rem;
+      align-items: center;
+      color: #a0aec0;
+      margin-left: auto;
+      max-width: 56px; }
+      .ae.layout-v2 .ae.side-nav .bottom .toggle-expand:hover {
+        cursor: pointer;
+        background-color: #edf2f7;
+        color: #a0aec0; }
+    .ae.layout-v2 .ae.side-nav.slide-in {
+      transform: translateX(0);
+      -webkit-transform: translateX(0); }
+    .ae.layout-v2 .ae.side-nav.slide-out {
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%); }
+  .ae.layout-v2 .ae.side-nav-overlay {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.2); }
+  .ae.layout-v2 .ae.body-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    transition: margin 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: 100vh;
+    margin-top: 0vh; }
+  .ae.layout-v2 .hide {
+    display: none !important; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 /** Transparent **/
 /** Black **/
 /** White **/

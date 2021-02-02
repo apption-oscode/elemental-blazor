@@ -15,8 +15,10 @@
     public string Icon { get; set; }
     [Parameter]
     public RXIcon.RXStyle? IconStyle { get; set; }
+    [Parameter]
+    public string Size { get; set; }
 
-    private string _classname => $"ae icon ri-{Icon}-{_iconStyle} {_inputClass}";
+    private string _classname => $"ae icon ri-{Icon}-{_iconStyle} {_inputClass} {(String.IsNullOrEmpty(Size) ? "": $"ri-{Size}")}";
 
 
     private string _iconStyle
@@ -26,7 +28,7 @@
             switch (IconStyle)
             {
                 case RXIcon.RXStyle.Fill:
-                    return "fill";                
+                    return "fill";
                 default:
                     return "line";
             }
