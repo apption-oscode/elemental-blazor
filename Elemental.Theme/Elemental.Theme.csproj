@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Styles\button.scss" />
     <None Remove="Styles\layoutV2.scss" />
   </ItemGroup>
 	

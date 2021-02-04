@@ -1867,6 +1867,60 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.125);
   list-style-position: inside; }
 
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.icon.blue {
+  color: #3182ce; }
+
+.ae.icon.red {
+  color: #e53e3e; }
+
+.ae.icon.orange {
+  color: #dd6b20; }
+
+.ae.icon.yellow {
+  color: #d69e2e; }
+
+.ae.icon.green {
+  color: #38a169; }
+
+.ae.icon.teal {
+  color: #319795; }
+
+.ae.icon.indigo {
+  color: #5a67d8; }
+
+.ae.icon.purple {
+  color: #805ad5; }
+
+.ae.icon.pink {
+  color: #d53f8c; }
+
 /*
     Third party
 */
