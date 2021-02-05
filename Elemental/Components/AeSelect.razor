@@ -40,7 +40,7 @@
 </div>
 
 @code {
-  //BUG: sometimes clicking outside the dropdown does not work as expected
+  //BUG: sometimes clicking outside the dropdown does not work as expected (visibility doesn't toggle)
 
   [Parameter]
   public string Label { get; set; }
@@ -89,86 +89,92 @@
                                 <AeIcon Icon="fas fa-caret-down" />
                                 </AeButton>
     ;
-        }
-        else
-        {
-            _labelFragment = LabelRenderFragment;
-        }
-    }
+      }
+      else
+      {
+          _labelFragment = LabelRenderFragment;
+      }
+  }
 
-    private async Task HandleClose()
-    {
-        var changed = new AeSelectChange<T>();
-        changed.AddedItems = _Changed.Where(t => _NewSelection[t]).ToList();
-        changed.RemovedItems = _Changed.Where(t => !_NewSelection[t]).ToList();
-        await OnChange.InvokeAsync(changed);
+  private async Task HandleClose()
+  {
+      var changed = new AeSelectChange<T>();
+      changed.AddedItems = _Changed.Where(t => _NewSelection[t]).ToList();
+      changed.RemovedItems = _Changed.Where(t => !_NewSelection[t]).ToList();
+      await OnChange.InvokeAsync(changed);
 
-    }
+  }
 
-    private void HandleClear()
-    {
-        foreach (T item in _Selected)
-        {
-            _Changed.Add(item);
-            _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
-        }
-        _Selected.Clear();
-        StateHasChanged();
-    }
+  private void HandleClear()
+  {
+      foreach (T item in _Selected)
+      {
+          _Changed.Add(item);
+          _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
+      }
+      _Selected.Clear();
+      StateHasChanged();
+  }
 
-    private void HandleItemClick(T item)
-    {
-        if (_Selected.Contains(item))
-        {
-            _Changed.Add(item);
-            _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
-            _Selected.Remove(item);
-        }
-        else
-        {
-            _Changed.Add(item);
-            _NewSelection.AddOrUpdate(item, true, (key, oldValue) => true);
-            _Selected.Add(item);
-        }
-    }
+  private void HandleItemClick(T item)
+  {
+      if (_Selected.Contains(item))
+      {
+          if (!_Changed.Contains(item))
+          {
+              _Changed.Add(item);
+          }
+          _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
+          _Selected.Remove(item);
+      }
+      else
+      {
+          if (!_Changed.Contains(item))
+          {
+              _Changed.Add(item);
+          }
+          _NewSelection.AddOrUpdate(item, true, (key, oldValue) => true);
+          _Selected.Add(item);
+      }
+  }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("aedropdown.initialize", _id);
-        }
-    }
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+      if (firstRender)
+      {
+          await JSRuntime.InvokeVoidAsync("aedropdown.initialize", _id);
+      }
+  }
 
-    private async Task SelectClicked()
-    {
-        ToggleVisiblity();
-        if (_open)
-        {
-            await HandleClose();
-        } else
-        {
-            _Changed.Clear();
-            _NewSelection.Clear();
-        }
-        _open = !_open;
-        System.Console.WriteLine(_open);
-    }
+  private async Task SelectClicked()
+  {
+      ToggleVisiblity();
+      if (_open)
+      {
+          await HandleClose();
+      } else
+      {
+          _Changed.Clear();
+          _NewSelection.Clear();
+      }
+      _open = !_open;
+      System.Console.WriteLine(_open);
+  }
 
-    private void ToggleVisiblity()
-    {
-        InvokeAsync(async () =>
-        {
-            await JSRuntime.InvokeVoidAsync("aedropdown.toggleVisibility", _id);
-        });
-    }
+  private void ToggleVisiblity()
+  {
+      InvokeAsync(async () =>
+      {
+          await JSRuntime.InvokeVoidAsync("aedropdown.toggleVisibility", _id);
+      });
+  }
 
 
-    public void Dispose()
-    {
-        InvokeAsync(async () =>
-        {
-            await JSRuntime.InvokeVoidAsync("aedropdown.dispose", _id);
-        });
-    }
+  public void Dispose()
+  {
+      InvokeAsync(async () =>
+      {
+          await JSRuntime.InvokeVoidAsync("aedropdown.dispose", _id);
+      });
+  }
 }
