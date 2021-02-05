@@ -625,7 +625,8 @@ body {
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 .ae.dropdown-wrapper {
-  outline: none; }
+  outline: none;
+  width: 0; }
   .ae.dropdown-wrapper .ae.button i {
     margin: 0 -0.5rem 0 0.5rem; }
   .ae.dropdown-wrapper .ae.content-wrapper {
