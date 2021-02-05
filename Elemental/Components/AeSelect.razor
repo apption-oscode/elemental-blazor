@@ -40,7 +40,7 @@
 </div>
 
 @code {
-  //CLEAR BUTTON NEED FIXING, IT ONLY CLEARED SELECTED
+  //BUG: sometimes clicking outside the dropdown does not work as expected (visibility doesn't toggle)
 
   [Parameter]
   public string Label { get; set; }
@@ -62,13 +62,14 @@
 
   private RenderFragment _labelFragment;
 
-  private void HandleBlur()
+  private async Task HandleBlur()
   {
         if (_open)
         {
-            HandleClose();
+            await HandleClose();
         }
         _open = false;
+        System.Console.WriteLine(_open);
   }
 
   protected override void OnParametersSet()
@@ -96,7 +97,7 @@
   }
 
   private async Task HandleClose()
-    {
+  {
       var changed = new AeSelectChange<T>();
       changed.AddedItems = _Changed.Where(t => _NewSelection[t]).ToList();
       changed.RemovedItems = _Changed.Where(t => !_NewSelection[t]).ToList();
@@ -108,8 +109,8 @@
   {
       foreach (T item in _Selected)
       {
-            _Changed.Add(item);
-            _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
+          _Changed.Add(item);
+          _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
       }
       _Selected.Clear();
       StateHasChanged();
@@ -119,13 +120,19 @@
   {
       if (_Selected.Contains(item))
       {
-          _Changed.Add(item);
+          if (!_Changed.Contains(item))
+          {
+              _Changed.Add(item);
+          }
           _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
           _Selected.Remove(item);
       }
       else
       {
-          _Changed.Add(item);
+          if (!_Changed.Contains(item))
+          {
+              _Changed.Add(item);
+          }
           _NewSelection.AddOrUpdate(item, true, (key, oldValue) => true);
           _Selected.Add(item);
       }
@@ -139,18 +146,19 @@
       }
   }
 
-  private void SelectClicked()
+  private async Task SelectClicked()
   {
       ToggleVisiblity();
       if (_open)
       {
-          HandleClose();
+          await HandleClose();
       } else
       {
           _Changed.Clear();
           _NewSelection.Clear();
       }
       _open = !_open;
+      System.Console.WriteLine(_open);
   }
 
   private void ToggleVisiblity()
