@@ -38,6 +38,7 @@
     protected override async Task OnInitializedAsync()
     {
         _starship = await CreateStarship();
+        _starship.Classification = "c";
     }
 
     private async Task OnChange(ModelFormChangeArgs<InteractiveStarship> args)
