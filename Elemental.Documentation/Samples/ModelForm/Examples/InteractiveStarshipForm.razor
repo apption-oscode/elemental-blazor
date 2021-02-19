@@ -47,11 +47,15 @@
         {
             await args.Context.UpdateValidValues(s => s.SubClassification, new[] { _starship.Classification + "1", _starship.Classification + "2", _starship.Classification + "3" });
         }
+        if(args.HasPropertyChanged(s => s.MaximumAccommodation))
+        {
+            await args.Context.RefreshModel.Invoke();
+        }
     }
 
     private async Task OnConfigure(ModelFormContext<InteractiveStarship> context)
     {
-        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });        
+        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });
     }
 
     private void HandleValidSubmit()

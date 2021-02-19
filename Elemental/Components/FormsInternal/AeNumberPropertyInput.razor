@@ -1,10 +1,10 @@
 ﻿@typeparam T
 @using Elemental.Components.Forms
+@using Microsoft.AspNetCore.Components.Forms
 
+<AeFormLabel PropertyInfo="@PropertyInfo" />
 
-<AeFormLabel PropertyInfo="@PropertyInfo"/>
-
-<Microsoft.AspNetCore.Components.Forms.InputNumber class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
+<Microsoft.AspNetCore.Components.Forms.InputNumber class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()" @onblur="UpdateModel"/>
 
 <div class="errortext">
     <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<T>(Instance,PropertyInfo))" />
@@ -16,6 +16,9 @@
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
+    //[Parameter]
+    //public EventCallback<ModelFormChangeArgs<T>> ValueChanged { get; set; }
+
     /// <summary>
     /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
     /// </summary>
@@ -26,7 +29,8 @@
 
     public T PropertyValue
     {
-        get {
+        get
+        {
             var val = PropertyInfo.GetValue(Instance);
             if (val is null) return default(T);
             return (T)val;
@@ -34,18 +38,32 @@
         set
         {
             PropertyInfo.SetValue(Instance, value);
+
         }
     }
 
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
-    [CascadingParameter(Name= "LabelForPropertyFunc")]
-    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+    [CascadingParameter(Name = "LabelForPropertyFunc")]
+    public Func<string, string> LabelForPropertyFunc { get; set; } = null;
+
+    [CascadingParameter(Name = "ModelFormContext")]
+    public ModelFormContext<T> ModelFormContext { get; set; } = null;
+
+    [CascadingParameter(Name = "OnChangeCallback")]
+    public EventCallback<ModelFormChangeArgs<T>> OnChangeCallback { get; set; }
 
     private string GetLabel()
     {
-        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
+        return AeModelFormTools.GetLabel(PropertyInfo, LabelForPropertyFunc, false);
+    }
+
+    private async Task UpdateModel()
+    {
+        await OnChangeCallback.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+        //OnChangeCallback.InvokeAsync(null).GetAwaiter().GetResult();
+        // return ValueChanged.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
     }
 
     private string GetID() => PropertyInfo.Name;

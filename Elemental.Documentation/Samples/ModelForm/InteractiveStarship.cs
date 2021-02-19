@@ -36,6 +36,9 @@ namespace Elemental.Documentation.Data
         [AeLabel(label: "Maximum Accomodation")]
         public int MaximumAccommodation { get; set; }
 
+        [AeLabel(label: "Maximum Accomodation Copy")]
+        public int MaximumAccommodationCopy => MaximumAccommodation;
+
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "This form disallows unapproved ships.")]
         [AeLabel("Validated Design")]
