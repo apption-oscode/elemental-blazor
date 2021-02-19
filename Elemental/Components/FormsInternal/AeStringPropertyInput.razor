@@ -6,7 +6,7 @@
 
 @if (!Editable)
 {
-    <Input disabled="true" Value="@(PropertyInfo.GetValue(Instance)?.ToString())" class="ae input" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
+    <Input disabled="true" Value="@GetFormattedValue()" class="ae input" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
 }
 else
 {
@@ -34,7 +34,7 @@ else
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
     [Parameter]
-    public bool Editable { get; set; } = true;    
+    public bool Editable { get; set; } = true;
 
     public string PropertyValue
     {
@@ -43,6 +43,34 @@ else
         {
             PropertyInfo.SetValue(Instance, value);
         }
+    }
+
+    public string GetFormattedValue()
+    {
+        var value = PropertyInfo.GetValue(Instance);
+
+        if (value is null)
+            return string.Empty;
+
+        var format = PropertyInfo.GetStringFormat();
+        if (format is null)
+        {
+            return value.ToString();
+        }
+        else
+        {
+            if (AeModelFormTools.IsNumericType(PropertyInfo.PropertyType))
+            {
+                var num = Convert.ToDouble(PropertyInfo.GetValue(Instance));
+                return num.ToString(format);
+            }
+            else
+            {
+                return value.ToString();
+            }
+        }
+
+
     }
 
     /// <summary>
