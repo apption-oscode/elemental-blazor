@@ -28,6 +28,14 @@ namespace Elemental.Code
             return IsNullable(propertyInfo.PropertyType);
         }
 
+        public static bool IsEditable(this PropertyInfo propertyInfo)
+        {
+            return EditableAttribute.IsDefined(propertyInfo, typeof(EditableAttribute))
+                ? (EditableAttribute.GetCustomAttribute(propertyInfo, typeof(EditableAttribute)) as EditableAttribute).AllowEdit
+                : true;
+
+        }
+
         public static bool IsDropDown(this PropertyInfo propertyInfo)
         {
             var hasValidValues = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))

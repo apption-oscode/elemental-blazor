@@ -516,6 +516,26 @@ body {
     outline: 0;
     box-shadow: 0 0 0 2px rgba(144, 205, 244, 0.2); }
 
+.ae.input.disabled {
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  color: #2d3748;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 2px;
+  transition: all 0.3s; }
+  .ae.input.disabled:hover {
+    border-color: #90cdf4; }
+  .ae.input.disabled:focus {
+    border-color: #90cdf4;
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba(144, 205, 244, 0.2); }
+
 .ae.search-wrapper {
   display: flex;
   align-items: baseline; }

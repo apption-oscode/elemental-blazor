@@ -25,10 +25,11 @@ namespace Elemental.Documentation
             services.AddScoped<GetDimensionsService>();
 
             //Use in modal
-            services.AddScoped<Elemental.Services.UIControlsService>();
+            //services.AddScoped<Elemental.Services.UIControlsService>();
+            //services.AddScoped<Elemental.Services.NotifierService>();
 
             //Use in downloading
-            //services.AddElemental();
+            services.AddElemental();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

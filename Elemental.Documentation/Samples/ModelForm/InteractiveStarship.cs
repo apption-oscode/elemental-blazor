@@ -37,6 +37,7 @@ namespace Elemental.Documentation.Data
         public int MaximumAccommodation { get; set; }
 
         [AeLabel(label: "Maximum Accomodation Copy")]
+        [Editable(false)]
         public int MaximumAccommodationCopy => MaximumAccommodation;
 
         [Required]

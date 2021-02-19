@@ -4,7 +4,7 @@
 
 <AeFormLabel PropertyInfo="@PropertyInfo" />
 
-<Microsoft.AspNetCore.Components.Forms.InputNumber class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()" @onblur="UpdateModel"/>
+<Microsoft.AspNetCore.Components.Forms.InputNumber class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()" @onblur="UpdateModel" />
 
 <div class="errortext">
     <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<T>(Instance,PropertyInfo))" />
@@ -51,8 +51,8 @@
     [CascadingParameter(Name = "ModelFormContext")]
     public ModelFormContext<T> ModelFormContext { get; set; } = null;
 
-    [CascadingParameter(Name = "OnChangeCallback")]
-    public EventCallback<ModelFormChangeArgs<T>> OnChangeCallback { get; set; }
+    [CascadingParameter(Name = "Notifier")]
+    public Func<Task> Notifier { get; set; }
 
     private string GetLabel()
     {
@@ -61,7 +61,8 @@
 
     private async Task UpdateModel()
     {
-        await OnChangeCallback.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+        await Notifier();
+        //await OnChangeCallback.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         //OnChangeCallback.InvokeAsync(null).GetAwaiter().GetResult();
         // return ValueChanged.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
     }
