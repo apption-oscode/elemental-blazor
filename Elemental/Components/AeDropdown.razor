@@ -30,7 +30,7 @@
     [Parameter]
     public string Label { get; set; }
     [Parameter]
-    public RenderFragment LabelRenderFragment { get; set; }
+    public Func<Task<RenderFragment>> LabelRenderFragment { get; set; }
     [Parameter]
     public Action<T> OnChange { get; set; }
     [Parameter]
@@ -43,7 +43,7 @@
 
     private RenderFragment _labelFragment;
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         if(Renderer is null)
         {
@@ -53,7 +53,7 @@
             });
         }
 
-        if(Label != null)
+        if(Label != null || LabelRenderFragment is null)
         {
             _labelFragment = @<AeButton>
                                 @Label
@@ -62,7 +62,7 @@
         }
         else
         {
-            _labelFragment = LabelRenderFragment;
+            _labelFragment = await LabelRenderFragment();
         }
     }
 

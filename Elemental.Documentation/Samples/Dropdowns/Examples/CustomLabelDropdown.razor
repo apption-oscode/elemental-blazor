@@ -11,14 +11,17 @@
 
 <AeTypography>Selected item: @_selectedItem</AeTypography>
 
-<AeDropdown LabelRenderFragment="_label"
+<AeDropdown LabelRenderFragment="getLabel"
             Items="_dropdownItems"
             OnChange="HandleDropdownChange" />
 
 @code {
-
     private string _selectedItem;
-    private RenderFragment _label = @<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>;
+
+    private async Task<RenderFragment> getLabel()
+    {
+        return @<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>;
+    }
 
     private List<string> _dropdownItems = new List<string>
     {
