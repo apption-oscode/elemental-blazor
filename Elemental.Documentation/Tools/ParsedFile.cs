@@ -10,15 +10,22 @@ namespace Elemental.Documentation
     public class ParsedFile
     {
         public string Pathname { get; private set; }
+        public string AdditionalCS { get; }
         public string Title { get; private set; }
         public object Description { get; private set; }
         public List<string> Html { get; private set; }
         public List<string> Code { get; private set; }
         public List<string> Scss { get; private set; }
+        public List<string> AdditionalCode { get; }
 
-        public ParsedFile (string path)
+        public ParsedFile (string path, string additionalCS)
         {
             Pathname = path;
+            if (!string.IsNullOrWhiteSpace(additionalCS))
+            {
+                AdditionalCode = ReadLines(additionalCS)?.ToList();
+            }
+            AdditionalCS = additionalCS;
             Initialize();
         }
 
