@@ -77,7 +77,7 @@ namespace Elemental.Tests
         [Fact]
         public void CanSetupParsedFile()
         {
-            var file = new ParsedFile(_testFilePath);
+            var file = new ParsedFile(_testFilePath, string.Empty);
 
             Assert.Equal(_testTitle, file.Title);
             Assert.Equal(_testDescription, file.Description);

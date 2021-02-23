@@ -38,6 +38,7 @@
     protected override async Task OnInitializedAsync()
     {
         _starship = await CreateStarship();
+        _starship.Classification = "c";
     }
 
     private async Task OnChange(ModelFormChangeArgs<InteractiveStarship> args)
@@ -50,7 +51,7 @@
 
     private async Task OnConfigure(ModelFormContext<InteractiveStarship> context)
     {
-        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });        
+        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });
     }
 
     private void HandleValidSubmit()

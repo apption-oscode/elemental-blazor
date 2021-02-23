@@ -4,29 +4,29 @@
 @using System.Reflection
 @using Microsoft.AspNetCore.Components.Forms
 
-    <AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false"/>
- 
-    @if (HasValidValues())
-    {
-        <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
-            @if (!AeModelFormTools.IsRequired(PropertyInfo))
+<AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false" />
+
+@if (HasValidValues())
+{
+    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
+        @if (!AeModelFormTools.IsRequired(PropertyInfo))
             {
             <option value="">@GetPlaceholder()</option>
             }
-            @foreach (var value in getValidValues())
+        @foreach (var value in getValidValues())
             {
             <option value="@value">@(GetLabel(value))</option>
             }
-        </Microsoft.AspNetCore.Components.Forms.InputSelect>
-    }
-    else
-    {
-        <select class="ae input"><option value="-">-</option></select>
-    }
+    </Microsoft.AspNetCore.Components.Forms.InputSelect>
+}
+else
+{
+    <select class="ae input"><option value="-">-</option></select>
+}
 
-    <div class="errortext">
-        <!--We can't actually fail to input a dropdown properly, this is here for style/spaceing consistency-->
-    </div>
+<div class="errortext">
+    <!--We can't actually fail to input a dropdown properly, this is here for style/spaceing consistency-->
+</div>
 
 @code {
     [Parameter]
@@ -53,11 +53,11 @@
         if (string.IsNullOrWhiteSpace(label))
             return "-";
         return label;
-    }       
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        var firstValue = getValidValues()?.FirstOrDefault();
+    {       
+        var firstValue = string.IsNullOrEmpty(PropertyValue) ? getValidValues()?.FirstOrDefault() : PropertyValue;
         if (firstRender && AeModelFormTools.IsRequired(PropertyInfo) && firstValue != null)
         {
             PropertyValue = firstValue;
@@ -67,13 +67,13 @@
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
-    [CascadingParameter(Name= "LabelForPropertyFunc")]
-    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+    [CascadingParameter(Name = "LabelForPropertyFunc")]
+    public Func<string, string> LabelForPropertyFunc { get; set; } = null;
 
-    [CascadingParameter(Name= "ModelFormContext")]
+    [CascadingParameter(Name = "ModelFormContext")]
     public ModelFormContext<T> ModelFormContext { get; set; } = null;
 
-    [CascadingParameter(Name= "OnChangeCallback")]
+    [CascadingParameter(Name = "OnChangeCallback")]
     public EventCallback<ModelFormChangeArgs<T>> OnChangeCallback { get; set; }
 
     private string GetLabel(string value)
@@ -94,7 +94,7 @@
     {
         get => PropertyInfo.GetValue(Instance) as string;
         set
-        {            
+        {
             PropertyInfo.SetValue(Instance, value);
             OnChangeCallback.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         }

@@ -2,20 +2,26 @@
 @using System.ComponentModel.DataAnnotations
 @using Elemental.Components.Forms
 
-    <AeFormLabel PropertyInfo="@PropertyInfo"/>
- 
+<AeFormLabel PropertyInfo="@PropertyInfo" />
+
+@if (!Editable)
+{
+    <Input disabled="true" Value="@GetFormattedValue()" class="ae input disabled" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
+}
+else
+{
     @if (HasStringLength() is null)
     {
-        <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" cols="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()"/>
+        <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" cols="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
     }
     else
     {
-        <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()"/>
+        <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
     }
     <div class="errortext">
-        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance,PropertyInfo))" />
+        <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance, PropertyInfo))" />
     </div>
-
+}
 
 @code {
 
@@ -27,6 +33,8 @@
 
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
+    [Parameter]
+    public bool Editable { get; set; } = true;
 
     public string PropertyValue
     {
@@ -37,15 +45,43 @@
         }
     }
 
+    public string GetFormattedValue()
+    {
+        var value = PropertyInfo.GetValue(Instance);
+
+        if (value is null)
+            return string.Empty;
+
+        var format = PropertyInfo.GetStringFormat();
+        if (format is null)
+        {
+            return value.ToString();
+        }
+        else
+        {
+            if (AeModelFormTools.IsNumericType(PropertyInfo.PropertyType))
+            {
+                var num = Convert.ToDouble(PropertyInfo.GetValue(Instance));
+                return num.ToString(format);
+            }
+            else
+            {
+                return value.ToString();
+            }
+        }
+
+
+    }
+
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
-    [CascadingParameter(Name= "LabelForPropertyFunc")]
-    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+    [CascadingParameter(Name = "LabelForPropertyFunc")]
+    public Func<string, string> LabelForPropertyFunc { get; set; } = null;
 
     private string GetLabel()
     {
-        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
+        return AeModelFormTools.GetLabel(PropertyInfo, LabelForPropertyFunc, false);
     }
 
     private string GetID() => PropertyInfo.Name;

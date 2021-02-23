@@ -1,0 +1,32 @@
+﻿@*
+    Copyright if necessary //todo
+*@
+
+@inherits HtmlElement
+@*
+    @using Microsoft.AspNetCore.Components.Routing;
+    @using Elemental.Components.ListInternal;
+*@
+
+<ul class="@_classname" @attributes="InputAttributesWithoutClass">
+    @if (Items != null)
+    {
+        @foreach (var item in Items)
+        {
+            <li class="ae list-item">@item</li>
+        }
+    }
+    @ChildContent
+
+    @*<AeListGroup Lists="itemList" />*@
+</ul>
+
+@code{
+    [Parameter]
+    public List<string> Items { get; set; }
+    @*[Parameter]
+        public List<AeListds> itemList { get; set; } = new List<AeListds>();
+    *@
+
+    private string _classname => $"ae list {_inputClass}";
+}

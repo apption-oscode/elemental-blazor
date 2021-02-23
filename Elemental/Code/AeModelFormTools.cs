@@ -28,6 +28,20 @@ namespace Elemental.Code
             return IsNullable(propertyInfo.PropertyType);
         }
 
+        public static string? GetStringFormat(this PropertyInfo propertyInfo)
+        {
+            return DisplayFormatAttribute.IsDefined(propertyInfo, typeof(DisplayFormatAttribute))
+                ? (DisplayFormatAttribute.GetCustomAttribute(propertyInfo, typeof(DisplayFormatAttribute)) as DisplayFormatAttribute).DataFormatString
+                : null;
+        }
+        public static bool IsEditable(this PropertyInfo propertyInfo)
+        {
+            return EditableAttribute.IsDefined(propertyInfo, typeof(EditableAttribute))
+                ? (EditableAttribute.GetCustomAttribute(propertyInfo, typeof(EditableAttribute)) as EditableAttribute).AllowEdit
+                : true;
+
+        }
+
         public static bool IsDropDown(this PropertyInfo propertyInfo)
         {
             var hasValidValues = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
@@ -76,7 +90,7 @@ namespace Elemental.Code
         }
 
         public static bool IsRequired(PropertyInfo propertyInfo)
-        {            
+        {
             return RequiredAttribute.IsDefined(propertyInfo, typeof(RequiredAttribute));
         }
 
@@ -195,7 +209,27 @@ namespace Elemental.Code
         public static string WithPropertyExpression<T>(Expression<Func<T, object>> expression)
         {
             return GetMemberName(expression.Body);
-            
+
+        }
+
+        private static HashSet<Type> NumericTypes = new HashSet<Type>
+        {
+            typeof(int),
+            typeof(uint),
+            typeof(double),
+            typeof(decimal),
+            typeof(byte),
+            typeof(sbyte),
+            typeof(long),
+            typeof(double),
+            typeof(ulong),
+            typeof(decimal),
+            typeof(float)
+        };
+        public static bool IsNumericType(Type type)
+        {
+            return NumericTypes.Contains(type) ||
+                   NumericTypes.Contains(Nullable.GetUnderlyingType(type));
         }
     }
 }

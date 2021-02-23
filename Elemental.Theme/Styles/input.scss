@@ -4,26 +4,35 @@
 
 
 $inputOptions: (
-    "margin": 0,
-    "display": inline-block,
-    "width": 100%,
-    "min-width": 0,
-    "padding": 0.5rem 0.75rem,
-    "color": $text-primary,
-    "font-size": 0.9rem,
-    "line-height": 1.5,
-    "background-color": $white,
-    "border": 1px solid $grey-300,
-    "border-radius": 2px,
-    "transition": all .3s,
-    "&:hover":(
-        "border-color": $blue-300,
+    "default" : (
+        "margin": 0,
+        "display": inline-block,
+        "width": 100%,
+        "min-width": 0,
+        "padding": 0.5rem 0.75rem,
+        "color": $text-primary,
+        "font-size": 0.9rem,
+        "line-height": 1.5,
+        "background-color": $white,
+        "border": 1px solid $grey-300,
+        "border-radius": 2px,
+        "transition": all .3s,
+        "&:hover":(
+            "border-color": $blue-300,
+        ),
+        "&:focus": (
+            "border-color": $blue-300,
+            "outline": 0,
+            "box-shadow": 0 0 0 2px rgba($blue-300, 0.2),
+        ),
     ),
-    "&:focus": (
-        "border-color": $blue-300,
-        "outline": 0,
-        "box-shadow": 0 0 0 2px rgba($blue-300, 0.2),
-    ),
+     "disabled": (
+        "background-color": $grey-300,
+        "border": 1px solid $grey-400,
+        "&:hover": (
+            "border-color": $grey-500,
+        ),
+    )
 ) !default;
 
 $inputWrapperOptions: (
@@ -89,7 +98,7 @@ $searchInputOptions: (
 ) !default;
 
 .ae.input {
-    @include set-values($inputOptions)
+    @include set-variations($inputOptions)
 }
 
 .ae.search-wrapper {

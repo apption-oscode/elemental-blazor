@@ -11,6 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddElemental(this IServiceCollection services)
         {
             services.AddSingleton<ICSVDataExportService, CSVDataExportService>();
+            services.AddScoped<UIControlsService>();
+            services.AddScoped<NotifierService>();
         }
     }
 }

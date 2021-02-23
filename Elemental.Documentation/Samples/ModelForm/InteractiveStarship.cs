@@ -36,6 +36,11 @@ namespace Elemental.Documentation.Data
         [AeLabel(label: "Maximum Accomodation")]
         public int MaximumAccommodation { get; set; }
 
+        [AeLabel(label: "Maintenance Cost")]
+        [Editable(false)]
+        [DisplayFormat(DataFormatString = "c")]
+        public double MaintenanceCost => MaximumAccommodation * 100;
+
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "This form disallows unapproved ships.")]
         [AeLabel("Validated Design")]

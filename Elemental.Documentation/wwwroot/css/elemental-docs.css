@@ -187,6 +187,60 @@
 /** Indigo **/
 /** Purple **/
 /** Pink **/
+.sidebar-page-container .layout-container {
+  background-color: #edf2f7;
+  font-size: 0.7rem;
+  color: #fff; }
+  .sidebar-page-container .layout-container .ae.layout-v2 {
+    display: flex; }
+  .sidebar-page-container .layout-container .ae.side-nav {
+    background-color: #90cdf4;
+    position: initial;
+    top: initial;
+    left: initial;
+    height: 448px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; }
+  .sidebar-page-container .layout-container .ae.body-wrapper.has-side-nav {
+    margin-left: 0; }
+  .sidebar-page-container .layout-container .ae.top-nav {
+    background-color: #63b3ed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: initial !important;
+    z-index: 1 !important; }
+  .sidebar-page-container .layout-container .ae.content-body {
+    background-color: #4299e1;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
 /**
  * Copyright (c) 2020 Apption Corporation
  * 
@@ -289,6 +343,22 @@ body {
       background-color: #f7fafc; }
     .sidenav .nav-link:hover {
       background-color: #f7fafc; }
+
+.ae.side-nav .header .logo {
+  background-color: #2b6cb0;
+  height: 48px;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center; }
+  .ae.side-nav .header .logo:hover {
+    background-color: #3182ce; }
+  .ae.side-nav .header .logo img {
+    height: 2rem;
+    padding-left: 1rem; }
+  .ae.side-nav .header .logo.small img {
+    overflow: hidden;
+    object-fit: cover;
+    object-position: 0%; }
 
 .demo-section + .demo-section {
   margin-top: 5rem; }

@@ -11,6 +11,9 @@ namespace Elemental.Code
     {
         public string To { get; set; }
         public string Label { get; set; }
+        public string IconName { get; set; }
+        public string IconClassName { get; set; }
+        public RXIcon.RXStyle IconStyle { get; set; }
         public List<AeNavLink> ChildLinks { get; set; }
         public RenderFragment CustomRender { get; set; }
     }
