@@ -1,0 +1,58 @@
+﻿@typeparam T
+
+@if (children != null && children.Count() > 0)
+{
+    <li class="tree-view-item">
+        <span class="caret @(IsCollapsed? "" : "caret-down")" @onclick="ItemClicked">
+            <AeIcon Icon="@nodeIcon"></AeIcon>
+            @nodeString
+        </span>
+    </li>
+    <ul class="nested @(IsCollapsed? "" : "active")">
+        @foreach (var child in children)
+        {
+            <TreeItem FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon" Root="child" />
+        }
+    </ul>
+}
+else
+{
+    <li class="tree-view-item">
+        @nodeString
+    </li>
+}
+
+@code {
+    [Parameter]
+    public Func<T, IEnumerable<T>> FetchChildren { get; set; }
+    
+    [Parameter]
+    public Func<T, string> RenderNode { get; set; }
+    
+    [Parameter]
+    public Func<T, string> RenderIcon { get; set; }
+
+    [Parameter]
+    public T Root { get; set; }
+
+    IEnumerable<T> children;
+
+    string nodeString;
+    string nodeIcon;
+
+    bool IsCollapsed = true;
+
+    private void ItemClicked()
+    {
+        IsCollapsed = !IsCollapsed;
+        StateHasChanged();
+    }
+
+    protected override void OnInitialized()
+    {
+        children = FetchChildren(Root);
+        nodeString = RenderNode(Root);
+        nodeIcon = RenderIcon(Root);
+    }
+
+}

@@ -1,0 +1,39 @@
+﻿@import 'colors';
+@import 'constants';
+@import 'box-shadow';
+@import 'utils';
+
+$treeViewOptions: ( 
+    "default":( 
+        "list-style-type": none,
+        "margin": 0,
+        "padding": 0,
+        ".tree-view-item": (
+            "list-style-type": none,
+            "margin-bottom": 8px,
+        ),
+        ".caret": (
+            "cursor": pointer,
+            "user-select": none, 
+        ),
+        ".caret::before": (
+            "content": "\2B9A",
+            "color": $grey-700,
+            "display": inline-block,
+            "margin-right": 6px,
+        ),
+        ".caret-down::before": (
+            "transform": rotate(90deg),
+        ),
+        ".nested": (
+            "display": none,
+        ),
+        ".active": (
+            "display": block,
+        ),
+    )
+) !default;
+
+.ae.tree-view {
+    @include set-variations($treeViewOptions);
+}

@@ -1,4 +1,5 @@
-﻿/**
+﻿@charset "UTF-8";
+/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -2015,6 +2016,89 @@ body {
 
 .ae.icon.pink {
   color: #d53f8c; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.tree-view {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .ae.tree-view .tree-view-item {
+    list-style-type: none;
+    margin-bottom: 8px; }
+  .ae.tree-view .caret {
+    cursor: pointer;
+    user-select: none; }
+  .ae.tree-view .caret::before {
+    content: "⮚";
+    color: #4a5568;
+    display: inline-block;
+    margin-right: 6px; }
+  .ae.tree-view .caret-down::before {
+    transform: rotate(90deg); }
+  .ae.tree-view .nested {
+    display: none; }
+  .ae.tree-view .active {
+    display: block; }
 
 /*
     Third party
