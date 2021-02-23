@@ -1595,11 +1595,11 @@ body {
     .ae.navbar .ae.navlinks .ae.navlink {
       display: inline-block;
       text-align: center;
-      padding: 1rem;
       text-decoration: none; }
       .ae.navbar .ae.navlinks .ae.navlink:hover {
         background-color: #2b6cb0; }
       .ae.navbar .ae.navlinks .ae.navlink .ae.typography {
+        padding: 1rem;
         color: #fff; }
     .ae.navbar .ae.navlinks .ae.nav-dropdown .ae.nav-dropdown-content {
       display: none;
