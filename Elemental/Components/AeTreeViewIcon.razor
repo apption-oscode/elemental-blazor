@@ -16,14 +16,15 @@
     
         @foreach(var item in Roots)
         {
-            <TreeItem FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon" Root="item"  />
+
+            <TreeItem T="T" FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon" 
+            Root="item" NodeClicked="NodeClicked"/>
             
         }
 </ul>
   }
 
 @code {
-
     [Parameter]
     public Func<T, IEnumerable<T>> FetchChildren { get; set; }
     
@@ -36,6 +37,7 @@
     [Parameter]
     public IEnumerable<T> Roots { get; set; }
 
-    
+    [Parameter]
+    public Action<T> NodeClicked { get; set; }
 
 }

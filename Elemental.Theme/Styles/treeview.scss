@@ -12,25 +12,52 @@ $treeViewOptions: (
             "list-style-type": none,
             "margin-bottom": 8px,
         ),
-        ".caret": (
-            "cursor": pointer,
-            "user-select": none, 
-        ),
-        ".caret::before": (
-            "content": "\2B9A",
-            "color": $grey-700,
-            "display": inline-block,
-            "margin-right": 6px,
-        ),
-        ".caret-down::before": (
-            "transform": rotate(90deg),
-        ),
         ".nested": (
             "display": none,
         ),
         ".active": (
             "display": block,
         ),
+        ".tree-view-item-content" :(
+            "display": flex,
+            "align-items": center
+        ),
+        ".caret": (
+            "padding": 4px 8px,
+            "cursor": pointer,
+
+        "&:hover": (
+            "background-color": $grey-200
+        )
+    ),
+    ".tree-view-icon" : (
+    
+            "margin-right": 8px,
+    ),
+        ".checkbox-region" : (
+            "width" : 16px,
+            "height": 16px,
+            "border": 1px solid $grey-500,
+            "display": flex,
+            "align-items": center,
+            "justify-content": center,
+            "text-align": center,
+            "margin-right": 8px,
+            "&:hover": (
+                    "background-color": $grey-200
+            )
+
+        
+    ),
+    ".tree-view-node-text" : (
+        "cursor": pointer,
+        "padding": 4px 8px,
+         "&:hover": (
+                "background-color": $grey-200
+            )
+    ),
+    ".xtra-padding" : (
+    ),
     )
 ) !default;
 

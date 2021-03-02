@@ -5,15 +5,17 @@
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-  Title: Basic Tree View
-  Description: Basic example of a tree view
+  Title: Icon Tree View
+  Description: Basic example of a tree view.
 *@
 <div>
-  <AeTreeView T="string" Roots="Roots" FetchChildren="GetChildren" RenderIcon="RenderIcon" RenderNode="RenderNode"/>
+  <AeTreeViewIcon T="string" Roots="Roots" FetchChildren="GetChildren" RenderIcon="RenderIcon" RenderNode="RenderNode"
+  NodeClicked="NodeClicked"/>
 </div>
-
+<section>Last item clicked @lastItemClicked</section>
 
 @code {
+    private string lastItemClicked;
     public List<string> Roots = new List<string>(new string[] { "server1", "server2", "server3" });
 
     public List<string> GetChildren(string root)
@@ -39,6 +41,12 @@
         return root;
     }
 
+    private void NodeClicked(string item)
+        {
+            lastItemClicked = item;
+            StateHasChanged();
+        }
+
     public string RenderIcon(string root){
         if (root.Contains("server"))
             return "server";
@@ -46,6 +54,6 @@
             return "database-2";
         else if (root.Contains("table"))
             return "table";
-        return "hashtag";
+        return "price-tag";
     }
 }
