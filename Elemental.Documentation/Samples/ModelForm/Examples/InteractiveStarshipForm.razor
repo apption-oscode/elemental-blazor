@@ -35,6 +35,8 @@
         return new InteractiveStarship() { ProductionDate = DateTime.Today };
     }
 
+
+
     protected override async Task OnInitializedAsync()
     {
         _starship = await CreateStarship();
@@ -51,7 +53,7 @@
 
     private async Task OnConfigure(ModelFormContext<InteractiveStarship> context)
     {
-        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });
+        await context.UpdateValidValues("Classification", new[] { "a", "b", "c" });        
     }
 
     private void HandleValidSubmit()

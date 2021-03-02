@@ -8,7 +8,7 @@
 
 @if (HasValidValues())
 {
-    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
+    <Microsoft.AspNetCore.Components.Forms.InputSelect ValueExpression="@(() => PropertyValue)" Value="PropertyValue" class="ae input" ValueChanged="@((string value) => OnValueChanged(value))">
         @if (!AeModelFormTools.IsRequired(PropertyInfo))
             {
             <option value="">@GetPlaceholder()</option>
@@ -56,7 +56,7 @@ else
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
-    {       
+    {
         var firstValue = string.IsNullOrEmpty(PropertyValue) ? getValidValues()?.FirstOrDefault() : PropertyValue;
         if (firstRender && AeModelFormTools.IsRequired(PropertyInfo) && firstValue != null)
         {
@@ -73,8 +73,8 @@ else
     [CascadingParameter(Name = "ModelFormContext")]
     public ModelFormContext<T> ModelFormContext { get; set; } = null;
 
-    [CascadingParameter(Name = "OnChangeCallback")]
-    public EventCallback<ModelFormChangeArgs<T>> OnChangeCallback { get; set; }
+    [CascadingParameter(Name = "Notifier")]
+    public Func<ModelFormChangeArgs, Task> Notifier { get; set; }
 
     private string GetLabel(string value)
     {
@@ -88,7 +88,11 @@ else
         }
     }
 
-
+    private async Task OnValueChanged(string value)
+    {
+        var changeArgs = new ModelFormChangeArgs() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
+        await Notifier(changeArgs);
+    }
 
     public string PropertyValue
     {
@@ -96,7 +100,7 @@ else
         set
         {
             PropertyInfo.SetValue(Instance, value);
-            OnChangeCallback.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+            //OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         }
     }
 

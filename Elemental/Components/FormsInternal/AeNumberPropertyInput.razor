@@ -17,7 +17,7 @@
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
     //[Parameter]
-    //public EventCallback<ModelFormChangeArgs<T>> ValueChanged { get; set; }
+    //public EventCallback<ModelFormChangeArgs> ValueChanged { get; set; }
 
     /// <summary>
     /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
@@ -52,7 +52,7 @@
     public ModelFormContext<T> ModelFormContext { get; set; } = null;
 
     [CascadingParameter(Name = "Notifier")]
-    public Func<Task> Notifier { get; set; }
+    public Func<ModelFormChangeArgs, Task> Notifier { get; set; }
 
     private string GetLabel()
     {
@@ -61,10 +61,10 @@
 
     private async Task UpdateModel()
     {
-        await Notifier();
-        //await OnChangeCallback.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+        await Notifier(new ModelFormChangeArgs() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+        //await OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         //OnChangeCallback.InvokeAsync(null).GetAwaiter().GetResult();
-        // return ValueChanged.InvokeAsync(new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+        // return ValueChanged.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
     }
 
     private string GetID() => PropertyInfo.Name;
