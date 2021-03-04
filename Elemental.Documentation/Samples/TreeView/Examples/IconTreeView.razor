@@ -9,14 +9,14 @@
   Description: Basic example of a tree view.
 *@
 <div>
-  <AeTreeViewIcon T="string" Roots="Roots" FetchChildren="GetChildren" RenderIcon="RenderIcon" RenderNode="RenderNode"
+  <AeTreeViewIcon T="string" Roots="_roots" FetchChildren="GetChildren" RenderIcon="RenderIcon" RenderNode="RenderNode"
   NodeClicked="NodeClicked"/>
 </div>
-<section>Last item clicked @lastItemClicked</section>
+<div class="treeview-clicked">Last item clicked <span>@_lastItemClicked</span></div>
 
 @code {
-    private string lastItemClicked;
-    public List<string> Roots = new List<string>(new string[] { "server1", "server2", "server3" });
+    private string _lastItemClicked;
+    public List<string> _roots = new List<string>(new string[] { "server1", "server2", "server3" });
 
     public List<string> GetChildren(string root)
     {
@@ -43,7 +43,7 @@
 
     private void NodeClicked(string item)
         {
-            lastItemClicked = item;
+            _lastItemClicked = item;
             StateHasChanged();
         }
 

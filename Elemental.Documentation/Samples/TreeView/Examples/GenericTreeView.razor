@@ -9,12 +9,11 @@
   Description: Basic example of a tree view.
 *@
 <div>
-  <AeTreeViewGeneric T="string" Roots="Roots" RenderItem="RenderItem" FetchChildren="GetChildren"/>
+  <AeTreeViewGeneric T="string" Roots="_roots" RenderItem="RenderItem" FetchChildren="GetChildren"/>
 </div>
 
 @code {
-    private string lastItemClicked;
-    public List<string> Roots = new List<string>(new string[] { "server1", "server2", "server3" });
+    public List<string> _roots = new List<string>(new string[] { "server1", "server2", "server3" });
 
     public List<string> GetChildren(string root)
     {

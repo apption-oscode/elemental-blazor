@@ -9,16 +9,13 @@
   Description: A tree view that replaces icons with checkboxes with three states
 *@
 <div>
-  <AeTreeViewSelectable T="Item" Roots="Roots" FetchChildren="GetChildren" RenderNode="RenderNode" IsChecked="IsChecked"
+  <AeTreeViewSelectable T="Item" Roots="_roots" FetchChildren="GetChildren" RenderNode="RenderNode" IsChecked="IsChecked"
   ItemChecked="ItemChecked" NodeClicked="NodeClicked"/>
 </div>
 
 
 @code {
-    private List<Item> Roots = new List<Item>();
-    private List<Item> allItems = new List<Item>();
-
-    private string lastClickedNode;
+    private List<Item> _roots = new List<Item>();
 
     public List<Item> GetChildren(Item root)
     {
@@ -95,8 +92,7 @@
         database2.parent = server1;
         database3.parent = server2;
         database4.parent = server2;
-        Roots.AddRange(new[] { server1, server2 });
-        allItems.AddRange(new[] { server1, server2, database1, database2, database3, database4, table1, table2, table3, table4 });
+        _roots.AddRange(new[] { server1, server2 });
     }
 
     public class Item
