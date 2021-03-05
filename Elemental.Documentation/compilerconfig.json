@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/css/elemental-docs.css",
     "inputFile": "Styles/elemental-docs.scss"
+  },
+  {
+    "outputFile": "Styles/Pages/_index.css",
+    "inputFile": "Styles/Pages/_index.scss"
   }
 ]

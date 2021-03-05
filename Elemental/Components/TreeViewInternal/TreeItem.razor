@@ -1,0 +1,139 @@
+﻿@typeparam T
+@inject IJSRuntime JSRuntime
+
+    <li class="tree-view-item">
+        <div class="tree-view-item-content">
+                
+        @if (hasChildren)
+        {
+            <div class="caret" @onclick="ItemClicked">
+                <AeIcon Icon="@(IsCollapsed? "arrow-right-s" : "arrow-down-s")"></AeIcon>
+            </div>
+                 }
+            @if (!IsGeneric)
+            {
+                @if (IsIcon)
+                {
+                    <div class="tree-view-icon">
+                        <AeIcon Icon="@nodeIcon"></AeIcon>
+                    </div>
+                } 
+                @if (IsSelectable)
+                {
+                    <div class="checkbox-region" @onclick="() => ItemChecked(Root, IsChecked(Root) == false)">
+                        @if (IsChecked(Root) == true)
+                        {
+
+                            <AeIcon Icon="check"></AeIcon>
+                        }
+                        @if (IsChecked(Root) == null)
+                        {
+
+                            <AeIcon Icon="subtract"></AeIcon>
+                        }
+                    </div>
+                }
+                <div class="tree-view-node-text @(hasChildren? "" : "xtra-padding")" @onclick="() => NodeClicked(Root)">
+                    @nodeString
+                </div>
+            }
+            else {
+                @RenderItem(Root)
+            }
+            </div>
+    </li>
+@if (hasChildren)
+{
+    <ul class="nested @(IsCollapsed ? "" : "active")">
+        @foreach (var child in children)
+        {
+            <TreeItem FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon" Root="child"
+            IsCollapsedList="IsCollapsedList" ItemChecked="ItemChecked" IsDisplayed="!IsCollapsed" IsChecked="IsChecked"
+            NodeClicked="NodeClicked" RenderItem="RenderItem"/>
+        }
+    </ul>
+    }
+
+
+@code {
+    [Parameter]
+    public Func<T, IEnumerable<T>> FetchChildren { get; set; }
+    
+    [Parameter]
+    public Func<T, string> RenderNode { get; set; }
+    
+    [Parameter]
+    public Func<T, string> RenderIcon { get; set; }
+
+    [Parameter]
+    public T Root { get; set; }
+     
+    [Parameter]
+    public List<(T, bool)> IsCollapsedList { get; set; }
+
+    [Parameter]
+    public Action<T, bool> ItemChecked { get; set; }
+
+    [Parameter]
+    public Func<T, bool?> IsChecked { get; set; }
+
+    [Parameter]
+    public bool IsDisplayed { get; set; } = true;
+
+    [Parameter]
+    public Action<T> NodeClicked { get; set; }
+    
+    [Parameter]
+    public Func<T, RenderFragment> RenderItem { get; set; }
+
+    IEnumerable<T> children;
+
+    string nodeString;
+    string nodeIcon;
+    string checkboxId;
+
+    bool IsCollapsed;
+    bool IsSelectable;
+    bool IsIcon;
+    bool hasChildren;
+    bool IsGeneric;
+
+    private void ItemClicked()
+    {
+        if (IsCollapsedList != null)
+            IsCollapsedList[IsCollapsedList.FindLastIndex(x => x.Item1.Equals(Root))] = (Root, !IsCollapsed);
+        IsCollapsed = !IsCollapsed;
+    }
+
+    protected override void OnInitialized()
+    {
+        checkboxId = "checkbox-" + this.GetHashCode();
+        if (IsCollapsedList != null)
+        {
+            if (!IsCollapsedList.Select(x => x.Item1).Contains(Root))
+                IsCollapsedList.Add((Root, true));
+            IsCollapsed = IsCollapsedList.First(x => x.Item1.Equals(Root)).Item2;
+        } 
+        else
+            IsCollapsed = true;
+        if (ItemChecked != null) 
+        {
+            IsSelectable = true;
+        }
+        children = FetchChildren(Root);
+        if (RenderNode!=null)
+            nodeString = RenderNode(Root);
+        if (RenderIcon != null) {
+            nodeIcon = RenderIcon(Root);
+            IsIcon = true;
+        }
+        hasChildren =  children != null && children.Count() > 0;
+        IsGeneric = RenderItem != null;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        
+    }
+    
+    }

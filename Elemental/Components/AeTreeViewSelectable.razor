@@ -1,0 +1,62 @@
+﻿@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+@using Elemental.Components.TreeViewInternal
+@typeparam T
+
+@if (Roots != null && Roots.Count() > 0)
+{
+    <ul class="ae tree-view">
+
+
+        @foreach (var item in Roots)
+        {
+
+            <TreeItem T="T" FetchChildren="FetchChildren" RenderNode="RenderNode" ItemChecked="ItemSelected" IsChecked="IsChecked"
+            Root="item" IsCollapsedList="IsCollapsed" NodeClicked="NodeClicked"/>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public Func<T, IEnumerable<T>> FetchChildren { get; set; }
+    
+    [Parameter]
+    public Func<T, string> RenderNode { get; set; }
+
+    [Parameter]
+    public IEnumerable<T> Roots { get; set; }
+
+    [Parameter]
+    public Action<T, bool> ItemChecked { get; set; }
+    
+    [Parameter]
+    public Func<T, bool?> IsChecked { get; set; }
+
+    [Parameter]
+    public Action<T> NodeClicked { get; set; }
+
+    private List<(T, bool)> IsCollapsed = new List<(T, bool)>();
+
+       protected override void OnInitialized()
+    {
+        foreach (var item in Roots)
+        {
+            if (!IsCollapsed.Select(x => x.Item1).Contains(item))
+                IsCollapsed.Add((item, true));
+        }
+    }
+
+      private void ItemSelected(T item, bool isSelected)
+    {
+        ItemChecked(item, isSelected);
+        StateHasChanged();
+    }
+
+}
