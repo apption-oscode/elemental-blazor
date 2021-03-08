@@ -197,6 +197,79 @@ body {
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/*@mixin Scrollbar() {
+    &::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $grey-200;
+        border-radius: $border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $grey-500;
+        border-radius: $border-radius;
+
+        &:hover {
+            background: $grey-600;
+        }
+    }
+}*/
 .ae.layout-v2 {
   display: flex;
   flex-direction: row; }
@@ -239,7 +312,18 @@ body {
     .ae.layout-v2 .ae.side-nav .header {
       text-align: center; }
     .ae.layout-v2 .ae.side-nav .menu {
-      flex-grow: 1; }
+      flex-grow: 1;
+      overflow: auto; }
+      .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar {
+        width: 0.25rem; }
+      .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar-track {
+        background: #edf2f7;
+        border-radius: 8px; }
+      .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar-thumb {
+        background: #a0aec0;
+        border-radius: 8px; }
+        .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar-thumb:hover {
+          background: #718096; }
       .ae.layout-v2 .ae.side-nav .menu .item {
         display: flex;
         align-items: center;

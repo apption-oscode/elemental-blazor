@@ -1,16 +1,17 @@
 ﻿@inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.Components.Routing
-
+@inject IJSRuntime JSRuntime
+@inject GetDimensionsService DimensionService
 @implements IDisposable
 
 
-<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick" @onmousemove="HandleItemHover" @onmouseout="() => _showTooltip = false">
+<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick" @onmousemove="HandleItemHover" @onmouseout="() => _showTooltip = false" @ref="_tooltipWrapperRef">
     @if (!string.IsNullOrEmpty(Link.IconName))
     {
         <AeIcon Icon="@Link.IconName" IconStyle="Link.IconStyle" class="@Link.IconClassName"/>
     }
     <div class="label">@Link.Label</div>
-    <span class="tooltip-text @(_showTooltip ? "show" : "")">@Link.Label</span>
+    <span class="tooltip-text @(_showTooltip ? "show" : "")" style="top:@(_toolTipPosition?.Top)px" >@Link.Label</span>
 </a>
 
 
@@ -22,8 +23,9 @@
     [Parameter]
     public bool IsCollapsed { get; set; }
     private bool _active = false;
-
+    private ElementPosition _toolTipPosition;
     private bool _showTooltip = false;
+    private ElementReference _tooltipWrapperRef;
 
     protected override void OnInitialized()
     {
@@ -55,10 +57,11 @@
         ToggleSublink.Invoke(Link);
     }
 
-    private void HandleItemHover()
+    private async Task HandleItemHover()
     {
         if (IsCollapsed)
         {
+            _toolTipPosition = await DimensionService.GetPosition(_tooltipWrapperRef);
             _showTooltip = true;
         }
     }
