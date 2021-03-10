@@ -9,10 +9,7 @@
 @if (HasValidValues())
 {
     <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input">
-        @if (!AeModelFormTools.IsRequired(PropertyInfo))
-            {
-            <option value="">@GetPlaceholder()</option>
-            }
+        <option value="">@GetPlaceholder()</option>
         @foreach (var value in getValidValues())
             {
             <option value="@value">@(GetLabel(value))</option>
@@ -25,7 +22,7 @@ else
 }
 
 <div class="errortext">
-    <!--We can't actually fail to input a dropdown properly, this is here for style/spaceing consistency-->
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance,PropertyInfo))" />
 </div>
 
 @code {
@@ -56,12 +53,9 @@ else
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
-    {       
-        var firstValue = string.IsNullOrEmpty(PropertyValue) ? getValidValues()?.FirstOrDefault() : PropertyValue;
-        if (firstRender && AeModelFormTools.IsRequired(PropertyInfo) && firstValue != null)
-        {
-            PropertyValue = firstValue;
-        }
+    {
+        if (string.IsNullOrWhiteSpace(PropertyValue))
+            PropertyValue = "";
     }
 
     /// <summary>
