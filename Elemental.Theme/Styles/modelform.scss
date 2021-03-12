@@ -85,15 +85,19 @@
                 }
             }
         }
-    }
 
-    .ae.modelform-rows.top-label {
-        .ae.modelform-row {
-            grid-template-columns: 100%;
+        &.top-label {
+            .ae.modelform-row {
+                grid-template-columns: 100%;
+    
+                .ae.ae-form-control-label {
+                    flex-direction: row;
+                    grid-column: span 2;
+                }
 
-            .ae.ae-form-control-label {
-                flex-direction: row;
-                grid-column: span 2;
+                .errortext {
+                    grid-column: 1;
+                }
             }
         }
     }

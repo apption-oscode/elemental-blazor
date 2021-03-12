@@ -2233,6 +2233,11 @@ body {
   grid-column: span 2;
 }
 
+.ae.modelform .ae.modelform-rows.top-label .ae.modelform-row .errortext {
+  -ms-grid-column: 1;
+  grid-column: 1;
+}
+
 /**
  * Copyright (c) 2020 Apption Corporation
  * 
