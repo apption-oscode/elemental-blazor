@@ -5,7 +5,7 @@
 @implements IDisposable
 
 
-<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick" @onmousemove="HandleItemHover" @onmouseout="() => _showTooltip = false" @ref="_tooltipWrapperRef">
+<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick" @onmouseover="HandleItemHover" @onmouseout="() => _showTooltip = false" @ref="_tooltipWrapperRef">
     @if (!string.IsNullOrEmpty(Link.IconName))
     {
         <AeIcon Icon="@Link.IconName" IconStyle="Link.IconStyle" class="@Link.IconClassName"/>
