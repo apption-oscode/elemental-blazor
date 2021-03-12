@@ -52,7 +52,7 @@
         if (parent == null)
             return;
         var childrenCountChecked = parent.children.Where(x => x.isChecked == true).Count();
-        if (childrenCountChecked < parent.children.Count() && 0 < childrenCountChecked)
+        if (childrenCountChecked < parent.children.Count() && 0 < childrenCountChecked || parent.children.Where(x => x.isChecked == null).Count() > 1)
         {
             parent.isChecked = null;
             setParent(parent.parent);
