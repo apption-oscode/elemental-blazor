@@ -56,7 +56,15 @@
                 flex-direction: row-reverse;
                 margin-right: 0.5rem;
                 font-weight: bold;
+                
+                &.ae-label-required {
+                    & > :first-child::after {
+                        color: $red-600;
+                        content: ' * ';
+                    }
+                }
             }
+
 
             .errortext {
                 grid-column-start: 2;
