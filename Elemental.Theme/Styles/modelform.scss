@@ -56,7 +56,15 @@
                 flex-direction: row-reverse;
                 margin-right: 0.5rem;
                 font-weight: bold;
+                
+                &.ae-label-required {
+                    & > :first-child::after {
+                        color: $red-600;
+                        content: ' * ';
+                    }
+                }
             }
+
 
             .errortext {
                 grid-column-start: 2;
@@ -77,15 +85,19 @@
                 }
             }
         }
-    }
 
-    .ae.modelform-rows.top-label {
-        .ae.modelform-row {
-            grid-template-columns: 100%;
+        &.top-label {
+            .ae.modelform-row {
+                grid-template-columns: 100%;
+    
+                .ae.ae-form-control-label {
+                    flex-direction: row;
+                    grid-column: span 2;
+                }
 
-            .ae.ae-form-control-label {
-                flex-direction: row;
-                grid-column: span 2;
+                .errortext {
+                    grid-column: 1;
+                }
             }
         }
     }

@@ -353,7 +353,7 @@ body {
           position: absolute;
           border-radius: 4px;
           padding: 0.25rem 0.5rem;
-          left: 40px;
+          left: 45px;
           opacity: 0;
           white-space: pre-line;
           color: #ffffff;
@@ -1699,6 +1699,9 @@ body {
     flex-direction: row-reverse;
     margin-right: 0.5rem;
     font-weight: bold; }
+    .ae.modelform .ae.modelform-rows .ae.modelform-row .ae.ae-form-control-label.ae-label-required > :first-child::after {
+      color: #e53e3e;
+      content: ' * '; }
   .ae.modelform .ae.modelform-rows .ae.modelform-row .errortext {
     grid-column-start: 2;
     color: #e53e3e;
@@ -1716,6 +1719,8 @@ body {
   .ae.modelform .ae.modelform-rows.top-label .ae.modelform-row .ae.ae-form-control-label {
     flex-direction: row;
     grid-column: span 2; }
+  .ae.modelform .ae.modelform-rows.top-label .ae.modelform-row .errortext {
+    grid-column: 1; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
