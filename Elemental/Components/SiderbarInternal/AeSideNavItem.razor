@@ -5,13 +5,13 @@
 @implements IDisposable
 
 
-<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick" @onmouseover="HandleItemHover" @onmouseout="async () => _showTooltip = false" @ref="_tooltipWrapperRef">
+<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick"  @ref="_tooltipWrapperRef">
     @if (!string.IsNullOrEmpty(Link.IconName))
     {
         <AeIcon Icon="@Link.IconName" IconStyle="Link.IconStyle" class="@Link.IconClassName"/>
     }
     <div class="label">@Link.Label</div>
-    <span class="tooltip-text @(_showTooltip ? "show" : "")" style="top:@(_toolTipPosition?.Top)px" >@Link.Label</span>
+    <span class="tooltip-text">@Link.Label</span>
 </a>
 
 
@@ -32,11 +32,13 @@
         NavigationManager.LocationChanged += OnLocationChanged;
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             InitializedNavItem();
+            await InitializedToolTips();
+
         }
     }
 
@@ -57,14 +59,14 @@
         ToggleSublink.Invoke(Link);
     }
 
-    private async Task HandleItemHover()
-    {
-        if (IsCollapsed)
-        {
-            _toolTipPosition = await DimensionService.GetPosition(_tooltipWrapperRef);
-            _showTooltip = true;
-        }
-    }
+    //private async Task HandleItemHover()
+    //{
+    //    if (IsCollapsed)
+    //    {
+    //        _toolTipPosition = await DimensionService.GetPosition(_tooltipWrapperRef);
+    //        _showTooltip = true;
+    //    }
+    //}
 
     public void Dispose()
     {
@@ -84,5 +86,10 @@
         else
             _active = false;
         StateHasChanged();
+    }
+
+    private async Task InitializedToolTips()
+    {
+        await JSRuntime.InvokeVoidAsync("initializeSidebar.initialize", _tooltipWrapperRef);
     }
 }

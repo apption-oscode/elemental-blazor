@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elemental.Services
 {
-    public static class BrowserResizeService
+    public static class SidebarService
     {
         public const int LARGE_SCREEN_SIZE = 1025;
         public const int MEDIUM_SCREEN_SIZE = 600;
@@ -24,12 +24,12 @@ namespace Elemental.Services
 
         public static async Task<int> GetInnerHeight(IJSRuntime jsRuntime)
         {
-            return await jsRuntime.InvokeAsync<int>("browserResize.getInnerHeight");
+            return await jsRuntime.InvokeAsync<int>("initializeSidebar.getInnerHeight");
         }
 
         public static async Task<int> GetInnerWidth(IJSRuntime jsRuntime)
         {
-            return await jsRuntime.InvokeAsync<int>("browserResize.getInnerWidth");
+            return await jsRuntime.InvokeAsync<int>("initializeSidebar.getInnerWidth");
         }
     }
 
