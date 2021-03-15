@@ -25,6 +25,16 @@
     </Content>
   </ItemGroup>
 
+  <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm run build-css" />
+  </Target>
+
+  <ItemGroup>
+    <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
+    <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
+  </ItemGroup>
+  
   <ItemGroup>
     <None Update="Samples\Cards\Examples\CardSamples.scss">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
