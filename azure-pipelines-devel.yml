@@ -29,7 +29,7 @@ steps:
 - task: CmdLine@2
   displayName: 'install npm'
   inputs:
-    script: 'apt install npm' 
+    script: 'curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -' 
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
