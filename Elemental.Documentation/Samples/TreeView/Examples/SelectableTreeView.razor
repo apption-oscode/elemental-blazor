@@ -10,7 +10,7 @@
 *@
 <div>
   <AeTreeViewSelectable T="Item" Roots="_roots" FetchChildren="GetChildren" RenderNode="RenderNode" IsChecked="IsChecked"
-  ItemChecked="ItemChecked" NodeClicked="NodeClicked"/>
+  ItemChecked="ItemChecked"/>
 </div>
 
 
@@ -66,10 +66,6 @@
             setParent(parent.parent);
         }
     }
-        private void NodeClicked(Item item)
-        {
-            
-        }
         
 
     protected override void OnInitialized()

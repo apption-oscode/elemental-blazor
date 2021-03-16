@@ -6,19 +6,19 @@
                 
         @if (hasChildren)
         {
-            <div class="caret" @onclick="ItemClicked">
-                <AeIcon Icon="@(IsCollapsed? "arrow-right-s" : "arrow-down-s")"></AeIcon>
+            <div class="caret" @onclick="() => ToggleCollapsed(Root)">
+                <AeIcon Icon="@(IsCollapsed(Root)? "arrow-right-s" : "arrow-down-s")"></AeIcon>
             </div>
                  }
-            @if (!IsGeneric)
+            @if (!isGeneric)
             {
-                @if (IsIcon)
+                @if (isIcon)
                 {
                     <div class="tree-view-icon">
                         <AeIcon Icon="@nodeIcon"></AeIcon>
                     </div>
                 } 
-                @if (IsSelectable)
+                @if (isSelectable)
                 {
                     <div class="checkbox-region" @onclick="() => ItemChecked(Root, IsChecked(Root) == false)">
                         @if (IsChecked(Root) == true)
@@ -33,7 +33,7 @@
                         }
                     </div>
                 }
-                <div class="tree-view-node-text @(hasChildren? "" : "xtra-padding")" @onclick="() => NodeClicked(Root)">
+                <div class="tree-view-node-text @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked(Root)">
                     @nodeString
                 </div>
             }
@@ -44,12 +44,12 @@
     </li>
 @if (hasChildren)
 {
-    <ul class="nested @(IsCollapsed ? "" : "active")">
+    <ul class="nested @(IsCollapsed(Root) ? "" : "active")">
         @foreach (var child in children)
         {
             <TreeItem FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon" Root="child"
-            IsCollapsedList="IsCollapsedList" ItemChecked="ItemChecked" IsDisplayed="!IsCollapsed" IsChecked="IsChecked"
-            NodeClicked="NodeClicked" RenderItem="RenderItem"/>
+            IsCollapsed="IsCollapsed" ToggleCollapsed="ToggleCollapsed" ItemChecked="ItemChecked"  IsChecked="IsChecked"
+            NodeClicked="NodeClicked" RenderItem="RenderItem" IsBold="IsBold"/>
         }
     </ul>
     }
@@ -58,18 +58,21 @@
 @code {
     [Parameter]
     public Func<T, IEnumerable<T>> FetchChildren { get; set; }
-    
+
     [Parameter]
     public Func<T, string> RenderNode { get; set; }
-    
+
     [Parameter]
     public Func<T, string> RenderIcon { get; set; }
 
     [Parameter]
     public T Root { get; set; }
-     
+
     [Parameter]
-    public List<(T, bool)> IsCollapsedList { get; set; }
+    public Func<T, bool> IsCollapsed { get; set; }
+
+    [Parameter]
+    public Action<T> ToggleCollapsed { get; set; }
 
     [Parameter]
     public Action<T, bool> ItemChecked { get; set; }
@@ -78,11 +81,11 @@
     public Func<T, bool?> IsChecked { get; set; }
 
     [Parameter]
-    public bool IsDisplayed { get; set; } = true;
+    public Func<T, bool> IsBold { get; set; }
 
     [Parameter]
     public Action<T> NodeClicked { get; set; }
-    
+
     [Parameter]
     public Func<T, RenderFragment> RenderItem { get; set; }
 
@@ -92,48 +95,29 @@
     string nodeIcon;
     string checkboxId;
 
-    bool IsCollapsed;
-    bool IsSelectable;
-    bool IsIcon;
+    bool isSelectable;
+    bool isIcon;
     bool hasChildren;
-    bool IsGeneric;
+    bool isGeneric;
 
-    private void ItemClicked()
-    {
-        if (IsCollapsedList != null)
-            IsCollapsedList[IsCollapsedList.FindLastIndex(x => x.Item1.Equals(Root))] = (Root, !IsCollapsed);
-        IsCollapsed = !IsCollapsed;
-    }
 
     protected override void OnInitialized()
     {
         checkboxId = "checkbox-" + this.GetHashCode();
-        if (IsCollapsedList != null)
+        if (ItemChecked != null)
         {
-            if (!IsCollapsedList.Select(x => x.Item1).Contains(Root))
-                IsCollapsedList.Add((Root, true));
-            IsCollapsed = IsCollapsedList.First(x => x.Item1.Equals(Root)).Item2;
-        } 
-        else
-            IsCollapsed = true;
-        if (ItemChecked != null) 
-        {
-            IsSelectable = true;
+            isSelectable = true;
         }
         children = FetchChildren(Root);
         if (RenderNode!=null)
             nodeString = RenderNode(Root);
         if (RenderIcon != null) {
             nodeIcon = RenderIcon(Root);
-            IsIcon = true;
+            isIcon = true;
         }
         hasChildren =  children != null && children.Count() > 0;
-        IsGeneric = RenderItem != null;
+        isGeneric = RenderItem != null;
     }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        
-    }
-    
+
     }

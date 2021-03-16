@@ -54,9 +54,12 @@ $treeViewOptions: (
         "padding": 4px 8px,
          "&:hover": (
                 "background-color": $grey-200
-            )
-    ),
-    ".xtra-padding" : (
+            ),
+        "&.xtra-padding" : (
+        ),
+        "&.bold" : (
+            "font-weight": bold
+        ),
     ),
     )
 ) !default;
