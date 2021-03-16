@@ -26,6 +26,10 @@ steps:
     version: '$(NetCoreVersion)'
     includePreviewVersions: true
 
+- task: CmdLine@2
+  inputs:
+    script: 'sudo apt install npm' 
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
