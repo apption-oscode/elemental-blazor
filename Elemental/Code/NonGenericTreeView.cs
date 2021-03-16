@@ -34,6 +34,9 @@ namespace Elemental.Code
         [Parameter]
         public Func<T, bool> IsBold { get; set; }
 
+        [Parameter]
+        public Func<T, bool> NodeIsClickable { get; set; }
+
 
         protected override void OnInitialized()
         {
@@ -42,9 +45,12 @@ namespace Elemental.Code
                 NodeClicked = nodeClicked;
             if (IsBold == null)
                 IsBold = isBold;
+            if (NodeIsClickable == null)
+                NodeIsClickable = isClickable;
         }
 
         private void nodeClicked(T root) {/*do nothing*/}
         private bool isBold(T root) { return false; }
+        private bool isClickable(T root) { return true; }
     }
 }

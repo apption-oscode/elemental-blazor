@@ -6,11 +6,11 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   Title: Icon Tree View with collapse and bold methods
-  Description: A tree view that uses custom collapse methods and set specific nodes text bold.
+  Description: A tree view that uses custom collapse methods and highlight methods and sets specific nodes bold.
 *@
 <div>
   <AeTreeViewIcon T="Item" Roots="_roots" FetchChildren="GetChildren" RenderNode="RenderNode" IsCollapsed="IsCollapsed"
-                  ToggleCollapsed="ToggleCollapsed" IsBold="IsBold" RenderIcon="RenderIcon"/>
+                  ToggleCollapsed="ToggleCollapsed" IsBold="IsBold" RenderIcon="RenderIcon" NodeIsClickable="IsClickable"/>
 </div>
 
 
@@ -45,7 +45,10 @@
     {
         return item.isBold;
     }
-
+    public bool IsClickable(Item item)
+    {
+        return item.isClickable;
+    }
 
 
     protected override void OnInitialized()
@@ -60,6 +63,8 @@
         database3.parent = server2;
         table1.isBold = true;
         database3.isBold = true;
+        table1.isClickable = true;
+        database3.isClickable = true;
         _roots.AddRange(new[] { server1, server2 });
     }
 
@@ -72,6 +77,7 @@
         public List<Item> children {  get;  set; }
         public Item parent{ get; set; }
         public bool isBold { get; set; }
+        public bool isClickable { get; set; }
 
         public Item(int id, string name, string icon, bool isCollapsed, List<Item> children){
             this.id = id;

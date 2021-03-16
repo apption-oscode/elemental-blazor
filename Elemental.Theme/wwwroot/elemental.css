@@ -2210,10 +2210,11 @@ body {
     .ae.tree-view .checkbox-region:hover {
       background-color: #edf2f7; }
   .ae.tree-view .tree-view-node-text {
-    cursor: pointer;
     padding: 4px 8px; }
-    .ae.tree-view .tree-view-node-text:hover {
-      background-color: #edf2f7; }
+    .ae.tree-view .tree-view-node-text.clickable {
+      cursor: pointer; }
+      .ae.tree-view .tree-view-node-text.clickable:hover {
+        background-color: #edf2f7; }
     .ae.tree-view .tree-view-node-text.bold {
       font-weight: bold; }
 

@@ -33,7 +33,7 @@
                         }
                     </div>
                 }
-                <div class="tree-view-node-text @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked(Root)">
+                <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked(Root)">
                     @nodeString
                 </div>
             }
@@ -49,7 +49,7 @@
         {
             <TreeItem FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon" Root="child"
             IsCollapsed="IsCollapsed" ToggleCollapsed="ToggleCollapsed" ItemChecked="ItemChecked"  IsChecked="IsChecked"
-            NodeClicked="NodeClicked" RenderItem="RenderItem" IsBold="IsBold"/>
+            NodeClicked="NodeClicked" RenderItem="RenderItem" IsBold="IsBold" NodeIsClickable="NodeIsClickable"/>
         }
     </ul>
     }
@@ -88,6 +88,9 @@
 
     [Parameter]
     public Func<T, RenderFragment> RenderItem { get; set; }
+
+    [Parameter]
+    public Func<T, bool> NodeIsClickable { get; set; }
 
     IEnumerable<T> children;
 

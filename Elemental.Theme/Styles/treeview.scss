@@ -50,12 +50,12 @@ $treeViewOptions: (
         
     ),
     ".tree-view-node-text" : (
-        "cursor": pointer,
         "padding": 4px 8px,
-         "&:hover": (
-                "background-color": $grey-200
-            ),
-        "&.xtra-padding" : (
+        "&.clickable" : (
+            "cursor": pointer,
+                 "&:hover": (
+                        "background-color": $grey-200
+                    ),
         ),
         "&.bold" : (
             "font-weight": bold
