@@ -27,7 +27,7 @@ steps:
     includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
+  displayName: 'dotnet build Elemental.sln'
   inputs:
     arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
 
