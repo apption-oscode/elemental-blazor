@@ -26,10 +26,8 @@ steps:
     version: '$(NetCoreVersion)'
     includePreviewVersions: true
 
-- task: CmdLine@2
-  displayName: 'install npm'
-  inputs:
-    script: 'curl -fsSL https://deb.nodesource.com/setup_10.x | bash -' 
+- task: NodeTool@0
+  displayName: 'install node'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
