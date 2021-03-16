@@ -20,18 +20,7 @@
                 } 
                 @if (isSelectable)
                 {
-                    <div class="checkbox-region" @onclick="() => ItemChecked(Root, IsChecked(Root) == false)">
-                        @if (IsChecked(Root) == true)
-                        {
-
-                            <AeIcon Icon="check"></AeIcon>
-                        }
-                        @if (IsChecked(Root) == null)
-                        {
-
-                            <AeIcon Icon="subtract"></AeIcon>
-                        }
-                    </div>
+                    <AeCheckbox IsChecked="isChecked" ItemSelected="checkboxSelected"/>
                 }
                 <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked(Root)">
                     @nodeString
@@ -120,6 +109,16 @@
         }
         hasChildren =  children != null && children.Count() > 0;
         isGeneric = RenderItem != null;
+    }
+
+    private bool? isChecked()
+    {
+        return IsChecked(Root);
+    }
+
+    private void checkboxSelected()
+    {
+        ItemChecked(Root, IsChecked(Root) == false);
     }
 
 

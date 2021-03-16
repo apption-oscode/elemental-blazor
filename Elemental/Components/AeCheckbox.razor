@@ -1,0 +1,19 @@
+﻿<div class="ae checkbox" @onclick="ItemSelected">
+    @if (IsChecked() == true)
+    {
+        <AeIcon Icon="check"></AeIcon>
+    }
+    @if (IsChecked() == null)
+    {
+        <AeIcon Icon="subtract"></AeIcon>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public Func<bool?> IsChecked { get; set; }
+
+    [Parameter]
+    public EventCallback ItemSelected { get; set; }
+}
