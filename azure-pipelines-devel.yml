@@ -27,8 +27,9 @@ steps:
     includePreviewVersions: true
 
 - task: CmdLine@2
+  displayName: 'install npm'
   inputs:
-    script: 'sudo apt install npm' 
+    script: 'apt install npm' 
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
