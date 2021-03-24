@@ -2187,7 +2187,10 @@ body {
   .ae.tree-view .nested {
     display: none; }
   .ae.tree-view .active {
-    display: block; }
+    display: block;
+    padding-left: 25px;
+    margin-left: 15px;
+    border-left: 1px solid #cbd5e0; }
   .ae.tree-view .tree-view-item-content {
     display: flex;
     align-items: center; }

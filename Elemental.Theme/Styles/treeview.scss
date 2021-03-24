@@ -17,6 +17,9 @@ $treeViewOptions: (
         ),
         ".active": (
             "display": block,
+            "padding-left": 25px,
+            "margin-left": 15px,
+            "border-left": 1px solid $grey-400
         ),
         ".tree-view-item-content" :(
             "display": flex,
