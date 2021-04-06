@@ -1,0 +1,8 @@
+﻿@import '../colors.scss';
+@import '../box-shadow.scss';
+
+.navbar-page-container {
+
+    @import '../../Samples/Navbar/Examples/BrandedNavbar.scss';
+    @import '../../Samples/Navbar/Examples/ResponsiveNavbar.scss';
+}
