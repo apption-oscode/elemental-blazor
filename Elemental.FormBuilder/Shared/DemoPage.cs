@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Elemental.Documentation.Shared
+namespace Elemental.FormBuilder.Shared
 {
     public class DemoPage : ComponentBase
     {
