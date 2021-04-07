@@ -90,9 +90,11 @@ $tableRowOptions: (
         ".ae.table-cell": (
             "background-color": $white,
             "word-wrap": break-word,
+            "overflow": hidden,
+            "text-overflow": ellipsis,
+            "white-space": nowrap,
             "padding": .5rem 0 .5rem .75rem,
             "&": $scrollbarOptions,
-            
             "&:nth-child(1)": (
                 "padding-left": .5rem,
                 "border-left": .25rem solid $transparent,
@@ -255,6 +257,23 @@ $tableRowOptions: (
     ),
 ) !default;
 
+$tableToolTipOptions : (
+    "position": fixed,
+
+    ".ae.tooltip": (
+        "width": 100%,
+        "height": 100%,
+        ".hover-text": (
+            "max-width": 80%,
+            "width": auto,
+            "transform": translateX(-50%),
+            "padding": 10px,
+            "visibility": visible,
+        ),
+    ),
+        
+) !default;
+
 .ae.table {
 
     .ae.table-header {
@@ -272,4 +291,7 @@ $tableRowOptions: (
             @include set-variations($tableRowOptions);
         }
     }
+}
+.ae.table-tooltip-wrapper{
+    @include set-values($tableToolTipOptions);
 }

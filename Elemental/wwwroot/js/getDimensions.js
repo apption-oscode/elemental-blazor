@@ -15,3 +15,7 @@ window.getPosition = function (element) {
         right: Math.floor(rect.right)
     };
 };
+
+window.setZIndex = function (element, zIndex) {
+    element.style.zIndex = zIndex;
+}

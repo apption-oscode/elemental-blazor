@@ -1130,6 +1130,9 @@ body {
     .ae.table .ae.table-rows .ae.table-row .ae.table-cell {
       background-color: #fff;
       word-wrap: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       padding: 0.5rem 0 0.5rem 0.75rem; }
       .ae.table .ae.table-rows .ae.table-row .ae.table-cell::-webkit-scrollbar {
         width: 0.25rem; }
@@ -1231,6 +1234,18 @@ body {
     .ae.table .ae.table-rows .ae.table-row.yellow:hover .ae.table-cell {
       transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #feebc8; }
+
+.ae.table-tooltip-wrapper {
+  position: fixed; }
+  .ae.table-tooltip-wrapper .ae.tooltip {
+    width: 100%;
+    height: 100%; }
+    .ae.table-tooltip-wrapper .ae.tooltip .hover-text {
+      max-width: 80%;
+      width: auto;
+      transform: translateX(-50%);
+      padding: 10px;
+      visibility: visible; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
