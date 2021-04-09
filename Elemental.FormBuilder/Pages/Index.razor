@@ -1,5 +1,5 @@
 @*
-    Copyright (c) 2020 Apption Corporation
+    Copyright (c) 2021 Apption Corporation
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,3 +10,106 @@
 @page "/"
 
 <div>Welcome to Form Builder</div>
+
+<div>
+    @foreach (var field in _formFields)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Section</td>
+                    <td>@field.Section</td>
+                </tr>
+                <tr>
+                    <td>Field</td>
+                    <td>@field.Field</td>
+                </tr>
+                <tr>
+                    <td>Extension</td>
+                    <td>@field.ExtensionLabel</td>
+                </tr>
+                <tr>
+                    <td>MaxLength</td>
+                    <td>@field.MaxLength</td>
+                </tr>
+                <tr>
+                    <td>Mandatory</td>
+                    <td>@field.Mandatory</td>
+                </tr>
+                <tr>
+                    <td>Dropdown option count</td>
+                    <td>@field.DropdownOptionCount</td>
+                </tr>
+                <tr>
+                    <td>Formatted</td>
+                    <td>@field.Formatted</td>
+                </tr>
+                <tr>
+                    <td>Code</td>
+                    <td>@field.Code</td>
+                </tr>
+                <tr>
+                    <td>SQL Name</td>
+                    <td>@field.SQLName</td>
+                </tr>
+                <tr>
+                    <td>JSON</td>
+                    <td><pre><code>@field.JSON</code></pre></td>
+                </tr>
+                <tr>
+                    <td>C# Code</td>
+                    <td>
+                        <pre><code>@field.CSCode</code></pre>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+@code
+{
+    private IList<FormField> _formFields = new List<FormField>()
+    {
+        new FormField()
+        {
+            Section = "Basic info",
+            Field = "Name",
+            Extension = ExtensionType.NAME,
+            MaxLength = 100,
+            Mandatory = true,
+            FieldType = FormFieldType.Text
+        },
+        new FormField()
+        {
+            Section = "Basic info",
+            Field = "Description",
+            Extension = ExtensionType.DESC,
+            MaxLength = 400,
+            FieldType = FormFieldType.Text
+        },
+        new FormField()
+        {
+            Section = "Basic info",
+            Field = "Creation Date",
+            Extension = ExtensionType.DT,
+            Mandatory = true,
+            FieldType = FormFieldType.Date
+        },
+        new FormField()
+        {
+            Section = "Price",
+            Field = "Price",
+            Extension = ExtensionType.AMT,
+            Mandatory = true,
+            FieldType = FormFieldType.Money
+        }
+        
+    };
+}
