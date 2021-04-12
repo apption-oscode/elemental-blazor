@@ -6,7 +6,7 @@
 
 @if (!Editable)
 {
-    <Input disabled="true" Value="@GetFormattedValue()" class="ae input disabled" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
+<Input disabled="true" Value="@GetFormattedValue()" class="ae input disabled" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" style="height:@AeModelFormTools.GetSize(PropertyInfo)px" />
 }
 else
 {
