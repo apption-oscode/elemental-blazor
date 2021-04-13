@@ -33,7 +33,7 @@
 
     private async Task<Starship> CreateStarship()
     {
-        return new Starship() {  ProductionDate = DateTime.Today}; 
+        return await Task.FromResult(new Starship() {  ProductionDate = DateTime.Today}); 
     }
     
     protected override async Task OnInitializedAsync()
