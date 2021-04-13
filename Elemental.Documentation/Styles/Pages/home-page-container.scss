@@ -6,16 +6,26 @@
     .section {
 
         &:before {
+            border-top: 1px solid $grey-300;
             display: block;
-            content: '';
-            height: 1px;
-            background-color: $grey-500;
+            position: relative;
+            content: "";
             width: 50%;
             margin: 5rem auto;
         }
 
         &.description {
             text-align: center;
+
+            .plug {
+                margin-top: 2rem;
+                opacity: .5;
+                transition: all .4s ease-out;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
         }
 
         #nuget-install,
