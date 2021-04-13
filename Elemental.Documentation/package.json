@@ -8,7 +8,7 @@
     "node-sass": "^5.0.0"
   },
   "scripts": {
-    "build-css": "node-sass --include-path Styles --output-style compressed Styles/elemental-docs.scss --output wwwroot"
+    "build-css": "node-sass --include-path Styles --output-style compressed Styles/elemental-docs.scss --output wwwroot/css"
   },
   "author": "Apption",
   "license": "Apache-2.0"

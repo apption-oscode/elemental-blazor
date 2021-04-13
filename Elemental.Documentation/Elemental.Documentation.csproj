@@ -6,17 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\css\elemental-docs.css" />
+    <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
+    <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="..\Elemental\wwwroot\css\elemental.css" Link="elemental.css" />
     <Content Include="..\Elemental\wwwroot\css\elemental.min.css" Link="elemental.min.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
-    <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,11 +39,5 @@
   <ItemGroup>
     <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
     <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Update="Samples\Cards\Examples\CardSamples.scss">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>
