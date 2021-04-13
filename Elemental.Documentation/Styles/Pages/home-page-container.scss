@@ -1,0 +1,26 @@
+﻿@import '../colors.scss';
+
+.home-page-container {
+
+
+    .section {
+
+        &:before {
+            display: block;
+            content: '';
+            height: 1px;
+            background-color: $grey-500;
+            width: 50%;
+            margin: 5rem auto;
+        }
+
+        &.description {
+            text-align: center;
+        }
+
+        #nuget-install,
+        .code-wrapper {
+            margin: .5rem 0;
+        }
+    }
+}

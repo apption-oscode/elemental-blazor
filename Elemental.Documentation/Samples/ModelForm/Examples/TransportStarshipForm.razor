@@ -32,9 +32,9 @@
 
     private async Task<TransportStarship> CreateStarship()
     {
-        return new TransportStarship() {  ProductionDate = DateTime.Today}; 
+        return await Task.FromResult(new TransportStarship() { ProductionDate = DateTime.Today });
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
         _starship = await CreateStarship();
