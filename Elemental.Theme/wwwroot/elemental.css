@@ -197,6 +197,79 @@ body {
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/*@mixin Scrollbar() {
+    &::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $grey-200;
+        border-radius: $border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $grey-500;
+        border-radius: $border-radius;
+
+        &:hover {
+            background: $grey-600;
+        }
+    }
+}*/
 .ae.layout-v2 {
   display: flex;
   flex-direction: row; }
@@ -239,7 +312,18 @@ body {
     .ae.layout-v2 .ae.side-nav .header {
       text-align: center; }
     .ae.layout-v2 .ae.side-nav .menu {
-      flex-grow: 1; }
+      flex-grow: 1;
+      overflow: auto; }
+      .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar {
+        width: 0.25rem; }
+      .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar-track {
+        background: #edf2f7;
+        border-radius: 8px; }
+      .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar-thumb {
+        background: #a0aec0;
+        border-radius: 8px; }
+        .ae.layout-v2 .ae.side-nav .menu::-webkit-scrollbar-thumb:hover {
+          background: #718096; }
       .ae.layout-v2 .ae.side-nav .menu .item {
         display: flex;
         align-items: center;
@@ -269,7 +353,7 @@ body {
           position: absolute;
           border-radius: 4px;
           padding: 0.25rem 0.5rem;
-          left: 40px;
+          left: 45px;
           opacity: 0;
           white-space: pre-line;
           color: #ffffff;
@@ -1046,6 +1130,9 @@ body {
     .ae.table .ae.table-rows .ae.table-row .ae.table-cell {
       background-color: #fff;
       word-wrap: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       padding: 0.5rem 0 0.5rem 0.75rem; }
       .ae.table .ae.table-rows .ae.table-row .ae.table-cell::-webkit-scrollbar {
         width: 0.25rem; }
@@ -1147,6 +1234,18 @@ body {
     .ae.table .ae.table-rows .ae.table-row.yellow:hover .ae.table-cell {
       transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: #feebc8; }
+
+.ae.table-tooltip-wrapper {
+  position: fixed; }
+  .ae.table-tooltip-wrapper .ae.tooltip {
+    width: 100%;
+    height: 100%; }
+    .ae.table-tooltip-wrapper .ae.tooltip .hover-text {
+      max-width: 80%;
+      width: auto;
+      transform: translateX(-50%);
+      padding: 10px;
+      visibility: visible; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
@@ -1615,6 +1714,9 @@ body {
     flex-direction: row-reverse;
     margin-right: 0.5rem;
     font-weight: bold; }
+    .ae.modelform .ae.modelform-rows .ae.modelform-row .ae.ae-form-control-label.ae-label-required > :first-child::after {
+      color: #e53e3e;
+      content: ' * '; }
   .ae.modelform .ae.modelform-rows .ae.modelform-row .errortext {
     grid-column-start: 2;
     color: #e53e3e;
@@ -1626,6 +1728,14 @@ body {
     align-self: center;
     transform: scale(1.5);
     margin-left: 0.25rem; }
+
+.ae.modelform .ae.modelform-rows.top-label .ae.modelform-row {
+  grid-template-columns: 100%; }
+  .ae.modelform .ae.modelform-rows.top-label .ae.modelform-row .ae.ae-form-control-label {
+    flex-direction: row;
+    grid-column: span 2; }
+  .ae.modelform .ae.modelform-rows.top-label .ae.modelform-row .errortext {
+    grid-column: 1; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
@@ -2020,6 +2130,150 @@ body {
 
 .ae.icon.pink {
   color: #d53f8c; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.tree-view {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .ae.tree-view .tree-view-item {
+    list-style-type: none;
+    margin-bottom: 8px; }
+  .ae.tree-view .nested {
+    display: none; }
+  .ae.tree-view .active {
+    display: block;
+    padding-left: 25px;
+    margin-left: 15px;
+    border-left: 1px solid #cbd5e0; }
+  .ae.tree-view .tree-view-item-content {
+    display: flex;
+    align-items: center; }
+  .ae.tree-view .caret {
+    padding: 4px 8px;
+    cursor: pointer; }
+    .ae.tree-view .caret:hover {
+      background-color: #edf2f7; }
+  .ae.tree-view .tree-view-icon {
+    margin-right: 8px; }
+  .ae.tree-view .checkbox-region {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #a0aec0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 8px; }
+    .ae.tree-view .checkbox-region:hover {
+      background-color: #edf2f7; }
+  .ae.tree-view .tree-view-node-text {
+    padding: 4px 8px; }
+    .ae.tree-view .tree-view-node-text.clickable {
+      cursor: pointer; }
+      .ae.tree-view .tree-view-node-text.clickable:hover {
+        background-color: #edf2f7; }
+    .ae.tree-view .tree-view-node-text.bold {
+      font-weight: bold; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 8px; }
+  .ae.checkbox:hover {
+    background-color: #edf2f7; }
 
 /*
     Third party

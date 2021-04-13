@@ -29,7 +29,7 @@
         <EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
-            <div class="ae modelform-rows" style="@_rowsStyle">
+            <div class="ae modelform-rows @_labelClass" style="@_rowsStyle">
                 @foreach (var category in GetCategories())
                 {
                     @if (!string.IsNullOrWhiteSpace(category.category))
@@ -135,6 +135,7 @@
     private string _modelFormClass => $"ae modelform {_inputClass}";
     private string _rowsStyle => $"{_gridStyle}; grid-template-rows: auto;";
     private string _rowStyle => $"{_gridStyle}; grid-template-rows:15px;";
+    private string _labelClass => LabelsOnTop? "top-label": "left-label";
 
     public List<(string category, List<PropertyInfo> properties)> GetCategories()
     {
@@ -232,6 +233,9 @@
     /// This method will be called when a property is changed.
     /// </summary>
     [Parameter] public EventCallback<ModelFormChangeArgs<T>> OnChange { get; set; }
+
+    [Parameter]
+    public bool LabelsOnTop { get; set; }
 
     private List<PropertyInfo> GetProperties()
     {

@@ -1,6 +1,0 @@
-{
-    "licenseInjector.owner": "Apption",
-    "licenseInjector.ignore": "node_modules,bin,wwwroot",
-    "licenser.author": "Apption Corporation",
-    "licenser.useSingleLineStyle": false
-}

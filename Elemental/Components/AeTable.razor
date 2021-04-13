@@ -18,7 +18,9 @@
 @inherits HtmlElement
 @implements ITable
 @inject IJSRuntime JSRuntime
+@inject GetDimensionsService DimensionService
 @using System.Text
+@using System.Reflection
 @typeparam T
 
 <div class="@_tableClass" @attributes="InputAttributesWithoutClass">
@@ -60,11 +62,16 @@
                 {
                     if (Renderers?[index] is null)
                     {
-                        <div class="ae table-cell">@accessor?.Invoke(row.item)</div>
+                        <div class="ae table-cell" @ref="cells[(row.i, index)]" @onmouseover="async () => await OnHoverShowToolTip(row.i, index, accessor?.Invoke(row.item))" >
+                            
+                            @accessor?.Invoke(row.item)
+                        </div>
                     }
                     else
                     {
-                        <div class="ae table-cell">@Renderers[index](row.item)</div>
+                        <div class="ae table-cell">
+                            @Renderers[index](row.item)
+                        </div>
                     }
                 }
             </div>
@@ -72,13 +79,20 @@
         </div>
     </div>
 </div>
+@if(AddToolTip)
+{
+    <div @ref="toolTipRef" class="ae table-tooltip-wrapper" style="top:@(_toolTipTop)px; left:@(_toolTipLeft)px; width:@(_toolTipWidth)px; height:@(_toolTipHeight)px;">
+        <AeTooltip Text="@_toolTipText"/>
+    </div>
+}
+
 
 
 
 
 
 @code {
-  [Parameter]
+    [Parameter]
   public string GridTemplateColumns { get; set; }
   [Parameter]
   public List<string> Headers { get; set; }
@@ -104,13 +118,17 @@
   public Func<string, int, RenderFragment> CustomHeader { get; set; }
   [Parameter]
   public Func<int, RenderFragment> CustomRowLabels { get; set; }
+  [Parameter]
+    public bool AddToolTip { get; set; }
 
   private RenderFragment defaultHeader(string header, int index)
   {
-      return  @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
+      return  
+    @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
                     @header
                     <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
-               </AeTypography>;
+               </AeTypography>
+    ;
   }
 
 public class customArgs { }
@@ -122,10 +140,16 @@ private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()}
 private string _rowsStyle => $"{_gridStyle}; grid-template-rows: repeat({scrollViewResult.TakeItems},{RowHeight}px); height:{scrollViewResult.Height}px;";
 private string _rowStyle => $"{_gridStyle}; grid-template-rows:{RowHeight}px;";
 private string _scrollStyle => $"max-height: {MaxHeight}px;";
-
+private string _toolTipText;
+    private int _toolTipHeight;
+    private int _toolTipWidth;
+    private int _toolTipTop;
+    private int _toolTipLeft;
 private (int column, bool sortAscending) _sorting = (0, true);
 
 private ElementReference tableRef;
+private ElementReference toolTipRef;
+private Dictionary<(int, int), ElementReference> cells = new Dictionary<(int, int), ElementReference>();
 private ScrollView scrollView;
 private ScrollViewResult scrollViewResult;
 private IEnumerable<T> Rows { get => GetSortedDataset(); }
@@ -156,6 +180,9 @@ if (firstRender || scrollViewResult.Height != tempHeight)
     scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
     scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + MaxHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
     StateHasChanged();
+}
+if (firstRender && AddToolTip){
+    await JSRuntime.InvokeVoidAsync("initializeToolTip", new object[] {toolTipRef, DotNetObjectReference.Create(this) });
 }
 }
 
@@ -210,6 +237,27 @@ else
 private string GetRowColor(T row)
 {
 return $"ae table-row {ColorAccessor?.Invoke(row)}";
+}
+
+private async Task OnHoverShowToolTip(int row, int cell, string text)
+{
+    var element = cells[(row, cell)];
+    var dimension = await DimensionService.GetDimensions(element);
+    var position = await DimensionService.GetPosition(element);
+    _toolTipHeight = dimension.Height;
+    _toolTipWidth = dimension.Width + 4;
+    _toolTipTop = position.Top;
+    _toolTipLeft = position.Left;
+    _toolTipText = text;
+    StateHasChanged();
+}
+
+[JSInvokableAttribute("OnMouseOutHideToolTip")]
+public void OnMouseOutHideToolTip()
+{
+    _toolTipText = null;
+    _toolTipLeft = 0; _toolTipTop = 0; _toolTipHeight = 0; _toolTipWidth = 0;
+    StateHasChanged();
 }
 
 private async Task OnScroll()

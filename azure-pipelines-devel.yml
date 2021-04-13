@@ -26,6 +26,11 @@ steps:
     version: '$(NetCoreVersion)'
     includePreviewVersions: true
 
+- task: NodeTool@0
+  displayName: 'install node'
+  inputs:
+    versionSpec: '15.11.0' 
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:

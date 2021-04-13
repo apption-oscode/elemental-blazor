@@ -1,16 +1,17 @@
 ﻿@inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.Components.Routing
-
+@inject IJSRuntime JSRuntime
+@inject GetDimensionsService DimensionService
 @implements IDisposable
 
 
-<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick" @onmousemove="HandleItemHover" @onmouseout="() => _showTooltip = false">
+<a class="item @(_active? "active" : "") @(IsCollapsed ? "" : "indent")" @onclick="HandleLinkClick"  @ref="_tooltipWrapperRef">
     @if (!string.IsNullOrEmpty(Link.IconName))
     {
         <AeIcon Icon="@Link.IconName" IconStyle="Link.IconStyle" class="@Link.IconClassName"/>
     }
     <div class="label">@Link.Label</div>
-    <span class="tooltip-text @(_showTooltip ? "show" : "")">@Link.Label</span>
+    <span class="tooltip-text">@Link.Label</span>
 </a>
 
 
@@ -22,19 +23,22 @@
     [Parameter]
     public bool IsCollapsed { get; set; }
     private bool _active = false;
-
+    private ElementPosition _toolTipPosition;
     private bool _showTooltip = false;
+    private ElementReference _tooltipWrapperRef;
 
     protected override void OnInitialized()
     {
         NavigationManager.LocationChanged += OnLocationChanged;
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             InitializedNavItem();
+            await InitializedToolTips();
+
         }
     }
 
@@ -55,13 +59,14 @@
         ToggleSublink.Invoke(Link);
     }
 
-    private void HandleItemHover()
-    {
-        if (IsCollapsed)
-        {
-            _showTooltip = true;
-        }
-    }
+    //private async Task HandleItemHover()
+    //{
+    //    if (IsCollapsed)
+    //    {
+    //        _toolTipPosition = await DimensionService.GetPosition(_tooltipWrapperRef);
+    //        _showTooltip = true;
+    //    }
+    //}
 
     public void Dispose()
     {
@@ -81,5 +86,10 @@
         else
             _active = false;
         StateHasChanged();
+    }
+
+    private async Task InitializedToolTips()
+    {
+        await JSRuntime.InvokeVoidAsync("initializeSidebar.initialize", _tooltipWrapperRef);
     }
 }

@@ -51,7 +51,15 @@
 
   <ItemGroup>
     <None Remove="Styles\button.scss" />
+    <None Remove="Styles\checkbox.scss" />
     <None Remove="Styles\layoutV2.scss" />
+    <None Remove="Styles\treeview.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 	
 	

@@ -5,3 +5,17 @@ window.getDimensions = function (element) {
     height: element.clientHeight
   };
 };
+
+window.getPosition = function (element) {    
+    var rect = element.getBoundingClientRect();
+    return {
+        top: Math.floor(rect.top),
+        left: Math.floor(rect.left),
+        bottom: Math.floor(rect.bottom),
+        right: Math.floor(rect.right)
+    };
+};
+
+window.setZIndex = function (element, zIndex) {
+    element.style.zIndex = zIndex;
+}

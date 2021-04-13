@@ -45,6 +45,7 @@
     .ae.modelform-rows {
 
         .ae.modelform-row {
+
             display: grid;
             grid-template-columns: 250px auto;
 
@@ -55,7 +56,15 @@
                 flex-direction: row-reverse;
                 margin-right: 0.5rem;
                 font-weight: bold;
+                
+                &.ae-label-required {
+                    & > :first-child::after {
+                        color: $red-600;
+                        content: ' * ';
+                    }
+                }
             }
+
 
             .errortext {
                 grid-column-start: 2;
@@ -73,6 +82,21 @@
                     align-self: center;
                     transform: scale(1.5);
                     margin-left: 0.25rem;
+                }
+            }
+        }
+
+        &.top-label {
+            .ae.modelform-row {
+                grid-template-columns: 100%;
+    
+                .ae.ae-form-control-label {
+                    flex-direction: row;
+                    grid-column: span 2;
+                }
+
+                .errortext {
+                    grid-column: 1;
                 }
             }
         }

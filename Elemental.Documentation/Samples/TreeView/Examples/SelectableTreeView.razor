@@ -1,0 +1,118 @@
+﻿@*
+  Copyright (c) 2020 Apption Corporation
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  Title: Selectable Tree View
+  Description: A tree view that replaces icons with checkboxes with three states
+*@
+<div>
+  <AeTreeViewSelectable T="Item" Roots="_roots" FetchChildren="GetChildren" RenderNode="RenderNode" IsChecked="IsChecked"
+  ItemChecked="ItemChecked" />
+</div>
+
+
+@code {
+    private List<Item> _roots = new List<Item>();
+
+    public List<Item> GetChildren(Item root)
+    {
+        return root.children;
+    }
+
+    public string RenderNode(Item item){
+        return item.name;
+    }
+
+    public bool? IsChecked(Item item){
+        return item.isChecked;
+    }
+
+    public void ItemChecked(Item item, bool isChecked)
+    {
+        item.isChecked = isChecked;
+        setChildren(item.children, isChecked);
+        setParent(item.parent);
+    }
+
+    private void setChildren(List<Item> children, bool isChecked)
+    {
+        if (children == null)
+            return;
+        foreach(var item in children){
+            item.isChecked = isChecked;
+            setChildren(item.children, isChecked);
+        }
+        
+    }
+    private void setParent(Item parent)
+    {
+        if (parent == null)
+            return;
+        var childrenCountChecked = parent.children.Where(x => x.isChecked == true).Count();
+        if (childrenCountChecked < parent.children.Count() && 0 < childrenCountChecked || parent.children.Where(x => x.isChecked == null).Count() > 1)
+        {
+            parent.isChecked = null;
+            setParent(parent.parent);
+        } else if (childrenCountChecked == 0)
+        {
+            parent.isChecked = false;
+            setParent(parent.parent);
+        } else if (childrenCountChecked == parent.children.Count())
+        {
+            parent.isChecked = true;
+            setParent(parent.parent);
+        }
+    }
+        
+
+    protected override void OnInitialized()
+    {
+        var table1 = new Item(1, "table1", "table", false, null);
+        var table2 = new Item(2, "table1", "table", false, null);
+        var table3= new Item(3, "table1", "table", false, null);
+        var table4 = new Item(4, "table1", "table", false, null);
+        var database1 = new Item(5, "database1", "database-2", false, new List<Item>(new[] {table1}));
+        var database2 = new Item(6, "database2", "database-2", false, new List<Item>(new[] {table2}));
+        var database3 = new Item(7, "database1", "database-2", false, new List<Item>(new[] {table3}));
+        var database4 = new Item(8, "database2", "database-2", false, new List<Item>(new[] {table4}));
+        var server1 = new Item(9, "server1", "server", false, new List<Item>(new[] {database1, database2}));
+        var server2 = new Item(10, "server2", "server", false, new List<Item>(new[] {database3, database4}));
+        table1.parent = database1;
+        table2.parent = database2;
+        table3.parent = database3;
+        table4.parent = database4;
+        database1.parent = server1;
+        database2.parent = server1;
+        database3.parent = server2;
+        database4.parent = server2;
+        _roots.AddRange(new[] { server1, server2 });
+    }
+
+    public class Item
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string icon{ get; set; }
+        public bool? isChecked{ get; set; }
+        public List<Item> children {  get;  set; } 
+        public Item parent{ get; set; }
+
+        public Item(int id, string name, string icon, bool isChecked, List<Item> children){
+            this.id = id;
+            this.name = name;
+            this.icon = icon;
+            this.isChecked = (bool?)isChecked;
+            this.children =  children;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.id.Equals((obj as Item)?.id);
+        }
+
+    }
+
+}

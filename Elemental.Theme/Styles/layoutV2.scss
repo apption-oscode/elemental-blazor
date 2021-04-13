@@ -1,6 +1,7 @@
 ﻿@import 'constants';
 @import 'utils';
 @import 'box-shadow';
+@import 'scrollbar';
 
 $sideNavWidth: 250px !default;
 $topNavHeight2: 0vh !default;
@@ -54,6 +55,9 @@ $layoutOptions2: (
         ),
         ".menu": (
             "flex-grow": 1,
+            "overflow": auto,
+            "&": $scrollbarOptions,
+
             ".item": (
                 "display": flex,
                 "align-items": center,
@@ -89,7 +93,7 @@ $layoutOptions2: (
                     "position": absolute,
                     "border-radius": 4px,
                     "padding": 0.25rem 0.5rem,
-                    "left": 40px,
+                    "left": 45px,
                     "opacity": 0,
                     "white-space": pre-line,
                     "color": $baseWhite,
