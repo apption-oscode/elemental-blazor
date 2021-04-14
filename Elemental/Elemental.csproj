@@ -16,6 +16,7 @@
     <PackageTags>c# blazor</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>images/Elemental_128x128.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +38,7 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="images/Elemental_128x128.png" Pack="true" PackagePath="\"/>    
   </ItemGroup>
 
 </Project>
