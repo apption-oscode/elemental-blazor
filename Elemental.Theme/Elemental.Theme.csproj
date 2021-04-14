@@ -64,6 +64,9 @@
     <Exec Command="npm i node-sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
+  <ItemGroup>
+    <Content Remove="Styles\ie-not-supported.scss" />
+  </ItemGroup>
 
 
   <ItemGroup>

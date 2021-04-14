@@ -1,0 +1,18 @@
+﻿@page "/ieNotSupported"
+@inherits DemoPage
+
+<AeFlex Vertical>
+    <div class="source">
+        <div class="title">_Host.cshtml</div>
+        <pre><code class="language-html">
+@(@"
+<script src=""_content/Apption.Elemental/js/checkForInternetExplorer.js""></script>
+")
+</code></pre>
+    </div>
+    <DemoSection Path="./Samples/IENotSupported/Examples/BasicWarning.razor">
+        <AeFlex>
+            <Elemental.Documentation.Samples.IENotSupported.Examples.BasicWarning />
+        </AeFlex>
+    </DemoSection>
+</AeFlex>

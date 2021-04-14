@@ -40,4 +40,12 @@
     <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
     <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckBuilt Remove="wwwroot\css\elemental-docs.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\elemental-docs.min.css" />
+  </ItemGroup>
 </Project>
