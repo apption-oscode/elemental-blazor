@@ -1430,7 +1430,6 @@ body {
   white-space: nowrap;
   text-align: center;
   border: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
   color: #fff;
   background-color: #718096;
@@ -1442,7 +1441,13 @@ body {
     border-top: solid;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    text-align: left; }
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    visibility: visible;
+    height: 100%; }
+    .ae.collapse .ae.body.hidden {
+      visibility: hidden;
+      height: 0; }
   .ae.collapse.dark {
     background-color: #2d3748;
     border-color: #2d3748; }
