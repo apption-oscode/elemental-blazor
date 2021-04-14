@@ -6,14 +6,14 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Custom Check for Internet Explorer
-    Description: You can pass a custom icon render fragment, as well as custom messages for the title and body of the warning. Note: the toggle/display override is implemented for demo purposes only.
+    Description: You can pass a custom icon render fragment, as well as custom messages for the title and body of the warning. The toggle/display override is implemented for demo purposes only.
 *@
-    <div class="ie-not-supported-container">
-        <AeIENotSupported Icon="_icon" Title="@_title" Message="@_message" OverrideBrowserCheck="_showMessage">
-            This browser is not IE!
-        </AeIENotSupported>
-    </div>
-    <AeButton @onclick="ToggleWarning">Toggle Warning</AeButton>
+<div class="ie-not-supported-container">
+    <AeIENotSupported Icon="_icon" Title="@_title" Message="@_message" OverrideBrowserCheck="_showMessage">
+        This browser is not IE!
+    </AeIENotSupported>
+</div>
+<AeButton @onclick="ToggleWarning">Toggle Warning</AeButton>
 
 @code {
     private string _title = "... your still using IE?";

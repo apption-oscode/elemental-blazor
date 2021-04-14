@@ -6,7 +6,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Basic Check for Internet Explorer
-    Description: Use this component around any content that requires a modern web browser. It is reccomend you wrap your whole Blazor App in this component to avoid usage by legacy browsers. Note: the toggle/display override is implemented for demo purposes only.
+    Description: Use this component around any content that requires a modern web browser. It is reccomend you wrap your whole Blazor App in this component to avoid usage by legacy browsers. The toggle/display override is implemented for demo purposes only.
 *@
 
 <div class="ie-not-supported-container">
@@ -17,7 +17,6 @@
 <AeButton @onclick="ToggleWarning">Toggle Warning</AeButton>
 
 @code{
-    //not required: demo purposes only
     private bool _showMessage;
 
     private void ToggleWarning()
