@@ -1,47 +1,42 @@
 ﻿@*
- Copyright 2020 Apption Corporation
- 
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
- 
-     http://www.apache.org/licenses/LICENSE-2.0
- 
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
+    Copyright 2020 Apption Corporation
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 *@
 
 @inherits HtmlElement
 
-  <div class="@_classname" @attributes="InputAttributesWithoutClass">
+<div class="@_classname" @attributes="InputAttributesWithoutClass">
     <div class="ae header" @onclick="ToggleSection">
-      @Header
+        @Header
     </div>
-    <div class="ae body" style="height:@Height">
-      @ChildContent 
+    <div class="ae body @_collapseBody">
+        @ChildContent
     </div>
-  </div>
+</div>
 
 @code {
 
-  [Parameter]
-  public string Header { get; set; }
-  [Parameter]
-  public string Height { get; set; } = "0";
+    [Parameter]
+    public string Header { get; set; }
 
-  public void ToggleSection()
-  {
-    if (Height == "0")
+
+    private string _collapseBody => _isCollapsed ? "hidden" : "";
+    private bool _isCollapsed = false;
+    public void ToggleSection()
     {
-      Height = "100%";
-    } else
-    {
-      Height = "0";
+        _isCollapsed = !_isCollapsed;
     }
-  }
 
-  private string _classname => $"ae collapse {_inputClass}";
+    private string _classname => $"ae collapse {_inputClass}";
 }
