@@ -9,8 +9,8 @@
     <Authors>Apption</Authors>
     <Company>Apption</Company>
     <Product>Elemental Blazor</Product>
-    <Description>The Elemental Framework for Blazor provides a series of basic controls for the Blazor framework. Buttons, Dropdowns, Search Bar and a Table.</Description>
-    <Copyright>Copyright Apption 2020</Copyright>
+    <Description>Build modern, customizable feature rich web experiences in Blazor with minimal code using the Elemental controls. Elemental include a highly customizable table, common input controls, an object form editor and layout tools. Elemental features a scss model to customize all styles.</Description>
+    <Copyright>Copyright Apption 2021</Copyright>
     <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
     <PackageTags>c# blazor</PackageTags>
@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
-    <None Include="images/Elemental_128x128.png" Pack="true" PackagePath="\"/>    
+    <None Include="images/Elemental_128x128.png" Pack="true" PackagePath="\" />    
   </ItemGroup>
 
 </Project>
