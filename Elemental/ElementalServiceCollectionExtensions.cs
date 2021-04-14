@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<ICSVDataExportService, CSVDataExportService>();
             services.AddScoped<UIControlsService>();
             services.AddScoped<NotifierService>();
+            services.AddScoped<GetDimensionsService>();
         }
     }
 }

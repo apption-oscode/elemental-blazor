@@ -35,7 +35,7 @@
     // Accessor functions to retrieve cell value
     private List<Func<PropertyInfo, string>> accessorFunctions;
 
-    protected override async Task OnParametersSetAsync()
+    protected override void OnParametersSet()
     {
         _PropertyInfos = Object.GetType().GetProperties().ToList();
         accessorFunctions = new List<Func<PropertyInfo, string>>

@@ -8,36 +8,26 @@
 
 @using Elemental.Components.TreeViewInternal
 @typeparam T
+@inherits NonGenericTreeView<T>
 
 @if (Roots != null && Roots.Count() > 0)
 {
-<ul class="ae tree-view">
-    
-    
-        @foreach(var item in Roots)
+    <ul class="ae tree-view">
+
+
+        @foreach (var item in Roots)
         {
 
-            <TreeItem T="T" FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon" 
-            Root="item" NodeClicked="NodeClicked"/>
-            
+            <TreeItem T="T" FetchChildren="FetchChildren" RenderNode="RenderNode" RenderIcon="RenderIcon"
+                      Root="item" NodeClicked="NodeClicked" IsCollapsed="IsCollapsed" ToggleCollapsed="ToggleCollapsed" 
+                      IsBold="IsBold" NodeIsClickable="NodeIsClickable"/>
+
         }
-</ul>
-  }
+    </ul>
+}
 
 @code {
     [Parameter]
-    public Func<T, IEnumerable<T>> FetchChildren { get; set; }
-    
-    [Parameter]
-    public Func<T, string> RenderNode { get; set; }
-    
-    [Parameter]
     public Func<T, string> RenderIcon { get; set; }
-
-    [Parameter]
-    public IEnumerable<T> Roots { get; set; }
-
-    [Parameter]
-    public Action<T> NodeClicked { get; set; }
 
 }

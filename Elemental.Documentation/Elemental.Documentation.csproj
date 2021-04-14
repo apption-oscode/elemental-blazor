@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\css\elemental-docs.css" />
+    <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
+    <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,19 +16,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
-    <ProjectReference Include="..\Elemental\Elemental.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="Samples\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
+  <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm run build-css" />
+  </Target>
+
+  <!-- from https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially -->
+  <PropertyGroup>
+    <!-- File with mtime of last successful npm install -->
+    <NpmInstallStampFile>node_modules/.install-stamp</NpmInstallStampFile>
+  </PropertyGroup>
+  <Target Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
+    <Exec Command="npm i node-sass --save-dev" />
+    <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
+  </Target>
+
   <ItemGroup>
-    <None Update="Samples\Cards\Examples\CardSamples.scss">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
+    <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
   </ItemGroup>
 </Project>

@@ -17,6 +17,9 @@ $treeViewOptions: (
         ),
         ".active": (
             "display": block,
+            "padding-left": 25px,
+            "margin-left": 15px,
+            "border-left": 1px solid $grey-400
         ),
         ".tree-view-item-content" :(
             "display": flex,
@@ -50,13 +53,16 @@ $treeViewOptions: (
         
     ),
     ".tree-view-node-text" : (
-        "cursor": pointer,
         "padding": 4px 8px,
-         "&:hover": (
-                "background-color": $grey-200
-            )
-    ),
-    ".xtra-padding" : (
+        "&.clickable" : (
+            "cursor": pointer,
+                 "&:hover": (
+                        "background-color": $grey-200
+                    ),
+        ),
+        "&.bold" : (
+            "font-weight": bold
+        ),
     ),
     )
 ) !default;
