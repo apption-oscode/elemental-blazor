@@ -18,7 +18,7 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 
-<div class="@(_classname) @(_browserIsInternetExplorer? "show-message" : "")">
+<div class="@(_classname) @(_browserIsInternetExplorer || OverrideBrowserCheck? "show-message" : "")">
     <div class="ie-not-supported-message-wrapper">
         <div class="ie-not-supported-icon">
             @Icon
@@ -40,6 +40,9 @@
     private bool _browserIsInternetExplorer;
 
     [Parameter]
+    public bool OverrideBrowserCheck { get; set; }
+
+    [Parameter]
     public RenderFragment Icon { get; set; } =@<AeIcon Icon="error-warning" Size="10x"></AeIcon>;
 
     [Parameter]
@@ -50,7 +53,7 @@
 
     protected override void OnInitialized()
     {
-            if (HttpContextAccessor.HttpContext != null && HttpContextAccessor.HttpContext.Request.IsInternetExplorer())
+            if (!OverrideBrowserCheck && HttpContextAccessor.HttpContext != null && HttpContextAccessor.HttpContext.Request.IsInternetExplorer())
                 _browserIsInternetExplorer = true;
     }
 

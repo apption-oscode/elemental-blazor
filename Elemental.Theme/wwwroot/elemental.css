@@ -491,7 +491,13 @@ body {
   cursor: pointer;
   color: #fff;
   background-color: #718096;
-  border-color: #718096; }
+  border-color: #718096;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   .ae.button:focus {
     outline: none; }
   .ae.button:hover {
@@ -2288,7 +2294,7 @@ body {
     position: absolute;
     width: 60%;
     max-width: 600px;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     -webkit-animation: fadein 10s;

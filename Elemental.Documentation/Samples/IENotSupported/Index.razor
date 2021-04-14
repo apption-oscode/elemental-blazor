@@ -2,17 +2,17 @@
 @inherits DemoPage
 
 <AeFlex Vertical>
-    <div class="source">
-        <div class="title">_Host.cshtml</div>
-        <pre><code class="language-html">
-@(@"
-<script src=""_content/Apption.Elemental/js/checkForInternetExplorer.js""></script>
-")
-</code></pre>
-    </div>
+    <AeTypography  Variant="p">
+        Too see the warning in action, try opening 
+        <AeTypography Variant="a" href="/ieNotSupported">
+            this address
+        </AeTypography> 
+        in Internet Explorer.
+</AeTypography>
     <DemoSection Path="./Samples/IENotSupported/Examples/BasicWarning.razor">
-        <AeFlex>
             <Elemental.Documentation.Samples.IENotSupported.Examples.BasicWarning />
-        </AeFlex>
     </DemoSection>
-</AeFlex>
+    <DemoSection Path="./Samples/IENotSupported/Examples/CustomWarning.razor">
+            <Elemental.Documentation.Samples.IENotSupported.Examples.CustomWarning />
+    </DemoSection>
+</AeFlex>   
