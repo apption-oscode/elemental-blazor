@@ -129,194 +129,198 @@
                     <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
                </AeTypography>
     ;
-  }
+    }
 
-public class customArgs { }
-customArgs emptyArgs;
+    public class customArgs { }
+    customArgs emptyArgs;
 
-private string _simple = null;
-private string _tableClass => $"ae table {_inputClass}";
-private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
-private string _rowsStyle => $"{_gridStyle}; grid-template-rows: repeat({scrollViewResult.TakeItems},{RowHeight}px); height:{scrollViewResult.Height}px;";
-private string _rowStyle => $"{_gridStyle}; grid-template-rows:{RowHeight}px;";
-private string _scrollStyle => $"max-height: {MaxHeight}px;";
-private string _toolTipText;
+    private string _simple = null;
+    private string _tableClass => $"ae table {_inputClass}";
+    private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
+    private string _rowsStyle => $"{_gridStyle}; grid-template-rows: repeat({scrollViewResult.TakeItems},{RowHeight}px); height:{scrollViewResult.Height}px;";
+    private string _rowStyle => $"{_gridStyle}; grid-template-rows:{RowHeight}px;";
+    private string _scrollStyle => $"max-height: {MaxHeight}px;";
+    private string _toolTipText;
     private int _toolTipHeight;
     private int _toolTipWidth;
     private int _toolTipTop;
     private int _toolTipLeft;
-private (int column, bool sortAscending) _sorting = (0, true);
+    private (int column, bool sortAscending) _sorting = (0, true);
 
-private ElementReference tableRef;
-private ElementReference toolTipRef;
-private Dictionary<(int, int), ElementReference> cells = new Dictionary<(int, int), ElementReference>();
-private ScrollView scrollView;
-private ScrollViewResult scrollViewResult;
-private IEnumerable<T> Rows { get => GetSortedDataset(); }
+    private ElementReference tableRef;
+    private ElementReference toolTipRef;
+    private Dictionary<(int, int), ElementReference> cells = new Dictionary<(int, int), ElementReference>();
+    private ScrollView scrollView;
+    private ScrollViewResult scrollViewResult;
+    private IEnumerable<T> Rows { get => GetSortedDataset(); }
 
-protected override void OnInitialized()
-{
-    base.OnInitialized();
-
-    scrollView = new ScrollView();
-    scrollViewResult = new ScrollViewResult();
-
-    if (SimpleTable)
+    protected override void OnInitialized()
     {
-        _simple = "simple";
-        RowHeight = 22;
-    }
-}
+        base.OnInitialized();
 
-protected override async Task OnAfterRenderAsync(bool firstRender)
-{
-await base.OnAfterRenderAsync(firstRender);
-var tempHeight = Rows.Count() * RowHeight;
-if (firstRender || scrollViewResult.Height != tempHeight)
-{
-    scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
+        scrollView = new ScrollView();
+        scrollViewResult = new ScrollViewResult();
 
-    scrollViewResult.Height = Rows.Count() * RowHeight;
-    scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
-    scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + MaxHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
-    StateHasChanged();
-}
-if (firstRender && AddToolTip){
-    await JSRuntime.InvokeVoidAsync("initializeToolTip", new object[] {toolTipRef, DotNetObjectReference.Create(this) });
-}
-}
-
-
-private void ToggleSortOnColumn(int column)
-{
-if (column == _sorting.column)
-{
-    _sorting.sortAscending = !_sorting.sortAscending;
-}
-else
-{
-    _sorting.column = column;
-    _sorting.sortAscending = true;
-}
-StateHasChanged();
-}
-
-private IEnumerable<T> GetSortedDataset()
-{
-if (_sorting.sortAscending)
-{
-    return Dataset.OrderBy(data => Accessors[_sorting.column].Invoke(data));
-}
-else
-{
-    return Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data));
-}
-}
-
-private string GetSortIconClass(int column)
-{
-if (column == _sorting.column)
-{
-    return _sorting.sortAscending ? "fad fa-sort-down" : "fad fa-sort-up";
-}
-return "fad fa-sort";
-}
-
-private string GetGridTemplateColumns()
-{
-if (string.IsNullOrWhiteSpace(GridTemplateColumns))
-{
-    return $"{(SimpleTable ? "minmax(0, 0.25fr)" : "")} repeat({(Headers?.Count ?? 1)}, minmax(0, 1fr))";
-}
-else
-{
-    return GridTemplateColumns;
-}
-}
-
-private string GetRowColor(T row)
-{
-return $"ae table-row {ColorAccessor?.Invoke(row)}";
-}
-
-private async Task OnHoverShowToolTip(int row, int cell, string text)
-{
-    var element = cells[(row, cell)];
-    var dimension = await DimensionService.GetDimensions(element);
-    var position = await DimensionService.GetPosition(element);
-    _toolTipHeight = dimension.Height;
-    _toolTipWidth = dimension.Width + 4;
-    _toolTipTop = position.Top;
-    _toolTipLeft = position.Left;
-    _toolTipText = text;
-    StateHasChanged();
-}
-
-[JSInvokableAttribute("OnMouseOutHideToolTip")]
-public void OnMouseOutHideToolTip()
-{
-    _toolTipText = null;
-    _toolTipLeft = 0; _toolTipTop = 0; _toolTipHeight = 0; _toolTipWidth = 0;
-    StateHasChanged();
-}
-
-private async Task OnScroll()
-{
-scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
-scrollViewResult.Height = Rows.Count() * RowHeight;
-scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
-scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + scrollView.ClientHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
-StateHasChanged();
-}
-
-public byte[] ExportToCSVInByte()
-{
-var builder = new StringBuilder();
-(int column, bool sortAscending) _sorting = (0, true);
-
-foreach (var h in Headers)
-{
-    builder.Append(h + ",");
-}
-//Remove the last ,
-builder.Length--;
-builder.Append(Environment.NewLine);
-
-foreach (var row in Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data)))
-{
-
-    foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
-    {
-        var value = accessor?.Invoke(row);
-        if (value.IndexOfAny(new char[] { '"', ',' }) != -1)
+        if (SimpleTable)
         {
-            builder.AppendFormat("\"{0}\"", value.Replace("\"", "\"\""));
-            builder.Append(",");
+            _simple = "simple";
+            RowHeight = 22;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        var tempHeight = Rows.Count() * RowHeight;
+        if (firstRender || scrollViewResult.Height != tempHeight)
+        {
+            scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
+
+            scrollViewResult.Height = Rows.Count() * RowHeight;
+            scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
+            scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + MaxHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
+            StateHasChanged();
+        }
+        if (firstRender && AddToolTip){
+            await JSRuntime.InvokeVoidAsync("initializeToolTip", new object[] {toolTipRef, DotNetObjectReference.Create(this) });
+        }
+    }
+
+
+    private void ToggleSortOnColumn(int column)
+    {
+        if (column == _sorting.column)
+        {
+            _sorting.sortAscending = !_sorting.sortAscending;
         }
         else
         {
-            builder.Append(accessor?.Invoke(row) + ",");
+            _sorting.column = column;
+            _sorting.sortAscending = true;
+        }
+        StateHasChanged();
+    }
+
+    private IEnumerable<T> GetSortedDataset()
+    {
+        if (_sorting.sortAscending)
+        {
+            return Dataset.OrderBy(data => Accessors[_sorting.column].Invoke(data));
+        }
+        else
+        {
+            return Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data));
         }
     }
-    //Remove the last ,
-    builder.Length--;
-    builder.Append(Environment.NewLine);
-}
-var bytes = Encoding.UTF8.GetBytes(builder.ToString());
-return bytes;
-}
 
-public class ScrollView
-{
-public int ClientHeight { get; set; }
+    private string GetSortIconClass(int column)
+    {
+        if (column == _sorting.column)
+        {
+            return _sorting.sortAscending ? "fad fa-sort-down" : "fad fa-sort-up";
+        }
+        return "fad fa-sort";
+    }
 
-public int ScrollTop { get; set; }
-}
+    private string GetGridTemplateColumns()
+    {
+        if (string.IsNullOrWhiteSpace(GridTemplateColumns))
+        {
+            return $"{(SimpleTable ? "minmax(0, 0.25fr)" : "")} repeat({(Headers?.Count ?? 1)}, minmax(0, 1fr))";
+        }
+        else
+        {
+            return GridTemplateColumns;
+        }
+    }
 
-public class ScrollViewResult
-{
-public int Height { get; set; }
-public int SkipItems { get; set; }
-public int TakeItems { get; set; }
-}
+    private string GetRowColor(T row)
+    {
+        return $"ae table-row {ColorAccessor?.Invoke(row)}";
+    }
+
+    private async Task OnHoverShowToolTip(int row, int cell, string text)
+    {
+        if (AddToolTip)
+        {
+            var element = cells[(row, cell)];
+            var dimension = await DimensionService.GetDimensions(element);
+            var position = await DimensionService.GetPosition(element);
+            _toolTipHeight = dimension.Height;
+            _toolTipWidth = dimension.Width + 4;
+            _toolTipTop = position.Top;
+            _toolTipLeft = position.Left;
+            _toolTipText = text;
+            StateHasChanged();
+
+        }
+    }
+
+    [JSInvokableAttribute("OnMouseOutHideToolTip")]
+    public void OnMouseOutHideToolTip()
+    {
+        _toolTipText = null;
+        _toolTipLeft = 0; _toolTipTop = 0; _toolTipHeight = 0; _toolTipWidth = 0;
+        StateHasChanged();
+    }
+
+    private async Task OnScroll()
+    {
+        scrollView = await JSRuntime.InvokeAsync<ScrollView>("virtualScrolling.getScrollView", tableRef);
+        scrollViewResult.Height = Rows.Count() * RowHeight;
+        scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
+        scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + scrollView.ClientHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
+        StateHasChanged();
+    }
+
+    public byte[] ExportToCSVInByte()
+    {
+        var builder = new StringBuilder();
+        (int column, bool sortAscending) _sorting = (0, true);
+
+        foreach (var h in Headers)
+        {
+            builder.Append(h + ",");
+        }
+        //Remove the last ,
+        builder.Length--;
+        builder.Append(Environment.NewLine);
+
+        foreach (var row in Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data)))
+        {
+
+            foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+            {
+                var value = accessor?.Invoke(row);
+                if (value.IndexOfAny(new char[] { '"', ',' }) != -1)
+                {
+                    builder.AppendFormat("\"{0}\"", value.Replace("\"", "\"\""));
+                    builder.Append(",");
+                }
+                else
+                {
+                    builder.Append(accessor?.Invoke(row) + ",");
+                }
+            }
+            //Remove the last ,
+            builder.Length--;
+            builder.Append(Environment.NewLine);
+        }
+        var bytes = Encoding.UTF8.GetBytes(builder.ToString());
+        return bytes;
+    }
+
+    public class ScrollView
+    {
+        public int ClientHeight { get; set; }
+
+        public int ScrollTop { get; set; }
+    }
+
+    public class ScrollViewResult
+    {
+        public int Height { get; set; }
+        public int SkipItems { get; set; }
+        public int TakeItems { get; set; }
+    }
 }
