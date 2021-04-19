@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -2291,7 +2291,7 @@ body {
 
 .ae.ie-not-supported.show-message {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative; }
   .ae.ie-not-supported.show-message .ie-not-supported-message-wrapper {
     display: inline;
@@ -2623,5 +2623,3 @@ template {
  */
 [hidden] {
   display: none; }
-
-/*# sourceMappingURL=elemental.css.map */
