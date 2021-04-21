@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Elemental.FormBuilder
 {
     public enum ExtensionType
@@ -65,6 +67,38 @@ namespace Elemental.FormBuilder
             { ExtensionType.TIME, "Time" },
             { ExtensionType.TS, "Timestamp" },
             { ExtensionType.VAL, "Value" }
+        };
+
+        public readonly static Dictionary<string, string> ClassWordsStr = new Dictionary<string, string>()
+        {
+            { "NONE", "None" },
+            { "AMT", "Amount" },
+            { "AMTL", "Amount (local currency)" },
+            { "AMTR", "Amount (reporting currency)" },
+            { "CD", "Code - A code may be paired with a description, name or nothing at all (in cases where the code is meaningful)" },
+            { "CNT", "Count" },
+            { "DT", "Date" },
+            { "DESC", "Description" },
+            { "DUR", "Duration" },
+            { "URL", "URL" },
+            { "EMAIL", "Email" },
+            { "NT", "Notes" },
+            { "FCTR", "Factor" },
+            { "ID", "Identification / Identifier" },
+            { "FLAG", "Indicator" },
+            { "MULT", "Multiplier" },
+            { "NAME", "Name" },
+            { "NUM", "Number" },
+            { "PCT", "Percentage" },
+            { "QTY", "Quantity" },
+            { "RT", "Rate" },
+            { "RTO", "Ratio" },
+            { "SID", "Surrogate Key" },
+            { "TXT", "Text" },
+            { "IND", "Indicator" },
+            { "TIME", "Time" },
+            { "TS", "Timestamp" },
+            { "VAL", "Value" }
         };
 
         public readonly static EnumIndexedArray<ExtensionType, string> Definitions = new EnumIndexedArray<ExtensionType, string>()

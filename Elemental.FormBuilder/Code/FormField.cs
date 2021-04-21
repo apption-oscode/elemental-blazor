@@ -1,71 +1,101 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
+using Elemental.Components.Forms;
 
 namespace Elemental.FormBuilder
 {
     public class FormField
     {
+        [AeFormIgnore]
+        [Key]
+        public int FormFieldID { get; set; }
+
+        [Required]
+        [StringLength(100)]
         public string Section { get; set; }
+
+        [Required]
+        [StringLength(100)]
         public string Field { get; set; }
-        public ExtensionType Extension { get; set; }
+
+        [AeLabel(isDropDown:true, validValues: new [] 
+            {
+                "NONE", "AMT", "AMTL", "AMTR", "CD", "CNT", "DT", "DESC", "DUR", "URL", "EMAIL", "NT", "FCTR", "ID", "FLAG", 
+                "MULT", "NAME", "NUM", "PCT", "QTY", "RT", "RTO", "SID", "TXT", "IND", "TIME", "TS", "VAL"
+            })]
+        public string Extension { get; set; } = "NONE";
         public int? MaxLength { get; set; }
         public bool Mandatory { get; set; }
-        public FormFieldType FieldType { get; set; }
+
+        [AeLabel(isDropDown:true, validValues: new [] 
+        {
+            "Text", "Integer", "Decimal", "Boolean", "Dropdown", "Date", "Time", "Money"
+        })]
+        public string FieldType { get; set; } = "Text";
         public int? DropdownOptionCount { get; set; }
 
+        [AeFormIgnore]
         public string Formatted
         {
             get
             {
+                if (Field == null) return string.Empty;
+
                 var deDashed = Field.Replace("-","");
                 return Regex.Replace(deDashed, "[^A-Za-z0-9_]+", "_", RegexOptions.Compiled);
             }
         }
 
+        [AeFormIgnore]
         public string Code
         {
             get 
             {
-                return Enum.GetName<ExtensionType>(Extension);
+                return Extension;
             }
         }
 
+        [AeFormIgnore]
         public string ExtensionLabel
         {
             get
             {
-                return ExtensionTypeReference.ClassWords[Extension];
+                return ExtensionTypeReference.ClassWordsStr[Extension];
             }
         }
 
+        [AeFormIgnore]
         public string SQLName
         {
             get
             {
-                return Extension == ExtensionType.NONE ?
+                return Extension == "NONE" ?
                     Formatted :
                     Formatted + "_" + Code;
             }
         }
         
+        [AeFormIgnore]
         public string EFType
         {
             get
             {
-                return FormFieldTypeReference.EFTypes[FieldType];
+                return FormFieldTypeReference.EFTypesStr[FieldType];
             }
         }
 
+        [AeFormIgnore]
         public string EFCoreAnnotations
         {
             get
             {
                 var sb = new StringBuilder();
                 // EFCoreAnnotation1: field type
-                if (FormFieldTypeReference.Annotations[FieldType] != null) 
+                if (FormFieldTypeReference.AnnotationsStr.ContainsKey(FieldType))
                 {
-                    sb.AppendLine(FormFieldTypeReference.Annotations[FieldType]);
+                    sb.AppendLine(FormFieldTypeReference.AnnotationsStr[FieldType]);
                 }
 
                 // EFCoreAnnotation2: required
@@ -84,6 +114,7 @@ namespace Elemental.FormBuilder
             }
         }
 
+        [AeFormIgnore]
         public string JSON
         {
             get
@@ -92,6 +123,7 @@ namespace Elemental.FormBuilder
             }
         }
 
+        [AeFormIgnore]
         public string CSCode
         {
             get

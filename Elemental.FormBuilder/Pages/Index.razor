@@ -8,8 +8,11 @@
 
 
 @page "/"
+@inject Code.IFormFieldRepository Repo;
 
 <div>Welcome to Form Builder</div>
+
+<a href="/formfields">Form Fields</a>
 
 <div>
     @foreach (var field in _formFields)
@@ -75,41 +78,11 @@
 
 @code
 {
-    private IList<FormField> _formFields = new List<FormField>()
+    private IEnumerable<FormField> _formFields = new List<FormField>();
+
+    protected override async Task OnInitializedAsync()
     {
-        new FormField()
-        {
-            Section = "Basic info",
-            Field = "Name",
-            Extension = ExtensionType.NAME,
-            MaxLength = 100,
-            Mandatory = true,
-            FieldType = FormFieldType.Text
-        },
-        new FormField()
-        {
-            Section = "Basic info",
-            Field = "Description",
-            Extension = ExtensionType.DESC,
-            MaxLength = 400,
-            FieldType = FormFieldType.Text
-        },
-        new FormField()
-        {
-            Section = "Basic info",
-            Field = "Creation Date",
-            Extension = ExtensionType.DT,
-            Mandatory = true,
-            FieldType = FormFieldType.Date
-        },
-        new FormField()
-        {
-            Section = "Price",
-            Field = "Price",
-            Extension = ExtensionType.AMT,
-            Mandatory = true,
-            FieldType = FormFieldType.Money
-        }
-        
-    };
+        _formFields = await Repo.GetFormFields();
+    }
+
 }

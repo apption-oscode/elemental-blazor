@@ -11,6 +11,12 @@
 @inherits DemoPage
 
 <AeFlex Vertical class="typography-page-container">
+    <DemoSection Path="./Pages/FormFieldDemo.razor" AdditionalCS="./Code/FormField.cs">
+        <AeFlex Vertical>
+            <Elemental.FormBuilder.Pages.FormFieldDemo />
+        </AeFlex>
+    </DemoSection>
+    
     <DemoSection Path="./Samples/ModelForm/Examples/StarshipForm.razor" AdditionalCS="./Samples/ModelForm/Starship.cs">
         <AeFlex Vertical>
             <Elemental.FormBuilder.Samples.ModelForm.Examples.StarshipForm />
