@@ -11,7 +11,7 @@
 
 <AeLayoutV2 Links="_navLinks">
     @*<TopNavigation>Top Nav</TopNavigation>*@
-    <Brand>
+    @* <Brand>
         <NavLink href="https://wwww.apption.com" class="logo">
             <img src="/img/apption-logo-white.svg" />
         </NavLink>
@@ -20,7 +20,10 @@
         <NavLink href="https://wwww.apption.com" class="logo small">
             <img src="/img/apption-logo-white.svg" />
         </NavLink>
-    </BrandSmall>
+    </BrandSmall> *@
+    <Brand>
+        <AeTypography Variant="h2">Form Builder</AeTypography>
+    </Brand>
     <ChildContent>
         <AeTypography Variant="h1" style="text-align: center;">Form Builder</AeTypography>
         <AeFlex Vertical style="max-width: 1200px; padding: 0rem 2rem 5rem">
@@ -60,7 +63,7 @@
     private List<AeNavLink> _navLinks = new List<AeNavLink>
     {
         new AeNavLink{ Label = "Home", To = "/", IconName = "function", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "blue" },
-        new AeNavLink {Label = "Components", IconName = "focus", IconClassName = "orange", ChildLinks = new List<AeNavLink>()
+        @* new AeNavLink {Label = "Components", IconName = "focus", IconClassName = "orange", ChildLinks = new List<AeNavLink>()
         {
             new AeNavLink{ Label = "Navbar", To = "/navbar", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
             new AeNavLink{ Label = "Buttons", To = "/buttons", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
@@ -89,7 +92,8 @@
             new AeNavLink{ Label = "Layout", To = "/layout", IconName = "layout", IconStyle = RXIcon.RXStyle.Fill },
             new AeNavLink{ Label = "Sidebar", To = "/layoutWithSidebar", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
 
-        } }
+        } } *@
+        new AeNavLink { Label = "Form Fields", To = "/formfields", IconName = "focus" }
     };
 
 }
