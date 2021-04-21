@@ -1087,7 +1087,6 @@ body {
       background-color: #718096;
       text-align: center;
       padding: 0;
-      width: 122px;
       border-top: 1px solid;
       border-right: 1px solid; }
     .ae.table .ae.table-header.simple .corner {
@@ -1174,7 +1173,6 @@ body {
       background-color: #edf2f7; }
     .ae.table .ae.table-rows .ae.table-row.simple {
       font-size: 0.75rem;
-      width: 400px;
       text-align: center; }
       .ae.table .ae.table-rows .ae.table-row.simple:focus {
         outline: none;

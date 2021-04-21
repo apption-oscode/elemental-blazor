@@ -11,8 +11,8 @@
 
 <AeTable Accessors="accessorFunctions"
          Dataset="dummyData"
-         Headers="headers"
          SimpleTable="true" />
+<br />
 
 <AeTable Accessors="accessorFunctions"
          Dataset="dummyData"
@@ -39,7 +39,7 @@ Func<int, RenderFragment> customLabel = (row) =>
 // Define the headers at the top of the table
 private List<string> headers = new List<string>
 {
-    "Type", "Category", "Location"
+    "Type", "Category", "Location", "Importance", "Icon"
 };
 
 // Typeparam class to hold row data, can be anything
@@ -63,6 +63,8 @@ private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyDat
     new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
     new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
     new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
+    new Func<DummyData, string>(dummyData => { return dummyData.Importance.ToString(); }),
+    new Func<DummyData, string>(dummyData => { return dummyData.CategoryIconClass; })
 };
 
 class DummyData
