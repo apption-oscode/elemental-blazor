@@ -9,7 +9,7 @@ trigger:
 pool:
   name: Apption Pool
   demands:
-    - agent.name -equals linux-build
+    - agent.name -equals linux-build
 
 variables:
   NetCoreVersion: '5.0.100'
