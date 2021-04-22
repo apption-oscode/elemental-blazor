@@ -1,31 +1,26 @@
 ﻿@using Elemental.Components.PasteAreaInternal;
 
-<PasteAwareComponent OnContentPasted="FillTable">
-    @if (_excelContent.Any() == false)
-    {
-        <div class="ae table">
-            <p>CRTL + V clipboard into this box</p>
-        </div>
-    }
-    else
-    {
-        <AeTable Accessors="pasteAccessors"
-                 Dataset="_excelContent"
-                 Headers="pasteHeaders"
-                 SimpleTable="true">
-        </AeTable>
-
-        <AeFlex id="buttonBar">
-            <div class="icon-container" style="margin-bottom: 10px; margin-left: 5px;">
-                <FAButton Text="Import" Icon="fal fa-arrow-left" onclick="e => ImportRecords()" />
+<div style="width:5000px">
+    <PasteAwareComponent OnContentPasted="FillTable">
+        @if (_excelContent.Any() == false)
+        {
+            <div class="ae table">
+                <p>CRTL + V clipboard into this box</p>
             </div>
-            <div class="icon-container" style="margin-bottom: 10px; margin-left: 5px;">
-                <FAButton Text="Cancel Import" Icon="far fa-plus-square" onclick="e => CancelImport()" />
-            </div>
-        </AeFlex>
-    }
-</PasteAwareComponent>
+        }
+        else
+        {
+            <AeTable Accessors="pasteAccessors"
+                     Dataset="_excelContent"
+                     SimpleTable="true">
+            </AeTable>
 
+            
+            <AeButton Text="Import" Icon="fal fa-arrow-left" @onclick="e => ImportRecords()" />
+            <AeButton Text="Cancel Import" Icon="far fa-plus-square" @onclick="e => CancelImport()" />            
+        }
+    </PasteAwareComponent>
+</div>
 @code {
 
     [Parameter]
@@ -35,8 +30,7 @@
 
     private List<String[]> _excelContent = new List<String[]>();
     private List<Func<String[], string>> pasteAccessors = new List<Func<String[], string>>();
-    private List<string> pasteHeaders = new List<string>();
-
+    
 
     private Task ImportRecords()
     {
@@ -58,7 +52,6 @@
         {
             var headerNumber = i + 1;
             int j = i;
-            pasteHeaders.Add($"Header{headerNumber}");
             var func = new Func<String[], string>(p => { return p[j]; });
             pasteAccessors.Add(func);
         }
@@ -67,7 +60,6 @@
     private async Task FillTable(IEnumerable<IDictionary<String, String>> content)
     {
         pasteAccessors.Clear();
-        pasteHeaders.Clear();
         _excelContent.Clear();
         if (content == null || content.Count() != 1)
         {
