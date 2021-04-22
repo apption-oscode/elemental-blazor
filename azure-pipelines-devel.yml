@@ -29,7 +29,14 @@ steps:
 - task: NodeTool@0
   displayName: 'install node'
   inputs:
-    versionSpec: '15.11.0' 
+    versionSpec: '15.x' 
+    checkLatest: true
+
+- task: Npm@1
+  displayName: 'rebuild node-sass'
+  inputs:
+    command: 'custom'
+    customCommand: 'rebuild node-sass'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
