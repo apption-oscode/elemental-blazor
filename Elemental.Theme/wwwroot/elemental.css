@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -491,7 +491,13 @@ body {
   cursor: pointer;
   color: #fff;
   background-color: #718096;
-  border-color: #718096; }
+  border-color: #718096;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   .ae.button:focus {
     outline: none; }
   .ae.button:hover {
@@ -1081,7 +1087,6 @@ body {
       background-color: #718096;
       text-align: center;
       padding: 0;
-      width: 122px;
       border-top: 1px solid;
       border-right: 1px solid; }
     .ae.table .ae.table-header.simple .corner {
@@ -1168,7 +1173,6 @@ body {
       background-color: #edf2f7; }
     .ae.table .ae.table-rows .ae.table-row.simple {
       font-size: 0.75rem;
-      width: 400px;
       text-align: center; }
       .ae.table .ae.table-rows .ae.table-row.simple:focus {
         outline: none;
@@ -2280,6 +2284,36 @@ body {
   .ae.checkbox:hover {
     background-color: #edf2f7; }
 
+.ae.ie-not-supported .ie-not-supported-message-wrapper {
+  display: none; }
+
+.ae.ie-not-supported.show-message {
+  width: 100%;
+  height: 100vh;
+  position: relative; }
+  .ae.ie-not-supported.show-message .ie-not-supported-message-wrapper {
+    display: inline;
+    text-align: center;
+    position: absolute;
+    width: 60%;
+    max-width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-animation: fadein 10s;
+    -moz-animation: fadein 10s;
+    -o-animation: fadein 10s;
+    animation: fadein 10s; }
+    .ae.ie-not-supported.show-message .ie-not-supported-message-wrapper .ie-not-supported-icon {
+      width: 100%;
+      text-align: center; }
+    .ae.ie-not-supported.show-message .ie-not-supported-message-wrapper .ie-not-supported-title {
+      margin: 16px 0; }
+    .ae.ie-not-supported.show-message .ie-not-supported-message-wrapper .ie-not-supported-message {
+      margin: 16px 0; }
+  .ae.ie-not-supported.show-message .ie-not-supported-child {
+    display: none; }
+
 /*
     Third party
 */
@@ -2587,5 +2621,3 @@ template {
  */
 [hidden] {
   display: none; }
-
-/*# sourceMappingURL=elemental.css.map */

@@ -8,6 +8,8 @@ trigger:
 
 pool:
   name: Apption Pool
+  demands:
+    - agent.name -equals Apptions-iMac
 
 variables:
   NetCoreVersion: '5.0.100'
