@@ -26,8 +26,7 @@ $tableHeaderOptions: (
             "border-color": $grey-500 !important,
             "background-color": $grey-600,
             "text-align": center,
-            "padding": 0,
-            "width": 122px,
+            "padding": 0,            
             "border-top": 1px solid,
             "border-right": 1px solid,  
         ),
@@ -160,7 +159,6 @@ $tableRowOptions: (
             ),
         ),
         "font-size": 0.75rem,
-        "width": 400px,
         "text-align": center,
         ".row-number": (
             "width": 75px,

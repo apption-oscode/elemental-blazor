@@ -36,7 +36,7 @@
 
 @code {
     private string _classname => $"ae ie-not-supported {_inputClass}";
-    //assume the browser is IE. Then check JS. If JS is not accesbile, it likely isn't a modern browser.
+
     private bool _browserIsInternetExplorer;
 
     [Parameter]
@@ -49,7 +49,7 @@
     public string Title { get; set; } = "This website requires a modern browser.";
 
     [Parameter]
-    public string Message { get; set; } = "To view this site we reccomend using a recent browser such as Chrome, Edge, Firefox, or Safari.";
+    public string Message { get; set; } = "To view this site we recommend using a recent browser such as Chrome, Edge, Firefox, or Safari.";
 
     protected override void OnInitialized()
     {

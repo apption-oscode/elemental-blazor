@@ -24,23 +24,26 @@
 @typeparam T
 
 <div class="@_tableClass" @attributes="InputAttributesWithoutClass">
-    <div class="ae table-header @_simple" style="@_gridStyle">
-        @if (SimpleTable)
-        {
-            <div class="corner">&nbsp;</div>
-        }
-        @foreach (var (header, index) in Headers.Select((h, index) => (h, index)))
-        {
-            @if (@CustomHeader != null)
+    @if (Headers.Count > 0)
+    {
+        <div class="ae table-header" style="@_gridStyle">
+            @if (SimpleTable)
             {
-                @CustomHeader(header, index)
+                <div class="corner  @_simple">&nbsp;</div>
             }
-            else
+            @foreach (var (header, index) in Headers.Select((h, index) => (h, index)))
             {
-                @defaultHeader(header, index)
+                @if (@CustomHeader != null)
+                {
+                    @CustomHeader(header, index)
+                }
+                else
+                {
+                    @defaultHeader(header, index)
+                }
             }
-        }
-    </div>
+        </div>
+    }
     <div class="ae table-scroll" style="@_scrollStyle" @onscroll="OnScroll" @ref="tableRef">
         <div class="ae table-rows" style="@_rowsStyle">
             @foreach (var row in Rows.Skip(scrollViewResult.SkipItems).Take(scrollViewResult.TakeItems).Select((item, i) => new { item, i }))
@@ -93,37 +96,37 @@
 
 @code {
     [Parameter]
-  public string GridTemplateColumns { get; set; }
-  [Parameter]
-  public List<string> Headers { get; set; }
-  [Parameter]
-  public List<Func<T, string>> Accessors { get; set; }
-  [Parameter]
-  public List<Func<T, RenderFragment>> Renderers { get; set; }
-  [Parameter]
-  public List<T> Dataset { get; set; }
-  [Parameter]
-  public Func<T, string> ColorAccessor { get; set; }
-  [Parameter]
-  public int MaxHeight { get; set; } = 600;
-  [Parameter]
-  public int RowHeight { get; set; } = 33;  //In px
-  [Parameter]
-  public EventCallback<T> OnRowClick { get; set; }
-  [Parameter]
-  public EventCallback<T> OnRowFocus { get; set; }
-  [Parameter]
-  public bool SimpleTable { get; set; } = false;
-  [Parameter]
-  public Func<string, int, RenderFragment> CustomHeader { get; set; }
-  [Parameter]
-  public Func<int, RenderFragment> CustomRowLabels { get; set; }
-  [Parameter]
+    public string GridTemplateColumns { get; set; }
+    [Parameter]
+    public List<string> Headers { get; set; } = new List<string>();
+    [Parameter]
+    public List<Func<T, string>> Accessors { get; set; }
+    [Parameter]
+    public List<Func<T, RenderFragment>> Renderers { get; set; }
+    [Parameter]
+    public List<T> Dataset { get; set; }
+    [Parameter]
+    public Func<T, string> ColorAccessor { get; set; }
+    [Parameter]
+    public int MaxHeight { get; set; } = 600;
+    [Parameter]
+    public int RowHeight { get; set; } = 33;  //In px
+    [Parameter]
+    public EventCallback<T> OnRowClick { get; set; }
+    [Parameter]
+    public EventCallback<T> OnRowFocus { get; set; }
+    [Parameter]
+    public bool SimpleTable { get; set; } = false;
+    [Parameter]
+    public Func<string, int, RenderFragment> CustomHeader { get; set; }
+    [Parameter]
+    public Func<int, RenderFragment> CustomRowLabels { get; set; }
+    [Parameter]
     public bool AddToolTip { get; set; }
-
-  private RenderFragment defaultHeader(string header, int index)
-  {
-      return  
+    
+    private RenderFragment defaultHeader(string header, int index)
+    {
+        return
     @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
                     @header
                     <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
@@ -226,7 +229,7 @@
     {
         if (string.IsNullOrWhiteSpace(GridTemplateColumns))
         {
-            return $"{(SimpleTable ? "minmax(0, 0.25fr)" : "")} repeat({(Headers?.Count ?? 1)}, minmax(0, 1fr))";
+            return $"{(SimpleTable ? "0.25fr" : "")} repeat({(Accessors?.Count ?? 1)}, 1fr)";
         }
         else
         {
