@@ -48,4 +48,10 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\elemental-docs.min.css" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
