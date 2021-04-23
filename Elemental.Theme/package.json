@@ -8,7 +8,6 @@
     "node-sass": "^5.0.0"
   },
   "scripts": {
-    "install": "npm rebuild node-sass",
     "build-css": "node-sass --include-path Styles --source-map true Styles/theme.scss wwwroot/elemental.css && node-sass --include-path Styles --output-style compressed Styles/theme.scss wwwroot/elemental.min.css",
     "build-default-css": "node-sass --include-path Styles --output-style compressed Styles/theme.scss ../Elemental/wwwroot/css/elemental.min.css"
   },
