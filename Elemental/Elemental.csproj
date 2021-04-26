@@ -9,13 +9,15 @@
     <Authors>Apption</Authors>
     <Company>Apption</Company>
     <Product>Elemental Blazor</Product>
-    <Description>The Elemental Framework for Blazor provides a series of basic controls for the Blazor framework. Buttons, Dropdowns, Search Bar and a Table.</Description>
-    <Copyright>Copyright Apption 2020</Copyright>
+    <Description>Build modern, customizable feature rich web experiences in Blazor with minimal code using the Elemental controls. Elemental include a highly customizable table, common input controls, an object form editor and layout tools. Elemental features a scss model to customize all styles.</Description>
+    <Copyright>Copyright Apption 2021</Copyright>
     <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
     <PackageTags>c# blazor</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>Elemental_128x128.png</PackageIcon>
+    <PackageIconFullPath>$(MSBuildThisFileDirectory)Elemental_128x128.png</PackageIconFullPath>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +28,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
@@ -37,6 +40,7 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,26 @@
+﻿@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Check for Internet Explorer
+    Description: Use this component around any content that requires a modern web browser. It is reccomend you wrap your whole Blazor App in this component to avoid usage by legacy browsers. The toggle/display override is implemented for demo purposes only.
+*@
+
+<div class="ie-not-supported-container">
+    <AeIENotSupported OverrideBrowserCheck="_showMessage">
+        This browser is not IE!
+    </AeIENotSupported>
+</div>
+<AeButton @onclick="ToggleWarning">Toggle Warning</AeButton>
+
+@code{
+    private bool _showMessage;
+
+    private void ToggleWarning()
+    {
+        _showMessage = !_showMessage;
+    }
+}
