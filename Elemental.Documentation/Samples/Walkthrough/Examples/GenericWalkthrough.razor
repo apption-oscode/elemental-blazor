@@ -1,0 +1,40 @@
+﻿@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Generic Walkthrough
+    Description: Basic example of Walkthrough
+*@
+
+<div>
+    <div>
+        <AeButton OnClickEvent="StartGuide">Start Walkthrough</AeButton>
+    </div>
+
+    <Elemental.Components.Walkthrough.AeWalkthrough Start="@start">
+            <Elemental.Components.Walkthrough.AeWalkthroughStep Order="1" Title="Walkthrough Section #1" Content="First step of this walkthrough example">
+                <AeTypography>Walkthrough Section # 1</AeTypography>
+            </Elemental.Components.Walkthrough.AeWalkthroughStep>
+
+            <Elemental.Components.Walkthrough.AeWalkthroughStep Order="2" Title="Walkthrough Section #2" Content="Second step of this walkthrough example">
+                <AeTypography>Walkthrough Section # 2</AeTypography>
+            </Elemental.Components.Walkthrough.AeWalkthroughStep>
+
+            <Elemental.Components.Walkthrough.AeWalkthroughStep Order="3" Title="Walkthrough Section #3" Content="Third step of this walkthrough example">
+                <AeTypography>Walkthrough Section # 3</AeTypography>
+            </Elemental.Components.Walkthrough.AeWalkthroughStep>
+    </Elemental.Components.Walkthrough.AeWalkthrough>
+</div>
+
+@code {
+
+    private bool start = false;
+
+    private void StartGuide()
+    {
+        start = true;
+    }
+    } 
