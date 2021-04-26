@@ -1,26 +1,25 @@
 ﻿@using Elemental.Components.PasteAreaInternal;
 
-<div style="width:5000px">
-    <PasteAwareComponent OnContentPasted="FillTable">
-        @if (_excelContent.Any() == false)
-        {
-            <div class="ae table">
-                <p>CRTL + V clipboard into this box</p>
-            </div>
-        }
-        else
-        {
-            <AeTable Accessors="pasteAccessors"
-                     Dataset="_excelContent"
-                     SimpleTable="true">
-            </AeTable>
+
+<PasteAwareComponent OnContentPasted="FillTable">
+    @if (_excelContent.Any() == false)
+    {
+        <div class="ae table">
+            <p>CRTL + V clipboard into this box</p>
+        </div>
+    }
+    else
+    {
+        <AeTable Accessors="pasteAccessors"
+                    Dataset="_excelContent"
+                    SimpleTable="true">
+        </AeTable>
 
             
-            <AeButton Text="Import" Icon="fal fa-arrow-left" @onclick="e => ImportRecords()" />
-            <AeButton Text="Cancel Import" Icon="far fa-plus-square" @onclick="e => CancelImport()" />            
-        }
-    </PasteAwareComponent>
-</div>
+        <AeButton Text="Import" Icon="fal fa-arrow-left" @onclick="e => ImportRecords()" />
+        <AeButton Text="Cancel Import" Icon="far fa-plus-square" @onclick="e => CancelImport()" />            
+    }
+</PasteAwareComponent>
 @code {
 
     [Parameter]

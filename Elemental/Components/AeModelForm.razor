@@ -26,7 +26,7 @@
 @if (Model != null)
 {
     <div class="@_modelFormClass">
-        <EditForm Model="Model" OnValidSubmit="@OnValidSubmit" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+        <EditForm Model="Model" OnSubmit="@OnSubmit" >
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="ae modelform-rows @_labelClass" style="@_rowsStyle">
