@@ -36,7 +36,7 @@
 
     private async Task CreateStarship()
     {
-        _starship = new Starship() { ProductionDate = DateTime.Today };
+        _starship = new Starship() { ProductionDate = DateTime.Today, Description = "the best starship", MaximumAccommodation = 5 };
     }
 
     protected override async Task OnInitializedAsync()
@@ -58,7 +58,8 @@
     private async Task<Starship> RefreshStarship()
     {
         _isValidated = "Cancelling take-off";
-        await CreateStarship();
+        StateHasChanged();
+        //await CreateStarship();
         //_isCancelled = false;
         return _starship;
     }
