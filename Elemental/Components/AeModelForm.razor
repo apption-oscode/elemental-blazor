@@ -188,6 +188,7 @@
 
     private async Task ReloadForm()
     {
+        editContext.MarkAsUnmodified();
         Model = await OnCancel();
         editContext = new EditContext(Model);
         this.StateHasChanged();
