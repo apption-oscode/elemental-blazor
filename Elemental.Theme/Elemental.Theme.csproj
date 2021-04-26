@@ -64,6 +64,9 @@
     <Exec Command="npm i node-sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
+  <ItemGroup>
+    <None Remove="Styles\spinner.scss" />
+  </ItemGroup>
 
 
   <ItemGroup>
