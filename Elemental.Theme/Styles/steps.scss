@@ -1,0 +1,109 @@
+﻿    @import 'colors';
+    @import 'constants';
+    @import 'box-shadow';
+    @import 'utils';
+
+$iconHeight: 32px;
+$tailPadding: 4px;
+$iconBorder: 2px;
+$stepPadding: 16px;
+$stepOptions: ( 
+    "default":( 
+        ".ae.step": (
+            "display": flex,
+            "position": relative,
+            "padding": 16px 0,
+            ".ae.step-tail": (
+                "position": absolute,
+                "top":calc(#{$iconHeight} + #{$tailPadding} + 2 * #{$iconBorder} + #{$stepPadding}),
+                "left": calc((#{$iconHeight} + #{$iconBorder}) / 2 + 1px),
+                "border-left-style": solid,
+                "border-left-width": 1px,
+                "width": 1px,
+                //"height": 100%,
+                "height": calc(100% - #{$iconHeight} - (#{$tailPadding} * 2) - (#{$iconBorder} * 2)),
+            ),
+            ".ae.step-icon": (
+                "width": $iconHeight,
+                "height": $iconHeight,
+                "border-radius": 50%,
+                "display": flex,
+                "align-items": center,
+                "justify-content": center,
+                "margin-right": 16px,
+                "border-style": solid,
+                "border-width": 2px,
+            ),
+            ".ae.step-content": (
+                "line-height": 32px,
+
+                ".ae.step-title": (
+                    "font-size": 1.0875rem,
+                    "color": $baseBlack
+
+                ),
+                ".ae.step-message": (
+                    "font-size": 0.875rem,
+                    "color": $grey-600
+                ),
+            ),
+            "&.passed":(
+                ".ae.step-tail": (
+                    border-color: $green-600,
+                ),
+                ".ae.step-icon": (
+                    "color": $green-600,
+                    "border-color": $green-600,
+                ),
+            ),
+            "&.failed":(
+                ".ae.step-tail": (
+                    border-color: $red-500,
+                ),
+                ".ae.step-icon": (
+                    "color": $red-500,
+                    "border-color": $red-500,
+                ),
+            ),
+            "&.running":(
+                ".ae.step-tail": (
+                    border-color: $blue-500,
+                ),
+
+                ".ae.step-icon": (
+                    "color": $white,
+                    "background-color": $blue-500,
+                    "border-color": $blue-500,
+                ),
+    
+                ".ae.step-content":(
+                    ".ae.step-message": (
+                        "color": $black,
+                    ),
+                ),
+            ),
+            "&.queued":(
+                ".ae.step-tail": (
+                    border-color: $grey-500,
+                ),
+                ".ae.step-icon": (
+                    "color": $grey-500,
+                    "border-color": $grey-500,
+                ),
+    
+                ".ae.step-content":(
+                    ".ae.step-title": (
+                        "color": $grey-500,
+                    ),
+                ".ae.step-message": (
+                    "color": $grey-500
+                ),
+                ),
+            ),
+        ),
+    )
+) !default;
+
+.ae.steps {
+    @include set-variations($stepOptions);
+}

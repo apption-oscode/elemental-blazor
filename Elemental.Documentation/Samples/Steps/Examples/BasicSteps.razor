@@ -1,0 +1,71 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Steps
+    Description: Steps
+*@
+<div class="ae steps">
+    <div class="ae step failed">
+        <div class="ae step-tail"></div>
+        <div class="ae step-icon failed">
+            <AeIcon Icon="close"></AeIcon>
+        </div>
+        <div class="ae step-content">
+            <div class="ae step-title">
+                Step Title
+            </div>
+            <div class="ae step-message">
+                Step failed.
+            </div>
+        </div>
+    </div>
+    <div class="ae step passed">
+        <div class="ae step-tail"></div>
+        <div class="ae step-icon">
+            <AeIcon Icon="check"></AeIcon>
+        </div>
+        <div class="ae step-content">
+            <div class="ae step-title">
+                Step Title
+            </div>
+            <div class="ae step-message">
+                Step passed.
+            </div>
+        </div>
+    </div>
+    <div class="ae step running">
+        <div class="ae step-tail"></div>
+        <div class="ae step-icon">
+            <div>3</div>
+        </div>
+        <div class="ae step-content">
+            <div class="ae step-title">
+                Step Title
+            </div>
+            <div class="ae step-message">
+                Step running.
+            </div>
+        </div>
+    </div>
+    <div class="ae step queued">
+        <div class="ae step-icon">
+            <div>4</div>
+        </div>
+        <div class="ae step-content">
+            <div class="ae step-title">
+                Step Title
+            </div>
+            <div class="ae step-message">
+                Step queued.
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+
+}
