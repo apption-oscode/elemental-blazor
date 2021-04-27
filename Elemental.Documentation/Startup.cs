@@ -21,7 +21,7 @@ namespace Elemental.Documentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor().AddHubOptions(x => x.MaximumReceiveMessageSize = 102400000);
 
             //Use in modal
             //services.AddScoped<Elemental.Services.UIControlsService>();
