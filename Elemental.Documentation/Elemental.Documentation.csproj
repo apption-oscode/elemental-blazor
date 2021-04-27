@@ -23,7 +23,7 @@
 
   <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command ="npm rebuild node-sass" />
+    <Exec Command="npm rebuild node-sass" />
     <Exec Command="npm run build-css" />
   </Target>
 
@@ -43,11 +43,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\img\Elemental_128x128.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <UpToDateCheckBuilt Remove="wwwroot\css\elemental-docs.min.css" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\elemental-docs.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\Elemental_128x128.png">
+      <PackagePath>\</PackagePath>
+      <Pack>true</Pack>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
