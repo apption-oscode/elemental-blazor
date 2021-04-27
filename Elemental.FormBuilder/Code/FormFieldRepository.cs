@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Elemental.FormBuilder.Code
 {
@@ -37,14 +38,7 @@ namespace Elemental.FormBuilder.Code
             var result = await _appDbContext.FormFields.FirstOrDefaultAsync(f => f.FormFieldID == formField.FormFieldID);
             if (result != null)
             {
-                result.Section = formField.Section;
-                result.Field = formField.Field;
-                result.Extension = formField.Extension;
-                result.MaxLength = formField.MaxLength;
-                result.Mandatory = formField.Mandatory;
-                result.FieldType = formField.FieldType;
-                result.DropdownOptionCount = formField.DropdownOptionCount;
-
+                result.TakeValuesFrom(formField);
                 await _appDbContext.SaveChangesAsync();
             }
 

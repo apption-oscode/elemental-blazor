@@ -119,7 +119,7 @@ namespace Elemental.FormBuilder
         {
             get
             {
-                return $"\"{SQLName}\": \"{Field}\"";
+                return $"\"{SQLName}\": \"{System.Web.HttpUtility.JavaScriptStringEncode(Field)}\"";
             }
         }
 
@@ -141,6 +141,31 @@ namespace Elemental.FormBuilder
 
                 return sb.ToString();
             }
+        }
+
+        public FormField Clone()
+        {
+            return new FormField()
+            {
+                Section = this.Section,
+                Field = this.Field,
+                Extension = this.Extension,
+                MaxLength = this.MaxLength,
+                Mandatory = this.Mandatory,
+                FieldType = this.FieldType,
+                DropdownOptionCount = this.DropdownOptionCount
+            };
+        }
+
+        public void TakeValuesFrom(FormField other)
+        {
+            Section = other.Section;
+            Field = other.Field;
+            Extension = other.Extension;
+            MaxLength = other.MaxLength;
+            Mandatory = other.Mandatory;
+            FieldType = other.FieldType;
+            DropdownOptionCount = other.DropdownOptionCount;
         }
     }
 }

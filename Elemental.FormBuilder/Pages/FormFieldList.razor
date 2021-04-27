@@ -19,6 +19,30 @@
         Dataset="@_formFields"
         Headers="@headers"
     />
+
+
+    <h4>JSON</h4>
+    <pre>
+        <code>
+            @foreach (var field in _formFields)
+            {
+                @field.JSON
+                <br />
+            }
+        </code>
+    </pre>
+
+    <h4>C#</h4>
+    <pre>
+        <code>
+            @foreach (var field in _formFields)
+            {
+                @field.CSCode
+                <br />
+            }
+        </code>
+    </pre>
+    
 }
 
 @code 
