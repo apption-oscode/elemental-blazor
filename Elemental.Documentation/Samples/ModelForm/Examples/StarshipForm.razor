@@ -21,46 +21,38 @@
     Model="@_starship" 
     SubmitLabel="Save changes" 
     OnValidSubmit="HandleValidSubmit" 
-    OnInvalidSubmit="HandleInvalidSubmit"
     CancelLabel="Cancel" 
-    OnCancel="RefreshStarship"  />
+    OnCancel="CreateStarship"
+    OnInvalidSubmit="HandleInvalidSubmit"/>
 
-<div>@_isValidated</div>
 <DebugObject Object="@_starship"/>
 
 @code {
 
     private Starship _starship;
-    private string _isValidated = "...";
-    //private bool _isCancelled;
 
-    private async Task CreateStarship()
+    private async Task<Starship> CreateStarship()
     {
-        _starship = new Starship() { ProductionDate = DateTime.Today, Description = "the best starship", MaximumAccommodation = 5 };
+        // roll back your changes
+        _starship = new Starship() { ProductionDate = DateTime.Today };
+        StateHasChanged();
+        return _starship;
     }
 
     protected override async Task OnInitializedAsync()
     {
-        await CreateStarship();
+        _starship = await CreateStarship();
     }
 
-    private void HandleValidSubmit()
+    private void HandleValidSubmit(EditContext editContext)
     {
-        _isValidated = "Starship is ready to fly";
+        //save to database
     }
 
-    private void HandleInvalidSubmit()
+    private void HandleInvalidSubmit(EditContext editContext)
     {
-        //do something if form is valid
-        _isValidated = "Starship is NOT ready to fly";
+        //do something if form is not valid
     }
 
-    private async Task<Starship> RefreshStarship()
-    {
-        _isValidated = "Cancelling take-off";
-        StateHasChanged();
-        //await CreateStarship();
-        //_isCancelled = false;
-        return _starship;
-    }
+
 }
