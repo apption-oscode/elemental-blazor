@@ -26,7 +26,7 @@
 @if (Model != null)
 {
     <div class="@_modelFormClass">
-        <EditForm Model="Model" OnSubmit="@OnSubmit" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+        <EditForm Model="Model" OnSubmit="@onSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="ae modelform-rows @_labelClass" style="@_rowsStyle">
@@ -183,6 +183,7 @@
 
     private async Task ReloadForm()
     {
+        _isCancelled = true;
         Model = await OnCancel();
         this.StateHasChanged();
     }
@@ -237,6 +238,8 @@
     [Parameter]
     public bool LabelsOnTop { get; set; }
 
+    private bool _isCancelled = false;
+
     private List<PropertyInfo> GetProperties()
     {
         return typeof(T).GetAeModelProperties();
@@ -245,6 +248,20 @@
     private Type GetNonNullableType(PropertyInfo prop)
     {
         return AeModelFormTools.GetNonNullableType(prop);
+    }
+
+    private Task onSubmit(EditContext editContext)
+    {
+        if (!_isCancelled)
+        {
+            bool isValid = editContext.Validate();
+            return isValid ? OnValidSubmit.InvokeAsync(editContext) : OnInvalidSubmit.InvokeAsync(editContext);
+        }
+        else
+        {
+            _isCancelled = false;
+            return null;
+        }
     }
 
     private Func<Task> notifier = null;
