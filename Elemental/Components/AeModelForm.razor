@@ -202,15 +202,6 @@
     /// </summary>
     [Parameter] public EventCallback<ModelFormContext<T>> OnConfigure { get; set; }
 
-
-    /// <summary>
-    /// A callback that will be invoked when the form is submitted.
-    ///
-    /// If using this parameter, you are responsible for triggering any validation
-    /// manually, e.g., by calling <see cref="EditContext.Validate"/>.
-    /// </summary>
-    [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
-
     /// <summary>
     /// A callback that will be invoked when the form is submitted and the
     /// <see cref="EditContext"/> is determined to be valid.
@@ -250,17 +241,23 @@
         return AeModelFormTools.GetNonNullableType(prop);
     }
 
-    private Task onSubmit(EditContext editContext)
+    private async Task onSubmit(EditContext editContext)
     {
         if (!_isCancelled)
         {
             bool isValid = editContext.Validate();
-            return isValid ? OnValidSubmit.InvokeAsync(editContext) : OnInvalidSubmit.InvokeAsync(editContext);
+            if (isValid)
+            {
+                await OnValidSubmit.InvokeAsync(editContext);
+            }
+            else
+            {
+                await OnInvalidSubmit.InvokeAsync(editContext);
+            }            
         }
         else
         {
-            _isCancelled = false;
-            return null;
+            _isCancelled = false;            
         }
     }
 

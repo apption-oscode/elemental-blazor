@@ -33,8 +33,10 @@
 
     private async Task<Starship> CreateStarship()
     {
+        // roll back your changes
         _starship = new Starship() { ProductionDate = DateTime.Today };
-        return await Task.FromResult(_starship);
+        StateHasChanged();
+        return _starship;
     }
 
     protected override async Task OnInitializedAsync()
@@ -44,7 +46,7 @@
 
     private void HandleValidSubmit(EditContext editContext)
     {
-        //do something if form is valid
+        //save to database
     }
 
     private void HandleInvalidSubmit(EditContext editContext)
