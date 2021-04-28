@@ -2653,6 +2653,131 @@ body {
   .ae.ie-not-supported.show-message .ie-not-supported-child {
     display: none; }
 
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.ae.steps .ae.step {
+  display: flex;
+  position: relative;
+  padding: 16px 0; }
+  .ae.steps .ae.step .ae.step-tail {
+    position: absolute;
+    top: calc(32px + 4px + 2 * 2px + 16px);
+    left: calc((32px + 2px) / 2);
+    background-image: linear-gradient(to bottom, #a0aec0 50%, #a0aec0 50%);
+    width: 1px;
+    -webkit-transition: background-position 0.5s;
+    -moz-transition: background-position 0.5s;
+    -o-transition: background-position 0.5s;
+    transition: background-position 0.5s;
+    background-size: 100% 200%;
+    height: calc(100% - 32px - (4px * 2) - (2px * 2)); }
+  .ae.steps .ae.step .ae.step-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    border-style: solid;
+    border-width: 2px;
+    -webkit-transition: border-color 0.25s ease-out;
+    -moz-transition: border-color 0.25s ease-out;
+    -o-transition: border-color 0.25s ease-out;
+    transition: border-color 0.25s ease-out; }
+  .ae.steps .ae.step .ae.step-content {
+    line-height: 32px; }
+    .ae.steps .ae.step .ae.step-content .ae.step-title {
+      font-size: 1.0875rem;
+      color: #000000; }
+    .ae.steps .ae.step .ae.step-content .ae.step-message {
+      font-size: 0.875rem;
+      color: #718096; }
+  .ae.steps .ae.step.passed .ae.step-tail {
+    background-image: linear-gradient(to bottom, #a0aec0 50%, #48bb78 50%);
+    background-position: 0 -100%; }
+  .ae.steps .ae.step.passed .ae.step-icon {
+    color: #48bb78;
+    border-color: #48bb78; }
+  .ae.steps .ae.step.failed .ae.step-tail {
+    background-image: linear-gradient(to bottom, #a0aec0 50%, #f56565 50%);
+    background-position: 0 -100%; }
+  .ae.steps .ae.step.failed .ae.step-icon {
+    color: #f56565;
+    border-color: #f56565; }
+  .ae.steps .ae.step.running .ae.step-icon {
+    color: #fff;
+    background-color: #4299e1;
+    border-color: #4299e1; }
+  .ae.steps .ae.step.running .ae.step-content .ae.step-message {
+    color: #000; }
+  .ae.steps .ae.step.queued .ae.step-icon {
+    color: #a0aec0;
+    border-color: #a0aec0; }
+  .ae.steps .ae.step.queued .ae.step-content .ae.step-title {
+    color: #a0aec0; }
+  .ae.steps .ae.step.queued .ae.step-content .ae.step-message {
+    color: #a0aec0; }
+
 /*
     Third party
 */

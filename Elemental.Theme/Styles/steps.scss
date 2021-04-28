@@ -1,0 +1,122 @@
+﻿    @import 'colors';
+    @import 'constants';
+    @import 'box-shadow';
+    @import 'utils';
+
+$iconHeight: 32px;
+$tailPadding: 4px;
+$iconBorder: 2px;
+$stepPadding: 16px;
+$running-color: $blue-500;
+$passed-color: $green-500;
+$failed-color: $red-500;
+$queued-color: $grey-500;
+$step-done-message-color: $grey-600;
+
+$stepOptions: ( 
+    "default":( 
+        ".ae.step": (
+            "display": flex,
+            "position": relative,
+            "padding": 16px 0,
+            ".ae.step-tail": (
+                "position": absolute,
+                "top":calc(#{$iconHeight} + #{$tailPadding} + 2 * #{$iconBorder} + #{$stepPadding}),
+                "left": calc((#{$iconHeight} + #{$iconBorder}) / 2),
+                "background-image": linear-gradient(to bottom, $queued-color 50%, $queued-color 50%),
+                "width": 1px,
+                //"height": 100%,  
+                "-webkit-transition": background-position 0.5s,
+                "-moz-transition": background-position 0.5s,
+                "-o-transition": background-position 0.5s,
+                "transition": background-position 0.5s,
+                "background-size": 100% 200%,
+                "height": calc(100% - #{$iconHeight} - (#{$tailPadding} * 2) - (#{$iconBorder} * 2)),
+            ),
+            ".ae.step-icon": (
+                "width": $iconHeight,
+                "height": $iconHeight,
+                "border-radius": 50%,
+                "display": flex,
+                "align-items": center,
+                "justify-content": center,
+                "margin-right": 16px,
+                "border-style": solid,
+                "border-width": 2px,
+                "-webkit-transition": border-color .25s ease-out,
+                "-moz-transition": border-color .25s ease-out,
+                "-o-transition": border-color .25s ease-out,
+                "transition": border-color .25s ease-out,
+            ),
+            ".ae.step-content": (
+                "line-height": 32px,
+
+                ".ae.step-title": (
+                    "font-size": 1.0875rem,
+                    "color": $baseBlack
+
+                ),
+                ".ae.step-message": (
+                    "font-size": 0.875rem,
+                    "color": $step-done-message-color
+                ),
+            ),
+            "&.passed":(
+                ".ae.step-tail": (
+                    "background-image": linear-gradient(to bottom, $queued-color 50%, $passed-color 50%),
+                    "background-position": 0 -100%,
+                ),
+                ".ae.step-icon": (
+                    "color": $passed-color,
+                    "border-color": $passed-color,
+                ),
+            ),
+            "&.failed":(
+                ".ae.step-tail": (
+                    "background-image": linear-gradient(to bottom, $queued-color 50%, $failed-color 50%),
+                    "background-position": 0 -100%,
+                ),
+                ".ae.step-icon": (
+                    "color": $failed-color,
+                    "border-color": $failed-color,
+                ),
+            ),
+            "&.running":(
+
+                ".ae.step-icon": (
+                    "color": $white,
+                    "background-color": $running-color,
+                    "border-color": $running-color,
+                ),
+    
+                ".ae.step-content":(
+                    ".ae.step-message": (
+                        "color": $black,
+                    ),
+                ),
+            ),
+            "&.queued":(
+                ".ae.step-tail": (
+                   // "background-color": $queued-color,
+                ),
+                ".ae.step-icon": (
+                    "color": $queued-color,
+                    "border-color": $queued-color,
+                ),
+    
+                ".ae.step-content":(
+                    ".ae.step-title": (
+                        "color": $queued-color,
+                    ),
+                ".ae.step-message": (
+                    "color": $queued-color
+                ),
+                ),
+            ),
+        ),
+    )
+) !default;
+
+.ae.steps {
+    @include set-variations($stepOptions);
+}
