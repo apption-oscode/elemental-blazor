@@ -19,6 +19,7 @@ $stepOptions: (
                 "left": calc((#{$iconHeight} + #{$iconBorder}) / 2 + 1px),
                 "border-left-style": solid,
                 "border-left-width": 1px,
+                    border-color: $grey-500,
                 "width": 1px,
                 //"height": 100%,
                 "height": calc(100% - #{$iconHeight} - (#{$tailPadding} * 2) - (#{$iconBorder} * 2)),
@@ -67,7 +68,6 @@ $stepOptions: (
             ),
             "&.running":(
                 ".ae.step-tail": (
-                    border-color: $blue-500,
                 ),
 
                 ".ae.step-icon": (

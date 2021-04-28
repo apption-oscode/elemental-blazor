@@ -6,12 +6,19 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Basic Steps
-    Description: Steps using default icons. 
+    Description: Steps using custom icons.
 *@
-<AeSteps T="int" CurrentStepState="GetState" StepItems="steps" StepTitle="StepTitle" StepMessage="StepMessage"></AeSteps>
+<AeSteps T="int" CurrentStepState="GetState" StepItems="steps" StepTitle="StepTitle"
+         StepMessage="StepMessage" PassedIcon="PassedIcon" FailedIcon="FailedIcon"></AeSteps>
 @*For demo only*@
 <AeButton Disabled="@disbaleRunAgain" OnClickEvent="OnRunAgain">Run Again</AeButton>
+
 @code {
+
+    public RenderFragment FailedIcon =@<i class="fad fa-sad-cry"></i>;
+
+    public RenderFragment PassedIcon = @<i class="fad fa-laugh"></i>;
+
     public List<int> steps = new List<int> { 1, 2, 3, 4 };
 
     public Dictionary<int, AeSteps<int>.StepState> stepStates = new Dictionary<int, AeSteps<int>.StepState>
@@ -32,9 +39,9 @@
         switch (stepStates[i])
         {
             case AeSteps<int>.StepState.Passed:
-                return "Step has passed.";
+                return "Woohoo!";
             case AeSteps<int>.StepState.Failed:
-                return "Step has failed";
+                return "Booooo!!!";
             case AeSteps<int>.StepState.Running:
                 return "Step is running...";
             default:
@@ -47,7 +54,9 @@
         return stepStates[i];
     }
 
+
     //demo only
+
     bool disbaleRunAgain = true;
 
     bool runAgainRequested = false;
@@ -63,7 +72,7 @@
             { 3, AeSteps<int>.StepState.Queued },
             { 4, AeSteps<int>.StepState.Queued }
         };
-        InvokeAsync(() => StateHasChanged());
+        StateHasChanged();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
