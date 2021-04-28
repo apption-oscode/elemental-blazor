@@ -1,4 +1,4 @@
-<Router AppAssembly="@typeof(Elemental.Documentation.Wasm.Program).Assembly" PreferExactMatches="@true">
+﻿<Router AppAssembly="@typeof(Elemental.Documentation.Program).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(Elemental.Documentation.Shared.MainLayout)" />
     </Found>
@@ -8,3 +8,4 @@
         </LayoutView>
     </NotFound>
 </Router>
+<AeModal />

@@ -5,11 +5,11 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageId>Apption.Elemental</PackageId>
+    <PackageId>Blazor.Elemental</PackageId>
     <Authors>Apption</Authors>
     <Company>Apption</Company>
     <Product>Elemental Blazor</Product>
-    <Description>Build modern, customizable feature rich web experiences in Blazor with minimal code using the Elemental controls. Elemental include a highly customizable table, common input controls, an object form editor and layout tools. Elemental features a scss model to customize all styles.</Description>
+    <Description>Build modern, sass customizable web experiences in Blazor with code first and functional primitives. Elemental components include a fully customizable table, common input controls, an object form editor and layout tools.</Description>
     <Copyright>Copyright Apption 2021</Copyright>
     <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
@@ -18,6 +18,10 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>Elemental_128x128.png</PackageIcon>
     <PackageIconFullPath>$(MSBuildThisFileDirectory)Elemental_128x128.png</PackageIconFullPath>    
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
