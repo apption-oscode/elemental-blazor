@@ -39,6 +39,6 @@ BlazorClipboadInterop.pasteEvent =
             }
         }
 
-        dotNetObject.invokeMethodAsync('Pasted', items);
+        await dotNetObject.invokeMethodAsync('Pasted', items);
         e.preventDefault();
     }

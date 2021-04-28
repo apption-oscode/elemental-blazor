@@ -12,14 +12,16 @@
 <AeLayoutV2 Links="_navLinks">
     @*<TopNavigation>Top Nav</TopNavigation>*@
     <Brand>
-        <NavLink href="https://www.apption.com" class="logo">
-            <img src="/img/apption-logo-white.svg" />
-        </NavLink>
+        <AeFlex>
+            <img src="/img/Elemental_128x128.png" style="max-height: 50px; padding: 4px 4px 4px 4px;" />
+            <AeTypography Variant="h2" style="text-align: center; padding: 0rem 0rem 0rem; margin: auto;">elemental</AeTypography>
+        </AeFlex>
     </Brand>
     <BrandSmall>
-        <NavLink href="https://www.apption.com" class="logo small">
-            <img src="/img/apption-logo-white.svg" />
-        </NavLink>
+        <AeFlex>
+            <img src="/img/Elemental_128x128.png" style="max-height: 50px; padding: 4px 4px 4px 4px;" />
+            <AeTypography Variant="h2" style="text-align: center; padding: 0rem 0rem 0rem; margin: auto;">elemental</AeTypography>
+        </AeFlex>
     </BrandSmall>
     <ChildContent>
         <AeTypography Variant="h1" style="text-align: center;">Elemental</AeTypography>
@@ -78,7 +80,7 @@
             new AeNavLink{ Label = "Treeview", To = "/treeview", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
             new AeNavLink{ Label = "Checkbox", To = "/checkbox", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
             new AeNavLink{ Label = "Walkthrough", To = "/walkthrough", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            //new AeNavLink{ Label = "Excel Import", To = "/pastearea", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
+            new AeNavLink{ Label = "Excel Import", To = "/pastearea", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
             new AeNavLink{ Label = "Spinner", To = "/spinner", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
         } },
         new AeNavLink { Label = "Content", IconName = "focus", IconClassName = "purple", ChildLinks = new List<AeNavLink>()

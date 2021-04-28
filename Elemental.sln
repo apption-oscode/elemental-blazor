@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{
 		azure-pipelines-master.yml = azure-pipelines-master.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elemental.Documentation.Wasm", "Elemental.Documentation.Wasm\Elemental.Documentation.Wasm.csproj", "{69023201-0427-461B-8A33-4DF631983F6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{F7DD851E-204F-47B2-95BA-15DA4126E55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7DD851E-204F-47B2-95BA-15DA4126E55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7DD851E-204F-47B2-95BA-15DA4126E55A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69023201-0427-461B-8A33-4DF631983F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69023201-0427-461B-8A33-4DF631983F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69023201-0427-461B-8A33-4DF631983F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69023201-0427-461B-8A33-4DF631983F6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

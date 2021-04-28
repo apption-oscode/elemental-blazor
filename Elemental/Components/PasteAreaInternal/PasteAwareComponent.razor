@@ -18,7 +18,7 @@
     [JSInvokable("Pasted")]
     public async void raisePasteEvent(IEnumerable<IDictionary<String, String>> items)
     {
-        await OnContentPasted.InvokeAsync(items);
+       await OnContentPasted.InvokeAsync(items);
     }
 
     private DotNetObjectReference<PasteAwareComponent> _objectReference;

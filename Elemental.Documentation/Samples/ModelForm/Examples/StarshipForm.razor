@@ -20,22 +20,23 @@
 <AeModelForm 
     Model="@_starship" 
     SubmitLabel="Save changes" 
-    OnSubmit="HandleValidSubmit" 
+    OnValidSubmit="HandleValidSubmit" 
     CancelLabel="Cancel" 
-    OnCancel="CreateStarship"  />
+    OnCancel="CreateStarship"
+    OnInvalidSubmit="HandleInvalidSubmit"/>
 
 <DebugObject Object="@_starship"/>
 
 @code {
 
     private Starship _starship;
-    private bool _isCancelled;
 
     private async Task<Starship> CreateStarship()
     {
-        _isCancelled = true;
+        // roll back your changes
         _starship = new Starship() { ProductionDate = DateTime.Today };
-        return await Task.FromResult(_starship);
+        StateHasChanged();
+        return _starship;
     }
 
     protected override async Task OnInitializedAsync()
@@ -45,26 +46,13 @@
 
     private void HandleValidSubmit(EditContext editContext)
     {
-        if (_isCancelled)
-        {
-            RefreshStarship();
-        }
-        else
-        {
-            if (!editContext.Validate())
-                HandleInvalidSubmit();
-            //else handle valid submit here
-        }
+        //save to database
     }
 
-    private void HandleInvalidSubmit()
+    private void HandleInvalidSubmit(EditContext editContext)
     {
-        //do something if form is valid
+        //do something if form is not valid
     }
 
-    private void RefreshStarship()
-    {
-        _isCancelled = false;
-        StateHasChanged();
-    }
+
 }
