@@ -43,10 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\img\Elemental_128x128.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UpToDateCheckBuilt Remove="wwwroot\css\elemental-docs.min.css" />
   </ItemGroup>
 
@@ -54,12 +50,6 @@
     <_ContentIncludedByDefault Remove="wwwroot\css\elemental-docs.min.css" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\img\Elemental_128x128.png">
-      <PackagePath>\</PackagePath>
-      <Pack>true</Pack>
-    </None>
-  </ItemGroup>
 
   <ItemGroup>
     <Content Update="package.json">
