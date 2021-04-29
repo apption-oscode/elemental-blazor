@@ -17,6 +17,7 @@
 @inherits HtmlElement
 @inject IJSRuntime JSRuntime
 @using Elemental.Components.SiderbarInternal
+@using Elemental.Code
 
 <style>
 
@@ -138,33 +139,38 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("initializeSidebar.registerResizeCallback");
+            try {
+                await JSRuntime.InvokeVoidAsync("initializeSidebar.registerResizeCallback");
 
-            _browserWidth = await SidebarService.GetInnerWidth(JSRuntime);
-            SetBrowserSize();
-            switch (_browserSize)
+                _browserWidth = await SidebarService.GetInnerWidth(JSRuntime);
+                SetBrowserSize();
+                switch (_browserSize)
+                {
+                    case BrowserSize.Large:
+                        _width = SidebarService.SIDEBAR_WIDTH;
+                        _marginWidth = SidebarService.SIDEBAR_WIDTH;
+                        _isCollapsed = false;
+                        break;
+                    case BrowserSize.Medium:
+                        _width = SidebarService.SIDEBAR_COLLAPSE_WIDTH;
+                        _marginWidth = SidebarService.SIDEBAR_COLLAPSE_WIDTH;
+                        _isCollapsed = true;
+                        break;
+                    case BrowserSize.Small:
+                        _isCollapsed = true;
+                        _width = 0;
+                        _marginWidth = 0;
+                        _showSideNav = false;
+                        break;
+                    default:
+                        //invalid BrowserSize
+                        break;
+                }
+                StateHasChanged();
+            } catch (Exception ex)
             {
-                case BrowserSize.Large:
-                    _width = SidebarService.SIDEBAR_WIDTH;
-                    _marginWidth = SidebarService.SIDEBAR_WIDTH;
-                    _isCollapsed = false;
-                    break;
-                case BrowserSize.Medium:
-                    _width = SidebarService.SIDEBAR_COLLAPSE_WIDTH;
-                    _marginWidth = SidebarService.SIDEBAR_COLLAPSE_WIDTH;
-                    _isCollapsed = true;
-                    break;
-                case BrowserSize.Small:
-                    _isCollapsed = true;
-                    _width = 0;
-                    _marginWidth = 0;
-                    _showSideNav = false;
-                    break;
-                default:
-                    //invalid BrowserSize
-                    break;
+                throw new AEException($"sidebar.js is likely missing",ex);
             }
-            StateHasChanged();
         }
     }
 

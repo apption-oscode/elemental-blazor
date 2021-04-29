@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Documentation.Was
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elemental.Documentation", "Elemental.Documentation\Elemental.Documentation.csproj", "{153B41BD-5CF3-4F93-8713-1E54C368075A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{CABD866C-0E61-44F5-87AD-433BD488EFC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{153B41BD-5CF3-4F93-8713-1E54C368075A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{153B41BD-5CF3-4F93-8713-1E54C368075A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{153B41BD-5CF3-4F93-8713-1E54C368075A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABD866C-0E61-44F5-87AD-433BD488EFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABD866C-0E61-44F5-87AD-433BD488EFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABD866C-0E61-44F5-87AD-433BD488EFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABD866C-0E61-44F5-87AD-433BD488EFC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

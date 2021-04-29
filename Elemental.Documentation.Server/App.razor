@@ -1,4 +1,5 @@
-﻿<Router AppAssembly="@typeof(Elemental.Documentation.Program).Assembly">
+﻿<Router AppAssembly="@typeof(Elemental.Documentation.Server.Program).Assembly"
+    AdditionalAssemblies="new[] { typeof(Elemental.Documentation.DocumentationTools).Assembly}">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(Elemental.Documentation.Shared.MainLayout)" />
     </Found>

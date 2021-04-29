@@ -6,8 +6,8 @@ namespace Elemental.Tests
 {
     public class SampleParsingTests
     {
-        private const string _testFilePath = "./Resources/ParsingTestComponent.razor";
-        private const int _testFileLineCount = 38;
+        private const string _testFilePath = "./Samples/Icons/Index.razor";
+        private const int _testFileLineCount = 29;
         private const string _testTitle = "Test Component";
         private const string _testDescription = "Lorem ipsum dolor sit amet.";
         private const int _testHtmlLength = 9;
@@ -20,7 +20,7 @@ namespace Elemental.Tests
             var lines = ParsedFile.ReadLines(_testFilePath);
             
             Assert.NotNull(lines);
-            Assert.Equal(_testFileLineCount, lines.Length);
+            Assert.Equal(_testFileLineCount, lines.Count());
         }
 
         [Fact]

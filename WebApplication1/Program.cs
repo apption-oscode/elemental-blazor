@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elemental.Documentation.Wasm
+namespace WebApplication1
 {
     public class Program
     {
@@ -18,7 +18,7 @@ namespace Elemental.Documentation.Wasm
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddElemental();
+
             await builder.Build().RunAsync();
         }
     }

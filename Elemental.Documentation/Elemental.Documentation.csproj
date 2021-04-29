@@ -10,6 +10,12 @@
     <Exec Command="npm run build-css" />
   </Target>
 
+  <ItemGroup>
+    <Content Update="Samples\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <!-- from https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially -->
   <PropertyGroup>
     <!-- File with mtime of last successful npm install -->
@@ -34,6 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Samples\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
@@ -46,6 +56,10 @@
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
