@@ -10,7 +10,7 @@ pool:
   name: Apption Pool
 
 variables:
-  NetCoreVersion: '5.0.100'
+  NetCoreVersion: '6.0.x'
 
 steps:
 - task: AzureKeyVault@1
