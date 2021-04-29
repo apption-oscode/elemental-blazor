@@ -1,0 +1,52 @@
+﻿@*
+    Copyright 2021 Apption Corporation
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    Title: Form Field Form
+    Description: Form is generated from .NET object model. Standard form annotations are used, few others have been added to handle labels, order, etc.
+*@
+
+<AeModelForm 
+    Model="@_formField"
+    SubmitLabel="Save Changes"
+    OnValidSubmit="@HandleValidSubmit"
+    CancelLabel="Cancel"
+    OnCancel="@CreateFormField"
+/>
+
+<DebugObject Object="@_formField" />
+
+@code {
+
+    private FormField _formField = new FormField();
+
+    private async Task<FormField> CreateFormField()
+    {
+        return new FormField();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _formField = await CreateFormField();
+    }
+
+    private void HandleValidSubmit()
+    {
+
+    }
+
+}
+
+
+        

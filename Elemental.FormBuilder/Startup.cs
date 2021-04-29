@@ -1,6 +1,8 @@
+using Elemental.FormBuilder.Code;
 using Elemental.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,6 +32,11 @@ namespace Elemental.FormBuilder
 
             //Use in downloading
             services.AddElemental();
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("LocalSqlite"))
+            );
+            services.AddScoped<IFormFieldRepository, FormFieldRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
