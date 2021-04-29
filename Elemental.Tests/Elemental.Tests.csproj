@@ -33,7 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.csproj" />
-    <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.Server.csproj" />
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 

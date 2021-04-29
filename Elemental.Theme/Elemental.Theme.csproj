@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>Apption.Elemental.Theme</PackageId>
+    <PackageId>AElemental.Blazor.Theme</PackageId>
     <Authors>Apption</Authors>
     <Product>Elemental Blazor Theme</Product>
     <Description>Theme for Apption Elemental.</Description>
@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Packaging">
-    <Content Include="build\Apption.Elemental.Theme.targets" PackagePath="build\Apption.Elemental.Theme.targets" />
+    <Content Include="build\AElemental.Blazor.Theme.targets" PackagePath="build\AElemental.Blazor.Theme.targets" />
 
     <Content Include="Styles/*.scss">
       <Pack>true</Pack>
