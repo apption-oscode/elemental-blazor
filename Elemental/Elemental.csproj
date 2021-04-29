@@ -5,10 +5,10 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageId>Blazor.Elemental</PackageId>
+    <PackageId>AElemental.Blazor</PackageId>
     <Authors>Apption</Authors>
     <Company>Apption</Company>
-    <Product>Elemental Blazor</Product>
+    <Product>AElemental for Blazor</Product>
     <Description>Build modern, sass customizable web experiences in Blazor with code first and functional primitives. Elemental components include a fully customizable table, common input controls, an object form editor and layout tools.</Description>
     <Copyright>Copyright Apption 2021</Copyright>
     <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>

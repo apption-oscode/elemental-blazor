@@ -96,14 +96,10 @@ namespace Elemental.Documentation
             //return File.ReadAllLines(fullPath);
 
         }
-        public static string[] ReadScssLines(string pathname)
+        public static IEnumerable<string> ReadScssLines(string pathname)
         {
             var scssPathname = Path.ChangeExtension(pathname, ".scss");
-            if (!File.Exists(scssPathname))
-            {
-                return null;
-            }
-            return File.ReadAllLines(scssPathname);
+            return ReadFile(scssPathname);
         }
 
         public static string ParseTitle(IEnumerable<string> lines)
@@ -148,7 +144,7 @@ namespace Elemental.Documentation
                 .ToList();
         }
 
-        public static List<string> ParseScss(string[] lines)
+        public static List<string> ParseScss(IEnumerable<string> lines)
         {
             return lines?.ToList();
         }
