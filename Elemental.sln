@@ -25,9 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Documentation.Wasm", "Elemental.Documentation.Wasm\Elemental.Documentation.Wasm.csproj", "{69023201-0427-461B-8A33-4DF631983F6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elemental.Documentation", "Elemental.Documentation\Elemental.Documentation.csproj", "{153B41BD-5CF3-4F93-8713-1E54C368075A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.Documentation", "Elemental.Documentation\Elemental.Documentation.csproj", "{153B41BD-5CF3-4F93-8713-1E54C368075A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elemental.FormBuilder", "Elemental.FormBuilder\Elemental.FormBuilder.csproj", "{E5D2C43C-DB91-420B-A70B-AADC38A100E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elemental.FormBuilder", "Elemental.FormBuilder\Elemental.FormBuilder.csproj", "{E5D2C43C-DB91-420B-A70B-AADC38A100E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

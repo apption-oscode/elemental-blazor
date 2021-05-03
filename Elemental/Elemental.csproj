@@ -43,6 +43,8 @@
 
 
   <ItemGroup>
+    <None Include="..\Elemental.Documentation\Samples\Outline\AeFlex.razor" Link="AeFlex.razor" />
+    <None Include="..\Elemental.Documentation\Samples\Outline\DemoSection.razor" Link="DemoSection.razor" />
     <None Include="compilerconfig.json" />
     <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
   </ItemGroup>
