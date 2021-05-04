@@ -38,11 +38,6 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <None Include="..\Elemental.Documentation\Samples\Outline\AeFlex.razor" Link="AeFlex.razor" />
     <None Include="..\Elemental.Documentation\Samples\Outline\DemoSection.razor" Link="DemoSection.razor" />
     <None Include="compilerconfig.json" />

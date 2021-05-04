@@ -44,11 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Samples\Outline\Examples\BasicOutline.razor" />
-    <Content Remove="Samples\Outline\Index.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 

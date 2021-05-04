@@ -1,12 +1,13 @@
-﻿@*
+﻿@using Elemental.Components.Outline
+@*
     Copyright (c) 2020 Apption Corporation
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Outline
-    Description: Creates a table of contents for the page
+    Title: Anchor navigation component
+    Description: Blazor does not natively support routing to fragments, by placing this component on a page it allows for fragment routing where it would not work otherwise
 *@
 
 <a href="#p1">Link 1</a>
@@ -14,7 +15,13 @@
 <a href="#p3">Link 3</a>
 <a href="#p4">Link 4</a>
 
-<p id="p1">Text 1</p>
-<p id="p2">Text 2</p>
-<p id="p3">Text 3</p>
-<p id="p4">Text 4</p>
+@foreach (int value in Enumerable.Range(1, 4)) //Places text with Ids P1...P4
+{
+    <p id="p@(value)">Text @value</p>
+    @foreach (int range in Enumerable.Range(1, 4)) // Adds spacing between <p> tags
+    {
+        <br> 
+    }
+}
+
+<AeAnchor></AeAnchor>
