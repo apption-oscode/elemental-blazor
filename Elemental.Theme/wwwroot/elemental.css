@@ -2785,7 +2785,7 @@ body {
   justify-content: space-between;
   align-items: flex-start; }
   .ae.steps.horizontal .ae.step {
-    flex: 1 1 0px;
+    flex: 1;
     display: block;
     overflow: hidden; }
     .ae.steps.horizontal .ae.step .ae.step-first-row {
@@ -2810,6 +2810,8 @@ body {
     .ae.steps.horizontal .ae.step.failed .ae.step-first-row .ae.step-tail {
       background-image: linear-gradient(to left, #a0aec0 50%, #f56565 50%);
       background-position: 0 0; }
+  .ae.steps.horizontal .ae.step:last-child {
+    flex: none; }
 
 /*
     Third party

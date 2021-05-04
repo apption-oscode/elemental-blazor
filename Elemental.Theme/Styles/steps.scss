@@ -128,7 +128,7 @@ $horizontalStepOptions: (
         "justify-content": space-between,
         "align-items": flex-start,
         ".ae.step": (
-            "flex": 1 1 0px,
+            "flex": 1,
             "display": block,
             "overflow": hidden,
             ".ae.step-first-row": (
@@ -167,6 +167,9 @@ $horizontalStepOptions: (
             ),
         ),        
     ),
+    ".ae.step:last-child": (
+        "flex": none,
+    )
 
 ),
 ) !default;
