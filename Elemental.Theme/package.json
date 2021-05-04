@@ -5,14 +5,12 @@
   "main": "index.js",
   "private": "true",
   "devDependencies": {
-    "node-sass": "^4.14.1"
+    "node-sass": "^5.0.0"
   },
   "scripts": {
-    "build-css": "node-sass --include-path Styles --source-map true Styles/theme.scss wwwroot/elemental.css && node-sass --include-path Styles --output-style compressed Styles/theme.scss wwwroot/elemental.min.css"
+    "build-css": "node-sass --include-path Styles --source-map true Styles/theme.scss wwwroot/elemental.css && node-sass --include-path Styles --output-style compressed Styles/theme.scss wwwroot/elemental.min.css",
+    "build-default-css": "node-sass --include-path Styles --output-style compressed Styles/theme.scss ../Elemental/wwwroot/css/elemental.min.css"
   },
   "author": "Apption",
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "node-sass": "^5.0.0"
-  }
+  "license": "Apache-2.0"
 }

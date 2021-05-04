@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.csproj" />
     <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
@@ -43,12 +44,6 @@
   <ItemGroup>
     <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
     <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Update="Samples\Cards\Examples\CardSamples.scss">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   
   <ItemGroup>

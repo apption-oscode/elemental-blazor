@@ -21,7 +21,8 @@ namespace Elemental.Documentation.Data
         [AeLabel(placeholder: "Enter Email...")]
         public string CaptainsEmail { get; set; }
 
-        [AeLabel(size:50,placeholder:"Describe your starship including crew size")]
+        [Editable(false)]
+        [AeLabel(size:100,placeholder:"Describe your starship including crew size")]
         public string Description { get; set; }
 
         [Required]

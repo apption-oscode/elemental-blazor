@@ -1,0 +1,109 @@
+﻿@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+
+@inject IJSRuntime JSRuntime
+
+<CascadingValue Value="this">
+    <div id="@Id">
+        <div id="container-fluid">
+            @ChildContent
+        </div>
+    </div>
+</CascadingValue>
+
+@functions { protected internal List<AeWalkthroughStep> Steps = new List<AeWalkthroughStep>();
+
+    protected internal List<StepItem> StepsForJs = new List<StepItem>();
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public bool Start { get; set; }
+
+    [Parameter]
+    public bool? Overlay { get; set; } = true;
+
+    [Parameter]
+    public bool? Clickable { get; set; } = false;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnComplete { get; set; }
+
+    public bool IsLastStep { get; set; }
+
+    public int StepsIndex(AeWalkthroughStep step) => StepsIndexInternal(step);
+
+    protected int StepsIndexInternal(AeWalkthroughStep step)
+    {
+        if (step == null)
+            throw new ArgumentNullException(nameof(step));
+
+        return Steps.IndexOf(step);
+    }
+
+    protected async override void OnParametersSet()
+    {
+        if (Start)
+        {
+            Guide();
+        }
+    }
+
+    protected internal void AddStep(AeWalkthroughStep step)
+    {
+        Steps.Add(step);
+        StepsForJs.Add(new StepItem(step.Title, step.Content, step.Id, step.Position, step.Order, step.ScrollTo, step.Arrow, step.Overlap));
+    }
+
+    [JSInvokable("WalkthroughCompleted")]
+    private void WalkthroughCompleted()
+    {
+        OnComplete.InvokeAsync(false);
+    }
+
+    private async void Guide()
+    {
+        DotNetObjectReference<AeWalkthrough> lDotNetReference = DotNetObjectReference.Create(this);
+        await JSRuntime.InvokeAsync<Object>("walkThroughHelper.walkThrough", new { steps = StepsForJs, overlay = Overlay, clickable = Clickable, dotNetReference = lDotNetReference });
+    }
+
+    public class StepItem
+    {
+        public string Title { get; set; }
+
+        public string Content { get; set; }
+
+        public string Id { get; set; }
+
+        public string Position { get; set; }
+
+        public int Order { get; set; }
+
+        public bool? ScrollTo { get; set; }
+
+        public bool? Arrow { get; set; }
+
+        public bool? Overlap { get; set; }
+
+        public StepItem(string t, string c, string id, string p, int o, bool? scrollTo, bool? arrow, bool? overlap)
+        {
+            Title = t;
+            Content = c;
+            Id = id;
+            Position = p;
+            Order = o;
+            ScrollTo = scrollTo;
+            Arrow = arrow;
+            Overlap = overlap;
+        }
+    } }

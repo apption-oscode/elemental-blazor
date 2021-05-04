@@ -20,18 +20,18 @@
 
     private async Task<RenderFragment> getLabel()
     {
-        return @<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>;
-    }
+        return await Task.FromResult<RenderFragment>(@<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>);
+}
 
-    private List<string> _dropdownItems = new List<string>
-    {
+private List<string> _dropdownItems = new List<string>
+{
         "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
     };
 
-    private void HandleDropdownChange(string selectedItem)
-    {
-        _selectedItem = selectedItem;
-        StateHasChanged();
-    }
+private void HandleDropdownChange(string selectedItem)
+{
+_selectedItem = selectedItem;
+StateHasChanged();
+}
 }
 

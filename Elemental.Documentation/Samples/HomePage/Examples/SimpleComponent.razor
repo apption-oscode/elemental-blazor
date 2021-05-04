@@ -1,0 +1,26 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Usage
+    Description: Here's an example of how you would make a simple counter component using Apption Elemental
+*@
+
+<AeFlex Vertical>
+    <AeTypography Variant="h3">Simple Counter</AeTypography>
+    <AeTypography Variant="p">Current count: <b>@_currentCount</b></AeTypography>
+    <AeButton @onclick="IncrementCount">Click me</AeButton>
+</AeFlex>
+
+@code {
+
+    private int _currentCount = 0;
+
+    private void IncrementCount()
+    {
+        _currentCount++;
+    }
+}

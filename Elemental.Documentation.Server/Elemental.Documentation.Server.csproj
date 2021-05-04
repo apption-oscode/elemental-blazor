@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.csproj" />
+    <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\Elemental\wwwroot\css\elemental.css" Link="elemental.css" />
+    <Content Include="..\Elemental\wwwroot\css\elemental.min.css" Link="elemental.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+</Project>

@@ -1,10 +1,19 @@
 @*
-    Copyright (c) 2020 Apption Corporation
+    Copyright 2020 Apption Corporation
 
-    This Source Code Form is subject to the terms of the Mozilla Public
-    License, v. 2.0. If a copy of the MPL was not distributed with this
-    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 *@
+
 
 @page "/dropdown"
 
@@ -82,7 +91,7 @@
     </div>
 
 
-    
+
 
 </div>
 
@@ -126,10 +135,10 @@
         </div>
         <div class="e text">@item.label</div>
     </div>;
-    }
+}
 
-    private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
-    private List<(string, string)> customDropdownItems = new List<(string, string)>()
+private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
+private List<(string, string)> customDropdownItems = new List<(string, string)>()
 {
         ("Number", "fa fa-hashtag"),
         ("PII Attribute", "fa fa-user-tag"),
@@ -141,31 +150,31 @@
         ("Outliers", "fa fa-bug"),
     };
 
-    private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
-    {
-        _selectedCustomItems = selectedItems.ToList();
-        StateHasChanged();
-    }
+private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
+{
+  _selectedCustomItems = selectedItems.ToList();
+  StateHasChanged();
+}
 
 
-    private void HandleDropdownChange(IEnumerable<string> selectedItem)
-    {
-        _selectedItem = selectedItem.FirstOrDefault();
-        StateHasChanged();
-    }
+private void HandleDropdownChange(IEnumerable<string> selectedItem)
+{
+  _selectedItem = selectedItem.FirstOrDefault();
+  StateHasChanged();
+}
 
 
-    private void HandleMultiDropdownChange(IEnumerable<string> selectedItems)
-    {
-        _selectedItems = selectedItems.ToList();
-        StateHasChanged();
-    }
+private void HandleMultiDropdownChange(IEnumerable<string> selectedItems)
+{
+  _selectedItems = selectedItems.ToList();
+  StateHasChanged();
+}
 
-    private string _itemList => string.Join(", ", _selectedItems);
+private string _itemList => string.Join(", ", _selectedItems);
 
-    public List<string> _selectedItems = new List<string>();
-    public string _selectedItem = "";
-    public List<string> dropdownItems = new List<string>
+public List<string> _selectedItems = new List<string>();
+public string _selectedItem = "";
+public List<string> dropdownItems = new List<string>
 {
         "Number",
         "Date",
@@ -190,134 +199,134 @@
     };
 
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntime.InvokeVoidAsync("initHighlight");
-    }
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+  await JSRuntime.InvokeVoidAsync("initHighlight");
+}
 
-    private string _ddHtml = @"<Dropdown 
-    Label=""Classifiers""
-    DropdownItems=""dropdownItems""
-    OnChange=""HandleDropdownChange"" 
+private string _ddHtml = @"<Dropdown
+Label=""Classifiers""
+DropdownItems=""dropdownItems""
+OnChange=""HandleDropdownChange""
 />";
 
-    private string _ddCSharp = @"@code {
-    
-    private string _selectedItem;
+private string _ddCSharp = @"@code {
 
-    private void HandleDropdownChange(IEnumerable<string> selectedItem)
-    {
-        _selectedItem = selectedItem.FirstOrDefault();
-        StateHasChanged();
-    }
+private string _selectedItem;
+
+private void HandleDropdownChange(IEnumerable<string> selectedItem)
+{
+_selectedItem = selectedItem.FirstOrDefault();
+StateHasChanged();
+}
 }";
 
 
-    private string _ddMultiselectHtml = @"<Dropdown Multiselect Label=""Classifiers"" DropdownItems=""dropdownItems"" OnChange=""HandleDropdownChange"" />";
-    private string _ddMultiselectCSharp = @"@code {
+private string _ddMultiselectHtml = @"<Dropdown Multiselect Label=""Classifiers"" DropdownItems=""dropdownItems"" OnChange=""HandleDropdownChange"" />";
+private string _ddMultiselectCSharp = @"@code {
 
-    private void HandleDropdownChange(IEnumerable<string> selectedItems)
-    {
-        _selectedItems = selectedItems.ToList();
-        StateHasChanged();
-    }
+private void HandleDropdownChange(IEnumerable<string> selectedItems)
+{
+_selectedItems = selectedItems.ToList();
+StateHasChanged();
+}
 
-    public List<string> _selectedItems = new List<string>();
-    public List<string> dropdownItems = new List<string>
-    {
-        ""Number"",
-        ""Date"",
-        ""Plain English"",
-        ""Money"",
-        ""String"",
-        ""First Name"",
-        ""Last Name"",
-        ""Dolor ipsum"",
-        ""1"",
-        ""2"",
-        ""3"",
-        ""4"",
-        ""5"",
-        ""6"",
-        ""7"",
-        ""8"",
-        ""9"",
-        ""10"",
-        ""11"",
-        ""12"",
-    };
+public List<string> _selectedItems = new List<string>();
+public List<string> dropdownItems = new List<string>
+{
+""Number"",
+""Date"",
+""Plain English"",
+""Money"",
+""String"",
+""First Name"",
+""Last Name"",
+""Dolor ipsum"",
+""1"",
+""2"",
+""3"",
+""4"",
+""5"",
+""6"",
+""7"",
+""8"",
+""9"",
+""10"",
+""11"",
+""12"",
+};
 }";
 
-    private string _ddMultiselectRenderHtml = @"<Dropdown
-    Multiselect
-    Label=""Classifiers"" 
-    DropdownItems=""customDropdownItems""
-    OnChange=""HandleCustomDropdownChange""
-    Renderer=""CustomRendering""
+private string _ddMultiselectRenderHtml = @"<Dropdown
+Multiselect
+Label=""Classifiers""
+DropdownItems=""customDropdownItems""
+OnChange=""HandleCustomDropdownChange""
+Renderer=""CustomRendering""
 />";
 
-    private string _ddMultiselectRenderCSharp = @"@code {
+private string _ddMultiselectRenderCSharp = @"@code {
 
-    private RenderFragment CustomRendering((string label, string iconClass) item, bool isSelected)
-    {
-        return @<div style=""display:contents;"">
-                    <div class=""@($""e checkbox checkicon {(isSelected ? ""checked"" : """")}"")"">
-                        <i class=""@item.iconClass""></i>
-                    </div>
-                    <div class=""e text"">@item.label</div>
-                </div>;
-    }
+private RenderFragment CustomRendering((string label, string iconClass) item, bool isSelected)
+{
+return @<div style=""display:contents;"">
+          <div class=""@($""e checkbox checkicon {(isSelected ? ""checked"" : """")}"")"">
+              <i class=""@item.iconClass""></i>
+          </div>
+          <div class=""e text"">@item.label</div>
+      </div>;
+}
 
-    private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
-    private List<(string, string)> customDropdownItems = new List<(string, string)>()
-    {
-        (""Number"", ""fa fa-hashtag""),
-        (""PII Attribute"", ""fa fa-user-tag""),
-        (""PII Individual"", ""fa fa-fingerprint""),
-        (""Finance"", ""fa fa-dollar-sign""),
-        (""Data Masking"", ""fa fa-user-secret""),
-        (""High Null Count"", ""fa fa-ban""),
-        (""Bias"", ""fa fa-balance-scale""),
-        (""Outliers"", ""fa fa-bug""),
-    };
+private List<(string, string)> _selectedCustomItems = new List<(string, string)>();
+private List<(string, string)> customDropdownItems = new List<(string, string)>()
+{
+(""Number"", ""fa fa-hashtag""),
+(""PII Attribute"", ""fa fa-user-tag""),
+(""PII Individual"", ""fa fa-fingerprint""),
+(""Finance"", ""fa fa-dollar-sign""),
+(""Data Masking"", ""fa fa-user-secret""),
+(""High Null Count"", ""fa fa-ban""),
+(""Bias"", ""fa fa-balance-scale""),
+(""Outliers"", ""fa fa-bug""),
+};
 
-    private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
-    {
-        _selectedCustomItems = selectedItems.ToList();
-        StateHasChanged();
-    }
+private void HandleCustomDropdownChange(IEnumerable<(string, string)> selectedItems)
+{
+_selectedCustomItems = selectedItems.ToList();
+StateHasChanged();
+}
 }";
 
-    private string _ddMultiselectAccessorHtml = @"<Dropdown 
-    Label=""The Avengers™"" 
-    DropdownItems=""accessorItems""
-    OnChange=""HandleAccessorDropdownChange""
-    Accessor=""CustomAccessor""
+private string _ddMultiselectAccessorHtml = @"<Dropdown
+Label=""The Avengers™""
+DropdownItems=""accessorItems""
+OnChange=""HandleAccessorDropdownChange""
+Accessor=""CustomAccessor""
 />";
 
-    private string _ddMultiselectAccessorCSharp = @"@code {
+private string _ddMultiselectAccessorCSharp = @"@code {
 
-    private string CustomAccessor((int, string label, bool) item)
-    {
-        return item.label;
-    }
+private string CustomAccessor((int, string label, bool) item)
+{
+return item.label;
+}
 
-    private void HandleAccessorDropdownChange(IEnumerable<(int, string, bool)> selectedItems)
-    {
-        _selectedAccessorItems = selectedItems.ToList();
-        StateHasChanged();
-    }
+private void HandleAccessorDropdownChange(IEnumerable<(int, string, bool)> selectedItems)
+{
+_selectedAccessorItems = selectedItems.ToList();
+StateHasChanged();
+}
 
-    private List<(int, string, bool)> _selectedAccessorItems = new List<(int, string, bool)>();
-    private List<(int, string, bool)> accessorItems = new List<(int, string, bool)>()
-    {
-        (5, ""Dr. Strange"", true),
-        (6, ""Iron Man"", false),
-        (3, ""Spiderman"", true),
-        (1, ""The Hulk"", false),
-        (4, ""Thanos"", false),
-        (7, ""Black Panther"", false),
-        (9, ""Thor"", true),
-    };
+private List<(int, string, bool)> _selectedAccessorItems = new List<(int, string, bool)>();
+private List<(int, string, bool)> accessorItems = new List<(int, string, bool)>()
+{
+(5, ""Dr. Strange"", true),
+(6, ""Iron Man"", false),
+(3, ""Spiderman"", true),
+(1, ""The Hulk"", false),
+(4, ""Thanos"", false),
+(7, ""Black Panther"", false),
+(9, ""Thor"", true),
+};
 }";
 }

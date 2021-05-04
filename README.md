@@ -1,51 +1,45 @@
-<!--
- Copyright (c) 2020 Apption Corporation
+﻿<!--
+ Copyright 2020 Apption Corporation
  
- This Source Code Form is subject to the terms of the Mozilla Public
- License, v. 2.0. If a copy of the MPL was not distributed with this
- file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
 -->
 
 # Elemental Framework for Blazor
 
-Elemental is a series of high level components designed to speed up Blazor projects.
+_Speed up your web projects with Blazor_
 
-Visit our [demo site](https://elemental-docs-app.azurewebsites.net/) for a live demo of all components and code details.
 
-## Styled Buttons
+## 🎉 Features
 
-Elemental styled buttons come with a built-in property for dark/light theme.
+- Modern Functional APIs
+- Leverages Blazor templating for tables and other components
+- State of the art ModelForm component for generating forms
+- SASS based styling for *all* components
+- Supports WebAssembly-based client-side and SignalR-based server-side UI event interaction.
+- Supports Progressive Web Applications (PWA).
+- .NET 5
 
-![Button image](docs/images/buttons.png)
+## 🌈 Online Examples
 
-## Dropdown
 
-NB! AeDropdown is for single select only, old multi-select dropdowns should be replaced with AeSelect
-
-Elemental dropdown binds to a property a list of objects in a single component.
-
-![Dropdown image](docs/images/Dropdown.png)
-
-## Model Form
-
-The Model Form is attempt to streamline forms using annotations. Standard C# annotations such as Required, StringLength and Range will be passed to the form for validation and one single component will bind each public property of the model to Blazor form components.
-
-```html
-<ModelForm Model="@_starship" OnValidSubmit="HandleValidSubmit"/>
-```
-
-will render into:
-
-![ModelForm image](docs/images/ModelForm.png)
-
-## Search Bar
-
-Standard component for search with a `OnInputChange` to directly send updates to the blazor backend.
-
-![SearchBar image](docs/images/SearchBar.png)
-
-## Table 
-
-In the Elemental Table component, to separate the data from the layout, the source data is a list of objects and header and lines are obtained using a series of functions.
+- [demo site](https://elemental-docs-app.azurewebsites.net/) 
 
 ![Table image](docs/images/Table.png)
+
+## Fully Open Source
+
+Elemental has the liberal [Apache license](https://www.apache.org/licenses/LICENSE-2.0.html)
+
+## Supported by experienced developers
+
+Contributors include [Apption](https://www.apption.com) who has been developing with Blazor since version 0.3
