@@ -1,0 +1,46 @@
+﻿@page "/forms"
+@inject Code.IFormRepository FormRepo
+
+<h3>Forms</h3>
+
+<AeButton To="/forms/new" class="blue">
+    <AeIcon Icon="add-circle" IconStyle="Elemental.Code.RXIcon.RXStyle.Fill" />
+    Create New Form
+</AeButton>
+
+@if (_forms != null && _forms.Count > 0)
+{
+    <AeTable
+        Accessors=@accessorFunctions
+        Renderers=@renderFunctions
+        Dataset=@_forms
+        Headers=@headers
+    />
+}
+
+@code {
+    private List<Form> _forms = new List<Form>();
+
+    private List<string> headers = new List<string>()
+    {
+        "Form Title", "Description"
+    };
+
+    private List<Func<Form, string>> accessorFunctions = new List<Func<Form, string>>()
+    {
+        (f => f.Title),
+        (f => f.Description)
+    };
+
+    private List<Func<Form, RenderFragment>> renderFunctions = new List<Func<Form, RenderFragment>>()
+    {
+        (f => @<a href=@($"/forms/{f.FormID}")>@f.Title</a>),
+        null
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var forms = await FormRepo.GetForms();
+        _forms = forms.ToList();
+    }
+}

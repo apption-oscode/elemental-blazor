@@ -37,6 +37,7 @@ namespace Elemental.FormBuilder
                 options.UseSqlite(Configuration.GetConnectionString("LocalSqlite"))
             );
             services.AddScoped<IFormFieldRepository, FormFieldRepository>();
+            services.AddScoped<IFormRepository, FormRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

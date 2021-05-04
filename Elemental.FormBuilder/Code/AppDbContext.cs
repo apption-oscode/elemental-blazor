@@ -10,13 +10,24 @@ namespace Elemental.FormBuilder.Code
         }
 
         public DbSet<FormField> FormFields { get; set; }
+        public DbSet<Form> Forms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Form>().HasData(
+                new Form() 
+                {
+                    FormID = 1,
+                    Title = "Test Form",
+                    Description = "A form for testing."
+                }
+            );
+
             modelBuilder.Entity<FormField>().HasData(new FormField()
             {
+                FormID = 1,
                 FormFieldID = 1,
                 Section = "Basic info",
                 Field = "Name",
@@ -27,6 +38,7 @@ namespace Elemental.FormBuilder.Code
             },
             new FormField()
             {
+                FormID = 1,
                 FormFieldID = 2,
                 Section = "Basic info",
                 Field = "Description",
@@ -36,6 +48,7 @@ namespace Elemental.FormBuilder.Code
             },
             new FormField()
             {
+                FormID = 1,
                 FormFieldID = 3,
                 Section = "Basic info",
                 Field = "Creation Date",
@@ -45,6 +58,7 @@ namespace Elemental.FormBuilder.Code
             },
             new FormField()
             {
+                FormID = 1,
                 FormFieldID = 4,
                 Section = "Price",
                 Field = "Price",
@@ -52,7 +66,6 @@ namespace Elemental.FormBuilder.Code
                 Mandatory = true,
                 FieldType = "Money"
             });
-
         }
     }
 }

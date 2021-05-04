@@ -33,6 +33,14 @@ namespace Elemental.FormBuilder.Code
             return results;
         }
 
+        public async Task<IEnumerable<FormField>> GetFormFieldsByForm(int formId)
+        {
+            var results = await _appDbContext.FormFields
+                .Where(ff => ff.FormID == formId)
+                .ToListAsync();
+            return results;
+        }
+
         public async Task<FormField> UpdateFormField(FormField formField)
         {
             var result = await _appDbContext.FormFields.FirstOrDefaultAsync(f => f.FormFieldID == formField.FormFieldID);

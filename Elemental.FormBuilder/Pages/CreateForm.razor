@@ -1,0 +1,42 @@
+﻿@page "/forms/new"
+@inject Code.IFormRepository FormRepo
+@inject NavigationManager NavManager
+
+@if (_form == null)
+{
+    <h3>Please Wait</h3>
+}
+else
+{
+    <h3>New Form</h3>
+
+    <AeModelForm
+        Model=@_form
+        SubmitLabel="Save Changes"
+        OnValidSubmit=@HandleValidSubmit
+        CancelLabel="Reset"
+        OnCancel=@DoCreateForm
+    />
+}
+
+@code {
+
+    private Form _form;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _form = await DoCreateForm();
+    }
+
+    private async Task<Form> DoCreateForm()
+    {
+        return new Form();
+    }
+
+    private async void HandleValidSubmit()
+    {
+        _form = await FormRepo.AddForm(_form);
+        NavManager.NavigateTo($"/forms/{_form.FormID}");
+    }
+
+}

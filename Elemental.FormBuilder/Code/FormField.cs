@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using System.Text.RegularExpressions;
 using Elemental.Components.Forms;
@@ -11,6 +12,12 @@ namespace Elemental.FormBuilder
         [AeFormIgnore]
         [Key]
         public int FormFieldID { get; set; }
+
+        [AeFormIgnore]
+        [ForeignKey("Form")]
+        public int FormID { get; set; }
+
+        public Form Form { get; set; }
 
         [Required]
         [StringLength(100)]

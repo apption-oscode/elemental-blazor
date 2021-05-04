@@ -3,14 +3,16 @@ using System;
 using Elemental.FormBuilder.Code;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Elemental.FormBuilder.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210429151158_AddedForms")]
+    partial class AddedForms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +65,7 @@ namespace Elemental.FormBuilder.Migrations
                     b.Property<string>("FieldType")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("FormID")
+                    b.Property<int?>("FormID")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Mandatory")
@@ -90,7 +92,6 @@ namespace Elemental.FormBuilder.Migrations
                             Extension = "NAME",
                             Field = "Name",
                             FieldType = "Text",
-                            FormID = 1,
                             Mandatory = true,
                             MaxLength = 100,
                             Section = "Basic info"
@@ -101,7 +102,6 @@ namespace Elemental.FormBuilder.Migrations
                             Extension = "DESC",
                             Field = "Description",
                             FieldType = "Text",
-                            FormID = 1,
                             Mandatory = false,
                             MaxLength = 400,
                             Section = "Basic info"
@@ -112,7 +112,6 @@ namespace Elemental.FormBuilder.Migrations
                             Extension = "DT",
                             Field = "Creation Date",
                             FieldType = "Date",
-                            FormID = 1,
                             Mandatory = true,
                             Section = "Basic info"
                         },
@@ -122,7 +121,6 @@ namespace Elemental.FormBuilder.Migrations
                             Extension = "AMT",
                             Field = "Price",
                             FieldType = "Money",
-                            FormID = 1,
                             Mandatory = true,
                             Section = "Price"
                         });
@@ -132,9 +130,7 @@ namespace Elemental.FormBuilder.Migrations
                 {
                     b.HasOne("Elemental.FormBuilder.Form", "Form")
                         .WithMany()
-                        .HasForeignKey("FormID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FormID");
 
                     b.Navigation("Form");
                 });

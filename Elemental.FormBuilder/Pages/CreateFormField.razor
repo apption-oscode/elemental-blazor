@@ -1,5 +1,6 @@
-﻿@page "/formfields/new"
-@inject Code.IFormFieldRepository Repo
+﻿@page "/forms/{FormId}/newfield"
+@inject Code.IFormFieldRepository FormFieldRepo
+@inject Code.IFormRepository FormRepo
 @inject NavigationManager NavManager
 
 @if(_formField == null)
@@ -22,21 +23,34 @@ else
 <AeButton To="/formfields">Back</AeButton>
 
 @code {
+
+    [Parameter]
+    public string FormId { get; set; }
+
     private FormField _formField;
+    private Form _form;
 
     protected override async Task OnInitializedAsync()
     {
-        _formField = new FormField();
+        _form = await FormRepo.GetForm(int.Parse(FormId));
+        if (_form != null)
+        {
+            _formField = await DoCreateFormField();
+        }
+        else
+        {
+            NavManager.NavigateTo("/forms");
+        }
     }
 
     private async Task<FormField> DoCreateFormField()
     {
-        return new FormField();
+        return new FormField() { FormID = _form.FormID };
     }
 
     private async void HandleValidSubmit()
     {
-        _formField = await Repo.AddFormField(_formField);
+        _formField = await FormFieldRepo.AddFormField(_formField);
         NavManager.NavigateTo($"/formfields/view/{_formField.FormFieldID}");
     }
 }
