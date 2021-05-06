@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -2797,10 +2797,12 @@ div.outline {
   position: -webkit-sticky;
   /* Safari */
   position: sticky;
-  top: 0;
-  right: 0;
-  border: 2px solid blue;
-  width: 150px; }
+  top: 0; }
+
+div.outlines {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end; }
 
 /*
     Third party
@@ -3109,5 +3111,3 @@ template {
  */
 [hidden] {
   display: none; }
-
-/*# sourceMappingURL=elemental.css.map */
