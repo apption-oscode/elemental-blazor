@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Elemental.Documentation.Data
 {
-    public class Starship
+    public class Starship : Ship
     {
 
         [AeFormIgnore]
@@ -45,4 +45,10 @@ namespace Elemental.Documentation.Data
 
         public int? SubLightEngines { get; set; }
     }
+
+    public abstract class Ship
+    {
+        public string ShipName { get; set; }
+    }
+
 }
