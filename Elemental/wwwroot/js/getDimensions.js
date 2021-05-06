@@ -16,6 +16,24 @@ window.getPosition = function (element) {
     };
 };
 
+window.getPositionOnDoc = function (element) {
+    var rect = window.getPosition(element)
+    return {
+        top: Math.floor(rect.top + window.pageYOffset),
+        left: Math.floor(rect.left + window.pageXOffset),
+        bottom: Math.floor(rect.bottom + window.pageYOffset),
+        right: Math.floor(rect.right + window.pageXOffset)
+    };
+};
+
+
+
 window.setZIndex = function (element, zIndex) {
     element.style.zIndex = zIndex;
+}
+
+ScrollPos = function (element) {
+    var pos = window.getPositionOnDoc(element);
+    window.scrollTo(0, pos.top);
+
 }
