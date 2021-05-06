@@ -46,5 +46,18 @@ namespace Elemental.Tests
             Assert.Equal("HAHA", result);
         }
 
+        [Fact]
+        public void CanGenerateExpressionAbstract()
+        {
+            var starshipType = typeof(Starship);
+            var starshipInstance = new Starship() { Identifier = "HAHA", ShipName = "ze_cheap_name" };
+            var idProp = starshipType.GetProperty("ShipName");
+            var expr = AeModelFormTools.GetExpression<string>(starshipInstance, idProp);
+
+            var compiled = expr.Compile();
+            var result = compiled();
+            Assert.Equal("ze_cheap_name", result);
+        }
+
     }
 }

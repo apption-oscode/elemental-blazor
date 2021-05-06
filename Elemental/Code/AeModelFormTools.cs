@@ -19,7 +19,8 @@ namespace Elemental.Code
         public static System.Linq.Expressions.Expression<Func<S>> GetExpression<S>(object instance, PropertyInfo propertyInfo)
         {
             var constant = Expression.Constant(instance);
-            var memberExpression = Expression.Property(constant, propertyInfo.GetGetMethod());
+            //var asDeclardType = Expression.Convert(constant, propertyInfo.DeclaringType);
+            var memberExpression = Expression.Property(constant, propertyInfo);
             return Expression.Lambda<Func<S>>(memberExpression);
         }
 
