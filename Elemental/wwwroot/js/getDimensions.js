@@ -26,14 +26,6 @@ window.getPositionOnDoc = function (element) {
     };
 };
 
-
-
 window.setZIndex = function (element, zIndex) {
     element.style.zIndex = zIndex;
-}
-
-ScrollPos = function (element) {
-    var pos = window.getPositionOnDoc(element);
-    window.scrollTo(0, pos.top);
-
 }

@@ -1,10 +1,41 @@
 ﻿@page "/outline"
 @inherits DemoPage
+<AeCard style="width: 250px; position:fixed; top:0px; right:0px;">
+    <Header>
+        <AeTypography style="flex-grow: 1; ">Document Navigation</AeTypography>
+    </Header>
+    <ChildContent>
+        <Elemental.Components.PageOutline.AeOutline Anchors="_Anchors" Style=""/>
+    </ChildContent>
+</AeCard>
 <AeFlex Vertical>
-    <DemoSection Path="./Samples/PageOutline/Examples/FragmentRouting.razor">
-        <Elemental.Documentation.Samples.PageOutline.Examples.FragmentRouting/>
-    </DemoSection>
-    <DemoSection Path="./Samples/PageOutline/Examples/ReferenceOutline.razor">
-        <Elemental.Documentation.Samples.PageOutline.Examples.ReferenceOutline/>
-    </DemoSection>
+    <span @ref="fragment">
+        <DemoSection Path="./Samples/PageOutline/Examples/FragmentRouting.razor" >
+            <Elemental.Documentation.Samples.PageOutline.Examples.FragmentRouting/>
+        </DemoSection>
+    </span>
+    <span @ref="reference">
+        <DemoSection Path="./Samples/PageOutline/Examples/ReferenceOutline.razor">
+            <Elemental.Documentation.Samples.PageOutline.Examples.ReferenceOutline/>
+        </DemoSection>
+    </span>
 </AeFlex>
+
+@code{
+    private ElementReference fragment;
+    private ElementReference reference;
+    private List<(ElementReference, RenderFragment)> _Anchors;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(firstRender){
+        _Anchors = new List<(ElementReference, RenderFragment)>
+        {
+            (fragment, @<AeTypography Variant="a">Example 1: Fragment Routing  </AeTypography>), 
+            (reference, @<AeTypography Variant="a"> Example 2: Reference Outline</AeTypography>),
+
+        };
+        StateHasChanged();
+        } 
+    }
+}

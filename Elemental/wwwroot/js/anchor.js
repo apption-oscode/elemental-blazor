@@ -9,3 +9,10 @@
     }
 }
 
+ScrollPos = function (element) {
+    if (element instanceof HTMLElement) {
+        var pos = window.getPositionOnDoc(element);
+        window.scrollTo(0, pos.top);
+    }
+}
+

@@ -3,17 +3,21 @@
 
 @if(!(Anchors is null))
 {
+	<div style="@Style">
 	@foreach (var item in Anchors)
 	{
 		<div @onclick="() => Scroll(item.Reference)">@item.ChildContent</div>	
-	}	
+	}
+	</div>
 }
 
 
 @code {
 	[Parameter]
 	public List<(ElementReference Reference, RenderFragment ChildContent)> Anchors { get; set; }
-	
+	[Parameter]
+	public string Style { get; set; }
+
 	private async Task Scroll(ElementReference refs)
 	{
 		if (refs.Equals(default(ElementReference))) throw new ArgumentNullException("ref was null");
