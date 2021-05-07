@@ -2724,10 +2724,10 @@ body {
     left: calc((32px + 2px) / 2);
     background-image: linear-gradient(to bottom, #a0aec0 50%, #a0aec0 50%);
     width: 1px;
-    -webkit-transition: background-position 0.5s;
-    -moz-transition: background-position 0.5s;
-    -o-transition: background-position 0.5s;
-    transition: background-position 0.5s;
+    -webkit-transition: background-position 1.5s;
+    -moz-transition: background-position 1.5s;
+    -o-transition: background-position 1.5s;
+    transition: background-position 1.5s;
     background-size: 100% 200%;
     height: calc(100% - 32px - (4px * 2) - (2px * 2)); }
   .ae.steps .ae.step .ae.step-icon {
@@ -2740,6 +2740,7 @@ body {
     margin-right: 16px;
     border-style: solid;
     border-width: 2px;
+    flex-shrink: 0;
     -webkit-transition: border-color 0.25s ease-out;
     -moz-transition: border-color 0.25s ease-out;
     -o-transition: border-color 0.25s ease-out;
@@ -2778,31 +2779,39 @@ body {
   .ae.steps .ae.step.queued .ae.step-content .ae.step-message {
     color: #a0aec0; }
 
-/**
- * Copyright 2020 Apption Corporation
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-div.outline {
-  position: -webkit-sticky;
-  /* Safari */
-  position: sticky;
-  top: 0; }
-
-div.outlines {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-end; }
+.ae.steps.horizontal {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start; }
+  .ae.steps.horizontal .ae.step {
+    flex: 1;
+    display: block;
+    overflow: hidden; }
+    .ae.steps.horizontal .ae.step .ae.step-first-row {
+      display: flex;
+      width: 100%; }
+      .ae.steps.horizontal .ae.step .ae.step-first-row .ae.step-tail {
+        flex: 1;
+        background-image: linear-gradient(to left, #a0aec0 50%, #a0aec0 50%);
+        height: 1px;
+        background-position: 100% 0;
+        background-size: 200% 100%;
+        width: 100%;
+        position: static;
+        margin: 16px 8px 0 8px; }
+    .ae.steps.horizontal .ae.step .ae.step-message {
+      margin-left: 50px;
+      font-size: 0.875rem;
+      color: #718096; }
+    .ae.steps.horizontal .ae.step.passed .ae.step-first-row .ae.step-tail {
+      background-image: linear-gradient(to left, #a0aec0 50%, #48bb78 50%);
+      background-position: 0 0; }
+    .ae.steps.horizontal .ae.step.failed .ae.step-first-row .ae.step-tail {
+      background-image: linear-gradient(to left, #a0aec0 50%, #f56565 50%);
+      background-position: 0 0; }
+  .ae.steps.horizontal .ae.step:last-child {
+    flex: none; }
 
 /*
     Third party
