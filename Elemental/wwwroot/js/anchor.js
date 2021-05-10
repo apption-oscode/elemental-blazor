@@ -15,4 +15,7 @@ ScrollPos = function (element) {
         window.scrollTo(0, pos.top);
     }
 }
+ScrollPosFromId = function (id) {
+    ScrollPos(document.getElementById(id));
+}
 

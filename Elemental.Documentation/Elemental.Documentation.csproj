@@ -43,7 +43,6 @@
     <EmbeddedResource Include="Samples\**" />
   </ItemGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>

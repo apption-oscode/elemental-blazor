@@ -9,28 +9,27 @@
     Title: Basic Outline
     Description: Provids a table of contents styled outline of the page
 *@
-<span style="border: 2px solid blue">
-    <AeOutlineRef Anchors="_Anchors"/>
+<span style="border: 2px dashed green">
+    <AeOutlineId Anchors="_Anchors"/>
 </span>
-<p @ref="p" >test1</p>
-<div @ref="div">test 2</div>
+<div id="divtag">test 2</div>
+<p id="ptag" >test1</p>
+<AeTypography id="aetag"></AeTypography>
+
 
 
 @code{
-    private List<(ElementReference Reference, RenderFragment ChildContent)> _Anchors;
-    private ElementReference div;
-    private ElementReference p;
+    private List<(string Id, RenderFragment ChildContent)> _Anchors;
     protected override void OnAfterRender(bool firstRender)
     {
         if(firstRender)
         {
-            _Anchors = new List<(ElementReference Reference, RenderFragment ChildContent)>()
+            _Anchors = new List<(string Id, RenderFragment ChildContent)>()
             {
-                (div, @<div>Div</div>),
-                (p, @<div>P</div>),
+                ("divtag", @<div>Div</div>),
+                ("ptag", @<div>P</div>),
             };
             StateHasChanged();
         }
-
     }
 }

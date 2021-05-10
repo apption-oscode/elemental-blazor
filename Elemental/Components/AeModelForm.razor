@@ -19,13 +19,25 @@
 
 @inherits HtmlElement
 @using Elemental.Components.Forms
+@using Elemental.Components.PageOutline
 @using System.Reflection
 @using Elemental.Components.FormsInternal
 @using Microsoft.AspNetCore.Components.Forms
 
 @if (Model != null)
 {
-    <div class="@_modelFormClass">
+    @if (EnableOutline)
+    {
+        <AeCard style=@(string.IsNullOrEmpty(OutlineStyle)? "width: 250px; position:fixed; top:0px; right:0px;": OutlineStyle) >
+            <Header>
+                <AeTypography style="flex-grow: 1; ">Form Navigation</AeTypography>
+            </Header>
+            <ChildContent>
+                <AeOutlineId Anchors="_Anchors"/>
+            </ChildContent>
+        </AeCard>
+    }
+    <div class="@_modelFormClass" id=@(EnableOutline? "Uncategorized":"")>
         <EditForm Model="Model" OnSubmit="@onSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
@@ -34,7 +46,15 @@
                 {
                     @if (!string.IsNullOrWhiteSpace(category.category))
                     {
-                        <AeTypography Variant="h3">@category.category</AeTypography>
+                        string id = "";
+                        @if (EnableOutline){
+                            id = category.category;
+                            if(!_Anchors.Any(a => a.Id == id)){
+                                _Anchors.Add((id, @<AeTypography Variant="a">@id</AeTypography>));
+                            }
+
+                        }
+                        <AeTypography Variant="h3" id="@id">@category.category</AeTypography>
                     }
                     @foreach (var prop in category.properties)
                     {
@@ -146,6 +166,15 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (EnableOutline)
+        {
+            _Anchors = new List<(string Id, RenderFragment ChildContent)>
+            {
+                ("Uncategorized", @<AeTypography Variant="a">Uncategorized Fields</AeTypography>)
+            };        
+        }
+       
+
         ModelFormContext.RefreshModel = async () => await this.InvokeAsync(() => this.StateHasChanged());
         ModelFormContext.SetProperties(GetProperties());
         if (!isConfigured)
@@ -155,6 +184,12 @@
         }
 
         notifier = OnNotify;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender) StateHasChanged();
+          
     }
 
     [Parameter]
@@ -229,7 +264,15 @@
     [Parameter]
     public bool LabelsOnTop { get; set; }
 
+    [Parameter]
+    public bool EnableOutline { get; set; }
+
+    [Parameter]
+    public string OutlineStyle{ get; set; }
+
     private bool _isCancelled = false;
+
+    private List<(string Id, RenderFragment ChildContent)> _Anchors;
 
     private List<PropertyInfo> GetProperties()
     {
