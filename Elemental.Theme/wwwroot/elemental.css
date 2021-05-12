@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -1721,7 +1721,8 @@ body {
     grid-template-rows: auto; }
     .ae.modelform .ae.modelform-rows .ae.modelform-row .ae.modelform-col {
       display: grid;
-      grid-template-columns: 250px auto; }
+      grid-template-columns: 250px auto;
+      margin: 0.5rem 0; }
       .ae.modelform .ae.modelform-rows .ae.modelform-row .ae.modelform-col .ae.ae-form-control-label {
         display: flex;
         align-items: center;
@@ -3247,5 +3248,3 @@ template {
  */
 [hidden] {
   display: none; }
-
-/*# sourceMappingURL=elemental.css.map */
