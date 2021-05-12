@@ -65,6 +65,7 @@
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
   <ItemGroup>
+    <None Remove="Styles\grid.scss" />
     <None Remove="Styles\spinner.scss" />
   </ItemGroup>
 

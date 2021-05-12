@@ -1,0 +1,9 @@
+﻿<div class="ae row @(Center? " center": "" )">@ChildContent</div>
+
+@code {
+    [Parameter]
+    public bool Center { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

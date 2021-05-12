@@ -1,0 +1,18 @@
+﻿@if (Size != null)
+{
+    <div class="@($"ae col-{Size}")">@ChildContent</div>
+}
+else
+{
+    <div class="ae col">@ChildContent</div>
+}
+
+
+@code {
+
+    [Parameter]
+    public int? Size { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
