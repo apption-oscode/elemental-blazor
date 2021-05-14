@@ -6,31 +6,24 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Basic Outline
-    Description: Provids a table of contents styled outline of the page
+    Title: Reference Based Outline
+    Description: Provids a table of contents styled outline of the page using a list of ElementReferences and renderfragments
 *@
-<span style="border: 2px solid blue">
-    <AeOutlineRef Anchors="_Anchors"/>
-</span>
-<p @ref="p" >test1</p>
-<div @ref="div">test 2</div>
+<AeOutlineRef @onchange="() => StateHasChanged()" Anchors="_Anchors" />
+<p @ref="p">This is the p Tag</p>
+<div @ref="div">This is the div Tag</div>
 
 
-@code{
-    private List<(ElementReference Reference, RenderFragment ChildContent)> _Anchors;
+@code {
+    private List<(ElementReference Reference, RenderFragment ChildContent)> _Anchors = new List<(ElementReference Reference, RenderFragment ChildContent)>();
     private ElementReference div;
     private ElementReference p;
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnInitialized()
     {
-        if(firstRender)
+        _Anchors = new List<(ElementReference Reference, RenderFragment ChildContent)>()
         {
-            _Anchors = new List<(ElementReference Reference, RenderFragment ChildContent)>()
-            {
-                (div, @<div>Div</div>),
-                (p, @<div>P</div>),
-            };
-            StateHasChanged();
-        }
-
+            (p, @<AeTypography Variant="a">Take me to the p tag!</AeTypography>),
+            (div, @<AeTypography Variant="a">take me to that div tag...</AeTypography>),
+        };
     }
 }

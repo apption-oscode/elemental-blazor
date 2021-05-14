@@ -6,19 +6,14 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Basic Outline
-    Description: Provids a table of contents styled outline of the page
+    Title: Id Based Outline
+    Description: Provids a table of contents styled outline of the page using a list of ids and renderfragments
 *@
-<span style="border: 2px dashed green">
-    <AeOutlineId Anchors="_Anchors"/>
-</span>
-<div id="divtag">test 2</div>
-<p id="ptag" >test1</p>
-<AeTypography id="aetag"></AeTypography>
+<AeOutlineId Anchors="_Anchors"/>
+<div id="divtag">Wow another div...</div>
+<p id="ptag">A p tag</p>
 
-
-
-@code{
+@code {
     private List<(string Id, RenderFragment ChildContent)> _Anchors;
     protected override void OnAfterRender(bool firstRender)
     {
@@ -26,8 +21,8 @@
         {
             _Anchors = new List<(string Id, RenderFragment ChildContent)>()
             {
-                ("divtag", @<div>Div</div>),
-                ("ptag", @<div>P</div>),
+                ("divtag", @<AeTypography Variant="a">free ride to that div</AeTypography>),
+                ("ptag", @<AeTypography Variant="a">Ill take you to the p tag</AeTypography>),
             };
             StateHasChanged();
         }

@@ -1,0 +1,13 @@
+﻿@inherits HtmlElement
+@code {
+	[CascadingParameter]
+	public AeOutline Outline { get; set; }
+	[Parameter]
+	public string Href { get; set; }
+	public string _Classname => $"ae outline-row {_inputClass}";
+
+	protected override void OnInitialized()
+	{
+		Outline.AddAnchor(this);
+	}
+}

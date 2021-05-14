@@ -1,48 +1,46 @@
 ﻿@page "/outline"
 @inherits DemoPage
+@using Elemental.Components.PageOutline
+<div class="alertbox">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong>Info!</strong> Before you proceed.
+  <ul>
+      <li>Make sure that automatic sleep is disabled to prevent the computer from sleeping during analysis</li>
+      <li>Ensure you are connected to a VPN if necessary for proper connection to databases</li>
+  </ul>
+</div>
 <AeCard style="width: 250px; position:fixed; top:0px; right:0px;">
     <Header>
         <AeTypography style="flex-grow: 1; ">Document Navigation</AeTypography>
     </Header>
     <ChildContent>
-        <Elemental.Components.PageOutline.AeOutlineRef Anchors="_Anchors" Style=""/>
+        <AeOutline>
+            <AeOutlineAnchor Href="fragment"> Fragment Routing</AeOutlineAnchor>
+            <AeOutlineAnchor Href="outline"> Basic Outline Component</AeOutlineAnchor>
+            <AeOutlineAnchor Href="reference"> Reference Based Outline</AeOutlineAnchor>
+            <AeOutlineAnchor Href="ids"> Id Based Outline</AeOutlineAnchor>
+        </AeOutline>
     </ChildContent>
 </AeCard>
 <AeFlex Vertical>
-    <span @ref="fragment">
-        <DemoSection Path="./Samples/PageOutline/Examples/FragmentRouting.razor" >
-            <Elemental.Documentation.Samples.PageOutline.Examples.FragmentRouting/>
+    <span id="fragment">
+        <DemoSection Path="./Samples/PageOutline/Examples/FragmentRouting.razor">
+            <Elemental.Documentation.Samples.PageOutline.Examples.FragmentRouting />
         </DemoSection>
     </span>
-    <span @ref="reference">
+    <span id="outline">
+        <DemoSection Path="./Samples/PageOutline/Examples/BasicOutline.razor">
+            <Elemental.Documentation.Samples.PageOutline.Examples.BasicOutline />
+        </DemoSection>
+    </span>
+    <span id="reference">
         <DemoSection Path="./Samples/PageOutline/Examples/ReferenceOutline.razor">
-            <Elemental.Documentation.Samples.PageOutline.Examples.ReferenceOutline/>
+            <Elemental.Documentation.Samples.PageOutline.Examples.ReferenceOutline />
         </DemoSection>
     </span>
-    <span @ref="ids">
+    <span id="ids">
         <DemoSection Path="./Samples/PageOutline/Examples/IdOutline.razor">
-            <Elemental.Documentation.Samples.PageOutline.Examples.IdOutline/>
+            <Elemental.Documentation.Samples.PageOutline.Examples.IdOutline />
         </DemoSection>
     </span>
 </AeFlex>
-
-@code{
-    private ElementReference fragment;
-    private ElementReference reference;
-    private ElementReference ids;
-    private List<(ElementReference, RenderFragment)> _Anchors;
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if(firstRender){
-            _Anchors = new List<(ElementReference, RenderFragment)>
-            {
-                (fragment, @<AeTypography Variant="a">Example 1: Fragment Routing  </AeTypography>), 
-                (reference, @<AeTypography Variant="a"> Example 2: Reference Outline</AeTypography>),
-                (ids, @<AeTypography Variant="a"> Example 3: Id Outline</AeTypography>),
-
-            };
-            StateHasChanged();
-        } 
-    }
-}
