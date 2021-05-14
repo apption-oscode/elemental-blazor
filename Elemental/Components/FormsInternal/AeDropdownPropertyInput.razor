@@ -74,7 +74,7 @@ else
     public ModelFormContext<T> ModelFormContext { get; set; } = null;
 
     [CascadingParameter(Name = "Notifier")]
-    public Func<ModelFormChangeArgs, Task> Notifier { get; set; }
+    public Func<ModelFormArgsInternal, Task> Notifier { get; set; }
 
     private string GetLabel(string value)
     {
@@ -90,7 +90,7 @@ else
 
     private async Task OnValueChanged(string value)
     {
-        var changeArgs = new ModelFormChangeArgs() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
+        var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
         await Notifier(changeArgs);
     }
 

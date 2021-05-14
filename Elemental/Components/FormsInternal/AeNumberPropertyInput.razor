@@ -52,7 +52,7 @@
     public ModelFormContext<T> ModelFormContext { get; set; } = null;
 
     [CascadingParameter(Name = "Notifier")]
-    public Func<ModelFormChangeArgs, Task> Notifier { get; set; }
+    public Func<ModelFormArgsInternal, Task> Notifier { get; set; }
 
     private string GetLabel()
     {
@@ -61,7 +61,7 @@
 
     private async Task UpdateModel()
     {
-        await Notifier(new ModelFormChangeArgs() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+        await Notifier(new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         //await OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         //OnChangeCallback.InvokeAsync(null).GetAwaiter().GetResult();
         // return ValueChanged.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });

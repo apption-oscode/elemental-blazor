@@ -41,7 +41,7 @@
                         <CascadingValue Value="@OnChange" Name="OnChangeCallback">
                             <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
                                 <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
-                                    <CascadingValue Value="@OnNotify" Name="Notifier">
+                                    <CascadingValue Value="@NotifyArg" Name="Notifier">
                                         <div class="ae modelform-row @RowColor">
                                             @if (!prop.IsEditable())
                                             {
@@ -152,7 +152,7 @@
             await OnConfigure.InvokeAsync(ModelFormContext);
             isConfigured = true;
         }
-
+        NotifyArg = OnNotify;
         //notifier = OnNotify;
     }
 
@@ -179,6 +179,8 @@
     /// </summary>
     [Parameter]
     public Func<string, string> LabelForPropertyFunc { get; set; } = null;
+
+    private Func<ModelFormArgsInternal, Task> NotifyArg;
 
     private async Task ReloadForm()
     {
@@ -231,7 +233,7 @@
     /// <summary>
     /// This method will be called when a property is changed.
     /// </summary>
-    [Parameter] public EventCallback<ModelFormChangeArgs> OnChange { get; set; }
+    [Parameter] public EventCallback<ModelFormChangeArgs<T>> OnChange { get; set; }
 
     private List<PropertyInfo> GetProperties()
     {
@@ -245,9 +247,9 @@
 
     private Func<Task> notifier = null;
 
-    public async Task OnNotify(ModelFormChangeArgs args)
-    {        
-
+    public async Task OnNotify(ModelFormArgsInternal iargs)
+    {
+        var args = new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = iargs.PropertyInfo, EditContext = iargs.EditContext };
         await OnChange.InvokeAsync(args);
         await InvokeAsync(() =>
         {
