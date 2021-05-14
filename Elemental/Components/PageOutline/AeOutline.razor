@@ -2,7 +2,7 @@
 @inject IJSRuntime JSRuntime
 <CascadingValue Value="this">
 	<div class="@_Classname">
-		@foreach(var anchor in _Anchors)
+		@foreach (var anchor in _Anchors)
 		{
 			<AeTypography Variant="a" class="@anchor._Classname" @onclick="() => Scroll(anchor.Href)">@anchor.ChildContent</AeTypography>
 		}
@@ -12,7 +12,7 @@
 
 @code {
     private string _Classname => $"ae outline-wrapper {_inputClass}";
-    private List<AeOutlineAnchor> _Anchors = new List<AeOutlineAnchor>();
+    private List<AeAnchor> _Anchors = new List<AeAnchor>();
 
     private async Task Scroll(string id)
     {
@@ -20,7 +20,7 @@
         await JSRuntime.InvokeVoidAsync(("ScrollPosFromId"), id);
     }
 
-    protected internal void AddAnchor(AeOutlineAnchor anchor)
+    protected internal void AddAnchor(AeAnchor anchor)
     {
         if(!(_Anchors.Any(a => a == anchor)))_Anchors.Add(anchor);
         StateHasChanged();

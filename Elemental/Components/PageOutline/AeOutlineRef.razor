@@ -1,22 +1,31 @@
 ﻿@inherits HtmlElement
 @inject IJSRuntime JSRuntime
-@inject GetDimensionsService Dimensions
-
-<div class="@_Classname">
-	@foreach (var item in Anchors)
-	{
-		<div @onclick="() => Scroll(item.Reference)">@item.ChildContent</div>	
-	}
-</div>
+<CascadingValue Value="this">
+    <div class="@_Classname">
+	    @foreach (var anchor in _Anchors)
+	    {
+		    <AeTypography Variant="a" class="@anchor._Classname" @onclick="() => Scroll(anchor.reference)">@anchor.Label</AeTypography>
+	    }
+    </div>
+    @ChildContent
+</CascadingValue>
 
 @code {
-    [Parameter]
-    public List<(ElementReference Reference, RenderFragment ChildContent)> Anchors { get; set; }
+    private List<AeAnchorRef> _Anchors = new List<AeAnchorRef>();
     private string _Classname => $"ae outline-wrapper {_inputClass}";
 
     private async Task Scroll(ElementReference refs)
     {
         if (refs.Equals(default(ElementReference))) throw new ArgumentNullException("ref was null");
         await JSRuntime.InvokeVoidAsync(("ScrollPos"), refs);
+    }
+
+    protected internal void AddAnchor(AeAnchorRef anchor)
+    {
+        if (!(_Anchors.Any(a => a == anchor)))
+        {
+            _Anchors.Add(anchor);
+        }
+        StateHasChanged();
     }
 }

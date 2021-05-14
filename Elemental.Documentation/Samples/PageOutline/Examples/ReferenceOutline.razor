@@ -6,24 +6,14 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Reference Based Outline
+    Title: Basic Outline using references
     Description: Provids a table of contents styled outline of the page using a list of ElementReferences and renderfragments
 *@
-<AeOutlineRef @onchange="() => StateHasChanged()" Anchors="_Anchors" />
-<p @ref="p">This is the p Tag</p>
-<div @ref="div">This is the div Tag</div>
-
-
-@code {
-    private List<(ElementReference Reference, RenderFragment ChildContent)> _Anchors = new List<(ElementReference Reference, RenderFragment ChildContent)>();
-    private ElementReference div;
-    private ElementReference p;
-    protected override void OnInitialized()
-    {
-        _Anchors = new List<(ElementReference Reference, RenderFragment ChildContent)>()
-        {
-            (p, @<AeTypography Variant="a">Take me to the p tag!</AeTypography>),
-            (div, @<AeTypography Variant="a">take me to that div tag...</AeTypography>),
-        };
-    }
-}
+<AeOutlineRef>
+    <AeAnchorRef Label="Take me to the P tag!">
+        <p>This is the p Tag</p>
+    </AeAnchorRef>
+    <AeAnchorRef Label="Link to the div...">
+        <div >This is the div Tag</div>
+    </AeAnchorRef>
+</AeOutlineRef>

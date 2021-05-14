@@ -1,24 +1,15 @@
 ﻿@page "/outline"
 @inherits DemoPage
 @using Elemental.Components.PageOutline
-<div class="alertbox">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  <strong>Info!</strong> Before you proceed.
-  <ul>
-      <li>Make sure that automatic sleep is disabled to prevent the computer from sleeping during analysis</li>
-      <li>Ensure you are connected to a VPN if necessary for proper connection to databases</li>
-  </ul>
-</div>
 <AeCard style="width: 250px; position:fixed; top:0px; right:0px;">
     <Header>
         <AeTypography style="flex-grow: 1; ">Document Navigation</AeTypography>
     </Header>
     <ChildContent>
         <AeOutline>
-            <AeOutlineAnchor Href="fragment"> Fragment Routing</AeOutlineAnchor>
-            <AeOutlineAnchor Href="outline"> Basic Outline Component</AeOutlineAnchor>
-            <AeOutlineAnchor Href="reference"> Reference Based Outline</AeOutlineAnchor>
-            <AeOutlineAnchor Href="ids"> Id Based Outline</AeOutlineAnchor>
+            <AeAnchor Href="fragment"> Fragment Routing</AeAnchor>
+            <AeAnchor Href="outline"> Basic Outline Component</AeAnchor>
+            <AeAnchor Href="reference"> Reference Based Outline</AeAnchor>
         </AeOutline>
     </ChildContent>
 </AeCard>
@@ -38,7 +29,7 @@
             <Elemental.Documentation.Samples.PageOutline.Examples.ReferenceOutline />
         </DemoSection>
     </span>
-    <span id="ids">
+        <span id="ids">
         <DemoSection Path="./Samples/PageOutline/Examples/IdOutline.razor">
             <Elemental.Documentation.Samples.PageOutline.Examples.IdOutline />
         </DemoSection>
