@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Elemental.Documentation
@@ -18,7 +19,7 @@ namespace Elemental.Documentation
         public List<string> Scss { get; private set; }
         public List<string> AdditionalCode { get; }
 
-        public ParsedFile (string path, string additionalCS)
+        public ParsedFile(string path, string additionalCS)
         {
             Pathname = path;
             if (!string.IsNullOrWhiteSpace(additionalCS))
@@ -40,26 +41,68 @@ namespace Elemental.Documentation
             Scss = ScssIfExists(Pathname);
         }
 
-
-        public static string[] ReadLines(string pathname)
+        private static List<string> ReadFile(string pathName)
         {
-            if (!File.Exists(pathname))
-            {
-                return new[] { $"Title: N/A (File {pathname} not found)", $"Description: N/A (File {pathname} not found)",$"File {pathname} not found" };
-            }
-            return File.ReadAllLines(pathname);
+            var assembly = typeof(DocumentationTools).Assembly;
+            var asmName = assembly.GetName().Name;
+            var fullPath = pathName;
+            if (pathName.StartsWith("./"))
+                fullPath = pathName.Substring(2);
+            fullPath = fullPath.Replace('/', '.');
+            fullPath = asmName + "." + fullPath;
+            return ReadLines(() => assembly.GetManifestResourceStream(fullPath), Encoding.UTF8).ToList();
+
         }
-        public static string[] ReadScssLines(string pathname)
+
+        public static IEnumerable<string> ReadLines(Func<Stream> streamProvider,
+                                             Encoding encoding)
+        {
+            using var stream = streamProvider();
+            if (stream is null)
+                yield break;
+            using var reader = new StreamReader(stream, encoding);
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                yield return line;
+            }            
+        }
+
+        public static IEnumerable<string> ReadLines(string pathname)
+        {
+            var lines = ReadFile(pathname);
+            if (lines is null || !lines.Any())
+            {
+                Console.Error.WriteLine($"Path {pathname} not found");
+                return new[] { $"Title: N/A (File {pathname} not found)", $"Description: N/A (File {pathname} not found)", $"File {pathname} not found" };
+            }
+            return lines;
+
+            //var asmPath = Path.GetDirectoryName(typeof(DocumentationTools).Assembly.Location);
+            //var fullPath = Path.Join(asmPath, pathname);
+            //if (string.IsNullOrWhiteSpace(asmPath))
+            //{
+            //    //strip ./
+            //    if (pathname.StartsWith("./"))
+            //        fullPath = pathname.Substring(2);
+            //}
+
+
+            //if (!File.Exists(fullPath))
+            //{
+            //    Console.Error.WriteLine($"Path {fullPath} not found");
+            //    return new[] { $"Title: N/A (File {pathname} not found)", $"Description: N/A (File {pathname} not found)", $"File {pathname} not found" };
+            //}
+            //return File.ReadAllLines(fullPath);
+
+        }
+        public static IEnumerable<string> ReadScssLines(string pathname)
         {
             var scssPathname = Path.ChangeExtension(pathname, ".scss");
-            if (!File.Exists(scssPathname))
-            {
-                return null;
-            }
-            return File.ReadAllLines(scssPathname);
+            return ReadFile(scssPathname);
         }
 
-        public static string ParseTitle(string[] lines)
+        public static string ParseTitle(IEnumerable<string> lines)
         {
             return lines
                 .FirstOrDefault(
@@ -70,7 +113,7 @@ namespace Elemental.Documentation
                 .Trim();
         }
 
-        public static string ParseDescription(string[] lines)
+        public static string ParseDescription(IEnumerable<string> lines)
         {
             return lines
                 .FirstOrDefault(
@@ -81,7 +124,7 @@ namespace Elemental.Documentation
                 .Trim();
         }
 
-        public static List<string> ParseHtml(string[] lines)
+        public static List<string> ParseHtml(IEnumerable<string> lines)
         {
             return lines
                 .SkipWhile(l => !l.Trim().Equals("*@"))
@@ -94,14 +137,14 @@ namespace Elemental.Documentation
                 .ToList();
         }
 
-        public static List<string> ParseCode(string[] lines)
+        public static List<string> ParseCode(IEnumerable<string> lines)
         {
             return lines
                 .SkipWhile(l => !l.Trim().Equals("@code {"))
                 .ToList();
         }
 
-        public static List<string> ParseScss(string[] lines)
+        public static List<string> ParseScss(IEnumerable<string> lines)
         {
             return lines?.ToList();
         }

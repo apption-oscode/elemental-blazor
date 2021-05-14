@@ -16,12 +16,10 @@ $collapseOptions: (
     "white-space": nowrap, 
     "text-align": center, 
     "border": none, 
-    "transition": all .3s $cubic-bezier, 
     "cursor": pointer, 
     "color": $white, 
     "background-color": $grey-600, 
-    "border-color": $grey-600,
-
+    "border-color": $grey-600,    
     ".ae.header": (
       "font-size": 1.5rem,
       "padding": 0.5rem,
@@ -32,6 +30,13 @@ $collapseOptions: (
       "padding-left": 0.5rem,
       "padding-right": 0.5rem,
       "text-align": left,
+      "transition": all .3s $cubic-bezier, 
+      "visibility": visible,
+      "height": 100%,
+      "&.hidden": (
+        "visibility": hidden,
+        "height": 0,
+      )
     ),
   ), 
 

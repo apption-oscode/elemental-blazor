@@ -19,12 +19,12 @@ $navbarOptions: (
             ".ae.navlink": (
                 "display": inline-block,
                 "text-align": center,
-                "padding": 1rem,
                 "text-decoration": none,
                 "&:hover": (
                     "background-color": $blue-700,
                 ),
                 ".ae.typography": (
+                    "padding": 1rem,
                     "color": $white,
                 ),
             ),

@@ -11,22 +11,34 @@ using System.Threading.Tasks;
 
 public class GetDimensionsService
 {
-  private IJSRuntime _js;
+    private IJSRuntime _js;
 
-  public GetDimensionsService(IJSRuntime js)
-  {
-    _js = js;
-  }
+    public GetDimensionsService(IJSRuntime js)
+    {
+        _js = js;
+    }
 
-  public async Task<ElementDimension> GetDimensions(object element)
-  {
-    return await _js.InvokeAsync<ElementDimension>("getDimensions", element);
-  }
+    public async Task<ElementDimension> GetDimensions(object element)
+    {
+        return await _js.InvokeAsync<ElementDimension>("getDimensions", element);
+    }
+    public async Task<ElementPosition> GetPosition(object element)
+    {
+        return await _js.InvokeAsync<ElementPosition>("getPosition", element);
+    }
 
 }
 
 public class ElementDimension
 {
-  public int Width { get; set; }
-  public int Height { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+}
+
+public class ElementPosition
+{
+    public int Top { get; set; }
+    public int Left { get; set; }
+    public int Bottom { get; set; }
+    public int Right { get; set; }
 }

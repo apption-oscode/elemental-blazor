@@ -43,36 +43,92 @@
     }
 
     .ae.modelform-rows {
+        /*        grid-template-columns: 40px auto 50px;
+*/
 
         .ae.modelform-row {
-            display: grid;
-            grid-template-columns: 250px auto;
+            grid-template-rows: auto;
+
+            .ae.modelform-col {
+                display: grid;
+                grid-template-columns: 250px auto;
+                margin: 0.5rem 0;
+                .ae.ae-form-control-label {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row-reverse;
+                    margin-right: 0.5rem;
+                    font-weight: bold;
+
+                    &.ae-label-required {
+                        & > :first-child::after {
+                            color: $red-600;
+                            content: ' * ';
+                        }
+                    }
+                }
 
 
-            .ae.ae-form-control-label {
+                .errortext {
+                    grid-column-start: 2;
+                    color: $red-600;
+                    padding: 0.5rem 0;
+                    font-size: 0.9rem;
+                }
+
+                .ae.input {
+                    width: initial;
+                }
+
+                input {
+                    &[type="checkbox"] {
+                        align-self: center;
+                        transform: scale(1.5);
+                        margin-left: 0.25rem;
+                    }
+                }
+            }
+        }
+
+        &.top-label {
+            .ae.modelform-row {
+                .ae.modelform-col {
+                    grid-template-columns: 100%;
+
+                    .ae.ae-form-control-label {
+                        flex-direction: row;
+                        grid-column: span 2;
+                    }
+
+                    .errortext {
+                        grid-column: 1;
+                    }
+                }
+            }
+        }
+
+        &.flexbox {
+
+            .ae.modelform-row {
                 display: flex;
-                align-items: center;
-                flex-direction: row-reverse;
-                margin-right: 0.5rem;
-                font-weight: bold;
-            }
+                flex-direction: row;
 
-            .errortext {
-                grid-column-start: 2;
-                color: $red-600;
-                padding: 0.5rem 0;
-                font-size: 0.9rem;
-            }
+                .ae.modelform-col {
+                    position: relative;
+                    width: 100%;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    margin-bottom: 0.5rem;
+                    -ms-flex-preferred-size: 0;
+                    flex-basis: 0;
+                    -ms-flex-positive: 1;
+                    flex-grow: 1;
+                    max-width: 100%;
 
-            .ae.input {
-                width: initial;
-            }
+                    .ae.ae-form-control-label {
+                        
+                    }
 
-            input {
-                &[type="checkbox"] {
-                    align-self: center;
-                    transform: scale(1.5);
-                    margin-left: 0.25rem;
                 }
             }
         }

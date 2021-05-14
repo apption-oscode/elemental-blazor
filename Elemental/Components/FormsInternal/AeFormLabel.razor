@@ -1,7 +1,7 @@
 ﻿@if (!string.IsNullOrWhiteSpace(@GetLabel()))
 {
-    <label class="ae ae-form-control-label" for="@GetID()">
-        <AeTypography Variant="p">@GetLabel()</AeTypography>
+    <label class="ae ae-form-control-label @RequiredClass" for="@GetID()">
+        <AeTypography>@GetLabel()</AeTypography>
     </label>
 }
 else
@@ -20,11 +20,15 @@ else
 
     [Parameter] public bool ShowOptional { get; set; } = true;
 
+    private bool IsRequired => AeModelFormTools.IsRequired(PropertyInfo);
+
+    private string RequiredClass => IsRequired? "ae-label-required": "ae-label-optional";
+
     private string GetID() => PropertyInfo.Name;
 
     private string GetLabel()
     {
-        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, ShowOptional);
+        return AeModelFormTools.GetLabel(PropertyInfo, LabelForPropertyFunc, false);
     }
 
     /// <summary>

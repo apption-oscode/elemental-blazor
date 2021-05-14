@@ -1,0 +1,15 @@
+{
+  "name": "elemental.theme",
+  "version": "1.0.0",
+  "description": "Elemental Theme SCSS Scripts",
+  "main": "index.js",
+  "private": "true",
+  "devDependencies": {
+    "node-sass": "^5.0.0"
+  },
+  "scripts": {
+    "build-css": "node-sass --include-path Styles --output-style compressed Styles/elemental-docs.scss --output wwwroot/css"
+  },
+  "author": "Apption",
+  "license": "Apache-2.0"
+}

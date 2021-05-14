@@ -1,5 +1,4 @@
-﻿@using Components.Forms
-@*
+﻿@*
     Copyright 2020 Apption Corporation
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +17,8 @@
     Description: This sample uses Category annotations to group and order the different form elements into categories
 *@
 
+@using Elemental.Components.Forms
+
 <AeModelForm T="InteractiveStarship"
              Model="@_starship"
              SubmitLabel="Save changes"
@@ -27,12 +28,14 @@
              OnConfigure="OnConfigure"
              OnCancel="CreateStarship" />
 
+<DebugObject Object="@_starship"/>
+
 @code {
     private InteractiveStarship _starship;
 
     private async Task<InteractiveStarship> CreateStarship()
     {
-        return new InteractiveStarship() { ProductionDate = DateTime.Today };
+        return await Task.FromResult(new InteractiveStarship() { ProductionDate = DateTime.Today });
     }
 
 
@@ -41,11 +44,12 @@
     {
         _starship = await CreateStarship();
         _starship.Classification = "c";
+        _starship.Description = "This is a description of my starship. It has 4 engines and can go from 0 to light speed in 3 seconds. It has an automatic sheild deploy, free wifi and a vending machine. It sleeps 10 crew, but if you are optimistic, you can get 12 in there. When it comes to food, there is a garden wing, where we grow spinach, carrots, lettuce, tomatoes, potatoes and other such vegatables. Sadly, all the meat has to be synthetic since we quite willingly destroyed our home planet and have chosen to not be cannibals.";
     }
 
     private async Task OnChange(ModelFormChangeArgs<InteractiveStarship> args)
     {
-        if (args.HasPropertyChanged(s => s.Classification))
+        if (args.HasPropertyChanged(s => s.Classification) && !string.IsNullOrEmpty(_starship.Classification))
         {
             await args.Context.UpdateValidValues(s => s.SubClassification, new[] { _starship.Classification + "1", _starship.Classification + "2", _starship.Classification + "3" });
         }

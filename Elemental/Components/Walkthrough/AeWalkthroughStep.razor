@@ -1,0 +1,66 @@
+﻿@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*@
+
+<div id="Step-@(Order)">
+    @ChildContent
+</div>
+
+@functions
+{   [CascadingParameter]
+    protected internal AeWalkthrough Parent { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Content { get; set; }
+
+    [Parameter]
+    public int Order { get; set; }
+
+    [Parameter]
+    public string Position { get; set; }
+
+    [Parameter]
+    public string? Id { get; set; }
+
+    [Parameter]
+    public bool? ScrollTo { get; set; }
+
+    [Parameter]
+    public bool? Arrow { get; set; }
+
+    [Parameter]
+    public bool? Overlap { get; set; }
+
+
+
+    protected override void OnInitialized()
+    {
+        if (Id is null)
+            Id = $"#Step-{this.Order}";
+
+        if (Position is null)
+            Position = "auto";
+
+        if (!ScrollTo.HasValue)
+            ScrollTo = true;
+
+        if (!Arrow.HasValue)
+            Arrow = true;
+
+        if (!Overlap.HasValue)
+            Overlap = true;
+
+
+        Parent.AddStep(this);
+
+    } }

@@ -19,7 +19,8 @@ namespace Elemental.Code
         public static System.Linq.Expressions.Expression<Func<S>> GetExpression<S>(object instance, PropertyInfo propertyInfo)
         {
             var constant = Expression.Constant(instance);
-            var memberExpression = Expression.Property(constant, propertyInfo.GetGetMethod());
+            //var asDeclardType = Expression.Convert(constant, propertyInfo.DeclaringType);
+            var memberExpression = Expression.Property(constant, propertyInfo);
             return Expression.Lambda<Func<S>>(memberExpression);
         }
 
@@ -138,21 +139,37 @@ namespace Elemental.Code
             return type.GetProperties().Where(p => !Attribute.IsDefined(p, typeof(AeFormIgnoreAttribute))).ToList();
         }
 
-        public static List<(string category, List<PropertyInfo> properties)> GetAeModelFormCategories(this Type type)
+        public static List<(string category, List<List<PropertyInfo>> properties)> GetAeModelFormCategories(this Type type)
         {
             var allProps = GetAeModelProperties(type);
-            var propsNoCat = allProps.Where(p => !Attribute.IsDefined(p, typeof(AeFormCategoryAttribute))).ToList();
+            var propsNoCat = allProps.Where(p => !Attribute.IsDefined(p, typeof(AeFormCategoryAttribute)))
+                                     .GroupBy(p => GetRow(p))
+                                     .OrderBy(tp => tp.Key)
+                                     .Select(g => g.OrderBy(tp => GetColumn(tp)).Select(tp => tp).ToList()).ToList();
 
-            var result = new List<(string category, List<PropertyInfo> properties)>() { (null, propsNoCat) };
+            var result = new List<(string category, List<List<PropertyInfo>> properties)>() { (null, propsNoCat) };
             result.AddRange(allProps.Where(p => Attribute.IsDefined(p, typeof(AeFormCategoryAttribute)))
                 .Select(property => (((Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).Category,
                 (Attribute.GetCustomAttribute(property, typeof(AeFormCategoryAttribute)) as AeFormCategoryAttribute).CategoryOrder),
                 property))
                 .GroupBy(p => p.Item1)
                 .OrderBy(gp => gp.Key.CategoryOrder)
-                .Select(gp => (gp.Key.Category, gp.Select(tp => tp.property).ToList())));
+                .Select(gp => (gp.Key.Category, gp.Select(tp => tp.property)
+                                                  .GroupBy(p => GetRow(p))
+                                                  .OrderBy(tp => tp.Key)
+                                                  .Select(g => g.OrderBy(tp => GetColumn(tp)).Select(tp => tp).ToList()).ToList())).ToList());
             return result;
 
+        }
+
+        private static string GetRow (PropertyInfo p)
+        {
+            return (AeLabelAttribute.GetCustomAttribute(p, typeof(AeLabelAttribute)) as AeLabelAttribute)?.Row;
+        }
+        
+        private static string GetColumn (PropertyInfo p)
+        {
+            return (AeLabelAttribute.GetCustomAttribute(p, typeof(AeLabelAttribute)) as AeLabelAttribute)?.Column;
         }
 
         public static string Labelize(string propName)

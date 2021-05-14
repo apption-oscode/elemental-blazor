@@ -1,0 +1,49 @@
+﻿@using System.Reflection
+@*
+ Copyright 2020 Apption Corporation
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*@
+
+<AeTable Accessors="accessorFunctions"
+       Dataset="_PropertyInfos"
+       Headers="headers" />
+
+
+@code {
+    [Parameter]
+    public object Object { get; set;}
+
+    // Define the headers at the top of the table
+    private List<string> headers = new List<string>
+    {
+        "Property", "Value"
+    };
+
+    // Typeparam class to hold row data, can be anything
+
+    // Accessor functions to retrieve cell value
+    private List<Func<PropertyInfo, string>> accessorFunctions;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _PropertyInfos = Object.GetType().GetProperties().ToList();
+        accessorFunctions = new List<Func<PropertyInfo, string>>
+    {
+        new Func<PropertyInfo, string>(prop => { return prop.Name; }),
+        new Func<PropertyInfo, string>(prop => { return Convert.ToString(prop.GetValue(Object, null) ?? "(null)"); })
+    };
+    }
+
+    private List<PropertyInfo> _PropertyInfos = null;
+}

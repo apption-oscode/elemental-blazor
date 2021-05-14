@@ -12,17 +12,17 @@ namespace Elemental.Tests
     public class ModelFormTests
     {
         [Fact]
-        public async Task TestStarshipCategories()
+        public void TestStarshipCategories()
         {
             var s1 = typeof(Starship).GetAeModelFormCategories();
             Assert.Single(s1);
-            var (c1, l1) = s1[0];
-            Assert.Equal(9, l1.Count);
+            var (_, l1) = s1[0];
+            Assert.Equal(10, l1[0].Count);
 
         }
 
         [Fact]
-        public async Task TestTransportStarshipCategories()
+        public void TestTransportStarshipCategories()
         {
             var s1 = typeof(TransportStarship).GetAeModelFormCategories();
             Assert.Equal(3, s1.Count);
@@ -32,7 +32,7 @@ namespace Elemental.Tests
         }
 
         [Fact]
-        public async Task TestPropertyName()
+        public void TestPropertyName()
         {
             Assert.Equal("Classification", AeModelFormTools.WithPropertyExpression<InteractiveStarship>(p => p.Classification));
         }

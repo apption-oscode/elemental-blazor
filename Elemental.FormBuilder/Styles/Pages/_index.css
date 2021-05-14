@@ -1,0 +1,144 @@
+﻿.button-page-container .ae.button {
+  margin-bottom: 8px; }
+  .button-page-container .ae.button + .ae.button {
+    margin-left: 4px; }
+
+.input-page-container .input-container {
+  max-width: 400px; }
+  .input-page-container .input-container.multiple .ae.input-wrapper {
+    margin: 1rem 0; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.layout-page-container .layout-container {
+  background-color: #edf2f7;
+  font-size: 0.7rem;
+  color: #fff; }
+  .layout-page-container .layout-container .ae.layout {
+    display: flex; }
+  .layout-page-container .layout-container .ae.side-nav {
+    background-color: #90cdf4;
+    position: initial;
+    top: initial;
+    left: initial;
+    height: 448px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; }
+  .layout-page-container .layout-container .ae.content-wrapper.has-side-nav {
+    margin-left: 0; }
+  .layout-page-container .layout-container .ae.top-nav {
+    background-color: #63b3ed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: initial !important;
+    z-index: 1 !important; }
+  .layout-page-container .layout-container .ae.content-body {
+    background-color: #4299e1;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.sidebar-page-container .layout-container {
+  background-color: #edf2f7;
+  font-size: 0.7rem;
+  color: #fff; }
+  .sidebar-page-container .layout-container .ae.layout-v2 {
+    display: flex; }
+  .sidebar-page-container .layout-container .ae.side-nav {
+    background-color: #90cdf4;
+    position: initial;
+    top: initial;
+    left: initial;
+    height: 448px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; }
+  .sidebar-page-container .layout-container .ae.body-wrapper.has-side-nav {
+    margin-left: 0; }
+  .sidebar-page-container .layout-container .ae.top-nav {
+    background-color: #63b3ed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: initial !important;
+    z-index: 1 !important; }
+  .sidebar-page-container .layout-container .ae.content-body {
+    background-color: #4299e1;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; }
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.treeview-clicked {
+  margin-top: 16px; }
+  .treeview-clicked span {
+    padding: 4px;
+    background-color: white;
+    border: 1px solid #1a202c; }

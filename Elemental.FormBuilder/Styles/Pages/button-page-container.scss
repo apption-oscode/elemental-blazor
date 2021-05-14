@@ -1,0 +1,10 @@
+﻿.button-page-container {
+
+    .ae.button {
+        margin-bottom: 8px;
+
+        & + .ae.button {
+            margin-left: 4px;
+        }
+    }
+}

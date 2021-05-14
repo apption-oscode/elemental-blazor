@@ -1,0 +1,42 @@
+﻿@page "/formfields/new"
+@inject Code.IFormFieldRepository Repo
+@inject NavigationManager NavManager
+
+@if(_formField == null)
+{
+    <h3>Please Wait</h3>
+}
+else
+{
+    <h3>New Form Field</h3>
+
+    <AeModelForm
+        Model="@_formField"
+        SubmitLabel="Save Changes"
+        OnValidSubmit="@HandleValidSubmit"
+        CancelLabel="Reset"
+        OnCancel="@DoCreateFormField"
+    />
+}
+
+<AeButton To="/formfields">Back</AeButton>
+
+@code {
+    private FormField _formField;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _formField = new FormField();
+    }
+
+    private async Task<FormField> DoCreateFormField()
+    {
+        return new FormField();
+    }
+
+    private async void HandleValidSubmit()
+    {
+        _formField = await Repo.AddFormField(_formField);
+        NavManager.NavigateTo($"/formfields/view/{_formField.FormFieldID}");
+    }
+}

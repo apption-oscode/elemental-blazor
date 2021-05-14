@@ -22,7 +22,10 @@
     SubmitLabel="Save changes" 
     OnValidSubmit="HandleValidSubmit" 
     CancelLabel="Cancel" 
-    OnCancel="CreateStarship" />
+    OnCancel="CreateStarship"
+    OnInvalidSubmit="HandleInvalidSubmit"/>
+
+<DebugObject Object="@_starship"/>
 
 @code {
 
@@ -30,17 +33,26 @@
 
     private async Task<Starship> CreateStarship()
     {
-        return new Starship() {  ProductionDate = DateTime.Today}; 
+        // roll back your changes
+        _starship = new Starship() { ProductionDate = DateTime.Today };
+        StateHasChanged();
+        return _starship;
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
         _starship = await CreateStarship();
     }
 
-    private void HandleValidSubmit()
+    private void HandleValidSubmit(EditContext editContext)
     {
-        //do something if form is valid
+        //save to database
     }
+
+    private void HandleInvalidSubmit(EditContext editContext)
+    {
+        //do something if form is not valid
+    }
+
 
 }

@@ -21,11 +21,11 @@
 }
 else
 {
-    <select class="ae input"><option value="-">-</option></select>
+    <select class="ae input"><option value="">-</option></select>
 }
 
 <div class="errortext">
-    <!--We can't actually fail to input a dropdown properly, this is here for style/spaceing consistency-->
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance,PropertyInfo))" />
 </div>
 
 @code {
@@ -53,7 +53,7 @@ else
         if (string.IsNullOrWhiteSpace(label))
             return "-";
         return label;
-    }
+    }    
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -93,6 +93,7 @@ else
         var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
         await Notifier(changeArgs);
     }
+    private string _previousValue;
 
     public string PropertyValue
     {

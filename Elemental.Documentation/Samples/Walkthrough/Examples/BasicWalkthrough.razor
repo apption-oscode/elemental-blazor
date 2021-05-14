@@ -1,0 +1,72 @@
+﻿@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Generic Walkthrough
+    Description: Basic example of Walkthrough
+*@
+
+<div>
+    <div>
+        <AeButton OnClickEvent="StartGuide">Start Walkthrough</AeButton>
+    </div>
+
+    <Elemental.Components.Walkthrough.AeWalkthrough OnComplete="OnWalkthroughComplete" Overlay="true" Clickable="false" Start="@start">
+        <Elemental.Components.Walkthrough.AeWalkthroughStep Order="1" Title="@titles[0]" Content="@contents[0]" Position="right">
+            <AeTypography>Walkthrough Section # 1</AeTypography>
+        </Elemental.Components.Walkthrough.AeWalkthroughStep>
+
+        <Elemental.Components.Walkthrough.AeWalkthroughStep Order="2" Title="@titles[1]" Content="@contents[1]" Position="right" Arrow="true">
+            <AeTypography>Walkthrough Section # 2</AeTypography>
+        </Elemental.Components.Walkthrough.AeWalkthroughStep>
+
+        <Elemental.Components.Walkthrough.AeWalkthroughStep Order="3" Title="@titles[2]" Content="@contents[2]" Position="right"  Overlap="false" ScrollTo="true">
+            <AeTypography>Walkthrough Section # 3</AeTypography>
+        </Elemental.Components.Walkthrough.AeWalkthroughStep>
+
+        <Elemental.Components.Walkthrough.AeWalkthroughStep Order="4" Title="@titles[3]" Content="@contents[3]" Position="right" Id="#Test" />
+
+        <div id="Test">
+            <AeTypography> Walkthrough Section # 4 </AeTypography>
+        </div>
+
+    </Elemental.Components.Walkthrough.AeWalkthrough>
+</div>
+
+@code {
+
+    private bool start = false;
+
+    private void StartGuide()
+    {
+        start = true;
+    }
+
+    private void OnWalkthroughComplete(bool finished)
+    {
+        start = finished;
+
+        //perform anything after completion of the walkthrough
+    }
+
+    List<string> titles = new List<string>
+    {
+        "Walkthrough Section #1",
+        "Walkthrough Section #2",
+        "Walkthrough Section #3",
+        "Walkthrough Section #4"
+    };
+
+    List<string> contents = new List<string>
+    {
+        "First step of this walkthrough example. The Position parameter dictates where the guide popup appears relative to the element. Options are auto, left ,right ,top ,bottom. Adding the '-start' suffix to any of the options make it appear at the start of the position. Adding the '-end' suffix to any of the options make it appear at the end of the position.",
+        "Second step of this walkthrough example. The Arrow parameter dictates whether you would like an arrow to point to the element focused on",
+        "Third step of this walkthrough. The Overlay parameter dictates if you'd like an dark background overlay to focus on elements. The ScrollTo parameter dictates if you'd like to auto scroll to the next element to focus on.",
+        "The fourth step of this walkthrough example. The Id parameter allows you to refer to a class or id on the page so that you don't have to wrap the AeWalkthroughStep around the element. Useful for adding a guide step to elements that come from shared page resources."
+    };
+
+
+    } 
