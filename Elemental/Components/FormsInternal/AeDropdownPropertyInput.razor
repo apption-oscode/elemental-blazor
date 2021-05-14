@@ -8,7 +8,7 @@
 
 @if (HasValidValues())
 {
-    <Microsoft.AspNetCore.Components.Forms.InputSelect ValueExpression="@(() => PropertyValue)" Value="PropertyValue" class="ae input" ValueChanged="@((string value) => OnValueChanged(value))">
+    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input"> @*   Value="PropertyValue" ValueChanged="@((string value) => OnValueChanged(value))" *@
         @if (!AeModelFormTools.IsRequired(PropertyInfo))
             {
             <option value="">@GetPlaceholder()</option>
@@ -64,6 +64,11 @@ else
         }
     }
 
+    protected override async Task OnInitializedAsync()
+    {
+        valueChangedCallback = EventCallback.Factory.Create<string>(this, s => OnValueChanged(s));
+    }
+
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
@@ -88,6 +93,8 @@ else
         }
     }
 
+    private EventCallback<string> valueChangedCallback;
+
     private async Task OnValueChanged(string value)
     {
         var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
@@ -101,6 +108,7 @@ else
         set
         {
             PropertyInfo.SetValue(Instance, value);
+            valueChangedCallback.InvokeAsync(value);
             //OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         }
     }
