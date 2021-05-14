@@ -16,8 +16,10 @@
 
 @inherits HtmlElement
 @inject IJSRuntime JSRuntime
+@inject ILogger<AeLayoutV2> logger
 @using Elemental.Components.SiderbarInternal
 @using Elemental.Code
+@using Microsoft.Extensions.Logging
 
 <style>
 
@@ -126,6 +128,7 @@
         _showSideNav = true;
         //SetBrowserSize();
         _browserSize = BrowserSize.Medium;
+        SidebarService.Logger = logger;
         SidebarService.OnResize += BrowserHasResized;
 
         foreach (var link in Links)

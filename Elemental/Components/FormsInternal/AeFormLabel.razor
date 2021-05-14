@@ -1,7 +1,7 @@
 ﻿@if (!string.IsNullOrWhiteSpace(@GetLabel()))
 {
     <label class="ae ae-form-control-label @RequiredClass" for="@GetID()">
-        <AeTypography Variant="p">@GetLabel()</AeTypography>
+        <AeTypography>@GetLabel()</AeTypography>
     </label>
 }
 else

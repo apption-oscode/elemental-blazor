@@ -11,16 +11,30 @@ using System.Threading.Tasks;
 namespace Elemental.Components.Forms
 {
 
+    public class ModelFormArgsInternal
+    {
+        public PropertyInfo PropertyInfo { get; set; }        
+        public EditContext EditContext { get; set; }
+
+        public bool HasPropertyChanged<T>(Expression<Func<T, object>> expression)
+        {
+            return AeModelFormTools.WithPropertyExpression<T>(expression) == PropertyInfo.Name;
+        }
+
+    }
+
     public class ModelFormChangeArgs<T>
     {
         public PropertyInfo PropertyInfo { get; set; }
-        public ModelFormContext<T> Context { get; set; }
         public EditContext EditContext { get; set; }
+
+        public ModelFormContext<T> Context { get; set; }
 
         public bool HasPropertyChanged(Expression<Func<T, object>> expression)
         {
             return AeModelFormTools.WithPropertyExpression<T>(expression) == PropertyInfo.Name;
         }
+
     }
 
     public class ModelFormContext<T>
