@@ -45,6 +45,26 @@ $cardOptions: (
   )
 )  !default;
 
+$horizontalCards : (
+    "default": (
+        "display": flex,
+        ".ae.card-header": (
+            "width": 40%,
+            "display": flex,
+            "align-items": center,
+            "justify-content": center,
+            "font-size": 5rem,
+        ),
+        ".ae.card-content-wrapper": (
+            "width": 60%,
+        ),
+    )
+) !default;
+
 .ae.card {
   @include set-variations($cardOptions);
+
+  &.Horizontal {
+      @include set-variations($horizontalCards);
+  }
 }

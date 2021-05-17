@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -843,6 +843,16 @@ body {
     padding: 0.75rem; }
   .ae.card.small .ae.card-footer {
     padding: 0.75rem; }
+  .ae.card.Horizontal {
+    display: flex; }
+    .ae.card.Horizontal .ae.card-header {
+      width: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem; }
+    .ae.card.Horizontal .ae.card-content-wrapper {
+      width: 60%; }
 
 /**
  * Copyright (c) 2020 Apption Corporation
@@ -3252,5 +3262,3 @@ template {
  */
 [hidden] {
   display: none; }
-
-/*# sourceMappingURL=elemental.css.map */
