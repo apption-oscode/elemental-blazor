@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -2862,33 +2862,6 @@ body {
 .ae.outline-row {
   display: block; }
 
-/*  for yellow warning colors
-    color: #856404;
-    background-color: #fff3cd;
-    border-color: #ffeeba;*/
-.alertbox {
-  padding: 20px;
-  color: #004085;
-  background-color: #cce5ff;
-  border-color: #b8daff;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-  border-radius: 15px; }
-  .alertbox ul li {
-    padding-bottom: 11px; }
-
-closebtn {
-  color: #004085;
-  margin-left: 15px;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s; }
-  closebtn:hover {
-    color: black; }
-
 .ae.row {
   display: -ms-flexbox;
   display: flex;
@@ -3279,3 +3252,5 @@ template {
  */
 [hidden] {
   display: none; }
+
+/*# sourceMappingURL=elemental.css.map */
