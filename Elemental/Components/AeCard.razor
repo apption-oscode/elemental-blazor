@@ -23,17 +23,36 @@
             @Header
         </div>
     }
-    @if (ChildContent != null)
+    @if (CardPosition == CardStyle.Horizontal)
     {
-        <div class="ae card-content">
-            @ChildContent
+        <div class="ae card-content-wrapper">
+                @if (ChildContent != null)
+                {
+                    <div class="ae card-content">
+                        @ChildContent
+                    </div>
+                }
+                @if (Footer != null)
+                {
+                    <div class="ae card-footer">
+                        @Footer
+                    </div>
+                }
         </div>
     }
-    @if (Footer != null)
-    {
-        <div class="ae card-footer">
-            @Footer
-        </div>
+    else {
+        @if (ChildContent != null)
+        {
+            <div class="ae card-content">
+                @ChildContent
+            </div>
+        }
+        @if (Footer != null)
+        {
+            <div class="ae card-footer">
+                @Footer
+            </div>
+        }
     }
 </div>
 
@@ -43,7 +62,13 @@
     public RenderFragment Header { get; set; }
     [Parameter]
     public RenderFragment Footer { get; set; }
+    [Parameter]
+    public CardStyle CardPosition { get; set; }
 
+    private string _classname => $"ae card {CardPosition} {_inputClass}";
 
-    private string _classname => $"ae card {_inputClass}";
+    public enum CardStyle {
+        Vertical,
+        Horizontal
+    }
 }
