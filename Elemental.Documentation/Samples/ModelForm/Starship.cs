@@ -21,6 +21,11 @@ namespace Elemental.Documentation.Data
         [AeLabel(placeholder: "Enter Email...")]
         public string CaptainsEmail { get; set; }
 
+        [Required]
+        [StringLength(20, ErrorMessage = "Identifier too long (20 character limit).")]
+        [AeLabel(placeholder: "Enter your credit card number...", isPasswordField:true)]
+        public string CaptainsPassword { get; set; }
+
         [AeLabel(size:50,placeholder:"Describe your starship including crew size")]
         public string Description { get; set; }
 

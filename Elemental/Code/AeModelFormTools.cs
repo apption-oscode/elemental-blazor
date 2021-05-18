@@ -109,6 +109,12 @@ namespace Elemental.Code
                 : null;
         }
 
+        public static bool IsPasswordField(PropertyInfo propertyInfo)
+        {
+            return AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
+                ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).IsPasswordField
+                : false;
+        }
 
 
         public static string GetLabel(PropertyInfo propertyInfo, Func<string, string> labelFunc, bool includeOptional = true)

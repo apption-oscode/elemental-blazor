@@ -25,7 +25,7 @@ else
 }
 else
 {
-    <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
+    <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" type="@TextFieldType" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
 }
 <div class="errortext">
     <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance, PropertyInfo))" />
@@ -44,6 +44,11 @@ else
 
     [Parameter]
     public bool Editable { get; set; } = true;
+
+    private string? TextFieldType { get
+        {
+            return AeModelFormTools.IsPasswordField(PropertyInfo)?"password":null;
+        } }
 
     public string PropertyValue
     {
