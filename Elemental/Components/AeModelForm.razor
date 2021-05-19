@@ -28,9 +28,9 @@
 {
     @if (EnableOutline)
     {
-        <AeCard style=@(string.IsNullOrEmpty(OutlineStyle)? "width: 250px; position:fixed; top:0px; right:0px;": OutlineStyle) >            
+        <AeCard class="outline-fixed" >            
             <Header>
-                <AeTypography style="flex-grow: 1; ">Form Navigation</AeTypography>
+                <AeTypography style="flex-grow: 1;">Form Navigation</AeTypography>
             </Header>
             <ChildContent>
                 <AeOutlineId Anchors="_Anchors"/>
