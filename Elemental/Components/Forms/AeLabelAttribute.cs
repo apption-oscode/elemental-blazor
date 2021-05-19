@@ -19,7 +19,7 @@ namespace Elemental.Components.Forms
         private readonly string _column;
 
 
-        public AeLabelAttribute(string label = null, string placeholder = null, int order = 0, int size = 0, string[] validValues = null, bool isDropDown = false, string row = null, string column = null)
+        public AeLabelAttribute(string label = null, string placeholder = null, int order = 0, int size = 0, string[] validValues = null, bool isDropDown = false, string row = null, string column = null, bool isPasswordField = false)
         {
             _label = label;
             _order = order;
@@ -31,7 +31,7 @@ namespace Elemental.Components.Forms
             _placeHolder = placeholder;
             this._row = row;
             this._column = column;
-
+            IsPasswordField = isPasswordField;
         }
 
         public virtual string Label
@@ -60,6 +60,7 @@ namespace Elemental.Components.Forms
 
         public virtual string Row {get {return _row; } }
         public virtual string Column {get {return _column; } }
-        
+
+        public virtual bool IsPasswordField { get; }
     }
 }
