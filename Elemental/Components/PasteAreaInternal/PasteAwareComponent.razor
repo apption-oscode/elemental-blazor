@@ -29,7 +29,7 @@
         if (firstRender == true)
         {
             _objectReference = DotNetObjectReference.Create(this);
-            await runtime.InvokeVoidAsync("BlazorClipboadInterop.ListeningForPasteEvents", new Object[] { _reference, _objectReference });
+            await runtime.InvokeVoidAsync("window.BlazorClipboadInterop.ListeningForPasteEvents", new Object[] { _reference, _objectReference });
         }
     }
 

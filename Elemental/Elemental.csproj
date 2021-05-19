@@ -1,47 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageId>AElemental.Blazor</PackageId>
-    <Authors>Apption</Authors>
-    <Company>Apption</Company>
-    <Product>AElemental for Blazor</Product>
-    <Description>Build modern, sass customizable web experiences in Blazor with code first and functional primitives. Elemental components include a fully customizable table, common input controls, an object form editor and layout tools.</Description>
-    <Copyright>Copyright Apption 2021</Copyright>
-    <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
-    <PackageTags>c# blazor</PackageTags>
-    <RepositoryType>Git</RepositoryType>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageIcon>Elemental_128x128.png</PackageIcon>
-    <PackageIconFullPath>$(MSBuildThisFileDirectory)Elemental_128x128.png</PackageIconFullPath>    
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageId>AElemental.Blazor</PackageId>
+		<Authors>Apption</Authors>
+		<Company>Apption</Company>
+		<Product>AElemental for Blazor</Product>
+		<Description>Build modern, sass customizable web experiences in Blazor with code first and functional primitives. Elemental components include a fully customizable table, common input controls, an object form editor and layout tools.</Description>
+		<Copyright>Copyright Apption 2021</Copyright>
+		<PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
+		<PackageTags>c# blazor</PackageTags>
+		<RepositoryType>Git</RepositoryType>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageIcon>Elemental_128x128.png</PackageIcon>
+		<PackageIconFullPath>$(MSBuildThisFileDirectory)Elemental_128x128.png</PackageIconFullPath>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="compilerconfig.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+	</ItemGroup>
 
+	<PropertyGroup>
+		<!-- File with mtime of last successful npm install -->
+		<NpmInstallStampFile>node_modules/.install-stamp</NpmInstallStampFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\Elemental.Documentation\Samples\Outline\AeFlex.razor" Link="AeFlex.razor" />
+		<None Include="..\Elemental.Documentation\Samples\Outline\DemoSection.razor" Link="DemoSection.razor" />
+		<None Include="compilerconfig.json" />
+		<None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
+		<None Include="wwwroot\js\shepherd.min.js" />
+	</ItemGroup>
 
-
-  <ItemGroup>
-    <None Include="..\Elemental.Documentation\Samples\Outline\AeFlex.razor" Link="AeFlex.razor" />
-    <None Include="..\Elemental.Documentation\Samples\Outline\DemoSection.razor" Link="DemoSection.razor" />
-    <None Include="compilerconfig.json" />
-    <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
-  </ItemGroup>
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Inputs="js/*.js" Outputs="wwwroot/js/aebundle.js">
+		<Exec Command="npm run-script build" />
+	</Target>
+	
+	<Target Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
+		<Exec Command="npm install --save-dev" />
+		<Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
+	</Target>
 
 </Project>

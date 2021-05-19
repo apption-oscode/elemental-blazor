@@ -1,18 +1,17 @@
-﻿
-var BlazorClipboadInterop = BlazorClipboadInterop || {};
+﻿window.BlazorClipboadInterop = window.BlazorClipboadInterop || {};
 
-BlazorClipboadInterop.ListeningForPasteEvents = function (element, dotNetObject) {
+window.BlazorClipboadInterop.ListeningForPasteEvents = function (element, dotNetObject) {
     element.addEventListener('paste', function (e) { BlazorClipboadInterop.pasteEvent(e, dotNetObject) });
 };
 
-BlazorClipboadInterop.toBase64 = file => new Promise((resolve, reject) => {
+const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
 });
 
-BlazorClipboadInterop.pasteEvent =
+window.BlazorClipboadInterop.pasteEvent =
     async function (e, dotNetObject) {
 
         var data = await navigator.clipboard.read();
@@ -33,7 +32,7 @@ BlazorClipboadInterop.pasteEvent =
                         item[type] = content;
                     }
                     else {
-                        item[type] = await BlazorClipboadInterop.toBase64(blob);
+                        item[type] = await toBase64(blob);
                     }
                 }
             }
