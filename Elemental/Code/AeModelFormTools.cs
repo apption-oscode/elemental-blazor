@@ -168,14 +168,14 @@ namespace Elemental.Code
 
         }
 
-        private static string GetRow (PropertyInfo p)
+        private static int GetRow (PropertyInfo p)
         {
-            return (AeLabelAttribute.GetCustomAttribute(p, typeof(AeLabelAttribute)) as AeLabelAttribute)?.Row;
+            return int.TryParse((AeLabelAttribute.GetCustomAttribute(p, typeof(AeLabelAttribute)) as AeLabelAttribute)?.Row, out var result) ? result : 0;
         }
         
-        private static string GetColumn (PropertyInfo p)
+        private static int GetColumn (PropertyInfo p)
         {
-            return (AeLabelAttribute.GetCustomAttribute(p, typeof(AeLabelAttribute)) as AeLabelAttribute)?.Column;
+            return int.TryParse((AeLabelAttribute.GetCustomAttribute(p, typeof(AeLabelAttribute)) as AeLabelAttribute)?.Column, out var result) ? result : 0;
         }
 
         public static string Labelize(string propName)
