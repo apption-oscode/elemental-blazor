@@ -41,7 +41,9 @@
 		<None Include="..\Elemental.Documentation\Samples\Outline\DemoSection.razor" Link="DemoSection.razor" />
 		<None Include="compilerconfig.json" />
 		<None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
-		<None Include="wwwroot\js\shepherd.min.js" />
+		<None Include="wwwroot\js\third-party\shepherd.min.js">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Inputs="js/*.js" Outputs="wwwroot/js/aebundle.js">
