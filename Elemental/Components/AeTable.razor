@@ -206,6 +206,11 @@
 
     private IEnumerable<T> GetSortedDataset()
     {
+        if (Dataset is null || !Dataset.Any())
+        {
+            return new List<T>();
+        }
+
         if (_sorting.sortAscending)
         {
             return Dataset.OrderBy(data => Accessors[_sorting.column].Invoke(data));
