@@ -9,8 +9,25 @@
 @inherits LayoutComponentBase
 @using Elemental.Code
 
+<AeLayout Links="_navLinks">
+    <Brand>
+        <AeFlex>
+            <img src="_content/Elemental.Documentation/img/Elemental_128x128.png" style="max-height: 50px; padding-right:4px;" />
+            <AeTypography Variant="h2" style="text-align: center; padding: 0rem 0rem 0rem; margin: auto;">elemental</AeTypography>
+        </AeFlex>
+    </Brand>
+    <Body>
+        <AeTypography Variant="h1" style="text-align: center;">Elemental</AeTypography>
+        <AeFlex Vertical style="width: 840px; padding: 0rem 2rem 5rem; margin: auto;">
+            @Body
+        </AeFlex>
+    </Body>
+</AeLayout>
+
+
+@*
 <AeLayoutV2 Links="_navLinks">
-    @*<TopNavigation>Top Nav</TopNavigation>*@
+    @*<TopNavigation>Top Nav</TopNavigation>
     <Brand>
         <AeFlex>
             <img src="_content/Elemental.Documentation/img/Elemental_128x128.png" style="max-height: 50px; padding: 4px 4px 4px 4px;" />
@@ -29,7 +46,7 @@
             @Body
         </AeFlex>
     </ChildContent>
-</AeLayoutV2>
+</AeLayoutV2>*@
 
 
 
@@ -62,41 +79,42 @@
     private List<AeNavLink> _navLinks = new List<AeNavLink>
     {
         new AeNavLink{ Label = "Home", To = "/", IconName = "function", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "blue" },
-        new AeNavLink {Label = "Components", IconName = "focus", IconClassName = "orange", ChildLinks = new List<AeNavLink>()
+        new AeNavLink {Label = "Comps", To = "/components", IconName = "focus", IconClassName = "orange", ChildLinks = new List<AeNavLink>()
         {
-            new AeNavLink{ Label = "Buttons", To = "/buttons", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Cards", To = "/cards", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Checkbox", To = "/checkbox", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Collapse", To = "/collapse", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Dropdowns", To = "/dropdowns", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Excel Import", To = "/pastearea", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Icon", To = "/icons", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Inputs", To = "/inputs", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "List", To = "/list", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Menu", To = "/menu", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Modal", To = "/modal", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Navbar", To = "/navbar", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Page Outline", To = "/outline", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Progress Bar", To = "/progress", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Spinner", To = "/spinner", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Steps", To = "/steps", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Toggle", To = "/toggle", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Tooltip", To = "/tooltip", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Treeview", To = "/treeview", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
-            new AeNavLink{ Label = "Walkthrough", To = "/walkthrough", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill},
+            new AeNavLink{ Label = "Buttons", To = "/components/buttons", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Cards", To = "/components/cards", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Checkbox", To = "/components/checkbox", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Collapse", To = "/components/collapse", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Dropdowns", To = "/components/dropdowns", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Excel Import", To = "/components/pastearea", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Icon", To = "/components/icons", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Inputs", To = "/components/inputs", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "List", To = "/components/list", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Menu", To = "/components/menu", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Modal", To = "/components/modal", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Navbar", To = "/components/navbar", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Page Outline", To = "/components/outline", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Progress Bar", To = "/components/progress", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange" },
+            new AeNavLink{ Label = "Spinner", To = "/components/spinner", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Steps", To = "/components/steps", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Toggle", To = "/components/toggle", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Tooltip", To = "/components/tooltip", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Treeview", To = "/components/treeview", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
+            new AeNavLink{ Label = "Walkthrough", To = "/components/walkthrough", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "orange"},
         } },
-        new AeNavLink { Label = "Content", IconName = "focus", IconClassName = "purple", ChildLinks = new List<AeNavLink>()
+        new AeNavLink { Label = "Content", To="/content", IconName = "focus", IconClassName = "purple", ChildLinks = new List<AeNavLink>()
         {
-            new AeNavLink{ Label = "Typography", To = "/typography", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Tables", To = "/tables", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
+            new AeNavLink{ Label = "Typography", To = "/content/typography", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "purple" },
+            new AeNavLink{ Label = "Tables", To = "/content/tables", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "purple" },
         } },
         new AeNavLink{ Label = "Forms", To = "/modelform", IconName = "focus", IconClassName = "green" },
-        new AeNavLink{ Label = "Layout", IconName = "focus", IconClassName = "red", ChildLinks = new List<AeNavLink>()
+        new AeNavLink{ Label = "Layout", To = "/layout", IconName = "focus", IconClassName = "red", ChildLinks = new List<AeNavLink>()
         {
-            new AeNavLink{ Label = "Layout", To = "/layout", IconName = "layout", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "Sidebar", To = "/layoutWithSidebar", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill },
-            new AeNavLink{ Label = "IE Not Supported", To = "/ieNotSupported", IconName = "error-warning", IconStyle = RXIcon.RXStyle.Fill },
-
+            new AeNavLink{ Label = "Layout 1", To = "/layout/1", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "red" },
+            new AeNavLink{ Label = "Layout 2", To = "/layout/2", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "red" },
+        } },
+        new AeNavLink { Label = "Helpers", To = "/helpers", IconName = "focus", IconClassName = "pink", ChildLinks = new List<AeNavLink> { 
+            new AeNavLink{ Label = "IE Not Supported", To = "/helpers/ieNotSupported", IconName = "error-warning", IconStyle = RXIcon.RXStyle.Fill },               
         } }
     };
 

@@ -1,0 +1,81 @@
+﻿@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<div class="ae sidenav">
+    <div class="top">
+        <div class="ae sidenav-logo">            
+            @Brand            
+        </div>
+        <div class="ae sidenav-container">
+            <div class="ae sidenav-main-menu">
+                @foreach (var link in Links)
+                {
+                    @if (link.Enable)
+                    {
+                        <div class="ae sidenav-group-wrapper">
+                            <AeSideNavItem Link="link" Main />
+                        </div>
+                    }
+                }
+            </div>
+            <div class="ae sidenav-sub-menu">
+                @foreach (var link in Links)
+                {
+                    <div class="ae sidenav-sub-group-wrapper" data-nav-href="@link.To">
+                        <a class="ae sidenav-sub-group-title" href="@link.To">@link.Label</a>                        
+                        @foreach (var subLink in link.ChildLinks)
+                        {
+                            @if(subLink.Enable)
+                            {
+                                <AeSideNavItem Link="subLink" />
+                                <div class="ae sidenav-sub-sub-group-wrapper" data-nav-href="@subLink.To"> 
+                                    @foreach (var subSubLink in subLink.ChildLinks)
+                                    {
+                                        @if (subSubLink.Enable)
+                                        {
+                                            <AeSideNavItem Link="subSubLink" />                                                                                   
+                                        }
+                                    }
+                                </div>                                
+                            }
+                        }                                                    
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        @Bottom
+    </div>
+</div>
+
+
+@functions{
+    [Parameter]
+    public RenderFragment Brand { get; set; }
+    [Parameter]
+    public List<AeNavLink> Links { get; set; }
+    [Parameter]
+    public RenderFragment Bottom { get; set; }
+    [Parameter]
+    public int SidebarExpandThreshold { get; set; } = 1400;
+    [Parameter]
+    public int SidebarShrunkThreshold { get; set; } = 1400;
+    
+
+    private string _sideNavClassname => $"ae side-nav";
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeAsync<string>("sidenav.initializeSidenav", firstRender, SidebarExpandThreshold, SidebarShrunkThreshold);
+        }
+        await JSRuntime.InvokeAsync<string>("sidenav.updateNav");
+    }
+
+    private async Task ToggleExpansion()
+    {
+        await JSRuntime.InvokeAsync<string>("sidenav.toggleExpansion");
+    }
+}

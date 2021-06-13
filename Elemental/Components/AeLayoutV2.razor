@@ -17,7 +17,7 @@
 @inherits HtmlElement
 @inject IJSRuntime JSRuntime
 @inject ILogger<AeLayoutV2> logger
-@using Elemental.Components.SiderbarInternal
+@using Elemental.Components.LayoutInternal
 @using Elemental.Code
 @using Microsoft.Extensions.Logging
 
@@ -60,13 +60,13 @@
         <div class="menu">
             @foreach (var nav in Links)
             {
-                <AeSideNavItem Link="nav" ToggleSublink="ToggleSublink" IsCollapsed="_isCollapsed" />
+                <AeSideNavItem2 Link="nav" ToggleSublink="ToggleSublink" IsCollapsed="_isCollapsed" />
                 @if (nav.ChildLinks != null)
                 {
                     <div class="subnav-wrapper @(_toggleSublink[nav.Label] ? "expanded":"")">
                         @foreach (var item in nav.ChildLinks)
                         {
-                            <AeSideNavItem Link="item" ToggleSublink="ToggleSublink" IsCollapsed="_isCollapsed" />
+                            <AeSideNavItem2 Link="item" ToggleSublink="ToggleSublink" IsCollapsed="_isCollapsed" />
 
                         }
                     </div>

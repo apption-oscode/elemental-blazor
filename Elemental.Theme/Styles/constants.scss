@@ -11,3 +11,112 @@
 $cubic-bezier: cubic-bezier(.25,.8,.25,1);
 
 $text-primary: $grey-800;
+
+$IconColors: (
+    "background-color": #46486d,
+
+    "& i": (
+        "color": $blue-600,
+    ),
+
+    "&.main .sidenav-text": (
+        "color": $blue-600,
+    ),
+
+    "&.purple": (
+        "border-left": 4px solid $purple-600,
+        "color": $white,
+        "& i": (
+            "color": $purple-600,
+        ),
+
+        "&.main .sidenav-text": (
+            "color": $purple-600,
+        )
+    ),
+
+   "&.blue":(
+        "border-left": 4px solid $blue-600,
+        "color": $white,
+        "& i": (
+            "color": $blue-600,
+        ),
+
+        "&.main .sidenav-text" :(
+            "color": $blue-600,
+        ),
+    ),
+
+    "&.orange" :(
+        "& i" :(
+            "color": $orange-600,
+        ),
+
+        "border-left": 4px solid $orange-600,
+        "color": $white,
+        "&.main .sidenav-text" :(
+            "color": $orange-600,
+        ),
+    ),
+
+    "&.indigo" :(
+        "& i" :(
+            "color": $indigo-600,
+        ),
+
+        "border-left": 4px solid $indigo-600,
+        "color": $white,
+        "&.main .sidenav-text" :(
+            "color": $indigo-600,
+        ),
+    ),
+
+    "&.yellow" :(
+        "& i" :(
+            "color": $yellow-600,
+        ),
+
+        "border-left": 4px solid $yellow-600,
+        "color": $white,
+        "&.main .sidenav-text" :(
+            "color": $yellow-600,
+        ),
+    ),
+
+    "&.green" :(
+        "& i" :(
+            "color": $green-600,
+        ),
+
+        "border-left": 4px solid $green-600,
+        "color": $white,
+       "&.main .sidenav-text" :(
+            "color": $green-600,
+        ),
+    ),
+
+    "&.pink" :(
+        "& i" :(
+            "color": $pink-600,
+        ),
+
+        "border-left": 4px solid $pink-600,
+        "color": $white,
+        "&.main .sidenav-text" :(
+            "color": $pink-600,
+        ),
+    ),
+
+    "&.red" :(
+        "& i" :(
+            "color": $red-600,
+        ),
+
+        "border-left": 4px solid $red-600,
+        "color": $white,
+        "&.main .sidenav-text" :(
+            "color": $red-600,
+        ),
+    )
+)
+

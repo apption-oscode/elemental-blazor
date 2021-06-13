@@ -1,53 +1,52 @@
 ﻿@*
- Copyright 2020 Apption Corporation
- 
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
- 
-     http://www.apache.org/licenses/LICENSE-2.0
- 
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
+Copyright 2020 Apption Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 *@
 @inherits HtmlElement
+@using Elemental.Components.LayoutInternal
 
-
-<div class="@_layoutClassname" @attributes="InputAttributesWithoutClass">
-    @if (SideNavigation != null)
-    {
-        <div class="@_sideNavClassname">
-            @SideNavigation
-        </div>
-    }
+<div class="@_layoutClassname">
+    <AeSideNav Brand="Brand" Links="Links" SidebarExpandThreshold="SidebarExpandThreshold" SidebarShrunkThreshold="SidebarShrunkThreshold"/>
     <div class="@_wrapperClassname">
-        @if (TopNavigation != null)
+        @if (TopBar != null)
         {
-            <div class="@_topNavClassname">
-                @TopNavigation
-            </div>
+            <AeTopBar>
+                @TopBar
+            </AeTopBar>
         }
-        <div class="@_contentClassname">
-            @ChildContent
-        </div>
+        @Body
     </div>
 </div>
 
 @code {
+    [Parameter]
+    public RenderFragment Brand { get; set; }
 
     [Parameter]
-    public RenderFragment TopNavigation { get; set; }
-    [Parameter]
-    public RenderFragment SideNavigation { get; set; }
+    public List<AeNavLink> Links { get; set; }
 
+    [Parameter]
+    public RenderFragment TopBar { get; set; }
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+    [Parameter]
+    public int SidebarExpandThreshold { get; set; } = 1400;
+    [Parameter]
+    public int SidebarShrunkThreshold { get; set; } = 1400;
 
     private string _layoutClassname => $"ae layout {_inputClass}";
-    private string _sideNavClassname => $"ae side-nav";
-    private string _wrapperClassname => $"ae content-wrapper {(SideNavigation == null ? "" : "has-side-nav")}";
-    private string _topNavClassname => $"ae top-nav";
-    private string _contentClassname => $"ae content-body";
+    private string _wrapperClassname => $"ae content-wrapper";
 
 }

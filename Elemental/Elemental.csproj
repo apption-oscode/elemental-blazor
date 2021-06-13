@@ -41,6 +41,7 @@
 		<None Include="..\Elemental.Documentation\Samples\Outline\DemoSection.razor" Link="DemoSection.razor" />
 		<None Include="compilerconfig.json" />
 		<None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
+		<None Include="wwwroot\js\third-party\jquery.min.js" />
 		<None Include="wwwroot\js\third-party\shepherd.min.js">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
