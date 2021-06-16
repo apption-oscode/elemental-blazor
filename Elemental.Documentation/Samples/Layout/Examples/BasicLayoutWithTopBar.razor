@@ -12,7 +12,7 @@
 @layout EmptyLayout
 @page "/layout-3"
 
-<AeLayout Links="_navLinks">
+<AeLayout Links="_navLinks" SidebarExpandThreshold="900" SidebarShrunkThreshold="900">
     <Brand>
        <AeFlex>
             <img src="_content/Elemental.Documentation/img/Elemental_128x128.png" style="max-height: 50px; padding-right:4px;" />
@@ -43,6 +43,14 @@
         new AeNavLink { Label = "Main 3", To="/main3", IconName = "focus", IconClassName = "purple", Enable = false },
         new AeNavLink{ Label = "Main 4", To = "/main4", IconName = "focus", IconClassName = "green" },
         new AeNavLink{ Label = "Main 5", To = "/main5", IconName = "focus", IconClassName = "red" },
-        new AeNavLink { Label = "Main 6", To = "/main6", IconName = "focus", IconClassName = "pink" }
+        new AeNavLink { Label = "Main 6", To = "/main6", IconName = "focus", IconClassName = "pink", ChildLinks = new List<AeNavLink>
+        {
+            new AeNavLink{ Label = "Sub 1", To = "/main6/sub1", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "pink" },
+            new AeNavLink{ Label = "Sub 2", To = "/main6/sub2", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "pink" },
+            new AeNavLink{ Label = "Sub 3", To = "/main6/sub3", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "pink"},
+            new AeNavLink{ Label = "Sub 4", To = "/main6/sub4", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "pink" },
+            new AeNavLink{ Label = "Sub 5", To = "/main6/sub5", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "pink"},
+
+        } }
     };
 }

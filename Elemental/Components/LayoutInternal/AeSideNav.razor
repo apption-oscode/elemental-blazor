@@ -11,10 +11,8 @@
                 @foreach (var link in Links)
                 {
                     @if (link.Enable)
-                    {
-                        <div class="ae sidenav-group-wrapper">
-                            <AeSideNavItem Link="link" Main />
-                        </div>
+                    {                        
+                        <AeSideNavItem Link="link" Main />
                     }
                 }
             </div>
@@ -22,7 +20,7 @@
                 @foreach (var link in Links)
                 {
                     <div class="ae sidenav-sub-group-wrapper" data-nav-href="@link.To">
-                        <a class="ae sidenav-sub-group-title" href="@link.To">@link.Label</a>                        
+                        <a class="ae sidenav-sub-group-title" href="@link.To">@link.Label</a>                             
                         @foreach (var subLink in link.ChildLinks)
                         {
                             @if(subLink.Enable)
@@ -38,15 +36,19 @@
                                     }
                                 </div>                                
                             }
-                        }                                                    
+                        }                                                                               
+                        
                     </div>
                 }
             </div>
         </div>
     </div>
-    <div class="bottom">
-        @Bottom
-    </div>
+    @if(Bottom != null)
+    {
+        <div class="bottom">
+            @Bottom
+        </div>        
+    }
 </div>
 
 
@@ -61,7 +63,9 @@
     public int SidebarExpandThreshold { get; set; } = 1400;
     [Parameter]
     public int SidebarShrunkThreshold { get; set; } = 1400;
-    
+
+    [Parameter]
+    public bool StayCollapse { get; set; } = false;
 
     private string _sideNavClassname => $"ae side-nav";
 
@@ -69,7 +73,7 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeAsync<string>("sidenav.initializeSidenav", firstRender, SidebarExpandThreshold, SidebarShrunkThreshold);
+            await JSRuntime.InvokeAsync<string>("sidenav.initializeSidenav", firstRender, SidebarExpandThreshold, SidebarShrunkThreshold, StayCollapse);
         }
         await JSRuntime.InvokeAsync<string>("sidenav.updateNav");
     }

@@ -233,7 +233,6 @@ body {
   top: 0;
   height: 100%;
   width: 300px;
-  overflow-y: hidden;
   overflow-x: hidden;
   z-index: 1;
   background-color: #27283d;
@@ -246,7 +245,9 @@ body {
     border-bottom: 1px solid #e2e8f0;
     background-color: #fff; }
   .ae.sidenav .top {
-    flex-grow: 1; }
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; }
   .ae.sidenav .bottom {
     display: flex;
     align-items: center;
@@ -254,95 +255,102 @@ body {
   .ae.sidenav .ae.sidenav-container {
     display: flex;
     flex-direction: row;
-    height: 100%; }
+    flex-grow: 1; }
     .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu {
       display: flex;
       flex-direction: column;
       border-right: 3px solid #2d3748;
       max-width: 60px; }
-      .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper {
-        display: flex;
-        flex-direction: row; }
-        .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a {
-          height: 3rem;
-          padding: 1.75rem 0.5rem; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover {
-            background-color: #46486d; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover i {
+      .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item {
+        height: 3rem;
+        padding: 1.75rem 0.5rem; }
+        .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover {
+          background-color: #46486d; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover i {
+            color: #3182ce; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.main .sidenav-text {
+            color: #3182ce; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.purple {
+            border-left: 4px solid #805ad5;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.purple i {
+              color: #805ad5; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.purple.main .sidenav-text {
+              color: #805ad5; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.blue {
+            border-left: 4px solid #3182ce;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.blue i {
               color: #3182ce; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.main .sidenav-text {
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.blue.main .sidenav-text {
               color: #3182ce; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.purple {
-              border-left: 4px solid #805ad5;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.purple i {
-                color: #805ad5; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.purple.main .sidenav-text {
-                color: #805ad5; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.blue {
-              border-left: 4px solid #3182ce;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.blue i {
-                color: #3182ce; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.blue.main .sidenav-text {
-                color: #3182ce; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.orange {
-              border-left: 4px solid #dd6b20;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.orange i {
-                color: #dd6b20; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.orange.main .sidenav-text {
-                color: #dd6b20; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.indigo {
-              border-left: 4px solid #5a67d8;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.indigo i {
-                color: #5a67d8; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.indigo.main .sidenav-text {
-                color: #5a67d8; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.yellow {
-              border-left: 4px solid #d69e2e;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.yellow i {
-                color: #d69e2e; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.yellow.main .sidenav-text {
-                color: #d69e2e; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.green {
-              border-left: 4px solid #38a169;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.green i {
-                color: #38a169; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.green.main .sidenav-text {
-                color: #38a169; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.pink {
-              border-left: 4px solid #d53f8c;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.pink i {
-                color: #d53f8c; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.pink.main .sidenav-text {
-                color: #d53f8c; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.red {
-              border-left: 4px solid #e53e3e;
-              color: #fff; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.red i {
-                color: #e53e3e; }
-              .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.red.main .sidenav-text {
-                color: #e53e3e; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a.main {
-            display: flex;
-            flex-direction: column;
-            justify-content: center; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a.main .sidenav-text {
-              font-size: 0.7rem;
-              padding-top: 0.2rem; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.orange {
+            border-left: 4px solid #dd6b20;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.orange i {
+              color: #dd6b20; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.orange.main .sidenav-text {
+              color: #dd6b20; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.indigo {
+            border-left: 4px solid #5a67d8;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.indigo i {
+              color: #5a67d8; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.indigo.main .sidenav-text {
+              color: #5a67d8; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.yellow {
+            border-left: 4px solid #d69e2e;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.yellow i {
+              color: #d69e2e; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.yellow.main .sidenav-text {
+              color: #d69e2e; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.green {
+            border-left: 4px solid #38a169;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.green i {
+              color: #38a169; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.green.main .sidenav-text {
+              color: #38a169; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.pink {
+            border-left: 4px solid #d53f8c;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.pink i {
+              color: #d53f8c; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.pink.main .sidenav-text {
+              color: #d53f8c; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.red {
+            border-left: 4px solid #e53e3e;
+            color: #fff; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.red i {
+              color: #e53e3e; }
+            .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.red.main .sidenav-text {
+              color: #e53e3e; }
+        .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item.main {
+          display: flex;
+          flex-direction: column;
+          justify-content: center; }
+          .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item.main .sidenav-text {
+            font-size: 0.7rem;
+            padding-top: 0.2rem; }
     .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu {
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
-      overflow-x: hidden;
-      width: 100%; }
+      overflow-x: hidden; }
+      .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar {
+        width: 0.25rem; }
+      .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar-track {
+        background: #edf2f7;
+        border-radius: 8px; }
+      .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar-thumb {
+        background: #a0aec0;
+        border-radius: 8px; }
+        .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar-thumb:hover {
+          background: #718096; }
       .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper {
-        display: none; }
+        display: none;
+        width: 240px;
+        max-height: 550px; }
         .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper.expanded {
           display: flex;
           flex-direction: column; }
@@ -361,16 +369,6 @@ body {
           text-decoration: none; }
         .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper i {
           font-size: 1.25rem; }
-        .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar {
-          width: 0.25rem; }
-        .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar-track {
-          background: #edf2f7;
-          border-radius: 8px; }
-        .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar-thumb {
-          background: #a0aec0;
-          border-radius: 8px; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar-thumb:hover {
-            background: #718096; }
       .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-sub-group-wrapper {
         display: none; }
         .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-sub-group-wrapper.expanded {

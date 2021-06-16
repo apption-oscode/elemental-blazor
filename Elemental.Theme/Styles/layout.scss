@@ -5,6 +5,7 @@
 $sideNavWidth: 300px !default;
 $sidenav-shrunk-width: 60px !default;
 $sidenav-main-menu-width: 60px !default;
+$sidenav-sub-menu-height: 550px !default;
 
 $topNavHeight: 65px !default;
 $border-color: $grey-300 !default;
@@ -38,7 +39,6 @@ $sideNavOptions: (
     "top": 0,
     "height": 100%,
     "width": $sideNavWidth,
-    "overflow-y": hidden,
     "overflow-x": hidden,
     "z-index": 1,
     "background-color": $sidebar-color,
@@ -47,7 +47,6 @@ $sideNavOptions: (
     "transition": width 0.5s $cubic-bezier,
     "color": $white,
 
-
     ".ae.sidenav-logo": (
         "display": flex,
         "padding": 0.5rem 0 0.5rem 0.3rem,
@@ -55,7 +54,9 @@ $sideNavOptions: (
         "background-color": $white        
     ),
     ".top": (
-        "flex-grow": 1
+        "flex-grow": 1,
+        "display": flex,
+        "flex-direction": column,
     ),
     ".bottom": (
         "display": flex,
@@ -66,45 +67,42 @@ $sideNavOptions: (
     ".ae.sidenav-container": (
         "display": flex,
         "flex-direction": row,
-        "height": 100%,
+        "flex-grow": 1,
         ".ae.sidenav-main-menu": (
             "display": flex,
             "flex-direction": column,
             "border-right": 3px solid $grey-800,
-            "max-width": $sidenav-main-menu-width,
-            ".ae.sidenav-group-wrapper": (
-                "display": flex,
-                "flex-direction": row,
+            "max-width": $sidenav-main-menu-width,            
+            ".ae.sidenav-item": (
+                "height": 3rem,
+                "padding": 1.75rem 0.5rem,
+                "&:hover": (
+                    "&": $IconColors
+                ),
 
-                "& a": (
-                    "height": 3rem,
-                    "padding": 1.75rem 0.5rem,
-                    "&:hover": (
-                        "&": $IconColors
-                    ),
+                "&.main": (
+                    "display": flex,
+                    "flex-direction": column,
+                    "justify-content": center,
 
-                    "&.main": (
-                        "display": flex,
-                        "flex-direction": column,
-                        "justify-content": center,
-
-                        ".sidenav-text": (
-                            "font-size": 0.7rem,
-                            "padding-top": 0.2rem
-                        )
+                    ".sidenav-text": (
+                        "font-size": 0.7rem,
+                        "padding-top": 0.2rem
                     )
                 )
             )
+            
         ),
         ".ae.sidenav-sub-menu": (
             "display": flex,
             "flex-direction": column,
-            "overflow-y": auto,
             "overflow-x": hidden,
-            "width": 100%,
-
+    
+            "&": $scrollbarOptions,  
             ".ae.sidenav-sub-group-wrapper" :(
-                "display": none,
+                "display": none, 
+                "width": $sideNavWidth - $sidenav-shrunk-width,                    
+                "max-height": $sidenav-sub-menu-height,
 
                 "&.expanded": (
                     "display": flex,
@@ -131,8 +129,7 @@ $sideNavOptions: (
 
                 "& i" :(
                     "font-size": 1.25rem,
-                ),                
-                "&": $scrollbarOptions
+                ),  
             ),
             ".ae.sidenav-sub-sub-group-wrapper": (
                 "display": none,
