@@ -8,7 +8,7 @@
     "sass": "^1.35.1"
   },
   "scripts": {
-    "build-css": "sass Styles/theme.scss:wwwroot/elemental.css && sass --style=compressed Styles/theme.scss wwwroot/elemental.min.css"
+    "build-css": "sass Styles/_index.scss:wwwroot/elemental.css && sass --style=compressed Styles/_index.scss wwwroot/elemental.min.css"
   },
   "author": "Apption",
   "license": "Apache-2.0"

@@ -1,18 +1,173 @@
-/* Error: Can't find stylesheet to import.
- *   ,
- * 1 | ﻿@import 'colors';
- *   |          ^^^^^^^^
- *   '
- *   styles\typography.scss 1:10  @import
- *   styles\theme.scss 6:9        root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  \feff @import 'colors';\d\a   \2502           ^^^^^^^^\a   \2575 \a   styles\\typography.scss 1:10  @import\a   styles\\theme.scss 6:9        root stylesheet";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/*
+    Third party
+*/
+/**
+* Copyright (c) 2020 Apption Corporation
+* 
+* This Source Code Form is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*/
+body {
+  background-color: #f7fafc;
+  color: #4a5568;
+  font-size: 1rem;
+  font-family: "Open Sans";
 }
+
+.ae.button {
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 2px;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  color: #fff;
+  background-color: #718096;
+  border-color: #718096;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.ae.button:focus {
+  outline: none;
+}
+.ae.button:hover {
+  background-color: #4a5568;
+  border-color: #4a5568;
+}
+.ae.button.dark {
+  background-color: #2d3748;
+  border-color: #2d3748;
+}
+.ae.button.dark:hover {
+  background-color: #4a5568;
+  border-color: #4a5568;
+}
+.ae.button.light {
+  color: #718096;
+  background-color: #f7fafc;
+  border-color: #f7fafc;
+}
+.ae.button.light:hover {
+  background-color: #e2e8f0;
+  border-color: #e2e8f0;
+}
+.ae.button.blue {
+  background-color: #3182ce;
+  border-color: #3182ce;
+}
+.ae.button.blue:hover {
+  background-color: #2b6cb0;
+  border-color: #2b6cb0;
+}
+.ae.button.red {
+  background-color: #e53e3e;
+  border-color: #e53e3e;
+}
+.ae.button.red:hover {
+  background-color: #c53030;
+  border-color: #c53030;
+}
+.ae.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ae.typography {
+  color: #4a5568;
+  overflow-wrap: break-word;
+  font-size: 0.9rem;
+  font-family: "Open Sans";
+  line-height: 1.75;
+}
+.ae.typography.h1 {
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+.ae.typography.h2 {
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.ae.typography.h3 {
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.ae.typography.h4 {
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.ae.typography.a {
+  text-decoration: none;
+  color: #4299e1;
+  cursor: pointer;
+}
+.ae.typography.a:hover {
+  text-decoration: underline;
+}
+.ae.typography.p {
+  line-height: 1.75;
+}
+.ae.typography.hint {
+  color: #cbd5e0;
+}
+.ae.typography.warning {
+  color: #f6ad55;
+}
+.ae.typography.danger {
+  color: #e53e3e;
+}
+
+/*# sourceMappingURL=elemental.css.map */

@@ -1,0 +1,48 @@
+﻿@use 'body/body';
+@use 'button/button';
+@use 'typography/typography';
+
+// @import 'flex';
+
+// @import 'layout';
+// @import 'layoutV2';
+
+// @import 'input';
+// @import 'dropdown';
+// @import 'card';
+// @import 'progress';
+// @import 'table';
+// @import 'modal';
+// @import 'collapse';
+// @import 'menu';
+// @import 'modelform';
+// @import 'toggle';
+// @import 'navbar';
+// @import 'tooltip';
+// @import 'list.scss';
+// @import 'icon.scss';
+// @import 'treeview.scss';
+// @import 'checkbox.scss';
+// @import 'spinner.scss';
+// @import 'ie-not-supported.scss';
+// @import 'steps.scss';
+// @import 'pageoutline';
+// @import 'grid';
+/*
+    Third party
+*/
+// @import 'normalize';
+
+@mixin configure($options) {
+  @include body.configure(map-get($options, 'body'));
+  @include button.configure(map-get($options, 'button'));
+  @include typography.configure(map-get($options, 'typography'));
+
+  @include styles;
+}
+
+@mixin styles {
+  @include body.styles;
+  @include button.styles;
+  @include typography.styles;
+}

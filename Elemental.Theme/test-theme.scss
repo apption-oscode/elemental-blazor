@@ -1,0 +1,7 @@
+@use 'test-button.scss';
+@use 'Styles/theme.scss';
+
+$empty: ();
+$overrides: ();
+
+@include theme.configure($overrides);

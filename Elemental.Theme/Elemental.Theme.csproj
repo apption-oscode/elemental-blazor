@@ -34,6 +34,7 @@
     <Content Include="Styles\common\_constants.scss" />
     <Content Include="Styles\common\_colors.scss" />
     <Content Include="Styles\common\_box-shadow.scss" />
+    <Content Include="Styles\typography\_typography.scss" />
 
     <Content Include="Styles/*.scss">
       <Pack>true</Pack>
