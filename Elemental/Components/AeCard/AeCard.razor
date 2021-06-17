@@ -65,7 +65,7 @@
     [Parameter]
     public CardStyle CardPosition { get; set; }
 
-    private string _classname => $"ae card {CardPosition} {_inputClass}";
+    private string _classname => $"ae card {CardPosition.ToLower()} {_inputClass}";
 
     public enum CardStyle {
         Vertical,

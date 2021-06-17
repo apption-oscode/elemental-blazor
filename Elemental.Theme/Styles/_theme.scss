@@ -1,5 +1,6 @@
 ﻿@use 'body/body';
 @use 'button/button';
+@use 'card/card';
 @use 'typography/typography';
 
 @use 'flex/flex';
@@ -36,6 +37,7 @@
 @mixin configure($overrides) {
   @include body.configure(map-get($overrides, 'body'));
   @include button.configure(map-get($overrides, 'button'));
+  @include card.configure(map-get($overrides, 'card'));
   @include flex.configure(map-get($overrides, 'flex'));
   @include typography.configure(map-get($overrides, 'typography'));
 
@@ -45,6 +47,7 @@
 @mixin styles {
   @include body.styles;
   @include button.styles;
+  @include card.styles;
   @include flex.styles;
   @include typography.styles;
 }
