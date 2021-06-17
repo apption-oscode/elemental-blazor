@@ -1,9 +1,10 @@
 ﻿@use 'body/body';
 @use 'button/button';
 @use 'card/card';
-@use 'typography/typography';
-
+@use 'checkbox/checkbox';
+@use 'collapse/collapse';
 @use 'flex/flex';
+@use 'typography/typography';
 
 // @import 'layout';
 // @import 'layoutV2';
@@ -38,6 +39,8 @@
   @include body.configure(map-get($overrides, 'body'));
   @include button.configure(map-get($overrides, 'button'));
   @include card.configure(map-get($overrides, 'card'));
+  @include checkbox.configure(map-get($overrides, 'checkbox'));
+  @include collapse.configure(map-get($overrides, 'collapse'));
   @include flex.configure(map-get($overrides, 'flex'));
   @include typography.configure(map-get($overrides, 'typography'));
 
@@ -48,6 +51,8 @@
   @include body.styles;
   @include button.styles;
   @include card.styles;
+  @include checkbox.styles;
+  @include collapse.styles;
   @include flex.styles;
   @include typography.styles;
 }

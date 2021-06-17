@@ -38,10 +38,12 @@
 
 	<ItemGroup>
 	  <None Include="..\Elemental.Theme\Styles\button\_button.scss" Link="Components\AeButton\_button.scss" />
-	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
-      <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
       <None Include="..\Elemental.Theme\Styles\card\_card.scss" Link="Components\AeCard\_card.scss" />
       <None Include="..\Elemental.Theme\Styles\checkbox\_checkbox.scss" Link="Components\AeCheckbox\_checkbox.scss" />
+      <None Include="..\Elemental.Theme\Styles\collapse\_collapse.scss" Link="Components\AeCollapse\_collapse.scss" />
+      <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
+	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
+
     </ItemGroup>
   
 	<ItemGroup>  
