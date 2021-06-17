@@ -37,6 +37,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\Elemental.Theme\Styles\button\_button.scss" Link="Components\Button\_button.scss" />
+    </ItemGroup>
+  
+	<ItemGroup>  
 		<None Include="compilerconfig.json" />
 		<None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
 		<None Include="wwwroot\js\third-party\jquery.min.js" />

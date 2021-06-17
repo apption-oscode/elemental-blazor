@@ -1,0 +1,86 @@
+﻿@use '../common' as c;
+
+$buttonOptions: (
+  'default': (
+    'position': relative,
+    'display': inline-block,
+    'padding': 0.25rem 1rem,
+    'border-radius': 2px,
+    'line-height': 1.5,
+    'font-size': 0.8rem,
+    'font-weight': 400,
+    'white-space': nowrap,
+    'text-align': center,
+    'border': none,
+    'transition': all 0.3s c.$cubic-bezier,
+    'cursor': pointer,
+    'color': c.$white,
+    'background-color': c.$grey-600,
+    'border-color': c.$grey-600,
+    '-webkit-touch-callout': none,
+    /* iOS Safari */ '-webkit-user-select': none,
+    /* Safari */ '-khtml-user-select': none,
+    /* Konqueror HTML */ '-moz-user-select': none,
+    /* Old versions of Firefox */ '-ms-user-select': none,
+    /* Internet Explorer/Edge */ 'user-select': none,
+    /* Non-prefixed version, currently
+                                      supported by Chrome, Edge, Opera and Firefox */
+      '&:hover':
+      (
+        'background-color': c.$grey-700,
+        'border-color': c.$grey-700,
+      ),
+  ),
+  'dark': (
+    'background-color': c.$grey-800,
+    'border-color': c.$grey-800,
+    '&:hover': (
+      'background-color': c.$grey-700,
+      'border-color': c.$grey-700,
+    ),
+  ),
+  'light': (
+    'color': c.$grey-600,
+    'background-color': c.$grey-100,
+    'border-color': c.$grey-100,
+    '&:hover': (
+      'background-color': c.$grey-300,
+      'border-color': c.$grey-300,
+    ),
+  ),
+  'blue': (
+    'background-color': c.$blue-600,
+    'border-color': c.$blue-600,
+    '&:hover': (
+      'background-color': c.$blue-700,
+      'border-color': c.$blue-700,
+    ),
+  ),
+  'red': (
+    'background-color': c.$red-600,
+    'border-color': c.$red-600,
+    '&:hover': (
+      'background-color': c.$red-700,
+      'border-color': c.$red-700,
+    ),
+  ),
+  'disabled': (
+    'opacity': 0.5,
+    'cursor': not-allowed,
+  ),
+) !default;
+
+@mixin configure($options) {
+  @if ($options) {
+    $buttonOptions: $options;
+  }
+}
+
+@mixin styles {
+  .ae.button {
+    &:focus {
+      outline: none;
+    }
+    @include set-variations($buttonOptions);
+  }
+}
