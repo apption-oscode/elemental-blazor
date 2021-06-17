@@ -1,7 +1,8 @@
-@use 'test-button.scss';
-@use 'Styles/theme.scss';
+@use 'test-button';
+@use 'Styles/theme';
 
-$empty: ();
-$overrides: ();
+$overrides: (
+  'button': test-button.$newButtonOptions,
+);
 
-@include theme.configure($overrides);
+@include theme.custom($overrides);

@@ -3,6 +3,7 @@
 @use 'card/card';
 @use 'checkbox/checkbox';
 @use 'collapse/collapse';
+@use 'column/column';
 @use 'flex/flex';
 @use 'typography/typography';
 
@@ -35,12 +36,13 @@
 */
 // @import 'normalize';
 
-@mixin configure($overrides) {
+@mixin custom($overrides) {
   @include body.configure(map-get($overrides, 'body'));
   @include button.configure(map-get($overrides, 'button'));
   @include card.configure(map-get($overrides, 'card'));
   @include checkbox.configure(map-get($overrides, 'checkbox'));
   @include collapse.configure(map-get($overrides, 'collapse'));
+  @include column.configure(map-get($overrides, 'column'));
   @include flex.configure(map-get($overrides, 'flex'));
   @include typography.configure(map-get($overrides, 'typography'));
 
