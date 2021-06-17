@@ -6,6 +6,8 @@
 @use 'column/column';
 @use 'dropdown/dropdown';
 @use 'flex/flex';
+@use 'icon/icon';
+@use 'ie-not-supported/ie-not-supported';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -47,6 +49,7 @@
   @include dropdown.configure(map-get($overrides, 'dropdown'));
   @include flex.configure(map-get($overrides, 'flex'));
   @include icon.configure(map-get($overrides, 'icon'));
+  @include ie-not-supported.configure(map-get($overrides, 'ie-not-supported'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -61,5 +64,6 @@
   @include dropdown.styles;
   @include flex.styles;
   @include icon.styles;
+  @include ie-not-supported.styles;
   @include typography.styles;
 }
