@@ -44,6 +44,7 @@
       <None Include="..\Elemental.Theme\Styles\column\_column.scss" Link="Components\AeColumn\_column.scss" />
       <None Include="..\Elemental.Theme\Styles\dropdown\_dropdown.scss" Link="Components\AeDropdown\_dropdown.scss" />
       <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
+      <None Include="..\Elemental.Theme\Styles\icon\_icon.scss" Link="Components\AeIcon\_icon.scss" />
 	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 
     </ItemGroup>

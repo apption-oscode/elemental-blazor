@@ -46,6 +46,7 @@
   @include column.configure(map-get($overrides, 'column'));
   @include dropdown.configure(map-get($overrides, 'dropdown'));
   @include flex.configure(map-get($overrides, 'flex'));
+  @include icon.configure(map-get($overrides, 'icon'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -59,5 +60,6 @@
   @include collapse.styles;
   @include dropdown.styles;
   @include flex.styles;
+  @include icon.styles;
   @include typography.styles;
 }
