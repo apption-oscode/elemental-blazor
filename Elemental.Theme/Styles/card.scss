@@ -1,7 +1,7 @@
-﻿@import 'colors';
-@import 'constants';
-@import 'box-shadow';
-@import 'utils';
+﻿@import 'Common/_colors.scss';
+@import 'Common/_constants.scss';
+@import 'Common/_box-shadow.scss';
+@import 'Common/_utils.scss';
 
 
 $cardOptions: ( 

@@ -1,17 +1,13 @@
-﻿@import 'colors';
-@import 'utils';
-
+﻿@use 'common/colors';
+@use 'common/utils';
 
 $bodyOptions: (
-    "background-color": $grey-100,
-    "color": $grey-700,
-    "font-size": 1rem,
-    "font-family": "Open Sans",
-
+  'background-color': colors.$grey-100,
+  'color': colors.$grey-700,
+  'font-size': 1rem,
+  'font-family': 'Open Sans',
 ) !default;
 
-
-
 body {
-    @include set-values($bodyOptions);
+  @include utils.set-values($bodyOptions);
 }
