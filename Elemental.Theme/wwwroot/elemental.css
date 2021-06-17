@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2020 Apption Corporation
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -225,6 +225,10 @@ body {
       position: sticky;
       top: 0;
       z-index: 10; }
+  .ae.layout.stay-collapse .ae.sidenav {
+    width: 60px; }
+  .ae.layout.stay-collapse .ae.content-wrapper {
+    margin-left: 60px; }
 
 .ae.sidenav {
   display: flex;
@@ -233,6 +237,7 @@ body {
   top: 0;
   height: 100%;
   width: 300px;
+  overflow-y: hidden;
   overflow-x: hidden;
   z-index: 1;
   background-color: #27283d;
@@ -250,8 +255,79 @@ body {
     flex-direction: column; }
   .ae.sidenav .bottom {
     display: flex;
-    align-items: center;
-    justify-content: space-between; }
+    align-items: center; }
+    .ae.sidenav .bottom .ae.sidenav-item {
+      height: 3rem;
+      padding: 1.75rem 0.5rem; }
+      .ae.sidenav .bottom .ae.sidenav-item:hover {
+        background-color: #46486d; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover i {
+          color: #3182ce; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.main .sidenav-text {
+          color: #3182ce; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.purple {
+          border-left: 4px solid #805ad5;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.purple i {
+            color: #805ad5; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.purple.main .sidenav-text {
+            color: #805ad5; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.blue {
+          border-left: 4px solid #3182ce;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.blue i {
+            color: #3182ce; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.blue.main .sidenav-text {
+            color: #3182ce; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.orange {
+          border-left: 4px solid #dd6b20;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.orange i {
+            color: #dd6b20; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.orange.main .sidenav-text {
+            color: #dd6b20; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.indigo {
+          border-left: 4px solid #5a67d8;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.indigo i {
+            color: #5a67d8; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.indigo.main .sidenav-text {
+            color: #5a67d8; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.yellow {
+          border-left: 4px solid #d69e2e;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.yellow i {
+            color: #d69e2e; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.yellow.main .sidenav-text {
+            color: #d69e2e; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.green {
+          border-left: 4px solid #38a169;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.green i {
+            color: #38a169; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.green.main .sidenav-text {
+            color: #38a169; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.pink {
+          border-left: 4px solid #d53f8c;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.pink i {
+            color: #d53f8c; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.pink.main .sidenav-text {
+            color: #d53f8c; }
+        .ae.sidenav .bottom .ae.sidenav-item:hover.red {
+          border-left: 4px solid #e53e3e;
+          color: #fff; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.red i {
+            color: #e53e3e; }
+          .ae.sidenav .bottom .ae.sidenav-item:hover.red.main .sidenav-text {
+            color: #e53e3e; }
+      .ae.sidenav .bottom .ae.sidenav-item.main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; }
+        .ae.sidenav .bottom .ae.sidenav-item.main .sidenav-text {
+          font-size: 0.7rem;
+          padding-top: 0.2rem; }
   .ae.sidenav .ae.sidenav-container {
     display: flex;
     flex-direction: row;
@@ -377,92 +453,92 @@ body {
         .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-sub-group-wrapper i {
           font-size: 1rem;
           margin-left: 20px; }
-    .ae.sidenav .ae.sidenav-container .ae.sidenav-item {
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-      overflow: hidden;
-      transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-      border-left: 4px solid transparent;
-      box-sizing: border-box;
-      color: inherit;
-      text-decoration: none; }
-      .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active {
-        border-left: 4px solid #3182ce;
-        font-weight: bold; }
-        .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active i {
+  .ae.sidenav .ae.sidenav-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-left: 4px solid transparent;
+    box-sizing: border-box;
+    color: inherit;
+    text-decoration: none; }
+    .ae.sidenav .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-item.active {
+      border-left: 4px solid #3182ce;
+      font-weight: bold; }
+      .ae.sidenav .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-item.active i {
+        color: #3182ce; }
+      .ae.sidenav .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-item.active {
+        background-color: #46486d; }
+        .ae.sidenav .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-item.active i {
           color: #3182ce; }
-        .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active {
-          background-color: #46486d; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active i {
+        .ae.sidenav .ae.sidenav-item.exact.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.main .sidenav-text {
+          color: #3182ce; }
+        .ae.sidenav .ae.sidenav-item.exact.purple, .ae.sidenav .ae.sidenav-item.active.purple {
+          border-left: 4px solid #805ad5;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.purple i, .ae.sidenav .ae.sidenav-item.active.purple i {
+            color: #805ad5; }
+          .ae.sidenav .ae.sidenav-item.exact.purple.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.purple.main .sidenav-text {
+            color: #805ad5; }
+        .ae.sidenav .ae.sidenav-item.exact.blue, .ae.sidenav .ae.sidenav-item.active.blue {
+          border-left: 4px solid #3182ce;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.blue i, .ae.sidenav .ae.sidenav-item.active.blue i {
             color: #3182ce; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.main .sidenav-text {
+          .ae.sidenav .ae.sidenav-item.exact.blue.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.blue.main .sidenav-text {
             color: #3182ce; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.purple, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.purple {
-            border-left: 4px solid #805ad5;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.purple i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.purple i {
-              color: #805ad5; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.purple.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.purple.main .sidenav-text {
-              color: #805ad5; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.blue, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.blue {
-            border-left: 4px solid #3182ce;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.blue i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.blue i {
-              color: #3182ce; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.blue.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.blue.main .sidenav-text {
-              color: #3182ce; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.orange, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.orange {
-            border-left: 4px solid #dd6b20;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.orange i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.orange i {
-              color: #dd6b20; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.orange.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.orange.main .sidenav-text {
-              color: #dd6b20; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.indigo, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.indigo {
-            border-left: 4px solid #5a67d8;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.indigo i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.indigo i {
-              color: #5a67d8; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.indigo.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.indigo.main .sidenav-text {
-              color: #5a67d8; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.yellow, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.yellow {
-            border-left: 4px solid #d69e2e;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.yellow i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.yellow i {
-              color: #d69e2e; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.yellow.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.yellow.main .sidenav-text {
-              color: #d69e2e; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.green, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.green {
-            border-left: 4px solid #38a169;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.green i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.green i {
-              color: #38a169; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.green.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.green.main .sidenav-text {
-              color: #38a169; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.pink, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.pink {
-            border-left: 4px solid #d53f8c;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.pink i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.pink i {
-              color: #d53f8c; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.pink.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.pink.main .sidenav-text {
-              color: #d53f8c; }
-          .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.red, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.red {
-            border-left: 4px solid #e53e3e;
-            color: #fff; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.red i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.red i {
-              color: #e53e3e; }
-            .ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.red.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.red.main .sidenav-text {
-              color: #e53e3e; }
-      .ae.sidenav .ae.sidenav-container .ae.sidenav-item:hover {
-        background-color: #3c3d5d; }
-      .ae.sidenav .ae.sidenav-container .ae.sidenav-item .ae.icon {
-        font-size: 1.2rem;
-        display: flex;
-        justify-content: center;
-        text-align: left;
-        min-width: 40px;
-        color: #fff; }
+        .ae.sidenav .ae.sidenav-item.exact.orange, .ae.sidenav .ae.sidenav-item.active.orange {
+          border-left: 4px solid #dd6b20;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.orange i, .ae.sidenav .ae.sidenav-item.active.orange i {
+            color: #dd6b20; }
+          .ae.sidenav .ae.sidenav-item.exact.orange.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.orange.main .sidenav-text {
+            color: #dd6b20; }
+        .ae.sidenav .ae.sidenav-item.exact.indigo, .ae.sidenav .ae.sidenav-item.active.indigo {
+          border-left: 4px solid #5a67d8;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.indigo i, .ae.sidenav .ae.sidenav-item.active.indigo i {
+            color: #5a67d8; }
+          .ae.sidenav .ae.sidenav-item.exact.indigo.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.indigo.main .sidenav-text {
+            color: #5a67d8; }
+        .ae.sidenav .ae.sidenav-item.exact.yellow, .ae.sidenav .ae.sidenav-item.active.yellow {
+          border-left: 4px solid #d69e2e;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.yellow i, .ae.sidenav .ae.sidenav-item.active.yellow i {
+            color: #d69e2e; }
+          .ae.sidenav .ae.sidenav-item.exact.yellow.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.yellow.main .sidenav-text {
+            color: #d69e2e; }
+        .ae.sidenav .ae.sidenav-item.exact.green, .ae.sidenav .ae.sidenav-item.active.green {
+          border-left: 4px solid #38a169;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.green i, .ae.sidenav .ae.sidenav-item.active.green i {
+            color: #38a169; }
+          .ae.sidenav .ae.sidenav-item.exact.green.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.green.main .sidenav-text {
+            color: #38a169; }
+        .ae.sidenav .ae.sidenav-item.exact.pink, .ae.sidenav .ae.sidenav-item.active.pink {
+          border-left: 4px solid #d53f8c;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.pink i, .ae.sidenav .ae.sidenav-item.active.pink i {
+            color: #d53f8c; }
+          .ae.sidenav .ae.sidenav-item.exact.pink.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.pink.main .sidenav-text {
+            color: #d53f8c; }
+        .ae.sidenav .ae.sidenav-item.exact.red, .ae.sidenav .ae.sidenav-item.active.red {
+          border-left: 4px solid #e53e3e;
+          color: #fff; }
+          .ae.sidenav .ae.sidenav-item.exact.red i, .ae.sidenav .ae.sidenav-item.active.red i {
+            color: #e53e3e; }
+          .ae.sidenav .ae.sidenav-item.exact.red.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.red.main .sidenav-text {
+            color: #e53e3e; }
+    .ae.sidenav .ae.sidenav-item:hover {
+      background-color: #3c3d5d; }
+    .ae.sidenav .ae.sidenav-item .ae.icon {
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      text-align: left;
+      min-width: 40px;
+      color: #fff; }
   .ae.sidenav.shrunk {
     width: 60px; }
 
@@ -3588,5 +3664,3 @@ template {
  */
 [hidden] {
   display: none; }
-
-/*# sourceMappingURL=elemental.css.map */
