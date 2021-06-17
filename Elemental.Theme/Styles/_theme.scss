@@ -2,7 +2,7 @@
 @use 'button/button';
 @use 'typography/typography';
 
-// @import 'flex';
+@use 'flex/flex';
 
 // @import 'layout';
 // @import 'layoutV2';
@@ -33,10 +33,11 @@
 */
 // @import 'normalize';
 
-@mixin configure($options) {
-  @include body.configure(map-get($options, 'body'));
-  @include button.configure(map-get($options, 'button'));
-  @include typography.configure(map-get($options, 'typography'));
+@mixin configure($overrides) {
+  @include body.configure(map-get($overrides, 'body'));
+  @include button.configure(map-get($overrides, 'button'));
+  @include flex.configure(map-get($overrides, 'flex'));
+  @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
 }
@@ -44,5 +45,6 @@
 @mixin styles {
   @include body.styles;
   @include button.styles;
+  @include flex.styles;
   @include typography.styles;
 }

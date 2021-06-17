@@ -37,7 +37,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\Elemental.Theme\Styles\button\_button.scss" Link="Components\Button\_button.scss" />
+	  <None Include="..\Elemental.Theme\Styles\button\_button.scss" Link="Components\AeButton\_button.scss" />
+	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
+      <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
     </ItemGroup>
   
 	<ItemGroup>  
