@@ -46,6 +46,10 @@
       <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
       <None Include="..\Elemental.Theme\Styles\icon\_icon.scss" Link="Components\AeIcon\_icon.scss" />
       <None Include="..\Elemental.Theme\Styles\ie-not-supported\_ie-not-supported.scss" Link="Components\AeIENotSupported\_ie-not-supported.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_index.scss" Link="Components\AeInput\_index.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_input.scss" Link="Components\AeInput\_input.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_search-wrapper.scss" Link="Components\AeInput\_search-wrapper.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_input-wrapper.scss" Link="Components\AeInput\_input-wrapper.scss" />
 	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 
     </ItemGroup>

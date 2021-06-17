@@ -1,8 +1,3 @@
-@use 'test-button';
 @use 'Styles/theme';
 
-$overrides: (
-  'button': test-button.$newButtonOptions,
-);
-
-@include theme.custom($overrides);
+@include theme.styles;
