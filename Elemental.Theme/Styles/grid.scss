@@ -18,7 +18,7 @@
     max-width: percentage($width/$totalColumns);
 }
 
-.ae.col, .ae.col-1, .ae.col-10, .ae.col-11, .ae.col-12, .ae.col-2, .ae.col-3, .ae.col-4, .ae.col-5, .ae.col-6, .ae.col-7, .ae.col-8, .ae.col-9 {
+@mixin columnCommon {
     position: relative;
     width: 100%;
     padding-right: 15px;
@@ -28,56 +28,17 @@
 
 .ae.col {
     -ms-flex-preferred-size: 0;
-    flex-basis: 0;
     -ms-flex-positive: 1;
+    flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
+
+    @include columnCommon;
 }
 
-.ae.col-1 {
-    @include columnMaxWidth(1);
-}
-
-.ae.col-2 {
-    @include columnMaxWidth(2);
-}
-
-.ae.col-3 {
-    @include columnMaxWidth(3);
-}
-
-.ae.col-4 {
-    @include columnMaxWidth(4);
-}
-
-.ae.col-5 {
-    @include columnMaxWidth(5);
-}
-
-.ae.col-6 {
-    @include columnMaxWidth(6);
-}
-
-.ae.col-7 {
-    @include columnMaxWidth(7);
-}
-
-.ae.col-8 {
-    @include columnMaxWidth(8);
-}
-
-.ae.col-9 {
-    @include columnMaxWidth(9);
-}
-
-.ae.col-10 {
-    @include columnMaxWidth(10);
-}
-
-.ae.col-11 {
-    @include columnMaxWidth(11);
-}
-
-.ae.col-12 {
-    @include columnMaxWidth(12);
+@for $i from 1 through $totalColumns {
+    .ae.col-#{$i} {
+        @include columnCommon;
+        @include columnMaxWidth($i);
+    }
 }
