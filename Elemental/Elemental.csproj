@@ -41,6 +41,7 @@
 	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
       <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
       <None Include="..\Elemental.Theme\Styles\card\_card.scss" Link="Components\AeCard\_card.scss" />
+      <None Include="..\Elemental.Theme\Styles\checkbox\_checkbox.scss" Link="Components\AeCheckbox\_checkbox.scss" />
     </ItemGroup>
   
 	<ItemGroup>  

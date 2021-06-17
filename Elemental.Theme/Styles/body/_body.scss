@@ -6,7 +6,7 @@ $bodyOptions: (
   'color': colors.$grey-700,
   'font-size': 1rem,
   'font-family': 'Open Sans',
-) !default;
+);
 
 @mixin configure($options) {
   @if ($options) {

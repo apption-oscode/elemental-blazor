@@ -52,7 +52,7 @@ $cardOptions: (
       'width': 60%,
     ),
   ),
-) !default;
+);
 
 @mixin configure($options) {
   @if ($options) {
