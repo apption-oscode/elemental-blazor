@@ -42,7 +42,7 @@ $ieNotSupportedOptions: (
             )
         ),
     ),
-) !default
+) !default;
 
 .ae.ie-not-supported {
     @include set-variations($ieNotSupportedOptions);
