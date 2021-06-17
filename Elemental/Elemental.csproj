@@ -42,6 +42,7 @@
       <None Include="..\Elemental.Theme\Styles\checkbox\_checkbox.scss" Link="Components\AeCheckbox\_checkbox.scss" />
       <None Include="..\Elemental.Theme\Styles\collapse\_collapse.scss" Link="Components\AeCollapse\_collapse.scss" />
       <None Include="..\Elemental.Theme\Styles\column\_column.scss" Link="Components\AeColumn\_column.scss" />
+      <None Include="..\Elemental.Theme\Styles\dropdown\_dropdown.scss" Link="Components\AeDropdown\_dropdown.scss" />
       <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
 	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 

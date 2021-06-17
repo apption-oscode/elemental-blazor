@@ -4,6 +4,7 @@
 @use 'checkbox/checkbox';
 @use 'collapse/collapse';
 @use 'column/column';
+@use 'dropdown/dropdown';
 @use 'flex/flex';
 @use 'typography/typography';
 
@@ -43,6 +44,7 @@
   @include checkbox.configure(map-get($overrides, 'checkbox'));
   @include collapse.configure(map-get($overrides, 'collapse'));
   @include column.configure(map-get($overrides, 'column'));
+  @include dropdown.configure(map-get($overrides, 'dropdown'));
   @include flex.configure(map-get($overrides, 'flex'));
   @include typography.configure(map-get($overrides, 'typography'));
 
@@ -55,6 +57,7 @@
   @include card.styles;
   @include checkbox.styles;
   @include collapse.styles;
+  @include dropdown.styles;
   @include flex.styles;
   @include typography.styles;
 }
