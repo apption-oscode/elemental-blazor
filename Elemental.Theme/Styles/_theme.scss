@@ -21,6 +21,7 @@
 @use 'spinner/spinner';
 @use 'steps/steps';
 @use 'table/table';
+@use 'toggle/toggle';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -76,6 +77,7 @@
   @include spinner.configure(map-get($overrides, 'spinner'));
   @include steps.configure(map-get($overrides, 'steps'));
   @include table.configure(map-get($overrides, 'table'));
+  @include toggle.configure(map-get($overrides, 'toggle'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -104,5 +106,6 @@
   @include spinner.styles;
   @include steps.styles;
   @include table.styles;
+  @include toggle.styles;
   @include typography.styles;
 }

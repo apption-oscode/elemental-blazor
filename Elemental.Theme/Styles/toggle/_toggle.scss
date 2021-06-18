@@ -1,7 +1,4 @@
-﻿@import 'colors';
-@import 'constants';
-@import 'box-shadow';
-@import 'utils';
+﻿@use '../common/' as c;
 
 $toggleOptions: (
   'default': (
@@ -31,7 +28,7 @@ $toggleOptions: (
       'left': 6px,
       'right': 32px,
       'bottom': 6px,
-      'background-color': $white,
+      'background-color': c.$white,
       'transition': 0.4s,
     ),
     '& input:checked + .slider': (
@@ -71,6 +68,14 @@ $toggleOptions: (
   ),
 );
 
-.ae.toggle {
-  @include set-variations($toggleOptions);
+@mixin configure($options) {
+  @if ($options) {
+    $toggleOptions: $options !global;
+  }
+}
+
+@mixin styles {
+  .ae.toggle {
+    @include set-variations($toggleOptions);
+  }
 }
