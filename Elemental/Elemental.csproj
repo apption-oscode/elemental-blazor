@@ -64,6 +64,7 @@
       <None Include="..\Elemental.Theme\Styles\table\_table.scss" Link="Components\AeTable\_table.scss" />
       <None Include="..\Elemental.Theme\Styles\toggle\_toggle.scss" Link="Components\AeToggle\_toggle.scss" />
       <None Include="..\Elemental.Theme\Styles\tooltip\_tooltip.scss" Link="Components\AeTooltip\_tooltip.scss" />
+      <None Include="..\Elemental.Theme\Styles\treeview\_treeview.scss" Link="Components\AeTreeview\_treeview.scss" />
       <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 
     </ItemGroup>
