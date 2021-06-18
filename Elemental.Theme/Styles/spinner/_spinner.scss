@@ -1,4 +1,4 @@
-﻿@use '../common/colors';
+﻿@use '../common/colors' as c;
 
 @mixin configure($options) {
   @if ($options) {

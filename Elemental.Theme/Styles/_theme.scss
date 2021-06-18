@@ -19,6 +19,7 @@
 @use 'progress/progress';
 @use 'row/row';
 @use 'spinner/spinner';
+@use 'steps/steps';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -72,6 +73,7 @@
   @include progress.configure(map-get($overrides, 'progress'));
   @include row.configure(map-get($overrides, 'row'));
   @include spinner.configure(map-get($overrides, 'spinner'));
+  @include steps.configure(map-get($overrides, 'steps'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -98,5 +100,6 @@
   @include progress.styles;
   @include row.styles;
   @include spinner.styles;
+  @include steps.styles;
   @include typography.styles;
 }

@@ -1,5 +1,6 @@
 ﻿@typeparam T
 @using System.Linq;
+@namespace Elemental.Components
 
 <div class="ae steps@(Alignment == StepAlignment.Horizontal? " horizontal" : "")">
     @foreach (var item in StepItems.Select((step, i) => (i, step)))

@@ -54,7 +54,7 @@ $typgraphyOptions: (
   'danger': (
     'color': colors.$red-600,
   ),
-) !default;
+);
 
 @mixin configure($options) {
   @if ($options) {
