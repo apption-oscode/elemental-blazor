@@ -61,7 +61,8 @@
       <None Include="..\Elemental.Theme\Styles\row\_row.scss" Link="Components\AeRow\_row.scss" />
       <None Include="..\Elemental.Theme\Styles\spinner\_spinner.scss" Link="Components\AeSpinner\_spinner.scss" />
       <None Include="..\Elemental.Theme\Styles\steps\_steps.scss" Link="Components\AeSteps\_steps.scss" />
-	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
+      <None Include="..\Elemental.Theme\Styles\table\_table.scss" Link="Components\AeTable\_table.scss" />
+      <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 
     </ItemGroup>
   

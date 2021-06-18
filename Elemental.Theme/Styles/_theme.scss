@@ -20,6 +20,7 @@
 @use 'row/row';
 @use 'spinner/spinner';
 @use 'steps/steps';
+@use 'table/table';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -74,6 +75,7 @@
   @include row.configure(map-get($overrides, 'row'));
   @include spinner.configure(map-get($overrides, 'spinner'));
   @include steps.configure(map-get($overrides, 'steps'));
+  @include table.configure(map-get($overrides, 'table'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -101,5 +103,6 @@
   @include row.styles;
   @include spinner.styles;
   @include steps.styles;
+  @include table.styles;
   @include typography.styles;
 }
