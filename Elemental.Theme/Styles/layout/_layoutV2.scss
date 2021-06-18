@@ -1,5 +1,4 @@
 ﻿@use '../common/' as c;
-@use '../scrollbar';
 
 $sideNavWidth: 250px;
 $topNavHeight: 0vh;
@@ -52,7 +51,7 @@ $layoutOptions: (
     '.menu': (
       'flex-grow': 1,
       'overflow': auto,
-      '&': scrollbar.$scrollbarOptions,
+      '&': c.$scrollbarOptions,
       '.item': (
         'display': flex,
         'align-items': center,

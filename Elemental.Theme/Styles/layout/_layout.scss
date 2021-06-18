@@ -1,12 +1,11 @@
 ﻿@use '../common' as c;
-@use '../scrollbar';
 
 $sideNavWidth: 300px;
 $sidenav-shrunk-width: 60px;
 $sidenav-main-menu-width: 60px;
 
 $topNavHeight: 65px;
-$border-color: $grey-300;
+$border-color: c.$grey-300;
 $sidebar-color: #27283d;
 $item-hover: #3c3d5d;
 
@@ -31,89 +30,89 @@ $layoutOptions: (
 $IconColors: (
   'background-color': #46486d,
   '& i': (
-    'color': $blue-600,
+    'color': c.$blue-600,
   ),
   '&.main .sidenav-text': (
-    'color': $blue-600,
+    'color': c.$blue-600,
   ),
   '&.purple': (
-    'border-left': 4px solid $purple-600,
-    'color': $white,
+    'border-left': 4px solid c.$purple-600,
+    'color': c.$white,
     '& i': (
-      'color': $purple-600,
+      'color': c.$purple-600,
     ),
     '&.main .sidenav-text': (
-      'color': $purple-600,
+      'color': c.$purple-600,
     ),
   ),
   '&.blue': (
-    'border-left': 4px solid $blue-600,
-    'color': $white,
+    'border-left': 4px solid c.$blue-600,
+    'color': c.$white,
     '& i': (
-      'color': $blue-600,
+      'color': c.$blue-600,
     ),
     '&.main .sidenav-text': (
-      'color': $blue-600,
+      'color': c.$blue-600,
     ),
   ),
   '&.orange': (
     '& i': (
-      'color': $orange-600,
+      'color': c.$orange-600,
     ),
-    'border-left': 4px solid $orange-600,
-    'color': $white,
+    'border-left': 4px solid c.$orange-600,
+    'color': c.$white,
     '&.main .sidenav-text': (
-      'color': $orange-600,
+      'color': c.$orange-600,
     ),
   ),
   '&.indigo': (
     '& i': (
-      'color': $indigo-600,
+      'color': c.$indigo-600,
     ),
-    'border-left': 4px solid $indigo-600,
-    'color': $white,
+    'border-left': 4px solid c.$indigo-600,
+    'color': c.$white,
     '&.main .sidenav-text': (
-      'color': $indigo-600,
+      'color': c.$indigo-600,
     ),
   ),
   '&.yellow': (
     '& i': (
-      'color': $yellow-600,
+      'color': c.$yellow-600,
     ),
-    'border-left': 4px solid $yellow-600,
-    'color': $white,
+    'border-left': 4px solid c.$yellow-600,
+    'color': c.$white,
     '&.main .sidenav-text': (
-      'color': $yellow-600,
+      'color': c.$yellow-600,
     ),
   ),
   '&.green': (
     '& i': (
-      'color': $green-600,
+      'color': c.$green-600,
     ),
-    'border-left': 4px solid $green-600,
-    'color': $white,
+    'border-left': 4px solid c.$green-600,
+    'color': c.$white,
     '&.main .sidenav-text': (
-      'color': $green-600,
+      'color': c.$green-600,
     ),
   ),
   '&.pink': (
     '& i': (
-      'color': $pink-600,
+      'color': c.$pink-600,
     ),
-    'border-left': 4px solid $pink-600,
-    'color': $white,
+    'border-left': 4px solid c.$pink-600,
+    'color': c.$white,
     '&.main .sidenav-text': (
-      'color': $pink-600,
+      'color': c.$pink-600,
     ),
   ),
   '&.red': (
     '& i': (
-      'color': $red-600,
+      'color': c.$red-600,
     ),
-    'border-left': 4px solid $red-600,
-    'color': $white,
+    'border-left': 4px solid c.$red-600,
+    'color': c.$white,
     '&.main .sidenav-text': (
-      'color': $red-600,
+      'color': c.$red-600,
     ),
   ),
 );
@@ -130,13 +129,13 @@ $sideNavOptions: (
   'z-index': 1,
   'background-color': $sidebar-color,
   'border-right': 1px solid $border-color,
-  'transition': width 0.5s $cubic-bezier,
-  'color': $white,
+  'transition': width 0.5s c.$cubic-bezier,
+  'color': c.$white,
   '.ae.sidenav-logo': (
     'display': flex,
     'padding': 0.5rem 0 0.5rem 0.3rem,
     'border-bottom': 1px solid $border-color,
-    'background-color': $white,
+    'background-color': c.$white,
   ),
   '.top': (
     'flex-grow': 1,
@@ -153,7 +152,7 @@ $sideNavOptions: (
     '.ae.sidenav-main-menu': (
       'display': flex,
       'flex-direction': column,
-      'border-right': 3px solid $grey-800,
+      'border-right': 3px solid c.$grey-800,
       'max-width': $sidenav-main-menu-width,
       '.ae.sidenav-group-wrapper': (
         'display': flex,
@@ -199,7 +198,7 @@ $sideNavOptions: (
           ),
         ),
         '.ae.sidenav-sub-group-title': (
-          'color': $white,
+          'color': c.$white,
           'font-size': 1.2rem,
           'padding': 1rem 1rem,
           'text-decoration': none,
@@ -207,7 +206,7 @@ $sideNavOptions: (
         '& i': (
           'font-size': 1.25rem,
         ),
-        '&': $scrollbarOptions,
+        '&': c.$scrollbarOptions,
       ),
       '.ae.sidenav-sub-sub-group-wrapper': (
         'display': none,
@@ -226,16 +225,16 @@ $sideNavOptions: (
       'align-items': center,
       'white-space': nowrap,
       'overflow': hidden,
-      'transition': background-color 0.4s $cubic-bezier,
+      'transition': background-color 0.4s c.$cubic-bezier,
       'border-left': 4px solid transparent,
       'box-sizing': border-box,
       'color': inherit,
       'text-decoration': none,
       '&.exact, &.active': (
-        'border-left': 4px solid $blue-600,
+        'border-left': 4px solid c.$blue-600,
         'font-weight': bold,
         '& i': (
-          'color': $blue-600,
+          'color': c.$blue-600,
         ),
         '&': $IconColors,
       ),
@@ -248,7 +247,7 @@ $sideNavOptions: (
         'justify-content': center,
         'text-align': left,
         'min-width': 40px,
-        'color': $white,
+        'color': c.$white,
       ),
     ),
   ),
@@ -264,8 +263,8 @@ $topNavOptions: (
   'top': 0,
   'align-items': center,
   'z-index': 9999,
-  'background-color': $white,
-  'border-bottom': 1px solid $grey-300,
+  'background-color': c.$white,
+  'border-bottom': 1px solid c.$grey-300,
 );
 
 @mixin configure($options) {
@@ -310,14 +309,14 @@ $topNavOptions: (
 
 @mixin styles {
   .ae.layout {
-    @include set-values($layoutOptions);
+    @include c.set-values($layoutOptions);
   }
 
   .ae.sidenav {
-    @include set-values($sideNavOptions);
+    @include c.set-values($sideNavOptions);
   }
 
   .ae.top-nav {
-    @include set-values($topNavOptions);
+    @include c.set-values($topNavOptions);
   }
 }

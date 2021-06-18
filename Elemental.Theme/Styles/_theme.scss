@@ -11,6 +11,7 @@
 @use 'input';
 @use 'layout/layout';
 @use 'layout/layoutV2';
+@use 'list/list';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -56,6 +57,7 @@
   @include input.configure(map-get($overrides, 'input'));
   @include layout.configure(map-get($overrides, 'layout'));
   @include layoutV2.configure(map-get($overrides, 'layoutV2'));
+  @include list.configure(map-get($overrides, 'list'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -74,5 +76,6 @@
   @include input.styles;
   @include layout.styles;
   @include layoutV2.styles;
+  @include list.styles;
   @include typography.styles;
 }
