@@ -1,4 +1,5 @@
-﻿@inject IJSRuntime JSRuntime
+﻿@namespace Elemental.Components
+@inject IJSRuntime JSRuntime
 
 <a class="@_sidenavItem" href="@(Link.To ?? Link?.ChildLinks.FirstOrDefault().To)" @onclick="NotifyInteropClick">
     @if (!string.IsNullOrEmpty(Link.IconName))
