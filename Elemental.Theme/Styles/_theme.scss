@@ -15,6 +15,7 @@
 @use 'menu/menu';
 @use 'modal/modal';
 @use 'model-form/model-form';
+@use 'navbar/navbar';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -64,6 +65,7 @@
   @include menu.configure(map-get($overrides, 'menu'));
   @include modal.configure(map-get($overrides, 'modal'));
   @include model-form.configure(map-get($overrides, 'model-form'));
+  @include navbar.configure(map-get($overrides, 'navbar'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -86,5 +88,6 @@
   @include menu.styles;
   @include modal.styles;
   @include model-form.styles;
+  @include navbar.styles;
   @include typography.styles;
 }

@@ -56,6 +56,7 @@
       <None Include="..\Elemental.Theme\Styles\menu\_menu.scss" Link="Components\AeMenu\_menu.scss" />
       <None Include="..\Elemental.Theme\Styles\modal\_modal.scss" Link="Components\AeModal\_modal.scss" />
       <None Include="..\Elemental.Theme\Styles\model-form\_model-form.scss" Link="Components\AeModelForm\_model-form.scss" />
+      <None Include="..\Elemental.Theme\Styles\navbar\_navbar.scss" Link="Components\AeNavbar\_navbar.scss" />
 	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 
     </ItemGroup>

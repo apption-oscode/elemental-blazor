@@ -61,6 +61,6 @@ $modalOptions: (
 
 @mixin styles {
   .ae.modal {
-    @include set-variations($modalOptions);
+    @include c.set-variations($modalOptions);
   }
 }

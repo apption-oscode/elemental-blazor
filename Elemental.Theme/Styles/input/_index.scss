@@ -2,12 +2,6 @@
 @use 'input-wrapper';
 @use 'search-wrapper';
 
-$inputOptions: (
-  'input': input.$inputOptions,
-  'search-wrapper': search-wrapper.$searchInputOptions,
-  'input-wrapper': input-wrapper.$inputWrapperOptions,
-);
-
 @mixin configure($options) {
   @if ($options) {
     $tempInput: input.$inputOptions;
