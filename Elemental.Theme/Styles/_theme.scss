@@ -18,6 +18,7 @@
 @use 'navbar/navbar';
 @use 'progress/progress';
 @use 'row/row';
+@use 'spinner/spinner';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -70,6 +71,7 @@
   @include navbar.configure(map-get($overrides, 'navbar'));
   @include progress.configure(map-get($overrides, 'progress'));
   @include row.configure(map-get($overrides, 'row'));
+  @include spinner.configure(map-get($overrides, 'spinner'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -95,5 +97,6 @@
   @include navbar.styles;
   @include progress.styles;
   @include row.styles;
+  @include spinner.styles;
   @include typography.styles;
 }
