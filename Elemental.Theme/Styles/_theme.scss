@@ -22,36 +22,12 @@
 @use 'steps/steps';
 @use 'table/table';
 @use 'toggle/toggle';
+@use 'tooltip/tooltip';
+@use 'treeview/treeview';
 @use 'typography/typography';
 
-// @import 'layout';
-// @import 'layoutV2';
-
-// @import 'input';
-// @import 'dropdown';
-// @import 'card';
-// @import 'progress';
-// @import 'table';
-// @import 'modal';
-// @import 'collapse';
-// @import 'menu';
-// @import 'modelform';
-// @import 'toggle';
-// @import 'navbar';
-// @import 'tooltip';
-// @import 'list.scss';
-// @import 'icon.scss';
-// @import 'treeview.scss';
-// @import 'checkbox.scss';
-// @import 'spinner.scss';
-// @import 'ie-not-supported.scss';
-// @import 'steps.scss';
-// @import 'pageoutline';
-// @import 'grid';
-/*
-    Third party
-*/
-// @import 'normalize';
+// Third-party
+@use 'normalize';
 
 @mixin custom($overrides) {
   @include body.configure(map-get($overrides, 'body'));
@@ -78,6 +54,8 @@
   @include steps.configure(map-get($overrides, 'steps'));
   @include table.configure(map-get($overrides, 'table'));
   @include toggle.configure(map-get($overrides, 'toggle'));
+  @include tooltip.configure(map-get($overrides, 'tooltip'));
+  @include treeview.configure(map-get($overrides, 'treeview'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -107,5 +85,7 @@
   @include steps.styles;
   @include table.styles;
   @include toggle.styles;
+  @include tooltip.styles;
+  @include treeview.styles;
   @include typography.styles;
 }
