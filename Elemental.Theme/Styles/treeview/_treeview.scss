@@ -1,7 +1,4 @@
-﻿@import 'colors';
-@import 'constants';
-@import 'box-shadow';
-@import 'utils';
+﻿@use '../common' as c;
 
 $treeViewOptions: (
   'default': (
@@ -19,7 +16,7 @@ $treeViewOptions: (
       'display': block,
       'padding-left': 25px,
       'margin-left': 15px,
-      'border-left': 1px solid $grey-400,
+      'border-left': 1px solid c.$grey-400,
     ),
     '.tree-view-item-content': (
       'display': flex,
@@ -29,7 +26,7 @@ $treeViewOptions: (
       'padding': 4px 8px,
       'cursor': pointer,
       '&:hover': (
-        'background-color': $grey-200,
+        'background-color': c.$grey-200,
       ),
     ),
     '.tree-view-icon': (
@@ -38,14 +35,14 @@ $treeViewOptions: (
     '.checkbox-region': (
       'width': 16px,
       'height': 16px,
-      'border': 1px solid $grey-500,
+      'border': 1px solid c.$grey-500,
       'display': flex,
       'align-items': center,
       'justify-content': center,
       'text-align': center,
       'margin-right': 8px,
       '&:hover': (
-        'background-color': $grey-200,
+        'background-color': c.$grey-200,
       ),
     ),
     '.tree-view-node-text': (
@@ -53,7 +50,7 @@ $treeViewOptions: (
       '&.clickable': (
         'cursor': pointer,
         '&:hover': (
-          'background-color': $grey-200,
+          'background-color': c.$grey-200,
         ),
       ),
       '&.bold': (
@@ -63,6 +60,14 @@ $treeViewOptions: (
   ),
 );
 
-.ae.tree-view {
-  @include set-variations($treeViewOptions);
+@mixin configure($options) {
+  @if ($options) {
+    $treeViewOptions: $options !global;
+  }
+}
+
+@mixin styles {
+  .ae.tree-view {
+    @include c.set-variations($treeViewOptions);
+  }
 }
