@@ -67,6 +67,10 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+  
+	<ItemGroup>
+	  <Folder Include="Components\AeModelForm\" />
+	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Inputs="js/*.js" Outputs="wwwroot/js/aebundle.js">
 		<Exec Command="npm run-script build" />

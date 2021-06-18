@@ -1,3 +1,8 @@
-@use 'Styles/theme';
+@use 'test-button'; // custom button map
+@use 'Styles/theme'; // elemental theme
 
-@include theme.styles;
+$overrides: (
+  'button': test-button.$newButtonOptions,
+);
+
+@include theme.custom($overrides);
