@@ -12,6 +12,7 @@
 @use 'layout/layout';
 @use 'layout/layoutV2';
 @use 'list/list';
+@use 'menu/menu';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -58,6 +59,7 @@
   @include layout.configure(map-get($overrides, 'layout'));
   @include layoutV2.configure(map-get($overrides, 'layoutV2'));
   @include list.configure(map-get($overrides, 'list'));
+  @include menu.configure(map-get($overrides, 'menu'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -77,5 +79,6 @@
   @include layout.styles;
   @include layoutV2.styles;
   @include list.styles;
+  @include menu.styles;
   @include typography.styles;
 }

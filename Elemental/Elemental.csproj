@@ -53,6 +53,7 @@
       <None Include="..\Elemental.Theme\Styles\layout\_layout.scss" Link="Components\AeLayout\_layout.scss" />
       <None Include="..\Elemental.Theme\Styles\layout\_layoutV2.scss" Link="Components\AeLayout\_layoutV2.scss" />
       <None Include="..\Elemental.Theme\Styles\list\_list.scss" Link="Components\AeList\_list.scss" />
+      <None Include="..\Elemental.Theme\Styles\menu\_menu.scss" Link="Components\AeMenu\_menu.scss" />
 	  <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 
     </ItemGroup>
@@ -76,3 +77,4 @@
 	</Target>
 
 </Project>
+
