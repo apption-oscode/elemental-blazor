@@ -46,6 +46,6 @@ $tooltipOptions: (
 
 @mixin styles {
   .ae.tooltip {
-    @include set-variations($tooltipOptions);
+    @include c.set-variations($tooltipOptions);
   }
 }
