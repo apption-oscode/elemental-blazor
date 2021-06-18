@@ -40,7 +40,7 @@ $toggleOptions: (
     '& input:checked + .slider:before': (
       '-webkit-transform': translateX(26px),
       '-ms-transform': translateX(26px),
-      'translate': translateX(26px),
+      'transform': translateX(26px),
     ),
   ),
   'round': (
@@ -63,7 +63,7 @@ $toggleOptions: (
     '& input:checked + .slider:before': (
       '-webkit-transform': translateX(13px),
       '-ms-transform': translateX(13px),
-      'translate': translateX(13px),
+      'transform': translateX(13px),
     ),
   ),
 );
@@ -76,6 +76,6 @@ $toggleOptions: (
 
 @mixin styles {
   .ae.toggle {
-    @include set-variations($toggleOptions);
+    @include c.set-variations($toggleOptions);
   }
 }
