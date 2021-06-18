@@ -17,6 +17,7 @@
 @use 'model-form/model-form';
 @use 'navbar/navbar';
 @use 'progress/progress';
+@use 'row/row';
 @use 'typography/typography';
 
 // @import 'layout';
@@ -68,6 +69,7 @@
   @include model-form.configure(map-get($overrides, 'model-form'));
   @include navbar.configure(map-get($overrides, 'navbar'));
   @include progress.configure(map-get($overrides, 'progress'));
+  @include row.configure(map-get($overrides, 'row'));
   @include typography.configure(map-get($overrides, 'typography'));
 
   @include styles;
@@ -92,5 +94,6 @@
   @include model-form.styles;
   @include navbar.styles;
   @include progress.styles;
+  @include row.styles;
   @include typography.styles;
 }
