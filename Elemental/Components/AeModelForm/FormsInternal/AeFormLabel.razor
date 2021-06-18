@@ -1,4 +1,6 @@
-﻿@if (!string.IsNullOrWhiteSpace(@GetLabel()))
+﻿@namespace Elemental.Components
+
+@if (!string.IsNullOrWhiteSpace(@GetLabel()))
 {
     <label class="ae ae-form-control-label @RequiredClass" for="@GetID()">
         <AeTypography>@GetLabel()</AeTypography>
