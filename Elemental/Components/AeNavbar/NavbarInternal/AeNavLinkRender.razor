@@ -1,4 +1,6 @@
-﻿@inherits HtmlElement
+﻿@namespace Elemental.Components
+
+@inherits HtmlElement
 
 <NavLink class="@_classname" href="@_href" Match="NavLinkMatch.All" @attributes="InputAttributesWithoutClass">
     @if (Link.CustomRender != null)
