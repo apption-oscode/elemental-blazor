@@ -1,15 +1,14 @@
-﻿@import 'constants';
-@import 'utils';
-@import 'scrollbar';
+﻿@use '../common' as c;
+@use '../scrollbar';
 
-$sideNavWidth: 300px !default;
-$sidenav-shrunk-width: 60px !default;
-$sidenav-main-menu-width: 60px !default;
+$sideNavWidth: 300px;
+$sidenav-shrunk-width: 60px;
+$sidenav-main-menu-width: 60px;
 
-$topNavHeight: 65px !default;
-$border-color: $grey-300 !default;
-$sidebar-color: #27283d !default;
-$item-hover: #3c3d5d !default;
+$topNavHeight: 65px;
+$border-color: $grey-300;
+$sidebar-color: #27283d;
+$item-hover: #3c3d5d;
 
 $layoutOptions: (
   'display': flex,
@@ -27,7 +26,7 @@ $layoutOptions: (
     ),
     '&.has-side-nav': (),
   ),
-) !default;
+);
 
 $IconColors: (
   'background-color': #46486d,
@@ -117,7 +116,7 @@ $IconColors: (
       'color': $red-600,
     ),
   ),
-) !default;
+);
 
 $sideNavOptions: (
   'display': flex,
@@ -256,7 +255,7 @@ $sideNavOptions: (
   '&.shrunk': (
     'width': $sidenav-shrunk-width,
   ),
-) !default;
+);
 
 $topNavOptions: (
   'height': $topNavHeight,
@@ -267,16 +266,58 @@ $topNavOptions: (
   'z-index': 9999,
   'background-color': $white,
   'border-bottom': 1px solid $grey-300,
-) !default;
+);
 
-.ae.layout {
-  @include set-values($layoutOptions);
+@mixin configure($options) {
+  @if ($options) {
+    @if (map.get($options, 'side-nav')) {
+      $sideNavOptions: map.get($options, 'side-nav') !global;
+    }
+    @if (map.get($options, 'top-nav')) {
+      $topNavOptions: map.get($options, 'top-nav') !global;
+    }
+    @if (map.get($options, 'layout')) {
+      $layoutOptions: map.get($options, 'layout') !global;
+    }
+    @if (map.get($options, 'icon-colors')) {
+      $IconColors: map.get($options, 'icon-colors') !global;
+    }
+
+    // variables
+    @if (map.get($options, 'sideNavWidth')) {
+      $sideNavWidth: map.get($options, 'sideNavWidth') !global;
+    }
+    @if (map.get($options, 'sidenav-shrunk-width')) {
+      $sidenav-shrunk-width: map.get($options, 'sidenav-shrunk-width') !global;
+    }
+    @if (map.get($options, 'sidenav-main-menu-width')) {
+      $sidenav-main-menu-width: map.get(
+        $options,
+        'sidenav-main-menu-width'
+      ) !global;
+    }
+    @if (map.get($options, 'border-color')) {
+      $border-color: map.get($options, 'border-color') !global;
+    }
+    @if (map.get($options, 'sidebar-color')) {
+      $sidebar-color: map.get($options, 'sidebar-color') !global;
+    }
+    @if (map.get($options, 'item-hover')) {
+      $item-hover: map.get($options, 'item-hover') !global;
+    }
+  }
 }
 
-.ae.sidenav {
-  @include set-values($sideNavOptions);
-}
+@mixin styles {
+  .ae.layout {
+    @include set-values($layoutOptions);
+  }
 
-.ae.top-nav {
-  @include set-values($topNavOptions);
+  .ae.sidenav {
+    @include set-values($sideNavOptions);
+  }
+
+  .ae.top-nav {
+    @include set-values($topNavOptions);
+  }
 }
