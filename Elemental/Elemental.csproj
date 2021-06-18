@@ -69,8 +69,7 @@
 
     </ItemGroup>
   
-	<ItemGroup>  
-		<None Include="compilerconfig.json" />
+	<ItemGroup>
 		<None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
 		<None Include="wwwroot\js\third-party\jquery.min.js" />
 		<None Include="wwwroot\js\third-party\shepherd.min.js">

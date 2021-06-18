@@ -22,7 +22,7 @@
     <NpmInstallStampFile>node_modules/.install-stamp</NpmInstallStampFile>
   </PropertyGroup>
   <Target Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
-    <Exec Command="npm i node-sass --save-dev" />
+    <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
 
@@ -41,6 +41,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Samples\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Styles\Pages\theme-page-container.scss" />
   </ItemGroup>
 	
   <ItemGroup>
