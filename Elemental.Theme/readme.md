@@ -90,7 +90,7 @@ That's it. When you build your project it will execute the npm script and compil
 
 To run the sass compilation you can always open your terminal in the same directory as your `package.json` and run the command to compile the sass.
 
-```ps
+```
 sass Styles/_index.scss:wwwroot/elemental.css
 ```
 
