@@ -1,7 +1,4 @@
-﻿@import 'colors';
-@import 'constants';
-@import 'box-shadow';
-@import 'utils';
+﻿@use '../common' as c;
 
 $tooltipOptions: (
   'default': (
@@ -41,6 +38,14 @@ $tooltipOptions: (
   ),
 );
 
-.ae.tooltip {
-  @include set-variations($tooltipOptions);
+@mixin configure($options) {
+  @if ($options) {
+    $tooltipOptions: $options !global;
+  }
+}
+
+@mixin styles {
+  .ae.tooltip {
+    @include set-variations($tooltipOptions);
+  }
 }

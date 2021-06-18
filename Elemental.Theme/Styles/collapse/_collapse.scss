@@ -53,7 +53,7 @@ $collapseOptions: (
     'background-color': colors.$red-600,
     'border-color': colors.$red-600,
   ),
-) !default;
+);
 
 @mixin configure($options) {
   @if ($options) {
