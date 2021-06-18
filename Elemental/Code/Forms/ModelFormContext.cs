@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elemental.Components.Forms
+namespace Elemental.Code.Forms
 {
 
     public class ModelFormArgsInternal
