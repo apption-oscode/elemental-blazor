@@ -1,0 +1,50 @@
+﻿@namespace Elemental.Components
+
+<div class="ae checkbox" @onclick="ItemSelected">
+    @if (IsChecked() == true)
+    {
+        @if (CheckedIcon == null)
+        {
+            <AeIcon Icon="check"></AeIcon>
+        }
+        else
+        {
+            <i class="@CheckedIcon"></i>
+
+        }
+    }
+    @if (IsChecked() == null)
+    {
+        @if (CheckedIcon == null)
+        {
+            <AeIcon Icon="subtract"></AeIcon>
+        }
+        else
+        {
+            <i class="@NullIcon"></i>
+
+        }
+    }
+    @if (IsChecked() == false && UncheckedIcon != null)
+    {
+        <i class="@UncheckedIcon"></i>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public Func<bool?> IsChecked { get; set; }
+
+    [Parameter]
+    public EventCallback ItemSelected { get; set; }
+
+    [Parameter]
+    public string CheckedIcon { get; set; }
+
+    [Parameter]
+    public string UncheckedIcon { get; set; }
+
+    [Parameter]
+    public string NullIcon { get; set; }
+}

@@ -1,0 +1,127 @@
+﻿@typeparam T
+@namespace Elemental.Components
+
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using Microsoft.AspNetCore.Components.Forms
+
+<AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false" />
+
+@if (HasValidValues())
+{
+    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input"> @*   Value="PropertyValue" ValueChanged="@((string value) => OnValueChanged(value))" *@
+        @if (!AeModelFormTools.IsRequired(PropertyInfo))
+            {
+            <option value="">@GetPlaceholder()</option>
+            }
+        @foreach (var value in getValidValues())
+            {
+            <option value="@value">@(GetLabel(value))</option>
+            }
+    </Microsoft.AspNetCore.Components.Forms.InputSelect>
+}
+else
+{
+    <select class="ae input"><option value="">-</option></select>
+}
+
+<div class="errortext">
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance,PropertyInfo))" />
+</div>
+
+@code {
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    [Parameter]
+    public T Instance { get; set; }
+
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
+
+    private IEnumerable<string> getValidValues()
+    {
+        return ModelFormContext.GetValidValues(PropertyInfo);
+    }
+
+    private bool HasValidValues()
+    {
+        return ModelFormContext.GetValidValues(PropertyInfo) != null;
+    }
+
+    private string GetPlaceholder()
+    {
+        var label = AeModelFormTools.GetPlaceHolder(PropertyInfo);
+        if (string.IsNullOrWhiteSpace(label))
+            return "-";
+        return label;
+    }    
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var firstValue = string.IsNullOrEmpty(PropertyValue) ? getValidValues()?.FirstOrDefault() : PropertyValue;
+        if (firstRender && AeModelFormTools.IsRequired(PropertyInfo) && firstValue != null)
+        {
+            PropertyValue = firstValue;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        valueChangedCallback = EventCallback.Factory.Create<string>(this, s => OnValueChanged(s));
+    }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name = "LabelForPropertyFunc")]
+    public Func<string, string> LabelForPropertyFunc { get; set; } = null;
+
+    [CascadingParameter(Name = "ModelFormContext")]
+    public ModelFormContext<T> ModelFormContext { get; set; } = null;
+
+    [CascadingParameter(Name = "Notifier")]
+    public Func<ModelFormArgsInternal, Task> Notifier { get; set; }
+
+    private string GetLabel(string value)
+    {
+        if (LabelForPropertyFunc != null)
+        {
+            return LabelForPropertyFunc(value);
+        }
+        else
+        {
+            return AeModelFormTools.Labelize(value);
+        }
+    }
+
+    private EventCallback<string> valueChangedCallback;
+
+    private async Task OnValueChanged(string value)
+    {
+        var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
+        await Notifier(changeArgs);
+    }
+    private string _previousValue;
+
+    public string PropertyValue
+    {
+        get => PropertyInfo.GetValue(Instance) as string;
+        set
+        {
+            PropertyInfo.SetValue(Instance, value);
+            valueChangedCallback.InvokeAsync(value);
+            //OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
+        }
+    }
+
+    private string GetID() => PropertyInfo.Name;
+
+
+
+    private int? HasStringLength()
+    {
+        var att = StringLengthAttribute.GetCustomAttribute(PropertyInfo, typeof(StringLengthAttribute)) as StringLengthAttribute;
+        return att?.MaximumLength;
+    }
+
+}

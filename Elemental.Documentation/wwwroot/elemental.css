@@ -1,0 +1,524 @@
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.button-page-container .ae.button {
+  margin-bottom: 8px;
+}
+.button-page-container .ae.button + .ae.button {
+  margin-left: 4px;
+}
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.card-page-container {
+  /**
+   * Copyright (c) 2020 Apption Corporation
+   * 
+   * This Source Code Form is subject to the terms of the Mozilla Public
+   * License, v. 2.0. If a copy of the MPL was not distributed with this
+   * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   */
+  /** Transparent **/
+  /** Black **/
+  /** White **/
+  /** Gray **/
+  /** Red **/
+  /** Orange **/
+  /** Yellow **/
+  /** Green **/
+  /** Teal **/
+  /** Blue **/
+  /** Indigo **/
+  /** Purple **/
+  /** Pink **/
+  /**
+   * Copyright (c) 2020 Apption Corporation
+   * 
+   * This Source Code Form is subject to the terms of the Mozilla Public
+   * License, v. 2.0. If a copy of the MPL was not distributed with this
+   * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   */
+}
+.card-page-container .basics .ae.card {
+  margin-bottom: 1rem;
+}
+.card-page-container .brian {
+  width: 480px;
+  background-color: #1a202c;
+}
+.card-page-container .brian:hover {
+  background-color: #2d3748;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.09), 0 6px 6px rgba(0, 0, 0, 0.13);
+}
+.card-page-container .brian h3 {
+  margin-top: 0;
+}
+.card-page-container .brian .ae.icon,
+.card-page-container .brian .ae.typography {
+  color: #fff;
+}
+.card-page-container .brian .big-icon {
+  font-size: 4rem;
+  align-self: center;
+  margin: 0 1.5rem 0 0.25rem;
+}
+.card-page-container .brian .top-right {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+}
+
+.input-page-container .input-container {
+  max-width: 400px;
+}
+.input-page-container .input-container.multiple .ae.input-wrapper {
+  margin: 1rem 0;
+}
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.layout-page-container .layout-container {
+  background-color: #edf2f7;
+  font-size: 0.7rem;
+  color: #fff;
+}
+.layout-page-container .layout-container .ae.layout {
+  display: flex;
+}
+.layout-page-container .layout-container .ae.side-nav {
+  background-color: #90cdf4;
+  position: initial;
+  top: initial;
+  left: initial;
+  height: 448px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.layout-page-container .layout-container .ae.content-wrapper.has-side-nav {
+  margin-left: 0;
+}
+.layout-page-container .layout-container .ae.top-nav {
+  background-color: #63b3ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: initial !important;
+  z-index: 1 !important;
+}
+.layout-page-container .layout-container .ae.content-body {
+  background-color: #4299e1;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.sidebar-page-container .layout-container {
+  background-color: #edf2f7;
+  font-size: 0.7rem;
+  color: #fff;
+}
+.sidebar-page-container .layout-container .ae.layout-v2 {
+  display: flex;
+}
+.sidebar-page-container .layout-container .ae.side-nav {
+  background-color: #90cdf4;
+  position: initial;
+  top: initial;
+  left: initial;
+  height: 448px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.sidebar-page-container .layout-container .ae.body-wrapper.has-side-nav {
+  margin-left: 0;
+}
+.sidebar-page-container .layout-container .ae.top-nav {
+  background-color: #63b3ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: initial !important;
+  z-index: 1 !important;
+}
+.sidebar-page-container .layout-container .ae.content-body {
+  background-color: #4299e1;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+.navbar-page-container {
+  /**
+   * Copyright (c) 2020 Apption Corporation
+   * 
+   * This Source Code Form is subject to the terms of the Mozilla Public
+   * License, v. 2.0. If a copy of the MPL was not distributed with this
+   * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   */
+  /** Transparent **/
+  /** Black **/
+  /** White **/
+  /** Gray **/
+  /** Red **/
+  /** Orange **/
+  /** Yellow **/
+  /** Green **/
+  /** Teal **/
+  /** Blue **/
+  /** Indigo **/
+  /** Purple **/
+  /** Pink **/
+  /**
+   * Copyright (c) 2020 Apption Corporation
+   * 
+   * This Source Code Form is subject to the terms of the Mozilla Public
+   * License, v. 2.0. If a copy of the MPL was not distributed with this
+   * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   */
+  /** Transparent **/
+  /** Black **/
+  /** White **/
+  /** Gray **/
+  /** Red **/
+  /** Orange **/
+  /** Yellow **/
+  /** Green **/
+  /** Teal **/
+  /** Blue **/
+  /** Indigo **/
+  /** Purple **/
+  /** Pink **/
+}
+.navbar-page-container .nav-logo-wrapper {
+  display: flex;
+  padding: 1rem 1rem 0;
+  height: 100%;
+}
+.navbar-page-container .nav-logo-wrapper .nav-logo {
+  width: 160px;
+}
+.navbar-page-container .nav-logo-wrapper .nav-logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.navbar-page-container .nav-logo-wrapper:hover {
+  background-color: #2b6cb0;
+}
+.navbar-page-container .nav-logo-wrapper {
+  display: flex;
+  padding: 1rem 1rem 0;
+  height: 100%;
+}
+.navbar-page-container .nav-logo-wrapper .nav-logo {
+  width: 160px;
+}
+.navbar-page-container .nav-logo-wrapper .nav-logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.navbar-page-container .nav-logo-wrapper:hover {
+  background-color: #2b6cb0;
+}
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.treeview-clicked {
+  margin-top: 16px;
+}
+.treeview-clicked span {
+  padding: 4px;
+  background-color: white;
+  border: 1px solid #1a202c;
+}
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+.home-page-container .section:before {
+  border-top: 1px solid #e2e8f0;
+  display: block;
+  position: relative;
+  content: "";
+  width: 50%;
+  margin: 5rem auto;
+}
+.home-page-container .section.description {
+  text-align: center;
+}
+.home-page-container .section.description .plug {
+  margin-top: 2rem;
+  opacity: 0.5;
+  transition: all 0.4s ease-out;
+}
+.home-page-container .section.description .plug:hover {
+  opacity: 1;
+}
+.home-page-container .section #nuget-install,
+.home-page-container .section .code-wrapper {
+  margin: 0.5rem 0;
+}
+
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/** Transparent **/
+/** Black **/
+/** White **/
+/** Gray **/
+/** Red **/
+/** Orange **/
+/** Yellow **/
+/** Green **/
+/** Teal **/
+/** Blue **/
+/** Indigo **/
+/** Purple **/
+/** Pink **/
+body {
+  overflow: overlay;
+}
+
+#top-nav {
+  background-color: #2b6cb0;
+  height: 100%;
+}
+#top-nav .white {
+  color: #fff;
+}
+
+.sidenav {
+  border-right: 1px solid #edf2f7;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.sidenav .logo {
+  background-color: #2b6cb0;
+  height: 48px;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+}
+.sidenav .logo:hover {
+  background-color: #3182ce;
+}
+.sidenav .logo img {
+  height: 1.5rem;
+}
+.sidenav .nav-link {
+  text-decoration: none;
+  padding: 0.25rem 1rem;
+}
+.sidenav .nav-link.active {
+  background-color: #f7fafc;
+}
+.sidenav .nav-link:hover {
+  background-color: #f7fafc;
+}
+
+.ae.side-nav .header .logo {
+  background-color: #2b6cb0;
+  height: 48px;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+}
+.ae.side-nav .header .logo:hover {
+  background-color: #3182ce;
+}
+.ae.side-nav .header .logo img {
+  height: 2rem;
+  padding-left: 1rem;
+}
+.ae.side-nav .header .logo.small img {
+  overflow: hidden;
+  object-fit: cover;
+  object-position: 0%;
+}
+
+.demo-section + .demo-section {
+  margin-top: 5rem;
+}
+.demo-section + .demo-section:before {
+  border-top: 1px solid #e2e8f0;
+  display: block;
+  position: relative;
+  top: -1rem;
+  margin: 0 auto;
+  content: "";
+}
+
+.ie-not-supported-container {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed black;
+}
+
+/*# sourceMappingURL=elemental.css.map */

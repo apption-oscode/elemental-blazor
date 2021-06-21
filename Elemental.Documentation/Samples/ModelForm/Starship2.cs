@@ -1,6 +1,6 @@
-﻿using Elemental.Components.Forms;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Elemental.Components;
 
 namespace Elemental.Documentation.Data
 {

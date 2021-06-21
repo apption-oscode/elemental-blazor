@@ -37,9 +37,39 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\Elemental.Documentation\Samples\Outline\AeFlex.razor" Link="AeFlex.razor" />
-		<None Include="..\Elemental.Documentation\Samples\Outline\DemoSection.razor" Link="DemoSection.razor" />
-		<None Include="compilerconfig.json" />
+	  <None Include="..\Elemental.Theme\Styles\button\_button.scss" Link="Components\AeButton\_button.scss" />
+      <None Include="..\Elemental.Theme\Styles\card\_card.scss" Link="Components\AeCard\_card.scss" />
+      <None Include="..\Elemental.Theme\Styles\checkbox\_checkbox.scss" Link="Components\AeCheckbox\_checkbox.scss" />
+      <None Include="..\Elemental.Theme\Styles\collapse\_collapse.scss" Link="Components\AeCollapse\_collapse.scss" />
+      <None Include="..\Elemental.Theme\Styles\column\_column.scss" Link="Components\AeColumn\_column.scss" />
+      <None Include="..\Elemental.Theme\Styles\dropdown\_dropdown.scss" Link="Components\AeDropdown\_dropdown.scss" />
+      <None Include="..\Elemental.Theme\Styles\flex\_flex.scss" Link="Components\AeFlex\_flex.scss" />
+      <None Include="..\Elemental.Theme\Styles\icon\_icon.scss" Link="Components\AeIcon\_icon.scss" />
+      <None Include="..\Elemental.Theme\Styles\ie-not-supported\_ie-not-supported.scss" Link="Components\AeIENotSupported\_ie-not-supported.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_index.scss" Link="Components\AeInput\_index.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_input.scss" Link="Components\AeInput\_input.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_search-wrapper.scss" Link="Components\AeInput\_search-wrapper.scss" />
+      <None Include="..\Elemental.Theme\Styles\input\_input-wrapper.scss" Link="Components\AeInput\_input-wrapper.scss" />
+      <None Include="..\Elemental.Theme\Styles\layout\_layout.scss" Link="Components\AeLayout\_layout.scss" />
+      <None Include="..\Elemental.Theme\Styles\layout\_layoutV2.scss" Link="Components\AeLayout\_layoutV2.scss" />
+      <None Include="..\Elemental.Theme\Styles\list\_list.scss" Link="Components\AeList\_list.scss" />
+      <None Include="..\Elemental.Theme\Styles\menu\_menu.scss" Link="Components\AeMenu\_menu.scss" />
+      <None Include="..\Elemental.Theme\Styles\modal\_modal.scss" Link="Components\AeModal\_modal.scss" />
+      <None Include="..\Elemental.Theme\Styles\model-form\_model-form.scss" Link="Components\AeModelForm\_model-form.scss" />
+      <None Include="..\Elemental.Theme\Styles\navbar\_navbar.scss" Link="Components\AeNavbar\_navbar.scss" />
+      <None Include="..\Elemental.Theme\Styles\progress\_progress.scss" Link="Components\AeProgress\_progress.scss" />
+      <None Include="..\Elemental.Theme\Styles\row\_row.scss" Link="Components\AeRow\_row.scss" />
+      <None Include="..\Elemental.Theme\Styles\spinner\_spinner.scss" Link="Components\AeSpinner\_spinner.scss" />
+      <None Include="..\Elemental.Theme\Styles\steps\_steps.scss" Link="Components\AeSteps\_steps.scss" />
+      <None Include="..\Elemental.Theme\Styles\table\_table.scss" Link="Components\AeTable\_table.scss" />
+      <None Include="..\Elemental.Theme\Styles\toggle\_toggle.scss" Link="Components\AeToggle\_toggle.scss" />
+      <None Include="..\Elemental.Theme\Styles\tooltip\_tooltip.scss" Link="Components\AeTooltip\_tooltip.scss" />
+      <None Include="..\Elemental.Theme\Styles\treeview\_treeview.scss" Link="Components\AeTreeview\_treeview.scss" />
+      <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
+
+    </ItemGroup>
+  
+	<ItemGroup>
 		<None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
 		<None Include="wwwroot\js\third-party\jquery.min.js" />
 		<None Include="wwwroot\js\third-party\shepherd.min.js">
@@ -47,13 +77,14 @@
 		</None>
 	</ItemGroup>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Inputs="js/*.js" Outputs="wwwroot/js/aebundle.js">
+	<Target Condition="'$(Configuration)' == 'Debug'" Name="PreBuild" BeforeTargets="PreBuildEvent" Inputs="js/*.js" Outputs="wwwroot/js/aebundle.js">
 		<Exec Command="npm run-script build" />
 	</Target>
 	
-	<Target Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
+	<Target Condition="'$(Configuration)' == 'Debug'" Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
 		<Exec Command="npm install --save-dev" />
 		<Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
 	</Target>
 
 </Project>
+
