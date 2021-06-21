@@ -48,6 +48,8 @@ jobs:
           api_location: "Api" # Api source code path - optional
           output_location: "wwwroot" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          SKIP_NODE: 1
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
