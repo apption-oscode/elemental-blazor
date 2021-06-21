@@ -77,11 +77,11 @@
 		</None>
 	</ItemGroup>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Inputs="js/*.js" Outputs="wwwroot/js/aebundle.js">
+	<Target Condition="'$(Configuration)' == 'Debug'" Name="PreBuild" BeforeTargets="PreBuildEvent" Inputs="js/*.js" Outputs="wwwroot/js/aebundle.js">
 		<Exec Command="npm run-script build" />
 	</Target>
 	
-	<Target Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
+	<Target Condition="'$(Configuration)' == 'Debug'" Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
 		<Exec Command="npm install --save-dev" />
 		<Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
 	</Target>

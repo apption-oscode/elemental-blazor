@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+  <Target Condition="'$(Configuration)' == 'Debug'" Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="npm run build-css" />
   </Target>
 
@@ -52,7 +52,7 @@
     <!-- File with mtime of last successful npm install -->
     <NpmInstallStampFile>node_modules/.install-stamp</NpmInstallStampFile>
   </PropertyGroup>
-  <Target Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
+  <Target Condition="'$(Configuration)' == 'Debug'" Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
     <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
