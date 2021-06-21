@@ -408,6 +408,13 @@ template {
   display: none;
 }
 
+/**
+* Copyright (c) 2020 Apption Corporation
+* 
+* This Source Code Form is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*/
 body {
   background-color: #f7fafc;
   color: #4a5568;
@@ -445,6 +452,23 @@ body {
   background-color: #4a5568;
   border-color: #4a5568;
 }
+.ae.button.dark {
+  background-color: #2d3748;
+  border-color: #2d3748;
+}
+.ae.button.dark:hover {
+  background-color: #4a5568;
+  border-color: #4a5568;
+}
+.ae.button.light {
+  color: #718096;
+  background-color: #f7fafc;
+  border-color: #f7fafc;
+}
+.ae.button.light:hover {
+  background-color: #e2e8f0;
+  border-color: #e2e8f0;
+}
 .ae.button.blue {
   background-color: #3182ce;
   border-color: #3182ce;
@@ -452,6 +476,18 @@ body {
 .ae.button.blue:hover {
   background-color: #2b6cb0;
   border-color: #2b6cb0;
+}
+.ae.button.red {
+  background-color: #e53e3e;
+  border-color: #e53e3e;
+}
+.ae.button.red:hover {
+  background-color: #c53030;
+  border-color: #c53030;
+}
+.ae.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .ae.card {
