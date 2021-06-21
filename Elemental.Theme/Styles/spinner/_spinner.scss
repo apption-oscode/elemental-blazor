@@ -1,4 +1,6 @@
-﻿@use '../common/colors' as c;
+﻿@use 'sass:math';
+
+@use '../common/colors' as c;
 
 @mixin configure($options) {
   @if ($options) {
@@ -23,7 +25,7 @@
     justify-content: space-evenly;
 
     .spinner-item {
-      width: $size / 12;
+      width: math.div($size, 12);
       height: 80%;
       animation: spinner1 $animation-duration ease-in-out infinite;
 
@@ -36,27 +38,27 @@
 
     .spinner-item:nth-child(1) {
       background: $clr1;
-      animation-delay: $animation-duration / 10 * -3;
+      animation-delay: math.div($animation-duration, 10) * -3;
     }
 
     .spinner-item:nth-child(2) {
       background: $clr5;
-      animation-delay: $animation-duration / 10 * -1;
+      animation-delay: math.div($animation-duration, 10) * -1;
     }
 
     .spinner-item:nth-child(3) {
       background: $clr3;
-      animation-delay: $animation-duration / 10 * -2;
+      animation-delay: math.div($animation-duration, 10) * -2;
     }
 
     .spinner-item:nth-child(4) {
       background: $clr4;
-      animation-delay: $animation-duration / 10 * -1;
+      animation-delay: math.div($animation-duration, 10) * -1;
     }
 
     .spinner-item:nth-child(5) {
       background: $clr2;
-      animation-delay: $animation-duration / 10 * -3;
+      animation-delay: math.div($animation-duration, 10) * -3;
     }
   }
 
@@ -111,7 +113,7 @@
   }
 
   .ae.spinner.Type3 {
-    $item-size: $size / 2.5;
+    $item-size: math.div($size, 2.5);
     $animation-duration: 5000ms;
     position: relative;
     width: $size;
@@ -229,7 +231,7 @@
 
   .ae.spinner.Type4 {
     $animation-duration: 1150ms;
-    $item-size: $size / 4;
+    $item-size: math.div($size, 4);
 
     .spinner-item {
       width: $item-size;
@@ -253,17 +255,17 @@
 
     .spinner-item:nth-child(1) {
       border: 4px solid $clr5;
-      animation-delay: $animation-duration / 6 * -1;
+      animation-delay: math.div($animation-duration, 6) * -1;
     }
 
     .spinner-item:nth-child(2) {
       border: 4px solid $clr3;
-      animation-delay: $animation-duration / 6 * -2;
+      animation-delay: math.div($animation-duration, 6) * -2;
     }
 
     .spinner-item:nth-child(3) {
       border: 4px solid $clr1;
-      animation-delay: $animation-duration / 6 * -3;
+      animation-delay: math.div($animation-duration, 6) * -3;
     }
   }
 
@@ -278,7 +280,7 @@
 
     .spinner-item {
       height: 40%;
-      width: $size / 13;
+      width: math.div($size, 13);
       animation: spinner5 $animation-duration ease-in-out infinite;
 
       @keyframes spinner5 {
@@ -298,22 +300,22 @@
 
     .spinner-item:nth-child(2) {
       background-color: $clr3;
-      animation-delay: $animation-duration/ 10;
+      animation-delay: math.div($animation-duration, 10);
     }
 
     .spinner-item:nth-child(3) {
       background-color: $clr5;
-      animation-delay: $animation-duration / 10 * 2;
+      animation-delay: math.div($animation-duration, 10) * 2;
     }
 
     .spinner-item:nth-child(4) {
       background-color: $clr4;
-      animation-delay: $animation-duration / 10 * 3;
+      animation-delay: math.div($animation-duration, 10) * 3;
     }
 
     .spinner-item:nth-child(5) {
       background-color: $clr2;
-      animation-delay: $animation-duration / 10 * 4;
+      animation-delay: math.div($animation-duration, 10) * 4;
     }
   }
 
@@ -352,7 +354,7 @@
 
     .spinner-item:nth-of-type(2) {
       background: $clr5;
-      animation-delay: $animation-duration / -2;
+      animation-delay: math.div($animation-duration, -2);
     }
   }
 
