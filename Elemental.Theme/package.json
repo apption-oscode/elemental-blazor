@@ -8,6 +8,7 @@
     "sass": "^1.35.1"
   },
   "scripts": {
+    "watch-scss": "sass Styles/_index.scss:wwwroot/elemental.css --watch",
     "build-css": "sass Styles/_index.scss:wwwroot/elemental.css && sass --style=compressed Styles/_index.scss wwwroot/elemental.min.css"
   },
   "author": "Apption",
