@@ -1,7 +1,7 @@
 ﻿@inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
-<div class="ae sidenav">
+<div class="@_sideNavClassname">
     <div class="top">
         <div class="ae sidenav-logo">            
             @Brand            
@@ -11,18 +11,27 @@
                 @foreach (var link in Links)
                 {
                     @if (link.Enable)
-                    {
-                        <div class="ae sidenav-group-wrapper">
-                            <AeSideNavItem Link="link" Main />
-                        </div>
+                    {                        
+                        <AeSideNavItem Link="link" Main />
+                    }
+                }
+                @if (BottomLinks?.First(l => l.Enable) != null)
+                {
+                    <AeSideNavItem Link="BottomLinks.First(l => l.Enable)" Main style="margin-top:auto;"/>                    
+                }
+                @foreach (var link in BottomLinks?.Except(new List<AeNavLink> { BottomLinks?.First(l => l.Enable) }) ?? new List<AeNavLink>() )
+                {
+                    @if (link.Enable)
+                    {               
+                        <AeSideNavItem Link="link" Main />
                     }
                 }
             </div>
             <div class="ae sidenav-sub-menu">
-                @foreach (var link in Links)
+                @foreach (var link in Links.Union(BottomLinks ?? new List<AeNavLink>()))
                 {
                     <div class="ae sidenav-sub-group-wrapper" data-nav-href="@link.To">
-                        <a class="ae sidenav-sub-group-title" href="@link.To">@link.Label</a>                        
+                        <a class="ae sidenav-sub-group-title" href="@link.To">@link.Label</a>                             
                         @foreach (var subLink in link.ChildLinks)
                         {
                             @if(subLink.Enable)
@@ -38,14 +47,11 @@
                                     }
                                 </div>                                
                             }
-                        }                                                    
+                        }                                                                                                       
                     </div>
                 }
             </div>
         </div>
-    </div>
-    <div class="bottom">
-        @Bottom
     </div>
 </div>
 
@@ -56,20 +62,22 @@
     [Parameter]
     public List<AeNavLink> Links { get; set; }
     [Parameter]
-    public RenderFragment Bottom { get; set; }
+    public List<AeNavLink> BottomLinks { get; set; }
     [Parameter]
     public int SidebarExpandThreshold { get; set; } = 1400;
     [Parameter]
     public int SidebarShrunkThreshold { get; set; } = 1400;
-    
 
-    private string _sideNavClassname => $"ae side-nav";
+    [Parameter]
+    public bool StayCollapse { get; set; } = false;
+
+    private string _sideNavClassname => $"ae sidenav";
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeAsync<string>("sidenav.initializeSidenav", firstRender, SidebarExpandThreshold, SidebarShrunkThreshold);
+            await JSRuntime.InvokeAsync<string>("sidenav.initializeSidenav", firstRender, SidebarExpandThreshold, SidebarShrunkThreshold, StayCollapse);
         }
         await JSRuntime.InvokeAsync<string>("sidenav.updateNav");
     }

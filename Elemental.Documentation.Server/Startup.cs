@@ -54,6 +54,10 @@ namespace Elemental.Documentation
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapFallbackToPage("/components/*", "/_Host");
+                endpoints.MapFallbackToPage("/content/*", "/_Host");
+                endpoints.MapFallbackToPage("/layout/*", "/_Host");
+                endpoints.MapFallbackToPage("/helpers/*", "/_Host");
                 //endpoints.MapDefaultControllerRoute();
             });
         }

@@ -5,62 +5,65 @@ trigger:
   branches:
     include:
     - develop
+jobs:
+- job: LinuxJob
+  pool:
+    name: Apption Pool
+  workspace:
+    clean: all
+    
+  variables:
+    NetCoreVersion: '6.0.x'
 
-pool:
-  name: Apption Pool
+  steps:
+  - task: AzureKeyVault@1
+    inputs:
+      azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
+      KeyVaultName: 'ElementalVault '
+      SecretsFilter: 'NugetAPISecret'
+      RunAsPreJob: true
 
-variables:
-  NetCoreVersion: '6.0.x'
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core sdk $(NetCoreVersion)'
+    inputs:
+      version: '$(NetCoreVersion)'
+      includePreviewVersions: true
 
-steps:
-- task: AzureKeyVault@1
-  inputs:
-    azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
-    KeyVaultName: 'ElementalVault '
-    SecretsFilter: 'NugetAPISecret'
-    RunAsPreJob: true
+  - task: NodeTool@0
+    displayName: 'install node'
+    inputs:
+      versionSpec: '15.x' 
+      checkLatest: true
 
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk $(NetCoreVersion)'
-  inputs:
-    version: '$(NetCoreVersion)'
-    includePreviewVersions: true
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
 
-- task: NodeTool@0
-  displayName: 'install node'
-  inputs:
-    versionSpec: '15.x' 
-    checkLatest: true
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test'
+    inputs:
+      command: test
+      arguments: '--no-restore --verbosity normal'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
-    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+  - task: DotNetCoreCLI@2
+    displayName: 'nuget push elemental'
+    inputs:
+      command: custom
+      custom: nuget
+      arguments: 'push Elemental/bin/Release/AElemental.Blazor.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
-  inputs:
-    command: test
-    arguments: '--no-restore --verbosity normal'
+  # Build Theme
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      projects: '**/Elemental.Theme.csproj'
+      arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'nuget push elemental'
-  inputs:
-    command: custom
-    custom: nuget
-    arguments: 'push Elemental/bin/Release/AElemental.Blazor.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
-
-# Build Theme
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
-    projects: '**/Elemental.Theme.csproj'
-    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'nuget push theme'
-  inputs:
-    command: custom
-    custom: nuget
-    arguments: 'push Elemental.Theme/bin/Release/AElemental.Blazor.Theme.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
+  - task: DotNetCoreCLI@2
+    displayName: 'nuget push theme'
+    inputs:
+      command: custom
+      custom: nuget
+      arguments: 'push Elemental.Theme/bin/Release/AElemental.Blazor.Theme.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
 

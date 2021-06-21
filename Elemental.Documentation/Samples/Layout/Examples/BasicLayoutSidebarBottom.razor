@@ -5,16 +5,17 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Basic Layout
-    Description: The most basic of page layouts
+    Title: Basic Layout With Sidebar Bottom Links
+    Description: Layout with sidebar bottom links
 *@
 
 @layout EmptyLayout
-@page "/layout-1"
+@page "/layout-5"
+@using Elemental.Components.LayoutInternal
 
-<AeLayout Links="_navLinks" SidebarExpandThreshold="800" SidebarShrunkThreshold="900">
+<AeLayout Links="_navLinks" SidebarExpandThreshold="900" SidebarShrunkThreshold="900" BottomLinks="bottoms">
     <Brand>
-        <AeFlex>
+       <AeFlex>
             <img src="_content/Elemental.Documentation/img/Elemental_128x128.png" style="max-height: 50px; padding-right:4px;" />
             <AeTypography Variant="h2" style="text-align: center; padding: 0rem 0rem 0rem; margin: auto;">elemental</AeTypography>
         </AeFlex>
@@ -51,5 +52,14 @@
             new AeNavLink{ Label = "Sub 5", To = "/main6/sub5", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "pink"},
 
         } }
+    };
+    private List<AeNavLink> bottoms = new List<AeNavLink> { 
+        new AeNavLink { Label = "Profile", To = "/profile", IconName = "passport", IconClassName = "blue" }, 
+        new AeNavLink { Label = "Settings", To = "/settings", IconName = "settings-2", IconClassName = "indigo", ChildLinks = new List<AeNavLink>
+        {
+            new AeNavLink { Label = "Setting 1", To = "/settings/1", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "indigo" },                     
+            new AeNavLink { Label = "Setting 2", To = "/settings/2", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "indigo" },                     
+            new AeNavLink { Label = "Setting 3", To = "/settings/3", IconName = "focus", IconStyle = RXIcon.RXStyle.Fill, IconClassName = "indigo" },                     
+        } } 
     };
 }
