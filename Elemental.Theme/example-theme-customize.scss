@@ -1,4 +1,4 @@
-@use 'test-button'; // custom button map
+@use 'example-theme-override-button.scss' as test-button; // custom button map
 @use 'Styles/theme'; // elemental theme
 
 $overrides: (
