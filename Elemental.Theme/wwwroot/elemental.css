@@ -789,6 +789,13 @@ body {
   top: 0;
   z-index: 10;
 }
+.ae.layout.stay-collapse .ae.sidenav {
+  width: 60px;
+}
+.ae.layout.stay-collapse .ae.content-wrapper {
+  margin-left: 60px;
+}
+
 .ae.sidenav {
   display: flex;
   flex-direction: column;
@@ -812,16 +819,119 @@ body {
 }
 .ae.sidenav .top {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 .ae.sidenav .bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+.ae.sidenav .bottom .ae.sidenav-item {
+  height: 3rem;
+  padding: 1.75rem 0.5rem;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover {
+  background-color: #46486d;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover i {
+  color: #3182ce;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.main .sidenav-text {
+  color: #3182ce;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.purple {
+  border-left: 4px solid #805ad5;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.purple i {
+  color: #805ad5;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.purple.main .sidenav-text {
+  color: #805ad5;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.blue {
+  border-left: 4px solid #3182ce;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.blue i {
+  color: #3182ce;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.blue.main .sidenav-text {
+  color: #3182ce;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.orange {
+  border-left: 4px solid #dd6b20;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.orange i {
+  color: #dd6b20;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.orange.main .sidenav-text {
+  color: #dd6b20;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.indigo {
+  border-left: 4px solid #5a67d8;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.indigo i {
+  color: #5a67d8;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.indigo.main .sidenav-text {
+  color: #5a67d8;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.yellow {
+  border-left: 4px solid #d69e2e;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.yellow i {
+  color: #d69e2e;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.yellow.main .sidenav-text {
+  color: #d69e2e;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.green {
+  border-left: 4px solid #38a169;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.green i {
+  color: #38a169;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.green.main .sidenav-text {
+  color: #38a169;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.pink {
+  border-left: 4px solid #d53f8c;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.pink i {
+  color: #d53f8c;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.pink.main .sidenav-text {
+  color: #d53f8c;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.red {
+  border-left: 4px solid #e53e3e;
+  color: #fff;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.red i {
+  color: #e53e3e;
+}
+.ae.sidenav .bottom .ae.sidenav-item:hover.red.main .sidenav-text {
+  color: #e53e3e;
+}
+.ae.sidenav .bottom .ae.sidenav-item.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ae.sidenav .bottom .ae.sidenav-item.main .sidenav-text {
+  font-size: 0.7rem;
+  padding-top: 0.2rem;
 }
 .ae.sidenav .ae.sidenav-container {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  flex-grow: 1;
 }
 .ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu {
   display: flex;
@@ -829,121 +939,131 @@ body {
   border-right: 3px solid #2d3748;
   max-width: 60px;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item {
   height: 3rem;
   padding: 1.75rem 0.5rem;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover {
   background-color: #46486d;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover i {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.main .sidenav-text {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.purple {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.purple {
   border-left: 4px solid #805ad5;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.purple i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.purple i {
   color: #805ad5;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.purple.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.purple.main .sidenav-text {
   color: #805ad5;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.blue {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.blue {
   border-left: 4px solid #3182ce;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.blue i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.blue i {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.blue.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.blue.main .sidenav-text {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.orange {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.orange {
   border-left: 4px solid #dd6b20;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.orange i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.orange i {
   color: #dd6b20;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.orange.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.orange.main .sidenav-text {
   color: #dd6b20;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.indigo {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.indigo {
   border-left: 4px solid #5a67d8;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.indigo i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.indigo i {
   color: #5a67d8;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.indigo.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.indigo.main .sidenav-text {
   color: #5a67d8;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.yellow {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.yellow {
   border-left: 4px solid #d69e2e;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.yellow i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.yellow i {
   color: #d69e2e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.yellow.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.yellow.main .sidenav-text {
   color: #d69e2e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.green {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.green {
   border-left: 4px solid #38a169;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.green i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.green i {
   color: #38a169;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.green.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.green.main .sidenav-text {
   color: #38a169;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.pink {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.pink {
   border-left: 4px solid #d53f8c;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.pink i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.pink i {
   color: #d53f8c;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.pink.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.pink.main .sidenav-text {
   color: #d53f8c;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.red {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.red {
   border-left: 4px solid #e53e3e;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.red i {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.red i {
   color: #e53e3e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a:hover.red.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item:hover.red.main .sidenav-text {
   color: #e53e3e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a.main {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item.main {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-group-wrapper a.main .sidenav-text {
+.ae.sidenav .ae.sidenav-container .ae.sidenav-main-menu .ae.sidenav-item.main .sidenav-text {
   font-size: 0.7rem;
   padding-top: 0.2rem;
 }
 .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   overflow-x: hidden;
-  width: 100%;
+}
+.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar {
+  width: 0.25rem;
+}
+.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar-track {
+  background: #edf2f7;
+  border-radius: 8px;
+}
+.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar-thumb {
+  background: #a0aec0;
+  border-radius: 8px;
+}
+.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu::-webkit-scrollbar-thumb:hover {
+  background: #718096;
 }
 .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper {
   display: none;
+  width: 240px;
+  max-height: 550px;
 }
 .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper.expanded {
   display: flex;
@@ -968,20 +1088,6 @@ body {
 .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper i {
   font-size: 1.25rem;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar {
-  width: 0.25rem;
-}
-.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar-track {
-  background: #edf2f7;
-  border-radius: 8px;
-}
-.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar-thumb {
-  background: #a0aec0;
-  border-radius: 8px;
-}
-.ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-group-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #718096;
-}
 .ae.sidenav .ae.sidenav-container .ae.sidenav-sub-menu .ae.sidenav-sub-sub-group-wrapper {
   display: none;
 }
@@ -993,7 +1099,7 @@ body {
   font-size: 1rem;
   margin-left: 20px;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item {
+.ae.sidenav .ae.sidenav-item {
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -1004,106 +1110,106 @@ body {
   color: inherit;
   text-decoration: none;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active {
+.ae.sidenav .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-item.active {
   border-left: 4px solid #3182ce;
   font-weight: bold;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active i {
+.ae.sidenav .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-item.active i {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active {
+.ae.sidenav .ae.sidenav-item.exact, .ae.sidenav .ae.sidenav-item.active {
   background-color: #46486d;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active i {
+.ae.sidenav .ae.sidenav-item.exact i, .ae.sidenav .ae.sidenav-item.active i {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.main .sidenav-text {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.purple, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.purple {
+.ae.sidenav .ae.sidenav-item.exact.purple, .ae.sidenav .ae.sidenav-item.active.purple {
   border-left: 4px solid #805ad5;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.purple i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.purple i {
+.ae.sidenav .ae.sidenav-item.exact.purple i, .ae.sidenav .ae.sidenav-item.active.purple i {
   color: #805ad5;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.purple.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.purple.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.purple.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.purple.main .sidenav-text {
   color: #805ad5;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.blue, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.blue {
+.ae.sidenav .ae.sidenav-item.exact.blue, .ae.sidenav .ae.sidenav-item.active.blue {
   border-left: 4px solid #3182ce;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.blue i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.blue i {
+.ae.sidenav .ae.sidenav-item.exact.blue i, .ae.sidenav .ae.sidenav-item.active.blue i {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.blue.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.blue.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.blue.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.blue.main .sidenav-text {
   color: #3182ce;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.orange, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.orange {
+.ae.sidenav .ae.sidenav-item.exact.orange, .ae.sidenav .ae.sidenav-item.active.orange {
   border-left: 4px solid #dd6b20;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.orange i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.orange i {
+.ae.sidenav .ae.sidenav-item.exact.orange i, .ae.sidenav .ae.sidenav-item.active.orange i {
   color: #dd6b20;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.orange.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.orange.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.orange.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.orange.main .sidenav-text {
   color: #dd6b20;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.indigo, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.indigo {
+.ae.sidenav .ae.sidenav-item.exact.indigo, .ae.sidenav .ae.sidenav-item.active.indigo {
   border-left: 4px solid #5a67d8;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.indigo i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.indigo i {
+.ae.sidenav .ae.sidenav-item.exact.indigo i, .ae.sidenav .ae.sidenav-item.active.indigo i {
   color: #5a67d8;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.indigo.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.indigo.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.indigo.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.indigo.main .sidenav-text {
   color: #5a67d8;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.yellow, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.yellow {
+.ae.sidenav .ae.sidenav-item.exact.yellow, .ae.sidenav .ae.sidenav-item.active.yellow {
   border-left: 4px solid #d69e2e;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.yellow i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.yellow i {
+.ae.sidenav .ae.sidenav-item.exact.yellow i, .ae.sidenav .ae.sidenav-item.active.yellow i {
   color: #d69e2e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.yellow.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.yellow.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.yellow.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.yellow.main .sidenav-text {
   color: #d69e2e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.green, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.green {
+.ae.sidenav .ae.sidenav-item.exact.green, .ae.sidenav .ae.sidenav-item.active.green {
   border-left: 4px solid #38a169;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.green i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.green i {
+.ae.sidenav .ae.sidenav-item.exact.green i, .ae.sidenav .ae.sidenav-item.active.green i {
   color: #38a169;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.green.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.green.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.green.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.green.main .sidenav-text {
   color: #38a169;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.pink, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.pink {
+.ae.sidenav .ae.sidenav-item.exact.pink, .ae.sidenav .ae.sidenav-item.active.pink {
   border-left: 4px solid #d53f8c;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.pink i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.pink i {
+.ae.sidenav .ae.sidenav-item.exact.pink i, .ae.sidenav .ae.sidenav-item.active.pink i {
   color: #d53f8c;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.pink.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.pink.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.pink.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.pink.main .sidenav-text {
   color: #d53f8c;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.red, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.red {
+.ae.sidenav .ae.sidenav-item.exact.red, .ae.sidenav .ae.sidenav-item.active.red {
   border-left: 4px solid #e53e3e;
   color: #fff;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.red i, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.red i {
+.ae.sidenav .ae.sidenav-item.exact.red i, .ae.sidenav .ae.sidenav-item.active.red i {
   color: #e53e3e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item.exact.red.main .sidenav-text, .ae.sidenav .ae.sidenav-container .ae.sidenav-item.active.red.main .sidenav-text {
+.ae.sidenav .ae.sidenav-item.exact.red.main .sidenav-text, .ae.sidenav .ae.sidenav-item.active.red.main .sidenav-text {
   color: #e53e3e;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item:hover {
+.ae.sidenav .ae.sidenav-item:hover {
   background-color: #3c3d5d;
 }
-.ae.sidenav .ae.sidenav-container .ae.sidenav-item .ae.icon {
+.ae.sidenav .ae.sidenav-item .ae.icon {
   font-size: 1.2rem;
   display: flex;
   justify-content: center;

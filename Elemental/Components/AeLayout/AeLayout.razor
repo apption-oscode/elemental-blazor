@@ -17,8 +17,8 @@ limitations under the License.
 @namespace Elemental.Components
 @inherits HtmlElement
 
-<div class="@_layoutClassname">
-    <AeSideNav Brand="Brand" Links="Links" SidebarExpandThreshold="SidebarExpandThreshold" SidebarShrunkThreshold="SidebarShrunkThreshold"/>
+<div class="@_layoutClassname"  @attributes="@InputAttributesWithoutClass">   
+    <AeSideNav Brand="Brand" Links="Links" SidebarExpandThreshold="SidebarExpandThreshold" SidebarShrunkThreshold="SidebarShrunkThreshold" StayCollapse="StayCollapse" BottomLinks="BottomLinks"/>
     <div class="@_wrapperClassname">
         @if (TopBar != null)
         {
@@ -41,13 +41,17 @@ limitations under the License.
     public RenderFragment TopBar { get; set; }
     [Parameter]
     public RenderFragment Body { get; set; }
+    [Parameter]
+    public List<AeNavLink> BottomLinks { get; set; } 
 
     [Parameter]
     public int SidebarExpandThreshold { get; set; } = 1400;
     [Parameter]
     public int SidebarShrunkThreshold { get; set; } = 1400;
+    [Parameter]
+    public bool StayCollapse { get; set; } = false;
 
-    private string _layoutClassname => $"ae layout {_inputClass}";
+    private string _layoutClassname => $"ae layout {_inputClass} {(StayCollapse ? "stay-collapse": "")}";
     private string _wrapperClassname => $"ae content-wrapper";
 
 }

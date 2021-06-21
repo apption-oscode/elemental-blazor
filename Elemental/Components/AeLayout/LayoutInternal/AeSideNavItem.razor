@@ -1,7 +1,8 @@
 ﻿@namespace Elemental.Components
+@inherits HtmlElement
 @inject IJSRuntime JSRuntime
 
-<a class="@_sidenavItem" href="@(Link.To ?? Link?.ChildLinks.FirstOrDefault().To)" @onclick="NotifyInteropClick">
+<a class="@_sidenavItem" href="@(Link.To ?? Link?.ChildLinks.FirstOrDefault().To)" @onclick="NotifyInteropClick" @attributes="@InputAttributesWithoutClass">
     @if (!string.IsNullOrEmpty(Link.IconName))
     {
         <AeIcon Icon="@Link.IconName" IconStyle="@Link.IconStyle" class="@($"{Link.IconClassName}")"/>

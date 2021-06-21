@@ -3,6 +3,7 @@
 $sideNavWidth: 300px;
 $sidenav-shrunk-width: 60px;
 $sidenav-main-menu-width: 60px;
+$sidenav-sub-menu-height: 550px;
 
 $topNavHeight: 65px;
 $border-color: c.$grey-300;
@@ -23,96 +24,13 @@ $layoutOptions: (
       'top': 0,
       'z-index': 10,
     ),
-    '&.has-side-nav': (),
   ),
-);
-
-$IconColors: (
-  'background-color': #46486d,
-  '& i': (
-    'color': c.$blue-600,
-  ),
-  '&.main .sidenav-text': (
-    'color': c.$blue-600,
-  ),
-  '&.purple': (
-    'border-left': 4px solid c.$purple-600,
-    'color': c.$white,
-    '& i': (
-      'color': c.$purple-600,
+  '&.stay-collapse': (
+    '.ae.sidenav': (
+      'width': $sidenav-shrunk-width,
     ),
-    '&.main .sidenav-text': (
-      'color': c.$purple-600,
-    ),
-  ),
-  '&.blue': (
-    'border-left': 4px solid c.$blue-600,
-    'color': c.$white,
-    '& i': (
-      'color': c.$blue-600,
-    ),
-    '&.main .sidenav-text': (
-      'color': c.$blue-600,
-    ),
-  ),
-  '&.orange': (
-    '& i': (
-      'color': c.$orange-600,
-    ),
-    'border-left': 4px solid c.$orange-600,
-    'color': c.$white,
-    '&.main .sidenav-text': (
-      'color': c.$orange-600,
-    ),
-  ),
-  '&.indigo': (
-    '& i': (
-      'color': c.$indigo-600,
-    ),
-    'border-left': 4px solid c.$indigo-600,
-    'color': c.$white,
-    '&.main .sidenav-text': (
-      'color': c.$indigo-600,
-    ),
-  ),
-  '&.yellow': (
-    '& i': (
-      'color': c.$yellow-600,
-    ),
-    'border-left': 4px solid c.$yellow-600,
-    'color': c.$white,
-    '&.main .sidenav-text': (
-      'color': c.$yellow-600,
-    ),
-  ),
-  '&.green': (
-    '& i': (
-      'color': c.$green-600,
-    ),
-    'border-left': 4px solid c.$green-600,
-    'color': c.$white,
-    '&.main .sidenav-text': (
-      'color': c.$green-600,
-    ),
-  ),
-  '&.pink': (
-    '& i': (
-      'color': c.$pink-600,
-    ),
-    'border-left': 4px solid c.$pink-600,
-    'color': c.$white,
-    '&.main .sidenav-text': (
-      'color': c.$pink-600,
-    ),
-  ),
-  '&.red': (
-    '& i': (
-      'color': c.$red-600,
-    ),
-    'border-left': 4px solid c.$red-600,
-    'color': c.$white,
-    '&.main .sidenav-text': (
-      'color': c.$red-600,
+    '.ae.content-wrapper': (
+      'margin-left': $sidenav-shrunk-width,
     ),
   ),
 );
@@ -139,38 +57,51 @@ $sideNavOptions: (
   ),
   '.top': (
     'flex-grow': 1,
+    'display': flex,
+    'flex-direction': column,
   ),
   '.bottom': (
     'display': flex,
     'align-items': center,
-    'justify-content': space-between,
+    '.ae.sidenav-item': (
+      'height': 3rem,
+      'padding': 1.75rem 0.5rem,
+      '&:hover': (
+        '&': c.$iconColors,
+      ),
+      '&.main': (
+        'display': flex,
+        'flex-direction': column,
+        'justify-content': center,
+        '.sidenav-text': (
+          'font-size': 0.7rem,
+          'padding-top': 0.2rem,
+        ),
+      ),
+    ),
   ),
   '.ae.sidenav-container': (
     'display': flex,
     'flex-direction': row,
-    'height': 100%,
+    'flex-grow': 1,
     '.ae.sidenav-main-menu': (
       'display': flex,
       'flex-direction': column,
       'border-right': 3px solid c.$grey-800,
       'max-width': $sidenav-main-menu-width,
-      '.ae.sidenav-group-wrapper': (
-        'display': flex,
-        'flex-direction': row,
-        '& a': (
-          'height': 3rem,
-          'padding': 1.75rem 0.5rem,
-          '&:hover': (
-            '&': $IconColors,
-          ),
-          '&.main': (
-            'display': flex,
-            'flex-direction': column,
-            'justify-content': center,
-            '.sidenav-text': (
-              'font-size': 0.7rem,
-              'padding-top': 0.2rem,
-            ),
+      '.ae.sidenav-item': (
+        'height': 3rem,
+        'padding': 1.75rem 0.5rem,
+        '&:hover': (
+          '&': c.$iconColors,
+        ),
+        '&.main': (
+          'display': flex,
+          'flex-direction': column,
+          'justify-content': center,
+          '.sidenav-text': (
+            'font-size': 0.7rem,
+            'padding-top': 0.2rem,
           ),
         ),
       ),
@@ -178,11 +109,12 @@ $sideNavOptions: (
     '.ae.sidenav-sub-menu': (
       'display': flex,
       'flex-direction': column,
-      'overflow-y': auto,
       'overflow-x': hidden,
-      'width': 100%,
+      '&': c.$scrollbarOptions,
       '.ae.sidenav-sub-group-wrapper': (
         'display': none,
+        'width': $sideNavWidth - $sidenav-shrunk-width,
+        'max-height': $sidenav-sub-menu-height,
         '&.expanded': (
           'display': flex,
           'flex-direction': column,
@@ -206,7 +138,6 @@ $sideNavOptions: (
         '& i': (
           'font-size': 1.25rem,
         ),
-        '&': c.$scrollbarOptions,
       ),
       '.ae.sidenav-sub-sub-group-wrapper': (
         'display': none,
@@ -220,35 +151,35 @@ $sideNavOptions: (
         ),
       ),
     ),
-    '.ae.sidenav-item': (
+  ),
+  '.ae.sidenav-item': (
+    'display': flex,
+    'align-items': center,
+    'white-space': nowrap,
+    'overflow': hidden,
+    'transition': background-color 0.4s c.$cubic-bezier,
+    'border-left': 4px solid transparent,
+    'box-sizing': border-box,
+    'color': inherit,
+    'text-decoration': none,
+    '&.exact, &.active': (
+      'border-left': 4px solid c.$blue-600,
+      'font-weight': bold,
+      '& i': (
+        'color': c.$blue-600,
+      ),
+      '&': c.$iconColors,
+    ),
+    '&:hover': (
+      'background-color': $item-hover,
+    ),
+    '& .ae.icon': (
+      'font-size': 1.2rem,
       'display': flex,
-      'align-items': center,
-      'white-space': nowrap,
-      'overflow': hidden,
-      'transition': background-color 0.4s c.$cubic-bezier,
-      'border-left': 4px solid transparent,
-      'box-sizing': border-box,
-      'color': inherit,
-      'text-decoration': none,
-      '&.exact, &.active': (
-        'border-left': 4px solid c.$blue-600,
-        'font-weight': bold,
-        '& i': (
-          'color': c.$blue-600,
-        ),
-        '&': $IconColors,
-      ),
-      '&:hover': (
-        'background-color': $item-hover,
-      ),
-      '& .ae.icon': (
-        'font-size': 1.2rem,
-        'display': flex,
-        'justify-content': center,
-        'text-align': left,
-        'min-width': 40px,
-        'color': c.$white,
-      ),
+      'justify-content': center,
+      'text-align': left,
+      'min-width': 40px,
+      'color': c.$white,
     ),
   ),
   '&.shrunk': (
@@ -269,17 +200,14 @@ $topNavOptions: (
 
 @mixin configure($options) {
   @if ($options) {
-    @if (map.get($options, 'side-nav')) {
-      $sideNavOptions: map.get($options, 'side-nav') !global;
+    @if (map.get($options, 'sideNavOptions')) {
+      $sideNavOptions: map.get($options, 'sideNavOptions') !global;
     }
-    @if (map.get($options, 'top-nav')) {
-      $topNavOptions: map.get($options, 'top-nav') !global;
+    @if (map.get($options, 'topNavOptions')) {
+      $topNavOptions: map.get($options, 'topNavOptions') !global;
     }
-    @if (map.get($options, 'layout')) {
-      $layoutOptions: map.get($options, 'layout') !global;
-    }
-    @if (map.get($options, 'icon-colors')) {
-      $IconColors: map.get($options, 'icon-colors') !global;
+    @if (map.get($options, 'layoutOptions')) {
+      $layoutOptions: map.get($options, 'layoutOptions') !global;
     }
 
     // variables
@@ -295,6 +223,13 @@ $topNavOptions: (
         'sidenav-main-menu-width'
       ) !global;
     }
+    @if (map.get($options, 'sidenav-sub-menu-height')) {
+      $sidenav-sub-menu-height: map.get(
+        $options,
+        'sidenav-sub-menu-height'
+      ) !global;
+    }
+
     @if (map.get($options, 'border-color')) {
       $border-color: map.get($options, 'border-color') !global;
     }
