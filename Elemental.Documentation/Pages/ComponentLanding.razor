@@ -1,0 +1,30 @@
+﻿@page "/components"
+
+<AeFlex class="component-landing-container">
+	<AeTypography Variant="h2">Components</AeTypography>
+
+	<AeSearchInput Placeholder="Search components by name" />
+
+	@foreach(var component in _components){
+		<ComponentCard Title="@component.Title" ImageUrl="@component.ImageUrl" Url="@component.Url" />
+	}
+</AeFlex>
+
+
+@code {
+
+	List<(string Title, string ImageUrl, string Url)> _components { get; set; }
+
+	protected override void OnInitialized()
+	{
+		
+		_components = new List<(string, string, string)>()
+		{
+			("Buttons", "https://via.placeholder.com/100x80", "buttons"),
+			("Buttons", "https://via.placeholder.com/200x140", "buttons"),
+			("Buttons", "https://via.placeholder.com/200x140", "buttons"),
+			("Buttons", "https://via.placeholder.com/200x140", "buttons"),
+			("Buttons", "https://via.placeholder.com/200x140", "buttons"),
+		};
+	}
+}

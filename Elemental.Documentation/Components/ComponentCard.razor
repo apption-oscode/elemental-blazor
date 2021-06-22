@@ -1,0 +1,25 @@
+@inject NavigationManager NavigationManager
+
+<AeCard @onclick="HandleClick" class="component-card">
+    <ChildContent>
+        <img src="@ImageUrl" />
+    </ChildContent>
+    <Footer>
+        <AeTypography>@Title</AeTypography>
+    </Footer>
+</AeCard>
+
+@code {
+
+
+  [Parameter]
+  public string Title {get; set;}
+  [Parameter]
+  public string ImageUrl {get; set;}
+  [Parameter]
+  public string Url {get; set;}	
+
+  private void HandleClick(){
+    NavigationManager.NavigateTo("/components/" + Url);
+  }
+}
