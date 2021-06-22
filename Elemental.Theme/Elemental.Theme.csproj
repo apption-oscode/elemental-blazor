@@ -33,7 +33,6 @@
     <Content Include="Styles/**/*.scss">
       <Pack>true</Pack>
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
-      
     </Content>
   </ItemGroup>
 
@@ -51,10 +50,10 @@
     <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
-
+  
   <ItemGroup>
-    <Content Update="package.json">
+    <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 </Project>
