@@ -13,18 +13,18 @@
                 {
                     @if (link.Enable)
                     {                        
-                        <AeSideNavItem Link="link" Main />
+                        <AeSideNavItem Link="link" @attributes="_attributes" Main />
                     }
                 }
                 @if (BottomLinks?.First(l => l.Enable) != null)
                 {
-                    <AeSideNavItem Link="BottomLinks.First(l => l.Enable)" Main style="margin-top:auto;"/>                    
+                    <AeSideNavItem Link="BottomLinks.First(l => l.Enable)" style="margin-top:auto;"  @attributes="_attributes" Main/>                    
                 }
                 @foreach (var link in BottomLinks?.Except(new List<AeNavLink> { BottomLinks?.First(l => l.Enable) }) ?? new List<AeNavLink>() )
                 {
                     @if (link.Enable)
                     {               
-                        <AeSideNavItem Link="link" Main />
+                        <AeSideNavItem Link="link" @attributes="_attributes" Main />
                     }
                 }
             </div>
@@ -32,18 +32,18 @@
                 @foreach (var link in Links.Union(BottomLinks ?? new List<AeNavLink>()))
                 {
                     <div class="ae sidenav-sub-group-wrapper" data-nav-href="@link.To">
-                        <a class="ae sidenav-sub-group-title" href="@link.To">@link.Label</a>                             
+                        <a class="ae sidenav-sub-group-title" href="@link.To">@(link.Title ?? link.Label)</a>                             
                         @foreach (var subLink in link.ChildLinks)
                         {
                             @if(subLink.Enable)
                             {
-                                <AeSideNavItem Link="subLink" />
+                                <AeSideNavItem Link="subLink" @attributes="_attributes" />
                                 <div class="ae sidenav-sub-sub-group-wrapper" data-nav-href="@subLink.To"> 
                                     @foreach (var subSubLink in subLink.ChildLinks)
                                     {
                                         @if (subSubLink.Enable)
                                         {
-                                            <AeSideNavItem Link="subSubLink" />                                                                                   
+                                            <AeSideNavItem Link="subSubLink" @attributes="_attributes" />                                                                                   
                                         }
                                     }
                                 </div>                                
@@ -72,7 +72,11 @@
     [Parameter]
     public bool StayCollapse { get; set; } = false;
 
+    [Parameter]
+    public RenderFragment<string> IconTemplate { get; set; }
+
     private string _sideNavClassname => $"ae sidenav";
+    private Dictionary<string, object> _attributes;
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -86,5 +90,11 @@
     private async Task ToggleExpansion()
     {
         await JSRuntime.InvokeAsync<string>("sidenav.toggleExpansion");
+    }
+
+    protected override void OnInitialized()
+    {
+        _attributes = new Dictionary<string,object>();
+        _attributes.Add(nameof(IconTemplate),this.IconTemplate);
     }
 }
