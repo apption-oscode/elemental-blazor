@@ -52,7 +52,7 @@ limitations under the License.
     public bool StayCollapse { get; set; } = false;
 
     [Parameter]
-    public RenderFragment<string> IconTemplate { get; set; }
+    public RenderFragment<Dictionary<string, object>> IconTemplate { get; set; }
 
     private string _layoutClassname => $"ae layout {_inputClass} {(StayCollapse ? "stay-collapse": "")}";
     private string _wrapperClassname => $"ae content-wrapper";

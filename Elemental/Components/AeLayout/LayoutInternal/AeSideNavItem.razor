@@ -5,7 +5,7 @@
 <a class="@_sidenavItem" href="@(Link.To ?? Link?.ChildLinks.FirstOrDefault().To)" @onclick="NotifyInteropClick" @attributes="@InputAttributesWithoutClass">
     @if (IconTemplate != null)
     {
-        @IconTemplate(Link.IconClassName)
+        @IconTemplate(Link.IconAttributes)
     }
     else if (!string.IsNullOrEmpty(Link.IconName))
     {
@@ -23,7 +23,7 @@
     public bool Main { get; set; }
 
     [Parameter]
-    public RenderFragment<string> IconTemplate { get; set; }
+    public RenderFragment<Dictionary<string, object>> IconTemplate { get; set; }
 
     private string _sidenavItem => $"ae sidenav-item {(Main ? "main" : "")} {Link.Color}";
     private async Task NotifyInteropClick()
