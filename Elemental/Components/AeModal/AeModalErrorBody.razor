@@ -3,12 +3,15 @@
 
 
 <AeFlex class="@_classname" @attributes="InputAttributesWithoutClass">
-	<AeIcon Icon="error-warning" />
+	<AeIcon Icon="@IconName" />
 	<AeTypography class="title">@Title</AeTypography>
 	<AeTypography class="message">@ErrorMessage</AeTypography>
 </AeFlex>
 
 @code {
+
+	[Parameter]
+	public string IconName { get; set; } = "error-warning";
 
 	[Parameter]
 	public string Title {get; set;} = "Something went wrong...";

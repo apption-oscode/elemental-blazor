@@ -20,7 +20,12 @@
 
     private void ShowModal()
     {
-        UIControlService.ToggleModal(null, @<AeErrorModal ErrorMessage="ERROR_CODE_007: This error is licensed to kill (the process)" />
+        UIControlService.ToggleModal(null, 
+            @<AeModalErrorBody 
+                Icon="error-warning"
+                Title="Something went wrong..."
+                ErrorMessage="ERROR_CODE_007: This error is licensed to kill (the process)" 
+            />
         );
     }
 }
