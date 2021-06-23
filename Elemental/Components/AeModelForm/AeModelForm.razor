@@ -184,7 +184,6 @@
             isConfigured = true;
         }
         NotifyArg = OnNotify;
-        //notifier = OnNotify;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -309,8 +308,6 @@
             _isCancelled = false;            
         }
     }
-
-    private Func<Task> notifier = null;
 
     public async Task OnNotify(ModelFormArgsInternal iargs)
     {
