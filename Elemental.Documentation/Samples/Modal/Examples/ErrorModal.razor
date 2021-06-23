@@ -8,21 +8,19 @@
     Title: Error Message Modal
     Description: Basic example of how to implement an error message modal box.
 *@
+
 @using Elemental.Services
+@using Elemental.Components
+
 @inject UIControlsService UIControlService
-<AeButton @onclick="ShowModal">Show Modal Box</AeButton>
+
+<AeButton @onclick="ShowModal">Show Error Message Modal</AeButton>
 
 @code {
 
     private void ShowModal()
     {
-        RenderFragment modalContent = @<div>
-                                            <p>Content</p>
-                                            <p>Content</p>
-                                            <p>Content</p>
-                                        </div>;
-        UIControlService.ToggleModal("Default", modalContent);
+        UIControlService.ToggleModal(null, @<AeErrorModal ErrorMessage="ERROR_CODE_007: This error is licensed to kill (the process)" />
+        );
     }
-
-
 }

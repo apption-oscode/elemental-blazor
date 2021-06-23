@@ -55,6 +55,7 @@
       <None Include="..\Elemental.Theme\Styles\list\_list.scss" Link="Components\AeList\_list.scss" />
       <None Include="..\Elemental.Theme\Styles\menu\_menu.scss" Link="Components\AeMenu\_menu.scss" />
       <None Include="..\Elemental.Theme\Styles\modal\_modal.scss" Link="Components\AeModal\_modal.scss" />
+      <None Include="..\Elemental.Theme\Styles\modal\_error-modal.scss" Link="Components\AeModal\_error-modal.scss" />
       <None Include="..\Elemental.Theme\Styles\model-form\_model-form.scss" Link="Components\AeModelForm\_model-form.scss" />
       <None Include="..\Elemental.Theme\Styles\navbar\_navbar.scss" Link="Components\AeNavbar\_navbar.scss" />
       <None Include="..\Elemental.Theme\Styles\progress\_progress.scss" Link="Components\AeProgress\_progress.scss" />
@@ -87,4 +88,5 @@
 	</Target>
 
 </Project>
+
 
