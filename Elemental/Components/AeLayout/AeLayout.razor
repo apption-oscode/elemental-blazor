@@ -18,7 +18,7 @@ limitations under the License.
 @inherits HtmlElement
 
 <div class="@_layoutClassname"  @attributes="@InputAttributesWithoutClass">   
-    <AeSideNav Brand="Brand" Links="Links" SidebarExpandThreshold="SidebarExpandThreshold" SidebarShrunkThreshold="SidebarShrunkThreshold" StayCollapse="StayCollapse" BottomLinks="BottomLinks"/>
+    <AeSideNav @attributes="_attributes" />
     <div class="@_wrapperClassname">
         @if (TopBar != null)
         {
@@ -53,5 +53,16 @@ limitations under the License.
 
     private string _layoutClassname => $"ae layout {_inputClass} {(StayCollapse ? "stay-collapse": "")}";
     private string _wrapperClassname => $"ae content-wrapper";
+    private Dictionary<string, object> _attributes;
 
+    protected override void OnInitialized()
+    {
+        _attributes = new Dictionary<string,object>();
+        _attributes.Add(nameof(Links),this.Links);
+        _attributes.Add(nameof(BottomLinks),this.BottomLinks);
+        _attributes.Add(nameof(Brand),this.Brand);
+        _attributes.Add(nameof(SidebarExpandThreshold),this.SidebarExpandThreshold);
+        _attributes.Add(nameof(SidebarShrunkThreshold),this.SidebarShrunkThreshold);
+        _attributes.Add(nameof(StayCollapse),this.StayCollapse);
+    }
 }

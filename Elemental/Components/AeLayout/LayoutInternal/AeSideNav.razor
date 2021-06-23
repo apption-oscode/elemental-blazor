@@ -18,7 +18,7 @@
                 }
                 @if (BottomLinks?.First(l => l.Enable) != null)
                 {
-                    <AeSideNavItem Link="BottomLinks.First(l => l.Enable)" Main style="margin-top:auto;"/>                    
+                    <AeSideNavItem Link="BottomLinks.First(l => l.Enable)" style="margin-top:auto;" Main/>                    
                 }
                 @foreach (var link in BottomLinks?.Except(new List<AeNavLink> { BottomLinks?.First(l => l.Enable) }) ?? new List<AeNavLink>() )
                 {
@@ -32,7 +32,7 @@
                 @foreach (var link in Links.Union(BottomLinks ?? new List<AeNavLink>()))
                 {
                     <div class="ae sidenav-sub-group-wrapper" data-nav-href="@link.To">
-                        <a class="ae sidenav-sub-group-title" href="@link.To">@link.Label</a>                             
+                        <a class="ae sidenav-sub-group-title" href="@link.To">@(link.Title ?? link.Label)</a>                             
                         @foreach (var subLink in link.ChildLinks)
                         {
                             @if(subLink.Enable)
@@ -73,6 +73,7 @@
     public bool StayCollapse { get; set; } = false;
 
     private string _sideNavClassname => $"ae sidenav";
+    private Dictionary<string, object> _attributes;
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {

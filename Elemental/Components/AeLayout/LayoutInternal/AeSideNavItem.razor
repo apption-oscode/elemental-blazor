@@ -3,11 +3,15 @@
 @inject IJSRuntime JSRuntime
 
 <a class="@_sidenavItem" href="@(Link.To ?? Link?.ChildLinks.FirstOrDefault().To)" @onclick="NotifyInteropClick" @attributes="@InputAttributesWithoutClass">
-    @if (!string.IsNullOrEmpty(Link.IconName))
+    @if (Link.IconRender != null)
     {
-        <AeIcon Icon="@Link.IconName" IconStyle="@Link.IconStyle" class="@($"{Link.IconClassName}")"/>
+        @Link.IconRender
     }
-    <div class="sidenav-text">@Link.Label</div>    
+    else if (!string.IsNullOrEmpty(Link.IconName))
+    {
+        <AeIcon Icon="@Link.IconName" IconStyle="@Link.IconStyle" class="@($"{Link.Color}")"/>
+    }
+    <div class="sidenav-text">@Link.Label</div>                
 </a>
 
 
@@ -18,8 +22,7 @@
     [Parameter]
     public bool Main { get; set; }
 
-
-    private string _sidenavItem => $"ae sidenav-item {(Main ? "main" : "")} {Link.IconClassName}";
+    private string _sidenavItem => $"ae sidenav-item {(Main ? "main" : "")} {Link.Color}";
     private async Task NotifyInteropClick()
     {
         await JSRuntime.InvokeAsync<string>("sidenav.updateNav");

@@ -29,7 +29,7 @@
 
   <ItemGroup Label="Packaging">
     <Content Include="build\AElemental.Blazor.Theme.targets" PackagePath="build\AElemental.Blazor.Theme.targets" />
-    <Content Include="Styles/*.scss">
+    <Content Include="Styles/**/*.scss">
       <Pack>true</Pack>
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
@@ -49,15 +49,10 @@
     <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
-
+  
   <ItemGroup>
-    <Content Update="package.json">
+    <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
-
-
-	
-	
-
 </Project>
