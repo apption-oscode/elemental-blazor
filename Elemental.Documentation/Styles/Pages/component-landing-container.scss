@@ -1,7 +1,65 @@
-@use '../colors.scss';
+@use '../colors';
+@use '../box-shadow';
 
 .component-landing-container {
-  .component-card {
-    width: 200px;
+  .search {
+    margin: 2rem 0;
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+
+    .component-card {
+      border: 1px solid colors.$transparent;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        border-radius: 4px 4px 0 0;
+        opacity: 0.4;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        transition: all 0.2s ease-in-out;
+      }
+
+      .text {
+        padding: 0.5rem 0.5rem;
+      }
+
+      &:hover {
+        background-color: colors.$white;
+        border: 1px solid colors.$grey-200;
+        transform: translateY(-1px);
+
+        @include box-shadow.BoxShadow(1);
+
+        img {
+          -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
+          opacity: 1;
+        }
+      }
+    }
+
+    .empty {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        margin: auto;
+        text-align: center;
+
+        .ae.icon {
+            font-size: 8rem;
+            color: colors.$grey-400;
+        }
+
+        .title {
+            font-size: 1.5rem;
+        }
+    }
   }
 }

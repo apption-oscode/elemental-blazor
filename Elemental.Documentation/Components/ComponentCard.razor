@@ -1,13 +1,10 @@
 @inject NavigationManager NavigationManager
 
-<AeCard @onclick="HandleClick" class="component-card">
-    <ChildContent>
-        <img src="@ImageUrl" />
-    </ChildContent>
-    <Footer>
-        <AeTypography>@Title</AeTypography>
-    </Footer>
-</AeCard>
+<AeFlex @onclick="HandleClick" class="component-card">
+  <img src="@ImageUrl" />
+  
+  <AeTypography class="text">@Title</AeTypography>
+</AeFlex>
 
 @code {
 
