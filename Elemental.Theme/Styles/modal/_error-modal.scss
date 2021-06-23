@@ -1,0 +1,17 @@
+@use '../common/' as c;
+
+$errorModalOptions: (
+  'background-color': c.$red-200,
+);
+
+@mixin configure($options) {
+  @if ($options) {
+    $errorModalOptions: $options !global;
+  }
+}
+
+@mixin styles {
+  .ae.error-modal {
+    @include c.set-values($errorModalOptions);
+  }
+}

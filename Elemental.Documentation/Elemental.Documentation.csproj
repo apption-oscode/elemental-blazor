@@ -43,6 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Samples\Modal\Examples\ErrorModal.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <UpToDateCheckInput Remove="Styles\Pages\theme-page-container.scss" />
   </ItemGroup>
 	

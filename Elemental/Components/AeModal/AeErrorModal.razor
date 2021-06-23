@@ -1,0 +1,21 @@
+﻿@namespace Elemental.Components
+@inherits HtmlElement
+
+
+<AeFlex class="@_classname" @attributes="InputAttributesWithoutClass">
+	<AeIcon Icon="error-warning" />
+	<AeTypography class="title">@Title</AeTypography>
+	<AeTypography class="message">@ErrorMessage</AeTypography>
+</AeFlex>
+
+@code {
+
+	[Parameter]
+	public string Title {get; set;} = "Something went wrong...";
+
+	[Parameter]
+	public string ErrorMessage {get; set;}
+
+
+	private string _classname => $"ae error-modal {_inputClass}";
+}
