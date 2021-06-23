@@ -764,8 +764,8 @@ body {
   color: #cbd5e0;
 }
 .ae.search-wrapper .ae.clear-icon {
-  padding: 0.5rem;
-  margin-left: -2rem;
+  width: 1.5rem;
+  margin-left: -1.5rem;
   color: #cbd5e0;
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
