@@ -1,4 +1,6 @@
-﻿@import 'button-page-container.scss';
+﻿@use 'component-landing-container.scss';
+
+@import 'button-page-container.scss';
 @import 'card-page-container.scss';
 @import 'input-page-container.scss';
 @import 'layout-page-container.scss';

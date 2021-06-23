@@ -13,8 +13,8 @@ $searchInputOptions: (
     'color': c.$text-hint,
   ),
   '.ae.clear-icon': (
-    'padding': 0.5rem,
-    'margin-left': -2rem,
+    'width': 1.5rem,
+    'margin-left': -1.5rem,
     'color': c.$text-hint,
     'opacity': 0,
     'transition': all 0.3s c.$cubic-bezier,

@@ -101,7 +101,6 @@ else
         var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
         await Notifier(changeArgs);
     }
-    private string _previousValue;
 
     public string PropertyValue
     {

@@ -29,7 +29,6 @@
 
   <ItemGroup Label="Packaging">
     <Content Include="build\AElemental.Blazor.Theme.targets" PackagePath="build\AElemental.Blazor.Theme.targets" />
-
     <Content Include="Styles/**/*.scss">
       <Pack>true</Pack>
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
