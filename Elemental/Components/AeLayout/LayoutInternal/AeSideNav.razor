@@ -13,18 +13,18 @@
                 {
                     @if (link.Enable)
                     {                        
-                        <AeSideNavItem Link="link" @attributes="_attributes" Main />
+                        <AeSideNavItem Link="link" Main />
                     }
                 }
                 @if (BottomLinks?.First(l => l.Enable) != null)
                 {
-                    <AeSideNavItem Link="BottomLinks.First(l => l.Enable)" style="margin-top:auto;"  @attributes="_attributes" Main/>                    
+                    <AeSideNavItem Link="BottomLinks.First(l => l.Enable)" style="margin-top:auto;" Main/>                    
                 }
                 @foreach (var link in BottomLinks?.Except(new List<AeNavLink> { BottomLinks?.First(l => l.Enable) }) ?? new List<AeNavLink>() )
                 {
                     @if (link.Enable)
                     {               
-                        <AeSideNavItem Link="link" @attributes="_attributes" Main />
+                        <AeSideNavItem Link="link" Main />
                     }
                 }
             </div>
@@ -37,13 +37,13 @@
                         {
                             @if(subLink.Enable)
                             {
-                                <AeSideNavItem Link="subLink" @attributes="_attributes" />
+                                <AeSideNavItem Link="subLink" />
                                 <div class="ae sidenav-sub-sub-group-wrapper" data-nav-href="@subLink.To"> 
                                     @foreach (var subSubLink in subLink.ChildLinks)
                                     {
                                         @if (subSubLink.Enable)
                                         {
-                                            <AeSideNavItem Link="subSubLink" @attributes="_attributes" />                                                                                   
+                                            <AeSideNavItem Link="subSubLink" />                                                                                   
                                         }
                                     }
                                 </div>                                
@@ -72,9 +72,6 @@
     [Parameter]
     public bool StayCollapse { get; set; } = false;
 
-    [Parameter]
-    public RenderFragment<Dictionary<string, object>> IconTemplate { get; set; }
-
     private string _sideNavClassname => $"ae sidenav";
     private Dictionary<string, object> _attributes;
 
@@ -90,11 +87,5 @@
     private async Task ToggleExpansion()
     {
         await JSRuntime.InvokeAsync<string>("sidenav.toggleExpansion");
-    }
-
-    protected override void OnInitialized()
-    {
-        _attributes = new Dictionary<string,object>();
-        _attributes.Add(nameof(IconTemplate),this.IconTemplate);
     }
 }

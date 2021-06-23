@@ -20,5 +20,6 @@ namespace Elemental.Code
         public List<AeNavLink> ChildLinks { get; set; } = new List<AeNavLink>();
         public RenderFragment CustomRender { get; set; }
         public bool Enable { get; set; } = true;
+        public RenderFragment IconRender { get; set; }
     }
 }
