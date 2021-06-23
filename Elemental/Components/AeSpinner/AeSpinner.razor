@@ -1,41 +1,44 @@
 ﻿@namespace Elemental.Components
+@inherits HtmlElement
 
-@switch (Spinner)
-{
-    case Spinner.Type1:
-    case Spinner.Type5:
-        <div class="ae spinner @Spinner">
+
+<div class="@_classname" @attributes="@InputAttributesWithoutClass">
+    @switch (Spinner)
+    {
+        case Spinner.Type1:
+        case Spinner.Type5:
             <div class="spinner-item"></div>
             <div class="spinner-item"></div>
             <div class="spinner-item"></div>
             <div class="spinner-item"></div>
             <div class="spinner-item"></div>
-        </div>
-        break;
-    case Spinner.Type2:
-    case Spinner.Type3:
-    case Spinner.Type4:
-        <div class="ae spinner @Spinner">
+            break;
+        case Spinner.Type2:
+        case Spinner.Type3:
+        case Spinner.Type4:
             <div class="spinner-item"></div>
             <div class="spinner-item"></div>
             <div class="spinner-item"></div>
-        </div>
-        break;
-    case Spinner.Type6:
-        <div class="ae spinner @Spinner">
+            break;
+        case Spinner.Type6:
             <div class="spinner-item"></div>
             <div class="spinner-item"></div>
-        </div>
-        break;
-    case Spinner.Type7:
-        <div class="ae spinner @Spinner.Type7">
+            break;
+        case Spinner.Type7:
             <div class="straight"></div>
             <div class="curve"></div>
             <div class="center"></div>
             <div class="inner"></div>
-        </div>
-        break;
-    default:
-        <div class="ae spinner @Spinner"></div>
-        break;
+            break;
+        default:
+            break;
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public Spinner Spinner { get; set; }
+
+    private string _classname => $"ae spinner {Spinner} {_inputClass}";
 }

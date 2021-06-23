@@ -7,12 +7,6 @@ using System.Threading.Tasks;
 
 namespace Elemental.Components
 {
-    public partial class AeSpinner
-    {
-        [Parameter]
-        public Spinner Spinner { get; set; }
-
-    }
     public enum Spinner
     {
         Type1,
