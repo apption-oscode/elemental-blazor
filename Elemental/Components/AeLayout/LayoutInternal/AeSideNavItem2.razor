@@ -25,7 +25,6 @@
     public bool IsCollapsed { get; set; }
     private bool _active = false;
     private ElementPosition _toolTipPosition;
-    private bool _showTooltip = false;
     private ElementReference _tooltipWrapperRef;
 
     protected override void OnInitialized()
@@ -59,15 +58,6 @@
             NavigationManager.NavigateTo(Link.To, false);
         ToggleSublink.Invoke(Link);
     }
-
-    //private async Task HandleItemHover()
-    //{
-    //    if (IsCollapsed)
-    //    {
-    //        _toolTipPosition = await DimensionService.GetPosition(_tooltipWrapperRef);
-    //        _showTooltip = true;
-    //    }
-    //}
 
     public void Dispose()
     {
