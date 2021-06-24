@@ -1,0 +1,23 @@
+﻿@using Elemental.Components.Tabs
+@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Tab
+    Description: Tabs with default parameters. 
+*@
+<AeTab>
+    <AeTabPage Key="1">
+        <p>This is the first tab</p>
+    </AeTabPage>
+    <AeTabPage Text="Tab 2" Key="2">
+        <button> this is the second tab</button>
+    </AeTabPage>
+    <AeTabPage Disable Text="Tab 3 disabled" Key="3">
+        <AeIcon Icon="shield" IconStyle="Code.RXIcon.RXStyle.Fill" />
+        <p> this is the 3rd tab</p>
+    </AeTabPage>
+</AeTab>

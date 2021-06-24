@@ -1,0 +1,19 @@
+﻿@inherits HtmlElement
+@code {
+    [CascadingParameter]
+    private AeTab TabControl { get; set; }
+    [Parameter]
+    public string Key { get; set; }
+    [Parameter]
+    public bool Disable { get; set; }
+    [Parameter]
+    public string Text { get; set; }
+
+    public string _Classname => $"ae tabpage {_inputClass}";
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrWhiteSpace(Key)) throw new ArgumentException("Tab key is not valid");
+        TabControl.AddTab(this);
+    }
+}

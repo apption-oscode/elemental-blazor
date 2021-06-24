@@ -1,0 +1,46 @@
+﻿@inherits HtmlElement
+<div class="@_Classname">
+    @foreach(var page in _Tabs)
+    {
+        <AeButton OnClickEvent="() => _ActivePage = page" class="@(page == _ActivePage? "blue" : "dark")" Disabled="@(page.Disable)">@(string.IsNullOrWhiteSpace(page.Text)? page.Key : page.Text)</AeButton>  
+    }
+</div>
+@if(_ActivePage is not null)
+{
+    <div class="@_ActivePage.">@_ActivePage.ChildContent</div>
+    
+}
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public string DefaultActive { get; set; }
+
+    private string _Classname => $"ae tab-wrapper {_inputClass}";
+
+    private List<AeTabPage> _Tabs { get; set; } = new List<AeTabPage>();
+
+    private AeTabPage _ActivePage { get; set; }
+
+    public void AddTab(AeTabPage tab)
+    {
+        if (!(_Tabs.Any(t => t == tab)))
+        {
+            _Tabs.Add(tab);
+            if(_Tabs.Count == 1)
+            {
+                _ActivePage = tab;
+            }
+            else if (!string.IsNullOrWhiteSpace(DefaultActive))
+            {
+                if(tab.Key == DefaultActive)
+                {
+                    _ActivePage = tab;
+                }
+            }
+            StateHasChanged();
+        }
+    }
+}
