@@ -16,7 +16,7 @@ $layoutOptions: (
     'display': flex,
     'flex-direction': column,
     'flex-grow': 1,
-    'margin-left': $sideNavWidth,
+    'margin-left': $sidenav-shrunk-width,
     'transition': margin-left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
     '.ae.top-nav': (
       'height': $topNavHeight,
@@ -41,7 +41,7 @@ $sideNavOptions: (
   'position': fixed,
   'top': 0,
   'height': 100%,
-  'width': $sideNavWidth,
+  'width': $sidenav-shrunk-width,
   'overflow-y': hidden,
   'overflow-x': hidden,
   'z-index': 1,
@@ -182,8 +182,8 @@ $sideNavOptions: (
       'color': c.$white,
     ),
   ),
-  '&.shrunk': (
-    'width': $sidenav-shrunk-width,
+  '&.expanded': (
+    'width': $sideNavWidth,
   ),
 );
 

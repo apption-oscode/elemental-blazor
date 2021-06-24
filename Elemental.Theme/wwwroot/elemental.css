@@ -816,7 +816,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-left: 300px;
+  margin-left: 60px;
   transition: margin-left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .ae.layout .ae.content-wrapper .ae.top-nav {
@@ -838,7 +838,7 @@ body {
   position: fixed;
   top: 0;
   height: 100%;
-  width: 300px;
+  width: 60px;
   overflow-y: hidden;
   overflow-x: hidden;
   z-index: 1;
@@ -1253,8 +1253,8 @@ body {
   min-width: 40px;
   color: #fff;
 }
-.ae.sidenav.shrunk {
-  width: 60px;
+.ae.sidenav.expanded {
+  width: 300px;
 }
 
 .ae.top-nav {
