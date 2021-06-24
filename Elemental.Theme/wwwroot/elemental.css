@@ -1564,6 +1564,26 @@ body {
   padding: 0.5rem;
   text-align: right;
 }
+.ae.modal .ae.error-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ae.modal .ae.error-modal .ae.icon {
+  font-size: 8rem;
+  color: #e53e3e;
+}
+.ae.modal .ae.error-modal .title {
+  max-width: 600px;
+  font-size: 1.5rem;
+  margin: 1rem auto;
+  white-space: pre-wrap;
+}
+.ae.modal .ae.error-modal .message {
+  margin: 1rem auto;
+  max-width: 600px;
+  white-space: pre-wrap;
+}
 
 .ae.modelform .validation-errors .validation-message {
   font-size: 0.9rem;
