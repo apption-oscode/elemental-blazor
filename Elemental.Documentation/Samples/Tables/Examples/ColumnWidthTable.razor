@@ -5,51 +5,28 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Callback Tables
-    Description: Basic table element with a provided callback function on row selection. It is cruicial to set "T" to be equal to be equal to the data class. OnRowClick runs the callback only on click, while OnRowFocus will also run when tabbing through the table
+    Title: Specify Column Width
+    Description: You can use the CSS grid-template-columns property to specify the width of the columns on the table
 *@
 
-<AeTypography>Selected Row Data:</AeTypography>
-<AeTypography>@_type, @_category, @_location</AeTypography>
-<br />
-<AeTypography Variant="h4">On Click Callback Table</AeTypography>
 <AeTable Accessors="accessorFunctions"
-         Dataset="dummyData"
-         Headers="headers"
-         T="DummyData"
-         OnRowClick="@testCall" />
-<br />
-<AeTypography Variant="h4">On Focus Callback Table</AeTypography>
-<AeTable Accessors="accessorFunctions"
-         Dataset="dummyData"
-         Headers="headers"
-         T="DummyData"
-         OnRowFocus="@testCall" />
+       Dataset="dummyData"
+       Headers="headers" 
+       GridTemplateColumns="70px auto 2fr 110px 1fr"
+       />
 
 
 @code {
 
-    private string _category;
-    private string _location;
-    private string _type = "nothing selected yet";
-
-    private void testCall(DummyData data)
-    {
-        _category = data.Category;
-        _location = data.Location;
-        _type = data.Type;
-        StateHasChanged();
-    }
-
     // Define the headers at the top of the table
     private List<string> headers = new List<string>
-{
-        "Type", "Category", "Location"
+    {
+        "Type", "Category", "Location", "Importance", "Icon"
     };
 
     // Typeparam class to hold row data, can be anything
     private List<DummyData> dummyData = new List<DummyData>
-{
+    {
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
         new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
@@ -64,10 +41,12 @@
 
     // Accessor functions to retrieve cell value
     private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
-{
+    {
         new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
         new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
+        new Func<DummyData, string>(dummyData => { return dummyData.Importance.ToString(); }),
+        new Func<DummyData, string>(dummyData => { return dummyData.CategoryIconClass; })
     };
 
     class DummyData
