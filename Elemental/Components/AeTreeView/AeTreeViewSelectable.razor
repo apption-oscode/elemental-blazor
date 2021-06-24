@@ -20,24 +20,24 @@
         {
 
             <TreeItem T="T" FetchChildren="FetchChildren" RenderNode="RenderNode" ItemChecked="ItemSelected" IsChecked="IsChecked"
-            Root="item" NodeClicked="NodeClicked" IsCollapsed="IsCollapsed" ToggleCollapsed="ToggleCollapsed" 
-                      IsBold="IsBold" NodeIsClickable="NodeIsClickable"/>
+              Root="item" NodeClicked="NodeClicked" IsCollapsed="IsCollapsed" ToggleCollapsed="ToggleCollapsed"
+              IsBold="IsBold" NodeIsClickable="NodeIsClickable" />
         }
     </ul>
 }
 
 @code {
-    
+
 
     [Parameter]
-    public Action<T, bool> ItemChecked { get; set; }
-    
+    public EventCallback<(T, bool)> ItemChecked { get; set; }
+
     [Parameter]
     public Func<T, bool?> IsChecked { get; set; }
 
-      private void ItemSelected(T item, bool isSelected)
+    private async Task ItemSelected((T item, bool isSelected) tuple)
     {
-        ItemChecked(item, isSelected);
+        await ItemChecked.InvokeAsync(tuple);
         StateHasChanged();
     }
 
