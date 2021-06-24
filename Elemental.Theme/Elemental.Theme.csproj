@@ -17,24 +17,11 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="compilerconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="compilerconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="compilerconfig.json" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
   </ItemGroup>
-
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -42,17 +29,15 @@
 
   <ItemGroup Label="Packaging">
     <Content Include="build\AElemental.Blazor.Theme.targets" PackagePath="build\AElemental.Blazor.Theme.targets" />
-
-    <Content Include="Styles/*.scss">
+    <Content Include="Styles/**/*.scss">
       <Pack>true</Pack>
       <PackagePath>contentFiles\elemental-theme\</PackagePath>
     </Content>
   </ItemGroup>
 
   <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+  <Target Condition="'$(Configuration)' == 'Debug'" Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="npm run build-css" />
-    <Exec Command="npm run build-default-css" />
   </Target>
 
   <!-- from https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially -->
@@ -60,24 +45,14 @@
     <!-- File with mtime of last successful npm install -->
     <NpmInstallStampFile>node_modules/.install-stamp</NpmInstallStampFile>
   </PropertyGroup>
-  <Target Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
-    <Exec Command="npm i node-sass --save-dev" />
+  <Target Condition="'$(Configuration)' == 'Debug'" Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
+    <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
+  
   <ItemGroup>
-    <None Remove="Styles\grid.scss" />
-    <None Remove="Styles\spinner.scss" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Content Update="package.json">
+    <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
-
-
-	
-	
-
 </Project>

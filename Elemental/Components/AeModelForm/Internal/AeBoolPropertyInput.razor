@@ -1,0 +1,61 @@
+﻿@typeparam T
+@namespace Elemental.Components
+
+    
+        <AeFormLabel PropertyInfo="@PropertyInfo"/>
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
+    <div class="errortext">
+@if (AeModelFormTools.IsNullable(PropertyInfo))
+{
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<bool?>(Instance,PropertyInfo))" />
+} else {
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<bool>(Instance,PropertyInfo))" />
+}
+    </div>
+
+@code {
+
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    /// <summary>
+    /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
+    /// </summary>
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
+
+    /// <summary>
+    /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
+    /// </summary>
+    [CascadingParameter(Name= "LabelForPropertyFunc")]
+    public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    private string GetLabel()
+    {
+        return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
+    }
+
+    [Parameter]
+    public T Instance { get; set; }
+
+    public bool PropertyValue
+    {
+        get {
+            var result = AeModelFormTools.AsNullableValue<bool>(PropertyInfo,Instance);
+            if (result is null)
+            {
+                return false;
+            }
+            else
+            {
+                return (bool)result;
+            }
+        }
+        set
+        {
+            PropertyInfo.SetValue(Instance, value);
+        }
+    }
+
+    private string GetID() => PropertyInfo.Name;
+
+}

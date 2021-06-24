@@ -1,0 +1,68 @@
+﻿@use '../common/colors';
+@use '../common/constants';
+@use '../common/utils';
+
+$collapseOptions: (
+  'default': (
+    'min-width': 15rem,
+    'position': relative,
+    'display': inline-block,
+    'border-radius': 2px,
+    'line-height': 1.5,
+    'font-size': 0.8rem,
+    'font-weight': 400,
+    'white-space': nowrap,
+    'text-align': center,
+    'border': none,
+    'cursor': pointer,
+    'color': colors.$white,
+    'background-color': colors.$grey-600,
+    'border-color': colors.$grey-600,
+    '.ae.header': (
+      'font-size': 1.5rem,
+      'padding': 0.5rem,
+    ),
+    '.ae.body': (
+      'border-top': solid,
+      'padding-left': 0.5rem,
+      'padding-right': 0.5rem,
+      'text-align': left,
+      'transition': all 0.3s constants.$cubic-bezier,
+      'visibility': visible,
+      'height': 100%,
+      '&.hidden': (
+        'visibility': hidden,
+        'height': 0,
+      ),
+    ),
+  ),
+  'dark': (
+    'background-color': colors.$grey-800,
+    'border-color': colors.$grey-800,
+  ),
+  'light': (
+    'color': colors.$grey-600,
+    'background-color': colors.$grey-100,
+    'border-color': colors.$grey-100,
+  ),
+  'blue': (
+    'background-color': colors.$blue-600,
+    'border-color': colors.$blue-600,
+  ),
+  'red': (
+    'background-color': colors.$red-600,
+    'border-color': colors.$red-600,
+  ),
+);
+
+@mixin configure($options) {
+  @if ($options) {
+    $collapseOptions: $options !global;
+  }
+}
+
+@mixin styles {
+  .ae.collapse {
+    @include utils.set-variations($collapseOptions);
+  }
+}

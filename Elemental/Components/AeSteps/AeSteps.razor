@@ -1,0 +1,109 @@
+﻿@typeparam T
+@using System.Linq;
+@namespace Elemental.Components
+
+<div class="ae steps@(Alignment == StepAlignment.Horizontal? " horizontal" : "")">
+    @foreach (var item in StepItems.Select((step, i) => (i, step)))
+    {
+        <div class="ae step @(CurrentStepState(item.step).ToString().ToLower())">
+            @if (Alignment == StepAlignment.Vertical)
+            {
+                <div class="ae step-icon">
+                    @getIcon(item)
+                </div>
+                <div class="ae step-content">
+                    <div class="ae step-title">
+                        @StepTitle(item.step)
+                    </div>
+                    @if (Alignment == StepAlignment.Vertical)
+                    {
+                        <div class="ae step-message">
+                            @StepMessage(item.step)
+                        </div>
+                    }
+                </div>
+                @if (item.i < StepItems.Count - 1)
+                {
+                    <div class="ae step-tail"></div>
+                }
+            }
+            else
+            {
+                <div class="ae step-first-row">
+                    <div class="ae step-icon">
+                        @getIcon(item)
+                    </div>
+                    <div class="ae step-content">
+                        <div class="ae step-title">
+                            @StepTitle(item.step)
+                        </div>
+                        @if (Alignment == StepAlignment.Vertical)
+                        {
+                            <div class="ae step-message">
+                                @StepMessage(item.step)
+                            </div>
+                        }
+                    </div>
+                    @if (item.i < StepItems.Count - 1)
+                    {
+                        <div class="ae step-tail"></div>
+                    }
+                </div> 
+                @if (Alignment == StepAlignment.Horizontal)
+                {
+                    <div class="ae step-message">
+                        @StepMessage(item.step)
+                    </div>
+                }
+            }
+
+        </div>
+     }
+</div>
+
+@code {
+    //required params
+    [Parameter]
+    public List<T> StepItems { get; set; }
+    [Parameter]
+    public Func<T, StepState> CurrentStepState { get; set; }
+    [Parameter]
+    public Func<T, string> StepTitle { get; set; }
+    [Parameter]
+    public Func<T, string> StepMessage { get; set; }
+
+    //optional params
+    [Parameter]
+    public StepAlignment Alignment { get; set; } = StepAlignment.Vertical;
+    [Parameter]
+    public RenderFragment PassedIcon { get; set; } =@<AeIcon Icon="check"></AeIcon>;
+    [Parameter]
+    public RenderFragment FailedIcon { get; set; } = @<AeIcon Icon="close"></AeIcon>;
+
+    private RenderFragment getIcon((int, T) item)
+    {
+        switch (CurrentStepState(item.Item2))
+        {
+            case StepState.Passed:
+                return PassedIcon;
+            case StepState.Failed:
+                return FailedIcon;
+            default:
+                return @<div>@(item.Item1 + 1)</div>;
+        }
+    }
+
+    public enum StepState
+    {
+        Queued,
+        Running,
+        Passed,
+        Failed
+    }
+
+    public enum StepAlignment
+    {
+        Vertical,
+        Horizontal
+    }
+}

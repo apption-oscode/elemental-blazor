@@ -5,10 +5,11 @@
   "main": "index.js",
   "private": "true",
   "devDependencies": {
-    "node-sass": "^5.0.0"
+    "sass": "^1.35.1"
   },
   "scripts": {
-    "build-css": "node-sass --include-path Styles --output-style compressed Styles/elemental-docs.scss --output wwwroot/css"
+    "watch-scss": "sass Styles/elemental-docs.scss:wwwroot/css/elemental-docs.css --watch",
+    "build-css": "sass Styles/elemental-docs.scss:wwwroot/css/elemental-docs.css && sass --style=compressed Styles/elemental-docs.scss:wwwroot/css/elemental-docs.min.css"
   },
   "author": "Apption",
   "license": "Apache-2.0"

@@ -1,0 +1,34 @@
+﻿@namespace Elemental.Components
+
+@inherits HtmlElement
+
+<NavLink class="@_classname" href="@_href" Match="NavLinkMatch.All" @attributes="InputAttributesWithoutClass">
+    @if (Link.CustomRender != null)
+    {
+        @Link.CustomRender
+    }
+    else
+    {
+        <AeTypography>
+            @Link.Label
+            @if (IsDropdownLabel)
+            {
+                <i class="fas fa-caret-down"  style="margin-left: .75rem;"/>
+            }
+        </AeTypography>
+    }
+</NavLink>
+
+@code {
+
+    @using Microsoft.AspNetCore.Components.Routing
+
+    [Parameter]
+    public bool IsDropdownLabel { get; set; }
+    [Parameter]
+    public AeNavLink Link { get; set; }
+
+    private string _href => IsDropdownLabel ? null : Link?.To;
+    private string _dropdownClassname => "dropdown-label";
+    private string _classname => $"ae navlink {(IsDropdownLabel ? _dropdownClassname : "")}";
+}
