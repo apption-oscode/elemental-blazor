@@ -35,7 +35,7 @@ namespace Elemental.Code
         public Func<T, bool> IsCollapsed { get; set; }
 
         [Parameter]
-        public Action<T> ToggleCollapsed { get; set; }
+        public EventCallback<T> ToggleCollapsed { get; set; }
 
         private List<(T, bool)> IsCollapsedList = new List<(T, bool)>();
 
@@ -46,10 +46,10 @@ namespace Elemental.Code
                 if (!IsCollapsedList.Select(x => x.Item1).Contains(item))
                     IsCollapsedList.Add((item, true));
             }
-            if (IsCollapsed == null || ToggleCollapsed == null)
+            if (IsCollapsed == null || !ToggleCollapsed.HasDelegate)
             {
                 IsCollapsed = itemCollapsed;
-                ToggleCollapsed = setItemCollapsed;
+                ToggleCollapsed = new EventCallback<T>(this, (Action<T>)setItemCollapsed);
             }
         }
 

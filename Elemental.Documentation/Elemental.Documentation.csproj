@@ -42,9 +42,6 @@
     <EmbeddedResource Include="Samples\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Styles\Pages\theme-page-container.scss" />
-  </ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
