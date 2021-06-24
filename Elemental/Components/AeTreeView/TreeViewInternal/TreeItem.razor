@@ -7,7 +7,7 @@
                 
         @if (hasChildren)
         {
-            <div class="caret" @onclick="() => ToggleCollapsed(Root)">
+            <div class="caret" @onclick="async () => await ToggleCollapsed.InvokeAsync(Root)">
                 <AeIcon Icon="@(IsCollapsed(Root)? "arrow-right-s" : "arrow-down-s")"></AeIcon>
             </div>
                  }
@@ -23,7 +23,7 @@
                 {
                     <AeCheckbox IsChecked="isChecked" ItemSelected="checkboxSelected"/>
                 }
-                <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked(Root)">
+                <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="async () => await NodeClicked.InvokeAsync(Root)">
                     @nodeString
                 </div>
             }
@@ -62,10 +62,10 @@
     public Func<T, bool> IsCollapsed { get; set; }
 
     [Parameter]
-    public Action<T> ToggleCollapsed { get; set; }
+    public EventCallback<T> ToggleCollapsed { get; set; }
 
     [Parameter]
-    public Action<T, bool> ItemChecked { get; set; }
+    public EventCallback<(T, bool)> ItemChecked { get; set; }
 
     [Parameter]
     public Func<T, bool?> IsChecked { get; set; }
@@ -74,7 +74,7 @@
     public Func<T, bool> IsBold { get; set; }
 
     [Parameter]
-    public Action<T> NodeClicked { get; set; }
+    public EventCallback<T> NodeClicked { get; set; }
 
     [Parameter]
     public Func<T, RenderFragment> RenderItem { get; set; }
@@ -97,7 +97,7 @@
     protected override void OnInitialized()
     {
         checkboxId = "checkbox-" + this.GetHashCode();
-        if (ItemChecked != null)
+        if (ItemChecked.HasDelegate)
         {
             isSelectable = true;
         }
@@ -117,9 +117,9 @@
         return IsChecked(Root);
     }
 
-    private void checkboxSelected()
+    private async Task checkboxSelected()
     {
-        ItemChecked(Root, IsChecked(Root) == false);
+        await ItemChecked.InvokeAsync((Root, IsChecked(Root) == false));
     }
 
 

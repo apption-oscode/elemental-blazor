@@ -30,11 +30,11 @@
         return item.isChecked;
     }
 
-    public void ItemChecked(Item item, bool isChecked)
+    public void ItemChecked((Item item, bool isChecked) item)
     {
-        item.isChecked = isChecked;
-        setChildren(item.children, isChecked);
-        setParent(item.parent);
+        item.item.isChecked = item.isChecked;
+        setChildren(item.item.children, item.isChecked);
+        setParent(item.item.parent);
     }
 
     private void setChildren(List<Item> children, bool isChecked)

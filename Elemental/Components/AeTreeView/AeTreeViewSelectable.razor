@@ -30,14 +30,14 @@
     
 
     [Parameter]
-    public Action<T, bool> ItemChecked { get; set; }
+    public EventCallback<(T, bool)> ItemChecked { get; set; }
     
     [Parameter]
     public Func<T, bool?> IsChecked { get; set; }
 
-      private void ItemSelected(T item, bool isSelected)
+    private async Task ItemSelected((T item, bool isSelected) item)
     {
-        ItemChecked(item, isSelected);
+        await ItemChecked.InvokeAsync((item.item, item.isSelected));
         StateHasChanged();
     }
 
