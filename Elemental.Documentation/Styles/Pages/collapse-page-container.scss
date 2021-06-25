@@ -1,0 +1,15 @@
+﻿@use '../colors';
+@use '../box-shadow';
+
+.collapse-page-container {
+    .callback-section {
+        .example {
+            .render {
+                background-color: colors.$white;
+                padding: 0 2rem;
+
+                @include box-shadow.BoxShadow(1);
+            }
+        }
+    }
+}
