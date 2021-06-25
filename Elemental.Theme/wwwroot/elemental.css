@@ -1884,6 +1884,17 @@ body {
   box-shadow: none;
 }
 
+.ae.outline-row {
+  display: block;
+}
+
+.ae.card.outline-fixed {
+  width: 250px;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
 .ae.progress {
   font-size: 0.8rem;
   font-weight: 400;
@@ -2431,6 +2442,28 @@ body {
 }
 .ae.steps.horizontal .ae.step:last-child {
   flex: none;
+}
+
+.ae.tab-wrapper {
+  border-bottom: 1px solid #a0aec0;
+  background-color: #bee3f8;
+  border-radius: 10px 10px 0 0;
+}
+.ae.tab-wrapper > .ae.button {
+  margin-right: 6px;
+  border-radius: 10px 10px 0 0;
+  color: white;
+}
+.ae.tab-wrapper > .ae.button.active {
+  min-width: 80px;
+}
+
+.ae.tabpage {
+  padding: 20px 10px 20px 10px;
+  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
+  background-color: #fff;
+  border: 1px solid #edf2f7;
 }
 
 .ae.table .ae.table-header {

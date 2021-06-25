@@ -1,0 +1,33 @@
+﻿@use '../common/' as c;
+
+@mixin configure($options) {
+    @if ($options) {
+        @debug 'tab configuration not yet supported';
+    }
+}
+
+@mixin styles {
+    .ae.tab-wrapper {
+        border-bottom: 1px solid c.$grey-500;
+        background-color: c.$blue-200;
+        border-radius: 10px 10px 0 0;
+
+        & > .ae.button {
+            margin-right: 6px;
+            border-radius: 10px 10px 0 0;
+            color: white;
+        }
+
+        & > .ae.button.active {
+            min-width: 80px;
+        }
+    }
+
+    .ae.tabpage {
+        padding: 20px 10px 20px 10px;
+        border-radius: 10px;
+        border-radius: 0 0 10px 10px;
+        background-color: c.$white;
+        border: 1px solid c.$grey-200;
+    }
+}

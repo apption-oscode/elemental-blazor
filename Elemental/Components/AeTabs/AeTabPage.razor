@@ -8,6 +8,8 @@
     public bool Disable { get; set; }
     [Parameter]
     public string Text { get; set; }
+    [Parameter]
+    public RenderFragment Title { get; set; }
 
     public string _Classname => $"ae tabpage {_inputClass}";
 
