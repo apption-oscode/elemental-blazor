@@ -34,7 +34,12 @@
 
     internal void AddSection(AeCollapseSection section)
     {
-        Sections.Add(section, false);
+        var open = section.DefaultOpen;
+        if(Accordion && open)
+        {
+            open = !Sections.Values.Any(s => s);
+        }
+        Sections.Add(section, open);
         StateHasChanged();
     }
 
