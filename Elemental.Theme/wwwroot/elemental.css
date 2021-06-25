@@ -554,55 +554,12 @@ body {
   background-color: #edf2f7;
 }
 
-.ae.collapse {
-  min-width: 15rem;
-  position: relative;
-  display: inline-block;
-  border-radius: 2px;
-  line-height: 1.5;
-  font-size: 0.8rem;
-  font-weight: 400;
-  white-space: nowrap;
-  text-align: center;
-  border: none;
+.ae.collapse .ae.collapse-section .ae.section-header {
   cursor: pointer;
-  color: #fff;
-  background-color: #718096;
-  border-color: #718096;
+  border-bottom: 1px solid #a0aec0;
 }
-.ae.collapse .ae.header {
-  font-size: 1.5rem;
-  padding: 0.5rem;
-}
-.ae.collapse .ae.body {
-  border-top: solid;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  text-align: left;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  visibility: visible;
-  height: 100%;
-}
-.ae.collapse .ae.body.hidden {
-  visibility: hidden;
-  height: 0;
-}
-.ae.collapse.dark {
-  background-color: #2d3748;
-  border-color: #2d3748;
-}
-.ae.collapse.light {
-  color: #718096;
-  background-color: #f7fafc;
-  border-color: #f7fafc;
-}
-.ae.collapse.blue {
-  background-color: #3182ce;
-  border-color: #3182ce;
-}
-.ae.collapse.red {
-  background-color: #e53e3e;
-  border-color: #e53e3e;
+.ae.collapse .ae.collapse-section .ae.section-body.collapsed {
+  display: none;
 }
 
 .ae.col {

@@ -18,26 +18,29 @@
 @inherits HtmlElement
 
 <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    <div class="ae header" @onclick="ToggleSection">
-        @Header
-    </div>
-    <div class="ae body @_collapseBody">
+    <CascadingValue Value="this">
         @ChildContent
-    </div>
+    </CascadingValue>
 </div>
 
 @code {
 
     [Parameter]
-    public string Header { get; set; }
-
-
-    private string _collapseBody => _isCollapsed ? "hidden" : "";
-    private bool _isCollapsed = false;
-    public void ToggleSection()
-    {
-        _isCollapsed = !_isCollapsed;
-    }
+    public bool Accordion { get; set; } = false;
 
     private string _classname => $"ae collapse {_inputClass}";
+
+    public Dictionary<AeCollapseSection, bool> Sections = new Dictionary<AeCollapseSection, bool>();
+
+    internal void AddSection(AeCollapseSection section)
+    {
+        Sections.Add(section, false);
+        StateHasChanged();
+    }
+
+    public void ToggleSection(AeCollapseSection section)
+    {
+        Sections[section] = !Sections[section];
+        StateHasChanged();
+    }
 }
