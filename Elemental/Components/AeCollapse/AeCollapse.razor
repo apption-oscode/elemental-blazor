@@ -28,6 +28,9 @@
     [Parameter]
     public bool Accordion { get; set; }
 
+    [Parameter]
+    public EventCallback<(AeCollapseSection Section, bool Open)> OnSectionToggled { get; set; }
+
     private string _classname => $"ae collapse {_inputClass}";
 
     public Dictionary<AeCollapseSection, bool> Sections = new Dictionary<AeCollapseSection, bool>();
@@ -43,7 +46,7 @@
         StateHasChanged();
     }
 
-    public void ToggleSection(AeCollapseSection section)
+    public async Task ToggleSection(AeCollapseSection section)
     {
         if(Accordion)
         {
@@ -56,6 +59,8 @@
         }
 
         Sections[section] = !Sections[section];
+
+        await OnSectionToggled.InvokeAsync((section, Sections[section]));
 
         StateHasChanged();
     }
