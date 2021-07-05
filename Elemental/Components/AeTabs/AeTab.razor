@@ -2,7 +2,7 @@
 <div class="@_Classname">
     @foreach(var page in _Tabs)
     {
-        <AeButton OnClickEvent="() => _ActivePage = page" class="@(page == _ActivePage? "blue active" : "dark")" Disabled="@(page.Disable)">@( page.Title is not null? page.Title : !string.IsNullOrWhiteSpace(page.Text)? page.Text : page.Key)</AeButton>  
+        <AeButton OnClickEvent="() => _ActivePage = page" class="@(page == _ActivePage? "blue active" : "dark")" Disabled="@(page.Disable)">@( page.Title is not null? page.Title : !string.IsNullOrWhiteSpace(page.Text)? page.Text : page.Key) </AeButton>  
     }
 </div>
 @if(_ActivePage is not null)
@@ -42,5 +42,10 @@
             }
             StateHasChanged();
         }
+    }
+
+    public void RemoveTab(AeTabPage tab)
+    {
+        
     }
 }

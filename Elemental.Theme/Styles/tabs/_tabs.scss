@@ -9,7 +9,7 @@
 @mixin styles {
     .ae.tab-wrapper {
         border-bottom: 1px solid c.$grey-500;
-        background-color: c.$blue-200;
+        background-color: whitesmoke;
         border-radius: 10px 10px 0 0;
 
         & > .ae.button {
