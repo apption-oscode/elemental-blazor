@@ -18,26 +18,50 @@
 @inherits HtmlElement
 
 <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    <div class="ae header" @onclick="ToggleSection">
-        @Header
-    </div>
-    <div class="ae body @_collapseBody">
+    <CascadingValue Value="this">
         @ChildContent
-    </div>
+    </CascadingValue>
 </div>
 
 @code {
 
     [Parameter]
-    public string Header { get; set; }
+    public bool Accordion { get; set; }
 
-
-    private string _collapseBody => _isCollapsed ? "hidden" : "";
-    private bool _isCollapsed = false;
-    public void ToggleSection()
-    {
-        _isCollapsed = !_isCollapsed;
-    }
+    [Parameter]
+    public EventCallback<(AeCollapseSection Section, bool Open)> OnSectionToggled { get; set; }
 
     private string _classname => $"ae collapse {_inputClass}";
+
+    public Dictionary<AeCollapseSection, bool> Sections = new Dictionary<AeCollapseSection, bool>();
+
+    internal void AddSection(AeCollapseSection section)
+    {
+        var open = section.DefaultOpen;
+        if(Accordion && open)
+        {
+            open = !Sections.Values.Any(s => s);
+        }
+        Sections.Add(section, open);
+        StateHasChanged();
+    }
+
+    public async Task ToggleSection(AeCollapseSection section)
+    {
+        if(Accordion)
+        {
+            foreach(var s in Sections.Keys.ToList()){
+              if(Sections[s] && s != section){
+                Sections[s] = false;
+              }
+            }
+
+        }
+
+        Sections[section] = !Sections[section];
+
+        await OnSectionToggled.InvokeAsync((section, Sections[section]));
+
+        StateHasChanged();
+    }
 }

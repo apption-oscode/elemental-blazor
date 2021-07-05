@@ -5,12 +5,12 @@
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-  Title: Basic Collapsible
-  Description: Basic example of a collapsible component
+  Title: Open By Default
+  Description: You can add the DefaultOpen parameter to make the collapsible content show itself by default
 *@
 
 <AeCollapse>
-  <AeCollapseSection>
+  <AeCollapseSection DefaultOpen>
     <Header>
       <AeTypography Variant="h5">Section 1 (Click me)</AeTypography>
     </Header>
@@ -27,6 +27,16 @@
     <ChildContent>
       <AeTypography> 
         2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et turpis lobortis, rutrum nunc ut, bibendum dui. Proin bibendum nisl ut gravida cursus. Morbi vitae ullamcorper justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla placerat facilisis lorem, vel gravida erat fringilla a. Aenean tincidunt ex elit, in placerat est sagittis ut. Sed dapibus metus massa, et ultricies lectus efficitur nec. Praesent non felis eget ante ultrices hendrerit nec id justo. Quisque at fringilla mi. Nulla ut nisi dictum, euismod velit ut, convallis neque.
+      </AeTypography>
+    </ChildContent>
+  </AeCollapseSection>
+  <AeCollapseSection DefaultOpen>
+    <Header>
+      <AeTypography Variant="h5">Section 3 (Click me)</AeTypography>
+    </Header>
+    <ChildContent>
+      <AeTypography> 
+        3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et turpis lobortis, rutrum nunc ut, bibendum dui. Proin bibendum nisl ut gravida cursus. Morbi vitae ullamcorper justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla placerat facilisis lorem, vel gravida erat fringilla a. Aenean tincidunt ex elit, in placerat est sagittis ut. Sed dapibus metus massa, et ultricies lectus efficitur nec. Praesent non felis eget ante ultrices hendrerit nec id justo. Quisque at fringilla mi. Nulla ut nisi dictum, euismod velit ut, convallis neque.
       </AeTypography>
     </ChildContent>
   </AeCollapseSection>

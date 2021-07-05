@@ -1,4 +1,5 @@
 ﻿@use '../common' as c;
+@use 'sass:map';
 
 $sideNavWidth: 300px;
 $sidenav-shrunk-width: 60px;

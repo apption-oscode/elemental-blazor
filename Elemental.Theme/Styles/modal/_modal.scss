@@ -1,5 +1,6 @@
 ﻿@use '../common' as c;
 @use 'error-modal';
+@use 'sass:map';
 
 $modalOptions: (
   'default': (

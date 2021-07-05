@@ -1,6 +1,7 @@
 @use 'input';
 @use 'input-wrapper';
 @use 'search-wrapper';
+@use 'sass:map';
 
 @mixin configure($options) {
   @if ($options) {

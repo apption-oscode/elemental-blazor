@@ -1,12 +1,12 @@
 ﻿@inherits HtmlElement
 @inject IJSRuntime JSRuntime
+<div class="@_Classname">
+	@foreach (var anchor in _Anchors)
+	{
+		<AeTypography Variant="a" class="@anchor._Classname" @onclick="() => Scroll(anchor.reference)">@anchor.Label</AeTypography>
+	}
+</div>
 <CascadingValue Value="this">
-    <div class="@_Classname">
-	    @foreach (var anchor in _Anchors)
-	    {
-		    <AeTypography Variant="a" class="@anchor._Classname" @onclick="() => Scroll(anchor.reference)">@anchor.Label</AeTypography>
-	    }
-    </div>
     @ChildContent
 </CascadingValue>
 
