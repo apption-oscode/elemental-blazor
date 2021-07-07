@@ -1,4 +1,5 @@
-﻿using Markdig;
+﻿using Elemental.Code.Markdown;
+using Markdig;
 using Markdig.Parsers;
 using Markdig.Renderers;
 using System;
@@ -18,6 +19,7 @@ namespace Elemental.Tests
         public MarkdownTests()
         {
             var builder = new MarkdownPipelineBuilder().UseAdvancedExtensions();
+            builder.Extensions.AddIfNotAlready<AeMDStyleExtension>();
             //if (!builder.Extensions.Contains<AeMDLinkExtension>())
             //{
             //    builder.Extensions.Add(new AeMDLinkExtension(new[] {"abc" }));
@@ -32,7 +34,7 @@ namespace Elemental.Tests
         private Func<string, string> rewrite_link = s => $"https://link?{s}";
 
         [Fact]
-        public void GivenMDLink_RenderWithExtension()
+        public void GivenMDLink_RenderWithLinkRewrite()
         {
 
             var writer = new StringWriter();
@@ -46,7 +48,33 @@ namespace Elemental.Tests
             var doc = Markdown.Parse(testMD, _pipeline);// ToHtml(testMD, _pipeline);
             renderer.Render(doc);
             writer.Flush();
-            var result = writer.ToString(); 
+            var result = writer.ToString();
+            Assert.Contains("https://link?", result);
+        }
+
+        [Fact]
+        public void GivenMDHeader_RenderWithClass()
+        {
+
+            var writer = new StringWriter();
+            var renderer = new HtmlRenderer(writer);
+            renderer.LinkRewriter = rewrite_link;
+            _pipeline.Setup(renderer);
+            var testMD = @"
+# Title1
+
+## Title2
+
+- element 1
+- element 2
+- element 3
+
+";
+            var doc = Markdown.Parse(testMD, _pipeline);// ToHtml(testMD, _pipeline);
+            renderer.Render(doc);
+            writer.Flush();
+            var result = writer.ToString();
+            Assert.Contains("https://link?", result);
         }
     }
 }

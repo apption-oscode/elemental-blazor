@@ -49,6 +49,18 @@ namespace Elemental.Code.Markdown
                     {
                         node.GetAttributes().AddClass("figure-caption");
                     }
+                    else if (node is HeadingBlock headingBlock)
+                    {
+                        headingBlock.GetAttributes().AddClass($"ae typography h{headingBlock.Level}");
+                    }
+                    else if (node is ParagraphBlock)
+                    {
+                        node.GetAttributes().AddClass($"ae typography");
+                    }//ae typography
+                    else if (node is ListBlock listBlock)
+                    {
+                        node.GetAttributes().AddClass($"ae typography");
+                    }
                 }
                 else if (node is Inline)
                 {

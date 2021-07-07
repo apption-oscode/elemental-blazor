@@ -1,5 +1,5 @@
 ﻿@*
-    Copyright (c) 2020 Apption Corporation
+    Copyright (c) 2021 Apption Corporation
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,25 +9,50 @@
     Description: Single option dropdown selector, hover over 
 *@
 
+@using System.Web
+
 <AeTypography>Mardown Renderer</AeTypography>
 
 <AeMarkdown
     Content="@Markdown_Content"
+    LinkRewriter="@RewriteLink"
 />
 
 @code {
 
-    private const string Markdown_Content = @"
-# List of stuff to do
+    [Parameter]
+    public string Path {get;set;}    
+
+    [Parameter]
+    public EventCallback<string> PathChanged {get;set;}    
+
+    [Parameter]
+    public string BaseURL {get;set;}    
+
+    private Func<string,string> RewriteLink;// = s => BaseURL + "/" + HttpUtility.UrlEncode(s);
+
+    protected override async Task OnInitializedAsync()
+    {
+        RewriteLink = s => BaseURL + "/" + HttpUtility.UrlEncode(s);
+    }
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        Markdown_Content = $@"
+# List of stuff to do - Page {Path}
 ## Elemental Framework
-- Improve documentation
-- Create sample project
-- Write articles
+- Improve documentation [page](/link/page)
+- Create sample project [page2](/link/page2)
+- Write articles [page3](/link/page3)
 
 ## Other stuff
-- Clean the **yard**
-- Rescue the cat
+- Prepare **pull request**
+- Get ready to argue with aelemental devs
+- Order coffee
 
 ";
+    }
+
+    private string Markdown_Content;
 
 }
