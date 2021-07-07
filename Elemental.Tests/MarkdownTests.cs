@@ -74,7 +74,8 @@ namespace Elemental.Tests
             renderer.Render(doc);
             writer.Flush();
             var result = writer.ToString();
-            Assert.Contains("https://link?", result);
+            Assert.Contains("class=\"ae typography h2\"", result);
+            Assert.Contains("class=\"ae typography h1\"", result);
         }
     }
 }
