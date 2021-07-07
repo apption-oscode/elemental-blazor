@@ -9,15 +9,44 @@
     Title: Basic Tab
     Description: Tabs with default parameters. 
 *@
-<AeTab>
-    <AeTabPage Key="1">
-        <p>This is the first tab</p>
+
+<AeTab Page="4">
+    <AeTabPage>
+        <Header>
+            Tab 1
+        </Header>
+        <Body>
+            <p>This is the first tab</p>
+        </Body>  
     </AeTabPage>
-    <AeTabPage Text="Tab 2" Key="2">
-        <button> this is the second tab</button>
+
+    <AeTabPage Deletable>
+        <Header>
+            2nd Tab
+        </Header>
+        <Body>
+            <AeIcon Icon="shield" IconStyle="Code.RXIcon.RXStyle.Fill" />
+            <p> this is the 2nd tab</p>
+        </Body>    
     </AeTabPage>
-    <AeTabPage Disable Text="Tab 3 disabled" Key="3">
-        <AeIcon Icon="shield" IconStyle="Code.RXIcon.RXStyle.Fill" />
-        <p> this is the 3rd tab</p>
+
+    <AeTabPage Disable Deletable>
+        <Header>Tab 3</Header>
+        <Body>
+            <AeIcon Icon="shield" IconStyle="Code.RXIcon.RXStyle.Fill" />
+            <p> this is the 3rd tab</p>
+        </Body>
+    </AeTabPage>
+
+    <AeTabPage>
+        <Header>
+            <i class="fal fa-atlas"></i> last tab
+        </Header>
+        <Body>
+            <AeIcon Icon="truck" IconStyle="Code.RXIcon.RXStyle.Fill" />
+            <AeIcon Icon="arrow-right" IconStyle="Code.RXIcon.RXStyle.Fill" />
+            <i class="fas fa-people-carry" />
+            <i class="fas fa-box-full"  />
+        </Body>
     </AeTabPage>
 </AeTab>

@@ -2446,7 +2446,7 @@ body {
 
 .ae.tab-wrapper {
   border-bottom: 1px solid #a0aec0;
-  background-color: #bee3f8;
+  background-color: whitesmoke;
   border-radius: 10px 10px 0 0;
 }
 .ae.tab-wrapper > .ae.button {

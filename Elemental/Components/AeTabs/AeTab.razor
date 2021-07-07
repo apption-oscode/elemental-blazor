@@ -2,13 +2,19 @@
 <div class="@_Classname">
     @foreach(var page in _Tabs)
     {
-        <AeButton OnClickEvent="() => _ActivePage = page" class="@(page == _ActivePage? "blue active" : "dark")" Disabled="@(page.Disable)">@( page.Title is not null? page.Title : !string.IsNullOrWhiteSpace(page.Text)? page.Text : page.Key)</AeButton>  
+        <AeButton OnClickEvent="() => {_ActivePage = page; OnTabSelected.InvokeAsync();}" class="@(page == _ActivePage? "blue active" : "dark")" Disabled="@(page.Disable)">
+            @(page.Header) 
+            &nbsp;
+            @if(page.Deletable)
+            { 
+                <Span class="ae tab deletable" @onclick="() => page.RemoveTab()">&#10006</Span>
+            } 
+        </AeButton>  
     }
 </div>
 @if(_ActivePage is not null)
 {
-    <div class="@_ActivePage._Classname">@_ActivePage.ChildContent</div>
-    
+    <div class="@_ActivePage._Classname">@_ActivePage.Body</div>    
 }
 <CascadingValue Value="this">
     @ChildContent
@@ -16,7 +22,7 @@
 
 @code {
     [Parameter]
-    public string DefaultActive { get; set; }
+    public int Page { get; set; }
 
     private string _Classname => $"ae tab-wrapper {_inputClass}";
 
@@ -24,23 +30,36 @@
 
     private AeTabPage _ActivePage { get; set; }
 
+    public EventCallback OnTabSelected { get; set; }
+
+    public EventCallback OnTabRemoved { get; set; }
+
     public void AddTab(AeTabPage tab)
     {
-        if (!(_Tabs.Any(t => t == tab)))
+        if (!(_Tabs.Any(t => t == tab || t.Key == tab.Key))) // checks for duplicate tabs / keys
         {
             _Tabs.Add(tab);
             if(_Tabs.Count == 1)
             {
                 _ActivePage = tab;
             }
-            else if (!string.IsNullOrWhiteSpace(DefaultActive))
+            else if (!string.IsNullOrWhiteSpace(Page))
             {
-                if(tab.Key == DefaultActive)
+                if(_ActivePage.Key != Page)
                 {
                     _ActivePage = tab;
                 }
             }
             StateHasChanged();
+        }
+    }
+
+    public void RemoveTab(AeTabPage tab)
+    {
+        if (_Tabs.Contains(tab))
+        {
+            _Tabs.Remove(tab);
+            OnTabRemoved.InvokeAsync();
         }
     }
 }
