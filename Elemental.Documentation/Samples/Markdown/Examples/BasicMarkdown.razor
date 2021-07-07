@@ -1,0 +1,33 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Dropdowns
+    Description: Single option dropdown selector, hover over 
+*@
+
+<AeTypography>Mardown Renderer</AeTypography>
+
+<AeMarkdown
+    Content="@Markdown_Content"
+/>
+
+@code {
+
+    private const string Markdown_Content = @"
+# List of stuff to do
+## Elemental Framework
+- Improve documentation
+- Create sample project
+- Write articles
+
+## Other stuff
+- Clean the **yard**
+- Rescue the cat
+
+";
+
+}

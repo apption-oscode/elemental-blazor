@@ -49,6 +49,9 @@
     <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
+  <ItemGroup>
+    <None Remove="Styles\markdown\_markdown.scss" />
+  </ItemGroup>
   
   <ItemGroup>
     <None Include="package.json">
