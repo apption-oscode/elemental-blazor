@@ -28,7 +28,7 @@
     @if (Headers.Count > 0)
     {
         <div class="ae table-header" style="@_gridStyle">
-            @if (SimpleTable)
+            @if (TableStyle == AeTableStyle.Data)
             {
                 <div class="corner  @_simple">&nbsp;</div>
             }
@@ -51,7 +51,7 @@
             {
             <div tabindex="0" class="@GetRowColor(row.item) @_simple" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;" @onclick="(() => OnRowClick.InvokeAsync(row.item))" @onfocus="(() => OnRowFocus.InvokeAsync(row.item))">
 
-                @if (SimpleTable)
+                @if (TableStyle == AeTableStyle.Data)
                 {
                     @if (@CustomRowLabels != null)
                     {
@@ -117,7 +117,7 @@
     [Parameter]
     public EventCallback<T> OnRowFocus { get; set; }
     [Parameter]
-    public bool SimpleTable { get; set; } = false;
+    public AeTableStyle TableStyle { get; set; } = AeTableStyle.Default;
     [Parameter]
     public Func<string, int, RenderFragment> CustomHeader { get; set; }
     [Parameter]
@@ -164,7 +164,7 @@
         scrollView = new ScrollView();
         scrollViewResult = new ScrollViewResult();
 
-        if (SimpleTable)
+        if (TableStyle == AeTableStyle.Data)
         {
             _simple = "simple";
             RowHeight = 22;
@@ -234,7 +234,7 @@
     {
         if (string.IsNullOrWhiteSpace(GridTemplateColumns))
         {
-            return $"{(SimpleTable ? "0.25fr" : "")} repeat({(Accessors?.Count ?? 1)}, 1fr)";
+            return $"{(TableStyle == AeTableStyle.Data ? "0.25fr" : "")} repeat({(Accessors?.Count ?? 1)}, 1fr)";
         }
         else
         {

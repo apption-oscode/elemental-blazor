@@ -9,15 +9,16 @@
     Description: Simple looking table element with sorting. Used by setting the SimpleTable attribute to True. Maintains the functionality of the regular table, but with a more data oriented aesthetic. You can override the row labels with your own Render Fragment via CustomRowLabels() in the same way you can overide the headers, only difference being CustomRowLabels() takes only an integer argument representing the row number.
 *@
 
+@using Elemental.Code
 <AeTable Accessors="accessorFunctions"
          Dataset="dummyData"
-         SimpleTable="true" />
+         TableStyle="AeTableStyle.Data" />
 <br />
 
 <AeTable Accessors="accessorFunctions"
          Dataset="dummyData"
          Headers="headers"
-         SimpleTable="true" 
+         TableStyle="AeTableStyle.Data"
          CustomRowLabels="@customLabel"/>
 
 
