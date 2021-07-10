@@ -8,11 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.csproj" />
     <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="..\Elemental\wwwroot\css\elemental.css" Link="elemental.css" />
-    <Content Include="..\Elemental\wwwroot\css\elemental.min.css" Link="elemental.min.css" />
+    <ProjectReference Include="..\Elemental.Theme.Light\Elemental.Theme.Light.csproj" />
   </ItemGroup>
 
   <ItemGroup>

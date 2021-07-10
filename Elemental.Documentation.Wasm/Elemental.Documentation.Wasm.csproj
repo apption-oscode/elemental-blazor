@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.csproj" />
     <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
+    <ProjectReference Include="..\Elemental.Theme.Light\Elemental.Theme.Light.csproj" />
   </ItemGroup>
 
   <ItemGroup>
