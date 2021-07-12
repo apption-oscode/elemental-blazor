@@ -32,6 +32,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+/**
+ * Copyright (c) 2020 Apption Corporation
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 /** Transparent **/
 /** Black **/
 /** White **/
@@ -593,16 +600,13 @@ body {
   object-position: 0%;
 }
 
-.demo-section + .demo-section {
-  margin-top: 5rem;
+.demo-section {
+  background-color: #fff;
+  padding: 2rem 4rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14);
 }
-.demo-section + .demo-section:before {
-  border-top: 1px solid #e2e8f0;
-  display: block;
-  position: relative;
-  top: -1rem;
-  margin: 0 auto;
-  content: "";
+.demo-section + .demo-section {
+  margin-top: 4rem;
 }
 
 .ie-not-supported-container {

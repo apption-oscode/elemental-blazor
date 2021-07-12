@@ -1,5 +1,12 @@
 ﻿@use '../../Elemental.Theme/Styles/theme';
 
-$overrides: ();
+@use 'table/table';
+
+$overrides: (
+  'table': (
+    'tableHeaderOptions': table.$tableHeaderOptions,
+    'tableRowOptions': table.$tableRowOptions,
+  ),
+);
 
 @include theme.custom($overrides);
