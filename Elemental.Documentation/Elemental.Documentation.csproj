@@ -43,14 +43,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Content Update="package.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\img\Elemental_128x128.png">
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>
@@ -59,6 +60,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

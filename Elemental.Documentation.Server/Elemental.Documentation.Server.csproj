@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.csproj" />
     <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
   </ItemGroup>
@@ -16,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="package.json">
+    <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 </Project>
