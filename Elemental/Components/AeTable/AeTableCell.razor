@@ -1,7 +1,10 @@
-﻿
+﻿@namespace Elemental.Components
+@inherits HtmlElement
 
-<h3>AeTableHeader</h3>
+<div class="@_className" @attributes="InputAttributesWithoutClass">
+  @ChildContent
+</div>
 
 @code {
-
+  private string _className => $"ae table-cell {_inputClass}";
 }

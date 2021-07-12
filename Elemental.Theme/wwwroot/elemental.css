@@ -2441,14 +2441,16 @@ body {
 .ae.table .ae.table-scroll::-webkit-scrollbar-thumb:hover {
   background: #718096;
 }
+.ae.table .ae.table-scroll .ae.table-row {
+  position: absolute;
+  width: 100%;
+}
 .ae.table .ae.table-rows {
   display: grid;
   overflow: overlay;
 }
 .ae.table .ae.table-rows .ae.table-row {
   display: grid;
-  position: absolute;
-  width: 100%;
 }
 .ae.table .ae.table-rows .ae.table-row:focus {
   outline: none;

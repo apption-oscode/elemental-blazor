@@ -46,7 +46,6 @@
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
-
   <ItemGroup>
     <Content Update="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
