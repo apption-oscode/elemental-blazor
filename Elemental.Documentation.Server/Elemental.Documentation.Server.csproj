@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="package-lock.json" />
     <Content Remove="package.json" />
   </ItemGroup>
 
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="package-lock.json" />
     <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>

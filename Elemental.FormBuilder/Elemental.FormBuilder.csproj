@@ -45,6 +45,16 @@
     <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
     <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="package-lock.json" />
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package-lock.json" />
+    <None Include="package.json" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="5.0.5" />
