@@ -15,7 +15,7 @@
     </div>
     @if(Pageable.PageCount > 1)
     {
-      if(Pageable.PageCount > _numberOfButtons) 
+      if(Pageable.PageCount > _numberOfButtons + 1) 
       {
         @for(int i=0; i < _numberOfButtons; i++)
         {
