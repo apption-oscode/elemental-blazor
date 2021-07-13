@@ -4,6 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
   <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
   <Target Condition="'$(Configuration)' == 'Debug'" Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="npm run build-css" />

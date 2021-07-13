@@ -6,6 +6,7 @@
     <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
+  <!-- https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#erroronduplicatepublishoutputfiles -->
   <PropertyGroup>
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
