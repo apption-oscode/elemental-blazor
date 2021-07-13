@@ -1,6 +1,59 @@
-<h3>Pagination</h3>
+@namespace Elemental.Components
+@inherits HtmlElement
+
+@if(Pageable != null)
+{
+  <div class="@_className" attributes="InputAttributesWithoutClass">
+    <div tabindex="0" class="@_pageLeftClass">
+      <AeIcon Icon="arrow-left-s" />
+    </div>
+    <div tabindex="0" class="@($"ae page {(0 == Pageable.Page ? "active" : "")}")">1</div>
+    @if(Pageable.PageCount > 1)
+    {
+      if(Pageable.PageCount > _numberOfButtons) 
+      {
+        @for(int i=_abbreviateMin; i <= _abbreviateMax; i++)
+        {
+          @if( (i == _abbreviateMin && i != 1) 
+            || (i == _abbreviateMax && i != Pageable.PageCount - 1))
+          {
+            <div tabindex="0" class="ae page more">
+              <AeIcon Icon="more" />
+            </div>
+          }
+          else 
+          {
+            <div tabindex="0" class="@($"ae page {(i == Pageable.Page ? "active" : "")}")">@i</div>
+          }
+        }
+      }
+      else 
+      {
+        @for(int i=1; i<Pageable.PageCount-1; i++)
+        {
+          <div tabindex="0" class="@($"ae page {(i == Pageable.Page ? "active" : "")}")">@(i+1)</div>
+        }
+      }
+      <div tabindex="0" class="@($"ae page {(Pageable.PageCount == Pageable.Page ? "active" : "")}")">@Pageable.PageCount</div>
+    }
+    <div tabindex="0" class="@_pageRightClass">
+      <AeIcon Icon="arrow-right-s" />
+    </div>
+  </div>
+}
 
 
 @code {
+  [Parameter] public IPageableComponent Pageable { get; set; }
+  [Parameter] public EventCallback<int> OnPageClick { get; set; }
+
+  private int _numberOfButtons = 5;
+  private int _numberOfButtonsOnSide => _numberOfButtons / 2;
+  private int _abbreviateMin => Math.Max(1, Pageable.Page - _numberOfButtonsOnSide);
+  private int _abbreviateMax => Math.Min(Pageable.PageCount - 1, Pageable.Page + _numberOfButtonsOnSide);
   
+
+  private string _className => $"ae pagination {_inputClass}";
+  private string _pageLeftClass => $"ae page page-left {(Pageable?.Page != 1 ? "" : "disabled")}";
+  private string _pageRightClass => $"ae page page-right {(Pageable?.Page != Pageable?.PageCount ? "" : "disabled")}";
 }

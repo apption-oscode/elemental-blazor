@@ -1,0 +1,47 @@
+@use '../common/' as c;
+
+$paginationOptions: (
+  'display': flex,
+);
+
+$pageOptions: (
+  'margin': 0.25rem,
+  'min-width': 2rem,
+  'height': 2rem,
+  'display': flex,
+  'justify-content': center,
+  'border-radius': 4px,
+  'align-items': center,
+  'cursor': pointer,
+  'transition': all 0.4s c.$cubic-bezier,
+  '&:hover': (
+    'box-shadow': c.$box-shadow-1,
+    'background-color': c.$grey-200,
+  ),
+  '&.active': (
+    'box-shadow': c.$box-shadow-1,
+    'background-color': c.$white,
+    'font-weight': bold,
+  ),
+);
+
+@mixin configure($options) {
+  @if ($options) {
+    @if (map.get($options, 'paginationOptions')) {
+      $paginationOptions: map.get($options, 'paginationOptions') !global;
+    }
+    @if (map.get($options, 'pageOptions')) {
+      $pageOptions: map.get($options, 'pageOptions') !global;
+    }
+  }
+}
+
+@mixin styles {
+  .ae.pagination {
+    @include c.set-values($paginationOptions);
+
+    .ae.page {
+      @include c.set-values($pageOptions);
+    }
+  }
+}

@@ -10,49 +10,58 @@
 *@
 
 <AePaginatedTable Accessors="accessorFunctions"
-       Dataset="dummyData"
-       Headers="headers" />
+  Dataset="GetDummyData()"
+  Headers="headers" 
+  @ref="_myTable"
+  Page="15"
+/>
 
+<AePagination Pageable="@_myTable" />
 
 @code {
 
-    // Define the headers at the top of the table
-    private List<string> headers = new List<string>
-    {
-        "Type", "Category", "Location", "Importance", "Icon"
-    };
-
-    // Typeparam class to hold row data, can be anything
-    private List<DummyData> dummyData = new List<DummyData>
-    {
-        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
-        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
-        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
-        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 0, Location = "FILESYSTEM", Type = "Number" },
-        new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = 1, Location = "FILESYSTEM", Type = "Number" },
-        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 1, Location = "SQLDEV_1/COSTS", Type = "Finance" },
-        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 2, Location = "SQLDEV_1/COSTS", Type = "Finance" },
-        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/COSTS", Type = "Finance" },
-        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 0, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
-        new DummyData { Category = "Dollar", CategoryIconClass="fa fa-dollar-sign", Importance = 3, Location = "SQLDEV_1/PROFITS", Type = "Finance" },
-    };
-
-    // Accessor functions to retrieve cell value
-    private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
-    {
-        new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
-        new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
-        new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
-        new Func<DummyData, string>(dummyData => { return dummyData.Importance.ToString(); }),
-        new Func<DummyData, string>(dummyData => { return dummyData.CategoryIconClass; })
-    };
-
-    class DummyData
-    {
-        public string Type { get; set; }
-        public string Category { get; set; }
-        public string CategoryIconClass { get; set; }
-        public string Location { get; set; }
-        public int Importance { get; set; }
+  private AePaginatedTable<DummyData> _myTable;
+  protected override void OnAfterRender(bool firstRender)
+  {
+    // You must re-render after the components are initialized in order for the 
+    // component reference to not be null
+    if(firstRender){
+      StateHasChanged();
     }
+  }
+
+
+  // Define the headers at the top of the table
+  private List<string> headers = new List<string>
+  {
+    "Type", "Category", "Location", "Importance", "Icon"
+  };
+
+  // Typeparam class to hold row data, can be anything
+  private List<DummyData> GetDummyData() {
+    var data = new List<DummyData>();
+    for(int i=0; i<100; i++){
+      data.Add(new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
+    }
+    return data;
+  }
+
+  // Accessor functions to retrieve cell value
+  private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
+  {
+    new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
+    new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
+    new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
+    new Func<DummyData, string>(dummyData => { return dummyData.Importance.ToString(); }),
+    new Func<DummyData, string>(dummyData => { return dummyData.CategoryIconClass; })
+  };
+
+  class DummyData
+  {
+    public string Type { get; set; }
+    public string Category { get; set; }
+    public string CategoryIconClass { get; set; }
+    public string Location { get; set; }
+    public int Importance { get; set; }
+  }
 }

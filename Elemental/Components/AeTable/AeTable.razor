@@ -123,7 +123,6 @@
     public class customArgs { }
 
     private string _simple = null;
-    private string _tableClass => $"ae table {_inputClass}";
     private string _rowsStyle => $"{_gridStyle}; grid-template-rows: repeat({scrollViewResult.TakeItems},{RowHeight}px); height:{scrollViewResult.Height}px;";
     private string _rowStyle => $"grid-template-rows:{RowHeight}px;";
     private string _scrollStyle => $"max-height: {MaxHeight}px;";
@@ -138,7 +137,6 @@
     private Dictionary<(int, int), ElementReference> cells = new Dictionary<(int, int), ElementReference>();
     private ScrollView scrollView;
     private ScrollViewResult scrollViewResult;
-    private IEnumerable<T> Rows { get => GetSortedDataset(); }
 
     protected override void OnInitialized()
     {

@@ -1,6 +1,7 @@
 ﻿@namespace Elemental.Components
 @typeparam T
 @inherits AeBaseTable<T>
+@implements IPageableComponent
 
 <div class="@_className" @attributes="InputAttributesWithoutClass">
   @if(Headers.Any()){
@@ -43,17 +44,23 @@
         }
       </AeTableRow>
     }
-  </div>
+  </div>    
 </div>
-
 
 @code {
 
   [Parameter] public int PageSize { get; set; } = 5;
   [Parameter] public int Page { get; set; } = 0;
+  public int Total { get; set; }
 
   private string _className => $"{_tableClass} paginated";
 
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+
+    Total = Rows.Count();
+  }
   protected override RenderFragment DefaultHeader(string header, int index)
   {
       return
@@ -62,7 +69,5 @@
                   <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
               </AeTypography>;
   }
-
-
 
 }
