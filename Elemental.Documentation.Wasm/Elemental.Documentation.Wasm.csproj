@@ -6,6 +6,10 @@
     <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
   <!--<PropertyGroup>
     <StaticWebAssetBasePath>Elemental.Documentation</StaticWebAssetBasePath>
   </PropertyGroup>-->
