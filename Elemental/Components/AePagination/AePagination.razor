@@ -4,56 +4,95 @@
 @if(Pageable != null)
 {
   <div class="@_className" attributes="InputAttributesWithoutClass">
-    <div tabindex="0" class="@_pageLeftClass">
+    <div tabindex="0" class="@_pageLeftClass" @onclick="() => PageClicked(Pageable.Page - 1)">
       <AeIcon Icon="arrow-left-s" />
     </div>
-    <div tabindex="0" class="@($"ae page {(0 == Pageable.Page ? "active" : "")}")">1</div>
+    <div tabindex="0" 
+      class="@($"ae page {(0 == Pageable.Page ? "active" : "")}")"
+      @onclick="@(async () => PageClicked(0))"
+    >
+      1
+    </div>
     @if(Pageable.PageCount > 1)
     {
       if(Pageable.PageCount > _numberOfButtons) 
       {
-        @for(int i=_abbreviateMin; i <= _abbreviateMax; i++)
+        @for(int i=0; i < _numberOfButtons; i++)
         {
-          @if( (i == _abbreviateMin && i != 1) 
-            || (i == _abbreviateMax && i != Pageable.PageCount - 1))
-          {
-            <div tabindex="0" class="ae page more">
+          var localIndex = (_middleButton - _numberOfButtonsOnSide) + i;
+          var nuzzled = (i == 0 && localIndex > _numberOfButtonsOnSide - 1) 
+                     || (i == _numberOfButtons-1 && localIndex < Pageable.PageCount - _numberOfButtonsOnSide);
+              
+          <div tabindex="0" 
+            class="@GetPageClass(localIndex, nuzzled)"
+            @onclick="@(async () => PageClicked(localIndex, nuzzled))"
+          >
+            @if(nuzzled){
               <AeIcon Icon="more" />
-            </div>
-          }
-          else 
-          {
-            <div tabindex="0" class="@($"ae page {(i == Pageable.Page ? "active" : "")}")">@i</div>
-          }
+            }
+            else {
+              @(localIndex+1)
+            }
+          </div>
         }
       }
       else 
       {
         @for(int i=1; i<Pageable.PageCount-1; i++)
         {
-          <div tabindex="0" class="@($"ae page {(i == Pageable.Page ? "active" : "")}")">@(i+1)</div>
+          var localIndex = i;
+          <div tabindex="0" 
+            class="@($"ae page {(i == Pageable.Page ? "active" : "")}")"
+            @onclick="() => PageClicked(localIndex)"
+          >
+            @(i+1)
+          </div>
         }
       }
-      <div tabindex="0" class="@($"ae page {(Pageable.PageCount == Pageable.Page ? "active" : "")}")">@Pageable.PageCount</div>
+      <div tabindex="0" 
+        class="@($"ae page {(Pageable.PageCount-1 == Pageable.Page ? "active" : "")}")"
+        @onclick="@(async () => PageClicked(Pageable.PageCount - 1))"
+      >
+        @Pageable.PageCount
+      </div>
     }
-    <div tabindex="0" class="@_pageRightClass">
+    <div tabindex="0" 
+      class="@_pageRightClass" 
+      @onclick="@(async () => PageClicked(Pageable.Page + 1))"
+    >
       <AeIcon Icon="arrow-right-s" />
     </div>
   </div>
 }
 
-
 @code {
   [Parameter] public IPageableComponent Pageable { get; set; }
   [Parameter] public EventCallback<int> OnPageClick { get; set; }
 
-  private int _numberOfButtons = 5;
-  private int _numberOfButtonsOnSide => _numberOfButtons / 2;
+  private int _numberOfButtonsOnSide = 2;
+  private int _numberOfButtons => _numberOfButtonsOnSide * 2 + 1;
+  private int _middleButton => Math.Min((Pageable.PageCount-1) - (_numberOfButtonsOnSide+1), 
+                                        Math.Max(Pageable.Page, _numberOfButtonsOnSide+1));
   private int _abbreviateMin => Math.Max(1, Pageable.Page - _numberOfButtonsOnSide);
   private int _abbreviateMax => Math.Min(Pageable.PageCount - 1, Pageable.Page + _numberOfButtonsOnSide);
   
 
   private string _className => $"ae pagination {_inputClass}";
-  private string _pageLeftClass => $"ae page page-left {(Pageable?.Page != 1 ? "" : "disabled")}";
-  private string _pageRightClass => $"ae page page-right {(Pageable?.Page != Pageable?.PageCount ? "" : "disabled")}";
+  private string _pageLeftClass => $"ae page page-left {(Pageable.Page == 0 ? "disabled" : "")}";
+  private string _pageRightClass => $"ae page page-right {(Pageable.Page == Pageable.PageCount - 1 ? "disabled" : "")}";
+
+  private string GetPageClass(int localIndex, bool nuzzled)
+  {
+    var active = localIndex == Pageable.Page ? "active" : "";
+    var disabled = nuzzled ? "disabled" : "";
+    return $"ae page {active} {disabled}";
+  }
+  private async Task PageClicked(int targetIndex, bool nuzzled = false)
+  {
+    if(nuzzled || targetIndex < 0 || targetIndex >= Pageable.PageCount || targetIndex == Pageable.Page){
+      return;
+    }
+
+    await OnPageClick.InvokeAsync(targetIndex);
+  }
 }

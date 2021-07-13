@@ -13,13 +13,16 @@
   Dataset="GetDummyData()"
   Headers="headers" 
   @ref="_myTable"
-  Page="15"
+  Page="@_lastClicked"
 />
 
-<AePagination Pageable="@_myTable" />
+<AePagination Pageable="@_myTable" OnPageClick="OnPageClick" />
+
+<AeTypography>Last clicked page index: @_lastClicked</AeTypography>
 
 @code {
 
+  private int _lastClicked = 0;
   private AePaginatedTable<DummyData> _myTable;
   protected override void OnAfterRender(bool firstRender)
   {
@@ -28,6 +31,11 @@
     if(firstRender){
       StateHasChanged();
     }
+  }
+
+  private void OnPageClick(int pageIndex)
+  {
+    _lastClicked = pageIndex;
   }
 
 

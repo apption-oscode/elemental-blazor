@@ -10,13 +10,18 @@ $pageOptions: (
   'height': 2rem,
   'display': flex,
   'justify-content': center,
-  'border-radius': 4px,
+  'border-radius': 2px,
   'align-items': center,
   'cursor': pointer,
+  'user-select': none,
   'transition': all 0.4s c.$cubic-bezier,
-  '&:hover': (
+  '&:not(.disabled):hover': (
     'box-shadow': c.$box-shadow-1,
     'background-color': c.$grey-200,
+  ),
+  '&.disabled': (
+    'opacity': 0.3,
+    'cursor': default,
   ),
   '&.active': (
     'box-shadow': c.$box-shadow-1,
