@@ -49,10 +49,6 @@
     <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
-  <ItemGroup>
-    <None Remove="Styles\tabs\_document-tab.scss" />
-    <None Remove="Styles\tabs\_index.scss" />
-  </ItemGroup>
   
   <ItemGroup>
     <None Include="package.json">

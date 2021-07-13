@@ -63,6 +63,8 @@
       <None Include="..\Elemental.Theme\Styles\row\_row.scss" Link="Components\AeRow\_row.scss" />
       <None Include="..\Elemental.Theme\Styles\spinner\_spinner.scss" Link="Components\AeSpinner\_spinner.scss" />
       <None Include="..\Elemental.Theme\Styles\steps\_steps.scss" Link="Components\AeSteps\_steps.scss" />
+      <None Include="..\Elemental.Theme\Styles\tabs\_document-tabs.scss" Link="Components\AeTabs\_document-tabs.scss" />
+      <None Include="..\Elemental.Theme\Styles\tabs\_index.scss" Link="Components\AeTabs\_index.scss" />
 	  <None Include="..\Elemental.Theme\Styles\tabs\_tabs.scss" Link="Components\AeTabs\_tabs.scss" />
       <None Include="..\Elemental.Theme\Styles\table\_table.scss" Link="Components\AeTable\_table.scss" />
       <None Include="..\Elemental.Theme\Styles\toggle\_toggle.scss" Link="Components\AeToggle\_toggle.scss" />

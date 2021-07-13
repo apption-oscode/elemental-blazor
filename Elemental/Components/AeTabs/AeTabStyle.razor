@@ -1,5 +1,9 @@
-﻿<h3>subtab</h3>
+﻿<div class="default-tabstyle">
+    @Childcontent
+</div>
 
 @code {
+    [Parameter]
+    public RenderFragment Childcontent { get; set; }
 
 }

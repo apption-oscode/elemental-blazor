@@ -9,21 +9,18 @@
     Title: Basic Tab
     Description: Tabs with default parameters. 
 *@
-
-<AeTab Page="4">
+@*Change this to a for loop with renderfragment tuple
+*@
+<AeTab TabIndex="3">
     <AeTabPage>
         <Header>
-            Tab 1
+            <AeTabStyle>Tab 1</AeTabStyle>
         </Header>
-        <Body>
-            <p>This is the first tab</p>
-        </Body>  
+        <Body><p>This is the first tab</p></Body>  
     </AeTabPage>
 
     <AeTabPage Deletable>
-        <Header>
-            2nd Tab
-        </Header>
+        <Header>2nd Tab</Header>
         <Body>
             <AeIcon Icon="shield" IconStyle="Code.RXIcon.RXStyle.Fill" />
             <p> this is the 2nd tab</p>
@@ -39,9 +36,7 @@
     </AeTabPage>
 
     <AeTabPage>
-        <Header>
-            <i class="fal fa-atlas"></i> last tab
-        </Header>
+        <Header><i class="fal fa-atlas"></i> last tab</Header>
         <Body>
             <AeIcon Icon="truck" IconStyle="Code.RXIcon.RXStyle.Fill" />
             <AeIcon Icon="arrow-right" IconStyle="Code.RXIcon.RXStyle.Fill" />
@@ -50,3 +45,10 @@
         </Body>
     </AeTabPage>
 </AeTab>
+
+<AeButton>
+    test
+</AeButton>
+<AeButton Disabled>
+    
+</AeButton>

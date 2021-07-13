@@ -1,10 +1,11 @@
 ﻿@inherits HtmlElement
-
+@if(Parent._ActivePage == this)
+{
+    <div class="@_Classname">@Body</div>    
+}
 @code {
     [CascadingParameter]
-    private AeTab TabControl { get; set; }
-    [Parameter]
-    public string Key { get; set; }
+    private AeTab Parent { get; set; }
     [Parameter]
     public bool Disable { get; set; }
     [Parameter]
@@ -18,12 +19,11 @@
 
     protected override void OnInitialized()
     {
-        if (string.IsNullOrWhiteSpace(Key)) throw new ArgumentException("Tab key is not valid");
-        TabControl.AddTab(this);
+        Parent.AddTab(this);
     }
 
     public void RemoveTab()
     {
-        TabControl.RemoveTab(this);
+        Parent.RemoveTab(this);
     }
 }

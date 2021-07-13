@@ -6,37 +6,93 @@
     }
 }
 
+
+/*
+    OVERRIDE
+
+    .ae.tab-container
+
+        .ae.tab-control-wrapper
+
+            .ae.tab-control
+                <styles>
+
+
+            .active 
+                .ae.tab-control
+                    <active styles>
+
+        .ae.tab-content-wrapper
+            
+*/
+
 @mixin styles {
     .ae.tab-wrapper {
-        border-bottom: 1px solid c.$grey-500;
-        background-color: whitesmoke;
-        border-radius: 10px 10px 0 0;
+        /*        border-bottom: 1px solid c.$grey-500;*/
+        padding: 3px 0 3px 0;
 
-        & > .ae.button {
-            margin-right: 6px;
-            border-radius: 10px 10px 0 0;
-            color: white;
+
+        & .ae.tab {
+            display: inline;
+            cursor: pointer;
+            padding: 0 5px 0 5px;
+            border-bottom: 1px solid c.$grey-500;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        & > .ae.button.active {
-            min-width: 80px;
+        & .active.ae.tab {
+            border-bottom: 1px solid blue;
+            min-width: 200px;
+
+            & .deletable {
+            }
+
+            & .default-tabstyle {
+                border: none;
+            }
+        }
+
+        & .default-tabstyle {
+            display: inline;
+            border-radius: 10px 10px 0 0;
+            color: white;
+            background-color: blue;
+            border: 0;
         }
     }
 
     .ae.tabpage {
         padding: 20px 10px 20px 10px;
-        border-radius: 10px;
-        border-radius: 0 0 10px 10px;
-        background-color: c.$white;
-        border: 1px solid c.$grey-200;
+    }
+    /*    .ae.tab-wrapper {
+        border-bottom: 1px solid c.$grey-500;
+
+        & > .ae.button {
+            background-color: inherit;
+            color: black;
+            padding: 5px;
+            border-radius: 0;
+            margin-right: 3px;
+        }
+
+        & > .ae.button.active {
+            border-bottom: 1px solid blue;
+        }
+    }
+
+    .ae.tabpage {
+        padding: 20px 10px 20px 10px;
     }
 
     .ae.tab.deletable {
-        position: absolute;
-        right: 3px;
-        bottom: 2px;
-        font-size: 18px;
         cursor: pointer;
-        background-color: red;
-    }
+    }*/
+    /*    .tabstyle {
+        background-color: white;
+        color: black;
+        padding: 5px;
+        border-radius: 0;
+        margin-right: 3px;
+        display: inline;
+    }*/
 }

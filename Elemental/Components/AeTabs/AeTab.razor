@@ -2,33 +2,29 @@
 <div class="@_Classname">
     @foreach(var page in _Tabs)
     {
-        <AeButton OnClickEvent="() => {_ActivePage = page; OnTabSelected.InvokeAsync();}" class="@(page == _ActivePage? "blue active" : "dark")" Disabled="@(page.Disable)">
+        <div @onclick="() => {_ActivePage = page; OnTabSelected.InvokeAsync();}" class="ae tab @(page == _ActivePage? "active" : "") @(page.Disable? "disable" : "")">
             @(page.Header) 
-            &nbsp;
-            @if(page.Deletable)
+@*            @if(page.Deletable)
             { 
-                <Span class="ae tab deletable" @onclick="() => page.RemoveTab()">&#10006</Span>
-            } 
-        </AeButton>  
+                <Span class="ae tab deletable" @onclick:stopPropagation="true" @onclick="() => page.RemoveTab()">&#10006</Span>
+            } *@
+        </div>  
     }
 </div>
-@if(_ActivePage is not null)
-{
-    <div class="@_ActivePage._Classname">@_ActivePage.Body</div>    
-}
+
 <CascadingValue Value="this">
     @ChildContent
 </CascadingValue>
 
 @code {
     [Parameter]
-    public int Page { get; set; }
+    public int TabIndex { get; set; } // starts at 0
 
     private string _Classname => $"ae tab-wrapper {_inputClass}";
 
     private List<AeTabPage> _Tabs { get; set; } = new List<AeTabPage>();
 
-    private AeTabPage _ActivePage { get; set; }
+    internal AeTabPage _ActivePage { get; set; }
 
     public EventCallback OnTabSelected { get; set; }
 
@@ -36,16 +32,16 @@
 
     public void AddTab(AeTabPage tab)
     {
-        if (!(_Tabs.Any(t => t == tab || t.Key == tab.Key))) // checks for duplicate tabs / keys
+        if (!(_Tabs.Any(t => t == tab))) // checks for duplicate tabs / keys
         {
             _Tabs.Add(tab);
             if(_Tabs.Count == 1)
             {
                 _ActivePage = tab;
             }
-            else if (!string.IsNullOrWhiteSpace(Page))
+            else if (TabIndex >= 0 && TabIndex < _Tabs.Count)
             {
-                if(_ActivePage.Key != Page)
+                if(_Tabs[TabIndex] != _ActivePage)
                 {
                     _ActivePage = tab;
                 }
@@ -56,10 +52,32 @@
 
     public void RemoveTab(AeTabPage tab)
     {
-        if (_Tabs.Contains(tab))
+        int index = _Tabs.IndexOf(tab);
+        if (index != -1)
         {
             _Tabs.Remove(tab);
+            _ActivePage = _Tabs.Count == index ? _Tabs[index - 1] : _Tabs[index];
+            StateHasChanged();
             OnTabRemoved.InvokeAsync();
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(TabIndex >= _Tabs.Count || TabIndex < 0)
+        {
+            throw new ArgumentOutOfRangeException("Page index was out of range"); 
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (TabIndex >= 0 && TabIndex < _Tabs.Count)
+        {
+            if (_Tabs[TabIndex] != _ActivePage)
+            {
+                _ActivePage = _Tabs[TabIndex];
+            }
         }
     }
 }
