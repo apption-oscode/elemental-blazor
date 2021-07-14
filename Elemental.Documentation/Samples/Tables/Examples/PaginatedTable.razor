@@ -1,0 +1,75 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Paginated Table
+    Description: Paginated table element with sorting and pagination
+*@
+
+<AePaginatedTable Accessors="accessorFunctions"
+  Dataset="GetDummyData()"
+  Headers="headers" 
+  @ref="_myTable"
+  Page="@_lastClicked"
+/>
+
+<AePagination Pageable="@_myTable" OnPageClick="OnPageClick" />
+
+<AeTypography>Last clicked page index: @_lastClicked</AeTypography>
+
+@code {
+
+  private int _lastClicked = 0;
+  private AePaginatedTable<DummyData> _myTable;
+  protected override void OnAfterRender(bool firstRender)
+  {
+    // You must re-render after the components are initialized in order for the 
+    // component reference to not be null
+    if(firstRender){
+      StateHasChanged();
+    }
+  }
+
+  private void OnPageClick(int pageIndex)
+  {
+    _lastClicked = pageIndex;
+  }
+
+
+  // Define the headers at the top of the table
+  private List<string> headers = new List<string>
+  {
+    "Type", "Category", "Location", "Importance", "Icon"
+  };
+
+  // Typeparam class to hold row data, can be anything
+  private List<DummyData> GetDummyData() {
+    var data = new List<DummyData>();
+    for(int i=0; i<200; i++){
+      data.Add(new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
+    }
+    return data;
+  }
+
+  // Accessor functions to retrieve cell value
+  private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
+  {
+    new Func<DummyData, string>(dummyData => { return dummyData.Type; }),
+    new Func<DummyData, string>(dummyData => { return dummyData.Category; }),
+    new Func<DummyData, string>(dummyData => { return dummyData.Location; }),
+    new Func<DummyData, string>(dummyData => { return dummyData.Importance.ToString(); }),
+    new Func<DummyData, string>(dummyData => { return dummyData.CategoryIconClass; })
+  };
+
+  class DummyData
+  {
+    public string Type { get; set; }
+    public string Category { get; set; }
+    public string CategoryIconClass { get; set; }
+    public string Location { get; set; }
+    public int Importance { get; set; }
+  }
+}
