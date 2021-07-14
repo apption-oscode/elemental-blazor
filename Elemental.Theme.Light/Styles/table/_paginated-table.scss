@@ -1,12 +1,15 @@
 @use '../common/' as c;
 
+$cell-padding: 1rem 0.75rem;
+
 $tableHeaderOptions: (
   'default': (
     'display': grid,
+    'border-bottom': 1px solid c.$grey-100,
     '.ae.table-cell': (
       'cursor': pointer,
       'user-select': none,
-      'padding': 0.5rem 0.75rem,
+      'padding': $cell-padding,
       'background-color': c.$transparent,
       'color': c.$text-primary,
       'font-weight': bold,
@@ -22,8 +25,8 @@ $tableHeaderOptions: (
 $tableRowOptions: (
   'default': (
     'display': grid,
-    'position': absolute,
     'width': 100%,
+    'border-bottom': 1px solid c.$grey-100,
     '&:focus': (
       'outline': none,
       'font-weight': bold,
@@ -44,7 +47,7 @@ $tableRowOptions: (
       'overflow': hidden,
       'text-overflow': ellipsis,
       'white-space': nowrap,
-      'padding': 0.5rem 0.75rem,
+      'padding': $cell-padding,
       '&': c.$scrollbarOptions,
       '&:nth-child(1)': (
         'padding-left': 0.5rem,
@@ -54,48 +57,6 @@ $tableRowOptions: (
         '&:hover': (
           'text-decoration': underline,
         ),
-      ),
-    ),
-  ),
-  'red': (
-    '.ae.table-cell': (
-      'background-color': c.$red-100,
-      '&:nth-child(1)': (
-        'border-left': 0.25rem solid c.$red-400,
-      ),
-    ),
-    '&:hover': (
-      '.ae.table-cell': (
-        'transition': 0.4s c.$cubic-bezier,
-        'background-color': c.$red-200,
-      ),
-    ),
-  ),
-  'blue': (
-    '.ae.table-cell': (
-      'background-color': c.$blue-100,
-      '&:nth-child(1)': (
-        'border-left': 0.25rem solid c.$blue-400,
-      ),
-    ),
-    '&:hover': (
-      '.ae.table-cell': (
-        'transition': 0.4s c.$cubic-bezier,
-        'background-color': c.$blue-200,
-      ),
-    ),
-  ),
-  'yellow': (
-    '.ae.table-cell': (
-      'background-color': c.$orange-100,
-      '&:nth-child(1)': (
-        'border-left': 0.25rem solid c.$orange-400,
-      ),
-    ),
-    '&:hover': (
-      '.ae.table-cell': (
-        'transition': 0.4s c.$cubic-bezier,
-        'background-color': c.$orange-200,
       ),
     ),
   ),

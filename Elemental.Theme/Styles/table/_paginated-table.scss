@@ -1,0 +1,41 @@
+@use '../common/' as c;
+@use 'sass:map';
+
+$tableRowOptions: ();
+$tableRowContainerOptions: ();
+$tableHeaderOptions: ();
+
+@mixin configure($options) {
+  @if ($options) {
+    @if (map.get($options, 'tableRowOptions')) {
+      $tableRowOptions: map.get($options, 'tableRowOptions') !global;
+    }
+
+    @if (map.get($options, 'tableRowContainerOptions')) {
+      $tableRowContainerOptions: map.get(
+        $options,
+        'tableRowContainerOptions'
+      ) !global;
+    }
+
+    @if (map.get($options, 'tableHeaderOptions')) {
+      $tableHeaderOptions: map.get($options, 'tableHeaderOptions') !global;
+    }
+  }
+}
+
+@mixin styles {
+  .ae.paginated {
+    .ae.table-header {
+      @include c.set-variations($tableHeaderOptions);
+    }
+
+    .ae.table-rows {
+      @include c.set-values($tableRowContainerOptions);
+
+      .ae.table-row {
+        @include c.set-variations($tableRowOptions);
+      }
+    }
+  }
+}

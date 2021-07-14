@@ -21,6 +21,7 @@
 @use 'row/row';
 @use 'spinner/spinner';
 @use 'steps/steps';
+@use 'table/paginated-table';
 @use 'table/table';
 @use 'toggle/toggle';
 @use 'tooltip/tooltip';
@@ -54,6 +55,7 @@
   @include row.configure(map-get($overrides, 'row'));
   @include spinner.configure(map-get($overrides, 'spinner'));
   @include steps.configure(map-get($overrides, 'steps'));
+  @include paginated-table.configure(map-get($overrides, 'paginated-table'));
   @include table.configure(map-get($overrides, 'table'));
   @include toggle.configure(map-get($overrides, 'toggle'));
   @include tooltip.configure(map-get($overrides, 'tooltip'));
@@ -87,6 +89,7 @@
   @include row.styles;
   @include spinner.styles;
   @include steps.styles;
+  @include paginated-table.styles;
   @include table.styles;
   @include toggle.styles;
   @include tooltip.styles;

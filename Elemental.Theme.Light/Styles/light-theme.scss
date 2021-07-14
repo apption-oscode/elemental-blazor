@@ -1,11 +1,11 @@
-﻿@use '../../Elemental.Theme/Styles/theme';
+﻿@use 'table/paginated-table';
 
-@use 'table/table';
+@use '../../Elemental.Theme/Styles/theme';
 
 $overrides: (
-  'table': (
-    'tableHeaderOptions': table.$tableHeaderOptions,
-    'tableRowOptions': table.$tableRowOptions,
+  'paginated-table': (
+    'tableHeaderOptions': paginated-table.$tableHeaderOptions,
+    'tableRowOptions': paginated-table.$tableRowOptions,
   ),
 );
 
