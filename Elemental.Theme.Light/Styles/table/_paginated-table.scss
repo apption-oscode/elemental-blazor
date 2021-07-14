@@ -5,7 +5,6 @@ $cell-padding: 1rem 0.75rem;
 $tableHeaderOptions: (
   'default': (
     'display': grid,
-    'border-bottom': 1px solid c.$grey-100,
     '.ae.table-cell': (
       'cursor': pointer,
       'user-select': none,
@@ -26,7 +25,7 @@ $tableRowOptions: (
   'default': (
     'display': grid,
     'width': 100%,
-    'border-bottom': 1px solid c.$grey-100,
+    'border-top': 1px solid c.$grey-100,
     '&:focus': (
       'outline': none,
       'font-weight': bold,
