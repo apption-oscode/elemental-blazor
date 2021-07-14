@@ -1,0 +1,55 @@
+@use '../common' as c;
+
+$buttonOptions: (
+  'default': (
+    'position': relative,
+    'display': inline-block,
+    'padding': 0.5rem 1rem,
+    'border-radius': 2px,
+    'line-height': 1.5,
+    'font-size': 0.8rem,
+    'font-weight': 400,
+    'white-space': nowrap,
+    'text-align': center,
+    'border': 1px solid c.$transparent,
+    'transition': all 0.3s c.$cubic-bezier,
+    'cursor': pointer,
+    'color': c.$text-primary,
+    'background-color': c.$grey-200,
+    'user-select': none,
+    '&:hover': (
+      'background-color': c.$grey-300,
+    ),
+  ),
+  'dark': (
+    'background-color': c.$grey-700,
+    'color': c.$white,
+    '&:hover': (
+      'background-color': c.$grey-800,
+    ),
+  ),
+  'light': (
+    'background-color': c.$transparent,
+    '&:hover': (
+      'background-color': c.$grey-200,
+    ),
+  ),
+  'blue': (
+    'color': c.$white,
+    'background-color': c.$blue-600,
+    '&:hover': (
+      'background-color': c.$blue-700,
+    ),
+  ),
+  'red': (
+    'color': c.$white,
+    'background-color': c.$red-600,
+    '&:hover': (
+      'background-color': c.$red-700,
+    ),
+  ),
+  'disabled': (
+    'opacity': 0.5,
+    'cursor': not-allowed,
+  ),
+);

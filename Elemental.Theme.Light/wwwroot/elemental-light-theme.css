@@ -418,65 +418,52 @@ body {
 .ae.button {
   position: relative;
   display: inline-block;
-  padding: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 2px;
   line-height: 1.5;
   font-size: 0.8rem;
   font-weight: 400;
   white-space: nowrap;
   text-align: center;
-  border: none;
+  border: 1px solid transparent;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
-  color: #fff;
-  background-color: #718096;
-  border-color: #718096;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  color: #4a5568;
+  background-color: #edf2f7;
   user-select: none;
 }
 .ae.button:focus {
   outline: none;
 }
 .ae.button:hover {
-  background-color: #4a5568;
-  border-color: #4a5568;
+  background-color: #e2e8f0;
 }
 .ae.button.dark {
-  background-color: #2d3748;
-  border-color: #2d3748;
+  background-color: #4a5568;
+  color: #fff;
 }
 .ae.button.dark:hover {
-  background-color: #4a5568;
-  border-color: #4a5568;
+  background-color: #2d3748;
 }
 .ae.button.light {
-  color: #718096;
-  background-color: #f7fafc;
-  border-color: #f7fafc;
+  background-color: transparent;
 }
 .ae.button.light:hover {
-  background-color: #e2e8f0;
-  border-color: #e2e8f0;
+  background-color: #edf2f7;
 }
 .ae.button.blue {
+  color: #fff;
   background-color: #3182ce;
-  border-color: #3182ce;
 }
 .ae.button.blue:hover {
   background-color: #2b6cb0;
-  border-color: #2b6cb0;
 }
 .ae.button.red {
+  color: #fff;
   background-color: #e53e3e;
-  border-color: #e53e3e;
 }
 .ae.button.red:hover {
   background-color: #c53030;
-  border-color: #c53030;
 }
 .ae.button.disabled {
   opacity: 0.5;
@@ -2414,7 +2401,6 @@ body {
 
 .ae.paginated .ae.table-header {
   display: grid;
-  border-bottom: 1px solid #f7fafc;
 }
 .ae.paginated .ae.table-header .ae.table-cell {
   cursor: pointer;
@@ -2432,7 +2418,7 @@ body {
 .ae.paginated .ae.table-rows .ae.table-row {
   display: grid;
   width: 100%;
-  border-bottom: 1px solid #f7fafc;
+  border-top: 1px solid #f7fafc;
 }
 .ae.paginated .ae.table-rows .ae.table-row:focus {
   outline: none;

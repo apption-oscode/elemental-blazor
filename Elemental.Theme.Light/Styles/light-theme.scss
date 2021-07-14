@@ -1,8 +1,10 @@
-﻿@use 'table/paginated-table';
+﻿@use 'button/button';
+@use 'table/paginated-table';
 
 @use '../../Elemental.Theme/Styles/theme';
 
 $overrides: (
+  'button': button.$buttonOptions,
   'paginated-table': (
     'tableHeaderOptions': paginated-table.$tableHeaderOptions,
     'tableRowOptions': paginated-table.$tableRowOptions,
