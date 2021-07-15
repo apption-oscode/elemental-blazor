@@ -440,6 +440,7 @@ body {
 }
 .ae.button:active {
   transform: translateY(1px);
+  box-shadow: inset 4px 8px 8px -8px rgba(0, 0, 0, 0.16);
 }
 .ae.button.dark {
   background-color: #4a5568;
