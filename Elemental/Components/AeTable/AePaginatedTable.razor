@@ -4,7 +4,7 @@
 @implements IPageableComponent
 
 <div class="@_className" @attributes="InputAttributesWithoutClass">
-  @if(Headers.Any()){
+  @if(Headers != null && Headers.Any()){
       <AeTableRow Header GridStyle="@_gridStyle">
         @foreach(var (header, index) in Headers.Select((h, index) => (h, index)))
         {
