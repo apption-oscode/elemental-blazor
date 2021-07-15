@@ -419,9 +419,9 @@ body {
   position: relative;
   display: inline-block;
   padding: 0.5rem 1rem;
-  border-radius: 2px;
   line-height: 1.5;
   font-size: 0.8rem;
+  border-radius: 2px;
   font-weight: 400;
   white-space: nowrap;
   text-align: center;
@@ -437,6 +437,9 @@ body {
 }
 .ae.button:hover {
   background-color: #e2e8f0;
+}
+.ae.button:active {
+  transform: translateY(1px);
 }
 .ae.button.dark {
   background-color: #4a5568;
@@ -2437,7 +2440,6 @@ body {
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   padding: 1rem 0.75rem;
 }
 .ae.paginated .ae.table-rows .ae.table-row .ae.table-cell::-webkit-scrollbar {

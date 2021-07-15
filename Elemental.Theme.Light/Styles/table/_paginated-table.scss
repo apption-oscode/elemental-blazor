@@ -45,7 +45,6 @@ $tableRowOptions: (
       'word-wrap': break-word,
       'overflow': hidden,
       'text-overflow': ellipsis,
-      'white-space': nowrap,
       'padding': $cell-padding,
       '&': c.$scrollbarOptions,
       '&:nth-child(1)': (

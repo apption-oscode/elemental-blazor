@@ -5,9 +5,9 @@ $buttonOptions: (
     'position': relative,
     'display': inline-block,
     'padding': 0.5rem 1rem,
-    'border-radius': 2px,
     'line-height': 1.5,
     'font-size': 0.8rem,
+    'border-radius': 2px,
     'font-weight': 400,
     'white-space': nowrap,
     'text-align': center,
@@ -19,6 +19,9 @@ $buttonOptions: (
     'user-select': none,
     '&:hover': (
       'background-color': c.$grey-300,
+    ),
+    '&:active': (
+      'transform': translateY(1px),
     ),
   ),
   'dark': (
