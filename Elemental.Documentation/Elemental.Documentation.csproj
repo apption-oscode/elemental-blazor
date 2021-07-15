@@ -4,6 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
   <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
   <Target Condition="'$(Configuration)' == 'Debug'" Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="npm run build-css" />
@@ -43,13 +47,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="package-lock.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Elemental\Elemental.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="package.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\img\Elemental_128x128.png">
       <PackagePath>\</PackagePath>
       <Pack>true</Pack>

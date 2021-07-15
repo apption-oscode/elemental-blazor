@@ -6,14 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="package-lock.json" />
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Elemental.Documentation\Elemental.Documentation.csproj" />
     <ProjectReference Include="..\Elemental.Theme\Elemental.Theme.csproj" />
     <ProjectReference Include="..\Elemental.Theme.Light\Elemental.Theme.Light.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="package.json">
+    <None Include="package-lock.json" />
+    <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 </Project>
