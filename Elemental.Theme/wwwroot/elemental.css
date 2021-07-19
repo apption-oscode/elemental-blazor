@@ -2508,27 +2508,44 @@ body {
 .ae.tab-wrapper {
   /*        border-bottom: 1px solid c.$grey-500;*/
   padding: 3px 0 3px 0;
+  /*            & .default-tabstyle {
+          border: none;
+      }*/
+  /*        & .default-tabstyle {
+      display: inline;
+      border-radius: 10px 10px 0 0;
+      color: white;
+      background-color: blue;
+      border: 0;
+  }*/
 }
 .ae.tab-wrapper .ae.tab {
   display: inline;
   cursor: pointer;
-  padding: 0 5px 0 5px;
+  padding: 0 8px 0 8px;
   border-bottom: 1px solid #a0aec0;
   transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  user-select: none;
 }
-.ae.tab-wrapper .active.ae.tab {
-  border-bottom: 1px solid blue;
-  min-width: 200px;
+.ae.tab-wrapper .ae.tab.active {
+  min-width: 100px;
 }
-.ae.tab-wrapper .active.ae.tab .default-tabstyle {
-  border: none;
+.ae.tab-wrapper .ae.tab:hover {
+  background-color: #edf2f7;
 }
-.ae.tab-wrapper .default-tabstyle {
-  display: inline;
-  border-radius: 10px 10px 0 0;
-  color: white;
-  background-color: blue;
-  border: 0;
+.ae.tab-wrapper .ae.tab.disable {
+  color: #ccc;
+  cursor: no-drop;
+}
+.ae.tab-wrapper .ae.tab.disable .tab-deletable:hover {
+  background-color: white;
+}
+.ae.tab-wrapper .tab-deletable {
+  margin-left: 3px;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.ae.tab-wrapper .tab-deletable:hover {
+  background-color: #e2e8f0;
 }
 
 .ae.tabpage {

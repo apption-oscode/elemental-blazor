@@ -35,30 +35,52 @@
         & .ae.tab {
             display: inline;
             cursor: pointer;
-            padding: 0 5px 0 5px;
+            padding: 0 8px 0 8px;
             border-bottom: 1px solid c.$grey-500;
             transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
+            user-select: none;
 
-        & .active.ae.tab {
-            border-bottom: 1px solid blue;
-            min-width: 200px;
-
-            & .deletable {
+            &.active{
+                min-width: 100px;
             }
 
-            & .default-tabstyle {
+            &:hover{
+                background-color: c.$grey-200;
+            }
+
+            &.disable.deletable {
+            }
+
+            &.disable {
+                color: #ccc;
+                cursor: no-drop;
+                & .tab-deletable:hover{
+                    background-color: white;
+                }
+            }
+
+            &.deletable {
+            }
+        }
+
+
+        & .tab-deletable {
+            margin-left: 3px;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            &:hover {
+                background-color: c.$grey-300;
+            }
+        }
+        /*            & .default-tabstyle {
                 border: none;
-            }
-        }
-
-        & .default-tabstyle {
+            }*/
+        /*        & .default-tabstyle {
             display: inline;
             border-radius: 10px 10px 0 0;
             color: white;
             background-color: blue;
             border: 0;
-        }
+        }*/
     }
 
     .ae.tabpage {

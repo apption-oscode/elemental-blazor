@@ -2,12 +2,12 @@
 <div class="@_Classname">
     @foreach(var page in _Tabs)
     {
-        <div @onclick="() => {_ActivePage = page; OnTabSelected.InvokeAsync();}" class="ae tab @(page == _ActivePage? "active" : "") @(page.Disable? "disable" : "")">
+        <div @onclick="() => {if(!page.Disable) _ActivePage = page; OnTabSelected.InvokeAsync();}" class="ae tab @(page == _ActivePage? "active" : "") @(page.Disable? "disable" : "") @(page.Deletable? "deletable" : "")">
             @(page.Header) 
-@*            @if(page.Deletable)
+            @if(page.Deletable)
             { 
-                <Span class="ae tab deletable" @onclick:stopPropagation="true" @onclick="() => page.RemoveTab()">&#10006</Span>
-            } *@
+                <Span class="ae tab-deletable" @onclick:stopPropagation="true" @onclick="() => {if(!page.Disable) page.RemoveTab();}">&#10006</Span>
+            } 
         </div>  
     }
 </div>
