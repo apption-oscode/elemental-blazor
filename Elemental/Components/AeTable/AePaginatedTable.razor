@@ -22,7 +22,7 @@
     }
 
     <div class="ae table-rows">
-        @for (var itemIndex = 0; itemIndex < PageSize; itemIndex++)
+        @for (var itemIndex = 0; itemIndex < PageItems.Count; itemIndex++)
         {
             var item = getPageItem(itemIndex);
             var currentIndex = itemIndex;
@@ -56,17 +56,11 @@
     [Parameter] public int PageSize { get; set; } = 5;
     [Parameter] public int Page { get; set; } = 0;
 
-    [Parameter] public bool RowHeader { get; set; }
-    [Parameter] public string RowGridStyle { get; set; }
-    private string _rowClassName => $"ae {(RowHeader ? "table-header" : "table-row")} {_inputClass}";
-    private string _rowStyle => $"{RowGridStyle} {_inputStyle}";
-
     private List<T> PageItems;
     private int? currentPage;
 
     private T getPageItem(int index)
     {
-        if (index >= PageSize) return default(T);
         return PageItems[index];
     }
 
