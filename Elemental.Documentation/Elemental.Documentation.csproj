@@ -47,6 +47,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Samples\ModelForm\StarshipWithOwner.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="package-lock.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>

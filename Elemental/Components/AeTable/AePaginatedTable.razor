@@ -19,7 +19,7 @@
   }
 
   <div class="ae table-rows">
-    @foreach(var row in Rows.Skip(Page * PageSize).Take(PageSize).Select((item, i) => new { item, i}))
+    @foreach(var row in Rows.Skip(Page * PageSize).Take(PageSize).Select((item, i) => (item, i)))
     {
       <AeTableRow 
         GridStyle="@_gridStyle" 
@@ -49,9 +49,11 @@
 
 @code {
 
-  [Parameter] public int PageSize { get; set; } = 5;
-  [Parameter] public int Page { get; set; } = 0;
-  public int Total { get; set; }
+    [Parameter] public int PageSize { get; set; } = 5;
+    [Parameter] public int Page { get { return _page; } set { _page = value; } }
+    private int _page = 0;
+    
+    public int Total { get; set; }
 
   private string _className => $"{_tableClass} paginated";
 
