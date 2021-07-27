@@ -11,20 +11,24 @@
 
 <AePaginatedTable Accessors="accessorFunctions"
   Dataset="GetDummyData()"
+  T=DummyData
   Headers="headers" 
   @ref="_myTable"
   Page="@_lastClicked"
+  OnRowClick="@RowSelected"
 />
 
 <AePagination Pageable="@_myTable" OnPageClick="OnPageClick" />
 
 <AeTypography>Last clicked page index: @_lastClicked</AeTypography>
+<AeTypography>Element Selected: @_selected</AeTypography>
 
 @code {
 
-  private int _lastClicked = 0;
+    private int _lastClicked = 0;
   private AePaginatedTable<DummyData> _myTable;
-  protected override void OnAfterRender(bool firstRender)
+    private DummyData? _selected;
+    protected override void OnAfterRender(bool firstRender)
   {
     // You must re-render after the components are initialized in order for the 
     // component reference to not be null
@@ -32,6 +36,10 @@
       StateHasChanged();
     }
   }
+  private void RowSelected(DummyData selected)
+    {
+        _selected = selected;
+    }
 
   private void OnPageClick(int pageIndex)
   {
@@ -64,7 +72,7 @@
     new Func<DummyData, string>(dummyData => { return dummyData.CategoryIconClass; })
   };
 
-  class DummyData
+  record DummyData
   {
     public string Type { get; set; }
     public string Category { get; set; }

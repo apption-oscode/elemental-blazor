@@ -4,70 +4,105 @@
 @implements IPageableComponent
 
 <div class="@_className" @attributes="InputAttributesWithoutClass">
-  @if(Headers != null && Headers.Any()){
-      <AeTableRow Header GridStyle="@_gridStyle">
-        @foreach(var (header, index) in Headers.Select((h, index) => (h, index)))
-        {
-          @if(@CustomHeader != null){
-            @CustomHeader(header, index)
-          }
-          else {
-            @DefaultHeader(header, index)
-          }
-        }
-      </AeTableRow>
-  }
-
-  <div class="ae table-rows">
-    @foreach(var row in Rows.Skip(Page * PageSize).Take(PageSize).Select((item, i) => new { item, i}))
+    @if (Headers != null && Headers.Any())
     {
-      <AeTableRow 
-        GridStyle="@_gridStyle" 
-        tabindex="0"
-        @onclick="(() => OnRowClick.InvokeAsync(row.item))" 
-        @onfocus="(() => OnRowFocus.InvokeAsync(row.item))"
-      >
-        @foreach(var (accessor, index) in Accessors.Select((a, i) => (a, i)))
-        {
-          if(Renderers?[index] is null)
-          {
-            <AeTableCell>
-              @accessor?.Invoke(row.item)
-            </AeTableCell>
-          }
-          else 
-          {
-            <AeTableCell>
-              @Renderers[index](row.item)
-            </AeTableCell>
-          }
-        }
-      </AeTableRow>
+        <AeTableRow Header GridStyle="@_gridStyle">
+            @foreach (var (header, index) in Headers.Select((h, index) => (h, index)))
+            {
+                @if (@CustomHeader != null)
+                {
+                    @CustomHeader(header, index)
+                }
+                else
+                {
+                    @DefaultHeader(header, index)
+                }
+            }
+        </AeTableRow>
     }
-  </div>    
+
+    <div class="ae table-rows">
+        @for (var itemIndex = 0; itemIndex < PageSize; itemIndex++)
+        {
+            var item = getPageItem(itemIndex);
+            var currentIndex = itemIndex;
+            <AeTableRow GridStyle="@_gridStyle"
+                    tabindex="0"
+                    @onclick="(() => OnRowClick.InvokeAsync(getPageItem(currentIndex)))"
+                    @onfocus="(() => OnRowFocus.InvokeAsync(getPageItem(currentIndex)))">
+                @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
+                {
+                    if (Renderers?[index] is null)
+                    {
+                        <AeTableCell>
+                            @accessor?.Invoke(item)
+                        </AeTableCell>
+                    }
+                    else
+                    {
+                        <AeTableCell>
+                            @Renderers[index](item)
+                        </AeTableCell>
+                    }
+                }
+            </AeTableRow>
+
+        }
+</div>
 </div>
 
 @code {
 
-  [Parameter] public int PageSize { get; set; } = 5;
-  [Parameter] public int Page { get; set; } = 0;
-  public int Total { get; set; }
+    [Parameter] public int PageSize { get; set; } = 5;
+    [Parameter] public int Page { get; set; } = 0;
 
-  private string _className => $"{_tableClass} paginated";
+    [Parameter] public bool RowHeader { get; set; }
+    [Parameter] public string RowGridStyle { get; set; }
+    private string _rowClassName => $"ae {(RowHeader ? "table-header" : "table-row")} {_inputClass}";
+    private string _rowStyle => $"{RowGridStyle} {_inputStyle}";
 
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
+    private List<T> PageItems;
+    private int? currentPage;
 
-    Total = Rows.Count();
-  }
-  protected override RenderFragment DefaultHeader(string header, int index)
-  {
-      return
-              @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
-                  @header
-                  <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
-              </AeTypography>;
-  }
+    private T getPageItem(int index)
+    {
+        if (index >= PageSize) return default(T);
+        return PageItems[index];
+    }
+
+    public int Total { get; set; }
+
+    private void LoadPageItems()
+    {
+        if (Page != currentPage)
+        {
+            PageItems = Rows.Skip(Page * PageSize).Take(PageSize).ToList();
+            currentPage = Page;
+        }
+    }
+
+    private string _className => $"{_tableClass} paginated";
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LoadPageItems();
+        Total = Rows.Count();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        LoadPageItems();
+    }
+
+    protected override RenderFragment DefaultHeader(string header, int index)
+    {
+        return
+    @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
+        @header
+        <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
+    </AeTypography>
+    ;
+    }
 
 }
