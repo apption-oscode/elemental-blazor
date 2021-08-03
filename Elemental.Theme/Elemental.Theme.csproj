@@ -49,8 +49,11 @@
     <Exec Command="npm i sass --save-dev" />
     <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
   </Target>
-  
+
   <ItemGroup>
+    <None Include="package-lock.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>

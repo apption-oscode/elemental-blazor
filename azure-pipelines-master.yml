@@ -1,4 +1,4 @@
-name: '1.0.$(date:yy)$(DayOfYear)$(rev:.r)'
+name: '1.1.$(date:yy)$(DayOfYear)$(rev:.r)'
 
 trigger:
   batch: true
