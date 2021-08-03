@@ -35,7 +35,7 @@
 
             if (!string.IsNullOrEmpty(elementId))
             {
-                await JSRuntime.InvokeVoidAsync("BlazorScrollToId", elementId);
+                await JSRuntime.InvokeVoidAsync("anchor.BlazorScrollToId", elementId);
             }
         }
     }
