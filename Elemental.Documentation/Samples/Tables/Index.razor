@@ -1,7 +1,12 @@
-﻿@page "/tables"
+﻿@page "/content/tables"
 @inherits DemoPage
 
 <AeFlex Vertical class="table-page-container">
+    <DemoSection Path="./Samples/Tables/Examples/PaginatedTable.razor">
+        <AeFlex class="table-container">
+            <Elemental.Documentation.Samples.Tables.Examples.PaginatedTable />
+        </AeFlex>
+    </DemoSection>
     <DemoSection Path="./Samples/Tables/Examples/BasicTable.razor">
         <AeFlex class="table-container">
             <Elemental.Documentation.Samples.Tables.Examples.BasicTable />
@@ -40,6 +45,11 @@
     <DemoSection Path="./Samples/Tables/Examples/CustomHeader.razor">
         <AeFlex class="table-container">
             <Elemental.Documentation.Samples.Tables.Examples.CustomHeader />
+        </AeFlex>
+    </DemoSection>
+    <DemoSection Path="./Samples/Tables/Examples/ColumnWidthTable.razor">
+        <AeFlex class="table-container">
+            <Elemental.Documentation.Samples.Tables.Examples.ColumnWidthTable />
         </AeFlex>
     </DemoSection>
 </AeFlex>

@@ -1,4 +1,4 @@
-﻿using Elemental.Code;
+﻿using Elemental.Components;
 using Elemental.Documentation.Data;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Elemental.Tests
             var s1 = typeof(Starship).GetAeModelFormCategories();
             Assert.Single(s1);
             var (_, l1) = s1[0];
-            Assert.Equal(9, l1.Count);
+            Assert.Equal(11, l1[0].Count);
 
         }
 

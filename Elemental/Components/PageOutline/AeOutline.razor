@@ -1,0 +1,28 @@
+﻿@inherits HtmlElement
+@inject IJSRuntime JSRuntime
+<CascadingValue Value="this">
+	<div class="@_Classname">
+		@foreach (var anchor in _Anchors)
+		{
+			<AeTypography Variant="a" class="@anchor._Classname" @onclick="() => Scroll(anchor.Href)">@anchor.ChildContent</AeTypography>
+		}
+	</div>
+	@ChildContent
+</CascadingValue>
+
+@code {
+    private string _Classname => $"ae outline-wrapper {_inputClass}";
+    private List<AeAnchor> _Anchors = new List<AeAnchor>();
+
+    private async Task Scroll(string id)
+    {
+        if (String.IsNullOrEmpty(id)) throw new ArgumentNullException("id was null / empty");
+        await JSRuntime.InvokeVoidAsync(("ScrollPosFromId"), id);
+    }
+
+    protected internal void AddAnchor(AeAnchor anchor)
+    {
+        if(!(_Anchors.Any(a => a == anchor)))_Anchors.Add(anchor);
+        StateHasChanged();
+    }
+}

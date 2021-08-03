@@ -1,30 +1,20 @@
-﻿@page "/modal"
+﻿@page "/components/modal"
 @inherits DemoPage
 
 <AeFlex Vertical class="modal-page-container">
+
+    <AeTypography Variant="h2">Setup</AeTypography>
+    <AeTypography Variant="p">Before you can use AeModal you'll have to add it below the <code>Router</code> component in your <code>App.razor</code> file</AeTypography>
+
     <div class="source">
-        <div class="title">App.razor</div>
-        <pre><code class="language-html">
-@(@"
-<Router AppAssembly=""..."">
-            
+        <pre><code class="language-html">@(@"<Router>
+    // contents
 </Router>
-<AeModal />")
-</code></pre>
-        <div class="title">Startup.cs</div>
-        <pre><code class="language-csharp">
-@(@"public void ConfigureServices(IServiceCollection services)
-{            
-    services.AddScoped<Elemental.Services.UIControlsService>();
-}")
-</code></pre>
-        <div class="title">_Host.cshtml</div>
-        <pre><code class="language-html">
-@(@"
-<script src=""_content/Blazor.Elemental/js/modal-helper.js""></script>
-")
-</code></pre>
+
+<AeModal />")</code></pre>
     </div>
+
+
     <DemoSection Path="./Samples/Modal/Examples/BasicModal.razor">
         <AeFlex>
             <Elemental.Documentation.Samples.Modal.Examples.BasicModal />
@@ -38,6 +28,11 @@
     <DemoSection Path="./Samples/Modal/Examples/AdvanceModal.razor">
         <AeFlex>
             <Elemental.Documentation.Samples.Modal.Examples.AdvanceModal />
+        </AeFlex>
+    </DemoSection>
+    <DemoSection Path="./Samples/Modal/Examples/ErrorModal.razor">
+        <AeFlex>
+            <Elemental.Documentation.Samples.Modal.Examples.ErrorModal />
         </AeFlex>
     </DemoSection>
 </AeFlex>

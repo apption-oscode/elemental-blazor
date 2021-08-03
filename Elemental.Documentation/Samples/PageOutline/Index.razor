@@ -1,0 +1,46 @@
+﻿@page "/components/outline"
+@inherits DemoPage
+@using Elemental.Components.PageOutline
+<AeCard class="outline-fixed">
+    <Header>
+        <AeTypography style="flex-grow: 1; ">Document Navigation</AeTypography>
+    </Header>
+    <ChildContent>
+        <AeOutline>
+            <AeAnchor Href="fragment"> Fragment Routing</AeAnchor>
+            <AeAnchor Href="outline"> Basic Outline Component</AeAnchor>
+            <AeAnchor Href="reference"> Reference Based Outline</AeAnchor>
+            <AeAnchor Href="ids"> Advanced Id Based Outline</AeAnchor>
+        </AeOutline>
+    </ChildContent>
+</AeCard>
+<AeFlex Vertical>
+        <div class="title">_Host.cshtml</div>
+        <pre>
+            <code class="language-html">
+@(@"
+<script src=""_content/Blazor.Elemental/js/anchor.js""></script>
+")
+            </code>
+        </pre>
+    <span id="fragment">
+        <DemoSection Path="./Samples/PageOutline/Examples/FragmentRouting.razor">
+            <Elemental.Documentation.Samples.PageOutline.Examples.FragmentRouting />
+        </DemoSection>
+    </span>
+    <span id="outline">
+        <DemoSection Path="./Samples/PageOutline/Examples/BasicOutline.razor">
+            <Elemental.Documentation.Samples.PageOutline.Examples.BasicOutline />
+        </DemoSection>
+    </span>
+    <span id="reference">
+        <DemoSection Path="./Samples/PageOutline/Examples/ReferenceOutline.razor">
+            <Elemental.Documentation.Samples.PageOutline.Examples.ReferenceOutline />
+        </DemoSection>
+    </span>
+        <span id="ids">
+        <DemoSection Path="./Samples/PageOutline/Examples/IdOutline.razor">
+            <Elemental.Documentation.Samples.PageOutline.Examples.IdOutline />
+        </DemoSection>
+    </span>
+</AeFlex>

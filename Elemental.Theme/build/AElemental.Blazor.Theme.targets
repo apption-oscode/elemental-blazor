@@ -1,8 +1,8 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-      <SourceScriptFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\elemental-theme\*" />
-  </ItemGroup>
   <Target Name="CopyScriptsToProject" BeforeTargets="Build">
-      <Copy SourceFiles="@(SourceScriptFiles)" DestinationFolder="$(ProjectDir)\Styles\elemental-theme\" />
+      <ItemGroup>
+          <SourceScriptFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\elemental-theme\**\*.*" />
+      </ItemGroup>
+      <Copy SourceFiles="@(SourceScriptFiles)" DestinationFolder="$(ProjectDir)\Styles\elemental-theme\%(RecursiveDir)" />
   </Target>
 </Project>

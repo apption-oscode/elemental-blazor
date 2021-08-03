@@ -1,0 +1,21 @@
+﻿@inherits HtmlElement
+<span @ref="reference">
+	@ChildContent
+</span>
+
+@code {
+	[CascadingParameter]
+	public AeOutlineRef Outline { get; set; }
+    [Parameter]
+	public string Label { get; set; }
+	protected internal string _Classname => $"ae outline-row {_inputClass}";
+	public ElementReference reference;
+
+	protected override void OnAfterRender(bool firstRender)
+	{
+		if (firstRender)
+		{
+			Outline.AddAnchor(this);
+		}
+	}
+}

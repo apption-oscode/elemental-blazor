@@ -1,0 +1,22 @@
+@inject NavigationManager NavigationManager
+
+<AeFlex @onclick="HandleClick" class="component-card">
+  <img src="@ImageUrl" />
+  
+  <AeTypography class="text">@Title</AeTypography>
+</AeFlex>
+
+@code {
+
+
+  [Parameter]
+  public string Title {get; set;}
+  [Parameter]
+  public string ImageUrl {get; set;}
+  [Parameter]
+  public string Url {get; set;}	
+
+  private void HandleClick(){
+    NavigationManager.NavigateTo("/components/" + Url);
+  }
+}

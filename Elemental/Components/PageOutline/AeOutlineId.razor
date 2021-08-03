@@ -1,0 +1,26 @@
+﻿@inherits HtmlElement
+@inject IJSRuntime JSRuntime
+@inject GetDimensionsService Dimensions
+
+@if (!(Anchors is null))
+{
+    <div class="@_Classname">
+        @foreach (var item in Anchors)
+        {
+            <div @onclick="() => Scroll(item.Id)">@item.ChildContent</div>
+        }
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public List<(string Id, RenderFragment ChildContent)> Anchors { get; set; }
+    private string _Classname => $"ae outline-wrapper {_inputClass}";
+
+    private async Task Scroll(string id)
+    {
+        if (String.IsNullOrEmpty(id)) throw new ArgumentNullException("id was null / empty");
+        await JSRuntime.InvokeVoidAsync(("ScrollPosFromId"), id);
+    }
+}

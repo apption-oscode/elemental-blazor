@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
-using Elemental.Components.Forms;
+using Elemental.Components;
 
 namespace Elemental.FormBuilder
 {

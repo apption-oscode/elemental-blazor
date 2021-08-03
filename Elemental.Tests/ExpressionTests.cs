@@ -1,4 +1,5 @@
 ﻿using Elemental.Code;
+using Elemental.Components;
 using Elemental.Documentation.Data;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,19 @@ namespace Elemental.Tests
             var compiled = expr.Compile();
             var result = compiled();
             Assert.Equal("HAHA", result);
+        }
+
+        [Fact]
+        public void CanGenerateExpressionAbstract()
+        {
+            var starshipType = typeof(Starship);
+            var starshipInstance = new Starship() { Identifier = "HAHA", ShipName = "ze_cheap_name" };
+            var idProp = starshipType.GetProperty("ShipName");
+            var expr = AeModelFormTools.GetExpression<string>(starshipInstance, idProp);
+
+            var compiled = expr.Compile();
+            var result = compiled();
+            Assert.Equal("ze_cheap_name", result);
         }
 
     }

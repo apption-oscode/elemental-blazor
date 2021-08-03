@@ -1,0 +1,85 @@
+﻿@page "/components"
+
+@using System.Linq;
+
+<AeFlex class="component-landing-container">
+	<AeTypography Variant="h2">Components</AeTypography>
+	<AeTypography>Components are the reusable building blocks of AElemental. Each component meets a specific interaction or UI need and has been specifically created to work together to create patterns and intuitive user experiences.</AeTypography>
+
+	<AeSearchInput class="search" Placeholder="Search components by name" OnInputChange="HandleSearch" EventTimer="1" />
+
+
+	@if(_isLoading){
+		<AeSpinner Spinner="Spinner.Type5" style="margin: auto;"/>
+	}
+	else {
+		<AeFlex class="card-container">
+			@foreach(var component in _components){
+				<ComponentCard Title="@component.Title" ImageUrl="@component.ImageUrl" Url="@component.Url" />
+			}
+
+			@if (!_components.Any())
+			{
+				<AeFlex class="empty">
+					<AeIcon Icon="git-branch"></AeIcon>
+					<AeTypography class="title">Don't see the component you're looking for?</AeTypography>
+					<AeTypography Variant="a" href="https://github.com/apption-oscode/elemental-blazor" class="subtitle">Come make it with us!</AeTypography>
+				</AeFlex>
+			}
+		</AeFlex>
+	}
+
+</AeFlex>
+
+
+@code {
+
+	List<(string Title, string ImageUrl, string Url)> _components;
+	List<(string Title, string ImageUrl, string Url)> _allComponents;
+	bool _isLoading = false;
+
+	private void HandleSearch(string newValue){
+
+			_isLoading = true;
+			StateHasChanged();
+
+			_components = _allComponents
+				.Where(c => c.Title.ToLower()
+					.Contains(newValue.ToLower()))
+				.ToList();
+
+			_isLoading = false;
+			StateHasChanged();
+	}
+
+
+	protected override void OnInitialized()
+	{
+		
+		_allComponents = new List<(string, string, string)>()
+		{
+			("Buttons", "https://picsum.photos/180/101", "buttons"),
+			("Card", "https://picsum.photos/180/101", "cards"),
+			("Checkbox", "https://picsum.photos/180/101", "checkbox"),
+			("Collapse", "https://picsum.photos/180/101", "collapse"),
+			("Dropdowns", "https://picsum.photos/180/101", "dropdowns"),
+			("Excel Import", "https://picsum.photos/180/101", "pastearea"),
+			("Icon", "https://picsum.photos/180/101", "icons"),
+			("Inputs", "https://picsum.photos/180/101", "inputs"),
+			("List", "https://picsum.photos/180/101", "list"),
+			("Menu", "https://picsum.photos/180/101", "menu"),
+			("Modal", "https://picsum.photos/180/101", "modal"),
+			("Navbar", "https://picsum.photos/180/101", "navbar"),
+			("Page Outline", "https://picsum.photos/180/101", "outline"),
+			("Progress Bar", "https://picsum.photos/180/101", "progress"),
+			("Spinner", "https://picsum.photos/180/101", "spinner"),
+			("Steps", "https://picsum.photos/180/101", "steps"),
+			("Toggle", "https://picsum.photos/180/101", "toggle"),
+			("Tooltip", "https://picsum.photos/180/101", "tooltip"),
+			("Treeview", "https://picsum.photos/180/101", "treeview"),
+			("Walkthrough", "https://picsum.photos/180/101", "walkthrough"),
+		};
+
+		_components = _allComponents;
+	}
+}
