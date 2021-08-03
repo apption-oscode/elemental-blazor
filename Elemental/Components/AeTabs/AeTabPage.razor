@@ -1,10 +1,15 @@
 ﻿@inherits HtmlElement
+
 @if(Parent._ActivePage == this)
 {
-    <div class="@_classname">@Body</div>    
+    <div class="@_classname">
+      @ChildContent
+    </div>    
 }
+
 @code {
-  [CascadingParameter]
+
+    [CascadingParameter]
     private AeTab Parent { get; set; }
     [Parameter]
     public bool Disable { get; set; }
@@ -12,8 +17,6 @@
     public bool Deletable { get; set; }
     [Parameter]
     public RenderFragment Header { get; set; }
-    [Parameter]
-    public RenderFragment Body { get; set; }
 
     public string _classname => $"ae tabpage {_inputClass}";
 
