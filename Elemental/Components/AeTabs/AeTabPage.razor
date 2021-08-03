@@ -1,4 +1,6 @@
-﻿@inherits HtmlElement
+﻿@namespace Elemental.Components
+
+@inherits HtmlElement
 
 @if(Parent._ActivePage == this)
 {
@@ -10,7 +12,7 @@
 @code {
 
     [CascadingParameter]
-    private AeTab Parent { get; set; }
+    private AeTabControl Parent { get; set; }
     [Parameter]
     public bool Disable { get; set; }
     [Parameter]

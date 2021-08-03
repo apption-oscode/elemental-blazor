@@ -1,120 +1,79 @@
 ﻿@use '../common/' as c;
 
+$tabControlDeletable: (
+  'margin-left': 0.5rem,
+  'transition': all 0.2s c.$cubic-bezier,
+  'opacity': 0.5,
+  '&:hover': (
+    'opacity': 1,
+    'transform': scale(1.1),
+  ),
+);
+
+$tabControlDisabled: (
+  'opacity': 0.5,
+  'cursor': not-allowed,
+);
+
+$tabControlOptions: (
+  'display': inline-flex,
+  'flex-wrap': wrap,
+  'cursor': pointer,
+  'padding': 1rem,
+  'margin-bottom': 1rem,
+  'border-bottom': 2px solid #{c.$transparent},
+  'transition': all 0.2s c.$cubic-bezier,
+  'user-select': not-allowed,
+  '&.active': (
+    'border-bottom-color': c.$blue-400,
+  ),
+  '&:hover': (
+    'background-color': c.$grey-200,
+  ),
+);
+
+$tabWrapperOptions: ();
+
+$tabContentOptions: ();
+
 @mixin configure($options) {
-    @if ($options) {
-        @debug 'tab configuration not yet supported';
+  @if ($options) {
+    @if (map.get($options, 'tabControlOptions')) {
+      $tabControlOptions: map.get($options, 'tabControlOptions') !global;
     }
+    @if (map.get($options, 'tabControlDeletable')) {
+      $tabControlDeletable: map.get($options, 'tabControlDeletable') !global;
+    }
+    @if (map.get($options, 'tabControlDisabled')) {
+      $tabControlDisabled: map.get($options, 'tabControlDisabled') !global;
+    }
+    @if (map.get($options, 'tabWrapperOptions')) {
+      $tabWrapperOptions: map.get($options, 'tabWrapperOptions') !global;
+    }
+    @if (map.get($options, 'tabContentOptions')) {
+      $tabContentOptions: map.get($options, 'tabContentOptions') !global;
+    }
+  }
 }
 
-
-/*
-    OVERRIDE
-
-    .ae.tab-container
-
-        .ae.tab-control-wrapper
-
-            .ae.tab-control
-                <styles>
-
-
-            .active 
-                .ae.tab-control
-                    <active styles>
-
-        .ae.tab-content-wrapper
-            
-*/
-
 @mixin styles {
-    .ae.tab-wrapper {
-        /*        border-bottom: 1px solid c.$grey-500;*/
-        padding: 3px 0 3px 0;
+  .ae.tab-wrapper {
+    @include c.set-values($tabWrapperOptions);
 
+    .ae.tab {
+      @include c.set-values($tabControlOptions);
 
-        & .ae.tab {
-            display: inline;
-            cursor: pointer;
-            padding: 0 8px 0 8px;
-            border-bottom: 1px solid c.$grey-500;
-            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-            user-select: none;
-
-            &.active{
-                min-width: 100px;
-            }
-
-            &:hover{
-                background-color: c.$grey-200;
-            }
-
-            &.disable.deletable {
-            }
-
-            &.disable {
-                color: #ccc;
-                cursor: no-drop;
-                & .tab-deletable:hover{
-                    background-color: white;
-                }
-            }
-
-            &.deletable {
-            }
-        }
-
-
-        & .tab-deletable {
-            margin-left: 3px;
-            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-            &:hover {
-                background-color: c.$grey-300;
-            }
-        }
-        /*            & .default-tabstyle {
-                border: none;
-            }*/
-        /*        & .default-tabstyle {
-            display: inline;
-            border-radius: 10px 10px 0 0;
-            color: white;
-            background-color: blue;
-            border: 0;
-        }*/
+      &.disable {
+        @include c.set-values($tabControlDisabled);
+      }
     }
 
-    .ae.tabpage {
-        padding: 20px 10px 20px 10px;
+    .tab-deletable {
+      @include c.set-values($tabControlDeletable);
     }
-    /*    .ae.tab-wrapper {
-        border-bottom: 1px solid c.$grey-500;
+  }
 
-        & > .ae.button {
-            background-color: inherit;
-            color: black;
-            padding: 5px;
-            border-radius: 0;
-            margin-right: 3px;
-        }
-
-        & > .ae.button.active {
-            border-bottom: 1px solid blue;
-        }
-    }
-
-    .ae.tabpage {
-        padding: 20px 10px 20px 10px;
-    }
-
-    .ae.tab.deletable {
-        cursor: pointer;
-    }*/
-    /*    .tabstyle {
-        background-color: white;
-        color: black;
-        padding: 5px;
-        border-radius: 0;
-        margin-right: 3px;
-        display: inline;
-    }*/
+  .ae.tabpage {
+    @include c.set-values($tabContentOptions);
+  }
 }
