@@ -1,5 +1,4 @@
-﻿@using Elemental.Components.AeTabs
-@*
+﻿@*
     Copyright (c) 2021 Apption Corporation
 
     This Source Code Form is subject to the terms of the Mozilla Public
@@ -10,20 +9,20 @@
     Description: Tabs with default parameters. 
 *@
 
-<AeTab>
-@foreach(var x in _tabList)
-{
-    <AeTabPage Disable="x.Item3" Deletable="x.Item4" >
-        <Header>@x.Item1</Header>
-        <Body>
-            @x.Item2
-        </Body>    
-    </AeTabPage>
+<AeTabControl>
+  @foreach(var tab in _tabList)
+  {
+      <AeTabPage Disable="tab.Disabled" Deletable="tab.Deletable" >        
+          <Header>@tab.Control</Header>
+          <Body>
+              @tab.Content
+          </Body>    
+      </AeTabPage>
 }
-</AeTab>
+</AeTabControl>
 
 @code{
-    private List<(RenderFragment, RenderFragment, bool, bool)> _tabList { get; set; }
+    private List<(RenderFragment Control, RenderFragment Content, bool Disabled, bool Deletable)> _tabList { get; set; }
 
     protected override void OnInitialized()
     {

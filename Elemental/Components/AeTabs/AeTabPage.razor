@@ -1,10 +1,10 @@
 ﻿@inherits HtmlElement
 @if(Parent._ActivePage == this)
 {
-    <div class="@_Classname">@Body</div>    
+    <div class="@_classname">@Body</div>    
 }
 @code {
-    [CascadingParameter]
+  [CascadingParameter]
     private AeTab Parent { get; set; }
     [Parameter]
     public bool Disable { get; set; }
@@ -15,10 +15,11 @@
     [Parameter]
     public RenderFragment Body { get; set; }
 
-    public string _Classname => $"ae tabpage {_inputClass}";
+    public string _classname => $"ae tabpage {_inputClass}";
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
         Parent.AddTab(this);
     }
 
