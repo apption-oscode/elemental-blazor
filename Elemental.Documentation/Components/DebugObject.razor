@@ -45,5 +45,10 @@
     };
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        OnParametersSet();
+    }
+
     private List<PropertyInfo> _PropertyInfos = null;
 }

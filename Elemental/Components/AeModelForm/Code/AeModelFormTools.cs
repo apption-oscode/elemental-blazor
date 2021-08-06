@@ -23,6 +23,14 @@ namespace Elemental.Components
             return Expression.Lambda<Func<S>>(memberExpression);
         }
 
+        public static System.Linq.Expressions.Expression GetExpressionObject(object instance, PropertyInfo propertyInfo)
+        {
+            var constant = Expression.Constant(instance);
+            //var asDeclardType = Expression.Convert(constant, propertyInfo.DeclaringType);
+            var memberExpression = Expression.Property(constant, propertyInfo);
+            return Expression.Lambda(memberExpression);
+        }
+
         public static bool IsNullable(PropertyInfo propertyInfo)
         {
             return IsNullable(propertyInfo.PropertyType);
@@ -42,20 +50,9 @@ namespace Elemental.Components
 
         }
 
-        public static bool IsDropDown(this PropertyInfo propertyInfo)
-        {
-            var hasValidValues = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
-                ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues?.Length > 0
-                : false;
-            var hasDropDown = AeLabelAttribute.IsDefined(propertyInfo, typeof(AeLabelAttribute))
-                ? (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).IsDropDown
-                : false;
-            return hasValidValues || hasDropDown;
-        }
-
         public static string[] DropdownValues(this PropertyInfo propertyInfo)
         {
-            return (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute).ValidValues;
+            return (AeLabelAttribute.GetCustomAttribute(propertyInfo, typeof(AeLabelAttribute)) as AeLabelAttribute)?.ValidValues;
         }
 
         public static bool IsNullable(Type type)
@@ -215,7 +212,7 @@ namespace Elemental.Components
             return false;
         }
 
-        private static string GetMemberName(Expression expression)
+        public static string GetMemberName(Expression expression)
         {
             switch (expression.NodeType)
             {

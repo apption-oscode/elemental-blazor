@@ -7,17 +7,17 @@
 
 <AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false" />
 
-@if (HasValidValues())
+@if (ValidDisplayValues != null)
 {
-    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="PropertyValue" class="ae input"> @*   Value="PropertyValue" ValueChanged="@((string value) => OnValueChanged(value))" *@
+    <Microsoft.AspNetCore.Components.Forms.InputSelect @bind-Value="InputSelectIndex"  class="ae input"> @*   Value="PropertyValue" ValueChanged="@((string value) => OnValueChanged(value))" *@
         @if (!AeModelFormTools.IsRequired(PropertyInfo))
             {
-            <option value="">@GetPlaceholder()</option>
+            <option value="@NO_VALUE">@GetPlaceholder()</option>
             }
-        @foreach (var value in getValidValues())
+        @for (int il = 0; il < ValidDisplayValues.Count; il++)
             {
-            <option value="@value">@(GetLabel(value))</option>
-            }
+            <option value="@il">@(ValidDisplayValues[il])</option>
+            }        
     </Microsoft.AspNetCore.Components.Forms.InputSelect>
 }
 else
@@ -26,7 +26,7 @@ else
 }
 
 <div class="errortext">
-    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance,PropertyInfo))" />
+    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<object>(Instance,PropertyInfo))" />
 </div>
 
 @code {
@@ -38,15 +38,11 @@ else
 
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
-    private IEnumerable<string> getValidValues()
-    {
-        return ModelFormContext.GetValidValues(PropertyInfo);
-    }
+    public const int NO_VALUE = -1;
 
-    private bool HasValidValues()
-    {
-        return ModelFormContext.GetValidValues(PropertyInfo) != null;
-    }
+    private List<string> ValidDisplayValues { get; set; }
+
+    private List<object> ActualValues { get; set; }
 
     private string GetPlaceholder()
     {
@@ -58,16 +54,30 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var firstValue = string.IsNullOrEmpty(PropertyValue) ? getValidValues()?.FirstOrDefault() : PropertyValue;
-        if (firstRender && AeModelFormTools.IsRequired(PropertyInfo) && firstValue != null)
+        //var firstValue = (ModelFormContext.GetDisplayValue(PropertyInfo,PropertyValue) is null) ? getValidValues()?.FirstOrDefault() : PropertyValue;
+        if (firstRender && AeModelFormTools.IsRequired(PropertyInfo))
         {
-            PropertyValue = firstValue;
+            InputSelectIndex = ActualValues.IndexOf(PropertyInfo.GetValue(Instance));
+            if (InputSelectIndex == -1)
+                InputSelectIndex = AeModelFormTools.IsRequired(PropertyInfo)?0:NO_VALUE;    
         }
     }
 
     protected override async Task OnInitializedAsync()
     {
-        valueChangedCallback = EventCallback.Factory.Create<string>(this, s => OnValueChanged(s));
+        valueChangedCallback = EventCallback.Factory.Create<object>(this, s => OnValueChanged(s));
+        UpdateOptions();
+        ModelFormContext.RegisterOptionComponent(PropertyInfo, this, () => UpdateOptions());
+    }
+
+    private void UpdateOptions()
+    {
+        var optValues = ModelFormContext.GetOptionValuesForProperty(PropertyInfo);
+        ValidDisplayValues = optValues.labels;
+        ActualValues = optValues.values;
+        InputSelectIndex = ActualValues.IndexOf(PropertyInfo.GetValue(Instance));
+        if (InputSelectIndex == -1)
+            InputSelectIndex = AeModelFormTools.IsRequired(PropertyInfo)?0:NO_VALUE;        
     }
 
     /// <summary>
@@ -94,21 +104,31 @@ else
         }
     }
 
-    private EventCallback<string> valueChangedCallback;
+    private EventCallback<object> valueChangedCallback;
 
-    private async Task OnValueChanged(string value)
+    private async Task OnValueChanged(object value)
     {
+        ModelFormContext.OnOptionPropertyChange(PropertyInfo, value);
         var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
         await Notifier(changeArgs);
     }
 
-    public string PropertyValue
+    private int currentIndex = 0;
+
+    public int InputSelectIndex
     {
-        get => PropertyInfo.GetValue(Instance) as string;
+        get => currentIndex; //PropertyInfo.GetValue(Instance);
         set
         {
-            PropertyInfo.SetValue(Instance, value);
-            valueChangedCallback.InvokeAsync(value);
+            if (currentIndex != value)
+            {
+                currentIndex = value;
+                if (currentIndex >= 0)
+                {
+                    PropertyInfo.SetValue(Instance, ActualValues[currentIndex]);
+                    valueChangedCallback.InvokeAsync(ActualValues[currentIndex]);
+                }
+            }
             //OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         }
     }

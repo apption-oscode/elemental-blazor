@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Elemental.Documentation.Samples.ModelForm
 {
-    class StarshipWithOwner
+    public class StarshipWithOwner
     {
         [AeFormIgnore]
         private int ID { get; set; } = 1;
@@ -50,6 +50,7 @@ namespace Elemental.Documentation.Samples.ModelForm
         public DateTime ProductionDate { get; set; }
 
         [Required]
+        [AeLabel("Owner", isDropDown:true)]
         public StarshipOwner Owner { get; set; }
 
         [Required]
@@ -62,14 +63,14 @@ namespace Elemental.Documentation.Samples.ModelForm
 
     }
 
-    public class StarshipOwner
+    public record StarshipOwner
     {
         public int OwnerID { get; set; }
         public string OwnerName { get; set; }
         public string OwnerLicense { get; set; }
     }
 
-    public class StarshipPort
+    public record StarshipPort
     {
         public int PortID { get; set; }
         public string PortName { get; set; }

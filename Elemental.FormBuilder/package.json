@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": "true",
   "devDependencies": {
+    "node-sass": "^6.0.1",
     "sass": "^1.37.2"
   },
   "scripts": {
