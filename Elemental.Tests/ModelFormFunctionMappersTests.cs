@@ -40,7 +40,7 @@ namespace Elemental.Tests
             var o = typeof(StarshipWithOwner).GetProperty("Owner");
             Assert.NotNull(o);
             var choices = ctx.GetOptionValuesForProperty(o);
-            Assert.Collection(choices, e => Assert.Equal("Joe",e), e => Assert.Equal("Brian",e));
+            Assert.Collection(choices.labels, e => Assert.Equal("Joe",e), e => Assert.Equal("Brian",e));
         }
 
         [Fact]

@@ -14,7 +14,7 @@ namespace Elemental.Components
 
     public class ModelFormArgsInternal
     {
-        public PropertyInfo PropertyInfo { get; set; }        
+        public PropertyInfo PropertyInfo { get; set; }
         public EditContext EditContext { get; set; }
 
         public bool HasPropertyChanged<T>(Expression<Func<T, object>> expression)
@@ -135,11 +135,11 @@ namespace Elemental.Components
             => RefreshOptions(((MemberExpression)propertyPath.Body).Member as PropertyInfo);
 
         public (List<object> values, List<string> labels) GetOptionValuesForProperty(PropertyInfo propertyInfo)
-        {            
+        {
             if (optionProperties.TryGetValue(propertyInfo, out var accessors))
             {
                 var validValues = accessors.Choices.DynamicInvoke() as IEnumerable;
-                if (validValues == null) return (null,null);
+                if (validValues == null) return (null, null);
                 var displayValues = new List<string>();
                 var values = new List<object>();
                 foreach (var item in validValues)
@@ -147,7 +147,7 @@ namespace Elemental.Components
                     values.Add(item);
                     displayValues.Add(accessors.Label.DynamicInvoke(item) as string);
                 }
-                return (values,displayValues);
+                return (values, displayValues);
             }
             var dropdownValues = propertyInfo.DropdownValues().ToList();
             return (dropdownValues.Cast<object>().ToList(), dropdownValues);
