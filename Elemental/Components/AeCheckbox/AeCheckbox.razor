@@ -1,7 +1,7 @@
 ﻿@namespace Elemental.Components
 
-<div class="ae checkbox" @onclick="ItemSelected">
-    @if (IsChecked() == true)
+<div class="ae checkbox" @onclick="OnClick">
+    @if (IsChecked == true)
     {
         @if (CheckedIcon == null)
         {
@@ -13,7 +13,7 @@
 
         }
     }
-    @if (IsChecked() == null)
+    @if (IsChecked is null)
     {
         @if (CheckedIcon == null)
         {
@@ -25,19 +25,24 @@
 
         }
     }
-    @if (IsChecked() == false && UncheckedIcon != null)
+    @if (IsChecked == false && UncheckedIcon != null)
     {
         <i class="@UncheckedIcon"></i>
     }
 </div>
 
-@code {
+@code { 
+    
+    [Parameter]
+    public bool? IsChecked { get; set; } = false;
 
     [Parameter]
-    public Func<bool?> IsChecked { get; set; }
+    public EventCallback<bool?> IsCheckedChanged { get; set; }
 
-    [Parameter]
-    public EventCallback ItemSelected { get; set; }
+    private async Task OnClick()
+    {
+        await IsCheckedChanged.InvokeAsync(IsChecked);
+    }
 
     [Parameter]
     public string CheckedIcon { get; set; }
