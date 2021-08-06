@@ -13,12 +13,12 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
-    Title: Model Form with Categories
-    Description: This sample uses Category annotations to group and order the different form elements into categories
+    Title: Model Form with Relationships
+    Description: This sample uses RegisterListValue to map relationships dropdowns
 *@
 
 
-<AeModelForm T="InteractiveStarship"
+<AeModelForm T="StarshipWithOwner"
              Model="@_starship"
              SubmitLabel="Save changes"
              OnValidSubmit="HandleValidSubmit"
@@ -29,11 +29,11 @@
 <DebugObject Object="@_starship"/>
 
 @code {
-    private InteractiveStarship _starship;
+    private StarshipWithOwner _starship;
 
-    private async Task<InteractiveStarship> CreateStarship()
+    private async Task<StarshipWithOwner> CreateStarship()
     {
-        return await Task.FromResult(new InteractiveStarship() { ProductionDate = DateTime.Today });
+        return await Task.FromResult(new StarshipWithOwner() { ProductionDate = DateTime.Today });
     }
 
 
@@ -45,18 +45,15 @@
         _starship.Description = "This is a description of my starship. It has 4 engines and can go from 0 to light speed in 3 seconds. It has an automatic sheild deploy, free wifi and a vending machine. It sleeps 10 crew, but if you are optimistic, you can get 12 in there. When it comes to food, there is a garden wing, where we grow spinach, carrots, lettuce, tomatoes, potatoes and other such vegatables. Sadly, all the meat has to be synthetic since we quite willingly destroyed our home planet and have chosen to not be cannibals.";
     }
 
-    private async Task OnConfigure(ModelFormContext<InteractiveStarship> context)
+    private async Task OnConfigure(ModelFormContext<StarshipWithOwner> context)
     {
-        context.RegisterOptionValueProperty(s => s.Classification,() => new[] { "a", "b", "c" }, e => context.RefreshOptions(s => s.SubClassification));
-        context.RegisterOptionValueProperty(s => s.SubClassification, ValidSubClassifications);
+        context.RegisterOptionValueProperty(s => s.Classification,() => new[] { "a", "b", "c" });
+        context.RegisterOptionValueProperty(p => p.Owner, s => s?.OwnerName??"N/A", 
+                () => new List<StarshipOwner>() { null, new() {  OwnerID = 1, OwnerName ="Joe"},
+                new() { OwnerID = 2, OwnerName = "Brian" } });
+
     }
     
-    private IEnumerable<string> ValidSubClassifications()
-    {
-        if (_starship.Classification is null) return new[] { "a", "b", "c" };
-        return new[] { _starship.Classification + "1", _starship.Classification + "2", _starship.Classification + "3" };   
-    }
-
     private void HandleValidSubmit()
     {
         //do something if form is valid
