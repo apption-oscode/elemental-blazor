@@ -6,12 +6,7 @@
 
 <div class="ae input disabled">
     @GetFormattedValue()
-</div>        
-
-<div class="errortext">
-    <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance, PropertyInfo))" />
 </div>
-}
 
 @code {
 
@@ -22,6 +17,12 @@
     public T Instance { get; set; }
 
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
+
+    [Parameter] public string TrueValue { get; set; } = "Yes";
+
+    [Parameter] public string FalseValue { get; set; } = "No";
+
+    [Parameter] public string NullValue { get; set; } = "-";
 
     [CascadingParameter(Name = "LabelForPropertyFunc")]
     public Func<string, string> LabelForPropertyFunc { get; set; } = null;
@@ -50,11 +51,16 @@
         var value = PropertyInfo.GetValue(Instance);
 
         if (value is null)
-            return Localize(string.Empty);
+            return Localize(NullValue);
 
+        var nonNullValue = AeModelFormTools.GetNonNullableValue(PropertyInfo, Instance);
         var format = PropertyInfo.GetStringFormat();
         if (format is null)
         {
+            if (nonNullValue is bool b)
+            {
+                return b ? Localize(TrueValue) : Localize(FalseValue);   
+            }
             return Localize(ModelFormContext.GetDisplayValue(PropertyInfo, Instance));            
         }
         else

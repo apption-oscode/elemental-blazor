@@ -108,19 +108,22 @@ namespace Elemental.Components
             return invoke.ReturnType;
         }
 
-        public string GetDisplayValue(PropertyInfo propertyInfo, object item)
+        public string? GetDisplayValue(PropertyInfo propertyInfo, object item)
         {
             if (optionProperties.TryGetValue(propertyInfo, out var accessors))
             {
                 return accessors.Label.DynamicInvoke(item) as string;
             }
-            return item?.ToString();
+            return propertyInfo.GetValue(item)?.ToString();
 
         }
 
         public void RegisterOptionComponent(PropertyInfo propertyInfo, AeDropdownPropertyInput<T> aeDropdown, Action updateOptions)
         {
-            optionPropertyComponent.Add(propertyInfo, (aeDropdown, updateOptions));
+            if (!optionPropertyComponent.TryAdd(propertyInfo, (aeDropdown, updateOptions)))
+            {
+                optionPropertyComponent[propertyInfo] = (aeDropdown, updateOptions);
+            }
         }
 
         public void RefreshOptions(PropertyInfo propertyInfo)

@@ -21,7 +21,7 @@
                 } 
                 @if (isSelectable)
                 {
-                    <AeCheckbox IsChecked="isChecked" ItemSelected="checkboxSelected"/>
+                    <AeCheckbox @bind-IsChecked="IsItemChecked" @bind-IsChecked:event="CheckChanged" @bind-HasValue="HasCheckboxValue"/>
                 }
                 <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked.InvokeAsync(Root)">
                     @nodeString
@@ -93,6 +93,9 @@
     bool hasChildren;
     bool isGeneric;
 
+    private bool IsItemChecked { get; set; }
+
+    private bool HasCheckboxValue { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -110,16 +113,13 @@
         }
         hasChildren =  children != null && children.Count() > 0;
         isGeneric = RenderItem != null;
+        IsItemChecked = IsChecked(Root) == true;
+        HasCheckboxValue = !(IsChecked(Root) is null);
     }
 
-    private bool? isChecked()
+    private async Task CheckChanged(bool? value)
     {
-        return IsChecked(Root);
-    }
-
-    private async Task checkboxSelected()
-    {
-        await ItemChecked.InvokeAsync((Root,isChecked() == false));
+        await ItemChecked.InvokeAsync((Root,value == false));
     }
 
 }

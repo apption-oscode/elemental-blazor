@@ -22,6 +22,15 @@ namespace Elemental.Tests
         }
 
         [Fact]
+        public void TestConvertNullValue()
+        {
+            var transportStarship = new TransportStarship() { SubLightEngines = 5 };
+            var prop = typeof(TransportStarship).GetProperty(nameof(TransportStarship.SubLightEngines));
+            var v = AeModelFormTools.GetNonNullableValue(prop, transportStarship);
+            Assert.Equal(typeof(int), v.GetType());
+        }
+
+        [Fact]
         public void TestTransportStarshipCategories()
         {
             var s1 = typeof(TransportStarship).GetAeModelFormCategories();

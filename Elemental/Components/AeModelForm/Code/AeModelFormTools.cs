@@ -74,6 +74,18 @@ namespace Elemental.Components
             return type;
         }
 
+        public static object GetNonNullableValue(PropertyInfo prop, object instance)
+        {
+            var type = prop.PropertyType;
+            var value = prop.GetValue(instance);
+            if (value != null && type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                var underlyingType = Nullable.GetUnderlyingType(type);
+                return Convert.ChangeType(value, underlyingType);
+            }
+            return value;
+        }
+
         public static Nullable<T> AsNullableValue<T>(PropertyInfo prop, object instance) where T : struct
         {
             if (IsNullable(prop))

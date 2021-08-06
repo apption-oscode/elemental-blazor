@@ -18,7 +18,7 @@
 *@
 
 <div>
-  <AeToggle class="round"  />
+  Read-Only <AeToggle class="round" @bind-IsChecked="IsReadOnly" />
 </div>
 
 <AeModelForm 
@@ -27,12 +27,15 @@
     OnValidSubmit="HandleValidSubmit" 
     CancelLabel="Cancel" 
     OnCancel="CreateStarship"
+    IsReadOnly="IsReadOnly"
     LabelsOnTop
     Flexbox />
 
 <DebugObject Object="@_starship"/>
 
-@code {
+@code { 
+
+    private bool IsReadOnly { get; set; } = false;
 
     private Starship3 _starship;
 
