@@ -1,0 +1,39 @@
+﻿@*
+    Copyright (c) 2021 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Tab
+    Description: Tabs with default parameters. 
+*@
+
+<AeTabControl>
+  @foreach(var tab in _tabList)
+  {
+      <AeTabPage Disable="tab.Disabled" Deletable="tab.Deletable" >        
+          <Header>@tab.Control</Header>
+          <ChildContent>
+              @tab.Content
+          </ChildContent>    
+      </AeTabPage>
+}
+</AeTabControl>
+
+@code{
+    private List<(RenderFragment Control, RenderFragment Content, bool Disabled, bool Deletable)> _tabList { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _tabList = new List<(RenderFragment, RenderFragment, bool, bool)>
+        {
+            (@<div>Tab 1</div>, @<p>This is the first tab</p>, false, false),
+            (@<div>2nd Tab</div>, @<span><AeIcon Icon="shield" IconStyle="Code.RXIcon.RXStyle.Fill" /><p> this is the 2nd tab</p></span>, false, true),
+            (@<div>Tab 3</div>, @<p>This is the first tab</p>, true, true),
+            (@<div><i class="fal fa-atlas"></i> last tab</div>, 
+            @<div><AeIcon Icon="truck" IconStyle="Code.RXIcon.RXStyle.Fill" /><AeIcon Icon="arrow-right" IconStyle="Code.RXIcon.RXStyle.Fill" /><i class="fas fa-people-carry" />
+            <i class="fas fa-box-full"  /></div>, false, false),
+        };
+    }
+}

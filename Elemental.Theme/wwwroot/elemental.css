@@ -2430,6 +2430,36 @@ body {
   flex: none;
 }
 
+.ae.tab-wrapper .ae.tab {
+  display: inline-flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  user-select: not-allowed;
+}
+.ae.tab-wrapper .ae.tab.active {
+  border-bottom-color: #63b3ed;
+}
+.ae.tab-wrapper .ae.tab:hover {
+  background-color: #edf2f7;
+}
+.ae.tab-wrapper .ae.tab.disable {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.ae.tab-wrapper .tab-deletable {
+  margin-left: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0.5;
+}
+.ae.tab-wrapper .tab-deletable:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
 .ae.table:not(.custom) .ae.table-header {
   display: grid;
 }

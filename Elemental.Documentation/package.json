@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": "true",
   "devDependencies": {
-    "sass": "^1.36.0"
+    "sass": "^1.37.2"
   },
   "scripts": {
     "watch-scss": "sass Styles/elemental-docs.scss:wwwroot/css/elemental-docs.css --watch",
