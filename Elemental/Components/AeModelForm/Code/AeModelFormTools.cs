@@ -212,24 +212,25 @@ namespace Elemental.Components
             return false;
         }
 
-        public static string GetMemberName(Expression expression)
+        public static PropertyInfo GetPropertyInfo(Expression expression)
         {
             switch (expression.NodeType)
             {
                 case ExpressionType.MemberAccess:
-                    return ((MemberExpression)expression).Member.Name;
+                    return ((MemberExpression)expression).Member as PropertyInfo ?? throw new InvalidOperationException($"Cannot extract property path from ${expression}");
                 case ExpressionType.Convert:
-                    return GetMemberName(((UnaryExpression)expression).Operand);
+                    return GetPropertyInfo(((UnaryExpression)expression).Operand);
                 default:
                     throw new NotSupportedException(expression.NodeType.ToString());
             }
         }
 
-        public static string WithPropertyExpression<T>(Expression<Func<T, object>> expression)
-        {
-            return GetMemberName(expression.Body);
+        public static PropertyInfo WithPropertyExpression<T>(Expression<Func<T, object>> expression)
+            => GetPropertyInfo(expression.Body);
 
-        }
+        public static PropertyInfo WithPropertyExpression(LambdaExpression expression)
+            => GetPropertyInfo(expression.Body);
+
 
         private static HashSet<Type> NumericTypes = new HashSet<Type>
         {

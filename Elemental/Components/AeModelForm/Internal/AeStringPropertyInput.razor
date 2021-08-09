@@ -1,5 +1,6 @@
 ﻿@typeparam T
 @using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
 @namespace Elemental.Components
 
 <AeFormLabel PropertyInfo="@PropertyInfo" />
@@ -45,17 +46,36 @@ else
     [Parameter]
     public bool Editable { get; set; } = true;
 
+    [CascadingParameter(Name = "Notifier")]
+    public Func<ModelFormArgsInternal, Task> Notifier { get; set; }
+
     private string? TextFieldType { get
         {
             return AeModelFormTools.IsPasswordField(PropertyInfo)?"password":null;
         } }
+
+    protected override async Task OnInitializedAsync()
+    {
+        valueChangedCallback = EventCallback.Factory.Create<object>(this, s => OnValueChanged(s));
+    }
+
+    private EventCallback<object> valueChangedCallback;
+
+    private async Task OnValueChanged(object value)
+    {
+        var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
+        await Notifier(changeArgs);
+    }
 
     public string PropertyValue
     {
         get => PropertyInfo.GetValue(Instance) as string;
         set
         {
+            var prevValue = PropertyInfo.GetValue(Instance) as string;
             PropertyInfo.SetValue(Instance, value);
+            if (value != prevValue)
+                valueChangedCallback.InvokeAsync(value);
         }
     }
 

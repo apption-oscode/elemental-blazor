@@ -19,37 +19,68 @@ namespace Elemental.Components
 
         public bool HasPropertyChanged<T>(Expression<Func<T, object>> expression)
         {
-            return AeModelFormTools.WithPropertyExpression<T>(expression) == PropertyInfo.Name;
+            return AeModelFormTools.WithPropertyExpression<T>(expression) == PropertyInfo;
         }
 
     }
 
-    public class ModelFormChangeArgs<T>
+    public class ModelFormChangeArgs
     {
         public PropertyInfo PropertyInfo { get; set; }
         public EditContext EditContext { get; set; }
 
-        public ModelFormContext<T> Context { get; set; }
+        public IModelFormContext Context { get; set; }
 
-        public bool HasPropertyChanged(Expression<Func<T, object>> expression)
+        public bool HasPropertyChanged<T>(Expression<Func<T, object>> expression)
         {
-            return AeModelFormTools.WithPropertyExpression<T>(expression) == PropertyInfo.Name;
+            return AeModelFormTools.WithPropertyExpression<T>(expression) == PropertyInfo;
         }
 
     }
 
-    public class ModelFormContext<T>
+    public class ModelFormContext<T> : IModelFormContext
     {
         private Dictionary<PropertyInfo, (Delegate Label, Delegate Choices, Delegate onChange)> optionProperties = new Dictionary<PropertyInfo, (Delegate, Delegate, Delegate)>();
         private Dictionary<PropertyInfo, (AeDropdownPropertyInput<T> component, Action updateOptions)> optionPropertyComponent = new Dictionary<PropertyInfo, (AeDropdownPropertyInput<T>, Action)>();
         public Func<Task> RefreshModel { get; set; }
         public List<PropertyInfo> Properties { get; private set; }
 
+
+        public void RegisterOptionValueProperty(PropertyInfo property, Func<IEnumerable<string>> choices, Action<string> onChange = null)
+        {
+            RegisterOptionValueProperty(property, e => e, choices, onChange);
+        }
+
+        public void RegisterOptionValueProperty(Expression<Func<T, string>> propertyPath, Func<IEnumerable<string>> choices, Action<string> onChange = null)
+        {
+            RegisterOptionValueProperty<string>(propertyPath, e => e, choices, onChange);
+        }
+
+        private static PropertyInfo GetPropertyInfo(LambdaExpression expression)
+        {
+            return AeModelFormTools.WithPropertyExpression(expression);
+        }
+
+        public void RegisterOptionValueProperty<P>(Expression<Func<P, string>> propertyPath, Func<IEnumerable<string>> choices, Action<string> onChange = null)
+        {            
+            RegisterOptionValueProperty(GetPropertyInfo(propertyPath), e => e, choices, onChange);
+        }
+
+        public void RegisterOptionValueProperty<P1,P2>(Expression<Func<P1, P2>> propertyPath, Func<P2, string> label, Func<IEnumerable<P2>> choices, Action<P2> onChange = null)
+        {
+            RegisterOptionValueProperty(GetPropertyInfo(propertyPath), label, choices, onChange);
+        }
+
         public void RegisterOptionValueProperty<S>(Expression<Func<T, S>> propertyPath, Func<S, string> label, Func<IEnumerable<S>> choices, Action<S> onChange = null)
         {
-            if (propertyPath is null)
+            RegisterOptionValueProperty(GetPropertyInfo(propertyPath), label, choices, onChange);
+        }
+
+        public void RegisterOptionValueProperty<S>(PropertyInfo property, Func<S, string> label, Func<IEnumerable<S>> choices, Action<S> onChange = null)
+        {
+            if (property is null)
             {
-                throw new ArgumentNullException(nameof(propertyPath));
+                throw new ArgumentNullException(nameof(property));
             }
 
             if (label is null)
@@ -62,8 +93,7 @@ namespace Elemental.Components
                 throw new ArgumentNullException(nameof(choices));
             }
 
-            var property = ((MemberExpression)propertyPath.Body).Member;
-            optionProperties.Add(property as PropertyInfo, (label, choices, onChange));
+            optionProperties.Add(property, (label, choices, onChange));
         }
 
         public void OnOptionPropertyChange(PropertyInfo property, object newValue)
@@ -74,12 +104,6 @@ namespace Elemental.Components
             }
         }
 
-
-
-        public void RegisterOptionValueProperty(Expression<Func<T, string>> propertyPath, Func<IEnumerable<string>> choices, Action<string> onChange = null)
-        {
-            RegisterOptionValueProperty<string>(propertyPath, e => e, choices, onChange);
-        }
 
         public bool IsDropDown(PropertyInfo propertyInfo)
         {
@@ -131,8 +155,13 @@ namespace Elemental.Components
             }
         }
 
+        public void RefreshOptions<T1>(Expression<Func<T1, object>> propertyPath)
+        {
+            RefreshOptions(GetPropertyInfo(propertyPath));
+        }
+
         public void RefreshOptions<S>(Expression<Func<T, S>> propertyPath)
-            => RefreshOptions(((MemberExpression)propertyPath.Body).Member as PropertyInfo);
+            => RefreshOptions(GetPropertyInfo(propertyPath));
 
         public (List<object> values, List<string> labels) GetOptionValuesForProperty(PropertyInfo propertyInfo)
         {
@@ -159,6 +188,7 @@ namespace Elemental.Components
             Properties = null;
             optionProperties = null;
             optionPropertyComponent = null;
+            propertyVisibility = null;
         }
 
         public PropertyInfo GetProperty(string name)
@@ -170,6 +200,29 @@ namespace Elemental.Components
         {
             this.Properties = properties;
         }
+
+        
+
+        public void SetVisible<T1>(Expression<Func<T1, object>> propertyPath, bool isVisible)
+            => SetVisible(GetPropertyInfo(propertyPath), isVisible);
+
+        private Dictionary<PropertyInfo, bool> propertyVisibility = new Dictionary<PropertyInfo, bool>();
+
+        public bool IsVisible(PropertyInfo property)
+        {
+            if (propertyVisibility.TryGetValue(property, out bool isVisible))
+            {
+                return isVisible;
+            }
+            return true;
+        }
+
+        public void SetVisible(PropertyInfo property, bool isVisible)
+        {
+            if (!propertyVisibility.TryAdd(property, isVisible))
+                propertyVisibility[property] = isVisible;
+        }
+
 
     }
 }
