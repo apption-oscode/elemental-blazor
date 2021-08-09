@@ -163,10 +163,11 @@
 @code {
     private string _modelFormClass => $"ae modelform {_inputClass}";
     private string _rowsClass => $"{(LabelsOnTop ? "top-label" : "left-label")} {(Flexbox ? "flexbox" : "")}";
-    public List<(string category, List<List<PropertyInfo>> properties)> GetCategories()
-    {
-        return typeof(T).GetAeModelFormCategories();
-    }
+    public List<(string category, List<List<PropertyInfo>> properties)> GetCategories() =>
+        typeof(T).GetAeModelFormCategories().Select(elem => (elem.category, 
+                elem.properties.Select(l => l.Where(l => ModelFormContext.IsVisible(l)).ToList()).ToList()))
+                .Where(elem => elem.Item2.Count > 0).ToList();
+    
 
     private bool isConfigured = false;
 
@@ -246,7 +247,7 @@
     ///
     /// This call is designed to let the user access the context and configure drop downs and other dynamic items
     /// </summary>
-    [Parameter] public EventCallback<ModelFormContext<T>> OnConfigure { get; set; }
+    [Parameter] public EventCallback<IModelFormContext> OnConfigure { get; set; }
 
     /// <summary>
     /// A callback that will be invoked when the form is submitted and the
@@ -270,7 +271,7 @@
     /// <summary>
     /// This method will be called when a property is changed.
     /// </summary>
-    [Parameter] public EventCallback<ModelFormChangeArgs<T>> OnChange { get; set; }
+    [Parameter] public EventCallback<ModelFormChangeArgs> OnChange { get; set; }
 
     [Parameter]
     public bool LabelsOnTop { get; set; }
@@ -320,7 +321,7 @@
 
     public async Task OnNotify(ModelFormArgsInternal iargs)
     {
-        var args = new ModelFormChangeArgs<T>() { Context = ModelFormContext, PropertyInfo = iargs.PropertyInfo, EditContext = iargs.EditContext };
+        var args = new ModelFormChangeArgs() { Context = ModelFormContext, PropertyInfo = iargs.PropertyInfo, EditContext = iargs.EditContext };
         await OnChange.InvokeAsync(args);
         await InvokeAsync(() =>
         {

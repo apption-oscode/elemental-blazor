@@ -37,9 +37,23 @@
         }
         set
         {
+            var prevValue = PropertyInfo.GetValue(Instance);
             PropertyInfo.SetValue(Instance, value);
-
+            valueChangedCallback.InvokeAsync(value);
         }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        valueChangedCallback = EventCallback.Factory.Create<object>(this, s => OnValueChanged(s));
+    }
+
+    private EventCallback<object> valueChangedCallback;
+
+    private async Task OnValueChanged(object value)
+    {
+        var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
+        await Notifier(changeArgs);
     }
 
     /// <summary>

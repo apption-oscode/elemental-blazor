@@ -1,5 +1,6 @@
 ﻿@typeparam T
 @namespace Elemental.Components
+@using Microsoft.AspNetCore.Components.Forms
 
     
         <AeFormLabel PropertyInfo="@PropertyInfo"/>
@@ -29,9 +30,25 @@
     [CascadingParameter(Name= "LabelForPropertyFunc")]
     public Func<string,string> LabelForPropertyFunc { get; set; } = null;
 
+    [CascadingParameter(Name = "Notifier")]
+    public Func<ModelFormArgsInternal, Task> Notifier { get; set; }
+
     private string GetLabel()
     {
         return AeModelFormTools.GetLabel(PropertyInfo,LabelForPropertyFunc, false);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        valueChangedCallback = EventCallback.Factory.Create<object>(this, s => OnValueChanged(s));
+    }
+
+    private EventCallback<object> valueChangedCallback;
+
+    private async Task OnValueChanged(object value)
+    {
+        var changeArgs = new ModelFormArgsInternal() { PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) };
+        await Notifier(changeArgs);
     }
 
     [Parameter]
@@ -52,7 +69,12 @@
         }
         set
         {
+            var currentValue = Convert.ToBoolean(PropertyInfo.GetValue(Instance));
             PropertyInfo.SetValue(Instance, value);
+            if (value!= currentValue)
+            {
+                valueChangedCallback.InvokeAsync(value);
+            }
         }
     }
 

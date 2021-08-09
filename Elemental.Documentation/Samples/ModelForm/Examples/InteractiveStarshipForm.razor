@@ -45,10 +45,10 @@
         _starship.Description = "This is a description of my starship. It has 4 engines and can go from 0 to light speed in 3 seconds. It has an automatic sheild deploy, free wifi and a vending machine. It sleeps 10 crew, but if you are optimistic, you can get 12 in there. When it comes to food, there is a garden wing, where we grow spinach, carrots, lettuce, tomatoes, potatoes and other such vegatables. Sadly, all the meat has to be synthetic since we quite willingly destroyed our home planet and have chosen to not be cannibals.";
     }
 
-    private async Task OnConfigure(ModelFormContext<InteractiveStarship> context)
+    private async Task OnConfigure(IModelFormContext context)
     {
-        context.RegisterOptionValueProperty(s => s.Classification,() => new[] { "a", "b", "c" }, _ => context.RefreshOptions(s => s.SubClassification));
-        context.RegisterOptionValueProperty(s => s.SubClassification, ValidSubClassifications);
+        context.RegisterOptionValueProperty<InteractiveStarship>(s => s.Classification,() => new[] { "a", "b", "c" }, _ => context.RefreshOptions<InteractiveStarship>(s => s.SubClassification));
+        context.RegisterOptionValueProperty<InteractiveStarship>(s => s.SubClassification, ValidSubClassifications);
     }
     
     private IEnumerable<string> ValidSubClassifications()

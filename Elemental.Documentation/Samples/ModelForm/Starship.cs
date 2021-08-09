@@ -41,6 +41,8 @@ namespace Elemental.Documentation.Data
         [Range(typeof(bool), "true", "true", ErrorMessage = "This form disallows unapproved ships.")]
         [AeLabel("Validated Design")]
         public bool IsValidatedDesign { get; set; }
+                
+        public DateTime? ValidationDate { get; set; }
 
         [Required]
         [AeLabel("Production Date")]

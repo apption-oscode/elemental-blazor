@@ -45,10 +45,10 @@
         _starship.Description = "This is a description of my starship. It has 4 engines and can go from 0 to light speed in 3 seconds. It has an automatic sheild deploy, free wifi and a vending machine. It sleeps 10 crew, but if you are optimistic, you can get 12 in there. When it comes to food, there is a garden wing, where we grow spinach, carrots, lettuce, tomatoes, potatoes and other such vegatables. Sadly, all the meat has to be synthetic since we quite willingly destroyed our home planet and have chosen to not be cannibals.";
     }
 
-    private async Task OnConfigure(ModelFormContext<StarshipWithOwner> context)
+    private async Task OnConfigure(IModelFormContext context)
     {
-        context.RegisterOptionValueProperty(s => s.Classification,() => new[] { "a", "b", "c" });
-        context.RegisterOptionValueProperty(p => p.Owner, s => s?.OwnerName??"N/A", 
+        context.RegisterOptionValueProperty<StarshipWithOwner>(s => s.Classification,() => new[] { "a", "b", "c" });
+        context.RegisterOptionValueProperty<StarshipWithOwner,StarshipOwner>(p => p.Owner, s => s?.OwnerName??"N/A", 
                 () => new List<StarshipOwner>() { null, new() {  OwnerID = 1, OwnerName ="Joe"},
                 new() { OwnerID = 2, OwnerName = "Brian" } });
 

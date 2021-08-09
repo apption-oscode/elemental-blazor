@@ -34,7 +34,8 @@ namespace Elemental.Tests
         [Fact]
         public void TestPropertyName()
         {
-            Assert.Equal("Classification", AeModelFormTools.WithPropertyExpression<InteractiveStarship>(p => p.Classification));
+            Assert.Equal("Classification", AeModelFormTools.WithPropertyExpression<InteractiveStarship>(p => p.Classification).Name);
         }
+
     }
 }
