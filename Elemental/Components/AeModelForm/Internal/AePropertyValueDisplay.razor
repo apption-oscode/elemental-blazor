@@ -1,0 +1,97 @@
+﻿@typeparam T
+@using System.ComponentModel.DataAnnotations
+@namespace Elemental.Components
+
+<AeFormLabel PropertyInfo="@PropertyInfo" />
+
+<div class="ae input disabled">
+    @GetFormattedValue()
+</div>
+
+@code {
+
+    [Parameter]
+    public System.Reflection.PropertyInfo PropertyInfo { get; set; }
+
+    [Parameter]
+    public T Instance { get; set; }
+
+    [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
+
+    [Parameter] public string TrueValue { get; set; } = "Yes";
+
+    [Parameter] public string FalseValue { get; set; } = "No";
+
+    [Parameter] public string NullValue { get; set; } = "-";
+
+    [CascadingParameter(Name = "LabelForPropertyFunc")]
+    public Func<string, string> LabelForPropertyFunc { get; set; } = null;
+
+    [CascadingParameter(Name = "ModelFormContext")]
+    public ModelFormContext<T> ModelFormContext { get; set; } = null;
+
+    [CascadingParameter(Name = "LocalizerFunction")]
+    public Func<string, string?> LocalizerFunction { get; set; } = null;
+
+    public string PropertyValue
+    {
+        get => PropertyInfo.GetValue(Instance) as string;
+        set
+        {
+            PropertyInfo.SetValue(Instance, value);
+        }
+    }
+
+    private string Localize(string input) => LocalizerFunction?.Invoke(input) ?? input;
+
+    public string GetFormattedValue()
+    {
+        if (AeModelFormTools.IsPasswordField(PropertyInfo))
+            return "********";
+        var value = PropertyInfo.GetValue(Instance);
+
+        if (value is null)
+            return Localize(NullValue);
+
+        var nonNullValue = AeModelFormTools.GetNonNullableValue(PropertyInfo, Instance);
+        var format = PropertyInfo.GetStringFormat();
+        if (format is null)
+        {
+            if (nonNullValue is bool b)
+            {
+                return b ? Localize(TrueValue) : Localize(FalseValue);   
+            }
+            return Localize(ModelFormContext.GetDisplayValue(PropertyInfo, Instance));            
+        }
+        else
+        {
+            if (AeModelFormTools.IsNumericType(PropertyInfo.PropertyType))
+            {
+                var num = Convert.ToDouble(PropertyInfo.GetValue(Instance));
+                return num.ToString(format);
+            }
+            else
+            {
+                return value.ToString();
+            }
+        }
+
+
+    }
+
+    private string GetLabel()
+    {
+        return AeModelFormTools.GetLabel(PropertyInfo, LabelForPropertyFunc, false);
+    }
+
+    private string GetID() => PropertyInfo.Name;
+
+
+
+    private int? HasStringLength()
+    {
+        var att = StringLengthAttribute.GetCustomAttribute(PropertyInfo, typeof(StringLengthAttribute)) as StringLengthAttribute;
+        return att?.MaximumLength;
+    }
+
+}

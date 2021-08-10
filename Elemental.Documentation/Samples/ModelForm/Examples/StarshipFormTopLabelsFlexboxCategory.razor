@@ -17,18 +17,25 @@
     Description: Example shows to use Flexbox and Category together
 *@
 
+<div>
+  Read-Only <AeToggle class="round" @bind-IsChecked="IsReadOnly" />
+</div>
+
 <AeModelForm 
     Model="@_starship" 
     SubmitLabel="Save changes" 
     OnValidSubmit="HandleValidSubmit" 
     CancelLabel="Cancel" 
     OnCancel="CreateStarship"
+    IsReadOnly="IsReadOnly"
     LabelsOnTop
     Flexbox />
 
 <DebugObject Object="@_starship"/>
 
-@code {
+@code { 
+
+    private bool IsReadOnly { get; set; } = false;
 
     private Starship3 _starship;
 

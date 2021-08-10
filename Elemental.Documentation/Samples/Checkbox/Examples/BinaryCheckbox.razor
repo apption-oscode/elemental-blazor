@@ -9,20 +9,13 @@
   Description: A checkbox that has two binary states.
 *@
 <div>
-  <AeCheckbox IsChecked="isChecked" ItemSelected="toggleCheckbox" />
+  <AeCheckbox @bind-IsChecked="IsChecked"/>
+  <AeTypography>Is checked: @IsChecked</AeTypography>
 </div>
 
 
 @code {
-    private bool _isChecked = true;
 
-    private bool? isChecked()
-    {
-        return new bool?(_isChecked);
-    }
+    private bool IsChecked { get; set; }
 
-    private void toggleCheckbox()
-    {
-        _isChecked = !_isChecked;
-    }
 }
