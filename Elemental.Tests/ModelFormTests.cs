@@ -17,7 +17,7 @@ namespace Elemental.Tests
             var s1 = typeof(Starship).GetAeModelFormCategories();
             Assert.Single(s1);
             var (_, l1) = s1[0];
-            Assert.Equal(11, l1[0].Count);
+            Assert.Equal(12, l1[0].Count);
 
         }
 
