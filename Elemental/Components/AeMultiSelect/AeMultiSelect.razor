@@ -1,0 +1,178 @@
+﻿@*
+ Copyright 2020 Apption Corporation
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*@
+
+@namespace Elemental.Components
+@inherits HtmlElement
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+@typeparam T
+
+@if (MultiSelect)
+{
+<div class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
+    <span @onclick="ToggleVisiblity">
+        @if (selectedItems.Count > 0)
+        {
+        @Renderer(selectedItems[0])
+        }
+        else
+        {
+        @_labelFragment
+        }
+    </span>
+    
+    <div class="ae content-wrapper">
+        @foreach(var item in Items)
+        {
+            <div class="ae dropdown-item">
+                <AeCheckbox IsChecked="SelectedItems.Contains(item)" IsCheckedChanged="b => ToggleItemSelected(item,b)" /> @Renderer(item)
+            </div>
+        }
+    </div>
+</div>    
+}
+else
+{
+<div class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
+    <span @onclick="ToggleVisiblity">
+        @if (selectedItems.Count > 0)
+        {
+        @Renderer(selectedItems[0])
+        }
+        else
+        {
+        @_labelFragment
+        }
+    </span>
+    
+    <div class="ae content-wrapper">
+        @foreach(var item in Items)
+        {
+            <div class="ae dropdown-item" @onclick="() => HandleDropdownClick(item)">
+                @Renderer(item)
+            </div>
+        }
+    </div>
+</div>
+}
+@code {
+    private List<T> selectedItems = new List<T>();
+
+    [Parameter]
+    public string Label { get; set; }
+    [Parameter]
+    public Func<Task<RenderFragment>> LabelRenderFragment { get; set; }
+    [Parameter]
+    public List<T> Items { get; set; }
+    [Parameter]
+    public List<T> SelectedItems {
+        get
+        {
+            return selectedItems;
+        }
+        set
+        {
+            if (value?.Count > 1 && !MultiSelect)
+            {
+                selectedItems = value.Take(1).ToList();
+            }
+            else
+            {
+                selectedItems = value ?? new List<T>();
+            }
+        }}
+    [Parameter]
+    public EventCallback<List<T>> SelectedItemsChanged { get; set; }
+    [Parameter]
+    public bool MultiSelect { get; set; } = false;
+    [Parameter]
+    public Func<T, RenderFragment> Renderer { get; set; }
+
+    private string _wrapperClassname => $"ae dropdown-wrapper {_inputClass}";
+    private string _id = $"ae-{Guid.NewGuid().ToString()}";
+
+    private RenderFragment _labelFragment;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(Renderer is null)
+        {
+            Renderer = new Func<T, RenderFragment>(item =>
+            {
+                return 
+    @<AeTypography>@item</AeTypography>;
+            });
+        }
+
+        if(Label != null || LabelRenderFragment is null)
+        {
+            _labelFragment = @<AeButton>
+                                @Label
+                                <AeIcon Icon="fas fa-caret-down" />
+                            </AeButton> ;
+        }
+        else
+        {
+            _labelFragment = await LabelRenderFragment();
+        }
+    }
+
+    private void ToggleItemSelected(T item, bool isSelected)
+    {
+        if (isSelected && !selectedItems.Contains(item))
+        {
+            selectedItems.Add(item);
+        }
+        if (!isSelected)
+        {
+            selectedItems.Remove(item);
+        }
+        SelectedItemsChanged.InvokeAsync(selectedItems);
+    }
+
+    private void HandleDropdownClick(T item)
+    {
+        ToggleVisiblity();
+        selectedItems.Clear();
+        selectedItems.Add(item);
+        SelectedItemsChanged.InvokeAsync(selectedItems);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("aedropdown.initialize", _id);
+        }
+    }
+
+    private void ToggleVisiblity()
+    {
+        InvokeAsync(async () =>
+        {
+            await JSRuntime.InvokeVoidAsync("aedropdown.toggleVisibility", _id);
+        });
+    }
+
+
+    public void Dispose()
+    {
+        InvokeAsync(async () =>
+        {
+            await JSRuntime.InvokeVoidAsync("aedropdown.dispose", _id);
+        });
+    }
+}
