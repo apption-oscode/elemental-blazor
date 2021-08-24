@@ -14,7 +14,7 @@ jobs:
     
   variables:
 #    NetCoreVersion: '6.0.x'
-    NetCoreVersion: '6.0.0-preview.6.21353.1'
+    NetCoreVersion: '6.0.100-preview.6.21355.2'
 
   steps:
   - task: AzureKeyVault@1
