@@ -39,13 +39,15 @@
     [Parameter]
     public string Label { get; set; }
     [Parameter]
-    public Func<Task<RenderFragment>> LabelRenderFragment { get; set; }
-    [Parameter]
-    public Action<T> OnChange { get; set; }
+    public Func<T,RenderFragment> LabelRenderFragment { get; set; }
     [Parameter]
     public IEnumerable<T> Items { get; set; }
     [Parameter]
     public Func<T, RenderFragment> Renderer { get; set; }
+    [Parameter]
+    public T Selected { get; set; }
+    [Parameter]
+    public EventCallback<T> SelectedChanged { get; set; }
 
     private string _wrapperClassname => $"ae dropdown-wrapper {_inputClass}";
     private string _id = $"ae-{Guid.NewGuid().ToString()}";
@@ -58,27 +60,36 @@
         {
             Renderer = new Func<T, RenderFragment>(item =>
             {
-                return @<AeTypography>@item</AeTypography>;
+                return 
+    @<AeTypography>@item</AeTypography> ;
             });
         }
 
-        if(Label != null || LabelRenderFragment is null)
+
+        if (LabelRenderFragment is null)
         {
-            _labelFragment = @<AeButton>
-                                @Label
-                                <AeIcon Icon="fas fa-caret-down" />
-                            </AeButton>;
+            LabelRenderFragment = it =>
+@<AeButton>
+    @if (it != null)
+    {
+        @Renderer(it)
+    }
+    else
+    {
+        @Label              
+    }
+    <AeIcon Icon="fas fa-caret-down" />
+</AeButton> ;                
         }
-        else
-        {
-            _labelFragment = await LabelRenderFragment();
-        }
+        _labelFragment = LabelRenderFragment(Selected);
+        
     }
 
     private void HandleItemClick(T item)
     {
         ToggleVisiblity();
-        OnChange?.Invoke(item);
+        Selected = item;
+        SelectedChanged.InvokeAsync(item);                
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

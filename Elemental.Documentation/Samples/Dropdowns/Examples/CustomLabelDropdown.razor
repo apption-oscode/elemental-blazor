@@ -13,25 +13,20 @@
 
 <AeDropdown LabelRenderFragment="getLabel"
             Items="_dropdownItems"
-            OnChange="HandleDropdownChange" />
+            @bind-Selected="_selectedItem"   />
 
 @code {
-    private string _selectedItem;
+    private string _selectedItem = "Second";
 
-    private async Task<RenderFragment> getLabel()
+    private RenderFragment getLabel(string s)
     {
-        return await Task.FromResult<RenderFragment>(@<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>);
-}
+        return @<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>;
+    }
 
-private List<string> _dropdownItems = new List<string>
-{
+    private List<string> _dropdownItems = new List<string>
+    {
         "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
     };
 
-private void HandleDropdownChange(string selectedItem)
-{
-_selectedItem = selectedItem;
-StateHasChanged();
-}
 }
 

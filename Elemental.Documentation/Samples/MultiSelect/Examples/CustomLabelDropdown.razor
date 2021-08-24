@@ -18,9 +18,9 @@
 @code {
     private string _selectedItem;
 
-    private async Task<RenderFragment> getLabel()
+    private RenderFragment getLabel(string s)
     {
-        return await Task.FromResult<RenderFragment>(@<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>);
+        return @<i class="fas fa-ellipsis-h" style="background-color: #e3e3e3; padding: 0.5rem; cursor: pointer; border-radius: 8px;"></i>;
 }
 
 private List<string> _dropdownItems = new List<string>

@@ -1,5 +1,4 @@
-﻿@using System.Linq;
-@*
+﻿@*
     Copyright (c) 2020 Apption Corporation
 
     This Source Code Form is subject to the terms of the Mozilla Public
@@ -10,25 +9,21 @@
     Description: Single option dropdown selector, hover over 
 *@
 
-<AeTypography>Selected item: @(String.Join(',', selected))</AeTypography>
+<AeTypography>Selected item: @(selected.Count > 0 ? selected.First():"-")</AeTypography>
 
 <AeMultiSelect 
     DefaultLabel="Please select a value"
     @bind-SelectedItems="selected"
     Items="_dropdownItems"
-    MultiSelect="true"
 />
 
 @code {
 
-    private SortedSet<string> selected;
+    private SortedSet<string> selected = new SortedSet<string>(new [] { "Second"});
 
-    private List<string> _dropdownItems;
-
-    protected override async Task OnInitializedAsync()
+    private List<string> _dropdownItems = new List<string>
     {
-        _dropdownItems = Enumerable.Range(1, 50).Select(r => Tools.Tools.NumberToWords(r)).ToList();
-        selected = new SortedSet<string>(new [] { _dropdownItems[2] });
-    }
+        "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
+    };
 
 }
