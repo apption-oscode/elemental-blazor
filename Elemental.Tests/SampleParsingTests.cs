@@ -17,7 +17,7 @@ namespace Elemental.Tests
             var lines = ParsedFile.ReadLines(_testFilePath);
             
             Assert.NotNull(lines);
-            Assert.Equal(34, lines.Count());
+            Assert.Equal(29, lines.Count());
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Elemental.Tests
             var lines = ParsedFile.ReadLines(_testFilePath);
             var code = ParsedFile.ParseCode(lines);
 
-            Assert.Equal(15, code.Count);
+            Assert.Equal(10, code.Count);
             Assert.Equal("@code {", code.First());
             Assert.Equal("}", code.Last());
         }
