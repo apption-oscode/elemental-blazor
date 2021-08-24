@@ -13,7 +13,7 @@
 
 <AeDropdown Label="Basic Dropdown"
             Items="customDropdownItems"
-            @bind-Selected="_selectedItem"  
+            OnChange="HandleDropdownChange"
             Renderer="CustomRenderer"
             />
 
@@ -40,4 +40,9 @@
                 </AeTypography>;
     }
 
+    private void HandleDropdownChange((string, string) selectedItem)
+    {
+        _selectedItem = selectedItem;
+        StateHasChanged();
+    }
 }
