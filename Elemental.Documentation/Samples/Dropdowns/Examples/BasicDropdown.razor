@@ -14,7 +14,7 @@
 <AeDropdown
     Label="Basic Dropdown"
     Items="_dropdownItems"
-    @bind-Selected="_selectedItem"    
+    OnChange="HandleDropdownChange"
 />
 
 @code {
@@ -26,4 +26,9 @@
         "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
     };
 
+    private void HandleDropdownChange(string selectedItem)
+    {
+        _selectedItem = selectedItem;
+        StateHasChanged();
+    }
 }
