@@ -56,6 +56,10 @@ else
     [Parameter]
     public string NullValue { get; set; } = "-";
     [Parameter]
+    public T? SelectedItem { get; set; }
+    [Parameter]
+    public EventCallback<T?> SelectedItemChanged { get; set; }
+    [Parameter]
     public SortedSet<T> SelectedItems {
         get
         {
@@ -91,11 +95,15 @@ else
         if (currentIdx >= 0)
         {
             var selectedItem = Items[currentIdx];
+            SelectedItem = selectedItem;
             selectedItems.Add(selectedItem);
+            await SelectedItemChanged.InvokeAsync(selectedItem);
             await SelectedItemsChanged.InvokeAsync(selectedItems);
         }
         else
         {
+            SelectedItem = default(T);
+            await SelectedItemChanged.InvokeAsync(default(T));
             await SelectedItemsChanged.InvokeAsync(selectedItems);            
         }
     }
@@ -106,7 +114,7 @@ else
         {
             Renderer = item => item?.ToString() ?? NullValue;
         }
-
+        if (SelectedItem != null) selectedItems.Add(SelectedItem);
     }
 
     private void ToggleItemSelected(T item, bool isSelected)

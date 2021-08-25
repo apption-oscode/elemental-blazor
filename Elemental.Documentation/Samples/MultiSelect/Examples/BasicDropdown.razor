@@ -9,17 +9,17 @@
     Description: Single option dropdown selector, hover over 
 *@
 
-<AeTypography>Selected item: @(selected.Count > 0 ? selected.First():"-")</AeTypography>
+<AeTypography>Selected item: @selected</AeTypography>
 
 <AeMultiSelect 
     DefaultLabel="Please select a value"
-    @bind-SelectedItems="selected"
+    @bind-SelectedItem="selected"
     Items="_dropdownItems"
 />
 
 @code {
 
-    private SortedSet<string> selected = new SortedSet<string>(new [] { "Second"});
+    private string selected = "Second";
 
     private List<string> _dropdownItems = new List<string>
     {
