@@ -32,16 +32,18 @@
 }
 else
 {
+    var idx = Items.IndexOf(SelectedItem);
 <div class="ae content-wrapper">
-<select @onchange="DropdownChanged">
+    selected = @Renderer(SelectedItem)
+<select @key=SelectedItem @onchange="DropdownChanged">
     @if (DefaultLabel != null)
     {                
-        <option value="-1" selected="@SelectedItems.Count == 0">@DefaultLabel</option>
+        <option @key=@DefaultLabel value="-1" selected="@(idx < 0)">@DefaultLabel</option>
     }
     @for (var il = 0;il < Items.Count;il++)
     {
         var current = il;
-        <option value=@current selected="@SelectedItems.Contains(Items[current])">@Renderer(Items[current])</option>                
+        <option @key=Items[current] value=@current selected="@(idx == current)">@Renderer(Items[current])</option>                
     }
 </select>
 </div>    
@@ -108,13 +110,17 @@ else
         }
     }
 
-    protected override async Task OnParametersSetAsync()
+    protected override void OnParametersSet()
     {
         if(Renderer is null)
         {
             Renderer = item => item?.ToString() ?? NullValue;
         }
-        if (SelectedItem != null) selectedItems.Add(SelectedItem);
+        if (SelectedItem != null)
+        {
+            selectedItems.Clear();
+            selectedItems.Add(SelectedItem);
+        }
     }
 
     private void ToggleItemSelected(T item, bool isSelected)
