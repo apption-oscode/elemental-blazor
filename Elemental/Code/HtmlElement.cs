@@ -15,10 +15,8 @@
  */
 
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Elemental.Code
 {
@@ -31,6 +29,9 @@ namespace Elemental.Code
         public Dictionary<string, object> InputAttributesWithoutClass { get; set; }
         protected string _inputClass => InputAttributes != null && InputAttributes.ContainsKey("class") ? InputAttributes["class"] as string : "";
 
+        public Dictionary<string, object> InputAttributesWithoutClassOrStyle { get; set; }
+        protected string _inputStyle => InputAttributes != null && InputAttributes.ContainsKey("style") ? InputAttributes["style"] as string : "";
+
 
         protected override void OnInitialized()
         {
@@ -39,6 +40,11 @@ namespace Elemental.Code
             InputAttributesWithoutClass = InputAttributes?
                 .Keys
                 .Where(k => k != "class")
+                .ToDictionary(_ => _, _ => InputAttributes[_]);
+
+            InputAttributesWithoutClassOrStyle = InputAttributesWithoutClass?
+                .Keys
+                .Where(k => k != "style")
                 .ToDictionary(_ => _, _ => InputAttributes[_]);
         }
     }

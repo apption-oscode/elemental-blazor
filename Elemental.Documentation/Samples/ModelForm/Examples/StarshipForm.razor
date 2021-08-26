@@ -23,6 +23,8 @@
     OnValidSubmit="HandleValidSubmit" 
     CancelLabel="Cancel" 
     OnCancel="CreateStarship"
+    OnChange="OnChange"
+    OnConfigure="OnConfigure"
     OnInvalidSubmit="HandleInvalidSubmit"/>
 
 <DebugObject Object="@_starship"/>
@@ -39,6 +41,16 @@
         return _starship;
     }
 
+    private void OnConfigure(IModelFormContext ctx)
+    {
+        ctx.SetVisible<Starship>(p => p.ValidationDate, _starship.IsValidatedDesign);
+    }
+
+    private void OnChange(ModelFormChangeArgs args)
+    {
+        OnConfigure(args.Context);
+    }
+
     protected override async Task OnInitializedAsync()
     {
         _starship = await CreateStarship();
@@ -47,6 +59,7 @@
     private void HandleValidSubmit(EditContext editContext)
     {
         //save to database
+        StateHasChanged();
     }
 
     private void HandleInvalidSubmit(EditContext editContext)

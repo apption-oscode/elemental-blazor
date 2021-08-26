@@ -4,6 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>  
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\elemental-docs.css" />
@@ -44,6 +48,16 @@
   <ItemGroup>
     <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
     <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="package-lock.json" />
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package-lock.json" />
+    <None Include="package.json" />
   </ItemGroup>
   
   <ItemGroup>

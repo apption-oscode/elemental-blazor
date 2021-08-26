@@ -17,8 +17,17 @@ namespace Elemental.Tests
             var s1 = typeof(Starship).GetAeModelFormCategories();
             Assert.Single(s1);
             var (_, l1) = s1[0];
-            Assert.Equal(11, l1[0].Count);
+            Assert.Equal(12, l1[0].Count);
 
+        }
+
+        [Fact]
+        public void TestConvertNullValue()
+        {
+            var transportStarship = new TransportStarship() { SubLightEngines = 5 };
+            var prop = typeof(TransportStarship).GetProperty(nameof(TransportStarship.SubLightEngines));
+            var v = AeModelFormTools.GetNonNullableValue(prop, transportStarship);
+            Assert.Equal(typeof(int), v.GetType());
         }
 
         [Fact]
@@ -34,7 +43,8 @@ namespace Elemental.Tests
         [Fact]
         public void TestPropertyName()
         {
-            Assert.Equal("Classification", AeModelFormTools.WithPropertyExpression<InteractiveStarship>(p => p.Classification));
+            Assert.Equal("Classification", AeModelFormTools.WithPropertyExpression<InteractiveStarship>(p => p.Classification).Name);
         }
+
     }
 }

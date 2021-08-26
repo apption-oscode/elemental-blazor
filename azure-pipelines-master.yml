@@ -1,10 +1,10 @@
-name: '1.0.$(date:yy)$(DayOfYear)$(rev:.r)'
+name: '1.2.$(date:yy)$(DayOfYear)$(rev:.r)'
 
 trigger:
   batch: true
   branches:
     include:
-    - develop
+    - master
 
 pool:
   name: Apption Pool

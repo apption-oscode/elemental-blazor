@@ -6,6 +6,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageId>AElemental.Blazor</PackageId>
+    <Nullable>enable</Nullable>
 		<Authors>Apption</Authors>
 		<Company>Apption</Company>
 		<Product>AElemental for Blazor</Product>
@@ -24,11 +25,20 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>true</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <Content Remove="package.json" />
+	</ItemGroup>
+
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
+		<PackageReference Include="Markdig" Version="0.25.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -55,12 +65,17 @@
       <None Include="..\Elemental.Theme\Styles\list\_list.scss" Link="Components\AeList\_list.scss" />
       <None Include="..\Elemental.Theme\Styles\menu\_menu.scss" Link="Components\AeMenu\_menu.scss" />
       <None Include="..\Elemental.Theme\Styles\modal\_modal.scss" Link="Components\AeModal\_modal.scss" />
+      <None Include="..\Elemental.Theme\Styles\modal\_error-modal.scss" Link="Components\AeModal\_error-modal.scss" />
       <None Include="..\Elemental.Theme\Styles\model-form\_model-form.scss" Link="Components\AeModelForm\_model-form.scss" />
       <None Include="..\Elemental.Theme\Styles\navbar\_navbar.scss" Link="Components\AeNavbar\_navbar.scss" />
+	  <None Include="..\Elemental.Theme\Styles\pageoutline\_pageoutline.scss" Link="Components\AePageOutline\_pageoutline.scss" />
       <None Include="..\Elemental.Theme\Styles\progress\_progress.scss" Link="Components\AeProgress\_progress.scss" />
       <None Include="..\Elemental.Theme\Styles\row\_row.scss" Link="Components\AeRow\_row.scss" />
       <None Include="..\Elemental.Theme\Styles\spinner\_spinner.scss" Link="Components\AeSpinner\_spinner.scss" />
       <None Include="..\Elemental.Theme\Styles\steps\_steps.scss" Link="Components\AeSteps\_steps.scss" />
+      <None Include="..\Elemental.Theme\Styles\tabs\_document-tabs.scss" Link="Components\AeTabs\_document-tabs.scss" />
+      <None Include="..\Elemental.Theme\Styles\tabs\_index.scss" Link="Components\AeTabs\_index.scss" />
+	  <None Include="..\Elemental.Theme\Styles\tabs\_tabs.scss" Link="Components\AeTabs\_tabs.scss" />
       <None Include="..\Elemental.Theme\Styles\table\_table.scss" Link="Components\AeTable\_table.scss" />
       <None Include="..\Elemental.Theme\Styles\toggle\_toggle.scss" Link="Components\AeToggle\_toggle.scss" />
       <None Include="..\Elemental.Theme\Styles\tooltip\_tooltip.scss" Link="Components\AeTooltip\_tooltip.scss" />
@@ -71,6 +86,9 @@
   
 	<ItemGroup>
 		<None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
+		<None Include="package.json">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
 		<None Include="wwwroot\js\third-party\jquery.min.js" />
 		<None Include="wwwroot\js\third-party\shepherd.min.js">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -87,4 +105,5 @@
 	</Target>
 
 </Project>
+
 

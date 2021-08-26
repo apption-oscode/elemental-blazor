@@ -1,0 +1,63 @@
+﻿@*
+    Copyright 2020 Apption Corporation
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    Title: Model Form with Relationships
+    Description: This sample uses RegisterListValue to map relationships dropdowns
+*@
+
+
+<AeModelForm T="StarshipWithOwner"
+             Model="@_starship"
+             SubmitLabel="Save changes"
+             OnValidSubmit="HandleValidSubmit"
+             CancelLabel="Cancel"             
+             OnConfigure="OnConfigure"
+             OnCancel="CreateStarship" />
+
+<DebugObject Object="@_starship"/>
+
+@code {
+    private StarshipWithOwner _starship;
+
+    private async Task<StarshipWithOwner> CreateStarship()
+    {
+        return await Task.FromResult(new StarshipWithOwner() { ProductionDate = DateTime.Today });
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _starship = await CreateStarship();
+        _starship.Classification = "c";
+        _starship.Description = "This is a description of my starship. It has 4 engines and can go from 0 to light speed in 3 seconds. It has an automatic sheild deploy, free wifi and a vending machine. It sleeps 10 crew, but if you are optimistic, you can get 12 in there. When it comes to food, there is a garden wing, where we grow spinach, carrots, lettuce, tomatoes, potatoes and other such vegatables. Sadly, all the meat has to be synthetic since we quite willingly destroyed our home planet and have chosen to not be cannibals.";
+    }
+
+    private async Task OnConfigure(IModelFormContext context)
+    {
+        context.RegisterOptionValueProperty<StarshipWithOwner>(s => s.Classification,() => new[] { "a", "b", "c" });
+        context.RegisterOptionValueProperty<StarshipWithOwner,StarshipOwner>(p => p.Owner, s => s?.OwnerName??"N/A", 
+                () => new List<StarshipOwner>() { null, new() {  OwnerID = 1, OwnerName ="Joe"},
+                new() { OwnerID = 2, OwnerName = "Brian" } });
+
+    }
+    
+    private void HandleValidSubmit()
+    {
+        //do something if form is valid
+        StateHasChanged();
+    }
+
+}

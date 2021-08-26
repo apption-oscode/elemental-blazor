@@ -7,7 +7,7 @@
                 
         @if (hasChildren)
         {
-            <div class="caret" @onclick="async () => await ToggleCollapsed.InvokeAsync(Root)">
+            <div class="caret" @onclick="() => ToggleCollapsed.InvokeAsync(Root)">
                 <AeIcon Icon="@(IsCollapsed(Root)? "arrow-right-s" : "arrow-down-s")"></AeIcon>
             </div>
                  }
@@ -21,9 +21,9 @@
                 } 
                 @if (isSelectable)
                 {
-                    <AeCheckbox IsChecked="isChecked" ItemSelected="checkboxSelected"/>
+                    <AeCheckbox @bind-IsChecked="IsItemChecked" @bind-IsChecked:event="CheckChanged" @bind-HasValue="HasCheckboxValue"/>
                 }
-                <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="async () => await NodeClicked.InvokeAsync(Root)">
+                <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked.InvokeAsync(Root)">
                     @nodeString
                 </div>
             }
@@ -93,8 +93,11 @@
     bool hasChildren;
     bool isGeneric;
 
+    private bool IsItemChecked { get; set; }
 
-    protected override void OnInitialized()
+    private bool HasCheckboxValue { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
         checkboxId = "checkbox-" + this.GetHashCode();
         if (ItemChecked.HasDelegate)
@@ -102,7 +105,7 @@
             isSelectable = true;
         }
         children = FetchChildren(Root);
-        if (RenderNode!=null)
+        if (RenderNode != null)
             nodeString = RenderNode(Root);
         if (RenderIcon != null) {
             nodeIcon = RenderIcon(Root);
@@ -110,17 +113,13 @@
         }
         hasChildren =  children != null && children.Count() > 0;
         isGeneric = RenderItem != null;
+        IsItemChecked = IsChecked(Root) == true;
+        HasCheckboxValue = !(IsChecked(Root) is null);
     }
 
-    private bool? isChecked()
+    private async Task CheckChanged(bool? value)
     {
-        return IsChecked(Root);
+        await ItemChecked.InvokeAsync((Root,value == false));
     }
 
-    private async Task checkboxSelected()
-    {
-        await ItemChecked.InvokeAsync((Root, IsChecked(Root) == false));
-    }
-
-
-    }
+}

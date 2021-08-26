@@ -10,11 +10,24 @@
 @inherits HtmlElement
 
 <label class="@_classname" @attributes="InputAttributesWithoutClass">
-    <input type="checkbox" />
+     <input type="checkbox" @onchange="ValueChanged" checked="@IsChecked" />
     <span class="slider"></span>
 </label>
 
 @code {
+
+    [Parameter]
+    public bool IsChecked { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> IsCheckedChanged { get; set; }
+
+    public async Task ValueChanged()
+    {
+        IsChecked = !IsChecked;
+        await IsCheckedChanged.InvokeAsync(IsChecked);
+    }
+
 
     private string _classname => $"ae toggle {_inputClass}";
 

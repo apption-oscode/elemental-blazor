@@ -1,4 +1,4 @@
-name: '1.1.$(date:yy)$(DayOfYear)$(rev:.r)-beta'
+name: '1.2.$(date:yy)$(DayOfYear)$(rev:.r)-beta'
 
 trigger:
   batch: true
@@ -13,7 +13,9 @@ jobs:
     clean: all
     
   variables:
-    NetCoreVersion: '6.0.x'
+#    NetCoreVersion: '6.0.x'
+    NetCoreVersion: '6.0.100-preview.6.21355.2'
+    MSBuildEnableWorkloadResolver: 'false'
 
   steps:
   - task: AzureKeyVault@1

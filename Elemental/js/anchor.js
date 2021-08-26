@@ -1,4 +1,4 @@
-﻿function BlazorScrollToId(id) {
+﻿BlazorScrollToId = function (id) {
     const element = document.getElementById(id);
     if (element instanceof HTMLElement) {
     element.scrollIntoView({

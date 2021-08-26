@@ -9,31 +9,28 @@
     Description: A checkbox that has three states true, false, and null. True reporesents a check, null represents a dash, and false is empty. This is used in the Treeview component.
 *@
 <div>
-    <AeCheckbox IsChecked="isChecked" ItemSelected="toggleCheckbox" />
+    <AeCheckbox IsChecked="@IsChecked" IsCheckedChanged="toggleCheckbox" @bind-HasValue="HasValue" />
 </div>
 
 
 @code {
-    private bool? _isChecked = false;
-
-    private bool? isChecked()
+    private bool IsChecked { get; set; }
+    private bool HasValue { get; set; }
+  
+    private void toggleCheckbox(bool value)
     {
-        return _isChecked;
-    }
-
-    private void toggleCheckbox()
-    {
-        if (_isChecked == false)
+        if (!HasValue)
         {
-            _isChecked = null;
+            HasValue = !HasValue;
+            IsChecked = true;
         }
-        else if (_isChecked == null)
+        else  if (value == true)
         {
-            _isChecked = true;
-        }
-        else
+            IsChecked = false;
+            HasValue = false;
+        } else
         {
-            _isChecked = false;
+            IsChecked = value;
         }
     }
 }

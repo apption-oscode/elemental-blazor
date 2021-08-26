@@ -16,18 +16,16 @@
 *@
 
 @namespace Elemental.Components
-@inherits HtmlElement
-@implements ITable
+@inherits AeBaseTable<T>
 @inject IJSRuntime JSRuntime
 @inject GetDimensionsService DimensionService
-@using System.Text
-@using System.Reflection
+
 @typeparam T
 
 <div class="@_tableClass" @attributes="InputAttributesWithoutClass">
     @if (Headers.Count > 0)
     {
-        <div class="ae table-header" style="@_gridStyle">
+        <AeTableRow Header GridStyle="@_gridStyle">
             @if (SimpleTable)
             {
                 <div class="corner  @_simple">&nbsp;</div>
@@ -40,16 +38,23 @@
                 }
                 else
                 {
-                    @defaultHeader(header, index)
+                    @DefaultHeader(header, index)
                 }
             }
-        </div>
+        </AeTableRow>
     }
     <div class="ae table-scroll" style="@_scrollStyle" @onscroll="OnScroll" @ref="tableRef">
         <div class="ae table-rows" style="@_rowsStyle">
             @foreach (var row in Rows.Skip(scrollViewResult.SkipItems).Take(scrollViewResult.TakeItems).Select((item, i) => new { item, i }))
             {
-            <div tabindex="0" class="@GetRowColor(row.item) @_simple" style="@_rowStyle top:@((scrollViewResult.SkipItems + row.i) * RowHeight)px;" @onclick="(() => OnRowClick.InvokeAsync(row.item))" @onfocus="(() => OnRowFocus.InvokeAsync(row.item))">
+            <AeTableRow 
+                GridStyle="@_gridStyle" 
+                tabindex="0" 
+                class="@GetRowColor(row.item)" 
+                style="@GetRowStyle(row.i)" 
+                @onclick="(() => OnRowClick.InvokeAsync(row.item))" 
+                @onfocus="(() => OnRowFocus.InvokeAsync(row.item))"
+            >
 
                 @if (SimpleTable)
                 {
@@ -59,26 +64,28 @@
                     }
                     else
                     {
-                        <div class="ae table-cell row-label">@(row.i+1)</div>
+                        <AeTableCell class="row-label">@(row.i+1)</AeTableCell>
                     }
                 }
                 @foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
                 {
                     if (Renderers?[index] is null)
                     {
-                        <div class="ae table-cell" @ref="cells[(row.i, index)]" @onmouseover="async () => await OnHoverShowToolTip(row.i, index, accessor?.Invoke(row.item))" >
-                            
-                            @accessor?.Invoke(row.item)
-                        </div>
+                        <span
+                            @ref="cells[(row.i, index)]" 
+                            @onmouseover="async () => await OnHoverShowToolTip(row.i, index, accessor?.Invoke(row.item))" 
+                        >
+                            <AeTableCell>
+                                @accessor?.Invoke(row.item)
+                            </AeTableCell>
+                        </span>
                     }
                     else
                     {
-                        <div class="ae table-cell">
-                            @Renderers[index](row.item)
-                        </div>
+                        <AeTableCell> @Renderers[index](row.item) </AeTableCell>
                     }
                 }
-            </div>
+            </AeTableRow>
             }
         </div>
     </div>
@@ -90,22 +97,7 @@
     </div>
 }
 
-
-
-
-
-
 @code {
-    [Parameter]
-    public string GridTemplateColumns { get; set; }
-    [Parameter]
-    public List<string> Headers { get; set; } = new List<string>();
-    [Parameter]
-    public List<Func<T, string>> Accessors { get; set; }
-    [Parameter]
-    public List<Func<T, RenderFragment>> Renderers { get; set; }
-    [Parameter]
-    public List<T> Dataset { get; set; }
     [Parameter]
     public Func<T, string> ColorAccessor { get; set; }
     [Parameter]
@@ -113,49 +105,38 @@
     [Parameter]
     public int RowHeight { get; set; } = 33;  //In px
     [Parameter]
-    public EventCallback<T> OnRowClick { get; set; }
-    [Parameter]
-    public EventCallback<T> OnRowFocus { get; set; }
-    [Parameter]
     public bool SimpleTable { get; set; } = false;
-    [Parameter]
-    public Func<string, int, RenderFragment> CustomHeader { get; set; }
     [Parameter]
     public Func<int, RenderFragment> CustomRowLabels { get; set; }
     [Parameter]
     public bool AddToolTip { get; set; }
     
-    private RenderFragment defaultHeader(string header, int index)
+    protected override RenderFragment DefaultHeader(string header, int index)
     {
         return
-    @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
+                @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
                     @header
                     <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
-               </AeTypography>
-    ;
+               </AeTypography>;
     }
 
     public class customArgs { }
 
     private string _simple = null;
-    private string _tableClass => $"ae table {_inputClass}";
-    private string _gridStyle => $"grid-template-columns: {GetGridTemplateColumns()};";
     private string _rowsStyle => $"{_gridStyle}; grid-template-rows: repeat({scrollViewResult.TakeItems},{RowHeight}px); height:{scrollViewResult.Height}px;";
-    private string _rowStyle => $"{_gridStyle}; grid-template-rows:{RowHeight}px;";
+    private string _rowStyle => $"grid-template-rows:{RowHeight}px;";
     private string _scrollStyle => $"max-height: {MaxHeight}px;";
     private string _toolTipText;
     private int _toolTipHeight;
     private int _toolTipWidth;
     private int _toolTipTop;
     private int _toolTipLeft;
-    private (int column, bool sortAscending) _sorting = (0, true);
 
     private ElementReference tableRef;
     private ElementReference toolTipRef;
     private Dictionary<(int, int), ElementReference> cells = new Dictionary<(int, int), ElementReference>();
     private ScrollView scrollView;
     private ScrollViewResult scrollViewResult;
-    private IEnumerable<T> Rows { get => GetSortedDataset(); }
 
     protected override void OnInitialized()
     {
@@ -189,62 +170,13 @@
         }
     }
 
-
-    private void ToggleSortOnColumn(int column)
-    {
-        if (column == _sorting.column)
-        {
-            _sorting.sortAscending = !_sorting.sortAscending;
-        }
-        else
-        {
-            _sorting.column = column;
-            _sorting.sortAscending = true;
-        }
-        StateHasChanged();
-    }
-
-    private IEnumerable<T> GetSortedDataset()
-    {
-        if (Dataset is null || !Dataset.Any())
-        {
-            return new List<T>();
-        }
-
-        if (_sorting.sortAscending)
-        {
-            return Dataset.OrderBy(data => Accessors[_sorting.column].Invoke(data));
-        }
-        else
-        {
-            return Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data));
-        }
-    }
-
-    private string GetSortIconClass(int column)
-    {
-        if (column == _sorting.column)
-        {
-            return _sorting.sortAscending ? "fad fa-sort-down" : "fad fa-sort-up";
-        }
-        return "fad fa-sort";
-    }
-
-    private string GetGridTemplateColumns()
-    {
-        if (string.IsNullOrWhiteSpace(GridTemplateColumns))
-        {
-            return $"{(SimpleTable ? "0.25fr" : "")} repeat({(Accessors?.Count ?? 1)}, 1fr)";
-        }
-        else
-        {
-            return GridTemplateColumns;
-        }
-    }
-
     private string GetRowColor(T row)
     {
-        return $"ae table-row {ColorAccessor?.Invoke(row)}";
+        return ColorAccessor?.Invoke(row) + _simple;
+    }
+
+    private string GetRowStyle(int rowIndex){
+        return $"{_rowStyle} top:{((scrollViewResult.SkipItems + rowIndex) * RowHeight)}px;";
     }
 
     private async Task OnHoverShowToolTip(int row, int cell, string text)
@@ -279,43 +211,6 @@
         scrollViewResult.SkipItems = scrollView.ScrollTop / RowHeight;
         scrollViewResult.TakeItems = (int)Math.Ceiling((double)(scrollView.ScrollTop + scrollView.ClientHeight) / (double)RowHeight) - scrollViewResult.SkipItems;
         StateHasChanged();
-    }
-
-    public byte[] ExportToCSVInByte()
-    {
-        var builder = new StringBuilder();
-        (int column, bool sortAscending) _sorting = (0, true);
-
-        foreach (var h in Headers)
-        {
-            builder.Append(h + ",");
-        }
-        //Remove the last ,
-        builder.Length--;
-        builder.Append(Environment.NewLine);
-
-        foreach (var row in Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data)))
-        {
-
-            foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))
-            {
-                var value = accessor?.Invoke(row);
-                if (value.IndexOfAny(new char[] { '"', ',' }) != -1)
-                {
-                    builder.AppendFormat("\"{0}\"", value.Replace("\"", "\"\""));
-                    builder.Append(",");
-                }
-                else
-                {
-                    builder.Append(accessor?.Invoke(row) + ",");
-                }
-            }
-            //Remove the last ,
-            builder.Length--;
-            builder.Append(Environment.NewLine);
-        }
-        var bytes = Encoding.UTF8.GetBytes(builder.ToString());
-        return bytes;
     }
 
     public class ScrollView

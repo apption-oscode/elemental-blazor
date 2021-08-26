@@ -1,4 +1,6 @@
 ﻿@use '../common' as c;
+@use 'error-modal';
+@use 'sass:map';
 
 $modalOptions: (
   'default': (
@@ -55,12 +57,19 @@ $modalOptions: (
 
 @mixin configure($options) {
   @if ($options) {
-    $modalOptions: $options !global;
+    @if (map.get($options, 'modalOptions')) {
+      $modalOptions: map.get($options, 'modalOptions') !global;
+    }
+    @if (map.get($options, 'errorModalOptions')) {
+      @include error-modal.configure(map.get($options, 'errorModalOptions'));
+    }
   }
 }
 
 @mixin styles {
   .ae.modal {
     @include c.set-variations($modalOptions);
+
+    @include error-modal.styles;
   }
 }
