@@ -29,7 +29,7 @@ namespace Elemental.Code
         public Func<T, string> RenderNode { get; set; }
 
         [Parameter]
-        public Action<T> NodeClicked { get; set; }
+        public EventCallback<T> NodeClicked { get; set; }
 
         [Parameter]
         public Func<T, bool> IsBold { get; set; }
@@ -41,8 +41,8 @@ namespace Elemental.Code
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            if (NodeClicked == null)
-                NodeClicked = nodeClicked;
+            if (!NodeClicked.HasDelegate)
+                NodeClicked = new EventCallback<T>(this, (Action<T>)nodeClicked);
             if (IsBold == null)
                 IsBold = isBold;
             if (NodeIsClickable == null)
