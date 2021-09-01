@@ -29,7 +29,7 @@
     {
                                 <AeCard class="outline-fixed" >            
                                     <Header>
-                                        <AeTypography style="flex-grow: 1;">Form Navigation</AeTypography>
+                                        <AeTypography style="flex-grow: 1;">@localize("Form Navigation")</AeTypography>
                                     </Header>
                                     <ChildContent>
                                         <AeOutlineId Anchors="_Anchors"/>
@@ -41,7 +41,7 @@
                         <DataAnnotationsValidator />
                         <ValidationSummary />
                         <div class="ae modelform-rows @_rowsClass">
-                @foreach (var category in GetCategories())
+                @foreach (var category in ModelFormContext.GetCategories())
                 {
                     @if (!string.IsNullOrWhiteSpace(category.category))
                     {
@@ -57,7 +57,7 @@
                             }
 
                         }
-                                                            <AeTypography Variant="h3" id="@id">@category.category</AeTypography>
+                                                            <AeTypography Variant="h3" id="@id">@localize(category.category)</AeTypography>
                     }
                     @foreach (var props in category.properties)
                     {
@@ -153,10 +153,10 @@
                 }
                         </div>
                         <div class="ae flex  ">
-                            <button id="submit" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" type="submit">@SubmitLabel</button>
+                            <button id="submit" disabled="@(!IsSubmitEnabled)" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" type="submit">@localize(SubmitLabel)</button>
                 @if (!string.IsNullOrWhiteSpace(CancelLabel) && OnCancel != null)
                 {
-                                            <button id="cancel" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" @onclick="ReloadForm">@CancelLabel</button>
+                                            <button id="cancel" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" @onclick="ReloadForm">@localize(CancelLabel)</button>
                 }
                         </div>
 
@@ -167,14 +167,12 @@
 
 @code {
     private string _modelFormClass => $"ae modelform {_inputClass}";
-    private string _rowsClass => $"{(LabelsOnTop ? "top-label" : "left-label")} {(Flexbox ? "flexbox" : "")}";
-    public List<(string category, List<List<PropertyInfo>> properties)> GetCategories() =>
-        typeof(T).GetAeModelFormCategories().Select(elem => (elem.category, 
-                elem.properties.Select(l => l.Where(l => ModelFormContext.IsVisible(l)).ToList()).ToList()))
-                .Where(elem => elem.Item2.Count > 0).ToList();
-    
+    private string _rowsClass => $"{(LabelsOnTop ? "top-label" : "left-label")} {(Flexbox ? "flexbox" : "")}";  
 
     private bool isConfigured = false;
+
+    [Parameter]
+    public bool IsSubmitEnabled { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -182,8 +180,8 @@
         {
             _Anchors = new List<(string Id, RenderFragment ChildContent)>
     {
-    ("Uncategorized", 
-    @<AeTypography Variant="a">Uncategorized Fields</AeTypography>
+    (@localize("Uncategorized"), 
+    @<AeTypography Variant="a">@localize("Uncategorized Fields")</AeTypography>
     )
     };
         }
@@ -207,6 +205,11 @@
 
     [Parameter]
     public Func<string, string?> LocalizerFunction { get; set; } = null;
+
+    private string localize(string input)
+    {
+        return LocalizerFunction is null ? input : (LocalizerFunction(input)?? input);
+    }
 
     [Parameter]
     public T Model { get; set; }
