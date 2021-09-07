@@ -17,12 +17,14 @@
     Description: This sample uses Category annotations to group and order the different form elements into categories
 *@
 
+<AeFlex><AeCheckbox @bind-IsChecked="submitEnabled"/> Enable Form</AeFlex>
 
 <AeModelForm T="InteractiveStarship"
              Model="@_starship"
              SubmitLabel="Save changes"
              OnValidSubmit="HandleValidSubmit"
-             CancelLabel="Cancel"             
+             CancelLabel="Cancel"    
+             IsSubmitEnabled="submitEnabled"
              OnConfigure="OnConfigure"
              OnCancel="CreateStarship" />
 
@@ -36,7 +38,7 @@
         return await Task.FromResult(new InteractiveStarship() { ProductionDate = DateTime.Today });
     }
 
-
+    private bool submitEnabled;
 
     protected override async Task OnInitializedAsync()
     {

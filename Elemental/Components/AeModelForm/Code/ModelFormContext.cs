@@ -45,6 +45,10 @@ namespace Elemental.Components
         public Func<Task> RefreshModel { get; set; }
         public List<PropertyInfo> Properties { get; private set; }
 
+        public List<(string category, List<List<PropertyInfo>> properties)> GetCategories() =>
+            typeof(T).GetAeModelFormCategories().Select(elem => (elem.category,
+                    visibleProperties:elem.properties.Select(l => l.Where(l => IsVisible(l)).ToList()).ToList()))
+                    .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
 
         public void RegisterOptionValueProperty(PropertyInfo property, Func<IEnumerable<string>> choices, Action<string> onChange = null)
         {
@@ -115,6 +119,8 @@ namespace Elemental.Components
                 : false;
             return hasValidValues || hasDropDown;
         }
+
+
 
         public static Type[] GetDelegateParameterTypes(MethodInfo invoke)
         {
