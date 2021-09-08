@@ -26,7 +26,8 @@
         {
             var item = getPageItem(itemIndex);
             var currentIndex = itemIndex;
-            <AeTableRow @key=item GridStyle="@_gridStyle"
+            var idx = itemIndex + Page * PageSize;
+            <AeTableRow @key=idx GridStyle="@_gridStyle"
                     tabindex="0"
                     @onclick="(() => OnRowClick.InvokeAsync(getPageItem(currentIndex)))"
                     @onfocus="(() => OnRowFocus.InvokeAsync(getPageItem(currentIndex)))">
