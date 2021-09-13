@@ -1,108 +1,118 @@
 ﻿@*
-    Copyright (c) 2020 Apption Corporation
+	Copyright (c) 2020 Apption Corporation
 
-    This Source Code Form is subject to the terms of the Mozilla Public
-    License, v. 2.0. If a copy of the MPL was not distributed with this
-    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+	This Source Code Form is subject to the terms of the Mozilla Public
+	License, v. 2.0. If a copy of the MPL was not distributed with this
+	file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Paginated Table
-    Description: Paginated table element with sorting and pagination
+	Title: Paginated Table
+	Description: Paginated table element with sorting and pagination [TESTING]
 *@
 
 <AePaginatedTable Accessors="accessorFunctions"
-  Dataset="dataset"
-  T=DummyData
-  Headers="headers" 
-  @ref="_myTable"
-  Page="@_lastClicked"
-  Renderers="renderFunctions"
-  OnRowClick="@RowSelected"
-/>
+				  Dataset="dataset"
+				  T=DummyData
+				  Headers="headers"
+				  @ref="_myTable"
+				  Page="@_lastClicked"
+				  Renderers="renderFunctions"
+				  OnRowClick="@RowSelected" />
 
-<AePagination Pageable="@_myTable" OnPageClick="OnPageClick" />
+<AePagination Pageable="@_myTable" OnPageClick="OnPageClick" >
+	<LeftIcon>
+		<i class='fad fa-chevron-double-left'></i>
+	</LeftIcon>
+	<RightIcon>
+		<i class='fad fa-chevron-double-right'></i>
+	</RightIcon>
+</AePagination> 
 
 <AeTypography>Last clicked page index: @_lastClicked</AeTypography>
 <AeTypography>Element Selected: @_selected</AeTypography>
 
 @code {
 
-    private int _lastClicked = 0;
-  private AePaginatedTable<DummyData> _myTable;
-    private DummyData? _selected;
+	private int _lastClicked = 0;
+	private AePaginatedTable<DummyData> _myTable;
+	private DummyData? _selected;
 
-    private List<Func<DummyData, RenderFragment>> renderFunctions;
-    private List<DummyData> dataset;
+	private List<Func<DummyData, RenderFragment>> renderFunctions;
+	private List<DummyData> dataset;
 
-    protected override async Task OnInitializedAsync()
-    {
-        dataset = GetDummyData();
-        renderFunctions = new List<Func<DummyData, RenderFragment>>
-        {
-        null,
-        null,
-        null,
-        null,
-        null,
-        dummyData => { return 
-    @<AeMultiSelect @bind-SelectedItem=dummyData.Rating DefaultLabel="-" Items=Ratings />;} 
-        };        
-    }
+	protected override async Task OnInitializedAsync()
+	{
+		dataset = GetDummyData();
+		renderFunctions = new List<Func<DummyData, RenderFragment>>
+		{
+			null,
+			null,
+			null,
+			null,
+			null,
+			dummyData => { return
+				@<AeMultiSelect @bind-SelectedItem=dummyData.Rating DefaultLabel="-" Items=Ratings />
+			;}
+		};
+	}
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-    // You must re-render after the components are initialized in order for the 
-    // component reference to not be null
-    if(firstRender){
-      StateHasChanged();
-    }
-  }
+	protected override void OnAfterRender(bool firstRender)
+	{
+		// You must re-render after the components are initialized in order for the
+		// component reference to not be null
+		if (firstRender)
+		{
+			StateHasChanged();
+		}
+	}
 
-  private void RowSelected(DummyData selected)
-  {
-    _selected = selected;
-  }
+	private void RowSelected(DummyData selected)
+	{
+		_selected = selected;
+	}
 
-  private void OnPageClick(int pageIndex)
-  {
-    _lastClicked = pageIndex;
-  }
+	private void OnPageClick(int pageIndex)
+	{
+		_lastClicked = pageIndex;
+	}
 
 
-  // Define the headers at the top of the table
-  private List<string> headers = new List<string>
-  {
-    "Type", "Category", "Location", "Importance", "Icon","Rating"
-  };
+	// Define the headers at the top of the table
+	private List<string> headers = new List<string>
+	{
+		"Type", "Category", "Location", "Importance", "Icon","Rating"
+	};
 
-    private List<string> Ratings = new List<string> { "A", "B", "C" };
+	private List<string> Ratings = new List<string> { "A", "B", "C" };
 
-  // Typeparam class to hold row data, can be anything
-  private List<DummyData> GetDummyData() {
-    var data = new List<DummyData>();
-    for(int i=0; i<187; i++){
-      data.Add(new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
-    }
-    return data;
-  }
+	// Typeparam class to hold row data, can be anything
+	private List<DummyData> GetDummyData()
+	{
+		var data = new List<DummyData>();
+		for (int i = 0; i < 187; i++)
+		{
+			data.Add(new DummyData { Category = "Hashtag", CategoryIconClass = "fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
+		}
+		return data;
+	}
 
-  // Accessor functions to retrieve cell value
-  private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
-  {
-    dummyData => { return dummyData.Type; },
-    dummyData => { return $"{dummyData.Category} ({dummyData.Rating})"; },
-    dummyData => { return dummyData.Location; },
-    dummyData => { return dummyData.Importance.ToString(); },
-    dummyData => { return dummyData.CategoryIconClass; },
-    null
-  };  
+	// Accessor functions to retrieve cell value
+	private List<Func<DummyData, string>> accessorFunctions = new List<Func<DummyData, string>>
+	{
+		dummyData => { return dummyData.Type; },
+		dummyData => { return $"{dummyData.Category} ({dummyData.Rating})"; },
+		dummyData => { return dummyData.Location; },
+		dummyData => { return dummyData.Importance.ToString(); },
+		dummyData => { return dummyData.CategoryIconClass; },
+		null
+	};
 
-  record DummyData
-  {
-    public string Type { get; set; }
-    public string Category { get; set; }
-    public string CategoryIconClass { get; set; }
-    public string Location { get; set; }
-    public int Importance { get; set; }
-        public string Rating { get; set; }
-    }
+	record DummyData
+	{
+		public string Type { get; set; }
+		public string Category { get; set; }
+		public string CategoryIconClass { get; set; }
+		public string Location { get; set; }
+		public int Importance { get; set; }
+		public string Rating { get; set; }
+	}
 }
