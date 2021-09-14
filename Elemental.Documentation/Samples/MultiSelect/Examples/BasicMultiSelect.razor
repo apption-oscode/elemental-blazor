@@ -1,0 +1,34 @@
+﻿@using System.Linq;
+@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Dropdowns
+    Description: Single option dropdown selector, hover over 
+*@
+
+<AeTypography>Selected item: @(String.Join(',', selected))</AeTypography>
+
+<AeMultiSelect 
+    DefaultLabel="Please select a value"
+    @bind-SelectedItems="selected"
+    Items="_dropdownItems"
+    MultiSelect="true"
+/>
+
+@code {
+
+    private SortedSet<string> selected;
+
+    private List<string> _dropdownItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _dropdownItems = Enumerable.Range(1, 50).Select(r => Tools.Tools.NumberToWords(r)).ToList();
+        selected = new SortedSet<string>(new [] { _dropdownItems[2] });
+    }
+
+}

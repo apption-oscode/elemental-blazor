@@ -37,7 +37,21 @@ namespace Elemental.Tests
             Assert.Equal(3, s1.Count);
             Assert.Collection(s1, e => Assert.Null(e.category), e => Assert.Equal("Identification", e.category), e => Assert.Equal("Details", e.category));
             //var (c1, l1) = s1[0];
+        }
 
+        [Fact]
+        public void TestTransportStarshipCategoriesVisibility()
+        {
+            var model = new ModelFormContext<TransportStarship>();
+            Assert.Equal(3, model.GetCategories().Count);
+            model.SetVisible<TransportStarship>(p => p.Identifier, false);
+
+            var allCats = typeof(TransportStarship).GetAeModelFormCategories().Select(elem => (elem.category,
+                    visibleProperties:elem.properties.Select(l => l.Where(l => model.IsVisible(l)).ToList()).ToList())).ToList();
+            var visibleProperties = allCats.Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
+            //        .Where(elem => elem.Item2.Count > 0).ToList();
+            Assert.Equal(2, model.GetCategories().Count);
+            //var (c1, l1) = s1[0];
         }
 
         [Fact]

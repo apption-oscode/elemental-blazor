@@ -6,6 +6,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageId>AElemental.Blazor</PackageId>
+    <Nullable>enable</Nullable>
 		<Authors>Apption</Authors>
 		<Company>Apption</Company>
 		<Product>AElemental for Blazor</Product>
@@ -25,7 +26,7 @@
 	</PropertyGroup>
 
   <PropertyGroup>
-    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <ErrorOnDuplicatePublishOutputFiles>true</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
 
   <ItemGroup>

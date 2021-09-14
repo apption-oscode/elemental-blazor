@@ -1,0 +1,29 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Dropdowns
+    Description: Single option dropdown selector, hover over 
+*@
+
+<AeTypography>Selected item: @selected</AeTypography>
+
+<AeMultiSelect 
+    DefaultLabel="Please select a value"
+    @bind-SelectedItem="selected"
+    Items="_dropdownItems"
+/>
+
+@code {
+
+    private string selected = "Second";
+
+    private List<string> _dropdownItems = new List<string>
+    {
+        "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
+    };
+
+}

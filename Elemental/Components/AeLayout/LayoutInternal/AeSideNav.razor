@@ -1,6 +1,8 @@
 ﻿@namespace Elemental.Components
+@using Microsoft.Extensions.Logging
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
+@inject ILogger<AeSideNav> logger
 
 <div class="@_sideNavClassname">
     <div class="top">
@@ -79,7 +81,13 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeAsync<string>("sidenav.initializeSidenav", firstRender, SidebarExpandThreshold, SidebarShrunkThreshold, StayCollapse);
+            try
+            {
+                await JSRuntime.InvokeAsync<string>("sidenav.initializeSidenav", firstRender, SidebarExpandThreshold, SidebarShrunkThreshold, StayCollapse);
+            } catch (Exception ex)
+            {
+                logger.LogCritical($"Cannot initialize AElemental javascript - please validate aebundle.js configuration in _host.html");
+            }
         }
         await JSRuntime.InvokeAsync<string>("sidenav.updateNav");
     }
