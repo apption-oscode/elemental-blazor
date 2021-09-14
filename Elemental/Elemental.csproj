@@ -37,6 +37,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
