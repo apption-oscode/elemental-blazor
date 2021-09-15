@@ -17,6 +17,7 @@
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Hosting;
 
 namespace Elemental.Code
 {
@@ -32,10 +33,22 @@ namespace Elemental.Code
         public Dictionary<string, object> InputAttributesWithoutClassOrStyle { get; set; }
         protected string _inputStyle => InputAttributes != null && InputAttributes.ContainsKey("style") ? InputAttributes["style"] as string : "";
 
+        [Inject]
+        IHostEnvironment Environment {  get; set; }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
+
+            if (Environment.IsDevelopment())
+            {
+                if(InputAttributes == null)
+                {
+                    InputAttributes = new Dictionary<string, object>();
+                }
+
+                InputAttributes?.Add("ae-debug-component-name", this.GetType().Name);
+            }
 
             InputAttributesWithoutClass = InputAttributes?
                 .Keys
@@ -46,6 +59,7 @@ namespace Elemental.Code
                 .Keys
                 .Where(k => k != "style")
                 .ToDictionary(_ => _, _ => InputAttributes[_]);
+
         }
     }
 }
