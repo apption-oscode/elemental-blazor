@@ -87,6 +87,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        Total = Rows.Count();
         LoadPageItems();
     }
 
