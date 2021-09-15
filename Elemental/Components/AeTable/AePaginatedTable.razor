@@ -87,8 +87,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        Total = Rows.Count();
         LoadPageItems();
+        Total = Rows.Count();
     }
 
     protected override RenderFragment DefaultHeader(string header, int index)
