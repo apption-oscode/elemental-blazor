@@ -13,8 +13,7 @@ jobs:
     clean: all
     
   variables:
-#    NetCoreVersion: '6.0.x'
-    NetCoreVersion: '6.0.100-rc.1.21458.32'
+    NetCoreVersion: '6.0.x'
     MSBuildEnableWorkloadResolver: 'false'
 
   steps:
