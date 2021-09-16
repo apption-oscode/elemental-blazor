@@ -38,12 +38,12 @@ jobs:
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
-    condition: succeededOrFailed()
     inputs:
       arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
       
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
+    condition: succeededOrFailed()    
     inputs:
       arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
 
