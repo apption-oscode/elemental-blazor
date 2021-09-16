@@ -31,7 +31,7 @@ jobs:
       useGlobalJson: true
 #      version: '$(NetCoreVersion)'
 #      includePreviewVersions: true
--
+
   - task: NodeTool@0
     displayName: 'install node'
     inputs:
