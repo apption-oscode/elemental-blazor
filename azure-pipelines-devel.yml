@@ -27,9 +27,11 @@ jobs:
   - task: UseDotNet@2
     displayName: 'Use .NET Core sdk $(NetCoreVersion)'
     inputs:
-      version: '$(NetCoreVersion)'
+      packageType: 'sdk'
+      useGlobalJson: true
+#      version: '$(NetCoreVersion)'
 #      includePreviewVersions: true
-
+-
   - task: NodeTool@0
     displayName: 'install node'
     inputs:
