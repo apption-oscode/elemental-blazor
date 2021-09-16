@@ -43,7 +43,7 @@ jobs:
       
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
-    condition: succeededOrFailed()    
+    condition: failed()    
     inputs:
       arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
 
