@@ -28,7 +28,7 @@ jobs:
     displayName: 'Use .NET Core sdk $(NetCoreVersion)'
     inputs:
       version: '$(NetCoreVersion)'
-      includePreviewVersions: true
+#      includePreviewVersions: true
 
   - task: NodeTool@0
     displayName: 'install node'
