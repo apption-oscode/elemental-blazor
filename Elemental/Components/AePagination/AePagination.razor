@@ -106,6 +106,7 @@
 	}
 	private async Task PageClicked(int targetIndex, bool nuzzled = false)
 	{
+		Console.WriteLine("LETS GOOOOOOOO");
 		if (nuzzled || targetIndex < 0 || targetIndex >= Pageable.PageCount || targetIndex == Pageable.Page)
 		{
 			return;
