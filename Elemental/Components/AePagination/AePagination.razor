@@ -106,7 +106,6 @@
 	}
 	private async Task PageClicked(int targetIndex, bool nuzzled = false)
 	{
-		Console.WriteLine("LETS GOOOOOOOO");
 		if (nuzzled || targetIndex < 0 || targetIndex >= Pageable.PageCount || targetIndex == Pageable.Page)
 		{
 			return;
@@ -114,8 +113,4 @@
 
 		await OnPageClick.InvokeAsync(targetIndex);
 	}
-
-	private string _wrapperClassname => $"ae pagination-wrapper {_inputClass}";
-    private string _wrappedInputClassname => $"ae input {(LeftIcon != null ? "has-left" : "")} {(RightIcon != null ? "has-right" : "")}";
-    private string _classname => $"ae pagination {_inputClass}";
 }

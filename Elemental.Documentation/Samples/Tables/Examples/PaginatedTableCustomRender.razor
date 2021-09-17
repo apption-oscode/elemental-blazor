@@ -6,7 +6,7 @@
 	file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 	Title: Paginated Table
-	Description: Paginated table element with sorting and pagination [TESTING]
+	Description: Paginated table element with sorting and pagination
 *@
 
 <AePaginatedTable Accessors="accessorFunctions"
@@ -39,6 +39,8 @@
 	private List<Func<DummyData, RenderFragment>> renderFunctions;
 	private List<DummyData> dataset;
 
+	private bool debug;
+
 	protected override async Task OnInitializedAsync()
 	{
 		dataset = GetDummyData();
@@ -51,7 +53,7 @@
 			null,
 			dummyData => { return
 				@<AeMultiSelect @bind-SelectedItem=dummyData.Rating DefaultLabel="-" Items=Ratings />
-			;}
+	;}
 		};
 	}
 
