@@ -67,9 +67,9 @@
 
     public int Total { get; set; }
 
-    private void LoadPageItems()
+    private void LoadPageItems(bool forceLoad = false)
     {
-        if (Page != currentPage)
+        if (forceLoad || Page != currentPage)
         {
             PageItems = Rows.Skip(Page * PageSize).Take(PageSize).ToList();
             currentPage = Page;
@@ -82,12 +82,12 @@
     {
         base.OnInitialized();
         LoadPageItems();
-        Total = Rows.Count();
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        LoadPageItems();
+        LoadPageItems(true);
+        Total = Rows.Count();
     }
 
     protected override RenderFragment DefaultHeader(string header, int index)
