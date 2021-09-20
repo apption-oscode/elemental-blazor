@@ -86,8 +86,10 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        LoadPageItems(true);
         Total = Rows.Count();
+        int PageCount = (int)Math.Ceiling(Total / (decimal)Math.Max(1, PageSize));
+        Page = (Page > PageCount - 1) ? PageCount - 1 : Page;
+        LoadPageItems(true);
     }
 
     protected override RenderFragment DefaultHeader(string header, int index)
