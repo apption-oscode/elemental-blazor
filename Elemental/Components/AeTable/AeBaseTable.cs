@@ -13,6 +13,7 @@ namespace Elemental.Components
         [Parameter] public List<string> Headers { get; set; } = new List<string>();
         [Parameter] public List<T> Dataset { get; set; }
         [Parameter] public List<Func<T, string>> Accessors { get; set; }
+        [Parameter] public List<GenericComparer<T>> Sorters { get; set; }
         [Parameter] public string GridTemplateColumns { get; set; }
         [Parameter] public List<Func<T, RenderFragment>> Renderers { get; set; }
         [Parameter] public EventCallback<T> OnRowClick { get; set; }
@@ -25,7 +26,6 @@ namespace Elemental.Components
 
         protected string _tableClass => $"ae table {_inputClass}";
         protected string _gridStyle => $"grid-template-columns: {CalculateGridTemplateColumns()};";
-
 
         protected override void OnInitialized()
         {
@@ -41,11 +41,16 @@ namespace Elemental.Components
 
             if (_sorting.sortAscending)
             {
-                return Dataset.OrderBy(data => Accessors[_sorting.column].Invoke(data));
+                // if Sorter Parameters exist, use sorter functions, else use Accessors TableComparer
+                return (Sorters != null && Sorters[_sorting.column] != null)?
+                    Dataset.OrderBy(data => data, Sorters[_sorting.column]) :
+                    Dataset.OrderBy(data => Accessors[_sorting.column].Invoke(data));
             }
             else
             {
-                return Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data));
+                return (Sorters != null && Sorters[_sorting.column] != null) ?
+                    Dataset.OrderByDescending(data => data, Sorters[_sorting.column]) :
+                    Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data));
             }
         }
 
@@ -61,7 +66,7 @@ namespace Elemental.Components
 
         protected virtual void ToggleSortOnColumn(int column)
         {
-
+            Console.WriteLine("ToggleSortOnColumn");
             if (column == _sorting.column)
             {
                 _sorting.sortAscending = !_sorting.sortAscending;

@@ -10,6 +10,7 @@
 *@
 
 <AePaginatedTable Accessors="accessorFunctions"
+				  Sorters="sorterFunctions"
 				  Dataset="dataset"
 				  T=DummyData
 				  Headers="headers"
@@ -94,6 +95,10 @@
 		{
 			data.Add(new DummyData { Category = "Hashtag", CategoryIconClass = "fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
 		}
+		data.Add(new DummyData { Category = "a", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
+		data.Add(new DummyData { Category = "b", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
+		data.Add(new DummyData { Category = "c", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
+		data.Add(new DummyData { Category = "d", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
 		return data;
 	}
 
@@ -105,6 +110,17 @@
 		dummyData => { return dummyData.Location; },
 		dummyData => { return dummyData.Importance.ToString(); },
 		dummyData => { return dummyData.CategoryIconClass; },
+		null
+	};
+
+	// Sorter functions to retrieve cell value
+	private List<GenericComparer<DummyData>> sorterFunctions = new List<GenericComparer<DummyData>>
+	{
+		null,
+		null,
+		null,
+		new GenericComparer<DummyData>((x, y) => x.Importance.CompareTo(y.Importance)),
+		null,
 		null
 	};
 
