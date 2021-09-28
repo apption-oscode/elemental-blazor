@@ -9,24 +9,19 @@
 	Description: Paginated table element with sorting and pagination
 *@
 
-<AePaginatedTable Accessors="accessorFunctions"
-				  Sorters="sorterFunctions"
-				  Dataset="dataset"
-				  T=DummyData
-				  Headers="headers"
-				  @ref="_myTable"
-				  Page="@_lastClicked"
-				  Renderers="renderFunctions"
-				  OnRowClick="@RowSelected" />
 
-<AePagination Pageable="@_myTable" OnPageClick="OnPageClick" >
-	<LeftIcon>
-		<i class='fad fa-chevron-double-left'></i>
-	</LeftIcon>
-	<RightIcon>
-		<i class='fad fa-chevron-double-right'></i>
-	</RightIcon>
-</AePagination> 
+<AePaginatedTableMerged Accessors="accessorFunctions"
+	Sorters="sorterFunctions"
+	Dataset="dataset"
+	T=DummyData
+	Headers="headers"
+	Page="@_lastClicked"
+	Renderers="renderFunctions"
+	OnRowClick="@RowSelected" 
+	OnPageClick="OnPageClick">
+	<LeftIcon><i class='fad fa-chevron-double-left'></i></LeftIcon>
+	<RightIcon><i class='fad fa-chevron-double-right'></i></RightIcon>
+</AePaginatedTableMerged>
 
 <AeTypography>Last clicked page index: @_lastClicked</AeTypography>
 <AeTypography>Element Selected: @_selected</AeTypography>
@@ -34,7 +29,6 @@
 @code {
 
 	private int _lastClicked = 0;
-	private AePaginatedTable<DummyData> _myTable;
 	private DummyData? _selected;
 
 	private List<Func<DummyData, RenderFragment>> renderFunctions;
