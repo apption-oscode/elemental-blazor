@@ -109,12 +109,12 @@
 
 	// Comparer functions to sort the table data, if null default to string comparisons
 	// define how objects will be compared here 
-	private List<GenericComparer<DummyData>> sorterFunctions = new List<GenericComparer<DummyData>>
+	private List<CustomRowComparer<DummyData>> sorterFunctions = new List<CustomRowComparer<DummyData>>
 	{
 		null,
 		null,
 		null,
-		new GenericComparer<DummyData>((x, y) => x.Importance.CompareTo(y.Importance)),
+		new CustomRowComparer<DummyData>((x, y) => x.Importance.CompareTo(y.Importance)),
 		null,
 		null
 	};

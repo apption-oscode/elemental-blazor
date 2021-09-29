@@ -13,7 +13,7 @@ namespace Elemental.Components
         [Parameter] public List<string> Headers { get; set; } = new List<string>();
         [Parameter] public List<T> Dataset { get; set; }
         [Parameter] public List<Func<T, string>> Accessors { get; set; }
-        [Parameter] public List<GenericComparer<T>> Sorters { get; set; }
+        [Parameter] public List<CustomRowComparer<T>> Sorters { get; set; }
         [Parameter] public string GridTemplateColumns { get; set; }
         [Parameter] public List<Func<T, RenderFragment>> Renderers { get; set; }
         [Parameter] public EventCallback<T> OnRowClick { get; set; }
@@ -38,7 +38,6 @@ namespace Elemental.Components
             {
                 return new List<T>();
             }
-
             if (_sorting.sortAscending)
             {
                 // if Sorter Parameters exist, use sorter functions, else use Accessors TableComparer

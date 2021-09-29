@@ -95,14 +95,14 @@
     protected override RenderFragment DefaultHeader(string header, int index)
     {
         return
-    @<AeTypography class="table-cell" @onclick="() => SortTable(index)">
+    @<AeTypography class="table-cell" @onclick="() => SortAndRecalculatePageItems(index)">
         @header
         <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
     </AeTypography>
     ;
     }
 
-    private void SortTable(int index)
+    private void SortAndRecalculatePageItems(int index)
     {
         ToggleSortOnColumn(index);
         LoadPageItems(true);
