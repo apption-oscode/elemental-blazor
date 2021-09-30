@@ -84,6 +84,11 @@
         LoadPageItems();
     }
 
+    /*
+        Because the PageCount is a calculated property, it only exists on the interface 
+        this means that PageCount is visible to external objects, but not internally 
+        to get around this, we can cast *this* to IPageableComponent, then access PageCount
+    */
     protected override async Task OnParametersSetAsync()
     {
         Total = Rows.Count();
