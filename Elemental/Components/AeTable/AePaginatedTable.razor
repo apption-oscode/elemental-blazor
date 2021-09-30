@@ -57,9 +57,6 @@
     [Parameter] public int PageSize { get; set; } = 5;
     [Parameter] public int Page { get; set; } = 0;
 
-    public int Total { get; set; }
-    //public int PageCount { get;}
-
     private List<T> PageItems;
     private int? currentPage;
 
@@ -67,6 +64,8 @@
     {
         return PageItems[index];
     }
+
+    public int Total { get; set; }
 
     private void LoadPageItems(bool forceLoad = false)
     {
