@@ -57,6 +57,9 @@
     [Parameter] public int PageSize { get; set; } = 5;
     [Parameter] public int Page { get; set; } = 0;
 
+    public int Total { get; set; }
+    //public int PageCount { get;}
+
     private List<T> PageItems;
     private int? currentPage;
 
@@ -64,8 +67,6 @@
     {
         return PageItems[index];
     }
-
-    public int Total { get; set; }
 
     private void LoadPageItems(bool forceLoad = false)
     {
@@ -109,9 +110,15 @@
 
     private void CheckOutOfBounds()
     {
-        int PageCount = (int)Math.Ceiling(Total / (decimal)Math.Max(1, PageSize));
-        if (Page > PageCount - 1) Page = PageCount - 1;
-        else if (Page < 0) Page = 0;
+        int PageCount = ((IPageableComponent)this).PageCount - 1;
+        if (Page > PageCount)
+        {
+            Page = PageCount;
+        }  
+        else if (Page < 0)
+        {
+            Page = 0;
+        }
     }
 
 }
