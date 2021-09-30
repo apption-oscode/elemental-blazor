@@ -65,7 +65,6 @@ namespace Elemental.Components
 
         protected virtual void ToggleSortOnColumn(int column)
         {
-            Console.WriteLine("ToggleSortOnColumn");
             if (column == _sorting.column)
             {
                 _sorting.sortAscending = !_sorting.sortAscending;
@@ -106,7 +105,9 @@ namespace Elemental.Components
             builder.Length--;
             builder.Append(Environment.NewLine);
 
-            foreach (var row in Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data)))
+            foreach (var row in (Sorters != null && Sorters[_sorting.column] != null) ?
+                    Dataset.OrderByDescending(data => data, Sorters[_sorting.column]) :
+                    Dataset.OrderByDescending(data => Accessors[_sorting.column].Invoke(data)))
             {
 
                 foreach (var (accessor, index) in Accessors.Select((a, i) => (a, i)))

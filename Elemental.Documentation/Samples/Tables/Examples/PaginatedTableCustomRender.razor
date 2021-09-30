@@ -9,7 +9,8 @@
 	Description: Paginated table element with sorting and pagination
 *@
 
-
+<AeButton class="debug button" @onclick="() => {if (dataset.Count > 0) dataset.RemoveAt(0);}">Remove Element</AeButton>
+<AeButton class="debug button" @onclick='() => dataset.Add(new DummyData { Category = "a", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" })'>Add Element</AeButton>
 <AePaginatedTableMerged Accessors="accessorFunctions"
 	Sorters="sorterFunctions"
 	Dataset="dataset"
@@ -27,7 +28,6 @@
 <AeTypography>Element Selected: @_selected</AeTypography>
 
 @code {
-
 	private int _lastClicked = 0;
 	private DummyData? _selected;
 
@@ -85,7 +85,7 @@
 	private List<DummyData> GetDummyData()
 	{
 		var data = new List<DummyData>();
-		for (int i = 0; i < 187; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			data.Add(new DummyData { Category = "Hashtag", CategoryIconClass = "fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
 		}
