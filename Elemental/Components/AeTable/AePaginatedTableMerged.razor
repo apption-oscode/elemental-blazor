@@ -4,6 +4,12 @@
 @inherits AePaginatedTable<T>
 @implements IPageableComponent
 
+@if (Dataset is null)
+{
+	<AeSpinner />
+}
+else
+{
 <AePaginatedTable 
 	Accessors="Accessors"
 	Sorters="Sorters"
@@ -26,6 +32,7 @@
 		@RightIcon
 	</RightIcon>
 </AePagination> 
+}
 
 @code {
 	[Parameter] public EventCallback<int> OnPageClick { get; set; }
