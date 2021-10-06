@@ -25,10 +25,14 @@
 	<RightIcon>
 		@RightIcon
 	</RightIcon>
+	<MoreIcon>
+		@MoreIcon
+	</MoreIcon>
 </AePagination> 
 
 @code {
 	[Parameter] public EventCallback<int> OnPageClick { get; set; }
 	[Parameter] public RenderFragment LeftIcon { get; set; }
 	[Parameter] public RenderFragment RightIcon { get; set; }
+	[Parameter] public RenderFragment MoreIcon { get; set; }
 }
