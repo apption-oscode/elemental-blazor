@@ -1,0 +1,34 @@
+﻿
+@namespace Elemental.Components
+@typeparam T
+@inherits AePaginatedTable<T>
+@implements IPageableComponent
+
+<AePaginatedTable 
+	Accessors="Accessors"
+	Sorters="Sorters"
+	Dataset="Dataset"
+	T=T
+	Headers="Headers"
+	Page="Page"
+	Renderers="Renderers"
+	OnRowClick="OnRowClick"
+	GridTemplateColumns="@GridTemplateColumns"
+	OnRowFocus="OnRowFocus"
+	CustomHeader="CustomHeader">
+</AePaginatedTable> 
+
+<AePagination Pageable="@this" OnPageClick="OnPageClick">
+	<LeftIcon>
+		@LeftIcon
+	</LeftIcon>
+	<RightIcon>
+		@RightIcon
+	</RightIcon>
+</AePagination> 
+
+@code {
+	[Parameter] public EventCallback<int> OnPageClick { get; set; }
+	[Parameter] public RenderFragment LeftIcon { get; set; }
+	[Parameter] public RenderFragment RightIcon { get; set; }
+}

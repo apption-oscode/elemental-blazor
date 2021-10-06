@@ -9,31 +9,26 @@
 	Description: Paginated table element with sorting and pagination
 *@
 
-<AePaginatedTable Accessors="accessorFunctions"
-				  Dataset="dataset"
-				  T=DummyData
-				  Headers="headers"
-				  @ref="_myTable"
-				  Page="@_lastClicked"
-				  Renderers="renderFunctions"
-				  OnRowClick="@RowSelected" />
-
-<AePagination Pageable="@_myTable" OnPageClick="OnPageClick" >
-	<LeftIcon>
-		<i class='fad fa-chevron-double-left'></i>
-	</LeftIcon>
-	<RightIcon>
-		<i class='fad fa-chevron-double-right'></i>
-	</RightIcon>
-</AePagination> 
+<AeButton class="debug button" @onclick="() => {if (dataset.Count > 0) dataset.RemoveAt(0);}">Remove Element</AeButton>
+<AeButton class="debug button" @onclick='() => dataset.Add(new DummyData { Category = "a", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" })'>Add Element</AeButton>
+<AePaginatedTableMerged Accessors="accessorFunctions"
+	Sorters="sorterFunctions"
+	Dataset="dataset"
+	T=DummyData
+	Headers="headers"
+	Page="@_lastClicked"
+	Renderers="renderFunctions"
+	OnRowClick="@RowSelected" 
+	OnPageClick="OnPageClick">
+	<LeftIcon><i class='fad fa-chevron-double-left'></i></LeftIcon>
+	<RightIcon><i class='fad fa-chevron-double-right'></i></RightIcon>
+</AePaginatedTableMerged>
 
 <AeTypography>Last clicked page index: @_lastClicked</AeTypography>
 <AeTypography>Element Selected: @_selected</AeTypography>
 
 @code {
-
 	private int _lastClicked = 0;
-	private AePaginatedTable<DummyData> _myTable;
 	private DummyData? _selected;
 
 	private List<Func<DummyData, RenderFragment>> renderFunctions;
@@ -90,10 +85,14 @@
 	private List<DummyData> GetDummyData()
 	{
 		var data = new List<DummyData>();
-		for (int i = 0; i < 187; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			data.Add(new DummyData { Category = "Hashtag", CategoryIconClass = "fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
 		}
+		data.Add(new DummyData { Category = "a", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
+		data.Add(new DummyData { Category = "b", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
+		data.Add(new DummyData { Category = "c", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
+		data.Add(new DummyData { Category = "d", CategoryIconClass = "a", Importance = 0, Location = "a", Type = "a" });
 		return data;
 	}
 
@@ -105,6 +104,18 @@
 		dummyData => { return dummyData.Location; },
 		dummyData => { return dummyData.Importance.ToString(); },
 		dummyData => { return dummyData.CategoryIconClass; },
+		null
+	};
+
+	// Comparer functions to sort the table data, if null default to string comparisons
+	// define how objects will be compared here 
+	private List<CustomRowComparer<DummyData>> sorterFunctions = new List<CustomRowComparer<DummyData>>
+	{
+		null,
+		null,
+		null,
+		new CustomRowComparer<DummyData>((x, y) => x.Importance.CompareTo(y.Importance)),
+		null,
 		null
 	};
 

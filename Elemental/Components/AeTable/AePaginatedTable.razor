@@ -84,21 +84,32 @@
         LoadPageItems();
     }
 
+    /*
+        Because the PageCount is a calculated property, it only exists on the interface 
+        this means that PageCount is visible to external objects, but not internally 
+        to get around this, we can cast *this* to IPageableComponent, then access PageCount
+    */
     protected override async Task OnParametersSetAsync()
     {
         Total = Rows.Count();
-        int PageCount = (int)Math.Ceiling(Total / (decimal)Math.Max(1, PageSize));
-        Page = (Page > PageCount - 1) ? PageCount - 1 : Page;
+        Page = Math.Max(0, Math.Min(Page, ((IPageableComponent)this).PageCount - 1));
         LoadPageItems(true);
     }
 
     protected override RenderFragment DefaultHeader(string header, int index)
     {
         return
-                @<AeTypography class="table-cell" @onclick="() => ToggleSortOnColumn(index)">
-                    @header
-                    <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
-               </AeTypography>;
+    @<AeTypography class="table-cell" @onclick="() => SortAndRecalculatePageItems(index)">
+        @header
+        <span class="ae table-sort"><i class="@GetSortIconClass(index)"></i></span>
+    </AeTypography>
+    ;
+    }
+
+    private void SortAndRecalculatePageItems(int index)
+    {
+        ToggleSortOnColumn(index);
+        LoadPageItems(true);
     }
 
 }
