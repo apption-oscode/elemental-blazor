@@ -19,9 +19,13 @@
 	Page="@_lastClicked"
 	Renderers="renderFunctions"
 	OnRowClick="@RowSelected" 
-	OnPageClick="OnPageClick">
-	<LeftIcon><i class='fad fa-chevron-double-left'></i></LeftIcon>
-	<RightIcon><i class='fad fa-chevron-double-right'></i></RightIcon>
+	OnPageClick="OnPageClick"
+>
+
+		<LeftIcon><i class='fad fa-chevron-double-left'></i></LeftIcon>
+		<RightIcon><i class='fad fa-chevron-double-right'></i></RightIcon>
+		<MoreIcon><i class="fad fa-ellipsis-h-alt"></i></MoreIcon>
+
 </AePaginatedTableMerged>
 
 <AeTypography>Last clicked page index: @_lastClicked</AeTypography>
