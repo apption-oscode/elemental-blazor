@@ -36,7 +36,16 @@
 					@onclick="@(async () => PageClicked(localIndex, nuzzled))">
 						@if (nuzzled)
 						{
-							<AeIcon Icon="more" />
+							@if(MoreIcon is null)
+							{
+								<AeIcon Icon="more" />
+							}
+							else
+							{
+							<span class="ae more icon">
+								@MoreIcon
+							</span>
+							}
 						}
 						else
 						{
@@ -84,6 +93,8 @@
 
 	[Parameter] public RenderFragment LeftIcon { get; set; }
 	[Parameter] public RenderFragment RightIcon { get; set; }
+
+	[Parameter] public RenderFragment MoreIcon { get; set; }
 	
 
 	private int _numberOfButtonsOnSide = 2;
