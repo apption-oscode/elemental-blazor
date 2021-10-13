@@ -4,6 +4,20 @@
 @inherits AePaginatedTable<T>
 @implements IPageableComponent
 
+<!--
+	When passing an Action from one Component to another component if the value is null the code throws the following exception: 
+	System.ArgumentException: 'Delegate to an instance method cannot have null 'this'.'
+	This is caused by the generated code, because it tries to create an instance of the Action delegate 
+	instead of just passing the value along as it is.
+	Source: https://github.com/dotnet/aspnetcore/issues/23892
+
+	To fix this, we must make sure the CustomHeader we pass to AePaginatedTable is not null.
+-->
+@if (CustomHeader is null)
+{
+	CustomHeader = DefaultHeader;
+}
+
 <AePaginatedTable 
 	Accessors="Accessors"
 	Sorters="Sorters"
@@ -13,10 +27,10 @@
 	Page="Page"
 	Renderers="Renderers"
 	OnRowClick="OnRowClick"
-	GridTemplateColumns="@GridTemplateColumns"
 	OnRowFocus="OnRowFocus"
-	CustomHeader="CustomHeader">
-</AePaginatedTable> 
+	GridTemplateColumns="@GridTemplateColumns"
+	CustomHeader="CustomHeader"
+/>
 
 <AePagination Pageable="@this" OnPageClick="OnPageClick">
 	<LeftIcon>
