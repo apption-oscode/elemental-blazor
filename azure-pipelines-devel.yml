@@ -13,8 +13,7 @@ jobs:
     clean: all
     
   variables:
-#    NetCoreVersion: '6.0.x'
-    NetCoreVersion: '6.0.100-preview.6.21355.2'
+    NetCoreVersion: '5.0.x'
     MSBuildEnableWorkloadResolver: 'false'
 
   steps:
@@ -28,8 +27,10 @@ jobs:
   - task: UseDotNet@2
     displayName: 'Use .NET Core sdk $(NetCoreVersion)'
     inputs:
-      version: '$(NetCoreVersion)'
-      includePreviewVersions: true
+      packageType: 'sdk'
+      useGlobalJson: true
+#      version: '$(NetCoreVersion)'
+#      includePreviewVersions: true
 
   - task: NodeTool@0
     displayName: 'install node'
@@ -39,6 +40,12 @@ jobs:
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
+    inputs:
+      arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+      
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    condition: failed()    
     inputs:
       arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
 

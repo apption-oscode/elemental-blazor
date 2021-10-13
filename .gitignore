@@ -340,6 +340,3 @@ ASALocalRun/
 healthchecksdb
 .vscode/tasks.json
 
-
-# Temp
-global.json
