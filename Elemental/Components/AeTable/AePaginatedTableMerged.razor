@@ -13,12 +13,13 @@
 
 	To fix this, we must make sure the CustomHeader we pass to AePaginatedTable is not null.
 -->
-@if (CustomHeader is null)
+@if (CustomHeader != null)
 {
-	CustomHeader = DefaultHeader;
+	_myTable.CustomHeader = CustomHeader;
 }
 
 <AePaginatedTable 
+	@ref="_myTable"
 	Accessors="Accessors"
 	Sorters="Sorters"
 	Dataset="Dataset"
@@ -29,10 +30,9 @@
 	OnRowClick="OnRowClick"
 	OnRowFocus="OnRowFocus"
 	GridTemplateColumns="@GridTemplateColumns"
-	CustomHeader="CustomHeader"
 />
 
-<AePagination Pageable="@this" OnPageClick="OnPageClick">
+<AePagination Pageable="@_myTable" OnPageClick="OnPageClick">
 	<LeftIcon>
 		@LeftIcon
 	</LeftIcon>
@@ -45,6 +45,8 @@
 </AePagination> 
 
 @code {
+	private AePaginatedTable<T> _myTable;
+
 	[Parameter] public EventCallback<int> OnPageClick { get; set; }
 	[Parameter] public RenderFragment LeftIcon { get; set; }
 	[Parameter] public RenderFragment RightIcon { get; set; }

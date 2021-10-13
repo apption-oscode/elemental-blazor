@@ -57,6 +57,8 @@
     [Parameter] public int PageSize { get; set; } = 5;
     [Parameter] public int Page { get; set; } = 0;
 
+    [Parameter] public AePagination Paginator { get; set; }
+
     private List<T> PageItems;
     private int? currentPage;
 
@@ -107,8 +109,10 @@
 
     private void SortAndRecalculatePageItems(int index)
     {
+        if (Paginator != null){
+            Paginator.OnPageClick.InvokeAsync(0).Wait();
+        }
         ToggleSortOnColumn(index);
         LoadPageItems(true);
     }
-
 }
