@@ -4,7 +4,8 @@
 @using System.ComponentModel.DataAnnotations
 @using System.Reflection
 @using Microsoft.AspNetCore.Components.Forms
-
+@using Microsoft.Extensions.Logging
+@inject ILogger<AeDropdownPropertyInput<T>> logger
 <AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false" />
 
 @if (ValidDisplayValues != null)
@@ -57,9 +58,13 @@ else
         //var firstValue = (ModelFormContext.GetDisplayValue(PropertyInfo,PropertyValue) is null) ? getValidValues()?.FirstOrDefault() : PropertyValue;
         if (firstRender && AeModelFormTools.IsRequired(PropertyInfo))
         {
-            InputSelectIndex = ActualValues.IndexOf(PropertyInfo.GetValue(Instance));
+            var currentValue = PropertyInfo.GetValue(Instance);
+            InputSelectIndex = ActualValues.IndexOf(currentValue);
             if (InputSelectIndex == -1)
-                InputSelectIndex = AeModelFormTools.IsRequired(PropertyInfo)?0:NO_VALUE;    
+            {
+                logger.LogWarning($"AeModelForm error - Property:{PropertyInfo.Name} - cannot locate value {currentValue} in dropdown values provided (list size={ActualValues.Count}) - resetting value");
+                InputSelectIndex = AeModelFormTools.IsRequired(PropertyInfo) ? 0 : NO_VALUE;
+            }
         }
     }
 

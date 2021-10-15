@@ -140,11 +140,12 @@ namespace Elemental.Components
 
         public string? GetDisplayValue(PropertyInfo propertyInfo, object item)
         {
+            var currentValue = propertyInfo.GetValue(item);
             if (optionProperties.TryGetValue(propertyInfo, out var accessors))
             {
-                return accessors.Label.DynamicInvoke(item) as string;
+                return accessors.Label.DynamicInvoke(currentValue) as string;
             }
-            return propertyInfo.GetValue(item)?.ToString();
+            return currentValue?.ToString();
 
         }
 

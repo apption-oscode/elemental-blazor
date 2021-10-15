@@ -17,12 +17,13 @@
     Description: This sample uses Category annotations to group and order the different form elements into categories
 *@
 
-<AeFlex><AeCheckbox @bind-IsChecked="submitEnabled"/> Enable Form</AeFlex>
-
+<AeFlex><AeCheckbox @bind-IsChecked="submitEnabled"/>Enable Form</AeFlex>
+<AeButton OnClickEvent="LoadShip2">Load Starship2</AeButton>
 <AeModelForm T="InteractiveStarship"
              Model="@_starship"
              SubmitLabel="Save changes"
              OnValidSubmit="HandleValidSubmit"
+             IsReadOnly="!submitEnabled"
              CancelLabel="Cancel"    
              IsSubmitEnabled="submitEnabled"
              OnConfigure="OnConfigure"
@@ -44,7 +45,17 @@
     {
         _starship = await CreateStarship();
         _starship.Classification = "c";
+        _starship.SubClassification = "c2";
         _starship.Description = "This is a description of my starship. It has 4 engines and can go from 0 to light speed in 3 seconds. It has an automatic sheild deploy, free wifi and a vending machine. It sleeps 10 crew, but if you are optimistic, you can get 12 in there. When it comes to food, there is a garden wing, where we grow spinach, carrots, lettuce, tomatoes, potatoes and other such vegatables. Sadly, all the meat has to be synthetic since we quite willingly destroyed our home planet and have chosen to not be cannibals.";
+    }
+
+    private async Task LoadShip2()
+    {
+        _starship = await CreateStarship();
+        _starship.Classification = "b";
+        _starship.SubClassification = "b3";
+        _starship.Description = "This is a Sharship2. It has 4 engines and can go from 0 to light speed in 3 seconds. It has an automatic sheild deploy, free wifi and a vending machine. It sleeps 10 crew, but if you are optimistic, you can get 12 in there. When it comes to food, there is a garden wing, where we grow spinach, carrots, lettuce, tomatoes, potatoes and other such vegatables. Sadly, all the meat has to be synthetic since we quite willingly destroyed our home planet and have chosen to not be cannibals.";
+        
     }
 
     private async Task OnConfigure(IModelFormContext context)
