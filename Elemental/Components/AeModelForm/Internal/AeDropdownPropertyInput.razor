@@ -62,7 +62,7 @@ else
             InputSelectIndex = ActualValues.IndexOf(currentValue);
             if (InputSelectIndex == -1)
             {
-                logger.LogWarning($"AeModelForm error - Property:{PropertyInfo.Name} - cannot locate value {currentValue} in dropdown values provided (list size={ActualValues.Count}) - resetting value");
+                logger.LogWarning($"AeModelForm - Property:{PropertyInfo.Name} - cannot locate value '{currentValue}' in dropdown values provided (list size={ActualValues.Count}) - selecting default");
                 InputSelectIndex = AeModelFormTools.IsRequired(PropertyInfo) ? 0 : NO_VALUE;
             }
         }
@@ -80,9 +80,13 @@ else
         var optValues = ModelFormContext.GetOptionValuesForProperty(PropertyInfo);
         ValidDisplayValues = optValues.labels;
         ActualValues = optValues.values;
-        InputSelectIndex = ActualValues.IndexOf(PropertyInfo.GetValue(Instance));
-        if (InputSelectIndex == -1)
-            InputSelectIndex = AeModelFormTools.IsRequired(PropertyInfo)?0:NO_VALUE;        
+        var idx = ActualValues.IndexOf(PropertyInfo.GetValue(Instance));
+        if (idx == -1)
+            idx = AeModelFormTools.IsRequired(PropertyInfo)?0:NO_VALUE;
+        // make sure idx is in bounds
+        if ((idx == -1 && AeModelFormTools.IsRequired(PropertyInfo)) || idx > (ActualValues.Count - 1))
+            throw new InvalidOperationException($"Request index for {PropertyInfo.Name} is {idx} but list has {ActualValues.Count} values");
+        InputSelectIndex = idx;
     }
 
     /// <summary>
