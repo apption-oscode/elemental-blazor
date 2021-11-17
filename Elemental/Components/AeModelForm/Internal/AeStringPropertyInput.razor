@@ -22,11 +22,11 @@ else
 {
 @if (HasStringLength() is null)
 {
-    <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" cols="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
+    <Microsoft.AspNetCore.Components.Forms.InputTextArea @bind-Value="PropertyValue" class="ae input" placeholder="@localize(AeModelFormTools.GetPlaceHolder(PropertyInfo))" cols="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
 }
 else
 {
-    <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" type="@TextFieldType" class="ae input" placeholder="@AeModelFormTools.GetPlaceHolder(PropertyInfo)" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
+    <Microsoft.AspNetCore.Components.Forms.InputText @bind-Value="PropertyValue" type="@TextFieldType" class="ae input" placeholder="@localize(AeModelFormTools.GetPlaceHolder(PropertyInfo))" size="@AeModelFormTools.GetSize(PropertyInfo)" DisplayName="@GetLabel()" />
 }
 <div class="errortext">
     <Microsoft.AspNetCore.Components.Forms.ValidationMessage For="@(AeModelFormTools.GetExpression<string>(Instance, PropertyInfo))" />
@@ -48,6 +48,15 @@ else
 
     [CascadingParameter(Name = "Notifier")]
     public Func<ModelFormArgsInternal, Task> Notifier { get; set; }
+
+    
+    [CascadingParameter(Name = "LocalizerFunction")]
+    public Func<string, string?> LocalizerFunction { get; set; } = null;
+
+    private string localize(string input)
+    {
+        return LocalizerFunction is null ? input : (LocalizerFunction(input)?? input);
+    }
 
     private string? TextFieldType { get
         {
