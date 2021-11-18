@@ -109,12 +109,21 @@
 	private string _pageLeftClass => $"ae page page-left {(Pageable.Page == 0 ? "disabled" : "")}";
 	private string _pageRightClass => $"ae page page-right {(Pageable.Page == Pageable.PageCount - 1 ? "disabled" : "")}";
 
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Pageable.Paginator = this;
+        }
+    }
+
 	private string GetPageClass(int localIndex, bool nuzzled)
 	{
 		var active = localIndex == Pageable.Page ? "active" : "";
 		var disabled = nuzzled ? "disabled" : "";
 		return $"ae page {active} {disabled}";
 	}
+
 	private async Task PageClicked(int targetIndex, bool nuzzled = false)
 	{
 		if (nuzzled || targetIndex < 0 || targetIndex >= Pageable.PageCount || targetIndex == Pageable.Page)
