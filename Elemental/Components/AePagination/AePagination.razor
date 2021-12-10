@@ -111,7 +111,7 @@
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (firstRender && Pageable != null)
         {
             Pageable.Paginator = this;
         }
