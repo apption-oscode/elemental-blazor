@@ -64,7 +64,9 @@
                                                             <div class="ae modelform-row @RowColor">
                             @foreach (var prop in props)
                             {
-                                                                                <div class="ae modelform-col">
+                                var isBool = GetNonNullableType(prop) == typeof(bool);
+                                var colClass = $"ae modelform-col {(isBool ? "checkbox-on-the-left" : "")}";
+                                                                                <div class=@colClass>
                                                                                     <CascadingValue Value="@OnChange" Name="OnChangeCallback">
                                                                                         <CascadingValue Value="@LocalizerFunction" Name="LocalizerFunction">
                                                                                         <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
@@ -131,7 +133,7 @@
                                                                             <AeNumberPropertyInput T=Decimal? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
                                                 }
                                                 @if (GetNonNullableType(prop) == typeof(bool))
-                                                {
+                                                {                                                    
                                                                             <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
                                                 }
                                                 @if (GetNonNullableType(prop) == typeof(DateTime))
