@@ -42,6 +42,7 @@ namespace Elemental.Components
     {
         private Dictionary<PropertyInfo, (Delegate Label, Delegate Choices, Delegate onChange)> optionProperties = new Dictionary<PropertyInfo, (Delegate, Delegate, Delegate)>();
         private Dictionary<PropertyInfo, (AeDropdownPropertyInput<T> component, Action updateOptions)> optionPropertyComponent = new Dictionary<PropertyInfo, (AeDropdownPropertyInput<T>, Action)>();
+        private Dictionary<PropertyInfo, string> fieldNotes = new Dictionary<PropertyInfo, string>();
         public Func<Task> RefreshModel { get; set; }
         public List<PropertyInfo> Properties { get; private set; }
 
@@ -50,6 +51,25 @@ namespace Elemental.Components
                     visibleProperties:elem.properties.Select(l => l.Where(l => IsVisible(l)).ToList()).ToList()))
                     .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
 
+
+
+        public string GetFieldNote(PropertyInfo propertyInfo)
+        {
+            if (fieldNotes.ContainsKey(propertyInfo))
+            { 
+                return fieldNotes[propertyInfo];
+            }
+            return string.Empty;
+        }
+        public void RegisterFieldNotes<P>(Expression<Func<P, string>> propertyPath, string notes)
+        {
+            var propertyInfo = GetPropertyInfo(propertyPath);
+            if (fieldNotes.ContainsKey(propertyInfo))
+            {
+                fieldNotes.Remove(propertyInfo);
+            }
+            fieldNotes.Add(propertyInfo, notes);
+        }
         public void RegisterOptionValueProperty(PropertyInfo property, Func<IEnumerable<string>> choices, Action<string> onChange = null)
         {
             RegisterOptionValueProperty(property, e => e, choices, onChange);

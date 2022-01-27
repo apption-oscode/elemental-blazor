@@ -1716,6 +1716,10 @@ body {
   margin-right: 0.5rem;
   font-weight: bold;
 }
+.ae.modelform .ae.modelform-rows .ae.modelform-row .ae.modelform-col .ae.ae-form-control-label.notes {
+  font-weight: normal;
+  font-style: italic;
+}
 .ae.modelform .ae.modelform-rows .ae.modelform-row .ae.modelform-col .ae.ae-form-control-label.ae-label-required > :first-child::after {
   color: #e53e3e;
   content: " * ";
@@ -2927,7 +2931,7 @@ body {
 }
 
 code {
-  background-color: #edf2f7;
+  background-color: #e2e8f0;
 }
 
 /*# sourceMappingURL=elemental.css.map */

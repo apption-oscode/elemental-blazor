@@ -14,14 +14,15 @@
     limitations under the License.
 
     Title: Model Form with Top Labels
-    Description: Using the LabelsOnTop property, labels will show on top rather than to the left of their corresponding elements.
+    Description: Using the LabelsOnTop property, labels will show on top rather than to the left of their corresponding elements. Also, use RegisterFieldNotes to register additional notes for fields.
 *@
 
 <AeModelForm 
     Model="@_starship" 
     SubmitLabel="Save changes" 
     OnValidSubmit="HandleValidSubmit" 
-    CancelLabel="Cancel" 
+    CancelLabel="Cancel"
+    OnConfigure="OnConfigure"
     OnCancel="CreateStarship"
     LabelsOnTop />
 
@@ -39,6 +40,11 @@
     protected override async Task OnInitializedAsync()
     {
         _starship = await CreateStarship();
+    }
+
+    private async Task OnConfigure(IModelFormContext context)
+    {
+        context.RegisterFieldNotes<Starship>(s => s.Classification, "This is classification information");       
     }
 
     private void HandleValidSubmit()
