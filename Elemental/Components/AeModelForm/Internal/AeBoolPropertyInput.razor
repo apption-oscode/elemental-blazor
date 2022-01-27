@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 
     
-        <AeFormLabel PropertyInfo="@PropertyInfo"/>
+        <AeFormLabel PropertyInfo="@PropertyInfo" Instance="@Instance" />
         <Microsoft.AspNetCore.Components.Forms.InputCheckbox class="ae input" @bind-Value="PropertyValue" DisplayName="GetLabel()"/>
     <div class="errortext">
 @if (AeModelFormTools.IsNullable(PropertyInfo))

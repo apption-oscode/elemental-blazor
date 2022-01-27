@@ -1,10 +1,18 @@
 ﻿@namespace Elemental.Components
+@typeparam T
 
 @if (!string.IsNullOrWhiteSpace(@GetLabel()))
 {
     <label class="ae ae-form-control-label @RequiredClass" for="@GetID()">
         <AeTypography>@GetLabel()</AeTypography>
     </label>
+
+    @if (!string.IsNullOrEmpty(@GetFieldNotes()))
+    {
+        <label class="ae ae-form-control-label notes">
+            <AeTypography>@GetFieldNotes()</AeTypography>
+        </label>        
+    }
 }
 else
 {
@@ -15,6 +23,8 @@ else
     [Parameter]
     public System.Reflection.PropertyInfo PropertyInfo { get; set; }
 
+    [Parameter]
+    public T Instance { get; set; }
     /// <summary>
     /// There are two major layout options. Standard has line based with label / field and compact has a tabular layout with CSS flex.
     /// </summary>
@@ -33,9 +43,24 @@ else
         return AeModelFormTools.GetLabel(PropertyInfo, LabelForPropertyFunc, false);
     }
 
+    private string GetFieldNotes()
+    {
+        if (ModelFormContext != null && LabelsOnTop && !string.IsNullOrEmpty(ModelFormContext.GetFieldNote(PropertyInfo)))
+        {
+            return ModelFormContext.GetFieldNote(PropertyInfo);
+        }
+        return string.Empty;
+
+    }
     /// <summary>
     /// Text that will be displayed for the Cancel button. Will be null and hidden by default.
     /// </summary>
     [CascadingParameter(Name= "LabelForPropertyFunc")]
     public Func<string,string> LabelForPropertyFunc { get; set; } = null;
+
+    [CascadingParameter(Name = "ModelFormContext")]
+    public ModelFormContext<T> ModelFormContext { get; set; } = null;
+
+    [CascadingParameter(Name = "LabelsOnTop")]
+    public bool LabelsOnTop { get; set; } = false;
 }

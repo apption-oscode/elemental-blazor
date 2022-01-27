@@ -43,6 +43,10 @@
                         <div class="ae modelform-rows @_rowsClass">
                 @foreach (var category in ModelFormContext.GetCategories())
                 {
+                    // new cascading parameter if section lost
+                    // dictionary , if value exists, returen value, or use propert IsEditable as default
+                    // will need two, do the section one first .
+
                     @if (!string.IsNullOrWhiteSpace(category.category))
                     {
                         string id = "";
@@ -72,14 +76,11 @@
                                                                                         <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
                                                                                             <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
                                                                                                 <CascadingValue Value="@NotifyArg" Name="Notifier">
+                                                                                                    <CascadingValue Value="@LabelsOnTop" Name="LabelsOnTop">
                                                         @if (IsReadOnly)
                                         {
                                                       <AePropertyValueDisplay PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
-                                        }
-                                        else if (!prop.IsEditable())
-                                        {
-                                                      <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" Editable="false" />
-                                        }
+                                        }                                        
                                         else
                                         {
                                             if (ModelFormContext.IsDropDown(prop))
@@ -90,7 +91,7 @@
                                             {
                                                 if (GetNonNullableType(prop) == typeof(string))
                                                 {
-                                                                            <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
+                                                                            <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" Editable="prop.IsEditable()" />
                                                 }
                                                 if (prop.PropertyType == typeof(int))
                                                 {
@@ -142,6 +143,7 @@
                                                 }
                                             }
                                         }
+                                         </CascadingValue>
                                                 </CascadingValue>
                                             </CascadingValue>
                                         </CascadingValue>

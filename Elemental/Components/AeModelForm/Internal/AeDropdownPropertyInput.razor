@@ -6,7 +6,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Logging
 @inject ILogger<AeDropdownPropertyInput<T>> logger
-<AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false" />
+<AeFormLabel PropertyInfo="@PropertyInfo" ShowOptional="false" Instance="@Instance" />
 
 @if (ValidDisplayValues != null)
 {

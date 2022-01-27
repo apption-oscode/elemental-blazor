@@ -24,5 +24,8 @@ namespace Elemental.Components
         void RegisterOptionValueProperty(PropertyInfo property, Func<IEnumerable<string>> choices, Action<string> onChange = null);
 
         void RegisterOptionValueProperty<P1, P2>(Expression<Func<P1, P2>> propertyPath, Func<P2, string> label, Func<IEnumerable<P2>> choices, Action<P2> onChange = null);
+
+        void RegisterFieldNotes<P>(Expression<Func<P, string>> propertyPath, string notes);
+        string GetFieldNote(PropertyInfo propertyInfo);
     }
 }
