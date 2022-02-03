@@ -38,6 +38,11 @@
             window.sidenav.toggleExpansion(false);
         }
 
+        if (firstRender && _window.width() < window.sidenav.sidenavExpandThreshold) {
+            //$('.toggle-expand').hide();
+            window.sidenav.toggleExpansion(true);
+        }
+
 
         if (!window.sidenav.stayCollapse) {
             _window.resize(() => {
@@ -83,7 +88,7 @@
         }
     },
 
-    updateNav: (collapse) =>
+    updateNav: (firstRender) =>
     {
         let href = window.location.pathname.substr(1);
         let splitHref = href.split('/');
@@ -103,41 +108,41 @@
 
             $(`[href="/${activeMainHref}"]`).addClass('active');
 
-            if (!collapse || $(window).width() > window.sidenav.sidenavExpandThreshold) {
-                subMenuGroup.addClass('expanded');
-                //if sub menu is empty, collapse
-                if ($('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length == 0) {
+            
+            subMenuGroup.addClass('expanded');
+            //if sub menu is empty, collapse
+            if ($('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length == 0) {
+                window.sidenav.toggleExpansion(true);
+            }
+            //if sub menu is not empty, expand
+            else if (!$('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length != 0 && !firstRender) {
+                window.sidenav.toggleExpansion(false);
+            }
+
+            if (splitHref.length > 1) {
+
+                let activeSubMenuHref = `${activeMainHref}/${splitHref[1]}`;
+                let activeSubMenuItem = subMenuGroup.children(`[href="/${activeSubMenuHref}"]`);
+
+                if (activeSubMenuItem.length == 0) {
                     window.sidenav.toggleExpansion(true);
                 }
-                //if sub menu is not empty, expand
-                else if (!$('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length != 0) {
-                    window.sidenav.toggleExpansion(false);
-                }
+                else {
+                    activeSubMenuItem.addClass('active');
 
-                if (splitHref.length > 1) {
-
-                    let activeSubMenuHref = `${activeMainHref}/${splitHref[1]}`;
-                    let activeSubMenuItem = subMenuGroup.children(`[href="/${activeSubMenuHref}"]`);
-
-                    if (activeSubMenuItem.length == 0) {
-                        window.sidenav.toggleExpansion(true);
-                    }
-                    else {
-                        activeSubMenuItem.addClass('active');
-
-                        let subSubMenuGroup = $(`[data-nav-href="/${activeSubMenuHref}"]`);
-                        subSubMenuGroup.addClass('expanded');
+                    let subSubMenuGroup = $(`[data-nav-href="/${activeSubMenuHref}"]`);
+                    subSubMenuGroup.addClass('expanded');
 
 
-                        if (splitHref.length > 2) {
+                    if (splitHref.length > 2) {
 
-                            let activeDatabaseHref = `${activeSubMenuHref}/${splitHref[2]}`;
-                            let activeDatabase = subSubMenuGroup.children(`[href="/${activeDatabaseHref}"]`);
-                            activeDatabase.addClass('active');
-                        }
+                        let activeDatabaseHref = `${activeSubMenuHref}/${splitHref[2]}`;
+                        let activeDatabase = subSubMenuGroup.children(`[href="/${activeDatabaseHref}"]`);
+                        activeDatabase.addClass('active');
                     }
                 }
             }
+            
             
         }
         
