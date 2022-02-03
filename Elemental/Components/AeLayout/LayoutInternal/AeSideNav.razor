@@ -89,21 +89,17 @@
             {
                 logger.LogCritical(ex, "Cannot initialize AElemental javascript - please validate aebundle.js configuration in _host.html");
             }
-            await UpdateSidenav(true);
         }
-        else 
-        {
-            await UpdateSidenav(false);
-        }
+        await UpdateSidenav();
         
 
     }
 
-    private async Task UpdateSidenav(bool firstRender)
+    private async Task UpdateSidenav()
     {
         try
         {
-            await JSRuntime.InvokeAsync<string>("sidenav.updateNav", firstRender);
+            await JSRuntime.InvokeAsync<string>("sidenav.updateNav");
         }
         catch (Exception ex)
         {

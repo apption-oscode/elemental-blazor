@@ -88,7 +88,7 @@
         }
     },
 
-    updateNav: (firstRender) =>
+    updateNav: () =>
     {
         let href = window.location.pathname.substr(1);
         let splitHref = href.split('/');
@@ -115,9 +115,9 @@
                 window.sidenav.toggleExpansion(true);
             }
             //if sub menu is not empty, expand
-            else if (!$('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length != 0 && !firstRender) {
-                window.sidenav.toggleExpansion(false);
-            }
+            //else if (!$('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length != 0 && !firstRender) {
+            //    window.sidenav.toggleExpansion(false);
+            //}
 
             if (splitHref.length > 1) {
 
