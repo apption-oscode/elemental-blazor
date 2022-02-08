@@ -165,7 +165,8 @@
                 }
                         </div>
                         <div class="ae flex  ">
-                            <button id="submit" disabled="@(!IsSubmitEnabled)" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" type="submit">@localize(SubmitLabel)</button>
+                            
+                            <button id="submit" disabled="@(!IsSubmitEnabled)" class=@_submitButtonClass style="margin-left: 4px; margin-bottom: 8px" type="submit">@localize(SubmitLabel)</button>
                 @if (!string.IsNullOrWhiteSpace(CancelLabel) && OnCancel != null)
                 {
                                             <button id="cancel" class="ae button dark" style="margin-left: 4px; margin-bottom: 8px" @onclick="ReloadForm">@localize(CancelLabel)</button>
@@ -179,8 +180,8 @@
 
 @code {
     private string _modelFormClass => $"ae modelform {_inputClass}";
-    private string _rowsClass => $"{(LabelsOnTop ? "top-label" : "left-label")} {(Flexbox ? "flexbox" : "")}";  
-
+    private string _rowsClass => $"{(LabelsOnTop ? "top-label" : "left-label")} {(Flexbox ? "flexbox" : "")}";
+    private string _submitButtonClass => IsSubmitEnabled ? $"ae button dark" : $"ae button disabled";
     private bool isConfigured = false;
 
     [Parameter]
