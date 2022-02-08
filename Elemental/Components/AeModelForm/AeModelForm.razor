@@ -43,26 +43,34 @@
                         <div class="ae modelform-rows @_rowsClass">
                 @foreach (var category in ModelFormContext.GetCategories())
                 {
-                    // new cascading parameter if section lost
-                    // dictionary , if value exists, returen value, or use propert IsEditable as default
-                    // will need two, do the section one first .
+                    var isCategoryLocked = ModelFormContext.IsCategoryLocked(category.category);
 
+                    <div style="display: flex; flex-direction: row">
                     @if (!string.IsNullOrWhiteSpace(category.category))
-                    {
-                        string id = "";
-                        @if (EnableOutline)
                         {
-                            id = category.category;
-                            if (!_Anchors.Any(a => a.Id == id))
+                            string id = "";
+                            @if (EnableOutline)
                             {
-                                _Anchors.Add((id, 
-            @<AeTypography Variant="a">@id</AeTypography>
-                                ));
-                            }
+                                id = category.category;
+                                if (!_Anchors.Any(a => a.Id == id))
+                                {
+                                    _Anchors.Add((id, 
+                                    @<AeTypography Variant="a">@id</AeTypography>
+                                    ));
+                                }
 
+                            }
+                            
+                            <AeFlex Vertical class="horizontal">
+                                <AeTypography Variant="h3" id="@id">@localize(category.category)
+                                @if (IsSectionLocksVisible)
+                                {                                       
+                                    <AeFlex><AeCheckbox IsChecked="isCategoryLocked" IsCheckedChanged="(async (isCheck) => await onCategoryLock(isCheck, category.category))" />  <AeTypography Variant="p" class="no-margin" >@localize("Lock Section") </AeTypography>  </AeFlex>                                        
+                                }
+                                </AeTypography>
+                            </AeFlex>
                         }
-                                                            <AeTypography Variant="h3" id="@id">@localize(category.category)</AeTypography>
-                    }
+                    </div>
                     @foreach (var props in category.properties)
                     {
                                                             <div class="ae modelform-row @RowColor">
@@ -70,14 +78,14 @@
                             {
                                 var isBool = GetNonNullableType(prop) == typeof(bool);
                                 var colClass = $"ae modelform-col {(isBool ? "checkbox-on-the-left" : "")}";
-                                                                                <div class=@colClass>
-                                                                                    <CascadingValue Value="@OnChange" Name="OnChangeCallback">
-                                                                                        <CascadingValue Value="@LocalizerFunction" Name="LocalizerFunction">
-                                                                                        <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
-                                                                                            <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
-                                                                                                <CascadingValue Value="@NotifyArg" Name="Notifier">
-                                                                                                    <CascadingValue Value="@LabelsOnTop" Name="LabelsOnTop">
-                                                        @if (IsReadOnly)
+                                <div class=@colClass>
+                                    <CascadingValue Value="@OnChange" Name="OnChangeCallback">
+                                        <CascadingValue Value="@LocalizerFunction" Name="LocalizerFunction">
+                                        <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
+                                            <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
+                                                <CascadingValue Value="@NotifyArg" Name="Notifier">
+                                                    <CascadingValue Value="@LabelsOnTop" Name="LabelsOnTop">
+                                                        @if (IsReadOnly || isCategoryLocked)
                                         {
                                                       <AePropertyValueDisplay PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
                                         }                                        
@@ -177,6 +185,8 @@
 
     [Parameter]
     public bool IsSubmitEnabled { get; set; } = true;
+    [Parameter]
+    public bool IsSectionLocksVisible { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -282,6 +292,8 @@
     /// </summary>
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; } = ModelFormStyle.Normal;
 
+    [Parameter] public EventCallback<string> OnCategoryLock { get; set; }
+
     public ModelFormContext<T> ModelFormContext { get; } = new ModelFormContext<T>();
 
     /// <summary>
@@ -313,6 +325,19 @@
     private Type GetNonNullableType(PropertyInfo prop)
     {
         return AeModelFormTools.GetNonNullableType(prop);
+    }
+
+    private async Task onCategoryLock(bool isLocked, string category)
+    {
+        if (!string.IsNullOrEmpty(category))
+        {
+            ModelFormContext.RegisterCategoryLocks(category, isLocked);
+            await OnConfigure.InvokeAsync(ModelFormContext);
+            await InvokeAsync(() =>
+            {
+                StateHasChanged();
+            });
+        }
     }
 
     private async Task onSubmit(EditContext editContext)
