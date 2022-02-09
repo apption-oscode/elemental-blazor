@@ -27,5 +27,10 @@ namespace Elemental.Components
 
         void RegisterFieldNotes<P>(Expression<Func<P, string>> propertyPath, string notes);
         string GetFieldNote(PropertyInfo propertyInfo);
+
+        bool IsCategoryLocked(string category);
+        void RegisterCategoryLocks(string category, bool isLocked);
+
+        List<string> GetLockedCategories { get;  }
     }
 }

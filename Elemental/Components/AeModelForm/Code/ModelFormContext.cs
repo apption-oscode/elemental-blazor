@@ -43,6 +43,7 @@ namespace Elemental.Components
         private Dictionary<PropertyInfo, (Delegate Label, Delegate Choices, Delegate onChange)> optionProperties = new Dictionary<PropertyInfo, (Delegate, Delegate, Delegate)>();
         private Dictionary<PropertyInfo, (AeDropdownPropertyInput<T> component, Action updateOptions)> optionPropertyComponent = new Dictionary<PropertyInfo, (AeDropdownPropertyInput<T>, Action)>();
         private Dictionary<PropertyInfo, string> fieldNotes = new Dictionary<PropertyInfo, string>();
+        private List<string> categoryLocks = new List<string>();
         public Func<Task> RefreshModel { get; set; }
         public List<PropertyInfo> Properties { get; private set; }
 
@@ -50,9 +51,24 @@ namespace Elemental.Components
             typeof(T).GetAeModelFormCategories().Select(elem => (elem.category,
                     visibleProperties:elem.properties.Select(l => l.Where(l => IsVisible(l)).ToList()).ToList()))
                     .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
+        
+        public List<string> GetLockedCategories => categoryLocks;
+        public bool IsCategoryLocked(string category)
+        {
+            return categoryLocks.Contains(category);
+        }
+        public void RegisterCategoryLocks(string category, bool isLocked)
+        {
+            if (isLocked && !categoryLocks.Contains(category))
+            { 
+                categoryLocks.Add(category);
+            }
 
-
-
+            if (!isLocked && categoryLocks.Contains(category))
+            { 
+                categoryLocks.Remove(category);
+            }
+        }
         public string GetFieldNote(PropertyInfo propertyInfo)
         {
             if (fieldNotes.ContainsKey(propertyInfo))
@@ -253,6 +269,6 @@ namespace Elemental.Components
                 propertyVisibility[property] = isVisible;
         }
 
-
+        
     }
 }
