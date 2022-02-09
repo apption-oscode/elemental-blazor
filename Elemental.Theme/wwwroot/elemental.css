@@ -1700,6 +1700,7 @@ body {
 
 .ae.modelform .validation-errors .validation-message {
   font-size: 0.9rem;
+  color: #e53e3e;
 }
 .ae.modelform .ae.modelform-rows .ae.modelform-row {
   grid-template-rows: auto;
