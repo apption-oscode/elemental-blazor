@@ -19,7 +19,7 @@
 @namespace Elemental.Components
 
 @inherits HtmlElement
-@inject ILogger<AeModelForm> Logger
+@inject ILogger<AeModelForm<T>> Logger
 @using Elemental.Components.AePageOutline
 @using System.Reflection
 @using Microsoft.AspNetCore.Components.Forms
@@ -204,7 +204,7 @@
     };
         }
 
-
+        ModelFormContext.Logger = Logger;
         ModelFormContext.RefreshModel = async () => await this.InvokeAsync(() => this.StateHasChanged());
         ModelFormContext.SetProperties(GetProperties());
         if (!isConfigured)
