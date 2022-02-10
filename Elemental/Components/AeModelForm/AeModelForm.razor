@@ -19,9 +19,11 @@
 @namespace Elemental.Components
 
 @inherits HtmlElement
+@inject ILogger<AeModelForm> Logger
 @using Elemental.Components.AePageOutline
 @using System.Reflection
 @using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Logging
 
 @if (Model != null)
 {

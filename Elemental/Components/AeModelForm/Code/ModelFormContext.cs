@@ -1,5 +1,6 @@
 ﻿using Elemental.Code;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace Elemental.Components
         private Dictionary<PropertyInfo, (Delegate Label, Delegate Choices, Delegate onChange)> optionProperties = new Dictionary<PropertyInfo, (Delegate, Delegate, Delegate)>();
         private Dictionary<PropertyInfo, (AeDropdownPropertyInput<T> component, Action updateOptions)> optionPropertyComponent = new Dictionary<PropertyInfo, (AeDropdownPropertyInput<T>, Action)>();
         private Dictionary<PropertyInfo, string> fieldNotes = new Dictionary<PropertyInfo, string>();
+        internal ILogger? Logger { get; set; }
         private List<string> categoryLocks = new List<string>();
         public Func<Task> RefreshModel { get; set; }
         public List<PropertyInfo> Properties { get; private set; }
@@ -224,8 +226,10 @@ namespace Elemental.Components
                 }
                 return (values, displayValues);
             }
-            var dropdownValues = propertyInfo.DropdownValues().ToList();
-            return (dropdownValues.Cast<object>().ToList(), dropdownValues);
+            var dropdownValues = propertyInfo.DropdownValues()?.ToList();
+            if (dropdownValues is null)
+                Logger?.LogWarning($"Property {propertyInfo.Name} doesn't have any values for dropdown");
+            return (dropdownValues?.Cast<object>()?.ToList()?? new List<object>(), dropdownValues?? new List<string>());
         }
 
         public void Clear()
