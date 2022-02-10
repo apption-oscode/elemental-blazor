@@ -6,7 +6,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Paginated Table
-    Description: Paginated table element with sorting and pagination. Use 'DisableDefaultSort' to pass an already sorted dataset to the table.
+    Description: Paginated table element with sorting and pagination. Use 'DisableFirstSort' to pass an already sorted dataset to the table.
 *@
 
 <AePaginatedTable Accessors="accessorFunctions"
@@ -16,7 +16,7 @@
   @ref="_myTable"
   Page="@_lastClicked"
   OnRowClick="@RowSelected"
-  DisableDefaultSort="true"
+  DisableFirstSort="true"
 />
 
 <AePagination Pageable="@_myTable" OnPageClick="OnPageClick" />
