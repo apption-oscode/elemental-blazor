@@ -39,7 +39,7 @@
                 <div class="@_modelFormClass" id=@(EnableOutline? "Uncategorized":"")>
                     <EditForm Model="Model" OnSubmit="@onSubmit">
                         <DataAnnotationsValidator />
-                        <ValidationSummary />
+                        
                         <div class="ae modelform-rows @_rowsClass">
                 @foreach (var category in ModelFormContext.GetCategories())
                 {
@@ -163,7 +163,8 @@
                                                             </div>
                     }
                 }
-                        </div>
+                        </div>                        
+                        <ValidationSummary class="errortext" />                        
                         <div class="ae flex  ">
                             
                             <button id="submit" disabled="@(!IsSubmitEnabled)" class=@_submitButtonClass style="margin-left: 4px; margin-bottom: 8px" type="submit">@localize(SubmitLabel)</button>

@@ -9,7 +9,7 @@
 
     @if (!string.IsNullOrEmpty(@GetFieldNotes()))
     {
-        <label class="ae ae-form-control-label notes">
+        <label class="ae ae-form-control-label notes @RequiredClass">
             <AeTypography>@GetFieldNotes()</AeTypography>
         </label>        
     }

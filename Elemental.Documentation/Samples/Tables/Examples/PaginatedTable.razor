@@ -6,7 +6,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
     Title: Paginated Table
-    Description: Paginated table element with sorting and pagination
+    Description: Paginated table element with sorting and pagination. Use 'DisableFirstSort' to pass an already sorted dataset to the table.
 *@
 
 <AePaginatedTable Accessors="accessorFunctions"
@@ -16,6 +16,7 @@
   @ref="_myTable"
   Page="@_lastClicked"
   OnRowClick="@RowSelected"
+  DisableFirstSort="true"
 />
 
 <AePagination Pageable="@_myTable" OnPageClick="OnPageClick" />
@@ -29,37 +30,37 @@
     private AePaginatedTable<DummyData> _myTable;
     private DummyData? _selected;
     protected override void OnAfterRender(bool firstRender)
-  {
-    // You must re-render after the components are initialized in order for the 
-    // component reference to not be null
-    if(firstRender){
-      StateHasChanged();
+    {
+        // You must re-render after the components are initialized in order for the 
+        // component reference to not be null
+        if(firstRender){
+            StateHasChanged();
+        }
     }
-  }
-  private void RowSelected(DummyData selected)
+    private void RowSelected(DummyData selected)
     {
         _selected = selected;
     }
 
-  private void OnPageClick(int pageIndex)
-  {
-    _lastClicked = pageIndex;
-  }
+    private void OnPageClick(int pageIndex)
+    {
+        _lastClicked = pageIndex;
+    }
 
 
-  // Define the headers at the top of the table
-  private List<string> headers = new List<string>
+    // Define the headers at the top of the table
+    private List<string> headers = new List<string>
   {
     "Type", "Category", "Location", "Importance", "Icon"
   };
 
-  // Typeparam class to hold row data, can be anything
-  private List<DummyData> GetDummyData() {
-    var data = new List<DummyData>();
-    for(int i=0; i<187; i++){
-      data.Add(new DummyData { Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
+    // Typeparam class to hold row data, can be anything
+    private List<DummyData> GetDummyData() {
+        var data = new List<DummyData>();
+        for(int i=0; i<187; i++){
+            data.Add(new DummyData { RecordNumber = i, Category = "Hashtag", CategoryIconClass="fa fa-hashtag", Importance = i, Location = "FILESYSTEM", Type = "Number" });
     }
-    return data;
+    return data.OrderBy(r => r.RecordNumber).ToList();
   }
 
   // Accessor functions to retrieve cell value
@@ -74,6 +75,7 @@
 
   record DummyData
   {
+    public int RecordNumber { get; set; }
     public string Type { get; set; }
     public string Category { get; set; }
     public string CategoryIconClass { get; set; }
