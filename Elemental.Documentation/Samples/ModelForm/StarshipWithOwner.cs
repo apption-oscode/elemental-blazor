@@ -24,7 +24,7 @@ namespace Elemental.Documentation.Samples.ModelForm
         [AeLabel(placeholder: "Enter Email...")]
         public string CaptainsEmail { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Captains Password field is required")]
         [StringLength(20, ErrorMessage = "Identifier too long (20 character limit).")]
         [AeLabel(placeholder: "Enter your credit card number...", isPasswordField: true)]
         public string CaptainsPassword { get; set; }

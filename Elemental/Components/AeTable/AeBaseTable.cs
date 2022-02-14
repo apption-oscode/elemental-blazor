@@ -19,6 +19,7 @@ namespace Elemental.Components
         [Parameter] public EventCallback<T> OnRowClick { get; set; }
         [Parameter] public EventCallback<T> OnRowFocus { get; set; }
         [Parameter] public Func<string, int, RenderFragment> CustomHeader { get; set; }
+        [Parameter] public bool DisableFirstSort { get; set; }
 
         protected IEnumerable<T> Rows { get => GetSortedDataset(); }
         protected (int column, bool sortAscending) _sorting = (0, true);
@@ -38,6 +39,14 @@ namespace Elemental.Components
             {
                 return new List<T>();
             }
+
+            if (DisableFirstSort)
+            {
+                //The default sort should only be run when the table loads the first time.
+                DisableFirstSort = false;
+                return Dataset;
+            }
+
             if (_sorting.sortAscending)
             {
                 // if Sorter Parameters exist, use sorter functions, else use Accessors TableComparer

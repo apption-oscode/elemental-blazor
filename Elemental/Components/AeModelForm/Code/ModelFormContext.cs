@@ -1,5 +1,6 @@
 ﻿using Elemental.Code;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,6 +44,8 @@ namespace Elemental.Components
         private Dictionary<PropertyInfo, (Delegate Label, Delegate Choices, Delegate onChange)> optionProperties = new Dictionary<PropertyInfo, (Delegate, Delegate, Delegate)>();
         private Dictionary<PropertyInfo, (AeDropdownPropertyInput<T> component, Action updateOptions)> optionPropertyComponent = new Dictionary<PropertyInfo, (AeDropdownPropertyInput<T>, Action)>();
         private Dictionary<PropertyInfo, string> fieldNotes = new Dictionary<PropertyInfo, string>();
+        internal ILogger? Logger { get; set; }
+        private List<string> categoryLocks = new List<string>();
         public Func<Task> RefreshModel { get; set; }
         public List<PropertyInfo> Properties { get; private set; }
 
@@ -50,9 +53,24 @@ namespace Elemental.Components
             typeof(T).GetAeModelFormCategories().Select(elem => (elem.category,
                     visibleProperties:elem.properties.Select(l => l.Where(l => IsVisible(l)).ToList()).ToList()))
                     .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
+        
+        public List<string> GetLockedCategories => categoryLocks;
+        public bool IsCategoryLocked(string category)
+        {
+            return categoryLocks.Contains(category);
+        }
+        public void RegisterCategoryLocks(string category, bool isLocked)
+        {
+            if (isLocked && !categoryLocks.Contains(category))
+            { 
+                categoryLocks.Add(category);
+            }
 
-
-
+            if (!isLocked && categoryLocks.Contains(category))
+            { 
+                categoryLocks.Remove(category);
+            }
+        }
         public string GetFieldNote(PropertyInfo propertyInfo)
         {
             if (fieldNotes.ContainsKey(propertyInfo))
@@ -208,8 +226,10 @@ namespace Elemental.Components
                 }
                 return (values, displayValues);
             }
-            var dropdownValues = propertyInfo.DropdownValues().ToList();
-            return (dropdownValues.Cast<object>().ToList(), dropdownValues);
+            var dropdownValues = propertyInfo.DropdownValues()?.ToList();
+            if (dropdownValues is null)
+                Logger?.LogWarning($"Property {propertyInfo.Name} doesn't have any values for dropdown");
+            return (dropdownValues?.Cast<object>()?.ToList()?? new List<object>(), dropdownValues?? new List<string>());
         }
 
         public void Clear()
@@ -253,6 +273,6 @@ namespace Elemental.Components
                 propertyVisibility[property] = isVisible;
         }
 
-
+        
     }
 }

@@ -22,7 +22,9 @@
     SubmitLabel="Save changes" 
     OnValidSubmit="HandleValidSubmit" 
     CancelLabel="Cancel" 
-    OnCancel="CreateStarship" />
+    OnConfigure="OnConfigure"
+    OnCancel="CreateStarship"
+    IsSectionLocksVisible="true" />
 
 <DebugObject Object="@_starship"/>
 
@@ -40,6 +42,13 @@
         _starship = await CreateStarship();
     }
 
+    private async Task OnConfigure(IModelFormContext context)
+    {
+        //Use context.GetLockedCategories to get a List<string> of locked categories
+        var lockedCategories = context.GetLockedCategories;
+    }
+
+   
     private void HandleValidSubmit()
     {
         //do something if form is valid

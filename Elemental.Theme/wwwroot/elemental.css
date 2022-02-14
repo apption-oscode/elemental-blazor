@@ -1700,6 +1700,7 @@ body {
 
 .ae.modelform .validation-errors .validation-message {
   font-size: 0.9rem;
+  color: #e53e3e;
 }
 .ae.modelform .ae.modelform-rows .ae.modelform-row {
   grid-template-rows: auto;
@@ -2919,6 +2920,9 @@ body {
 }
 .ae.typography.p {
   line-height: 1.75;
+}
+.ae.typography.p.no-margin {
+  margin: 0rem;
 }
 .ae.typography.hint {
   color: #cbd5e0;
