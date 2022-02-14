@@ -115,9 +115,9 @@
                 window.sidenav.toggleExpansion(true);
             }
             //if sub menu is not empty, expand
-            //else if (!$('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length != 0 && !firstRender) {
-            //    window.sidenav.toggleExpansion(false);
-            //}
+            else if (!$('.ae.sidenav').hasClass('expanded') && subMenuGroup.children(`[href*="/${activeMainHref}/"]`).length != 0 && $(window).width() > window.sidenav.sidenavExpandThreshold ) {
+                window.sidenav.toggleExpansion(false);
+            }
 
             if (splitHref.length > 1) {
 
