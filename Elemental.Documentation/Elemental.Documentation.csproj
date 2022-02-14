@@ -46,6 +46,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Samples\ModelForm\Examples\BasicForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="package-lock.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
