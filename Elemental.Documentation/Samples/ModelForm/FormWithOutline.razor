@@ -6,12 +6,18 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *@
 
-@page "/modelforms/basicform"
+@page "/modelforms/formwithoutline"
+
+@inherits DemoPage
 
 <AeFlex Vertical class="typography-page-container">
-    <DemoSection Path="./Samples/ModelForm/Examples/StarshipForm.razor" AdditionalCS="./Samples/ModelForm/Starship.cs">
+    <DemoSection Path="./Samples/ModelForm/Examples/TransportStarshipFormOutline.razor" AdditionalCS="./Samples/ModelForm/TransportStarship.cs">
         <AeFlex Vertical>
-            <Elemental.Documentation.Samples.ModelForm.Examples.StarshipForm />
+            <Elemental.Documentation.Samples.ModelForm.Examples.TransportStarshipFormOutline />
         </AeFlex>
     </DemoSection>
 </AeFlex>
+
+@code {
+
+}
