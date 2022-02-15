@@ -46,6 +46,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Samples\ModelForm\Examples\BasicForm.razor" />
+    <Content Remove="Samples\ModelForm\Examples\CustomLabels.razor" />
+    <Content Remove="Samples\ModelForm\Examples\FlexForm.razor" />
+    <Content Remove="Samples\ModelForm\Examples\FlexFormWithCategory.razor" />
+    <Content Remove="Samples\ModelForm\Examples\FormWithCategories.razor" />
+    <Content Remove="Samples\ModelForm\Examples\InteractiveDropdowns.razor" />
+    <Content Remove="Samples\ModelForm\Examples\InteractiveForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="package-lock.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
