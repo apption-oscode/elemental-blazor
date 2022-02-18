@@ -41,7 +41,7 @@
         }
     }
 
-    private string _href => IsDropdownLabel ? null : Link?.To;
+    private string? _href => IsDropdownLabel ? null : Link?.To;
     private string _dropdownClassname => "dropdown-label";
     private string _classname => $"ae navlink {(IsDropdownLabel ? _dropdownClassname : "")}";
 }

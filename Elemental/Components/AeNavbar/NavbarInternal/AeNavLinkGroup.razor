@@ -1,30 +1,51 @@
 ﻿@namespace Elemental.Components
 
-@foreach (var link in Links)
+
+@if (Link.ChildLinks?.Any() == true)
 {
-    if (link.ChildLinks?.Any() == true)
-    {
-        <li class="ae nav-dropdown" href="javascript:void(0);">
-            <AeNavLinkRender Link="link" IsDropdownLabel />
-            <div class="ae nav-dropdown-content">
-                @foreach (var child in link.ChildLinks)
-                {
-                    <AeNavLinkRender Link="child" CloseNav="CloseNav" />
-                }
-            </div>
-        </li>
-    }
-    else
-    {
-        <li>
-            <AeNavLinkRender Link="link"  CloseNav="CloseNav"/>
-        </li>
-    }
+    <li class="@_classname" @onclick="onClick">
+        <AeNavLinkRender Link="Link" IsDropdownLabel />
+        <div class="ae nav-dropdown-content">
+            @foreach (var child in Link.ChildLinks)
+            {
+                <AeNavLinkRender Link="child" CloseNav="CloseNav" />
+            }
+        </div>
+    </li>
 }
+else
+{
+    <li>
+        <AeNavLinkRender Link="Link"  CloseNav="CloseNav"/>
+    </li>
+}
+
 
 @code {
     [Parameter]
-    public List<AeNavLink> Links { get; set; }
+    public AeNavLink Link { get; set; }
     [Parameter]
     public EventCallback CloseNav { get; set; }
+    private string _classname => $"ae nav-dropdown {(_isOpen ? "open" : "")}";
+    private bool _isOpen = false;
+
+    private void onClick()
+    {
+        _isOpen = !_isOpen;
+        StateHasChanged();
+    }
+
+    public void CloseDropdown()
+    {
+        _isOpen = false;
+        StateHasChanged();
+    }
+    private async Task closeNavAndDropdown()
+    {
+        CloseDropdown();
+        if (CloseNav.HasDelegate)
+        {
+            await CloseNav.InvokeAsync();
+        }
+    }
 }

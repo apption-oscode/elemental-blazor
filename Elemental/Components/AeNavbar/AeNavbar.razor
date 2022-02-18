@@ -28,12 +28,17 @@
                 @Brand
             </li>
         }
-
-        <AeNavLinkGroup Links="Links" CloseNav="CloseNav" />
+        @foreach (var link in Links)
+        {   
+            <AeNavLinkGroup @ref="NavGroupsRef" Link="link" CloseNav="CloseNav" />
+        }
         
         <li style="flex-grow: 1;"></li>
         
-        <AeNavLinkGroup Links="RightLinks" CloseNav="CloseNav" />
+        @foreach(var link in RightLinks)
+        {
+            <AeNavLinkGroup @ref="NavGroupsRef" Link="link" CloseNav="CloseNav" />
+        }
         
         <li class="ae responsive-icon">
             <a href="javascript:void(0);" class="ae navlink" @onclick="ToggleResponsive">
@@ -57,9 +62,18 @@
     private string _classname => $"ae navbar {_inputClass} {(_isOpen ? "open" : "")} {(ForceResponsive ? "force-responsive": "" )}";
     private bool _isOpen = false;
 
+    private List<AeNavLinkGroup> NavGroupsRefs = new();
+    AeNavLinkGroup NavGroupsRef {
+        set { NavGroupsRefs.Add(value); }
+    }
+
     private void ToggleResponsive()
     {
         _isOpen = !_isOpen;
+        foreach (var group in NavGroupsRefs)
+        {
+            group.CloseDropdown();
+        }
         StateHasChanged();
     }
 
