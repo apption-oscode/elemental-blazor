@@ -33,9 +33,12 @@
 
     private async Task onClick()
     {
-        if (CloseNav.HasDelegate && !Link.ChildLinks.Any())
-            await CloseNav.InvokeAsync();
-        NavManager.NavigateTo(_href);
+        if (_href is not null)
+        {
+            if (CloseNav.HasDelegate)
+                await CloseNav.InvokeAsync();
+            NavManager.NavigateTo(_href);
+        }
     }
 
     private string _href => IsDropdownLabel ? null : Link?.To;
