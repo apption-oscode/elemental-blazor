@@ -33,7 +33,7 @@
 
     private async Task onClick()
     {
-        if (CloseNav.HasDelegate)
+        if (CloseNav.HasDelegate && !Link.ChildLinks.Any())
             await CloseNav.InvokeAsync();
         NavManager.NavigateTo(_href);
     }
