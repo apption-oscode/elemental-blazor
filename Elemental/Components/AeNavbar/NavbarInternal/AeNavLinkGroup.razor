@@ -1,10 +1,10 @@
 ﻿@namespace Elemental.Components
 
 
-@if (Link.ChildLinks?.Any() == true)
+@if (_isDropdownLabel)
 {
-    <li class="@_classname" @onclick="onClick">
-        <AeNavLinkRender Link="Link" IsDropdownLabel />
+    <li class="@_classname">
+        <AeNavLinkRender Link="Link" IsDropdownLabel ToggleDropDown="ToggleDropDown" />
         <div class="ae nav-dropdown-content">
             @foreach (var child in Link.ChildLinks)
             {
@@ -27,25 +27,21 @@ else
     [Parameter]
     public EventCallback CloseNav { get; set; }
     private string _classname => $"ae nav-dropdown {(_isOpen ? "open" : "")}";
+    private bool _isDropdownLabel => Link.ChildLinks.Any();
     private bool _isOpen = false;
 
-    private void onClick()
+    private async Task ToggleDropDown()
     {
-        _isOpen = !_isOpen;
-        StateHasChanged();
+        if (_isDropdownLabel)
+        {
+            _isOpen = !_isOpen;
+            await InvokeAsync(() => StateHasChanged());
+        }
     }
 
-    public void CloseDropdown()
+    public async Task CloseDropdown()
     {
         _isOpen = false;
-        StateHasChanged();
-    }
-    private async Task closeNavAndDropdown()
-    {
-        CloseDropdown();
-        if (CloseNav.HasDelegate)
-        {
-            await CloseNav.InvokeAsync();
-        }
+        await InvokeAsync(() => StateHasChanged());
     }
 }

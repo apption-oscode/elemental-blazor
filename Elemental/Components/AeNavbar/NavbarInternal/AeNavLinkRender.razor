@@ -30,10 +30,16 @@
     public AeNavLink Link { get; set; }
     [Parameter]
     public EventCallback CloseNav { get; set; }
+    [Parameter]
+    public EventCallback ToggleDropDown { get; set; }
 
     private async Task onClick()
     {
-        if (_href is not null)
+        if (IsDropdownLabel && ToggleDropDown.HasDelegate)
+        {
+            await ToggleDropDown.InvokeAsync();
+        }
+        else if (!IsDropdownLabel && _href is not null) //and href
         {
             if (CloseNav.HasDelegate)
                 await CloseNav.InvokeAsync();

@@ -67,24 +67,24 @@
         set { NavGroupsRefs.Add(value); }
     }
 
-    private void ToggleResponsive()
+    private async Task ToggleResponsive()
     {
         _isOpen = !_isOpen;
         foreach (var group in NavGroupsRefs)
         {
-            group.CloseDropdown();
+            await group.CloseDropdown();
         }
-        StateHasChanged();
+        await InvokeAsync(() => StateHasChanged());
     }
 
-    private void CloseNav()
+    private async Task CloseNav()
     {
         _isOpen = false;
         foreach (var group in NavGroupsRefs)
         {
-            group.CloseDropdown();
+            await group.CloseDropdown();
         }
-        StateHasChanged();
+        await InvokeAsync(() => StateHasChanged());
     }
 
 } 
