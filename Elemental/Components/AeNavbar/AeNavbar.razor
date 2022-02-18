@@ -29,11 +29,11 @@
             </li>
         }
 
-        <AeNavLinkGroup Links="Links" />
+        <AeNavLinkGroup Links="Links" CloseNav="CloseNav" />
         
         <li style="flex-grow: 1;"></li>
         
-        <AeNavLinkGroup Links="RightLinks" />
+        <AeNavLinkGroup Links="RightLinks" CloseNav="CloseNav" />
         
         <li class="ae responsive-icon">
             <a href="javascript:void(0);" class="ae navlink" @onclick="ToggleResponsive">
@@ -60,6 +60,12 @@
     private void ToggleResponsive()
     {
         _isOpen = !_isOpen;
+        StateHasChanged();
+    }
+
+    private void CloseNav()
+    {
+        _isOpen = false;
         StateHasChanged();
     }
 

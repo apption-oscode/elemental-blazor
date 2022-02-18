@@ -4,12 +4,12 @@
 {
     if (link.ChildLinks?.Any() == true)
     {
-        <li class="ae nav-dropdown">
+        <li class="ae nav-dropdown" href="javascript:void(0);">
             <AeNavLinkRender Link="link" IsDropdownLabel />
             <div class="ae nav-dropdown-content">
                 @foreach (var child in link.ChildLinks)
                 {
-                    <AeNavLinkRender Link="child" />
+                    <AeNavLinkRender Link="child" CloseNav="CloseNav" />
                 }
             </div>
         </li>
@@ -17,7 +17,7 @@
     else
     {
         <li>
-            <AeNavLinkRender Link="link" />
+            <AeNavLinkRender Link="link"  CloseNav="CloseNav"/>
         </li>
     }
 }
@@ -25,4 +25,6 @@
 @code {
     [Parameter]
     public List<AeNavLink> Links { get; set; }
+    [Parameter]
+    public EventCallback CloseNav { get; set; }
 }
