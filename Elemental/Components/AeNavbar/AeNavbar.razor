@@ -80,6 +80,10 @@
     private void CloseNav()
     {
         _isOpen = false;
+        foreach (var group in NavGroupsRefs)
+        {
+            group.CloseDropdown();
+        }
         StateHasChanged();
     }
 
