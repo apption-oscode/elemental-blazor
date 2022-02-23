@@ -46,7 +46,7 @@
                 @foreach (var category in ModelFormContext.GetCategories())
                 {
                     var isCategoryLocked = ModelFormContext.IsCategoryLocked(category.category);
-
+                    
                     <div style="display: flex; flex-direction: row">
                     @if (!string.IsNullOrWhiteSpace(category.category))
                         {
@@ -65,11 +65,15 @@
                             
                             <AeFlex Vertical class="horizontal">
                                 <AeTypography Variant="h3" id="@id">@localize(category.category)
+                                <label class="ae ae-form-control-label notes">
+                                    <AeTypography>@ModelFormContext.GetCategoryNote(category.category)</AeTypography>
+                                </label>                                        
                                 @if (IsSectionLocksVisible)
                                 {                                       
                                     <AeFlex><AeCheckbox IsChecked="isCategoryLocked" IsCheckedChanged="(async (isCheck) => await onCategoryLock(isCheck, category.category))" />  <AeTypography Variant="p" class="no-margin" >@localize("Lock Section") </AeTypography>  </AeFlex>                                        
                                 }
                                 </AeTypography>
+                                
                             </AeFlex>
                         }
                     </div>
@@ -321,21 +325,15 @@
 
     private List<(string Id, RenderFragment ChildContent)> _Anchors;
 
-    private List<PropertyInfo> GetProperties()
-    {
-        return typeof(T).GetAeModelProperties();
-    }
+    private List<PropertyInfo> GetProperties() => typeof(T).GetAeModelProperties();    
 
-    private Type GetNonNullableType(PropertyInfo prop)
-    {
-        return AeModelFormTools.GetNonNullableType(prop);
-    }
+    private Type GetNonNullableType(PropertyInfo prop) => AeModelFormTools.GetNonNullableType(prop);    
 
     private async Task onCategoryLock(bool isLocked, string category)
     {
         if (!string.IsNullOrEmpty(category))
         {
-            ModelFormContext.RegisterCategoryLocks(category, isLocked);
+            ModelFormContext.RegisterCategoryLock(category, isLocked);
             await OnConfigure.InvokeAsync(ModelFormContext);
             await InvokeAsync(() =>
             {

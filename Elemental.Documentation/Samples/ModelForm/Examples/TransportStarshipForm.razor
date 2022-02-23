@@ -45,7 +45,8 @@
     private async Task OnConfigure(IModelFormContext context)
     {
         //Use context.GetLockedCategories to get a List<string> of locked categories
-        var lockedCategories = context.GetLockedCategories;
+        var lockedCategories = context.LockedCategories;
+        context.RegisterCategoryNotes("Details", "These are the details of your transport ship");
     }
 
    

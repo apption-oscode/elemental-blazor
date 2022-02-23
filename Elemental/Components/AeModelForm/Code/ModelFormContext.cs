@@ -44,6 +44,7 @@ namespace Elemental.Components
         private Dictionary<PropertyInfo, (Delegate Label, Delegate Choices, Delegate onChange)> optionProperties = new Dictionary<PropertyInfo, (Delegate, Delegate, Delegate)>();
         private Dictionary<PropertyInfo, (AeDropdownPropertyInput<T> component, Action updateOptions)> optionPropertyComponent = new Dictionary<PropertyInfo, (AeDropdownPropertyInput<T>, Action)>();
         private Dictionary<PropertyInfo, string> fieldNotes = new Dictionary<PropertyInfo, string>();
+        private Dictionary<string, string> categoryNotes = new Dictionary<string, string>();
         internal ILogger? Logger { get; set; }
         private List<string> categoryLocks = new List<string>();
         public Func<Task> RefreshModel { get; set; }
@@ -54,12 +55,12 @@ namespace Elemental.Components
                     visibleProperties:elem.properties.Select(l => l.Where(l => IsVisible(l)).ToList()).ToList()))
                     .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
         
-        public List<string> GetLockedCategories => categoryLocks;
+        public List<string> LockedCategories => categoryLocks;
         public bool IsCategoryLocked(string category)
         {
             return categoryLocks.Contains(category);
-        }
-        public void RegisterCategoryLocks(string category, bool isLocked)
+        }        
+        public void RegisterCategoryLock(string category!!, bool isLocked)
         {
             if (isLocked && !categoryLocks.Contains(category))
             { 
@@ -71,13 +72,32 @@ namespace Elemental.Components
                 categoryLocks.Remove(category);
             }
         }
-        public string GetFieldNote(PropertyInfo propertyInfo)
+
+        public string GetFieldNote(PropertyInfo propertyInfo!!)
         {
             if (fieldNotes.ContainsKey(propertyInfo))
             { 
                 return fieldNotes[propertyInfo];
             }
             return string.Empty;
+        }
+
+        public string GetCategoryNote(string category)
+        {
+            if (categoryNotes.ContainsKey(category))
+            {
+                return categoryNotes[category];
+            }
+            return string.Empty;
+        }
+        public void RegisterCategoryNotes(string category, string notes)
+        {
+            
+            if (categoryNotes.ContainsKey(category))
+            {
+                categoryNotes.Remove(category);
+            }
+            categoryNotes.Add(category, notes);
         }
         public void RegisterFieldNotes<P>(Expression<Func<P, string>> propertyPath, string notes)
         {

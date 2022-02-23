@@ -7,6 +7,7 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageId>AElemental.Blazor</PackageId>
     <Nullable>enable</Nullable>
+		<LangVersion>preview</LangVersion>
 		<Authors>Apption</Authors>
 		<Company>Apption</Company>
 		<Product>AElemental for Blazor</Product>

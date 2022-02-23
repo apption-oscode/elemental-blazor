@@ -29,8 +29,10 @@ namespace Elemental.Components
         string GetFieldNote(PropertyInfo propertyInfo);
 
         bool IsCategoryLocked(string category);
-        void RegisterCategoryLocks(string category, bool isLocked);
+        void RegisterCategoryLock(string category, bool isLocked);
 
-        List<string> GetLockedCategories { get;  }
+        void RegisterCategoryNotes(string category, string notes);
+        string GetCategoryNote(string category);
+        List<string> LockedCategories { get;  }
     }
 }
