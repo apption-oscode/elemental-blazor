@@ -60,7 +60,7 @@ namespace Elemental.Components
         {
             return categoryLocks.Contains(category);
         }        
-        public void RegisterCategoryLock(string category!!, bool isLocked)
+        public void RegisterCategoryLock(string category, bool isLocked)
         {
             if (isLocked && !categoryLocks.Contains(category))
             { 
@@ -73,7 +73,7 @@ namespace Elemental.Components
             }
         }
 
-        public string GetFieldNote(PropertyInfo propertyInfo!!)
+        public string GetFieldNote(PropertyInfo propertyInfo)
         {
             if (fieldNotes.ContainsKey(propertyInfo))
             { 
