@@ -46,7 +46,7 @@
                 @foreach (var category in ModelFormContext.GetCategories())
                 {
                     var isCategoryLocked = ModelFormContext.IsCategoryLocked(category.category);
-
+                    
                     <div style="display: flex; flex-direction: row">
                     @if (!string.IsNullOrWhiteSpace(category.category))
                         {
@@ -65,11 +65,15 @@
                             
                             <AeFlex Vertical class="horizontal">
                                 <AeTypography Variant="h3" id="@id">@localize(category.category)
+                                <label class="ae ae-form-control-label notes">
+                                    <AeTypography>@ModelFormContext.GetCategoryNote(category.category)</AeTypography>
+                                </label>                                        
                                 @if (IsSectionLocksVisible)
                                 {                                       
                                     <AeFlex><AeCheckbox IsChecked="isCategoryLocked" IsCheckedChanged="(async (isCheck) => await onCategoryLock(isCheck, category.category))" />  <AeTypography Variant="p" class="no-margin" >@localize("Lock Section") </AeTypography>  </AeFlex>                                        
                                 }
                                 </AeTypography>
+                                
                             </AeFlex>
                         }
                     </div>

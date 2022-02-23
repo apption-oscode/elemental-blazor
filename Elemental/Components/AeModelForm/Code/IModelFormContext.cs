@@ -31,6 +31,8 @@ namespace Elemental.Components
         bool IsCategoryLocked(string category);
         void RegisterCategoryLocks(string category, bool isLocked);
 
+        void RegisterCategoryNotes(string category, string notes);
+        string GetCategoryNote(string category);
         List<string> GetLockedCategories { get;  }
     }
 }
