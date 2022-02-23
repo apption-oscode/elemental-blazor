@@ -55,12 +55,12 @@ namespace Elemental.Components
                     visibleProperties:elem.properties.Select(l => l.Where(l => IsVisible(l)).ToList()).ToList()))
                     .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
         
-        public List<string> GetLockedCategories => categoryLocks;
+        public List<string> LockedCategories => categoryLocks;
         public bool IsCategoryLocked(string category)
         {
             return categoryLocks.Contains(category);
         }        
-        public void RegisterCategoryLocks(string category, bool isLocked)
+        public void RegisterCategoryLock(string category!!, bool isLocked)
         {
             if (isLocked && !categoryLocks.Contains(category))
             { 
@@ -73,7 +73,7 @@ namespace Elemental.Components
             }
         }
 
-        public string GetFieldNote(PropertyInfo propertyInfo)
+        public string GetFieldNote(PropertyInfo propertyInfo!!)
         {
             if (fieldNotes.ContainsKey(propertyInfo))
             { 

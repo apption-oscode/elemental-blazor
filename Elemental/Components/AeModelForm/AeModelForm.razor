@@ -325,21 +325,15 @@
 
     private List<(string Id, RenderFragment ChildContent)> _Anchors;
 
-    private List<PropertyInfo> GetProperties()
-    {
-        return typeof(T).GetAeModelProperties();
-    }
+    private List<PropertyInfo> GetProperties() => typeof(T).GetAeModelProperties();    
 
-    private Type GetNonNullableType(PropertyInfo prop)
-    {
-        return AeModelFormTools.GetNonNullableType(prop);
-    }
+    private Type GetNonNullableType(PropertyInfo prop) => AeModelFormTools.GetNonNullableType(prop);    
 
     private async Task onCategoryLock(bool isLocked, string category)
     {
         if (!string.IsNullOrEmpty(category))
         {
-            ModelFormContext.RegisterCategoryLocks(category, isLocked);
+            ModelFormContext.RegisterCategoryLock(category, isLocked);
             await OnConfigure.InvokeAsync(ModelFormContext);
             await InvokeAsync(() =>
             {
