@@ -27,8 +27,8 @@ namespace Elemental.Components
 
     public class ModelFormChangeArgs
     {
-        public PropertyInfo PropertyInfo { get; set; }
-        public EditContext EditContext { get; set; }
+        public PropertyInfo? PropertyInfo { get; set; }
+        public EditContext? EditContext { get; set; }
 
         public IModelFormContext Context { get; set; }
 

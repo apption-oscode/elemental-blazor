@@ -220,9 +220,19 @@
         NotifyArg = OnNotify;
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender) StateHasChanged();
+        if (firstRender) 
+        {
+            StateHasChanged();
+        }
+        else
+        {
+            
+            var args = new ModelFormChangeArgs() { Context = ModelFormContext, PropertyInfo = null, EditContext = null };
+            await OnChange.InvokeAsync(args);   
+        }
+
 
     }
 
