@@ -155,6 +155,11 @@ namespace Elemental.Components
                 throw new ArgumentNullException(nameof(choices));
             }
 
+            if (optionProperties.ContainsKey(property))
+            { 
+                optionProperties.Remove(property);
+            }
+
             optionProperties.Add(property, (label, choices, onChange));
         }
 
