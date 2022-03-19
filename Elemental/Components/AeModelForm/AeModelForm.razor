@@ -70,7 +70,8 @@
                                 </label>                                        
                                 @if (IsSectionLocksVisible)
                                 {                                       
-                                    <AeFlex><AeCheckbox IsChecked="isCategoryLocked" IsCheckedChanged="(async (isCheck) => await onCategoryLock(isCheck, category.category))" />  <AeTypography Variant="p" class="no-margin" >@localize("Lock Section") </AeTypography>  </AeFlex>                                        
+                                    <AeFlex><AeCheckbox IsChecked="isCategoryLocked" IsCheckedChanged="(async (isCheck) => await onCategoryLock(isCheck, category.category))" CheckedIcon="@CheckedIcon" UncheckedIcon="@UncheckedIcon" />  <AeTypography Variant="p" class="no-margin" >@localize("Lock Section") </AeTypography>  </AeFlex>                                        
+                                    
                                 }
                                 </AeTypography>
                                 
@@ -320,6 +321,12 @@
 
     [Parameter]
     public string OutlineStyle { get; set; }
+
+    [Parameter]
+    public string CheckedIcon { get; set; } = null;
+
+    [Parameter]
+    public string UncheckedIcon { get; set; } = null;
 
     private bool _isCancelled = false;
 
