@@ -2502,12 +2502,15 @@ body {
   cursor: pointer;
   user-select: none;
   padding-left: 0.75rem;
-  background-color: #718096;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  background-color: #4a5568;
   color: #fff;
   word-wrap: break-word;
+  font-weight: bold;
 }
 .ae.table:not(.custom) .ae.table-header .ae.table-cell:hover {
-  background-color: #4a5568;
+  background-color: #2d3748;
 }
 .ae.table:not(.custom) .ae.table-header.simple {
   display: inline-grid;
