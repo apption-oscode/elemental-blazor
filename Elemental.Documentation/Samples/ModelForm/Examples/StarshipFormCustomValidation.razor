@@ -48,10 +48,18 @@
         ctx.SetValidator<Starship>(starship =>
         {
             var errors = new Dictionary<string, List<string>>();
+            
+            if(starship.Identifier != "USS Enterprise")
+            {
+                errors.AddOrAppend(nameof(starship.Identifier), new List<string>() { "It must be USS Enterprise" });
+                errors.AddOrAppend(nameof(starship.CaptainsEmail), new List<string>() { "Example of targeting a different field with a message", "Another error message example" });
+                errors.AddOrAppend(nameof(starship.Description), new List<string>() { "Example of targeting a different field with a message", "Another error message example" });
+            }
+            
             if(starship.Classification == "Class1Discovery" 
                && string.IsNullOrEmpty(starship.Description))
             {
-                errors.Add(nameof(starship.Description), 
+                errors.AddOrAppend(nameof(starship.Description), 
                     new List<string> {"For a Class1Discovery, a description is required"});
             }
             
