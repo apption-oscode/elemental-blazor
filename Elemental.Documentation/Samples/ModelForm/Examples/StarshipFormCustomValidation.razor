@@ -1,0 +1,84 @@
+﻿@*
+    Copyright 2020 Apption Corporation
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    Title: Custom Validation Form
+    Description: Form is generated from .NET object model. Standard form annotations are used, few others have been added to handle labels, order, etc.
+*@
+
+<AeModelForm 
+    Model="@_starship" 
+    SubmitLabel="Save changes" 
+    OnValidSubmit="HandleValidSubmit" 
+    CancelLabel="Cancel" 
+    OnCancel="CreateStarship"
+    OnChange="OnChange"
+    OnConfigure="OnConfigure"
+    OnInvalidSubmit="HandleInvalidSubmit"
+    />
+
+<DebugObject Object="@_starship"/>
+
+@code {
+
+    private Starship _starship;
+
+    private async Task<Starship> CreateStarship()
+    {
+        // roll back your changes
+        _starship = new Starship() { ProductionDate = DateTime.Today };
+        StateHasChanged();
+        return _starship;
+    }
+
+    private void OnConfigure(IModelFormContext ctx)
+    {
+        ctx.SetVisible<Starship>(p => p.ValidationDate, _starship.IsValidatedDesign);
+        
+        ctx.RuleFor<Starship>(s => s.ShipName).IsNotNull().WithMessage("Ship name is required");        
+        ctx.SetValidator<Starship>(starship =>
+        {
+            var errors = new Dictionary<string, List<string>>();
+            if(starship.Classification == "Class1Discovery" 
+               && string.IsNullOrEmpty(starship.Description))
+            {
+                errors.Add(nameof(starship.Description), 
+                    new List<string> {"For a Class1Discovery, a description is required"});
+            }
+            
+            return errors;
+        });
+    }
+
+    private void OnChange(ModelFormChangeArgs args)
+    {
+        OnConfigure(args.Context);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _starship = await CreateStarship();
+    }
+
+    private void HandleValidSubmit(EditContext editContext)
+    {
+        //save to database
+        StateHasChanged();
+    }
+
+    private void HandleInvalidSubmit(EditContext editContext)
+    {
+        //do something if form is not valid
+    }
+}

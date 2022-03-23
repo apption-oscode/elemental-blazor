@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using FluentValidation;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace Elemental.Components
 {
@@ -34,5 +36,7 @@ namespace Elemental.Components
         void RegisterCategoryNotes(string category, string notes);
         string GetCategoryNote(string category);
         List<string> LockedCategories { get;  }
+
+        void RuleFor<T>(Expression<Func<T, object>> propertyPath);
     }
 }

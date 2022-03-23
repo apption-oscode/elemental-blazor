@@ -1,4 +1,7 @@
+using Elemental.Documentation.Data;
+using Elemental.Documentation.Samples.ModelForm;
 using Elemental.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +32,9 @@ namespace Elemental.Documentation
 
             //Use in downloading
             services.AddElemental();
+
+            services.AddScoped<IValidator<Starship>, StarshipValidator>();
+            services.AddLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

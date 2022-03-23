@@ -31,6 +31,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="10.4.0" />
         <PackageReference Include="Markdig" Version="0.28.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
@@ -87,6 +88,12 @@
         <None Include="wwwroot\js\third-party\shepherd.min.js">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>FluentValidation.Internal</_Parameter1>
+        </AssemblyAttribute>
     </ItemGroup>
 </Project>
 
