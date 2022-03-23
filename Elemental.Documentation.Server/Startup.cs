@@ -32,8 +32,6 @@ namespace Elemental.Documentation
 
             //Use in downloading
             services.AddElemental();
-
-            services.AddScoped<IValidator<Starship>, StarshipValidator>();
             services.AddLogging();
         }
 

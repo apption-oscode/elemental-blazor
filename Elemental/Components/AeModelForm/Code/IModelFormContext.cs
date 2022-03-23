@@ -37,6 +37,6 @@ namespace Elemental.Components
         string GetCategoryNote(string category);
         List<string> LockedCategories { get;  }
 
-        void RuleFor<T>(Expression<Func<T, object>> propertyPath);
+        void SetValidator<T>(Func<T, Dictionary<string, List<string>>> validator);
     }
 }

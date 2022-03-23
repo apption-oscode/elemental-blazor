@@ -45,8 +45,6 @@
     private void OnConfigure(IModelFormContext ctx)
     {
         ctx.SetVisible<Starship>(p => p.ValidationDate, _starship.IsValidatedDesign);
-        
-        ctx.RuleFor<Starship>(s => s.ShipName).IsNotNull().WithMessage("Ship name is required");        
         ctx.SetValidator<Starship>(starship =>
         {
             var errors = new Dictionary<string, List<string>>();

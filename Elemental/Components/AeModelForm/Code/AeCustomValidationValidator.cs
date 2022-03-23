@@ -16,7 +16,7 @@ public class AeCustomValidationValidator<T> : ComponentBase
     [CascadingParameter] 
     public EditContext? EditContext { get; set; }
     
-    [CascadingParameter(Name = "ModelFormContext")]
+    [Parameter]
     public ModelFormContext<T>? ModelFormContext { get; set; }
     
     [Parameter]

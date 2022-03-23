@@ -43,7 +43,11 @@
         <EditForm Model="Model" OnSubmit="@OnSubmit">
             @if (ModelFormContext.CustomValidation)
             {
-                <AeCustomValidationValidator @ref="_customValidationValidator" Model="Model"/>
+                    <AeCustomValidationValidator 
+                        @ref="_customValidationValidator" 
+                        Model="Model"
+                        ModelFormContext="ModelFormContext"
+                        />
             }
             else
             {
@@ -318,7 +322,7 @@
     [Parameter]
     public EventCallback<string> OnCategoryLock { get; set; }
 
-    public ModelFormContext<T> ModelFormContext { get; } = new ModelFormContext<T>();
+    public ModelFormContext<T> ModelFormContext { get; } = new();
 
     /// <summary>
     /// This method will be called when a property is changed.

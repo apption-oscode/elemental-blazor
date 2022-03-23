@@ -26,21 +26,21 @@ namespace Elemental.Components
 
     }
 
-    public class ModelFormChangeArgs<T>
+    public class ModelFormChangeArgs
     {
         public PropertyInfo PropertyInfo { get; set; }
         public EditContext EditContext { get; set; }
 
-        public IModelFormContext<T> Context { get; set; }
+        public IModelFormContext Context { get; set; }
 
-        public bool HasPropertyChanged(Expression<Func<T, object>> expression)
+        public bool HasPropertyChanged<T>(Expression<Func<T, object>> expression)
         {
             return AeModelFormTools.WithPropertyExpression(expression) == PropertyInfo;
         }
 
     }
 
-    public class ModelFormContext<T> : IModelFormContext<T>
+    public class ModelFormContext<T> : IModelFormContext
     {
         private Dictionary<PropertyInfo, (Delegate Label, Delegate Choices, Delegate onChange)> optionProperties = new Dictionary<PropertyInfo, (Delegate, Delegate, Delegate)>();
         private Dictionary<PropertyInfo, (AeDropdownPropertyInput<T> component, Action updateOptions)> optionPropertyComponent = new Dictionary<PropertyInfo, (AeDropdownPropertyInput<T>, Action)>();
@@ -57,7 +57,7 @@ namespace Elemental.Components
                     .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
         
         public List<string> LockedCategories => categoryLocks;
-        
+     
 
 
         public bool IsCategoryLocked(string category)
@@ -310,9 +310,10 @@ namespace Elemental.Components
                 : _validator(model);
         }
 
-        public void SetValidator(Func<T, Dictionary<string, List<string>>> customValidator)
+        public void SetValidator<T1>(Func<T1, Dictionary<string, List<string>>> validator)
         {
-            throw new NotImplementedException();
+            _validator = (Func<T, Dictionary<string, List<string>>>) Convert.ChangeType(validator,
+                typeof(Func<T1, Dictionary<string, List<string>>>));
         }
         
         public bool CustomValidation => _validator != null;
