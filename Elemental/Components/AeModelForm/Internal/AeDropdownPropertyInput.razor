@@ -122,7 +122,7 @@ else
 
     public int InputSelectIndex
     {
-        get => currentIndex; //PropertyInfo.GetValue(Instance);
+        get => currentIndex; 
         set
         {
             if (currentIndex != value)
@@ -133,8 +133,12 @@ else
                     PropertyInfo.SetValue(Instance, ActualValues[currentIndex]);
                     valueChangedCallback.InvokeAsync(ActualValues[currentIndex]);
                 }
+                else if (currentIndex == NO_VALUE)
+                {
+                    PropertyInfo.SetValue(Instance, string.Empty);
+                    valueChangedCallback.InvokeAsync(string.Empty);
+                }
             }
-            //OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         }
     }
 
