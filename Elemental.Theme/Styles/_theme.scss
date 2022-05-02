@@ -1,5 +1,5 @@
 ﻿@use 'body/body';
-@use 'button/button';
+//@use 'button/button';
 @use 'card/card';
 @use 'checkbox/checkbox';
 @use 'collapse/collapse';
@@ -35,7 +35,7 @@
 
 @mixin custom($overrides) {
     @include body.configure(map-get($overrides, 'body'));
-    @include button.configure(map-get($overrides, 'button'));
+    //@include button.configure(map-get($overrides, 'button'));
     @include card.configure(map-get($overrides, 'card'));
     @include checkbox.configure(map-get($overrides, 'checkbox'));
     @include collapse.configure(map-get($overrides, 'collapse'));
@@ -69,7 +69,7 @@
 
 @mixin styles {
   @include body.styles;
-  @include button.styles;
+  //@include button.styles;
   @include card.styles;
   @include checkbox.styles;
   @include collapse.styles;
