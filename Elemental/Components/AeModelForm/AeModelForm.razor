@@ -92,18 +92,19 @@
                                             <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
                                                 <CascadingValue Value="@NotifyArg" Name="Notifier">
                                                     <CascadingValue Value="@LabelsOnTop" Name="LabelsOnTop">
-                                                        @if (IsReadOnly || isCategoryLocked)
-                                        {
-                                                      <AePropertyValueDisplay PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
-                                        }                                        
-                                        else
-                                        {
-                                            if (ModelFormContext.IsDropDown(prop))
-                                            {
-                                                                <AeDropdownPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                            }
-                                            else
-                                            {
+                                                        <CascadingValue Value="@AreFieldsNullable" Name="AreFieldsNullable">
+                                                @if (IsReadOnly || isCategoryLocked)
+                                                {
+                                                                <AePropertyValueDisplay PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                }                                        
+                                                else
+                                                {
+                                                if (ModelFormContext.IsDropDown(prop))
+                                                {
+                                                                    <AeDropdownPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
+                                                }
+                                                else
+                                                {
                                                 if (GetNonNullableType(prop) == typeof(string))
                                                 {
                                                                             <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" Editable="prop.IsEditable()" />
@@ -158,7 +159,8 @@
                                                 }
                                             }
                                         }
-                                         </CascadingValue>
+                                                        </CascadingValue>
+                                                    </CascadingValue>
                                                 </CascadingValue>
                                             </CascadingValue>
                                         </CascadingValue>
@@ -313,6 +315,8 @@
     [Parameter]
     public bool LabelsOnTop { get; set; }
 
+    [Parameter]
+    public bool AreFieldsNullable { get; set; }
     [Parameter]
     public bool Flexbox { get; set; }
 
