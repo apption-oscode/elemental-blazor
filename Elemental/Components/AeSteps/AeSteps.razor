@@ -80,16 +80,16 @@
     [Parameter]
     public RenderFragment FailedIcon { get; set; } = @<AeIcon Icon="close"></AeIcon>;
 
-    private RenderFragment getIcon((int, T) item)
+    private RenderFragment getIcon((int, T) icon)
     {
-        switch (CurrentStepState(item.Item2))
+        switch (CurrentStepState(icon.Item2))
         {
             case StepState.Passed:
                 return PassedIcon;
             case StepState.Failed:
                 return FailedIcon;
             default:
-                return @<div>@(item.Item1 + 1)</div>;
+                return @<div>@(icon.Item1 + 1)</div>;
         }
     }
 
