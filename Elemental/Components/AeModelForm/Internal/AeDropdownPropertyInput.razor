@@ -39,6 +39,9 @@ else
 
     [Parameter] public ModelFormStyle ModelFormStyle { get; set; }
 
+    [CascadingParameter(Name = "AreFieldsNullable")]
+    public bool AreFieldsNullable { get; set; } = false;
+
     public const int NO_VALUE = -1;
 
     private List<string> ValidDisplayValues { get; set; }
@@ -122,7 +125,7 @@ else
 
     public int InputSelectIndex
     {
-        get => currentIndex; //PropertyInfo.GetValue(Instance);
+        get => currentIndex; 
         set
         {
             if (currentIndex != value)
@@ -133,8 +136,13 @@ else
                     PropertyInfo.SetValue(Instance, ActualValues[currentIndex]);
                     valueChangedCallback.InvokeAsync(ActualValues[currentIndex]);
                 }
+                else if (currentIndex == NO_VALUE)
+                {
+                    var instanceValue = AreFieldsNullable ? null : string.Empty;
+                    PropertyInfo.SetValue(Instance, instanceValue);
+                    valueChangedCallback.InvokeAsync(instanceValue);
+                }
             }
-            //OnChangeCallback.InvokeAsync(new ModelFormChangeArgs() { Context = ModelFormContext<T>, PropertyInfo = PropertyInfo, EditContext = new EditContext(PropertyInfo) });
         }
     }
 
