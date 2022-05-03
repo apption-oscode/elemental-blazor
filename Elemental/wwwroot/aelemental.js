@@ -30445,4 +30445,5 @@ function provideFASTDesignSystem(element) {
 
 provideFASTDesignSystem()
     .withPrefix("ae")
+    .register(fastCheckbox())
     .register(fastButton());

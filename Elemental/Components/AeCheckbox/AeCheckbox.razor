@@ -1,62 +1,28 @@
-﻿@namespace Elemental.Components
+﻿@inherits HtmlElement
 
-<div class="ae checkbox" @onclick="OnClick">    
-    @if (IsChecked && HasValue)
-    {
-        @if (CheckedIcon == null)
-        {
-            <AeIcon Icon="check"></AeIcon>
-        }
-        else
-        {
-            <i class="@CheckedIcon"></i>
+@namespace Elemental.Components
 
-        }
-    }
-    @if (!HasValue)
-    {
-        @if (NullIcon == null)
-        {
-            <AeIcon Icon="subtract"></AeIcon>
-        }
-        else
-        {
-            <i class="@NullIcon"></i>
-
-        }
-    }
-    @if (HasValue && IsChecked == false && UncheckedIcon != null)
-    {
-        <i class="@UncheckedIcon"></i>
-    }
-</div>
+<ae-checkbox @onclick="OnClick"
+             checked="@Checked"
+             >
+    @ChildContent
+</ae-checkbox>
 
 @code {
 
     [Parameter]
-    public bool IsChecked { get; set; }
+    public bool Checked { get; set; }
+    
+    [Parameter]
+    public bool Indeterminate { get; set; }
 
     [Parameter]
-    public bool HasValue { get; set; } = true;
-
-    [Parameter]
-    public EventCallback<bool> IsCheckedChanged { get; set; }
-
-    [Parameter]
-    public EventCallback<bool> HasValueChanged { get; set; }
+    public EventCallback<bool> CheckedChanged { get; set; }
 
     private async Task OnClick()
     {
-        IsChecked = !IsChecked;
-        await IsCheckedChanged.InvokeAsync(IsChecked);
+        Checked = !Checked;
+        Indeterminate = false;
+        await CheckedChanged.InvokeAsync(Checked);
     }
-
-    [Parameter]
-    public string CheckedIcon { get; set; }
-
-    [Parameter]
-    public string UncheckedIcon { get; set; }
-
-    [Parameter]
-    public string NullIcon { get; set; }
 }

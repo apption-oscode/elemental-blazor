@@ -8,14 +8,9 @@
   Title: Basic Checkbox
   Description: A checkbox that has two binary states.
 *@
-<div>
-  <AeCheckbox @bind-IsChecked="IsChecked"/>
-  <AeTypography>Is checked: @IsChecked</AeTypography>
-</div>
 
+<AeCheckbox @bind-Checked="_isChecked">Is checked: @_isChecked</AeCheckbox>
 
 @code {
-
-    private bool IsChecked { get; set; }
-
+    private bool _isChecked;
 }
