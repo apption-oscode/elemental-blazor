@@ -1,4 +1,6 @@
-﻿@*
+﻿@using System.Text.Json
+@using System.Text.Json.Serialization
+@*
   Copyright (c) 2020 Apption Corporation
 
   This Source Code Form is subject to the terms of the Mozilla Public
@@ -8,111 +10,135 @@
   Title: Selectable Tree View
   Description: A tree view that replaces icons with checkboxes with three states
 *@
+<AeTreeViewSelectable
+    T="PlaceholderItem" 
+    Roots="_roots"
+    FetchChildren="GetChildren"
+    RenderNode="RenderNode"
+    IsChecked="IsChecked"
+    IsIndeterminate="IsIndeterminate"
+    ItemChecked="ItemChecked"/>
+
+
 <div>
-  <AeTreeViewSelectable T="Item" Roots="_roots" FetchChildren="GetChildren" RenderNode="RenderNode" IsChecked="IsChecked"
-  ItemChecked="ItemChecked" />
+    <div>Json Item:</div>
+    @JsonSerializer.Serialize(_roots, new JsonSerializerOptions()
+    {
+        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+        WriteIndented = true
+    });
 </div>
 
-
 @code {
-    private List<Item> _roots = new List<Item>();
+    private List<PlaceholderItem> _roots = new();
 
-    public List<Item> GetChildren(Item root)
+    private List<PlaceholderItem> GetChildren(PlaceholderItem root)
     {
-        return root.children;
+        return root.Children;
+    }
+    
+    private bool IsChecked(PlaceholderItem item){
+        return item.IsChecked;
+    }
+    
+    private bool IsIndeterminate(PlaceholderItem item){
+        return item.IsIndeterminate;
     }
 
-    public string RenderNode(Item item){
-        return item.name;
-    }
-
-    public bool? IsChecked(Item item){
-        return item.isChecked;
-    }
-
-    public void ItemChecked((Item item, bool isChecked) item)
+    private string RenderNode(PlaceholderItem placeholderItem)
     {
-        item.item.isChecked = item.isChecked;
-        setChildren(item.item.children, item.isChecked);
-        setParent(item.item.parent);
+        return placeholderItem.Name;
     }
 
-    private void setChildren(List<Item> children, bool isChecked)
+    private void ItemChecked((PlaceholderItem placeholderItem, bool isChecked) tuple)
     {
-        if (children == null)
+        tuple.placeholderItem.IsChecked = tuple.isChecked;
+        tuple.placeholderItem.IsIndeterminate = false;
+        UpdateChildren(tuple.placeholderItem);
+        UpdateParents(tuple.placeholderItem);
+    }
+
+    private void UpdateChildren(PlaceholderItem placeholderItem)
+    {
+        if (placeholderItem.Children == null)
             return;
-        foreach(var item in children){
-            item.isChecked = isChecked;
-            setChildren(item.children, isChecked);
-        }
         
+        foreach (var item in placeholderItem.Children)
+        {
+            item.IsChecked = placeholderItem.IsChecked;
+            UpdateChildren(item);
+        }
     }
-    private void setParent(Item parent)
+
+    private void UpdateParents(PlaceholderItem placeholderItem)
     {
+        var parent = placeholderItem?.Parent;
         if (parent == null)
             return;
-        var childrenCountChecked = parent.children.Where(x => x.isChecked == true).Count();
-        if (childrenCountChecked < parent.children.Count() && 0 < childrenCountChecked || parent.children.Where(x => x.isChecked == null).Count() > 1)
-        {
-            parent.isChecked = null;
-            setParent(parent.parent);
-        } else if (childrenCountChecked == 0)
-        {
-            parent.isChecked = false;
-            setParent(parent.parent);
-        } else if (childrenCountChecked == parent.children.Count())
-        {
-            parent.isChecked = true;
-            setParent(parent.parent);
-        }
-    }
+
+        // TODO: Optimize this check
+        parent.IsChecked = AllChildrenChecked(parent);
+        parent.IsIndeterminate = !parent.IsChecked && parent.Children.Any(x => x.IsChecked);
         
+        UpdateParents(parent);
+    }
+
+    private bool AllChildrenChecked(PlaceholderItem placeholderItem)
+    {
+        return placeholderItem.Children?.All(AllChildrenChecked) ?? placeholderItem.IsChecked;
+    }
 
     protected override void OnInitialized()
     {
-        var table1 = new Item(1, "table1", "table", false, null);
-        var table2 = new Item(2, "table1", "table", false, null);
-        var table3= new Item(3, "table1", "table", false, null);
-        var table4 = new Item(4, "table1", "table", false, null);
-        var database1 = new Item(5, "database1", "database-2", false, new List<Item>(new[] {table1}));
-        var database2 = new Item(6, "database2", "database-2", false, new List<Item>(new[] {table2}));
-        var database3 = new Item(7, "database1", "database-2", false, new List<Item>(new[] {table3}));
-        var database4 = new Item(8, "database2", "database-2", false, new List<Item>(new[] {table4}));
-        var server1 = new Item(9, "server1", "server", false, new List<Item>(new[] {database1, database2}));
-        var server2 = new Item(10, "server2", "server", false, new List<Item>(new[] {database3, database4}));
-        table1.parent = database1;
-        table2.parent = database2;
-        table3.parent = database3;
-        table4.parent = database4;
-        database1.parent = server1;
-        database2.parent = server1;
-        database3.parent = server2;
-        database4.parent = server2;
-        _roots.AddRange(new[] { server1, server2 });
+        var table1 = new PlaceholderItem(1, "table1", "table", false, null);
+        var table2 = new PlaceholderItem(2, "table2", "table", false, null);
+        var table3 = new PlaceholderItem(3, "table3", "table", false, null);
+        var table4 = new PlaceholderItem(4, "table4", "table", false, null);
+        var database1 = new PlaceholderItem(5, "database1", "database-2", false, new List<PlaceholderItem>(new[] {table1}));
+        var database2 = new PlaceholderItem(6, "database2", "database-2", false, new List<PlaceholderItem>(new[] {table2}));
+        var database3 = new PlaceholderItem(7, "database3", "database-2", false, new List<PlaceholderItem>(new[] {table3}));
+        var database4 = new PlaceholderItem(8, "database4", "database-2", false, new List<PlaceholderItem>(new[] {table4}));
+        var server1 = new PlaceholderItem(9, "server1", "server", false, new List<PlaceholderItem>(new[] {database1, database2}));
+        var server2 = new PlaceholderItem(10, "server2", "server", false, new List<PlaceholderItem>(new[] {database3, database4}));
+        table1.Parent = database1;
+        table2.Parent = database2;
+        table3.Parent = database3;
+        table4.Parent = database4;
+        database1.Parent = server1;
+        database2.Parent = server1;
+        database3.Parent = server2;
+        database4.Parent = server2;
+        _roots.AddRange(new[] {server1, server2});
     }
 
-    public class Item
+    public class PlaceholderItem
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string icon{ get; set; }
-        public bool? isChecked{ get; set; }
-        public List<Item> children {  get;  set; } 
-        public Item parent{ get; set; }
+        private int Id { get; set; }
+        public string Name { get; set; }
+        public string Icon { get; set; }
+        public bool IsChecked { get; set; }
+        public bool IsIndeterminate { get; set; }
+        public List<PlaceholderItem> Children { get; set; }
+        public PlaceholderItem Parent { get; set; }
 
-        public Item(int id, string name, string icon, bool isChecked, List<Item> children){
-            this.id = id;
-            this.name = name;
-            this.icon = icon;
-            this.isChecked = (bool?)isChecked;
-            this.children =  children;
+        public PlaceholderItem(int id, string name, string icon, bool isChecked, List<PlaceholderItem> children)
+        {
+            Id = id;
+            Name = name;
+            Icon = icon;
+            IsChecked = isChecked;
+            Children = children;
         }
 
         public override bool Equals(object obj)
         {
-            return this.id.Equals((obj as Item)?.id);
+            return Id.Equals((obj as PlaceholderItem)?.Id);
         }
 
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Name, Icon, IsChecked, Children, Parent);
+        }
     }
 
 }
