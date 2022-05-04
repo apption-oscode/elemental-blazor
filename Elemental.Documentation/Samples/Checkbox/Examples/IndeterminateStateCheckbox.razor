@@ -1,0 +1,23 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Indeterminate Checkbox
+    Description: A checkbox that has the indeterminate state. Represents a checkbox that is partially checked or unchecked.
+*@
+<AeCheckbox @bind-Checked="@_checked" Indeterminate="@_indeterminate">
+    Toggle Checked (@_checked)
+</AeCheckbox>
+
+<AeCheckbox @bind-Checked="@_indeterminate">
+    Toggle Indeterminate (@_indeterminate)
+</AeCheckbox>
+
+
+@code {
+    private bool _checked;
+    private bool _indeterminate = true;
+}
