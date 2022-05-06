@@ -43,11 +43,10 @@
         <EditForm Model="Model" OnSubmit="@OnSubmit">
             @if (ModelFormContext.CustomValidation)
             {
-                    <AeCustomValidationValidator 
-                        @ref="_customValidationValidator" 
-                        Model="Model"
-                        ModelFormContext="ModelFormContext"
-                        />
+                <AeCustomValidationValidator
+                    @ref="_customValidationValidator"
+                    Model="Model"
+                    ModelFormContext="ModelFormContext"/>
             }
             else
             {
@@ -101,77 +100,78 @@
                                 <div class=@colClass>
                                     <CascadingValue Value="@OnChange" Name="OnChangeCallback">
                                         <CascadingValue Value="@LocalizerFunction" Name="LocalizerFunction">
-                                          <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
-                                            <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
-                                                <CascadingValue Value="@NotifyArg" Name="Notifier">
-                                                    <CascadingValue Value="@LabelsOnTop" Name="LabelsOnTop">
-                                                        <CascadingValue Value="@AreFieldsNullable" Name="AreFieldsNullable">
-                                                @if (IsReadOnly || isCategoryLocked)
-                                                {
-                                                                <AePropertyValueDisplay PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
-                                                }                                        
-                                                else
-                                                {
-                                                if (ModelFormContext.IsDropDown(prop))
-                                                {
-                                                                    <AeDropdownPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                else
-                                                {
-                                                if (GetNonNullableType(prop) == typeof(string))
-                                                {
-                                                                            <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" Editable="prop.IsEditable()" />
-                                                }
-                                                if (prop.PropertyType == typeof(int))
-                                                {
-                                                                            <AeNumberPropertyInput T=int PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                if (prop.PropertyType == typeof(long))
-                                                {
-                                                                            <AeNumberPropertyInput T=long PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                if (prop.PropertyType == typeof(float))
-                                                {
-                                                                            <AeNumberPropertyInput T=float PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                if (prop.PropertyType == typeof(double))
-                                                {
-                                                                            <AeNumberPropertyInput T=double PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (prop.PropertyType == typeof(Decimal))
-                                                {
-                                                                            <AeNumberPropertyInput T=Decimal PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (prop.PropertyType == typeof(int?))
-                                                {
-                                                                            <AeNumberPropertyInput T=int? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (prop.PropertyType == typeof(long?))
-                                                {
-                                                                            <AeNumberPropertyInput T=long? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (prop.PropertyType == typeof(float?))
-                                                {
-                                                                            <AeNumberPropertyInput T=float? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (prop.PropertyType == typeof(double?))
-                                                {
-                                                                            <AeNumberPropertyInput T=double? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (prop.PropertyType == typeof(Decimal?))
-                                                {
-                                                                            <AeNumberPropertyInput T=Decimal? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (GetNonNullableType(prop) == typeof(bool))
-                                                {                                                    
-                                                                            <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                                @if (GetNonNullableType(prop) == typeof(DateTime))
-                                                {
-                                                                            <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" />
-                                                }
-                                            }
-                                        }
+                                            <CascadingValue Value="@ModelFormContext" Name="ModelFormContext">
+                                                <CascadingValue Value="@LabelForPropertyFunc" Name="LabelForPropertyFunc">
+                                                    <CascadingValue Value="@NotifyArg" Name="Notifier">
+                                                        <CascadingValue Value="@LabelsOnTop" Name="LabelsOnTop">
+                                                            <CascadingValue Value="@AreFieldsNullable" Name="AreFieldsNullable">
+                                                                @if (IsReadOnly || isCategoryLocked)
+                                                                {
+                                                                    <AePropertyValueDisplay PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (ModelFormContext.IsDropDown(prop))
+                                                                    {
+                                                                        <AeDropdownPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (GetNonNullableType(prop) == typeof(string))
+                                                                        {
+                                                                            <AeStringPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle" Editable="prop.IsEditable()"/>
+                                                                        }
+                                                                        if (prop.PropertyType == typeof(int))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=int PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        if (prop.PropertyType == typeof(long))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=long PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        if (prop.PropertyType == typeof(float))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=float PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        if (prop.PropertyType == typeof(double))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=double PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (prop.PropertyType == typeof(Decimal))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=Decimal PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (prop.PropertyType == typeof(int?))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=int? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (prop.PropertyType == typeof(long?))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=long? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (prop.PropertyType == typeof(float?))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=float? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (prop.PropertyType == typeof(double?))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=double? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (prop.PropertyType == typeof(Decimal?))
+                                                                        {
+                                                                            <AeNumberPropertyInput T=Decimal? PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (GetNonNullableType(prop) == typeof(bool))
+                                                                        {
+                                                                            <AeBoolPropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                        @if (GetNonNullableType(prop) == typeof(DateTime))
+                                                                        {
+                                                                            <AeDateTimePropertyInput PropertyInfo="prop" Instance="Model" ModelFormStyle="ModelFormStyle"/>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            </CascadingValue>
                                                         </CascadingValue>
                                                     </CascadingValue>
                                                 </CascadingValue>
@@ -336,6 +336,7 @@
 
     [Parameter]
     public bool AreFieldsNullable { get; set; }
+
     [Parameter]
     public bool Flexbox { get; set; }
 
@@ -379,7 +380,7 @@
             return;
         }
 
-        var isValid = ModelFormContext.CustomValidation 
+        var isValid = ModelFormContext.CustomValidation
             ? _customValidationValidator!.Validate() : editContext.Validate();
 
         if (isValid)
