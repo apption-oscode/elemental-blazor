@@ -1,0 +1,53 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Search Input With Results
+    Description: Adds a dropdown with search results. Results are only visible with the search input is in focus. Try it out by typing in the search box.
+*@
+
+<AeTypography>Search value (500ms delay): @_searchValue</AeTypography>
+<AeTypography>Selected value: @_selectedValue</AeTypography>
+
+<AeSearchInputWithResults T="string" Placeholder="Search..." OnInputChange="HandleSearch" OnResultSelected="HandleResultSelected" @bind-SearchResults="_searchResults"/>
+
+
+@code {
+
+    private string _searchValue;
+    private string _selectedValue;
+    private List<string> _searchResults = new();
+    private List<string> _allSearchableStrings = new()
+    {
+            "Search Result 1",
+            "Search Result 2",
+            "Very Very Very Very Very Very Very Very Very Very Long Search Result 3",
+            "Search Result 4",
+            "Search Result 5",
+            "Search Result 6",
+            "Search Result 7",
+            "Search Result 8",
+            "Search Result 9",
+            "Search Result 10",
+            "Search Result 11",
+            "Search Result 12",
+    };
+    private Random _random = new();
+
+    private void HandleSearch(string newValue)
+    {
+        _searchValue = newValue;
+        _searchResults = _allSearchableStrings.OrderBy(s => _random.Next()).Take(_random.Next(1, 13)).ToList();
+        StateHasChanged();
+    }
+
+    private void HandleResultSelected(string value)
+    {
+        _selectedValue = value;
+        StateHasChanged();
+    }
+
+}

@@ -13,8 +13,7 @@ jobs:
     clean: all
     
   variables:
-    NetCoreVersion: '5.0.x'
-    MSBuildEnableWorkloadResolver: 'false'
+    NetCoreVersion: '6.0.x'
 
   steps:
   - task: AzureKeyVault@1
@@ -27,10 +26,8 @@ jobs:
   - task: UseDotNet@2
     displayName: 'Use .NET Core sdk $(NetCoreVersion)'
     inputs:
-      packageType: 'sdk'
-      useGlobalJson: true
-#      version: '$(NetCoreVersion)'
-#      includePreviewVersions: true
+     version: '$(NetCoreVersion)'
+     includePreviewVersions: true
 
   - task: NodeTool@0
     displayName: 'install node'
@@ -57,6 +54,7 @@ jobs:
 
   - task: DotNetCoreCLI@2
     displayName: 'nuget push elemental'
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       command: custom
       custom: nuget
@@ -71,6 +69,7 @@ jobs:
 
   - task: DotNetCoreCLI@2
     displayName: 'nuget push theme'
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       command: custom
       custom: nuget

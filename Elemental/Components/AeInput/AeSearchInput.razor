@@ -19,9 +19,11 @@
 
 
 <div class="@_classname" @attributes="InputAttributesWithoutClass">
-    <i class="@_searchIconClassname"></i>
-    <input class="ae input search" type="text" @bind-value="_inputValue" @bind-value:event="oninput" @onkeyup="HandleKeyUp" placeholder="@Placeholder" />
-    <i class="@_clearIconClassname" @onclick="ClearSearch"></i>
+    <div class="ae search-bar">
+        <i class="@_searchIconClassname"></i>
+        <input class="ae input search" type="text" @bind-value="_inputValue" @bind-value:event="oninput" @onkeyup="HandleKeyUp" placeholder="@Placeholder" />
+        <i class="@_clearIconClassname" @onclick="ClearSearch"></i>
+    </div>
 </div>
 
 @code {
