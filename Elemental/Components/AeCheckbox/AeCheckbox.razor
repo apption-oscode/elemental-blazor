@@ -1,62 +1,42 @@
-﻿@namespace Elemental.Components
+﻿@inherits HtmlElement
 
-<div class="ae checkbox" @onclick="OnClick">    
-    @if (IsChecked && HasValue)
-    {
-        @if (CheckedIcon == null)
-        {
-            <AeIcon Icon="check"></AeIcon>
-        }
-        else
-        {
-            <i class="@CheckedIcon"></i>
+@inject IJSRuntime _jsRuntime;
 
-        }
-    }
-    @if (!HasValue)
-    {
-        @if (NullIcon == null)
-        {
-            <AeIcon Icon="subtract"></AeIcon>
-        }
-        else
-        {
-            <i class="@NullIcon"></i>
+@namespace Elemental.Components
 
-        }
-    }
-    @if (HasValue && IsChecked == false && UncheckedIcon != null)
-    {
-        <i class="@UncheckedIcon"></i>
-    }
-</div>
+<ae-checkbox @onclick="OnClick"
+             checked="@Checked"
+             @ref="@_checkboxElement">
+    @ChildContent
+</ae-checkbox>
 
 @code {
 
     [Parameter]
-    public bool IsChecked { get; set; }
+    public bool Checked { get; set; }
 
     [Parameter]
-    public bool HasValue { get; set; } = true;
+    public bool Indeterminate { get; set; }
 
     [Parameter]
-    public EventCallback<bool> IsCheckedChanged { get; set; }
+    public EventCallback<bool> CheckedChanged { get; set; }
 
-    [Parameter]
-    public EventCallback<bool> HasValueChanged { get; set; }
+    private ElementReference _checkboxElement;
+    private IJSObjectReference? _module;
 
     private async Task OnClick()
     {
-        IsChecked = !IsChecked;
-        await IsCheckedChanged.InvokeAsync(IsChecked);
+        Checked = !Checked;
+        Indeterminate = false;
+        await CheckedChanged.InvokeAsync(Checked);
     }
 
-    [Parameter]
-    public string CheckedIcon { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
 
-    [Parameter]
-    public string UncheckedIcon { get; set; }
+        _module = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/AElemental.Blazor/Components/AeCheckbox/AeCheckbox.razor.js");
+        await _module.InvokeVoidAsync("setIndeterminate", _checkboxElement, Indeterminate);
+    }
 
-    [Parameter]
-    public string NullIcon { get; set; }
 }

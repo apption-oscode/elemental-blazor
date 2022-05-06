@@ -21,7 +21,7 @@
                 } 
                 @if (isSelectable)
                 {
-                    <AeCheckbox IsChecked="IsItemChecked" IsCheckedChanged="(async (isCheck) => await CheckChanged(isCheck))" HasValue="HasCheckboxValue"/>
+                    <AeCheckbox Checked="@_isItemChecked" CheckedChanged="@CheckChanged" Indeterminate="_isIndeterminate"/>
                 }
                 <div class="tree-view-node-text @(NodeIsClickable(Root)? "clickable" : "") @(IsBold(Root)? "bold" : "")" @onclick="() => NodeClicked.InvokeAsync(Root)">
                     @nodeString
@@ -68,7 +68,10 @@
     public EventCallback<(T, bool)> ItemChecked { get; set; }
 
     [Parameter]
-    public Func<T, bool?> IsChecked { get; set; }
+    public Func<T, bool> IsChecked { get; set; }
+    
+    [Parameter]
+    public Func<T, bool> IsIndeterminate { get; set; }
 
     [Parameter]
     public Func<T, bool> IsBold { get; set; }
@@ -93,36 +96,52 @@
     bool hasChildren;
     bool isGeneric;
 
-    private bool IsItemChecked { get; set; }
+    private bool _isItemChecked;
+    private bool _isIndeterminate;
 
-    private bool HasCheckboxValue { get; set; }
-
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        checkboxId = "checkbox-" + this.GetHashCode();
+        checkboxId = "checkbox-" + GetHashCode();
         if (ItemChecked.HasDelegate)
         {
             isSelectable = true;
         }
-        children = FetchChildren(Root);
+        SetupPrivateProperties();
+
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        SetupPrivateProperties();
+        StateHasChanged();
+    }
+
+    private void SetupPrivateProperties()
+    {
         if (RenderNode != null)
             nodeString = RenderNode(Root);
         if (RenderIcon != null) {
             nodeIcon = RenderIcon(Root);
             isIcon = true;
         }
-        hasChildren =  children != null && children.Count() > 0;
+        
+        children = FetchChildren(Root);
+        hasChildren =  children != null && children.Any();
         isGeneric = RenderItem != null;
         if (IsChecked is not null)
         {
-            IsItemChecked = IsChecked(Root) == true;
-            HasCheckboxValue = true;
+            _isItemChecked = IsChecked(Root);
+        }
+        if (IsIndeterminate is not null)
+        {
+            _isIndeterminate = IsIndeterminate(Root);
         }
     }
 
-    private async Task CheckChanged(bool? value)
+    private async Task CheckChanged(bool value)
     {
-        await ItemChecked.InvokeAsync((Root,value == false));
+        await ItemChecked.InvokeAsync((Root,value));
     }
 
 }

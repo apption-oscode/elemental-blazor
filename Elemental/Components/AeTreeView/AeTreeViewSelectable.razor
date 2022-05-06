@@ -11,34 +11,43 @@
 @typeparam T
 @inherits NonGenericTreeView<T>
 
-@if (Roots != null && Roots.Count() > 0)
+@if (Roots != null && Roots.Any())
 {
     <ul class="ae tree-view">
-
-
         @foreach (var item in Roots)
         {
-
-            <TreeItem T="T" FetchChildren="FetchChildren" RenderNode="RenderNode" ItemChecked="ItemSelected" IsChecked="IsChecked"
-              Root="item" NodeClicked="NodeClicked" IsCollapsed="IsCollapsed" ToggleCollapsed="ToggleCollapsed"
-              IsBold="IsBold" NodeIsClickable="NodeIsClickable" />
+            <TreeItem 
+                T="T" 
+                FetchChildren="FetchChildren" 
+                RenderNode="RenderNode" 
+                ItemChecked="ItemSelected" 
+                IsChecked="IsChecked"
+                IsIndeterminate="IsIndeterminate"
+                Root="item" 
+                NodeClicked="NodeClicked" 
+                IsCollapsed="IsCollapsed" 
+                ToggleCollapsed="ToggleCollapsed"
+                IsBold="IsBold" 
+                NodeIsClickable="NodeIsClickable" 
+            />
         }
     </ul>
 }
 
 @code {
 
-
     [Parameter]
     public EventCallback<(T, bool)> ItemChecked { get; set; }
 
     [Parameter]
-    public Func<T, bool?> IsChecked { get; set; }
+    public Func<T, bool> IsChecked { get; set; }
+    
+    [Parameter]
+    public Func<T, bool> IsIndeterminate { get; set; }
 
     private async Task ItemSelected((T item, bool isSelected) tuple)
     {
         await ItemChecked.InvokeAsync(tuple);
         StateHasChanged();
     }
-
 }
