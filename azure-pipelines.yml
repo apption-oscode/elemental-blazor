@@ -1,6 +1,8 @@
 variables:
 - name: nugetBuildName
   value: '1.5.$(date:yy)$(DayOfYear)$(rev:.r)'
+- name: DotnetVersion
+  value: '6.0.x'
 
 trigger:
   batch: true
@@ -21,10 +23,7 @@ jobs:
     clean: all
 
   steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
-
   - script: |
-      echo Add other tasks to build, test, and deploy your project.
-      echo See https://aka.ms/yaml
-    displayName: 'Run a multi-line script'
+      echo source branch name is $(Build.SourceBranchName)
+      echo dotnet version is $(DotnetVersion)
+    displayName: 'Run a one-line script'
