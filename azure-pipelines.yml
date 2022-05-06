@@ -1,0 +1,30 @@
+variables:
+- name: nugetBuildName
+  value: '1.5.$(date:yy)$(DayOfYear)$(rev:.r)'
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - develop
+
+pr:
+- master
+- develop
+
+jobs:
+- job: LinuxJob
+  pool:
+    name: Apption Pool
+  workspace:
+    clean: all
+
+  steps:
+  - script: echo Hello, world!
+    displayName: 'Run a one-line script'
+
+  - script: |
+      echo Add other tasks to build, test, and deploy your project.
+      echo See https://aka.ms/yaml
+    displayName: 'Run a multi-line script'
