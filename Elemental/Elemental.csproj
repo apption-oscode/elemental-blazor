@@ -78,7 +78,6 @@
         <None Include="..\Elemental.Theme\Styles\typography\_typography.scss" Link="Components\AeTypography\_typography.scss" />
 
     </ItemGroup>
-
     <ItemGroup>
         <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
         <None Include="wwwroot\js\third-party\jquery.min.js" />

@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
 
 namespace Elemental.Components
 {
@@ -34,7 +35,7 @@ namespace Elemental.Components
 
         public bool HasPropertyChanged<T>(Expression<Func<T, object>> expression)
         {
-            return AeModelFormTools.WithPropertyExpression<T>(expression) == PropertyInfo;
+            return AeModelFormTools.WithPropertyExpression(expression) == PropertyInfo;
         }
 
     }
@@ -56,6 +57,9 @@ namespace Elemental.Components
                     .Where(p => p.visibleProperties.Any(l => l.Count > 0)).ToList();
         
         public List<string> LockedCategories => categoryLocks;
+     
+
+
         public bool IsCategoryLocked(string category)
         {
             return categoryLocks.Contains(category);
@@ -298,6 +302,20 @@ namespace Elemental.Components
                 propertyVisibility[property] = isVisible;
         }
 
+        private Func<T, Dictionary<string, List<string>>>? _validator;
+        public Dictionary<string, List<string>> Validate(T model)
+        {
+            return _validator is null 
+                ? new Dictionary<string, List<string>>() 
+                : _validator(model);
+        }
+
+        public void SetValidator<T1>(Func<T1, Dictionary<string, List<string>>> validator)
+        {
+            _validator = (Func<T, Dictionary<string, List<string>>>) Convert.ChangeType(validator,
+                typeof(Func<T1, Dictionary<string, List<string>>>));
+        }
         
+        public bool CustomValidation => _validator != null;
     }
 }
