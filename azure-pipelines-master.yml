@@ -45,6 +45,7 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'nuget push elemental'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')
   inputs:
     command: custom
     custom: nuget
@@ -59,6 +60,7 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'nuget push theme'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')
   inputs:
     command: custom
     custom: nuget
