@@ -1,0 +1,42 @@
+﻿@inherits HtmlElement
+
+@inject IJSRuntime _jsRuntime;
+
+@namespace AElemental.Components
+
+<ae-checkbox @onclick="OnClick"
+             checked="@Checked"
+             @ref="@_checkboxElement">
+    @ChildContent
+</ae-checkbox>
+
+@code {
+
+    [Parameter]
+    public bool Checked { get; set; }
+
+    [Parameter]
+    public bool Indeterminate { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> CheckedChanged { get; set; }
+
+    private ElementReference _checkboxElement;
+    private IJSObjectReference? _module;
+
+    private async Task OnClick()
+    {
+        Checked = !Checked;
+        Indeterminate = false;
+        await CheckedChanged.InvokeAsync(Checked);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        _module = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/AElemental.Blazor/Components/AeCheckbox/AeCheckbox.razor.js");
+        await _module.InvokeVoidAsync("setIndeterminate", _checkboxElement, Indeterminate);
+    }
+
+}
