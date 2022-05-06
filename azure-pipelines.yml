@@ -1,6 +1,8 @@
+name: '1.5.$(date:yy)$(DayOfYear)$(rev:.r)'
+
 variables:
 - name: VersionName
-  value: '2.0.$(date:yyyyMMdd)$(Rev:.r)'
+  value: $(name)
 - name: DotnetVersion
   value: '6.0.x'
 
