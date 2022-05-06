@@ -1,17 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
-
-  <!-- from https://jacobdixon.uk/2020/10/compile-scss-at-build-time-visual-studio/ -->
-  <Target Condition="'$(Configuration)' == 'Debug'" Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="npm run build-css" />
-  </Target>
 
   <ItemGroup>
     <Content Update="Samples\**">
@@ -19,24 +14,14 @@
     </Content>
   </ItemGroup>
 
-  <!-- from https://stackoverflow.com/questions/35435041/run-npm-install-only-when-needed-and-or-partially -->
-  <PropertyGroup>
-    <!-- File with mtime of last successful npm install -->
-    <NpmInstallStampFile>node_modules/.install-stamp</NpmInstallStampFile>
-  </PropertyGroup>
-  <Target Condition="'$(Configuration)' == 'Debug'" Name="NpmInstall" BeforeTargets="BeforeBuild" Inputs="package.json" Outputs="$(NpmInstallStampFile)">
-    <Exec Command="npm i sass --save-dev" />
-    <Touch Files="$(NpmInstallStampFile)" AlwaysCreate="true" />
-  </Target>
-
   <ItemGroup>
     <UpToDateCheckInput Include="Styles/**/*.scss" Set="Css" />
     <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <UpToDateCheckBuilt Remove="wwwroot\css\elemental-docs.min.css" />
   </ItemGroup>
@@ -53,15 +38,6 @@
     <Content Remove="Samples\ModelForm\Examples\FormWithCategories.razor" />
     <Content Remove="Samples\ModelForm\Examples\InteractiveDropdowns.razor" />
     <Content Remove="Samples\ModelForm\Examples\InteractiveForm.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="package-lock.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Include="package.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
