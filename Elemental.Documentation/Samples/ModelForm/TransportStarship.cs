@@ -44,6 +44,8 @@ namespace Elemental.Documentation.Data
 
         [Required]
         [AeLabel("Production Date")]
+        [AeFormCategory("Details", CategoryOrder = 2)]
+        [DisplayFormat(DataFormatString ="d")]
         public DateTime ProductionDate { get; set; }
         
         public DateTime? FirstFlightDate { get; set; }
