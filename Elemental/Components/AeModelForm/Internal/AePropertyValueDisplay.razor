@@ -70,9 +70,14 @@
                 var num = Convert.ToDouble(PropertyInfo.GetValue(Instance));
                 return num.ToString(format);
             }
+            else if (AeModelFormTools.IsDateType(PropertyInfo.PropertyType))
+            {
+                var dt = Convert.ToDateTime(PropertyInfo.GetValue(Instance));
+                return dt.ToString(format);
+            }
             else
             {
-                return value.ToString();
+                return value!.ToString();
             }
         }
 
