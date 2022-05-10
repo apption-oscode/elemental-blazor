@@ -11,6 +11,7 @@ pool:
 
 variables:
   NetCoreVersion: '6.0.x'
+  VersionNumber: '$(name)'
 
 steps:
 - task: AzureKeyVault@1
@@ -68,12 +69,12 @@ steps:
 
 - script: |
     echo source branch name is $(Build.SourceBranchName)
-    echo buildnumber name is $(Build.BuildNumber)
+    echo VersionNumber name is $(VersionNumber)
     echo dotnet version is $(DotnetVersion)
 - script: |
-    echo "##vso[task.setvariable variable=Build.BuildNumber;]$(Build.BuildNumber)-beta" 
-    echo overwriting build number
+    echo "##vso[task.setvariable variable=VersionNumber;]$(VersionNumber)-beta" 
+    echo overwriting VersionNumber
 - script: |
     echo source branch name is $(Build.SourceBranchName)
-    echo buildnumber name is $(Build.BuildNumber)
+    echo VersionNumber name is $(VersionNumber)
     echo dotnet version is $(DotnetVersion)
