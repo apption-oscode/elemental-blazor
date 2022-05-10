@@ -74,10 +74,10 @@ steps:
 #     Deploy
 #
 - task: DotNetCoreCLI@2
-  displayName: 'nuget push elemental'
+  displayName: 'nuget push aelemental'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   inputs:
     command: custom
     custom: nuget
-    arguments: 'push Elemental/bin/Release/AElemental.Blazor.$(VersionNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
+    arguments: 'push AElemental/bin/Release/AElemental.Blazor.$(VersionNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
 
