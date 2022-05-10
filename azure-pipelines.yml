@@ -14,10 +14,10 @@ variables:
   VersionNumber: '$(Build.BuildNumber)'
 
 steps:
-- task: AzureKeyVault@1
+- task: AzureKeyVault@2
   inputs:
     azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
-    KeyVaultName: 'ElementalVault '
+    KeyVaultName: 'ElementalVault'
     SecretsFilter: 'NugetAPISecret'
     RunAsPreJob: true
 
