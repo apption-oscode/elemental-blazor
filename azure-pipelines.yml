@@ -1,8 +1,4 @@
-variables:
-- name: VersionName
-  value: '2.0.$(date:yy)$(DayOfYear)$(rev:.r)-fast'
-- name: DotnetVersion
-  value: '6.0.x'
+name: '2.0.$(date:yy)$(DayOfYear)$(rev:.r)'
 
 trigger:
   batch: true
@@ -14,25 +10,52 @@ pr:
 - master
 - develop
 
-jobs:
-- job: LinuxJob
-  pool:
-    name: Apption Pool
-  workspace:
-    clean: all
+pool:
+  name: Apption Pool
 
-  steps:
-  - script: |
-      echo source branch name is $(Build.SourceBranchName)
-      echo version name is $(VersionName)
-      echo dotnet version is $(DotnetVersion)
-    displayName: "first script"
-  - script: |
-      echo "##vso[task.setvariable variable=VersionName;]$(VersionName)-pipeliens" 
-      echo overwriting version name
-    displayName: "overwriting"
-  - script: |
-      echo source branch name is $(Build.SourceBranchName)
-      echo version name is $(VersionName)
-      echo dotnet version is $(DotnetVersion)
-    displayName: "second script"
+workspace:
+  clean: all
+
+variables:
+  NetCoreVersion: '6.0.x'
+
+steps:
+
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
+    KeyVaultName: 'ElementalVault '
+    SecretsFilter: 'NugetAPISecret'
+    RunAsPreJob: true
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk $(NetCoreVersion)'
+  inputs:
+    version: '$(NetCoreVersion)'
+    includePreviewVersions: true
+
+- task: NodeTool@0
+  displayName: 'install node'
+  inputs:
+    versionSpec: '15.x' 
+    checkLatest: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+
+- script: |
+    echo source branch name is $(Build.SourceBranchName)
+    echo version name is $(VersionName)
+    echo dotnet version is $(DotnetVersion)
+  displayName: "first script"
+- script: |
+    echo "##vso[task.setvariable variable=name;]$(name)-pipeliens" 
+    echo overwriting version name
+  displayName: "overwriting"
+- script: |
+    echo source branch name is $(Build.SourceBranchName)
+    echo version name is $(name)
+    echo dotnet version is $(DotnetVersion)
+  displayName: "second script"
