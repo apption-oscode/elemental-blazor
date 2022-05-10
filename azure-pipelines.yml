@@ -4,23 +4,15 @@ trigger:
   batch: true
   branches:
     include:
-      - yr/*
-
-pr:
-- master
-- develop
+    - master
 
 pool:
   name: Apption Pool
-
-workspace:
-  clean: all
 
 variables:
   NetCoreVersion: '6.0.x'
 
 steps:
-
 - task: AzureKeyVault@1
   inputs:
     azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
@@ -45,17 +37,43 @@ steps:
   inputs:
     arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
 
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    arguments: '--no-restore --verbosity normal'
+
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push elemental'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push Elemental/bin/Release/AElemental.Blazor.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
+
+# Build Theme
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**/Elemental.Theme.csproj'
+    arguments: '--configuration Release /p:Version=$(Build.BuildNumber)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push theme'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push Elemental.Theme/bin/Release/AElemental.Blazor.Theme.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
+
 - script: |
     echo source branch name is $(Build.SourceBranchName)
-    echo version name is $(VersionName)
+    echo buildnumber name is $(Build.BuildNumber)
     echo dotnet version is $(DotnetVersion)
-  displayName: "first script"
 - script: |
-    echo "##vso[task.setvariable variable=name;]$(name)-pipeliens" 
-    echo overwriting version name
-  displayName: "overwriting"
+    echo "##vso[task.setvariable variable=Build.BuildNumber;]$(Build.BuildNumber)-beta" 
+    echo overwriting build number
 - script: |
     echo source branch name is $(Build.SourceBranchName)
-    echo version name is $(name)
+    echo buildnumber name is $(Build.BuildNumber)
     echo dotnet version is $(DotnetVersion)
-  displayName: "second script"
