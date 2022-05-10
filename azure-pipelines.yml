@@ -55,7 +55,8 @@ steps:
 - script: |
     echo source branch name is $(Build.SourceBranchName)
     echo VersionNumber name is $(VersionNumber)
-    echo dotnet version is $(DotnetVersion)
+    echo dotnet version is $(NetCoreVersion)
+  displayName: sanity check echos
 
 - script: |
     echo running dotnet build
@@ -72,12 +73,11 @@ steps:
 #
 #     Deploy
 #
-
-# - task: DotNetCoreCLI@2
-#   displayName: 'nuget push elemental'
-#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-#   inputs:
-#     command: custom
-#     custom: nuget
-#     arguments: 'push Elemental/bin/Release/AElemental.Blazor.$(Build.BuildNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push elemental'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push Elemental/bin/Release/AElemental.Blazor.$(VersionNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
 
