@@ -1,4 +1,4 @@
-name: '1.5.$(date:yy)$(DayOfYear)$(rev:.r)'
+name: '2.0.$(date:yy)$(DayOfYear)$(rev:.r)-fast'
 
 variables:
 - name: VersionName
@@ -10,8 +10,7 @@ trigger:
   batch: true
   branches:
     include:
-      - master
-      - develop
+      - yr/*
 
 pr:
 - master
