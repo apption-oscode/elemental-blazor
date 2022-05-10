@@ -243,7 +243,7 @@ namespace AElemental.Components
             => GetPropertyInfo(expression.Body);
 
 
-        private static HashSet<Type> NumericTypes = new HashSet<Type>
+        private static readonly HashSet<Type> NumericTypes = new HashSet<Type>
         {
             typeof(int),
             typeof(uint),
@@ -257,10 +257,23 @@ namespace AElemental.Components
             typeof(decimal),
             typeof(float)
         };
+
+        private static readonly HashSet<Type> DateTimeTypes = new HashSet<Type>
+        {
+            typeof(DateTime),
+            typeof(DateTimeOffset)
+        };
+
         public static bool IsNumericType(Type type)
         {
             return NumericTypes.Contains(type) ||
                    NumericTypes.Contains(Nullable.GetUnderlyingType(type));
+        }
+
+        public static bool IsDateType(Type type)
+        {
+            return DateTimeTypes.Contains(type) ||
+                   DateTimeTypes.Contains(Nullable.GetUnderlyingType(type));
         }
     }
 }
