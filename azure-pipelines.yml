@@ -1,8 +1,6 @@
 name: '2.0.$(date:yy)$(DayOfYear)$(rev:.r)-fast'
 
 variables:
-- name: VersionName
-  value: $(name)
 - name: DotnetVersion
   value: '6.0.x'
 
@@ -10,7 +8,7 @@ trigger:
   batch: true
   branches:
     include:
-      - do-not-run
+      - yr/*
 
 pr:
 - master
@@ -26,12 +24,15 @@ jobs:
   steps:
   - script: |
       echo source branch name is $(Build.SourceBranchName)
-      echo version name is $(VersionName)
+      echo version name is $(name)
       echo dotnet version is $(DotnetVersion)
+    displayName: "first script"
   - script: |
-      echo "##vso[task.setvariable variable=VersionName;]$(VersionName)-beta" 
+      echo "##vso[task.setvariable variable=VersionName;]$(name)-pipeliens" 
       echo overwriting version name
+    displayName: "overwriting"
   - script: |
       echo source branch name is $(Build.SourceBranchName)
-      echo version name is $(VersionName)
+      echo version name is $(name)
       echo dotnet version is $(DotnetVersion)
+    displayName: "second script"
