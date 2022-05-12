@@ -1,0 +1,28 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Basic Tags
+    Description: Standard extensible set of tags in a variety of default values
+*@
+<AeTypography>@_tagSelected</AeTypography>
+<div style="display:flex;">
+    <AeTag Title="@_title" Badges="_badges" OnClick="() => TagClicked(1)"/>
+    <AeTag class="dark" Title="@_title" Badges="_badges" OnClick="() => TagClicked(2)"/>
+    <AeTag class="light" Title="@_title" Badges="_badges" OnClick="() => TagClicked(3)"/>
+    <AeTag class="blue" Title="@_title" Badges="_badges" OnClick="() => TagClicked(4)"/>
+    <AeTag class="red" Title="@_title" Badges="_badges" OnClick="() => TagClicked(5)"/>
+</div>
+@code {
+    private string _title = "Title";
+    private List<string> _badges = new() { "193", "en" };
+    private string _tagSelected = "No tag has been clicked.";
+    private void TagClicked(int tagNumber)
+    {
+        _tagSelected = $"Tag {tagNumber} was clicked!";
+        StateHasChanged();
+    }
+}

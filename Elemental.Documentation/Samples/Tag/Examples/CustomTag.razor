@@ -1,0 +1,24 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Custom Tag
+    Description: You can override the default string values for the tag title and badges and instead pass a title render fragment and/or a list of render fragments for the badges.
+*@
+
+<AeTag TitleRenderFragment="@_title" BadgesRenderFragments="_badges" class="light"/>
+@code {
+    private RenderFragment _title = @<div style="display:flex;align-items:center;"><i class="fas fa-campfire fa-lg" style="margin-right:8px"></i><div style="margin-right:4px;">Camping</div></div>;
+
+    private List<RenderFragment> _badges = new();
+
+    protected override void OnInitialized()
+    {
+        _badges.Add(@<div style="background-color:c.$grey-300;color:#343a40;font-size:12px;padding:3px6px;margin:0 8px;display:flex;align-items:center;justify-content:center;border-radius:9px;"><i class="fas fa-campground fa-lg"></i></div>);
+        _badges.Add(@<div style="background-color:c.$grey-300;color:#343a40;font-size:12px;padding:3px6px;margin-left:4px;display:flex;align-items:center;justify-content:center;border-radius:9px;"><i class="fas fa-caravan fa-lg"></i></div>);
+        _badges.Add(@<div style="background-color:c.$grey-300;color:#343a40;font-size:12px;padding:3px6px;margin-left:4px;display:flex;align-items:center;justify-content:center;border-radius:9px;"><i class="fas fa-rv fa-lg"></i></div>);
+    }
+}
