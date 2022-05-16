@@ -1,0 +1,51 @@
+﻿@namespace AElemental.Components
+@inject NavigationManager NavManager
+
+@inherits HtmlElement
+
+<NavLink class="@_classname" @onclick="onClick" Match="NavLinkMatch.All" @attributes="InputAttributesWithoutClass">
+    @if (Link.CustomRender != null)
+    {
+        @Link.CustomRender
+    }
+    else
+    {
+        <AeTypography>
+            @Link.Label
+            @if (IsDropdownLabel)
+            {
+                <i class="fas fa-caret-down"  style="margin-left: .75rem;"/>
+            }
+        </AeTypography>
+    }
+</NavLink>
+
+@code {
+
+    [Parameter]
+    public bool IsDropdownLabel { get; set; }
+    [Parameter]
+    public AeNavLink Link { get; set; }
+    [Parameter]
+    public EventCallback CloseNav { get; set; }
+    [Parameter]
+    public EventCallback ToggleDropDown { get; set; }
+
+    private async Task onClick()
+    {
+        if (IsDropdownLabel && ToggleDropDown.HasDelegate)
+        {
+            await ToggleDropDown.InvokeAsync();
+        }
+        else if (!IsDropdownLabel && _href is not null) //and href
+        {
+            if (CloseNav.HasDelegate)
+                await CloseNav.InvokeAsync();
+            NavManager.NavigateTo(_href);
+        }
+    }
+
+    private string? _href => IsDropdownLabel ? null : Link?.To;
+    private string _dropdownClassname => "dropdown-label";
+    private string _classname => $"ae navlink {(IsDropdownLabel ? _dropdownClassname : "")}";
+}

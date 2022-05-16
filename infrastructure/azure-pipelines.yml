@@ -1,0 +1,38 @@
+name: '1.5.$(date:yy)$(DayOfYear)$(rev:.r)'
+
+variables:
+  - name: VersionName
+    value: $(name)
+  - name: DotnetVersion
+    value: '6.0.x'
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - develop
+
+pr:
+  - master
+  - develop
+
+jobs:
+  - job: LinuxJob
+    pool:
+      name: Apption Pool
+    workspace:
+      clean: all
+    
+    steps:
+      - script: |
+          echo source branch name is $(Build.SourceBranchName)
+          echo version name is $(VersionName)
+          echo dotnet version is $(DotnetVersion)
+      - script: |
+          echo "##vso[task.setvariable variable=VersionName;]$(VersionName)-beta" 
+          echo overwriting version name
+      - script: |
+          echo source branch name is $(Build.SourceBranchName)
+          echo version name is $(VersionName)
+          echo dotnet version is $(DotnetVersion)

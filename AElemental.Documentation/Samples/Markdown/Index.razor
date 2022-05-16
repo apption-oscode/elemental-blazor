@@ -1,0 +1,18 @@
+﻿@page "/content/markdown"
+@page "/content/markdown/{Path}"
+@inherits DemoPage
+
+<AeFlex Vertical class="dropdown-page-container">
+    <DemoSection Path="./Samples/Markdown/Examples/BasicMarkdown.razor">
+        <AeFlex Vertical>
+            <AElemental.Documentation.Samples.Markdown.Examples.BasicMarkdown Path="@Path" BaseURL="/content/markdown" />
+        </AeFlex>
+    </DemoSection>
+</AeFlex>
+
+@code {
+
+    [Parameter]
+    public string Path {get;set;}
+
+}

@@ -1,0 +1,10 @@
+﻿@namespace AElemental.Components
+@inherits HtmlElement
+
+<div class="@_className" @attributes="InputAttributesWithoutClass">
+  @ChildContent
+</div>
+
+@code {
+  private string _className => $"ae table-cell {_inputClass}";
+}

@@ -1,0 +1,83 @@
+name: '2.0.$(date:yy)$(DayOfYear)$(rev:.r)'
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+    - yr/*
+
+pr:
+  - develop
+  - master
+
+pool:
+  name: Apption Pool
+
+variables:
+  NetCoreVersion: '6.0.x'
+  VersionNumber: '$(Build.BuildNumber)'
+
+steps:
+
+#
+#     Tool Setup
+#
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'Microsoft Partner Network(7c29ea79-bc0f-47ec-b360-2b4fe0db71e1)'
+    KeyVaultName: 'ElementalVault'
+    SecretsFilter: 'NugetAPISecret'
+    RunAsPreJob: true
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk $(NetCoreVersion)'
+  inputs:
+    version: '$(NetCoreVersion)'
+    includePreviewVersions: true
+
+- task: NodeTool@0
+  displayName: 'install node'
+  inputs:
+    versionSpec: '15.x' 
+    checkLatest: true
+
+#
+#     Build & Test
+#
+- script: |
+    echo overwriting version number
+    echo "##vso[task.setvariable variable=VersionNumber;]$(VersionNumber)-fast" 
+  condition: ne(variables['Build.SourceBranch'], 'master')
+  displayName: append 'fast' tag if not master branch
+
+- script: |
+    echo source branch name is $(Build.SourceBranchName)
+    echo VersionNumber name is $(VersionNumber)
+    echo dotnet version is $(NetCoreVersion)
+  displayName: sanity check echos
+
+- script: |
+    echo running dotnet build
+    echo version number is $(VersionNumber)
+    dotnet build --configuration Release /p:Version=$(VersionNumber)
+  displayName: dotnet build
+
+- script: |
+    echo running dotnet test    
+    dotnet test --no-restore --verbosity normal
+  displayName: dotnet test
+
+
+#
+#     Deploy
+#
+- task: DotNetCoreCLI@2
+  displayName: 'nuget push aelemental'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push AElemental/bin/Release/AElemental.Blazor.$(VersionNumber).nupkg --api-key $(NugetAPISecret) --source https://api.nuget.org/v3/index.json'
+

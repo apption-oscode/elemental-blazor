@@ -1,0 +1,155 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageId>AElemental.Blazor</PackageId>
+        <Nullable>enable</Nullable>
+        <LangVersion>preview</LangVersion>
+        <Authors>Apption</Authors>
+        <Company>Apption</Company>
+        <Product>AElemental for Blazor</Product>
+        <Description>Build modern, sass customizable web experiences in Blazor with code first and functional primitives. Elemental components include a fully customizable table, common input controls, an object form editor and layout tools.</Description>
+        <Copyright>Copyright Apption 2021</Copyright>
+        <PackageProjectUrl>https://github.com/apption-oscode/elemental-blazor</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/apption-oscode/elemental-blazor</RepositoryUrl>
+        <PackageTags>c# blazor</PackageTags>
+        <RepositoryType>Git</RepositoryType>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageIcon>AElemental_128x128.png</PackageIcon>
+        <PackageIconFullPath>$(MSBuildThisFileDirectory)AElemental_128x128.png</PackageIconFullPath>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ErrorOnDuplicatePublishOutputFiles>true</ErrorOnDuplicatePublishOutputFiles>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="10.4.0" />
+        <PackageReference Include="Markdig" Version="0.28.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <!-- File with mtime of last successful npm install -->
+        <NpmInstallStampFile>node_modules/.install-stamp</NpmInstallStampFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\AElemental.Theme\Styles\card\_card.scss">
+          <Link>Components\AeCard\_card.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\collapse\_collapse.scss">
+          <Link>Components\AeCollapse\_collapse.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\column\_column.scss">
+          <Link>Components\AeColumn\_column.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\dropdown\_dropdown.scss">
+          <Link>Components\AeDropdown\_dropdown.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\flex\_flex.scss">
+          <Link>Components\AeFlex\_flex.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\icon\_icon.scss">
+          <Link>Components\AeIcon\_icon.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\ie-not-supported\_ie-not-supported.scss">
+          <Link>Components\AeIENotSupported\_ie-not-supported.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\input\_index.scss">
+          <Link>Components\AeInput\_index.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\input\_input-wrapper.scss">
+          <Link>Components\AeInput\_input-wrapper.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\input\_input.scss">
+          <Link>Components\AeInput\_input.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\input\_search-wrapper.scss">
+          <Link>Components\AeInput\_search-wrapper.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\layout\_layout.scss">
+          <Link>Components\AeLayout\_layout.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\layout\_layoutV2.scss">
+          <Link>Components\AeLayout\_layoutV2.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\list\_list.scss">
+          <Link>Components\AeList\_list.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\menu\_menu.scss">
+          <Link>Components\AeMenu\_menu.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\modal\_error-modal.scss">
+          <Link>Components\AeModal\_error-modal.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\modal\_modal.scss">
+          <Link>Components\AeModal\_modal.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\model-form\_model-form.scss">
+          <Link>Components\AeModelForm\_model-form.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\navbar\_navbar.scss">
+          <Link>Components\AeNavbar\_navbar.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\pageoutline\_pageoutline.scss">
+          <Link>Components\AePageOutline\_pageoutline.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\progress\_progress.scss">
+          <Link>Components\AeProgress\_progress.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\row\_row.scss">
+          <Link>Components\AeRow\_row.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\spinner\_spinner.scss">
+          <Link>Components\AeSpinner\_spinner.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\steps\_steps.scss">
+          <Link>Components\AeSteps\_steps.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\table\_table.scss">
+          <Link>Components\AeTable\_table.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\tabs\_document-tabs.scss">
+          <Link>Components\AeTabs\_document-tabs.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\tabs\_index.scss">
+          <Link>Components\AeTabs\_index.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\tabs\_tabs.scss">
+          <Link>Components\AeTabs\_tabs.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\toggle\_toggle.scss">
+          <Link>Components\AeToggle\_toggle.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\tooltip\_tooltip.scss">
+          <Link>Components\AeTooltip\_tooltip.scss</Link>
+        </None>
+        <None Include="..\AElemental.Theme\Styles\treeview\_treeview.scss">
+          <Link>Components\AeTreeView\_treeview.scss</Link>
+        </None>
+
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
+        <None Include="..\AElemental.Theme\Styles\typography\_typography.scss">
+          <Link>Components\AeTypography\_typography.scss</Link>
+        </None>
+        <None Include="wwwroot\js\third-party\jquery.min.js" />
+        <None Include="wwwroot\js\third-party\shepherd.min.js">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+</Project>
+
+
