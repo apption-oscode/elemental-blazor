@@ -5119,6 +5119,22 @@ function applyMixins(derivedCtor, ...baseCtors) {
 
 /**
  * An individual item in an {@link @microsoft/fast-foundation#(Accordion:class) }.
+ *
+ * @slot start - Content which can be provided between the heading and the icon
+ * @slot end - Content which can be provided between the start slot and icon
+ * @slot heading - Content which serves as the accordion item heading and text of the expand button
+ * @slot - The default slot for accordion item content
+ * @slot expanded-icon - The expanded icon
+ * @slot collapsed-icon - The collapsed icon
+ * @fires change - Fires a custom 'change' event when the button is invoked
+ * @csspart heading - Wraps the button
+ * @csspart button - The button which serves to invoke the item
+ * @csspart heading-content - Wraps the slot for the heading content within the button
+ * @csspart icon - The icon container
+ * @csspart expanded-icon - The expanded icon slot
+ * @csspart collapsed-icon - The collapsed icon
+ * @csspart region - The wrapper for the accordion item content
+ *
  * @public
  */
 class AccordionItem extends FoundationElement {
@@ -5180,11 +5196,13 @@ const accordionTemplate = (context, definition) => /* TODO: deprecate slot name 
     </template>
 `;
 
-var Orientation;
-(function (Orientation) {
-    Orientation["horizontal"] = "horizontal";
-    Orientation["vertical"] = "vertical";
-})(Orientation || (Orientation = {}));
+/**
+ * Standard orientation values
+ */
+const Orientation = {
+    horizontal: "horizontal",
+    vertical: "vertical",
+};
 
 /**
  * Returns the index of the last element in the array where predicate is true, and -1 otherwise.
@@ -5462,20 +5480,22 @@ var SystemColors;
  * Expand mode for {@link Accordion}
  * @public
  */
-var AccordionExpandMode;
-(function (AccordionExpandMode) {
+const AccordionExpandMode = {
     /**
      * Designates only a single {@link @microsoft/fast-foundation#(AccordionItem:class) } can be open a time.
      */
-    AccordionExpandMode["single"] = "single";
+    single: "single",
     /**
      * Designates multiple {@link @microsoft/fast-foundation#(AccordionItem:class) | AccordionItems} can be open simultaneously.
      */
-    AccordionExpandMode["multi"] = "multi";
-})(AccordionExpandMode || (AccordionExpandMode = {}));
+    multi: "multi",
+};
 /**
  * An Accordion Custom HTML Element
  * Implements {@link https://www.w3.org/TR/wai-aria-practices-1.1/#accordion | ARIA Accordion}.
+ *
+ * @fires change - Fires a custom 'change' event when the active item changes
+ * @csspart item - The slot for the accordion items
  * @public
  *
  * @remarks
@@ -5752,6 +5772,12 @@ __decorate([
  * An Anchor Custom HTML Element.
  * Based largely on the {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a | <a> element }.
  *
+ * @slot start - Content which can be provided before the anchor content
+ * @slot end - Content which can be provided after the anchor content
+ * @slot - The default slot for anchor content
+ * @csspart control - The anchor element
+ * @csspart content - The element wrapping anchor content
+ *
  * @public
  */
 class Anchor$1 extends FoundationElement {
@@ -5937,6 +5963,10 @@ class IntersectionService {
 
 /**
  * An anchored region Custom HTML Element.
+ *
+ * @slot - The default slot for the content
+ * @fires loaded - Fires a custom 'loaded' event when the region is loaded and visible
+ * @fires positionchange - Fires a custom 'positionchange' event when the position has changed
  *
  * @public
  */
@@ -6434,7 +6464,9 @@ class AnchoredRegion extends FoundationElement {
             switch (this.horizontalScaling) {
                 case "anchor":
                 case "fill":
-                    nextRegionWidth = nextPositionerDimension.width;
+                    nextRegionWidth = this.horizontalViewportLock
+                        ? this.viewportRect.width
+                        : nextPositionerDimension.width;
                     this.regionWidth = `${nextRegionWidth}px`;
                     break;
                 case "content":
@@ -6515,7 +6547,9 @@ class AnchoredRegion extends FoundationElement {
             switch (this.verticalScaling) {
                 case "anchor":
                 case "fill":
-                    nextRegionHeight = nextPositionerDimension.height;
+                    nextRegionHeight = this.verticalViewportLock
+                        ? this.viewportRect.height
+                        : nextPositionerDimension.height;
                     this.regionHeight = `${nextRegionHeight}px`;
                     break;
                 case "content":
@@ -6972,6 +7006,14 @@ const avatarTemplate = (context, definition) => html `
 /**
  * An Avatar Custom HTML Element
  *
+ * @slot media - Used for media such as an image
+ * @slot - The default slot for avatar text, commonly a name or initials
+ * @slot badge - Used to provide a badge, such as a status badge
+ * @csspart backplate - The wrapping container for the avatar
+ * @csspart link - The avatar link
+ * @csspart media - The media slot
+ * @csspart content - The default slot
+ *
  * @public
  */
 class Avatar$1 extends FoundationElement {
@@ -7012,6 +7054,8 @@ const badgeTemplate = (context, definition) => html `
 
 /**
  * A Badge Custom HTML Element.
+ * @slot - The default slot for the badge
+ * @csspart control - The element representing the badge, which wraps the default slot
  *
  * @public
  */
@@ -7103,6 +7147,8 @@ const breadcrumbTemplate = (context, definition) => html `
 
 /**
  * A Breadcrumb Custom HTML Element.
+ * @slot - The default slot for the breadcrumb items
+ * @csspart list - The element wrapping the slotted items
  *
  * @public
  */
@@ -7699,6 +7745,12 @@ class FormAssociatedButton extends FormAssociated(_Button) {
  * A Button Custom HTML Element.
  * Based largely on the {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button | <button> element }.
  *
+ * @slot start - Content which can be provided before the button content
+ * @slot end - Content which can be provided after the button content
+ * @slot - The default slot for button content
+ * @csspart control - The button element
+ * @csspart content - The element wrapping button content
+ *
  * @public
  */
 class Button$1 extends FormAssociatedButton {
@@ -8008,6 +8060,10 @@ class DateFormatter {
 
 /**
  * Calendar component
+ *
+ * @slot - The default slot for calendar content
+ * @fires dateselected - Fires a custom 'dateselected' event when Enter is invoked via keyboard on a date
+ *
  * @public
  */
 class Calendar extends FoundationElement {
@@ -8279,43 +8335,42 @@ __decorate([
 ], Calendar.prototype, "selectedDates", void 0);
 
 /**
- * Enumerates auto generated header options
+ * Enumerates the data grid auto generated header options
  * default option generates a non-sticky header row
  *
  * @public
  */
-var GenerateHeaderOptions;
-(function (GenerateHeaderOptions) {
-    GenerateHeaderOptions["none"] = "none";
-    GenerateHeaderOptions["default"] = "default";
-    GenerateHeaderOptions["sticky"] = "sticky";
-})(GenerateHeaderOptions || (GenerateHeaderOptions = {}));
+const GenerateHeaderOptions = {
+    none: "none",
+    default: "default",
+    sticky: "sticky",
+};
 /**
- * Enumerates possible cell types.
+ * Enumerates possible data grid cell types.
  *
  * @public
  */
-var DataGridCellTypes;
-(function (DataGridCellTypes) {
-    DataGridCellTypes["default"] = "default";
-    DataGridCellTypes["columnHeader"] = "columnheader";
-    DataGridCellTypes["rowHeader"] = "rowheader";
-})(DataGridCellTypes || (DataGridCellTypes = {}));
+const DataGridCellTypes = {
+    default: "default",
+    columnHeader: "columnheader",
+    rowHeader: "rowheader",
+};
 /**
- * Enumerates possible row types
+ * Enumerates possible data grid row types
  *
  * @public
  */
-var DataGridRowTypes;
-(function (DataGridRowTypes) {
-    DataGridRowTypes["default"] = "default";
-    DataGridRowTypes["header"] = "header";
-    DataGridRowTypes["stickyHeader"] = "sticky-header";
-})(DataGridRowTypes || (DataGridRowTypes = {}));
+const DataGridRowTypes = {
+    default: "default",
+    header: "header",
+    stickyHeader: "sticky-header",
+};
 
 /**
  * A Data Grid Row Custom HTML Element.
  *
+ * @fires row-focused - Fires a custom 'row-focused' event when focus is on an element (usually a cell or its contents) in the row
+ * @slot - The default slot for custom cell elements
  * @public
  */
 class DataGridRow extends FoundationElement {
@@ -8548,6 +8603,7 @@ const dataGridTemplate = (context, definition) => {
 /**
  * A Data Grid Custom HTML Element.
  *
+ * @slot - The default slot for custom row elements
  * @public
  */
 class DataGrid extends FoundationElement {
@@ -9000,6 +9056,8 @@ const defaultHeaderCellContentsTemplate = html `
 /**
  * A Data Grid Cell Custom HTML Element.
  *
+ * @fires cell-focused - Fires a custom 'cell-focused' event when focus is on the cell or its contents
+ * @slot - The default slot for cell contents.  The "cell contents template" renders here.
  * @public
  */
 class DataGridCell extends FoundationElement {
@@ -9471,6 +9529,8 @@ const cardTemplate = (context, definition) => html `
 /**
  * An Card Custom HTML Element.
  *
+ * @slot - The default slot for the card content
+ *
  * @public
  */
 class Card$1 extends FoundationElement {
@@ -9528,6 +9588,13 @@ class FormAssociatedCheckbox extends CheckableFormAssociated(_Checkbox) {
 /**
  * A Checkbox Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#checkbox | ARIA checkbox }.
+ *
+ * @slot checked-indicator - The checked indicator
+ * @slot indeterminate-indicator - The indeterminate indicator
+ * @slot - The default slot for the label
+ * @csspart control - The element representing the visual checkbox control
+ * @csspart label - The label
+ * @fires change - Emits a custom change event when the checked state changes
  *
  * @public
  */
@@ -9595,6 +9662,11 @@ function isListboxOption(el) {
 /**
  * An Option Custom HTML Element.
  * Implements {@link https://www.w3.org/TR/wai-aria-1.1/#option | ARIA option }.
+ *
+ * @slot start - Content which can be provided before the listbox option content
+ * @slot end - Content which can be provided after the listbox option content
+ * @slot - The default slot for listbox option content
+ * @csspart content - Wraps the listbox option content
  *
  * @public
  */
@@ -9710,10 +9782,11 @@ class ListboxOption extends FoundationElement {
         return (_b = (_a = this.textContent) === null || _a === void 0 ? void 0 : _a.replace(/\s+/g, " ").trim()) !== null && _b !== void 0 ? _b : "";
     }
     set value(next) {
-        this._value = next;
+        const newValue = `${next !== null && next !== void 0 ? next : ""}`;
+        this._value = newValue;
         this.dirtyValue = true;
         if (this.proxy instanceof HTMLOptionElement) {
-            this.proxy.value = next;
+            this.proxy.value = newValue;
         }
         Observable.notify(this, "value");
     }
@@ -9772,6 +9845,8 @@ applyMixins(ListboxOption, StartEnd, DelegatesARIAListboxOption);
 /**
  * A Listbox Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#listbox | ARIA listbox }.
+ *
+ * @slot - The default slot for the listbox options
  *
  * @public
  */
@@ -10245,7 +10320,7 @@ class Listbox$1 extends FoundationElement {
  * @param n - element to filter
  * @public
  */
-Listbox$1.slottedOptionFilter = (n) => isListboxOption(n) && !n.disabled && !n.hidden;
+Listbox$1.slottedOptionFilter = (n) => isListboxOption(n) && !n.hidden;
 /**
  * Typeahead timeout in milliseconds.
  *
@@ -10293,11 +10368,10 @@ applyMixins(Listbox$1, DelegatesARIAListbox);
  * Positioning directions for the listbox when a select is open.
  * @public
  */
-var SelectPosition;
-(function (SelectPosition) {
-    SelectPosition["above"] = "above";
-    SelectPosition["below"] = "below";
-})(SelectPosition || (SelectPosition = {}));
+const SelectPosition = {
+    above: "above",
+    below: "below",
+};
 
 class _Combobox extends Listbox$1 {
 }
@@ -10317,17 +10391,27 @@ class FormAssociatedCombobox extends FormAssociated(_Combobox) {
  * Autocomplete values for combobox.
  * @public
  */
-var ComboboxAutocomplete;
-(function (ComboboxAutocomplete) {
-    ComboboxAutocomplete["inline"] = "inline";
-    ComboboxAutocomplete["list"] = "list";
-    ComboboxAutocomplete["both"] = "both";
-    ComboboxAutocomplete["none"] = "none";
-})(ComboboxAutocomplete || (ComboboxAutocomplete = {}));
+const ComboboxAutocomplete = {
+    inline: "inline",
+    list: "list",
+    both: "both",
+    none: "none",
+};
 
 /**
  * A Combobox Custom HTML Element.
  * Implements the {@link https://w3c.github.io/aria-practices/#combobox | ARIA combobox }.
+ *
+ * @slot start - Content which can be provided before the input
+ * @slot end - Content which can be provided after the input
+ * @slot control - Used to replace the input element representing the combobox
+ * @slot indicator - The visual indicator representing the expanded state
+ * @slot - The default slot for the options
+ * @csspart control - The wrapper element containing the input area, including start and end
+ * @csspart selected-value - The input element representing the selected value
+ * @csspart indicator - The element wrapping the indicator slot
+ * @csspart listbox - The wrapper for the listbox slotted options
+ * @fires change - Fires a custom 'change' event when the value updates
  *
  * @public
  */
@@ -10378,12 +10462,6 @@ class Combobox$1 extends FormAssociatedCombobox {
          * HTML Attribute: open
          */
         this.open = false;
-        /**
-         * The current state of the calculated position of the listbox.
-         *
-         * @public
-         */
-        this.position = SelectPosition.below;
     }
     /**
      * Reset the element to its first selectable option when its parent form is reset.
@@ -10449,8 +10527,8 @@ class Combobox$1 extends FormAssociatedCombobox {
             this.proxy.placeholder = this.placeholder;
         }
     }
-    positionChanged() {
-        this.positionAttribute = this.position;
+    positionChanged(prev, next) {
+        this.positionAttribute = next;
         this.setPositioning();
     }
     /**
@@ -10498,6 +10576,7 @@ class Combobox$1 extends FormAssociatedCombobox {
             }
             this.selectedOptions = [captured];
             this.control.value = captured.text;
+            this.clearSelectionRange();
             this.updateValue(true);
         }
         this.open = !this.open;
@@ -10625,8 +10704,7 @@ class Combobox$1 extends FormAssociatedCombobox {
                     this.filter = this.value;
                 }
                 this.open = false;
-                const controlValueLength = this.control.value.length;
-                this.control.setSelectionRange(controlValueLength, controlValueLength);
+                this.clearSelectionRange();
                 break;
             }
             case "Escape": {
@@ -10821,6 +10899,13 @@ class Combobox$1 extends FormAssociatedCombobox {
         if (shouldEmit) {
             this.$emit("change");
         }
+    }
+    /**
+     * @internal
+     */
+    clearSelectionRange() {
+        const controlValueLength = this.control.value.length;
+        this.control.setSelectionRange(controlValueLength, controlValueLength);
     }
 }
 __decorate([
@@ -12043,7 +12128,7 @@ const dialogTemplate = (context, definition) => html `
 `;
 
 /*!
-* tabbable 5.3.1
+* tabbable 5.3.2
 * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
 */
 var candidateSelectors = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]:not(slot)', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])', 'details>summary:first-of-type', 'details'];
@@ -12149,6 +12234,11 @@ var isHidden = function isHidden(node, _ref) {
   var displayCheck = _ref.displayCheck,
       getShadowRoot = _ref.getShadowRoot;
 
+  // NOTE: visibility will be `undefined` if node is detached from the document
+  //  (see notes about this further down), which means we will consider it visible
+  //  (this is legacy behavior from a very long way back)
+  // NOTE: we check this regardless of `displayCheck="none"` because this is a
+  //  _visibility_ check, not a _display_ check
   if (getComputedStyle(node).visibility === 'hidden') {
     return true;
   }
@@ -12158,7 +12248,27 @@ var isHidden = function isHidden(node, _ref) {
 
   if (matches.call(nodeUnderDetails, 'details:not([open]) *')) {
     return true;
-  }
+  } // The root node is the shadow root if the node is in a shadow DOM; some document otherwise
+  //  (but NOT _the_ document; see second 'If' comment below for more).
+  // If rootNode is shadow root, it'll have a host, which is the element to which the shadow
+  //  is attached, and the one we need to check if it's in the document or not (because the
+  //  shadow, and all nodes it contains, is never considered in the document since shadows
+  //  behave like self-contained DOMs; but if the shadow's HOST, which is part of the document,
+  //  is hidden, or is not in the document itself but is detached, it will affect the shadow's
+  //  visibility, including all the nodes it contains). The host could be any normal node,
+  //  or a custom element (i.e. web component). Either way, that's the one that is considered
+  //  part of the document, not the shadow root, nor any of its children (i.e. the node being
+  //  tested).
+  // If rootNode is not a shadow root, it won't have a host, and so rootNode should be the
+  //  document (per the docs) and while it's a Document-type object, that document does not
+  //  appear to be the same as the node's `ownerDocument` for some reason, so it's safer
+  //  to ignore the rootNode at this point, and use `node.ownerDocument`. Otherwise,
+  //  using `rootNode.contains(node)` will _always_ be true we'll get false-positives when
+  //  node is actually detached.
+
+
+  var nodeRootHost = getRootNode(node).host;
+  var nodeIsAttached = (nodeRootHost === null || nodeRootHost === void 0 ? void 0 : nodeRootHost.ownerDocument.contains(nodeRootHost)) || node.ownerDocument.contains(node);
 
   if (!displayCheck || displayCheck === 'full') {
     if (typeof getShadowRoot === 'function') {
@@ -12191,18 +12301,42 @@ var isHidden = function isHidden(node, _ref) {
     } // else, `getShadowRoot` might be true, but all that does is enable shadow DOM support
     //  (i.e. it does not also presume that all nodes might have undisclosed shadows); or
     //  it might be a falsy value, which means shadow DOM support is disabled
-    // didn't find it sitting in an undisclosed shadow (or shadows are disabled) so now we
-    //  can just test to see if it would normally be visible or not
-    // this works wherever the node is: if there's at least one client rect, it's
-    //  somehow displayed; it also covers the CSS 'display: contents' case where the
-    //  node itself is hidden in place of its contents; and there's no need to search
-    //  up the hierarchy either
+    // Since we didn't find it sitting in an undisclosed shadow (or shadows are disabled)
+    //  now we can just test to see if it would normally be visible or not, provided it's
+    //  attached to the main document.
+    // NOTE: We must consider case where node is inside a shadow DOM and given directly to
+    //  `isTabbable()` or `isFocusable()` -- regardless of `getShadowRoot` option setting.
 
 
-    return !node.getClientRects().length;
+    if (nodeIsAttached) {
+      // this works wherever the node is: if there's at least one client rect, it's
+      //  somehow displayed; it also covers the CSS 'display: contents' case where the
+      //  node itself is hidden in place of its contents; and there's no need to search
+      //  up the hierarchy either
+      return !node.getClientRects().length;
+    } // Else, the node isn't attached to the document, which means the `getClientRects()`
+    //  API will __always__ return zero rects (this can happen, for example, if React
+    //  is used to render nodes onto a detached tree, as confirmed in this thread:
+    //  https://github.com/facebook/react/issues/9117#issuecomment-284228870)
+    //
+    // It also means that even window.getComputedStyle(node).display will return `undefined`
+    //  because styles are only computed for nodes that are in the document.
+    //
+    // NOTE: THIS HAS BEEN THE CASE FOR YEARS. It is not new, nor is it caused by tabbable
+    //  somehow. Though it was never stated officially, anyone who has ever used tabbable
+    //  APIs on nodes in detached containers has actually implicitly used tabbable in what
+    //  was later (as of v5.2.0 on Apr 9, 2021) called `displayCheck="none"` mode -- essentially
+    //  considering __everything__ to be visible because of the innability to determine styles.
+
   } else if (displayCheck === 'non-zero-area') {
+    // NOTE: Even though this tests that the node's client rect is non-zero to determine
+    //  whether it's displayed, and that a detached node will __always__ have a zero-area
+    //  client rect, we don't special-case for whether the node is attached or not. In
+    //  this mode, we do want to consider nodes that have a zero area to be hidden at all
+    //  times, and that includes attached or not.
     return isZeroArea(node);
-  }
+  } // visible, as far as we can tell, or per current `displayCheck` mode
+
 
   return false;
 }; // form fields (nested) inside a disabled fieldset are not focusable/tabbable
@@ -12290,6 +12424,13 @@ var isFocusable = function isFocusable(node, options) {
 /**
  * A Switch Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#dialog | ARIA dialog }.
+ *
+ * @slot - The default slot for the dialog content
+ * @csspart positioning-region - A wrapping element used to center the dialog and position the modal overlay
+ * @csspart overlay - The modal dialog overlay
+ * @csspart control - The dialog element
+ * @fires cancel - Fires a custom 'cancel' event when the modal overlay is clicked
+ * @fires close - Fires a custom 'close' event when the dialog is hidden
  *
  * @public
  */
@@ -12578,6 +12719,12 @@ const disclosureTemplate = (context, definition) => html `
  * A Disclosure Custom HTML Element.
  * Based largely on the {@link https://w3c.github.io/aria-practices/#disclosure | disclosure element }.
  *
+ * @slot start - Content which can be provided before the summary content
+ * @slot end - Content which can be provided after the summary content
+ * @slot title - The summary content
+ * @slot - The default slot for the disclosure content
+ * @fires toggle - fires a toggle event when the summary is toggled
+ *
  * @public
  */
 class Disclosure$1 extends FoundationElement {
@@ -12650,17 +12797,16 @@ const dividerTemplate = (context, definition) => html `
  * Divider roles
  * @public
  */
-var DividerRole;
-(function (DividerRole) {
+const DividerRole = {
     /**
      * The divider semantically separates content
      */
-    DividerRole["separator"] = "separator";
+    separator: "separator",
     /**
      * The divider has no semantic value and is for visual presentation only.
      */
-    DividerRole["presentation"] = "presentation";
-})(DividerRole || (DividerRole = {}));
+    presentation: "presentation",
+};
 
 /**
  * A Divider Custom HTML Element.
@@ -12675,7 +12821,6 @@ class Divider extends FoundationElement {
          * The role of the element.
          *
          * @public
-         * @defaultValue - {@link DividerRole.separator}
          * @remarks
          * HTML Attribute: role
          */
@@ -12701,11 +12846,10 @@ __decorate([
  * The direction options for flipper.
  * @public
  */
-var FlipperDirection;
-(function (FlipperDirection) {
-    FlipperDirection["next"] = "next";
-    FlipperDirection["previous"] = "previous";
-})(FlipperDirection || (FlipperDirection = {}));
+const FlipperDirection = {
+    next: "next",
+    previous: "previous",
+};
 
 /**
  * The template for the {@link @microsoft/fast-foundation#Flipper} component.
@@ -12740,6 +12884,12 @@ const flipperTemplate = (context, definition) => html `
  * A Flipper Custom HTML Element.
  * Flippers are a form of button that implies directional content navigation, such as in a carousel.
  *
+ * @slot next - The next flipper content
+ * @slot previous - The previous flipper content
+ * @csspart next - Wraps the next flipper content
+ * @csspart previous - Wraps the previous flipper content
+ * @fires click - Fires a custom 'click' event when Enter or Space is invoked via keyboard and the flipper is exposed to assistive technologies.
+ *
  * @public
  */
 class Flipper extends FoundationElement {
@@ -12772,7 +12922,7 @@ class Flipper extends FoundationElement {
     keyupHandler(e) {
         if (!this.hiddenFromAT) {
             const key = e.key;
-            if (key === "Enter") {
+            if (key === "Enter" || key === "Space") {
                 this.$emit("click", e);
             }
             if (key === "Escape") {
@@ -13291,7 +13441,7 @@ const listboxTemplate = (context, definition) => html `
  *
  * @alpha
  */
-class PickerMenu extends FoundationElement {
+class PickerMenu$1 extends FoundationElement {
     constructor() {
         super(...arguments);
         /**
@@ -13331,16 +13481,16 @@ class PickerMenu extends FoundationElement {
 }
 __decorate([
     observable
-], PickerMenu.prototype, "menuElements", void 0);
+], PickerMenu$1.prototype, "menuElements", void 0);
 __decorate([
     observable
-], PickerMenu.prototype, "headerElements", void 0);
+], PickerMenu$1.prototype, "headerElements", void 0);
 __decorate([
     observable
-], PickerMenu.prototype, "footerElements", void 0);
+], PickerMenu$1.prototype, "footerElements", void 0);
 __decorate([
     observable
-], PickerMenu.prototype, "suggestionsAvailableText", void 0);
+], PickerMenu$1.prototype, "suggestionsAvailableText", void 0);
 
 const defaultContentsTemplate$1 = html `
     <template>
@@ -13503,7 +13653,7 @@ function createDefaultMenuOptionTemplate(context) {
  */
 const pickerTemplate = (context, definition) => {
     const anchoredRegionTag = context.tagFor(AnchoredRegion);
-    const pickerMenuTag = context.tagFor(PickerMenu);
+    const pickerMenuTag = context.tagFor(PickerMenu$1);
     const pickerListTag = context.tagFor(PickerList);
     const progressRingTag = context.tagFor(PickerList);
     const defaultListItemTemplate = createDefaultListItemTemplate(context);
@@ -14415,21 +14565,20 @@ const pickerListItemTemplate = (context, definition) => {
  * Menu items roles.
  * @public
  */
-var MenuItemRole;
-(function (MenuItemRole) {
+const MenuItemRole = {
     /**
      * The menu item has a "menuitem" role
      */
-    MenuItemRole["menuitem"] = "menuitem";
+    menuitem: "menuitem",
     /**
      * The menu item has a "menuitemcheckbox" role
      */
-    MenuItemRole["menuitemcheckbox"] = "menuitemcheckbox";
+    menuitemcheckbox: "menuitemcheckbox",
     /**
      * The menu item has a "menuitemradio" role
      */
-    MenuItemRole["menuitemradio"] = "menuitemradio";
-})(MenuItemRole || (MenuItemRole = {}));
+    menuitemradio: "menuitemradio",
+};
 /**
  * @internal
  */
@@ -14442,6 +14591,23 @@ const roleForMenuItem = {
 /**
  * A Switch Custom HTML Element.
  * Implements {@link https://www.w3.org/TR/wai-aria-1.1/#menuitem | ARIA menuitem }, {@link https://www.w3.org/TR/wai-aria-1.1/#menuitemcheckbox | ARIA menuitemcheckbox}, or {@link https://www.w3.org/TR/wai-aria-1.1/#menuitemradio | ARIA menuitemradio }.
+ *
+ * @slot checked-indicator - The checked indicator
+ * @slot radio-indicator - The radio indicator
+ * @slot start - Content which can be provided before the menu item content
+ * @slot end - Content which can be provided after the menu item content
+ * @slot - The default slot for menu item content
+ * @slot expand-collapse-indicator - The expand/collapse indicator
+ * @slot submenu - Used to nest menu's within menu items
+ * @csspart input-container - The element representing the visual checked or radio indicator
+ * @csspart checkbox - The element wrapping the `menuitemcheckbox` indicator
+ * @csspart radio - The element wrapping the `menuitemradio` indicator
+ * @csspart content - The element wrapping the menu item content
+ * @csspart expand-collapse-glyph-container - The element wrapping the expand collapse element
+ * @csspart expand-collapse - The expand/collapse element
+ * @csspart submenu-region - The container for the submenu, used for positioning
+ * @fires expanded-change - Fires a custom 'expanded-change' event when the expanded state changes
+ * @fires change - Fires a custom 'change' event when a non-submenu item with a role of `menuitemcheckbox`, `menuitemradio`, or `menuitem` is invoked
  *
  * @public
  */
@@ -14759,9 +14925,11 @@ const menuTemplate = (context, definition) => html `
  * A Menu Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#menu | ARIA menu }.
  *
+ * @slot - The default slot for the menu items
+ *
  * @public
  */
-class Menu extends FoundationElement {
+class Menu$1 extends FoundationElement {
     constructor() {
         super(...arguments);
         this.expandedItem = null;
@@ -14918,7 +15086,7 @@ class Menu extends FoundationElement {
          */
         this.isMenuItemElement = (el) => {
             return (isHTMLElement(el) &&
-                Menu.focusableElementRoles.hasOwnProperty(el.getAttribute("role")));
+                Menu$1.focusableElementRoles.hasOwnProperty(el.getAttribute("role")));
         };
         /**
          * check if the item is focusable
@@ -15034,10 +15202,10 @@ class Menu extends FoundationElement {
         }
     }
 }
-Menu.focusableElementRoles = roleForMenuItem;
+Menu$1.focusableElementRoles = roleForMenuItem;
 __decorate([
     observable
-], Menu.prototype, "items", void 0);
+], Menu$1.prototype, "items", void 0);
 
 /**
  * The template for the {@link @microsoft/fast-foundation#(NumberField:class)} component.
@@ -15140,33 +15308,40 @@ class FormAssociatedTextField extends FormAssociated(_TextField) {
  * Text field sub-types
  * @public
  */
-var TextFieldType;
-(function (TextFieldType) {
+const TextFieldType = {
     /**
      * An email TextField
      */
-    TextFieldType["email"] = "email";
+    email: "email",
     /**
      * A password TextField
      */
-    TextFieldType["password"] = "password";
+    password: "password",
     /**
      * A telephone TextField
      */
-    TextFieldType["tel"] = "tel";
+    tel: "tel",
     /**
      * A text TextField
      */
-    TextFieldType["text"] = "text";
+    text: "text",
     /**
      * A URL TextField
      */
-    TextFieldType["url"] = "url";
-})(TextFieldType || (TextFieldType = {}));
+    url: "url",
+};
 
 /**
  * A Text Field Custom HTML Element.
  * Based largely on the {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text | <input type="text" /> element }.
+ *
+ * @slot start - Content which can be provided before the number field input
+ * @slot end - Content which can be provided after the number field input
+ * @slot - The default slot for the label
+ * @csspart label - The label
+ * @csspart root - The element wrapping the control, including start and end slots
+ * @csspart control - The text field element
+ * @fires change - Fires a custom 'change' event when the value has changed
  *
  * @public
  */
@@ -15346,6 +15521,20 @@ class FormAssociatedNumberField extends FormAssociated(_NumberField) {
 /**
  * A Number Field Custom HTML Element.
  * Based largely on the {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number | <input type="number" /> element }.
+ *
+ * @slot start - Content which can be provided before the number field input
+ * @slot end - Content which can be provided after the number field input
+ * @slot - The default slot for the label
+ * @slot step-up-glyph - The glyph for the step up control
+ * @slot step-down-glyph - The glyph for the step down control
+ * @csspart label - The label
+ * @csspart root - The element wrapping the control, including start and end slots
+ * @csspart control - The element representing the input
+ * @csspart controls - The step up and step down controls
+ * @csspart step-up - The step up control
+ * @csspart step-down - The step down control
+ * @fires input - Fires a custom 'input' event when the value has changed
+ * @fires change - Fires a custom 'change' event when the value has changed
  *
  * @public
  */
@@ -15657,6 +15846,11 @@ const progressRingTemplate = (context, definition) => html `
  * An Progress HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#progressbar | ARIA progressbar }.
  *
+ * @slot indeterminate - The slot for a custom indeterminate indicator
+ * @csspart progress - Represents the progress element
+ * @csspart determinate - The determinate indicator
+ * @csspart indeterminate - The indeterminate indicator
+ *
  * @public
  */
 class BaseProgress extends FoundationElement {
@@ -15778,6 +15972,11 @@ const radioGroupTemplate = (context, definition) => html `
 /**
  * An Radio Group Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#radiogroup | ARIA radiogroup }.
+ *
+ * @slot label - The slot for the label
+ * @slot - The default slot for radio buttons
+ * @csspart positioning-region - The positioning region for laying out the radios
+ * @fires change - Fires a custom 'change' event when the value changes
  *
  * @public
  */
@@ -16205,6 +16404,12 @@ class FormAssociatedRadio extends CheckableFormAssociated(_Radio) {
  * A Radio Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#radio | ARIA radio }.
  *
+ * @slot checked-indicator - The checked indicator
+ * @slot - The default slot for the label
+ * @csspart control - The element representing the visual radio control
+ * @csspart label - The label
+ * @fires change - Emits a custom change event when the checked state changes
+ *
  * @public
  */
 class Radio extends FormAssociatedRadio {
@@ -16302,6 +16507,19 @@ __decorate([
 
 /**
  * A HorizontalScroll Custom HTML Element
+ *
+ * @slot start - Content which can be provided before the scroll area
+ * @slot end - Content which can be provided after the scroll area
+ * @csspart scroll-area - Wraps the entire scrollable region
+ * @csspart scroll-view - The visible scroll area
+ * @csspart content-container - The container for the content
+ * @csspart scroll-prev - The previous flipper container
+ * @csspart scroll-action-previous - The element wrapping the previous flipper
+ * @csspart scroll-next - The next flipper container
+ * @csspart scroll-action-next - The element wrapping the next flipper
+ * @fires scrollstart - Fires a custom 'scrollstart' event when scrolling
+ * @fires scrollend - Fires a custom 'scrollend' event when scrolling stops
+ *
  * @public
  */
 class HorizontalScroll$1 extends FoundationElement {
@@ -16797,6 +17015,16 @@ class FormAssociatedSearch extends FormAssociated(_Search) {
  * A Search Custom HTML Element.
  * Based largely on the {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search | <input type="search" /> element }.
  *
+ * @slot start - Content which can be provided before the search input
+ * @slot end - Content which can be provided after the search clear button
+ * @slot - The default slot for the label
+ * @slot close-button - The clear button
+ * @slot close-glyph - The clear glyph
+ * @csspart label - The label
+ * @csspart root - The element wrapping the control, including start and end slots
+ * @csspart control - The element representing the input
+ * @csspart clear-button - The button to clear the input
+ *
  * @public
  */
 class Search$1 extends FormAssociatedSearch {
@@ -16949,6 +17177,19 @@ class FormAssociatedSelect extends FormAssociated(_Select) {
  * A Select Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#select | ARIA select }.
  *
+ * @slot start - Content which can be provided before the button content
+ * @slot end - Content which can be provided after the button content
+ * @slot button-container - The element representing the select button
+ * @slot selected-value - The selected value
+ * @slot indicator - The visual indicator for the expand/collapse state of the button
+ * @slot - The default slot for slotted options
+ * @csspart control - The element representing the select invoking element
+ * @csspart selected-value - The element wrapping the selected value
+ * @csspart indicator - The element wrapping the visual indicator
+ * @csspart listbox - The listbox element
+ * @fires input - Fires a custom 'input' event when the value updates
+ * @fires change - Fires a custom 'change' event when the value updates
+ *
  * @public
  */
 class Select$1 extends FormAssociatedSelect {
@@ -16968,12 +17209,6 @@ class Select$1 extends FormAssociatedSelect {
          * @internal
          */
         this.forcedPosition = false;
-        /**
-         * Holds the current state for the calculated position of the listbox.
-         *
-         * @public
-         */
-        this.position = SelectPosition.below;
         /**
          * The unique id for the internal listbox element.
          *
@@ -17030,25 +17265,17 @@ class Select$1 extends FormAssociatedSelect {
         return this._value;
     }
     set value(next) {
-        var _a;
+        var _a, _b, _c, _d, _e, _f, _g;
         const prev = `${this._value}`;
-        if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.length) {
-            const selectedIndex = this.options.findIndex(el => el.value === next);
-            const prevSelectedOption = this.options[this.selectedIndex];
-            const nextSelectedOption = this.options[selectedIndex];
-            const prevSelectedValue = prevSelectedOption
-                ? prevSelectedOption.value
-                : null;
-            const nextSelectedValue = nextSelectedOption
-                ? nextSelectedOption.value
-                : null;
+        if ((_a = this._options) === null || _a === void 0 ? void 0 : _a.length) {
+            const selectedIndex = this._options.findIndex(el => el.value === next);
+            const prevSelectedValue = (_c = (_b = this._options[this.selectedIndex]) === null || _b === void 0 ? void 0 : _b.value) !== null && _c !== void 0 ? _c : null;
+            const nextSelectedValue = (_e = (_d = this._options[selectedIndex]) === null || _d === void 0 ? void 0 : _d.value) !== null && _e !== void 0 ? _e : null;
             if (selectedIndex === -1 || prevSelectedValue !== nextSelectedValue) {
                 next = "";
                 this.selectedIndex = selectedIndex;
             }
-            if (this.firstSelectedOption) {
-                next = this.firstSelectedOption.value;
-            }
+            next = (_g = (_f = this.firstSelectedOption) === null || _f === void 0 ? void 0 : _f.value) !== null && _g !== void 0 ? _g : next;
         }
         if (prev !== next) {
             this._value = next;
@@ -17089,8 +17316,8 @@ class Select$1 extends FormAssociatedSelect {
         super.selectedIndexChanged(prev, next);
         this.updateValue();
     }
-    positionChanged() {
-        this.positionAttribute = this.position;
+    positionChanged(prev, next) {
+        this.positionAttribute = next;
         this.setPositioning();
     }
     /**
@@ -17200,6 +17427,21 @@ class Select$1 extends FormAssociatedSelect {
         }
     }
     /**
+     * Updates the value when an option's value changes.
+     *
+     * @param source - the source object
+     * @param propertyName - the property to evaluate
+     *
+     * @internal
+     * @override
+     */
+    handleChange(source, propertyName) {
+        super.handleChange(source, propertyName);
+        if (propertyName === "value") {
+            this.updateValue();
+        }
+    }
+    /**
      * Synchronize the form-associated proxy and updates the value property of the element.
      *
      * @param prev - the previous collection of slotted option elements
@@ -17208,7 +17450,15 @@ class Select$1 extends FormAssociatedSelect {
      * @internal
      */
     slottedOptionsChanged(prev, next) {
+        this.options.forEach(o => {
+            const notifier = Observable.getNotifier(o);
+            notifier.unsubscribe(this, "value");
+        });
         super.slottedOptionsChanged(prev, next);
+        this.options.forEach(o => {
+            const notifier = Observable.getNotifier(o);
+            notifier.subscribe(this, "value");
+        });
         this.setProxyOptions();
         this.updateValue();
     }
@@ -17339,7 +17589,7 @@ class Select$1 extends FormAssociatedSelect {
             this.updateValue(true);
             this.indexWhenOpened = this.selectedIndex;
         }
-        return !(key in ArrowKeys);
+        return !(key === keyArrowDown || key === keyArrowUp);
     }
     connectedCallback() {
         super.connectedCallback();
@@ -17499,6 +17749,8 @@ const skeletonTemplate = (context, definition) => html `
 /**
  * A Skeleton Custom HTML Element.
  *
+ * @slot - The default slot
+ *
  * @public
  */
 class Skeleton extends FoundationElement {
@@ -17571,6 +17823,9 @@ const defaultConfig = {
 /**
  * A label element intended to be used with the {@link @microsoft/fast-foundation#(Slider:class)} component.
  *
+ * @slot - The default slot for the label content
+ * @csspart root - The element wrapping the label mark and text
+ *
  * @public
  */
 class SliderLabel$1 extends FoundationElement {
@@ -17591,7 +17846,7 @@ class SliderLabel$1 extends FoundationElement {
         this.getSliderConfiguration = () => {
             if (!this.isSliderConfig(this.parentNode)) {
                 this.sliderDirection = defaultConfig.direction || Direction.ltr;
-                this.sliderOrientation = defaultConfig.orientation || Orientation.horizontal;
+                this.sliderOrientation = defaultConfig.orientation ;
                 this.sliderMaxPosition = defaultConfig.max;
                 this.sliderMinPosition = defaultConfig.min;
             }
@@ -17766,13 +18021,22 @@ class FormAssociatedSlider extends FormAssociated(_Slider) {
  * The selection modes of a {@link @microsoft/fast-foundation#(Slider:class)}.
  * @public
  */
-var SliderMode;
-(function (SliderMode) {
-    SliderMode["singleValue"] = "single-value";
-})(SliderMode || (SliderMode = {}));
+const SliderMode = {
+    singleValue: "single-value",
+};
 /**
  * A Slider Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#slider | ARIA slider }.
+ *
+ * @slot track - The track of the slider
+ * @slot track-start - The track-start visual indicator
+ * @slot thumb - The slider thumb
+ * @slot - The default slot for labels
+ * @csspart positioning-region - The region used to position the elements of the slider
+ * @csspart track-container - The region containing the track elements
+ * @csspart track-start - The element wrapping the track start slot
+ * @csspart thumb-container - The thumb container element which is programatically positioned
+ * @fires change - Fires a custom 'change' event when the slider value changes
  *
  * @public
  */
@@ -18252,6 +18516,16 @@ class FormAssociatedSwitch extends CheckableFormAssociated(_Switch) {
  * A Switch Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#switch | ARIA switch }.
  *
+ * @slot - The deafult slot for the label
+ * @slot checked-message - The message when in a checked state
+ * @slot unchecked-message - The message when in an unchecked state
+ * @csspart label - The label
+ * @csspart switch - The element representing the switch, which wraps the indicator
+ * @csspart status-message - The wrapper for the status messages
+ * @csspart checked-message - The checked message
+ * @csspart unchecked-message - The unchecked message
+ * @fires change - Emits a custom change event when the checked state changes
+ *
  * @public
  */
 class Switch extends FormAssociatedSwitch {
@@ -18323,6 +18597,9 @@ const tabPanelTemplate = (context, definition) => html `
 
 /**
  * A TabPanel Component to be used with {@link @microsoft/fast-foundation#(Tabs:class)}
+ *
+ * @slot - The default slot for the tabpanel content
+ *
  * @public
  */
 class TabPanel extends FoundationElement {
@@ -18340,6 +18617,9 @@ const tabTemplate = (context, definition) => html `
 
 /**
  * A Tab Component to be used with {@link @microsoft/fast-foundation#(Tabs:class)}
+ *
+ * @slot - The default slot for the tab content
+ *
  * @public
  */
 class Tab extends FoundationElement {
@@ -18377,14 +18657,23 @@ const tabsTemplate = (context, definition) => html `
  * The orientation of the {@link @microsoft/fast-foundation#(Tabs:class)} component
  * @public
  */
-var TabsOrientation;
-(function (TabsOrientation) {
-    TabsOrientation["vertical"] = "vertical";
-    TabsOrientation["horizontal"] = "horizontal";
-})(TabsOrientation || (TabsOrientation = {}));
+const TabsOrientation = {
+    vertical: "vertical",
+    horizontal: "horizontal",
+};
 /**
  * A Tabs Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#tablist | ARIA tablist }.
+ *
+ * @slot start - Content which can be provided before the tablist element
+ * @slot end - Content which can be provided after the tablist element
+ * @slot tab - The slot for tabs
+ * @slot tabpanel - The slot for tabpanels
+ * @csspart tablist - The element wrapping for the tabs
+ * @csspart tab - The tab slot
+ * @csspart activeIndicator - The visual indicator
+ * @csspart tabpanel - The tabpanel slot
+ * @fires change - Fires a custom 'change' event when a tab is clicked or during keyboard navigation
  *
  * @public
  */
@@ -18743,29 +19032,34 @@ class FormAssociatedTextArea extends FormAssociated(_TextArea) {
  * Resize mode for a TextArea
  * @public
  */
-var TextAreaResize;
-(function (TextAreaResize) {
+const TextAreaResize = {
     /**
      * No resize.
      */
-    TextAreaResize["none"] = "none";
+    none: "none",
     /**
      * Resize vertically and horizontally.
      */
-    TextAreaResize["both"] = "both";
+    both: "both",
     /**
      * Resize horizontally.
      */
-    TextAreaResize["horizontal"] = "horizontal";
+    horizontal: "horizontal",
     /**
      * Resize vertically.
      */
-    TextAreaResize["vertical"] = "vertical";
-})(TextAreaResize || (TextAreaResize = {}));
+    vertical: "vertical",
+};
 
 /**
  * A Text Area Custom HTML Element.
  * Based largely on the {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea | <textarea> element }.
+ *
+ * @slot - The default slot for the label
+ * @csspart label - The label
+ * @csspart root - The element wrapping the control
+ * @csspart control - The textarea element
+ * @fires change - Emits a custom 'change' event when the textarea emits a change event
  *
  * @public
  */
@@ -19084,6 +19378,12 @@ const ToolbarArrowKeyMap = Object.freeze({
  * A Toolbar Custom HTML Element.
  * Implements the {@link https://w3c.github.io/aria-practices/#Toolbar|ARIA Toolbar}.
  *
+ * @slot start - Content which can be provided before the slotted items
+ * @slot end - Content which can be provided after the slotted items
+ * @slot - The default slot for slotted items
+ * @slot label - The toolbar label
+ * @csspart positioning-region - The element containing the items, start and end slots
+ *
  * @public
  */
 class Toolbar$1 extends FoundationElement {
@@ -19341,68 +19641,71 @@ const tooltipTemplate = (context, definition) => {
  *
  * @public
  */
-var TooltipPosition;
-(function (TooltipPosition) {
+const TooltipPosition = {
     /**
      * The tooltip is positioned above the element
      */
-    TooltipPosition["top"] = "top";
+    top: "top",
     /**
      * The tooltip is positioned to the right of the element
      */
-    TooltipPosition["right"] = "right";
+    right: "right",
     /**
      * The tooltip is positioned below the element
      */
-    TooltipPosition["bottom"] = "bottom";
+    bottom: "bottom",
     /**
      * The tooltip is positioned to the left of the element
      */
-    TooltipPosition["left"] = "left";
+    left: "left",
     /**
      * The tooltip is positioned before the element
      */
-    TooltipPosition["start"] = "start";
+    start: "start",
     /**
      * The tooltip is positioned after the element
      */
-    TooltipPosition["end"] = "end";
+    end: "end",
     /**
      * The tooltip is positioned above the element and to the left
      */
-    TooltipPosition["topLeft"] = "top-left";
+    topLeft: "top-left",
     /**
      * The tooltip is positioned above the element and to the right
      */
-    TooltipPosition["topRight"] = "top-right";
+    topRight: "top-right",
     /**
      * The tooltip is positioned below the element and to the left
      */
-    TooltipPosition["bottomLeft"] = "bottom-left";
+    bottomLeft: "bottom-left",
     /**
      * The tooltip is positioned below the element and to the right
      */
-    TooltipPosition["bottomRight"] = "bottom-right";
+    bottomRight: "bottom-right",
     /**
      * The tooltip is positioned above the element and to the left
      */
-    TooltipPosition["topStart"] = "top-start";
+    topStart: "top-start",
     /**
      * The tooltip is positioned above the element and to the right
      */
-    TooltipPosition["topEnd"] = "top-end";
+    topEnd: "top-end",
     /**
      * The tooltip is positioned below the element and to the left
      */
-    TooltipPosition["bottomStart"] = "bottom-start";
+    bottomStart: "bottom-start",
     /**
      * The tooltip is positioned below the element and to the right
      */
-    TooltipPosition["bottomEnd"] = "bottom-end";
-})(TooltipPosition || (TooltipPosition = {}));
+    bottomEnd: "bottom-end",
+};
 
 /**
  * An Tooltip Custom HTML Element.
+ *
+ * @slot - The default slot for the tooltip content
+ * @csspart tooltip - The tooltip element
+ * @fires dismiss - Fires a custom 'dismiss' event when the tooltip is visible and escape key is pressed
  *
  * @public
  */
@@ -19966,6 +20269,18 @@ function isTreeItemElement(el) {
 /**
  * A Tree item Custom HTML Element.
  *
+ * @slot start - Content which can be provided before the tree item content
+ * @slot end - Content which can be provided after the tree item content
+ * @slot - The default slot for tree item text content
+ * @slot item - The slot for tree items (fast tree items manage this assignment themselves)
+ * @slot expand-collapse-button - The expand/collapse button
+ * @csspart positioning-region - The element used to position the tree item content with exception of any child nodes
+ * @csspart content-region - The element containing the expand/collapse, start, and end slots
+ * @csspart items - The element wrapping any child items
+ * @csspart expand-collapse-button - The expand/collapse button
+ * @fires expanded-change - Fires a custom 'expanded-change' event when the expanded state changes
+ * @fires selected-change - Fires a custom 'selected-change' event when the selected state changes
+ *
  * @public
  */
 class TreeItem extends FoundationElement {
@@ -20108,6 +20423,8 @@ const treeViewTemplate = (context, definition) => html `
 /**
  * A Tree view Custom HTML Element.
  * Implements the {@link https://w3c.github.io/aria-practices/#TreeView | ARIA TreeView }.
+ *
+ * @slot - The default slot for tree items
  *
  * @public
  */
@@ -22505,11 +22822,10 @@ function baseLayerLuminanceSwatch(luminance) {
  *
  * @public
  */
-var StandardLuminance;
-(function (StandardLuminance) {
-    StandardLuminance[StandardLuminance["LightMode"] = 1] = "LightMode";
-    StandardLuminance[StandardLuminance["DarkMode"] = 0.23] = "DarkMode";
-})(StandardLuminance || (StandardLuminance = {}));
+const StandardLuminance = {
+    LightMode: 1,
+    DarkMode: 0.23,
+};
 
 /**
  * @internal
@@ -22539,14 +22855,14 @@ function neutralLayer2Index(palette, luminance, layerDelta, fillRestDelta, fillH
 /**
  * @internal
  */
-function neutralLayer2$1(palette, luminance, layerDelta, fillRestDelta, fillHoverDelta, fillActiveDelta) {
+function neutralLayer2(palette, luminance, layerDelta, fillRestDelta, fillHoverDelta, fillActiveDelta) {
     return palette.get(neutralLayer2Index(palette, luminance, layerDelta, fillRestDelta, fillHoverDelta, fillActiveDelta));
 }
 
 /**
  * @internal
  */
-function neutralLayer3$1(palette, luminance, layerDelta, fillRestDelta, fillHoverDelta, fillActiveDelta) {
+function neutralLayer3(palette, luminance, layerDelta, fillRestDelta, fillHoverDelta, fillActiveDelta) {
     return palette.get(neutralLayer2Index(palette, luminance, layerDelta, fillRestDelta, fillHoverDelta, fillActiveDelta) + layerDelta);
 }
 
@@ -22746,17 +23062,17 @@ const neutralLayer1 = create("neutral-layer-1").withDefault((element) => neutral
 // Neutral Layer 2
 /** @public */
 const neutralLayer2Recipe = createNonCss("neutral-layer-2-recipe").withDefault({
-    evaluate: (element) => neutralLayer2$1(neutralPalette.getValueFor(element), baseLayerLuminance.getValueFor(element), neutralFillLayerRestDelta.getValueFor(element), neutralFillRestDelta.getValueFor(element), neutralFillHoverDelta.getValueFor(element), neutralFillActiveDelta.getValueFor(element)),
+    evaluate: (element) => neutralLayer2(neutralPalette.getValueFor(element), baseLayerLuminance.getValueFor(element), neutralFillLayerRestDelta.getValueFor(element), neutralFillRestDelta.getValueFor(element), neutralFillHoverDelta.getValueFor(element), neutralFillActiveDelta.getValueFor(element)),
 });
 /** @public */
-const neutralLayer2 = create("neutral-layer-2").withDefault((element) => neutralLayer2Recipe.getValueFor(element).evaluate(element));
+create("neutral-layer-2").withDefault((element) => neutralLayer2Recipe.getValueFor(element).evaluate(element));
 // Neutral Layer 3
 /** @public */
 const neutralLayer3Recipe = createNonCss("neutral-layer-3-recipe").withDefault({
-    evaluate: (element) => neutralLayer3$1(neutralPalette.getValueFor(element), baseLayerLuminance.getValueFor(element), neutralFillLayerRestDelta.getValueFor(element), neutralFillRestDelta.getValueFor(element), neutralFillHoverDelta.getValueFor(element), neutralFillActiveDelta.getValueFor(element)),
+    evaluate: (element) => neutralLayer3(neutralPalette.getValueFor(element), baseLayerLuminance.getValueFor(element), neutralFillLayerRestDelta.getValueFor(element), neutralFillRestDelta.getValueFor(element), neutralFillHoverDelta.getValueFor(element), neutralFillActiveDelta.getValueFor(element)),
 });
 /** @public */
-const neutralLayer3 = create("neutral-layer-3").withDefault((element) => neutralLayer3Recipe.getValueFor(element).evaluate(element));
+create("neutral-layer-3").withDefault((element) => neutralLayer3Recipe.getValueFor(element).evaluate(element));
 // Neutral Layer 4
 /** @public */
 const neutralLayer4Recipe = createNonCss("neutral-layer-4-recipe").withDefault({
@@ -22903,7 +23219,7 @@ const neutralFillStealthHover = create("neutral-fill-stealth-hover").withDefault
 /** @public */
 const neutralFillStealthActive = create("neutral-fill-stealth-active").withDefault((element) => neutralFillStealthRecipe.getValueFor(element).evaluate(element).active);
 /** @public */
-create("neutral-fill-stealth-focus").withDefault((element) => neutralFillStealthRecipe.getValueFor(element).evaluate(element).focus);
+const neutralFillStealthFocus = create("neutral-fill-stealth-focus").withDefault((element) => neutralFillStealthRecipe.getValueFor(element).evaluate(element).focus);
 // Neutral Fill Strong
 /** @public */
 const neutralFillStrongRecipe = create({
@@ -23020,116 +23336,116 @@ const heightNumber = cssPartial `(${baseHeightMultiplier} + ${density}) * ${desi
  * @public
  */
 const accordionItemStyles = (context, definition) => css `
-    ${display("flex")} :host {
-        box-sizing: border-box;
-        font-family: ${bodyFont};
-        flex-direction: column;
-        font-size: ${typeRampMinus1FontSize};
-        line-height: ${typeRampMinus1LineHeight};
-        border-bottom: calc(${strokeWidth} * 1px) solid ${neutralStrokeDividerRest};
-    }
+        ${display("flex")} :host {
+            box-sizing: border-box;
+            font-family: ${bodyFont};
+            flex-direction: column;
+            font-size: ${typeRampMinus1FontSize};
+            line-height: ${typeRampMinus1LineHeight};
+            border-bottom: calc(${strokeWidth} * 1px) solid ${neutralStrokeDividerRest};
+        }
 
-    .region {
-        display: none;
-        padding: calc((6 + (${designUnit} * 2 * ${density})) * 1px);
-    }
+        .region {
+            display: none;
+            padding: calc((6 + (${designUnit} * 2 * ${density})) * 1px);
+        }
 
-    .heading {
-        display: grid;
-        position: relative;
-        grid-template-columns: auto 1fr auto calc(${heightNumber} * 1px);
-    }
+        .heading {
+            display: grid;
+            position: relative;
+            grid-template-columns: auto 1fr auto calc(${heightNumber} * 1px);
+        }
 
-    .button {
-        appearance: none;
-        border: none;
-        background: none;
-        grid-column: 2;
-        grid-row: 1;
-        outline: none;
-        padding: 0 calc((6 + (${designUnit} * 2 * ${density})) * 1px);
-        text-align: left;
-        height: calc(${heightNumber} * 1px);
-        color: ${neutralForegroundRest};
-        cursor: pointer;
-        font-family: inherit;
-    }
+        .button {
+            appearance: none;
+            border: none;
+            background: none;
+            grid-column: 2;
+            grid-row: 1;
+            outline: none;
+            padding: 0 calc((6 + (${designUnit} * 2 * ${density})) * 1px);
+            text-align: left;
+            height: calc(${heightNumber} * 1px);
+            color: ${neutralForegroundRest};
+            cursor: pointer;
+            font-family: inherit;
+        }
 
-    .button:hover {
-        color: ${neutralForegroundRest};
-    }
+        .button:hover {
+            color: ${neutralForegroundRest};
+        }
 
-    .button:active {
-        color: ${neutralForegroundRest};
-    }
+        .button:active {
+            color: ${neutralForegroundRest};
+        }
 
-    .button::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        cursor: pointer;
-    }
+        .button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+        }
 
-    .button:${focusVisible}::before {
-        outline: none;
-        border: calc(${focusStrokeWidth} * 1px) solid ${focusStrokeOuter};
-        border-radius: calc(${controlCornerRadius} * 1px);
-    }
+        .button:${focusVisible}::before {
+            outline: none;
+            border: calc(${focusStrokeWidth} * 1px) solid ${focusStrokeOuter};
+            border-radius: calc(${controlCornerRadius} * 1px);
+        }
 
-    :host([expanded]) .region {
-        display: block;
-    }
+        :host([expanded]) .region {
+            display: block;
+        }
 
-    .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        grid-column: 4;
-        pointer-events: none;
-        position: relative;
-    }
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            grid-column: 4;
+            pointer-events: none;
+            position: relative;
+        }
 
-    slot[name="expanded-icon"],
-    slot[name="collapsed-icon"] {
-        fill: ${accentFillRest};
-    }
+        slot[name="expanded-icon"],
+        slot[name="collapsed-icon"] {
+            fill: ${accentForegroundRest};
+        }
 
-    slot[name="collapsed-icon"] {
-        display: flex;
-    }
+        slot[name="collapsed-icon"] {
+            display: flex;
+        }
 
-    :host([expanded]) slot[name="collapsed-icon"] {
-        display: none;
-    }
+        :host([expanded]) slot[name="collapsed-icon"] {
+            display: none;
+        }
 
-    slot[name="expanded-icon"] {
-        display: none;
-    }
+        slot[name="expanded-icon"] {
+            display: none;
+        }
 
-    :host([expanded]) slot[name="expanded-icon"] {
-        display: flex;
-    }
+        :host([expanded]) slot[name="expanded-icon"] {
+            display: flex;
+        }
 
-    .start {
-        display: flex;
-        align-items: center;
-        padding-inline-start: calc(${designUnit} * 1px);
-        justify-content: center;
-        grid-column: 1;
-        position: relative;
-    }
+        .start {
+            display: flex;
+            align-items: center;
+            padding-inline-start: calc(${designUnit} * 1px);
+            justify-content: center;
+            grid-column: 1;
+            position: relative;
+        }
 
-    .end {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        grid-column: 3;
-        position: relative;
-    }
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        .end {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            grid-column: 3;
+            position: relative;
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
             .button:${focusVisible}::before {
                 border-color: ${SystemColors.Highlight};
             }
@@ -23987,7 +24303,6 @@ const badgeStyles = (context, definition) => css `
         :host([circular]) .control {
             border-radius: 100px;
             padding: 0 calc(${designUnit} * 1px);
-            /* Need to work with Brian on width and height here */
             height: calc((${heightNumber} - (${designUnit} * 3)) * 1px);
             min-width: calc((${heightNumber} - (${designUnit} * 3)) * 1px);
             display: flex;
@@ -24460,7 +24775,7 @@ const CalendarStyles = css `
 
 /**
  * The FAST Calendar Element. Implements {@link @microsoft/fast-foundation#Calendar},
- * {@link @microsoft/fast-foundation#CalendarTemplate}
+ * {@link @microsoft/fast-foundation#calendarTemplate}
  *
  *
  * @public
@@ -24533,131 +24848,129 @@ const fastCard = Card.compose({
  * @public
  */
 const checkboxStyles = (context, definition) => css `
-    ${display("inline-flex")} :host {
-        align-items: center;
-        outline: none;
-        margin: calc(${designUnit} * 1px) 0;
-        /* Chromium likes to select label text or the default slot when the checkbox is
-            clicked. Maybe there is a better solution here? */
-        user-select: none;
-    }
+        ${display("inline-flex")} :host {
+            align-items: center;
+            outline: none;
+            margin: calc(${designUnit} * 1px) 0;
+            /* Chromium likes to select label text or the default slot when the checkbox is
+                clicked. Maybe there is a better solution here? */
+            user-select: none;
+        }
 
-    .control {
-        position: relative;
-        width: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
-        height: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
-        box-sizing: border-box;
-        border-radius: calc(${controlCornerRadius} * 1px);
-        border: calc(${strokeWidth} * 1px) solid ${neutralStrokeRest};
-        background: ${neutralFillInputRest};
-        outline: none;
-        cursor: pointer;
-    }
+        .control {
+            position: relative;
+            width: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
+            height: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
+            box-sizing: border-box;
+            border-radius: calc(${controlCornerRadius} * 1px);
+            border: calc(${strokeWidth} * 1px) solid ${neutralStrokeRest};
+            background: ${neutralFillInputRest};
+            outline: none;
+            cursor: pointer;
+        }
 
-    .label {
-        font-family: ${bodyFont};
-        color: ${neutralForegroundRest};
-        /* Need to discuss with Brian how HorizontalSpacingNumber can work.
-            https://github.com/microsoft/fast/issues/2766 */
-        padding-inline-start: calc(${designUnit} * 2px + 2px);
-        margin-inline-end: calc(${designUnit} * 2px + 2px);
-        cursor: pointer;
-        font-size: ${typeRampBaseFontSize};
-        line-height: ${typeRampBaseLineHeight};
-    }
+        .label {
+            font-family: ${bodyFont};
+            color: ${neutralForegroundRest};
+            padding-inline-start: calc(${designUnit} * 2px + 2px);
+            margin-inline-end: calc(${designUnit} * 2px + 2px);
+            cursor: pointer;
+            font-size: ${typeRampBaseFontSize};
+            line-height: ${typeRampBaseLineHeight};
+        }
 
-    .label__hidden {
-        display: none;
-        visibility: hidden;
-    }
+        .label__hidden {
+            display: none;
+            visibility: hidden;
+        }
 
-    .checked-indicator {
-        width: 100%;
-        height: 100%;
-        display: block;
-        fill: ${foregroundOnAccentRest};
-        opacity: 0;
-        pointer-events: none;
-    }
+        .checked-indicator {
+            width: 100%;
+            height: 100%;
+            display: block;
+            fill: ${foregroundOnAccentRest};
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    .indeterminate-indicator {
-        border-radius: calc(${controlCornerRadius} * 1px);
-        background: ${foregroundOnAccentRest};
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 50%;
-        height: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-    }
+        .indeterminate-indicator {
+            border-radius: calc(${controlCornerRadius} * 1px);
+            background: ${foregroundOnAccentRest};
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
 
-    :host(:not([disabled])) .control:hover {
-        background: ${neutralFillInputHover};
-        border-color: ${neutralStrokeHover};
-    }
+        :host(:not([disabled])) .control:hover {
+            background: ${neutralFillInputHover};
+            border-color: ${neutralStrokeHover};
+        }
 
-    :host(:not([disabled])) .control:active {
-        background: ${neutralFillInputActive};
-        border-color: ${neutralStrokeActive};
-    }
+        :host(:not([disabled])) .control:active {
+            background: ${neutralFillInputActive};
+            border-color: ${neutralStrokeActive};
+        }
 
-    :host(:${focusVisible}) .control {
-        box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
-    }
+        :host(:${focusVisible}) .control {
+            box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
+        }
 
-    :host([aria-checked="true"]) .control {
-        background: ${accentFillRest};
-        border: calc(${strokeWidth} * 1px) solid ${accentFillRest};
-    }
+        :host([aria-checked="true"]) .control {
+            background: ${accentFillRest};
+            border: calc(${strokeWidth} * 1px) solid ${accentFillRest};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:hover {
-        background: ${accentFillHover};
-        border: calc(${strokeWidth} * 1px) solid ${accentFillHover};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:hover {
+            background: ${accentFillHover};
+            border: calc(${strokeWidth} * 1px) solid ${accentFillHover};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:hover .checked-indicator {
-        fill: ${foregroundOnAccentHover};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:hover .checked-indicator {
+            fill: ${foregroundOnAccentHover};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:hover .indeterminate-indicator {
-        background: ${foregroundOnAccentHover};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:hover .indeterminate-indicator {
+            background: ${foregroundOnAccentHover};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:active {
-        background: ${accentFillActive};
-        border: calc(${strokeWidth} * 1px) solid ${accentFillActive};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:active {
+            background: ${accentFillActive};
+            border: calc(${strokeWidth} * 1px) solid ${accentFillActive};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:active .checked-indicator {
-        fill: ${foregroundOnAccentActive};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:active .checked-indicator {
+            fill: ${foregroundOnAccentActive};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:active .indeterminate-indicator {
-        background: ${foregroundOnAccentActive};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:active .indeterminate-indicator {
+            background: ${foregroundOnAccentActive};
+        }
 
-    :host([aria-checked="true"]:${focusVisible}:not([disabled])) .control {
-        box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
-    }
+        :host([aria-checked="true"]:${focusVisible}:not([disabled])) .control {
+            box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
+        }
 
 
-    :host([disabled]) .label,
-    :host([readonly]) .label,
-    :host([readonly]) .control,
-    :host([disabled]) .control {
-        cursor: ${disabledCursor};
-    }
+        :host([disabled]) .label,
+        :host([readonly]) .label,
+        :host([readonly]) .control,
+        :host([disabled]) .control {
+            cursor: ${disabledCursor};
+        }
 
-    :host([aria-checked="true"]:not(.indeterminate)) .checked-indicator,
-    :host(.indeterminate) .indeterminate-indicator {
-        opacity: 1;
-    }
+        :host([aria-checked="true"]:not(.indeterminate)) .checked-indicator,
+        :host(.indeterminate) .indeterminate-indicator {
+            opacity: 1;
+        }
 
-    :host([disabled]) {
-        opacity: ${disabledOpacity};
-    }
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        :host([disabled]) {
+            opacity: ${disabledOpacity};
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
             .control {
                 forced-color-adjust: none;
                 border-color: ${SystemColors.FieldText};
@@ -24765,7 +25078,7 @@ const listboxStyles = (context, definition) => {
         ${!hostContext ? display("inline-flex") : ""}
 
         :host ${hostContext} {
-            background: ${neutralLayerFloating};
+            background: ${fillColor};
             border: calc(${strokeWidth} * 1px) solid ${neutralStrokeRest};
             border-radius: calc(${controlCornerRadius} * 1px);
             box-sizing: border-box;
@@ -24830,241 +25143,241 @@ const selectStyles = (context, definition) => {
     // various formatting bugs.
     // prettier-ignore
     return css `
-    ${display("inline-flex")}
+        ${display("inline-flex")}
 
-    :host {
-        --elevation: 14;
-        background: ${neutralFillInputRest};
-        border-radius: calc(${controlCornerRadius} * 1px);
-        border: calc(${strokeWidth} * 1px) solid ${accentFillRest};
-        box-sizing: border-box;
-        color: ${neutralForegroundRest};
-        font-family: ${bodyFont};
-        height: calc(${heightNumber} * 1px);
-        position: relative;
-        user-select: none;
-        min-width: 250px;
-        outline: none;
-        vertical-align: top;
-    }
-
-    ${selectContext ? css `
-        :host(:not([aria-haspopup])) {
-            --elevation: 0;
-            border: 0;
-            height: auto;
-            min-width: 0;
+        :host {
+            --elevation: 14;
+            background: ${neutralFillInputRest};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            border: calc(${strokeWidth} * 1px) solid ${accentFillRest};
+            box-sizing: border-box;
+            color: ${neutralForegroundRest};
+            font-family: ${bodyFont};
+            height: calc(${heightNumber} * 1px);
+            position: relative;
+            user-select: none;
+            min-width: 250px;
+            outline: none;
+            vertical-align: top;
         }
-    ` : ""}
 
-    ${listboxStyles(context)}
+        ${selectContext ? css `
+            :host(:not([aria-haspopup])) {
+                --elevation: 0;
+                border: 0;
+                height: auto;
+                min-width: 0;
+            }
+        ` : ""}
 
-    .listbox {
-        ${elevation}
-        border: none;
-        display: flex;
-        left: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-    }
+        ${listboxStyles(context)}
 
-    .control + .listbox {
-        --stroke-size: calc(${designUnit} * ${strokeWidth} * 2);
-        max-height: calc(
-            (var(--listbox-max-height) * ${heightNumber} + var(--stroke-size)) * 1px
-        );
-    }
-
-    ${selectContext ? css `
-        :host(:not([aria-haspopup])) .listbox {
-            left: auto;
-            position: static;
-            z-index: auto;
+        :host .listbox {
+            ${elevation}
+            border: none;
+            display: flex;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            z-index: 1;
         }
-    ` : ""}
 
-    .listbox[hidden] {
-        display: none;
-    }
+        .control + .listbox {
+            --stroke-size: calc(${designUnit} * ${strokeWidth} * 2);
+            max-height: calc(
+                (var(--listbox-max-height) * ${heightNumber} + var(--stroke-size)) * 1px
+            );
+        }
 
-    .control {
-        align-items: center;
-        box-sizing: border-box;
-        cursor: pointer;
-        display: flex;
-        font-size: ${typeRampBaseFontSize};
-        font-family: inherit;
-        line-height: ${typeRampBaseLineHeight};
-        min-height: 100%;
-        padding: 0 calc(${designUnit} * 2.25px);
-        width: 100%;
-    }
-
-    :host(:not([disabled]):hover) {
-        background: ${neutralFillInputHover};
-        border-color: ${accentFillHover};
-    }
-
-    :host(:${focusVisible}) {
-        border-color: ${focusStrokeOuter};
-    }
-
-    :host(:not([size]):not([multiple]):not([open]):${focusVisible}),
-    :host([multiple]:${focusVisible}),
-    :host([size]:${focusVisible}) {
-        box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) ${focusStrokeOuter};
-    }
-
-    :host(:not([multiple]):not([size]):${focusVisible}) ::slotted(${context.tagFor(ListboxOption)}[aria-selected="true"]:not([disabled])) {
-        box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) inset ${focusStrokeInner};
-        border-color: ${focusStrokeOuter};
-        background: ${accentFillFocus};
-        color: ${foregroundOnAccentFocus};
-    }
-
-    :host([disabled]) {
-        cursor: ${disabledCursor};
-        opacity: ${disabledOpacity};
-    }
-
-    :host([disabled]) .control {
-        cursor: ${disabledCursor};
-        user-select: none;
-    }
-
-    :host([disabled]:hover) {
-        background: ${neutralFillStealthRest};
-        color: ${neutralForegroundRest};
-        fill: currentcolor;
-    }
-
-    :host(:not([disabled])) .control:active {
-        background: ${neutralFillInputActive};
-        border-color: ${accentFillActive};
-        border-radius: calc(${controlCornerRadius} * 1px);
-    }
-
-    :host([open][position="above"]) .listbox {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: 0;
-        bottom: calc(${heightNumber} * 1px);
-    }
-
-    :host([open][position="below"]) .listbox {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-top: 0;
-        top: calc(${heightNumber} * 1px);
-    }
-
-    .selected-value {
-        flex: 1 1 auto;
-        font-family: inherit;
-        min-width: calc(var(--listbox-scroll-width, 0) - (${designUnit} * 4) * 1px);
-        overflow: hidden;
-        text-align: start;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .indicator {
-        flex: 0 0 auto;
-        margin-inline-start: 1em;
-    }
-
-    slot[name="listbox"] {
-        display: none;
-        width: 100%;
-    }
-
-    :host([open]) slot[name="listbox"] {
-        display: flex;
-        position: absolute;
-        ${elevation}
-    }
-
-    .end {
-        margin-inline-start: auto;
-    }
-
-    .start,
-    .end,
-    .indicator,
-    .select-indicator,
-    ::slotted(svg) {
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        fill: currentcolor;
-        height: 1em;
-        min-height: calc(${designUnit} * 4px);
-        min-width: calc(${designUnit} * 4px);
-        width: 1em;
-    }
-
-    ::slotted([role="option"]),
-    ::slotted(option) {
-        flex: 0 0 auto;
-    }
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
-            :host(:not([disabled]):hover),
-            :host(:not([disabled]):active) {
-                border-color: ${SystemColors.Highlight};
+        ${selectContext ? css `
+            :host(:not([aria-haspopup])) .listbox {
+                left: auto;
+                position: static;
+                z-index: auto;
             }
+        ` : ""}
 
-            :host(:not([disabled]):${focusVisible}) {
-                background-color: ${SystemColors.ButtonFace};
-                box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) ${SystemColors.Highlight};
-                color: ${SystemColors.ButtonText};
-                fill: currentcolor;
-                forced-color-adjust: none;
-            }
+        .listbox[hidden] {
+            display: none;
+        }
 
-            :host(:not([disabled]):${focusVisible}) .listbox {
-                background: ${SystemColors.ButtonFace};
-            }
+        .control {
+            align-items: center;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: flex;
+            font-size: ${typeRampBaseFontSize};
+            font-family: inherit;
+            line-height: ${typeRampBaseLineHeight};
+            min-height: 100%;
+            padding: 0 calc(${designUnit} * 2.25px);
+            width: 100%;
+        }
 
-            :host([disabled]) {
-                border-color: ${SystemColors.GrayText};
-                background-color: ${SystemColors.ButtonFace};
-                color: ${SystemColors.GrayText};
-                fill: currentcolor;
-                opacity: 1;
-                forced-color-adjust: none;
-            }
+        :host(:not([disabled]):hover) {
+            background: ${neutralFillInputHover};
+            border-color: ${accentFillHover};
+        }
 
-            :host([disabled]:hover) {
-                background: ${SystemColors.ButtonFace};
-            }
+        :host(:${focusVisible}) {
+            border-color: ${focusStrokeOuter};
+        }
 
-            :host([disabled]) .control {
-                color: ${SystemColors.GrayText};
-                border-color: ${SystemColors.GrayText};
-            }
+        :host(:not([size]):not([multiple]):not([open]):${focusVisible}),
+        :host([multiple]:${focusVisible}),
+        :host([size]:${focusVisible}) {
+            box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) ${focusStrokeOuter};
+        }
 
-            :host([disabled]) .control .select-indicator {
-                fill: ${SystemColors.GrayText};
-            }
+        :host(:not([multiple]):not([size]):${focusVisible}) ::slotted(${context.tagFor(ListboxOption)}[aria-selected="true"]:not([disabled])) {
+            box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) inset ${focusStrokeInner};
+            border-color: ${focusStrokeOuter};
+            background: ${accentFillFocus};
+            color: ${foregroundOnAccentFocus};
+        }
 
-            :host(:${focusVisible}) ::slotted([aria-selected="true"][role="option"]),
-            :host(:${focusVisible}) ::slotted(option[aria-selected="true"]),
-            :host(:${focusVisible}) ::slotted([aria-selected="true"][role="option"]:not([disabled])) {
-                background: ${SystemColors.Highlight};
-                border-color: ${SystemColors.ButtonText};
-                box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) inset ${SystemColors.HighlightText};
-                color: ${SystemColors.HighlightText};
-                fill: currentcolor;
-            }
+        :host([disabled]) {
+            cursor: ${disabledCursor};
+            opacity: ${disabledOpacity};
+        }
 
-            .start,
-            .end,
-            .indicator,
-            .select-indicator,
-            ::slotted(svg) {
-                color: ${SystemColors.ButtonText};
-                fill: currentcolor;
-            }
-        `));
+        :host([disabled]) .control {
+            cursor: ${disabledCursor};
+            user-select: none;
+        }
+
+        :host([disabled]:hover) {
+            background: ${neutralFillStealthRest};
+            color: ${neutralForegroundRest};
+            fill: currentcolor;
+        }
+
+        :host(:not([disabled])) .control:active {
+            background: ${neutralFillInputActive};
+            border-color: ${accentFillActive};
+            border-radius: calc(${controlCornerRadius} * 1px);
+        }
+
+        :host([open][position="above"]) .listbox {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: 0;
+            bottom: calc(${heightNumber} * 1px);
+        }
+
+        :host([open][position="below"]) .listbox {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-top: 0;
+            top: calc(${heightNumber} * 1px);
+        }
+
+        .selected-value {
+            flex: 1 1 auto;
+            font-family: inherit;
+            min-width: calc(var(--listbox-scroll-width, 0) - (${designUnit} * 4) * 1px);
+            overflow: hidden;
+            text-align: start;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .indicator {
+            flex: 0 0 auto;
+            margin-inline-start: 1em;
+        }
+
+        slot[name="listbox"] {
+            display: none;
+            width: 100%;
+        }
+
+        :host([open]) slot[name="listbox"] {
+            display: flex;
+            position: absolute;
+            ${elevation}
+        }
+
+        .end {
+            margin-inline-start: auto;
+        }
+
+        .start,
+        .end,
+        .indicator,
+        .select-indicator,
+        ::slotted(svg) {
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            fill: currentcolor;
+            height: 1em;
+            min-height: calc(${designUnit} * 4px);
+            min-width: calc(${designUnit} * 4px);
+            width: 1em;
+        }
+
+        ::slotted([role="option"]),
+        ::slotted(option) {
+            flex: 0 0 auto;
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
+                :host(:not([disabled]):hover),
+                :host(:not([disabled]):active) {
+                    border-color: ${SystemColors.Highlight};
+                }
+
+                :host(:not([disabled]):${focusVisible}) {
+                    background-color: ${SystemColors.ButtonFace};
+                    box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) ${SystemColors.Highlight};
+                    color: ${SystemColors.ButtonText};
+                    fill: currentcolor;
+                    forced-color-adjust: none;
+                }
+
+                :host(:not([disabled]):${focusVisible}) .listbox {
+                    background: ${SystemColors.ButtonFace};
+                }
+
+                :host([disabled]) {
+                    border-color: ${SystemColors.GrayText};
+                    background-color: ${SystemColors.ButtonFace};
+                    color: ${SystemColors.GrayText};
+                    fill: currentcolor;
+                    opacity: 1;
+                    forced-color-adjust: none;
+                }
+
+                :host([disabled]:hover) {
+                    background: ${SystemColors.ButtonFace};
+                }
+
+                :host([disabled]) .control {
+                    color: ${SystemColors.GrayText};
+                    border-color: ${SystemColors.GrayText};
+                }
+
+                :host([disabled]) .control .select-indicator {
+                    fill: ${SystemColors.GrayText};
+                }
+
+                :host(:${focusVisible}) ::slotted([aria-selected="true"][role="option"]),
+                :host(:${focusVisible}) ::slotted(option[aria-selected="true"]),
+                :host(:${focusVisible}) ::slotted([aria-selected="true"][role="option"]:not([disabled])) {
+                    background: ${SystemColors.Highlight};
+                    border-color: ${SystemColors.ButtonText};
+                    box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) inset ${SystemColors.HighlightText};
+                    color: ${SystemColors.HighlightText};
+                    fill: currentcolor;
+                }
+
+                .start,
+                .end,
+                .indicator,
+                .select-indicator,
+                ::slotted(svg) {
+                    color: ${SystemColors.ButtonText};
+                    fill: currentcolor;
+                }
+            `));
 };
 
 /**
@@ -25204,30 +25517,30 @@ const dataGridRowStyles = (context, definition) => css `
  * @public
  */
 const dataGridCellStyles = (context, definition) => css `
-    :host {
-        padding: calc(${designUnit} * 1px) calc(${designUnit} * 3px);
-        color: ${neutralForegroundRest};
-        box-sizing: border-box;
-        font-family: ${bodyFont};
-        font-size: ${typeRampBaseFontSize};
-        line-height: ${typeRampBaseLineHeight};
-        font-weight: 400;
-        border: transparent calc(${strokeWidth} * 1px) solid;
-        overflow: hidden;
-        white-space: nowrap;
-        border-radius: calc(${controlCornerRadius} * 1px);
-    }
+        :host {
+            padding: calc(${designUnit} * 1px) calc(${designUnit} * 3px);
+            color: ${neutralForegroundRest};
+            box-sizing: border-box;
+            font-family: ${bodyFont};
+            font-size: ${typeRampBaseFontSize};
+            line-height: ${typeRampBaseLineHeight};
+            font-weight: 400;
+            border: transparent calc(${focusStrokeWidth} * 1px) solid;
+            overflow: hidden;
+            white-space: nowrap;
+            border-radius: calc(${controlCornerRadius} * 1px);
+        }
 
-    :host(.column-header) {
-        font-weight: 600;
-    }
+        :host(.column-header) {
+            font-weight: 600;
+        }
 
-    :host(:${focusVisible}) {
-        border: ${focusStrokeOuter} calc(${strokeWidth} * 1px) solid;
-        color: ${neutralForegroundRest};
-    }
-
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        :host(:${focusVisible}) {
+            border: ${focusStrokeOuter} calc(${focusStrokeWidth} * 1px) solid;
+            outline: none;
+            color: ${neutralForegroundRest};
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
         :host {
             forced-color-adjust: none;
             border-color: transparent;
@@ -26377,113 +26690,93 @@ const fastHorizontalScroll = HorizontalScroll.compose({
  * @public
  */
 const optionStyles = (context, definition) => css `
-    ${display("inline-flex")} :host {
-        align-items: center;
-        font-family: ${bodyFont};
-        border-radius: calc(${controlCornerRadius} * 1px);
-        border: calc(${focusStrokeWidth} * 1px) solid ${neutralLayerFloating};
-        box-sizing: border-box;
-        color: ${neutralForegroundRest};
-        cursor: pointer;
-        flex: 0 0 auto;
-        fill: currentcolor;
-        font-size: ${typeRampBaseFontSize};
-        height: calc(${heightNumber} * 1px);
-        line-height: ${typeRampBaseLineHeight};
-        margin: 0 calc((${designUnit} - ${focusStrokeWidth}) * 1px);
-        outline: none;
-        overflow: hidden;
-        padding: 0 1ch;
-        user-select: none;
-        white-space: nowrap;
-    }
+        ${display("inline-flex")} :host {
+            align-items: center;
+            font-family: ${bodyFont};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            border: calc(${focusStrokeWidth} * 1px) solid transparent;
+            box-sizing: border-box;
+            background: ${neutralFillStealthRest};
+            color: ${neutralForegroundRest};
+            cursor: pointer;
+            flex: 0 0 auto;
+            fill: currentcolor;
+            font-size: ${typeRampBaseFontSize};
+            height: calc(${heightNumber} * 1px);
+            line-height: ${typeRampBaseLineHeight};
+            margin: 0 calc((${designUnit} - ${focusStrokeWidth}) * 1px);
+            outline: none;
+            overflow: hidden;
+            padding: 0 1ch;
+            user-select: none;
+            white-space: nowrap;
+        }
 
-    :host(:${focusVisible}) {
-        box-shadow: 0 0 0 calc(${focusStrokeWidth} * 1px) inset ${focusStrokeInner};
-        border-color: ${focusStrokeOuter};
-        background: ${accentFillFocus};
-        color: ${foregroundOnAccentFocus};
-    }
+        :host(:not([disabled]):not([aria-selected="true"]):hover) {
+            background: ${neutralFillStealthHover};
+        }
 
-    :host([aria-selected="true"]) {
-        background: ${accentFillRest};
-        color: ${foregroundOnAccentRest};
-    }
+        :host(:not([disabled]):not([aria-selected="true"]):active) {
+            background: ${neutralFillStealthActive};
+        }
 
-    :host(:hover) {
-        background: ${accentFillHover};
-        color: ${foregroundOnAccentHover};
-    }
+        :host([aria-selected="true"]) {
+            background: ${accentFillRest};
+            color: ${foregroundOnAccentRest};
+        }
 
-    :host(:active) {
-        background: ${accentFillActive};
-        color: ${foregroundOnAccentActive};
-    }
+        :host(:not([disabled])[aria-selected="true"]:hover) {
+            background: ${accentFillHover};
+            color: ${foregroundOnAccentHover};
+        }
 
-    :host(:not([aria-selected="true"]):hover),
-    :host(:not([aria-selected="true"]):active) {
-        background: ${neutralFillHover};
-        color: ${neutralForegroundRest};
-    }
+        :host(:not([disabled])[aria-selected="true"]:active) {
+            background: ${accentFillActive};
+            color: ${foregroundOnAccentActive};
+        }
 
-    :host([disabled]) {
-        cursor: ${disabledCursor};
-        opacity: ${disabledOpacity};
-    }
+        :host([disabled]) {
+            cursor: ${disabledCursor};
+            opacity: ${disabledOpacity};
+        }
 
-    :host([disabled]:hover) {
-        background-color: inherit;
-    }
+        .content {
+            grid-column-start: 2;
+            justify-self: start;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-    .content {
-        grid-column-start: 2;
-        justify-self: start;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        .start,
+        .end,
+        ::slotted(svg) {
+            display: flex;
+        }
 
-    .start,
-    .end,
-    ::slotted(svg) {
-        display: flex;
-    }
+        ::slotted(svg) {
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            height: calc(${designUnit} * 4px);
+            width: calc(${designUnit} * 4px);
+        }
 
-    ::slotted(svg) {
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        height: calc(${designUnit} * 4px);
-        width: calc(${designUnit} * 4px);
-    }
+        ::slotted([slot="end"]) {
+            margin-inline-start: 1ch;
+        }
 
-    ::slotted([slot="end"]) {
-        margin-inline-start: 1ch;
-    }
+        ::slotted([slot="start"]) {
+            margin-inline-end: 1ch;
+        }
 
-    ::slotted([slot="start"]) {
-        margin-inline-end: 1ch;
-    }
+        :host([aria-checked="true"][aria-selected="false"]) {
+            border-color: ${focusStrokeOuter};
+        }
 
-    :host([aria-checked="true"][aria-selected="false"]) {
-        border-color: ${neutralStrokeRest};
-        background: ${neutralLayer3};
-        color: ${neutralForegroundRest};
-    }
-
-    :host([aria-checked="true"][aria-selected="false"]:not([disabled]):hover) {
-        background: ${neutralFillHover};
-    }
-
-    :host([aria-checked="true"][aria-selected="true"]) {
-        border-color: ${focusStrokeOuter};
-        background: ${accentFillFocus};
-        color: ${foregroundOnAccentFocus};
-    }
-
-    :host([aria-checked="true"][aria-selected="true"]:hover) {
-        background: ${accentFillHover};
-        color: ${foregroundOnAccentHover};
-    }
-
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        :host([aria-checked="true"][aria-selected="true"]) {
+            border-color: ${focusStrokeOuter};
+            box-shadow: 0 0 0 calc(${focusStrokeWidth} * 2 * 1px) inset
+                ${focusStrokeInner};
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
                 :host {
                     border-color: transparent;
                     forced-color-adjust: none;
@@ -26593,256 +26886,260 @@ const fastListbox = Listbox.compose({
  * @public
  */
 const menuItemStyles = (context, definition) => css `
-    ${display("grid")} :host {
-        contain: layout;
-        overflow: visible;
-        font-family: ${bodyFont};
-        outline: none;
-        box-sizing: border-box;
-        height: calc(${heightNumber} * 1px);
-        grid-template-columns: minmax(42px, auto) 1fr minmax(42px, auto);
-        grid-template-rows: auto;
-        justify-items: center;
-        align-items: center;
-        padding: 0;
-        margin: 0 calc(${designUnit} * 1px);
-        white-space: nowrap;
-        color: ${neutralForegroundRest};
-        fill: currentcolor;
-        cursor: pointer;
-        font-size: ${typeRampBaseFontSize};
-        line-height: ${typeRampBaseLineHeight};
-        border-radius: calc(${controlCornerRadius} * 1px);
-        border: calc(${focusStrokeWidth} * 1px) solid transparent;
-    }
+        ${display("grid")} :host {
+            contain: layout;
+            overflow: visible;
+            font-family: ${bodyFont};
+            outline: none;
+            box-sizing: border-box;
+            height: calc(${heightNumber} * 1px);
+            grid-template-columns: minmax(42px, auto) 1fr minmax(42px, auto);
+            grid-template-rows: auto;
+            justify-items: center;
+            align-items: center;
+            padding: 0;
+            margin: 0 calc(${designUnit} * 1px);
+            white-space: nowrap;
+            background: ${neutralFillStealthRest};
+            color: ${neutralForegroundRest};
+            fill: currentcolor;
+            cursor: pointer;
+            font-size: ${typeRampBaseFontSize};
+            line-height: ${typeRampBaseLineHeight};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            border: calc(${focusStrokeWidth} * 1px) solid transparent;
+        }
 
-    :host(:hover) {
-        position: relative;
-        z-index: 1;
-    }
+        :host(:hover) {
+            position: relative;
+            z-index: 1;
+        }
 
-    :host(.indent-0) {
-        grid-template-columns: auto 1fr minmax(42px, auto);
-    }
-    :host(.indent-0) .content {
-        grid-column: 1;
-        grid-row: 1;
-        margin-inline-start: 10px;
-    }
-    :host(.indent-0) .expand-collapse-glyph-container {
-        grid-column: 5;
-        grid-row: 1;
-    }
-    :host(.indent-2) {
-        grid-template-columns: minmax(42px, auto) minmax(42px, auto) 1fr minmax(42px, auto) minmax(42px, auto);
-    }
-    :host(.indent-2) .content {
-        grid-column: 3;
-        grid-row: 1;
-        margin-inline-start: 10px;
-    }
-    :host(.indent-2) .expand-collapse-glyph-container {
-        grid-column: 5;
-        grid-row: 1;
-    }
-    :host(.indent-2) .start {
-        grid-column: 2;
-    }
-    :host(.indent-2) .end {
-        grid-column: 4;
-    }
+        :host(.indent-0) {
+            grid-template-columns: auto 1fr minmax(42px, auto);
+        }
+        :host(.indent-0) .content {
+            grid-column: 1;
+            grid-row: 1;
+            margin-inline-start: 10px;
+        }
+        :host(.indent-0) .expand-collapse-glyph-container {
+            grid-column: 5;
+            grid-row: 1;
+        }
+        :host(.indent-2) {
+            grid-template-columns: minmax(42px, auto) minmax(42px, auto) 1fr minmax(42px, auto) minmax(42px, auto);
+        }
+        :host(.indent-2) .content {
+            grid-column: 3;
+            grid-row: 1;
+            margin-inline-start: 10px;
+        }
+        :host(.indent-2) .expand-collapse-glyph-container {
+            grid-column: 5;
+            grid-row: 1;
+        }
+        :host(.indent-2) .start {
+            grid-column: 2;
+        }
+        :host(.indent-2) .end {
+            grid-column: 4;
+        }
 
-    :host(:${focusVisible}) {
-        border-color: ${focusStrokeOuter};
-        background: ${neutralLayer3};
-        color: ${neutralForegroundRest};
-    }
+        :host(:${focusVisible}) {
+            border-color: ${focusStrokeOuter};
+            background: ${neutralFillStealthFocus};
+            color: ${neutralForegroundRest};
+        }
 
-    :host(:hover) {
-        background: ${neutralLayer3};
-        color: ${neutralForegroundRest};
-    }
+        :host(:hover) {
+            background: ${neutralFillStealthHover};
+            color: ${neutralForegroundRest};
+        }
 
-    :host([aria-checked="true"]),
-    :host(:active),
-    :host(.expanded) {
-        background: ${neutralLayer2};
-        color: ${neutralForegroundRest};
-    }
+        :host(:active) {
+            background: ${neutralFillStealthActive};
+        }
 
-    :host([disabled]) {
-        cursor: ${disabledCursor};
-        opacity: ${disabledOpacity};
-    }
+        :host([aria-checked="true"]),
+        :host(.expanded) {
+            background: ${neutralFillRest};
+            color: ${neutralForegroundRest};
+        }
 
-    :host([disabled]:hover) {
-        color: ${neutralForegroundRest};
-        fill: currentcolor;
-        background: ${neutralFillStealthRest};
-    }
+        :host([disabled]) {
+            cursor: ${disabledCursor};
+            opacity: ${disabledOpacity};
+        }
 
-    :host([disabled]:hover) .start,
-    :host([disabled]:hover) .end,
-    :host([disabled]:hover)::slotted(svg) {
-        fill: ${neutralForegroundRest};
-    }
+        :host([disabled]:hover) {
+            color: ${neutralForegroundRest};
+            fill: currentcolor;
+            background: ${neutralFillStealthRest};
+        }
 
-    .expand-collapse-glyph {
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        width: 16px;
-        height: 16px;
-        fill: currentcolor;
-    }
+        :host([disabled]:hover) .start,
+        :host([disabled]:hover) .end,
+        :host([disabled]:hover)::slotted(svg) {
+            fill: ${neutralForegroundRest};
+        }
 
-    .content {
-        grid-column-start: 2;
-        justify-self: start;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        .expand-collapse-glyph {
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            width: 16px;
+            height: 16px;
+            fill: currentcolor;
+        }
 
-    .start,
-    .end {
-        display: flex;
-        justify-content: center;
-    }
+        .content {
+            grid-column-start: 2;
+            justify-self: start;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-    ::slotted(svg) {
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        width: 16px;
-        height: 16px;
-    }
+        .start,
+        .end {
+            display: flex;
+            justify-content: center;
+        }
 
-    :host(:hover) .start,
-    :host(:hover) .end,
-    :host(:hover)::slotted(svg),
-    :host(:active) .start,
-    :host(:active) .end,
-    :host(:active)::slotted(svg) {
-        fill: ${neutralForegroundRest};
-    }
+        ::slotted(svg) {
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            width: 16px;
+            height: 16px;
+        }
 
-    :host(.indent-0[aria-haspopup="menu"]) {
-        display: grid;
-        grid-template-columns: minmax(42px, auto) auto 1fr minmax(42px, auto) minmax(42px, auto);
-        align-items: center;
-        min-height: 32px;
-    }
+        :host(:hover) .start,
+        :host(:hover) .end,
+        :host(:hover)::slotted(svg),
+        :host(:active) .start,
+        :host(:active) .end,
+        :host(:active)::slotted(svg) {
+            fill: ${neutralForegroundRest};
+        }
 
-    :host(.indent-1[aria-haspopup="menu"]),
-    :host(.indent-1[role="menuitemcheckbox"]),
-    :host(.indent-1[role="menuitemradio"]) {
-        display: grid;
-        grid-template-columns: minmax(42px, auto) auto 1fr minmax(42px, auto) minmax(42px, auto);
-        align-items: center;
-        min-height: 32px;
-    }
+        :host(.indent-0[aria-haspopup="menu"]) {
+            display: grid;
+            grid-template-columns: minmax(42px, auto) auto 1fr minmax(42px, auto) minmax(42px, auto);
+            align-items: center;
+            min-height: 32px;
+        }
 
-    :host(.indent-2:not([aria-haspopup="menu"])) .end {
-        grid-column: 5;
-    }
+        :host(.indent-1[aria-haspopup="menu"]),
+        :host(.indent-1[role="menuitemcheckbox"]),
+        :host(.indent-1[role="menuitemradio"]) {
+            display: grid;
+            grid-template-columns: minmax(42px, auto) auto 1fr minmax(42px, auto) minmax(42px, auto);
+            align-items: center;
+            min-height: 32px;
+        }
 
-    :host .input-container,
-    :host .expand-collapse-glyph-container {
-        display: none;
-    }
+        :host(.indent-2:not([aria-haspopup="menu"])) .end {
+            grid-column: 5;
+        }
 
-    :host([aria-haspopup="menu"]) .expand-collapse-glyph-container,
-    :host([role="menuitemcheckbox"]) .input-container,
-    :host([role="menuitemradio"]) .input-container {
-        display: grid;
-        margin-inline-end: 10px;
-    }
+        :host .input-container,
+        :host .expand-collapse-glyph-container {
+            display: none;
+        }
 
-    :host([aria-haspopup="menu"]) .content,
-    :host([role="menuitemcheckbox"]) .content,
-    :host([role="menuitemradio"]) .content {
-        grid-column-start: 3;
-    }
+        :host([aria-haspopup="menu"]) .expand-collapse-glyph-container,
+        :host([role="menuitemcheckbox"]) .input-container,
+        :host([role="menuitemradio"]) .input-container {
+            display: grid;
+            margin-inline-end: 10px;
+        }
 
-    :host([aria-haspopup="menu"].indent-0) .content {
-        grid-column-start: 1;
-    }
+        :host([aria-haspopup="menu"]) .content,
+        :host([role="menuitemcheckbox"]) .content,
+        :host([role="menuitemradio"]) .content {
+            grid-column-start: 3;
+        }
 
-    :host([aria-haspopup="menu"]) .end,
-    :host([role="menuitemcheckbox"]) .end,
-    :host([role="menuitemradio"]) .end {
-        grid-column-start: 4;
-    }
+        :host([aria-haspopup="menu"].indent-0) .content {
+            grid-column-start: 1;
+        }
 
-    :host .expand-collapse,
-    :host .checkbox,
-    :host .radio {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        width: 20px;
-        height: 20px;
-        box-sizing: border-box;
-        outline: none;
-        margin-inline-start: 10px;
-    }
+        :host([aria-haspopup="menu"]) .end,
+        :host([role="menuitemcheckbox"]) .end,
+        :host([role="menuitemradio"]) .end {
+            grid-column-start: 4;
+        }
 
-    :host .checkbox,
-    :host .radio {
-        border: calc(${strokeWidth} * 1px) solid ${neutralForegroundRest};
-    }
+        :host .expand-collapse,
+        :host .checkbox,
+        :host .radio {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 20px;
+            height: 20px;
+            box-sizing: border-box;
+            outline: none;
+            margin-inline-start: 10px;
+        }
 
-    :host([aria-checked="true"]) .checkbox,
-    :host([aria-checked="true"]) .radio {
-        background: ${accentFillRest};
-        border-color: ${accentFillRest};
-    }
+        :host .checkbox,
+        :host .radio {
+            border: calc(${strokeWidth} * 1px) solid ${neutralForegroundRest};
+        }
 
-    :host .checkbox {
-        border-radius: calc(${controlCornerRadius} * 1px);
-    }
+        :host([aria-checked="true"]) .checkbox,
+        :host([aria-checked="true"]) .radio {
+            background: ${accentFillRest};
+            border-color: ${accentFillRest};
+        }
 
-    :host .radio {
-        border-radius: 999px;
-    }
+        :host .checkbox {
+            border-radius: calc(${controlCornerRadius} * 1px);
+        }
 
-    :host .checkbox-indicator,
-    :host .radio-indicator,
-    :host .expand-collapse-indicator,
-    ::slotted([slot="checkbox-indicator"]),
-    ::slotted([slot="radio-indicator"]),
-    ::slotted([slot="expand-collapse-indicator"]) {
-        display: none;
-    }
+        :host .radio {
+            border-radius: 999px;
+        }
 
-    ::slotted([slot="end"]:not(svg)) {
-        margin-inline-end: 10px;
-        color: ${neutralForegroundHint}
-    }
+        :host .checkbox-indicator,
+        :host .radio-indicator,
+        :host .expand-collapse-indicator,
+        ::slotted([slot="checkbox-indicator"]),
+        ::slotted([slot="radio-indicator"]),
+        ::slotted([slot="expand-collapse-indicator"]) {
+            display: none;
+        }
 
-    :host([aria-checked="true"]) .checkbox-indicator,
-    :host([aria-checked="true"]) ::slotted([slot="checkbox-indicator"]) {
-        width: 100%;
-        height: 100%;
-        display: block;
-        fill: ${foregroundOnAccentRest};
-        pointer-events: none;
-    }
+        ::slotted([slot="end"]:not(svg)) {
+            margin-inline-end: 10px;
+            color: ${neutralForegroundHint}
+        }
 
-    :host([aria-checked="true"]) .radio-indicator {
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        right: 4px;
-        bottom: 4px;
-        border-radius: 999px;
-        display: block;
-        background: ${foregroundOnAccentRest};
-        pointer-events: none;
-    }
+        :host([aria-checked="true"]) .checkbox-indicator,
+        :host([aria-checked="true"]) ::slotted([slot="checkbox-indicator"]) {
+            width: 100%;
+            height: 100%;
+            display: block;
+            fill: ${foregroundOnAccentRest};
+            pointer-events: none;
+        }
 
-    :host([aria-checked="true"]) ::slotted([slot="radio-indicator"]) {
-        display: block;
-        pointer-events: none;
-    }
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        :host([aria-checked="true"]) .radio-indicator {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border-radius: 999px;
+            display: block;
+            background: ${foregroundOnAccentRest};
+            pointer-events: none;
+        }
+
+        :host([aria-checked="true"]) ::slotted([slot="radio-indicator"]) {
+            display: block;
+            pointer-events: none;
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
             :host {
                 border-color: transparent;
                 color: ${SystemColors.ButtonText};
@@ -26998,7 +27295,7 @@ const fastMenuItem = MenuItem.compose({
 const menuStyles = (context, definition) => css `
         ${display("block")} :host {
             --elevation: 11;
-            background: ${neutralLayerFloating};
+            background: ${fillColor};
             border: calc(${strokeWidth} * 1px) solid transparent;
             ${elevation}
             margin: 0;
@@ -27027,6 +27324,18 @@ const menuStyles = (context, definition) => css `
                 }
             `));
 
+/**
+ * @public
+ */
+class Menu extends Menu$1 {
+    /**
+     * @internal
+     */
+    connectedCallback() {
+        super.connectedCallback();
+        fillColor.setValueFor(this, neutralLayerFloating);
+    }
+}
 /**
  * A function that returns a {@link @microsoft/fast-foundation#Menu} registration for configuring the component with a DesignSystem.
  * Implements {@link @microsoft/fast-foundation#menuTemplate}
@@ -27298,7 +27607,7 @@ const pickerStyles = (context, definition) => css `
 
         .loading-display,
         .no-options-display {
-            background: ${neutralLayerFloating};
+            background: ${fillColor};
             width: 100%;
             min-height: calc(${heightNumber} * 1px);
             display: flex;
@@ -27328,7 +27637,7 @@ const pickerStyles = (context, definition) => css `
  */
 const pickerMenuStyles = (context, definition) => css `
         :host {
-            background: ${neutralLayerFloating};
+            background: ${fillColor};
             --elevation: 11;
             /* TODO: a mechanism to manage z-index across components
             https://github.com/microsoft/fast/issues/3813 */
@@ -27366,43 +27675,55 @@ const pickerMenuStyles = (context, definition) => css `
  */
 const pickerMenuOptionStyles = (context, definition) => css `
         :host {
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        font-family: ${bodyFont};
-        border-radius: calc(${controlCornerRadius} * 1px);
-        border: calc(${focusStrokeWidth} * 1px) solid transparent;
-        box-sizing: border-box;
-        color: ${neutralForegroundRest};
-        cursor: pointer;
-        fill: currentcolor;
-        font-size: ${typeRampBaseFontSize};
-        min-height: calc(${heightNumber} * 1px);
-        line-height: ${typeRampBaseLineHeight};
-        margin: 0 calc(${designUnit} * 1px);
-        outline: none;
-        overflow: hidden;
-        padding: 0 calc(${designUnit} * 2.25px);
-        user-select: none;
-        white-space: nowrap;
-    }
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            font-family: ${bodyFont};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            border: calc(${focusStrokeWidth} * 1px) solid transparent;
+            box-sizing: border-box;
+            background: ${neutralFillStealthRest};
+            color: ${neutralForegroundRest};
+            cursor: pointer;
+            fill: currentcolor;
+            font-size: ${typeRampBaseFontSize};
+            min-height: calc(${heightNumber} * 1px);
+            line-height: ${typeRampBaseLineHeight};
+            margin: 0 calc(${designUnit} * 1px);
+            outline: none;
+            overflow: hidden;
+            padding: 0 calc(${designUnit} * 2.25px);
+            user-select: none;
+            white-space: nowrap;
+        }
 
-    :host(:${focusVisible}[role="listitem"]) {
-        border-color: ${focusStrokeOuter};
-        background: ${neutralFillRest};
-        color: ${neutralForegroundRest};
-    }
+        :host(:${focusVisible}[role="listitem"]) {
+            border-color: ${focusStrokeOuter};
+            background: ${neutralFillStealthFocus};
+        }
 
-    :host(:hover) {
-        background: ${neutralFillHover};
-        color: ${neutralForegroundRest};
-    }
+        :host(:hover) {
+            background: ${neutralFillStealthHover};
+        }
 
-    :host([aria-selected="true"]) {
-        background: ${accentFillRest};
-        color: ${foregroundOnAccentActive};
-    }
+        :host(:active) {
+            background: ${neutralFillStealthActive};
+        }
 
+        :host([aria-selected="true"]) {
+            background: ${accentFillRest};
+            color: ${foregroundOnAccentRest};
+        }
+
+        :host([aria-selected="true"]:hover) {
+            background: ${accentFillHover};
+            color: ${foregroundOnAccentHover};
+        }
+
+        :host([aria-selected="true"]:active) {
+            background: ${accentFillActive};
+            color: ${foregroundOnAccentActive};
+        }
     `.withBehaviors(forcedColorsStylesheetBehavior(css `
                 :host {
                     border-color: transparent;
@@ -27484,41 +27805,46 @@ const pickerListStyles = (context, definition) => css `
  * @public
  */
 const pickerListItemStyles = (context, definition) => css `
-:host {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    font-family: ${bodyFont};
-    border-radius: calc(${controlCornerRadius} * 1px);
-    border: calc(${focusStrokeWidth} * 1px) solid transparent;
-    box-sizing: border-box;
-    color: ${neutralForegroundRest};
-    cursor: pointer;
-    fill: currentcolor;
-    font-size: ${typeRampBaseFontSize};
-    height: calc(${heightNumber} * 1px);
-    line-height: ${typeRampBaseLineHeight};
-    outline: none;
-    overflow: hidden;
-    padding: 0 calc(${designUnit} * 2.25px);
-    user-select: none;
-    white-space: nowrap;
-}
+        :host {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            font-family: ${bodyFont};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            border: calc(${focusStrokeWidth} * 1px) solid transparent;
+            box-sizing: border-box;
+            background: ${neutralFillStealthRest};
+            color: ${neutralForegroundRest};
+            cursor: pointer;
+            fill: currentcolor;
+            font-size: ${typeRampBaseFontSize};
+            height: calc(${heightNumber} * 1px);
+            line-height: ${typeRampBaseLineHeight};
+            outline: none;
+            overflow: hidden;
+            padding: 0 calc(${designUnit} * 2.25px);
+            user-select: none;
+            white-space: nowrap;
+        }
 
-:host(:${focusVisible}),
-:host(:hover) {
-    background: ${neutralLayer3};
-    color: ${neutralForegroundRest};
-}
+        :host(:hover) {
+            background: ${neutralFillStealthHover};
+        }
 
-:host(:focusVisible) {
-    border-color: ${focusStrokeOuter};
-}
+        :host(:active) {
+            background: ${neutralFillStealthActive};
+        }
 
-:host([aria-selected="true"]) {
-    background: ${accentFillActive};
-    color: ${foregroundOnAccentActive};
-}`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        :host(:${focusVisible}) {
+            background: ${neutralFillStealthFocus};
+            border-color: ${focusStrokeOuter};
+        }
+
+        :host([aria-selected="true"]) {
+            background: ${accentFillRest};
+            color: ${foregroundOnAccentActive};
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
                 :host {
                     border-color: transparent;
                     forced-color-adjust: none;
@@ -27557,6 +27883,18 @@ const fastPicker = Picker.compose({
     shadowOptions: {},
 });
 /**
+ * @public
+ */
+class PickerMenu extends PickerMenu$1 {
+    /**
+     * @public
+     */
+    connectedCallback() {
+        fillColor.setValueFor(this, neutralLayerFloating);
+        super.connectedCallback();
+    }
+}
+/**
  * Component that displays the list of available picker options
  *
  *
@@ -27566,6 +27904,7 @@ const fastPicker = Picker.compose({
  */
 const fastPickerMenu = PickerMenu.compose({
     baseName: "picker-menu",
+    baseClass: PickerMenu$1,
     template: pickerMenuTemplate,
     styles: pickerMenuStyles,
 });
@@ -27914,124 +28253,122 @@ const fastRadioGroup = RadioGroup.compose({
  * @public
  */
 const radioStyles = (context, definition) => css `
-    ${display("inline-flex")} :host {
-        --input-size: calc((${heightNumber} / 2) + ${designUnit});
-        align-items: center;
-        outline: none;
-        margin: calc(${designUnit} * 1px) 0;
-        /* Chromium likes to select label text or the default slot when
-            the radio is clicked. Maybe there is a better solution here? */
-        user-select: none;
-        position: relative;
-        flex-direction: row;
-        transition: all 0.2s ease-in-out;
-    }
+        ${display("inline-flex")} :host {
+            --input-size: calc((${heightNumber} / 2) + ${designUnit});
+            align-items: center;
+            outline: none;
+            margin: calc(${designUnit} * 1px) 0;
+            /* Chromium likes to select label text or the default slot when
+                the radio is clicked. Maybe there is a better solution here? */
+            user-select: none;
+            position: relative;
+            flex-direction: row;
+            transition: all 0.2s ease-in-out;
+        }
 
-    .control {
-        position: relative;
-        width: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
-        height: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
-        box-sizing: border-box;
-        border-radius: 999px;
-        border: calc(${strokeWidth} * 1px) solid ${neutralStrokeRest};
-        background: ${neutralFillInputRest};
-        outline: none;
-        cursor: pointer;
-    }
+        .control {
+            position: relative;
+            width: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
+            height: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
+            box-sizing: border-box;
+            border-radius: 999px;
+            border: calc(${strokeWidth} * 1px) solid ${neutralStrokeRest};
+            background: ${neutralFillInputRest};
+            outline: none;
+            cursor: pointer;
+        }
 
-    .label {
-        font-family: ${bodyFont};
-        color: ${neutralForegroundRest};
-        /* Need to discuss with Brian how HorizontalSpacingNumber can work.
-            https://github.com/microsoft/fast/issues/2766 */
-        padding-inline-start: calc(${designUnit} * 2px + 2px);
-        margin-inline-end: calc(${designUnit} * 2px + 2px);
-        cursor: pointer;
-        font-size: ${typeRampBaseFontSize};
-        line-height: ${typeRampBaseLineHeight};
-    }
+        .label {
+            font-family: ${bodyFont};
+            color: ${neutralForegroundRest};
+            padding-inline-start: calc(${designUnit} * 2px + 2px);
+            margin-inline-end: calc(${designUnit} * 2px + 2px);
+            cursor: pointer;
+            font-size: ${typeRampBaseFontSize};
+            line-height: ${typeRampBaseLineHeight};
+        }
 
-    .label__hidden {
-        display: none;
-        visibility: hidden;
-    }
+        .label__hidden {
+            display: none;
+            visibility: hidden;
+        }
 
-    .control, .checked-indicator {
-        flex-shrink: 0;
-    }
+        .control, .checked-indicator {
+            flex-shrink: 0;
+        }
 
-    .checked-indicator {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        right: 5px;
-        bottom: 5px;
-        border-radius: 999px;
-        display: inline-block;
-        background: ${foregroundOnAccentRest};
-        fill: ${foregroundOnAccentRest};
-        opacity: 0;
-        pointer-events: none;
-    }
+        .checked-indicator {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 999px;
+            display: inline-block;
+            background: ${foregroundOnAccentRest};
+            fill: ${foregroundOnAccentRest};
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    :host(:not([disabled])) .control:hover{
-        background: ${neutralFillInputHover};
-        border-color: ${neutralStrokeHover};
-    }
+        :host(:not([disabled])) .control:hover{
+            background: ${neutralFillInputHover};
+            border-color: ${neutralStrokeHover};
+        }
 
-    :host(:not([disabled])) .control:active {
-        background: ${neutralFillInputActive};
-        border-color: ${neutralStrokeActive};
-    }
+        :host(:not([disabled])) .control:active {
+            background: ${neutralFillInputActive};
+            border-color: ${neutralStrokeActive};
+        }
 
-    :host(:${focusVisible}) .control {
-        box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
-    }
+        :host(:${focusVisible}) .control {
+            box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
+        }
 
-    :host([aria-checked="true"]) .control {
-        background: ${accentFillRest};
-        border: calc(${strokeWidth} * 1px) solid ${accentFillRest};
-    }
+        :host([aria-checked="true"]) .control {
+            background: ${accentFillRest};
+            border: calc(${strokeWidth} * 1px) solid ${accentFillRest};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:hover {
-        background: ${accentFillHover};
-        border: calc(${strokeWidth} * 1px) solid ${accentFillHover};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:hover {
+            background: ${accentFillHover};
+            border: calc(${strokeWidth} * 1px) solid ${accentFillHover};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:hover .checked-indicator {
-        background: ${foregroundOnAccentHover};
-        fill: ${foregroundOnAccentHover};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:hover .checked-indicator {
+            background: ${foregroundOnAccentHover};
+            fill: ${foregroundOnAccentHover};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:active {
-        background: ${accentFillActive};
-        border: calc(${strokeWidth} * 1px) solid ${accentFillActive};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:active {
+            background: ${accentFillActive};
+            border: calc(${strokeWidth} * 1px) solid ${accentFillActive};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .control:active .checked-indicator {
-        background: ${foregroundOnAccentActive};
-        fill: ${foregroundOnAccentActive};
-    }
+        :host([aria-checked="true"]:not([disabled])) .control:active .checked-indicator {
+            background: ${foregroundOnAccentActive};
+            fill: ${foregroundOnAccentActive};
+        }
 
-    :host([aria-checked="true"]:${focusVisible}:not([disabled])) .control {
-        box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
-    }
+        :host([aria-checked="true"]:${focusVisible}:not([disabled])) .control {
+            box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
+        }
 
-    :host([disabled]) .label,
-    :host([readonly]) .label,
-    :host([readonly]) .control,
-    :host([disabled]) .control {
-        cursor: ${disabledCursor};
-    }
+        :host([disabled]) .label,
+        :host([readonly]) .label,
+        :host([readonly]) .control,
+        :host([disabled]) .control {
+            cursor: ${disabledCursor};
+        }
 
-    :host([aria-checked="true"]) .checked-indicator {
-        opacity: 1;
-    }
+        :host([aria-checked="true"]) .checked-indicator {
+            opacity: 1;
+        }
 
-    :host([disabled]) {
-        opacity: ${disabledOpacity};
-    }
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        :host([disabled]) {
+            opacity: ${disabledOpacity};
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
             .control,
             :host([aria-checked="true"]:not([disabled])) .control {
                 forced-color-adjust: none;
@@ -28389,6 +28726,15 @@ class Select extends Select$1 {
          * @internal
          */
         this.listboxScrollWidth = "";
+    }
+    /**
+     * @internal
+     */
+    connectedCallback() {
+        super.connectedCallback();
+        if (this.listbox) {
+            fillColor.setValueFor(this.listbox, neutralLayerFloating);
+        }
     }
     /**
      * Returns the calculated max height for the listbox.
@@ -28943,154 +29289,152 @@ const fastSlider = Slider.compose({
  * @public
  */
 const switchStyles = (context, definition) => css `
-    :host([hidden]) {
-        display: none;
-    }
+        :host([hidden]) {
+            display: none;
+        }
 
-    ${display("inline-flex")} :host {
-        align-items: center;
-        outline: none;
-        font-family: ${bodyFont};
-        margin: calc(${designUnit} * 1px) 0;
-        ${
+        ${display("inline-flex")} :host {
+            align-items: center;
+            outline: none;
+            font-family: ${bodyFont};
+            margin: calc(${designUnit} * 1px) 0;
+            ${
 /*
  * Chromium likes to select label text or the default slot when
  * the checkbox is clicked. Maybe there is a better solution here?
  */ ""} user-select: none;
-    }
+        }
 
-    :host([disabled]) {
-        opacity: ${disabledOpacity};
-    }
+        :host([disabled]) {
+            opacity: ${disabledOpacity};
+        }
 
-    :host([disabled]) .label,
-    :host([readonly]) .label,
-    :host([readonly]) .switch,
-    :host([disabled]) .switch {
-        cursor: ${disabledCursor};
-    }
+        :host([disabled]) .label,
+        :host([readonly]) .label,
+        :host([readonly]) .switch,
+        :host([disabled]) .switch {
+            cursor: ${disabledCursor};
+        }
 
-    .switch {
-        position: relative;
-        outline: none;
-        box-sizing: border-box;
-        width: calc(${heightNumber} * 1px);
-        height: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
-        background: ${neutralFillInputRest};
-        border-radius: calc(${controlCornerRadius} * 1px);
-        border: calc(${strokeWidth} * 1px) solid ${neutralStrokeRest};
-    }
+        .switch {
+            position: relative;
+            outline: none;
+            box-sizing: border-box;
+            width: calc(${heightNumber} * 1px);
+            height: calc((${heightNumber} / 2 + ${designUnit}) * 1px);
+            background: ${neutralFillInputRest};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            border: calc(${strokeWidth} * 1px) solid ${neutralStrokeRest};
+        }
 
-    .switch:hover {
-        background: ${neutralFillInputHover};
-        border-color: ${neutralStrokeHover};
-        cursor: pointer;
-    }
+        .switch:hover {
+            background: ${neutralFillInputHover};
+            border-color: ${neutralStrokeHover};
+            cursor: pointer;
+        }
 
-    host([disabled]) .switch:hover,
-    host([readonly]) .switch:hover {
-        background: ${neutralFillInputHover};
-        border-color: ${neutralStrokeHover};
-        cursor: ${disabledCursor};
-    }
+        host([disabled]) .switch:hover,
+        host([readonly]) .switch:hover {
+            background: ${neutralFillInputHover};
+            border-color: ${neutralStrokeHover};
+            cursor: ${disabledCursor};
+        }
 
-    :host(:not([disabled])) .switch:active {
-        background: ${neutralFillInputActive};
-        border-color: ${neutralStrokeActive};
-    }
+        :host(:not([disabled])) .switch:active {
+            background: ${neutralFillInputActive};
+            border-color: ${neutralStrokeActive};
+        }
 
-    :host(:${focusVisible}) .switch {
-        box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
-    }
+        :host(:${focusVisible}) .switch {
+            box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
+        }
 
-    .checked-indicator {
-        position: absolute;
-        top: 5px;
-        bottom: 5px;
-        background: ${neutralForegroundRest};
-        border-radius: calc(${controlCornerRadius} * 1px);
-        transition: all 0.2s ease-in-out;
-    }
+        .checked-indicator {
+            position: absolute;
+            top: 5px;
+            bottom: 5px;
+            background: ${neutralForegroundRest};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            transition: all 0.2s ease-in-out;
+        }
 
-    .status-message {
-        color: ${neutralForegroundRest};
-        cursor: pointer;
-        font-size: ${typeRampBaseFontSize};
-        line-height: ${typeRampBaseLineHeight};
-    }
+        .status-message {
+            color: ${neutralForegroundRest};
+            cursor: pointer;
+            font-size: ${typeRampBaseFontSize};
+            line-height: ${typeRampBaseLineHeight};
+        }
 
-    :host([disabled]) .status-message,
-    :host([readonly]) .status-message {
-        cursor: ${disabledCursor};
-    }
+        :host([disabled]) .status-message,
+        :host([readonly]) .status-message {
+            cursor: ${disabledCursor};
+        }
 
-    .label {
-        color: ${neutralForegroundRest};
+        .label {
+            color: ${neutralForegroundRest};
+            margin-inline-end: calc(${designUnit} * 2px + 2px);
+            font-size: ${typeRampBaseFontSize};
+            line-height: ${typeRampBaseLineHeight};
+            cursor: pointer;
+        }
 
-        ${
-/* Need to discuss with Brian how HorizontalSpacingNumber can work. https://github.com/microsoft/fast/issues/2766 */ ""} margin-inline-end: calc(${designUnit} * 2px + 2px);
-        font-size: ${typeRampBaseFontSize};
-        line-height: ${typeRampBaseLineHeight};
-        cursor: pointer;
-    }
+        .label__hidden {
+            display: none;
+            visibility: hidden;
+        }
 
-    .label__hidden {
-        display: none;
-        visibility: hidden;
-    }
+        ::slotted([slot="checked-message"]),
+        ::slotted([slot="unchecked-message"]) {
+            margin-inline-start: calc(${designUnit} * 2px + 2px);
+        }
 
-    ::slotted([slot="checked-message"]),
-    ::slotted([slot="unchecked-message"]) {
-        margin-inline-start: calc(${designUnit} * 2px + 2px);
-    }
+        :host([aria-checked="true"]) .checked-indicator {
+            background: ${foregroundOnAccentRest};
+        }
 
-    :host([aria-checked="true"]) .checked-indicator {
-        background: ${foregroundOnAccentRest};
-    }
+        :host([aria-checked="true"]) .switch {
+            background: ${accentFillRest};
+            border-color: ${accentFillRest};
+        }
 
-    :host([aria-checked="true"]) .switch {
-        background: ${accentFillRest};
-        border-color: ${accentFillRest};
-    }
+        :host([aria-checked="true"]:not([disabled])) .switch:hover {
+            background: ${accentFillHover};
+            border-color: ${accentFillHover};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .switch:hover {
-        background: ${accentFillHover};
-        border-color: ${accentFillHover};
-    }
+        :host([aria-checked="true"]:not([disabled])) .switch:hover .checked-indicator {
+            background: ${foregroundOnAccentHover};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .switch:hover .checked-indicator {
-        background: ${foregroundOnAccentHover};
-    }
+        :host([aria-checked="true"]:not([disabled])) .switch:active {
+            background: ${accentFillActive};
+            border-color: ${accentFillActive};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .switch:active {
-        background: ${accentFillActive};
-        border-color: ${accentFillActive};
-    }
+        :host([aria-checked="true"]:not([disabled])) .switch:active .checked-indicator {
+            background: ${foregroundOnAccentActive};
+        }
 
-    :host([aria-checked="true"]:not([disabled])) .switch:active .checked-indicator {
-        background: ${foregroundOnAccentActive};
-    }
+        :host([aria-checked="true"]:${focusVisible}:not([disabled])) .switch {
+            box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
+        }
 
-    :host([aria-checked="true"]:${focusVisible}:not([disabled])) .switch {
-        box-shadow: 0 0 0 2px ${fillColor}, 0 0 0 4px ${focusStrokeOuter};
-    }
+        .unchecked-message {
+            display: block;
+        }
 
-    .unchecked-message {
-        display: block;
-    }
+        .checked-message {
+            display: none;
+        }
 
-    .checked-message {
-        display: none;
-    }
+        :host([aria-checked="true"]) .unchecked-message {
+            display: none;
+        }
 
-    :host([aria-checked="true"]) .unchecked-message {
-        display: none;
-    }
-
-    :host([aria-checked="true"]) .checked-message {
-        display: block;
-    }
-`.withBehaviors(forcedColorsStylesheetBehavior(css `
+        :host([aria-checked="true"]) .checked-message {
+            display: block;
+        }
+    `.withBehaviors(forcedColorsStylesheetBehavior(css `
             .checked-indicator,
             :host(:not([disabled])) .switch:active .checked-indicator {
                 forced-color-adjust: none;
@@ -30083,159 +30427,168 @@ const treeItemStyles = (context, definition) => css `
         --tree-item-nested-width: 0;
     }
 
-    :host(:focus) > .positioning-region {
-        outline: none;
-    }
+        :host(:focus) > .positioning-region {
+            outline: none;
+        }
 
-    :host(:focus) .content-region {
-        outline: none;
-    }
+        :host(:focus) .content-region {
+            outline: none;
+        }
 
-    :host(:${focusVisible}) .positioning-region {
-        border: ${focusStrokeOuter} calc(${strokeWidth} * 1px) solid;
-        border-radius: calc(${controlCornerRadius} * 1px);
-        color: ${neutralForegroundRest};
-    }
+        :host(:${focusVisible}) .positioning-region {
+            border: ${focusStrokeOuter} calc(${strokeWidth} * 1px) solid;
+            border-radius: calc(${controlCornerRadius} * 1px);
+            color: ${neutralForegroundRest};
+        }
 
-    .positioning-region {
-        display: flex;
-        position: relative;
-        box-sizing: border-box;
-        border: transparent calc(${strokeWidth} * 1px) solid;
-        height: calc((${heightNumber} + 1) * 1px);
-    }
+        .positioning-region {
+            display: flex;
+            position: relative;
+            box-sizing: border-box;
+            background: ${neutralFillStealthRest};
+            border: transparent calc(${strokeWidth} * 1px) solid;
+            height: calc((${heightNumber} + 1) * 1px);
+        }
 
-    .positioning-region::before {
-        content: "";
-        display: block;
-        width: var(--tree-item-nested-width);
-        flex-shrink: 0;
-    }
+        .positioning-region::before {
+            content: "";
+            display: block;
+            width: var(--tree-item-nested-width);
+            flex-shrink: 0;
+        }
 
-    .positioning-region:hover {
-        background: ${neutralFillStealthHover};
-    }
+        :host(:not([disabled])) .positioning-region:hover {
+            background: ${neutralFillStealthHover};
+        }
 
-    .positioning-region:active {
-        background: ${neutralFillStealthActive};
-    }
+        :host(:not([disabled])) .positioning-region:active {
+            background: ${neutralFillStealthActive};
+        }
 
-    .content-region {
-        display: inline-flex;
-        align-items: center;
-        white-space: nowrap;
-        width: 100%;
-        height: calc(${heightNumber} * 1px);
-        margin-inline-start: calc(${designUnit} * 2px + 8px);
-        font-size: ${typeRampBaseFontSize};
-        line-height: ${typeRampBaseLineHeight};
-        font-weight: 400;
-    }
+        .content-region {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            width: 100%;
+            height: calc(${heightNumber} * 1px);
+            margin-inline-start: calc(${designUnit} * 2px + 8px);
+            font-size: ${typeRampBaseFontSize};
+            line-height: ${typeRampBaseLineHeight};
+            font-weight: 400;
+        }
 
-    .items {
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        font-size: calc(1em + (${designUnit} + 16) * 1px);
-    }
+        .items {
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            font-size: calc(1em + (${designUnit} + 16) * 1px);
+        }
 
-    .expand-collapse-button {
-        background: none;
-        border: none;
-        outline: none;
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        width: calc((${expandCollapseButtonSize} + (${designUnit} * 2)) * 1px);
-        height: calc((${expandCollapseButtonSize} + (${designUnit} * 2)) * 1px);
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        margin-left: 6px;
-        margin-right: 6px;
-    }
+        .expand-collapse-button {
+            background: none;
+            border: none;
+            outline: none;
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            width: calc((${expandCollapseButtonSize} + (${designUnit} * 2)) * 1px);
+            height: calc((${expandCollapseButtonSize} + (${designUnit} * 2)) * 1px);
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 6px;
+            margin-right: 6px;
+        }
 
-    .expand-collapse-glyph {
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        width: 16px;
-        height: 16px;
-        transition: transform 0.1s linear;
+        .expand-collapse-glyph {
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            width: 16px;
+            height: 16px;
+            transition: transform 0.1s linear;
 
-        pointer-events: none;
-        fill: currentcolor;
-    }
+            pointer-events: none;
+            fill: currentcolor;
+        }
 
-    .start,
-    .end {
-        display: flex;
-        fill: currentcolor;
-    }
+        .start,
+        .end {
+            display: flex;
+            fill: currentcolor;
+        }
 
-    ::slotted(svg) {
-        /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
-        width: 16px;
-        height: 16px;
-    }
+        ::slotted(svg) {
+            /* TODO: adaptive typography https://github.com/microsoft/fast/issues/2432 */
+            width: 16px;
+            height: 16px;
+        }
 
-    .start {
-        /* TODO: horizontalSpacing https://github.com/microsoft/fast/issues/2766 */
-        margin-inline-end: calc(${designUnit} * 2px + 2px);
-    }
+        .start {
+            /* TODO: horizontalSpacing https://github.com/microsoft/fast/issues/2766 */
+            margin-inline-end: calc(${designUnit} * 2px + 2px);
+        }
 
-    .end {
-        /* TODO: horizontalSpacing https://github.com/microsoft/fast/issues/2766 */
-        margin-inline-start: calc(${designUnit} * 2px + 2px);
-    }
+        .end {
+            /* TODO: horizontalSpacing https://github.com/microsoft/fast/issues/2766 */
+            margin-inline-start: calc(${designUnit} * 2px + 2px);
+        }
 
-    :host([expanded]) > .items {
-        animation: treeItemLoading ease-in 10ms;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-    }
+        :host([expanded]) > .items {
+            animation: treeItemLoading ease-in 10ms;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
 
-    :host([disabled]) .content-region {
-        opacity: ${disabledOpacity};
-        cursor: ${disabledCursor};
-    }
+        :host([disabled]) .content-region {
+            opacity: ${disabledOpacity};
+            cursor: ${disabledCursor};
+        }
 
-    :host(.nested) .content-region {
-        position: relative;
-        margin-inline-start: var(--expand-collapse-button-size);
-    }
+        :host(.nested) .content-region {
+            position: relative;
+            margin-inline-start: var(--expand-collapse-button-size);
+        }
 
-    :host(.nested) .expand-collapse-button {
-        position: absolute;
-    }
+        :host(.nested) .expand-collapse-button {
+            position: absolute;
+        }
 
-    :host(.nested) .expand-collapse-button:hover {
-        background: ${expandCollapseHoverBehavior};
-    }
+        :host(.nested:not([disabled])) .expand-collapse-button:hover {
+            background: ${expandCollapseHoverBehavior};
+        }
 
-    :host([selected]) .positioning-region {
-        background: ${neutralFillRest};
-    }
+        :host([selected]) .positioning-region {
+            background: ${neutralFillRest};
+        }
 
-    :host([selected]) .expand-collapse-button:hover {
-        background: ${selectedExpandCollapseHoverBehavior};
-    }
+        :host([selected]:not([disabled])) .positioning-region:hover {
+            background: ${neutralFillHover};
+        }
 
-    :host([selected])::after {
-        /* The background needs to be calculated based on the selected background state
-            for this control. We currently have no way of changing that, so setting to
-            accent-foreground-rest for the time being */
-        background: ${accentForegroundRest};
-        border-radius: calc(${controlCornerRadius} * 1px);
-        content: "";
-        display: block;
-        position: absolute;
-        top: calc((${heightNumber} / 4) * 1px);
-        width: 3px;
-        height: calc((${heightNumber} / 2) * 1px);
-    }
+        :host([selected]:not([disabled])) .positioning-region:active {
+            background: ${neutralFillActive};
+        }
 
-    ::slotted(${context.tagFor(TreeItem)}) {
-        --tree-item-nested-width: 1em;
-        --expand-collapse-button-nested-width: calc(${heightNumber} * -1px);
-    }
-`.withBehaviors(new DirectionalStyleSheetBehavior(ltr, rtl), forcedColorsStylesheetBehavior(css `
+        :host([selected]:not([disabled])) .expand-collapse-button:hover {
+            background: ${selectedExpandCollapseHoverBehavior};
+        }
+
+        :host([selected])::after {
+            /* The background needs to be calculated based on the selected background state
+                for this control. We currently have no way of changing that, so setting to
+                accent-foreground-rest for the time being */
+            background: ${accentForegroundRest};
+            border-radius: calc(${controlCornerRadius} * 1px);
+            content: "";
+            display: block;
+            position: absolute;
+            top: calc((${heightNumber} / 4) * 1px);
+            width: 3px;
+            height: calc((${heightNumber} / 2) * 1px);
+        }
+
+        ::slotted(${context.tagFor(TreeItem)}) {
+            --tree-item-nested-width: 1em;
+            --expand-collapse-button-nested-width: calc(${heightNumber} * -1px);
+        }
+    `.withBehaviors(new DirectionalStyleSheetBehavior(ltr, rtl), forcedColorsStylesheetBehavior(css `
             :host {
                 forced-color-adjust: none;
                 border-color: transparent;
@@ -30359,6 +30712,9 @@ const fastTreeView = TreeView.compose({
 });
 
 /**
+ * Export all custom element definitions
+ */
+/**
  * All Web Components
  * @public
  * @remarks
@@ -30445,14 +30801,62 @@ function provideFASTDesignSystem(element) {
 
 provideFASTDesignSystem()
     .withPrefix("ae")
-    .register(fastCheckbox())
-    .register(fastButton());
+    .register(
+        fastCheckbox(),
+        fastButton()
+    );
 
 
-        
-window.aelemental = {
-    accentPalette: accentPalette,
-    parseColorHexRGB: parseColorHexRGB,
-    SwatchRGB: SwatchRGB,
-    PaletteRGB: PaletteRGB,
+let datahunterOptions = {
+    // The size of the corners in px
+    cornerRadius: 8,
+
+    // The brightness of the base layer (0 dark to 1 light)
+    baseLayerLuminance: 1,
+
+    disabledOpacity: "30%",
+
+    accentColor: "#2563eb",
+
+    designUnit: 4,
+    density: 4,
+    baseHeightMultiplier: 10,
+    baseHorizontalSpacingMultiplier: 3,
+    outlineWidth: 1
 };
+
+
+window.aelemental = {
+    ...window.aelemental,
+    ...{
+        accentPalette: accentPalette,
+        parseColorHexRGB: parseColorHexRGB,
+        SwatchRGB: SwatchRGB,
+        PaletteRGB: PaletteRGB,
+        themeOptions: datahunterOptions,
+    }
+};
+
+// setAElementalThemeOptions(window.aelemental.themeOptions);
+
+setRandomOptions();
+
+function setRandomOptions() {
+    setInterval(() => controlCornerRadius.withDefault(randomIntFromInterval(0, 12)), 1000);
+    setInterval(() => baseLayerLuminance.withDefault(randomFloatTwoDecimal(0, 1)), 1000);
+    setInterval(() => density.withDefault(randomIntFromInterval(0, 4)), 1000);
+    setInterval(() => neutralPalette.withDefault(PaletteRGB.create(SwatchRGB.from(parseColorHexRGB(randomColor())))), 1000);
+    setInterval(() => accentPalette.withDefault(PaletteRGB.create(SwatchRGB.from(parseColorHexRGB(randomColor())))), 1000);
+}
+
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function randomFloatTwoDecimal(min, max){
+    return randomIntFromInterval(min +10, max +10) / 100;
+}
+
+function randomColor(){
+    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+}
