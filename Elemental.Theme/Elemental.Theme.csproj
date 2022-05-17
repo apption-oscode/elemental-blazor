@@ -35,8 +35,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="Styles\tag\_tag.scss" />
-  </ItemGroup>
-
 </Project>
