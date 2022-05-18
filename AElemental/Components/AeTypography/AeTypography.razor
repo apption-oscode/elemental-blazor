@@ -40,8 +40,24 @@ else
 
 @code {
     [Parameter]
-    public string Variant {get; set; }
+    public string? Variant {get; set; }
 
-    private string _classname => $"{_inputClass}";
-    private string _style => $"{_inputStyle}";
+    private string? _classname;
+    private string? _style;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        
+        _style = new AeStyleBuilder()
+            .AddStyle("font-family", "var(--body-font)")
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();  
+        
+        _classname = new AeCssBuilder()
+            .SetPrefix("ae-")
+            .AddClass(Variant)
+            .AddClassFromAttributes(InputAttributes)
+            .NullIfEmpty();
+    }
 }
