@@ -22,9 +22,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AElemental Documentations</title>
     <base href="~/" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/night-owl.min.css">
 
-    <link href="~/_content/AElemental.Blazor.Theme/elemental.css" rel="stylesheet" />
+    @* <link href="~/_content/AElemental.Blazor.Theme/elemental.css" rel="stylesheet" /> *@
     <link href="~/_content/AElemental.Blazor/css/third-party/remixicon.css" rel="stylesheet">
     <link href="~/_content/AElemental.Blazor/css/third-party/shepherd.css" rel="stylesheet">
 
@@ -43,9 +48,9 @@
 </head>
 <body>
 <app>
-    <ae-design-system-provider>
+    <ae-theme-provider>
         <component type="typeof(App)" render-mode="ServerPrerendered"/>
-    </ae-design-system-provider>
+    </ae-theme-provider>
 </app>
 
     <script src="/_framework/blazor.server.js"></script>
