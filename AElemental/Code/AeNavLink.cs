@@ -12,7 +12,7 @@ namespace AElemental.Code
         public string IconClassName { get; set; }
         public string Color { get; set; }
         public Dictionary<string, object> IconAttributes { get; set; }
-        public RXIcon.RXStyle IconStyle { get; set; }
+        public string IconStyle { get; set; }
         public List<AeNavLink> ChildLinks { get; set; } = new List<AeNavLink>();
         public RenderFragment CustomRender { get; set; }
         public bool Enable { get; set; } = true;

@@ -2,24 +2,33 @@
 @inherits DemoPage
 
 <AeFlex Vertical class="icon-page-container">
+    <AeTypography>Icons source: <a href="https://remixicon.com/">REMIX ICON</a></AeTypography>
+    <AeTypography>
+        Include the following line to <i>&lt;head&gt;</i>
+    </AeTypography>
+    <div class="code-wrapper">
+        <pre style="margin: 0"><code class="language-html">
+        @(@"<link href=""_content/Blazor.AElemental/css/third-party/remixicon.css"" rel=""stylesheet"">")
+    </code></pre>
+    </div>
     <DemoSection Path="./Samples/Icons/Examples/BasicIcons.razor">
         <AeFlex Vertical>
-            <AElemental.Documentation.Samples.Icons.Examples.BasicIcons />
+            <AElemental.Documentation.Samples.Icons.Examples.BasicIcons/>
         </AeFlex>
     </DemoSection>
     <DemoSection Path="./Samples/Icons/Examples/StylingIcons.razor">
         <AeFlex>
-            <AElemental.Documentation.Samples.Icons.Examples.StylingIcons />
+            <AElemental.Documentation.Samples.Icons.Examples.StylingIcons/>
         </AeFlex>
     </DemoSection>
     <DemoSection Path="./Samples/Icons/Examples/SizingIcons.razor">
         <AeFlex>
-            <AElemental.Documentation.Samples.Icons.Examples.SizingIcons />
+            <AElemental.Documentation.Samples.Icons.Examples.SizingIcons/>
         </AeFlex>
     </DemoSection>
     <DemoSection Path="./Samples/Icons/Examples/ColoringIcons.razor">
         <AeFlex>
-            <AElemental.Documentation.Samples.Icons.Examples.ColoringIcons />
+            <AElemental.Documentation.Samples.Icons.Examples.ColoringIcons/>
         </AeFlex>
     </DemoSection>
 </AeFlex>

@@ -30846,7 +30846,7 @@ window.aelemental = {
 
 setAElementalThemeOptions(window.aelemental.themeOptions);
 
-// setRandomOptions();
+// setDiscoOptions();
 
 function setAElementalThemeOptions(options) {
     baseLayerLuminance.withDefault(options.baseLayerLuminance);

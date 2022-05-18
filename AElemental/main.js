@@ -67,7 +67,7 @@ window.aelemental = {
 
 setAElementalThemeOptions(window.aelemental.themeOptions);
 
-// setRandomOptions();
+// setDiscoOptions();
 
 function setAElementalThemeOptions(options) {
     baseLayerLuminance.withDefault(options.baseLayerLuminance);
@@ -84,7 +84,7 @@ function setAElementalThemeOptions(options) {
     bodyFont.withDefault(options.bodyFont);
 }
 
-function setRandomOptions() {
+function setDiscoOptions() {
     setInterval(() => controlCornerRadius.withDefault(randomIntFromInterval(0, 12)), 7);
     setInterval(() => baseLayerLuminance.withDefault(randomFloatTwoDecimal(0, 1)), 13);
     setInterval(() => density.withDefault(randomIntFromInterval(0, 4)), 17);

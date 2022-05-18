@@ -20,27 +20,35 @@
 <i class="@_classname" @attributes="InputAttributesWithoutClass"></i>
 
 @code {
-    [Parameter]
-    public string Icon { get; set; }
-    [Parameter]
-    public RXIcon.RXStyle? IconStyle { get; set; }
-    [Parameter]
-    public string Size { get; set; }
 
-    private string _classname => $"ae icon ri-{Icon}-{_iconStyle} {_inputClass} {(String.IsNullOrEmpty(Size) ? "": $"ri-{Size}")}";
+    // Let users overwrite these values to integrate with other icon libraries
+    public static bool UseRemixIconLibrary = true;
 
+    [Parameter]
+    public string? RxIconName { get; set; }
+    [Parameter]
+    public string? RxStyle { get; set; } = RxIcon.RxStyle.Line;
+    [Parameter]
+    public string? RxSize { get; set; }
+    
 
-    private string _iconStyle
+    private string? _classname;
+    private string? _style;
+    
+    protected override void OnParametersSet()
     {
-        get
-        {
-            switch (IconStyle)
-            {
-                case RXIcon.RXStyle.Fill:
-                    return "fill";
-                default:
-                    return "line";
-            }
-        }
+        base.OnParametersSet();
+        
+        _style = new AeStyleBuilder()
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();  
+        
+        _classname = new AeCssBuilder()
+            .AddClass($"ri-{RxIconName}-{RxStyle}", when: UseRemixIconLibrary)
+            .AddClass($"{RxIconName}", when: UseRemixIconLibrary && !string.IsNullOrEmpty(RxIconName))
+            .AddClassFromAttributes(InputAttributes)
+            .SetPrefix("ae-")
+            .AddClass("icon")
+            .NullIfEmpty();
     }
 }
