@@ -30828,7 +30828,7 @@ let datahunterOptions = {
     designUnit: 4,
     density: 1,
     baseHeightMultiplier: 8,
-    baseHorizontalSpacingMultiplier: 6,
+    baseHorizontalSpacingMultiplier: 4,
     outlineWidth: 1
 };
 

@@ -39,8 +39,9 @@ else
 }
 
 @code {
+
     [Parameter]
-    public string? Variant {get; set; }
+    public string Variant { get; set; } = "div";
 
     private string? _classname;
     private string? _style;
