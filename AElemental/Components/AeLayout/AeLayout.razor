@@ -17,52 +17,31 @@ limitations under the License.
 @namespace AElemental.Components
 @inherits HtmlElement
 
-<div class="@_layoutClassname"  @attributes="@InputAttributesWithoutClass">   
-    <AeSideNav @attributes="_attributes" />
-    <div class="@_wrapperClassname">
-        @if (TopBar != null)
-        {
-            <AeTopBar>
-                @TopBar
-            </AeTopBar>
-        }
-        @Body
-    </div>
-</div>
+<ae-layout class="@_classname" style="@_style"  @attributes="@InputAttributesWithoutClassOrStyle">   
+    <div>sidebar</div>
+    <div>appbar</div>
+    <div>body</div>
+</ae-layout>
 
 @code {
-    [Parameter]
-    public RenderFragment Brand { get; set; }
+    
+    private string? _classname;
+    private string? _style;
 
-    [Parameter]
-    public List<AeNavLink> Links { get; set; }
-
-    [Parameter]
-    public RenderFragment TopBar { get; set; }
-    [Parameter]
-    public RenderFragment Body { get; set; }
-    [Parameter]
-    public List<AeNavLink> BottomLinks { get; set; } 
-
-    [Parameter]
-    public int SidebarExpandThreshold { get; set; } = 1400;
-    [Parameter]
-    public int SidebarShrunkThreshold { get; set; } = 1400;
-    [Parameter]
-    public bool StayCollapse { get; set; } = false;
-
-    private string _layoutClassname => $"ae layout {_inputClass} {(StayCollapse ? "stay-collapse": "")}";
-    private string _wrapperClassname => $"ae content-wrapper";
-    private Dictionary<string, object> _attributes;
-
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
-        _attributes = new Dictionary<string,object>();
-        _attributes.Add(nameof(Links),this.Links);
-        _attributes.Add(nameof(BottomLinks),this.BottomLinks);
-        _attributes.Add(nameof(Brand),this.Brand);
-        _attributes.Add(nameof(SidebarExpandThreshold),this.SidebarExpandThreshold);
-        _attributes.Add(nameof(SidebarShrunkThreshold),this.SidebarShrunkThreshold);
-        _attributes.Add(nameof(StayCollapse),this.StayCollapse);
+        base.OnParametersSet();
+        
+        _style = new AeStyleBuilder()
+            .AddStyle("font-family", "var(--body-font)")
+            .AddStyle("display", "grid")
+            .AddStyle("grid-template-columns", "200px 1fr")
+            .AddStyle("grid-template-rows", "auto 1fr")
+            .AddStyle("grid-template-areas", "'sidebar appbar' 'sidebar body'")
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();  
+        _classname = new AeCssBuilder()
+            .AddClassFromAttributes(InputAttributes)
+            .NullIfEmpty();
     }
 }
