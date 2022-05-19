@@ -17,22 +17,26 @@ limitations under the License.
 @namespace AElemental.Components
 @inherits HtmlElement
 
-<ae-layout class="@_classname" style="@_style"  @attributes="@InputAttributesWithoutClassOrStyle">   
-    <div>sidebar</div>
-    <div>appbar</div>
-    <div>body</div>
+<ae-layout class="@_classname" style="@_layoutStyle"  @attributes="@InputAttributesWithoutClassOrStyle">
+    <div style="@_sidebarStyle">sidebar</div>
+    <div style="@_appbarStyle">appbar</div>
+    <div style="@_bodyStyle">@ChildContent</div>
 </ae-layout>
 
 @code {
     
     private string? _classname;
-    private string? _style;
+    
+    private string? _layoutStyle;
+    private string? _bodyStyle;
+    private string? _sidebarStyle;
+    private string? _appbarStyle;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         
-        _style = new AeStyleBuilder()
+        _layoutStyle = new AeStyleBuilder()
             .AddStyle("font-family", "var(--body-font)")
             .AddStyle("display", "grid")
             .AddStyle("grid-template-columns", "200px 1fr")
@@ -40,6 +44,30 @@ limitations under the License.
             .AddStyle("grid-template-areas", "'sidebar appbar' 'sidebar body'")
             .AddStyleFromAttributes(InputAttributes)
             .NullIfEmpty();  
+        
+        _bodyStyle = new AeStyleBuilder()
+            .AddStyle("grid-area", "body")
+            .AddStyle("background-color", CssVars.NeutralLayerCardContainer)
+            .NullIfEmpty();
+        
+        _sidebarStyle = new AeStyleBuilder()
+            .AddStyle("grid-area", "sidebar")
+            .AddStyle("max-height", "100vh")
+            .AddStyle("height", "100%")
+            .AddStyle("overflow-y", "auto")
+            .AddStyle("position", "sticky")
+            .AddStyle("top", "0")
+            .AddStyle("background-color", CssVars.NeutralLayerFloating)
+            .NullIfEmpty();
+        
+        _appbarStyle = new AeStyleBuilder()
+            .AddStyle("grid-area", "appbar")
+            .AddStyle("position", "sticky")
+            .AddStyle("top", "0")
+            .AddStyle("background-color", CssVars.NeutralLayerFloating)
+            .AddStyle("z-index", "101")
+            .NullIfEmpty();
+        
         _classname = new AeCssBuilder()
             .AddClassFromAttributes(InputAttributes)
             .NullIfEmpty();

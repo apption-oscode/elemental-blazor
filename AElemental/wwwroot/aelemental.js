@@ -30799,6 +30799,11 @@ function provideFASTDesignSystem(element) {
     return DesignSystem.getOrCreate(element).withPrefix("fast");
 }
 
+// TODO: Figure out how to import this and bundle it
+// import 'remixicon/fonts/remixicon.css';
+// import 'normalize.css';
+
+
 provideFASTDesignSystem()
     .withPrefix("ae")
     .register(
@@ -30852,7 +30857,11 @@ function setAElementalThemeOptions(options) {
     baseLayerLuminance.withDefault(options.baseLayerLuminance);
 
     neutralPalette.withDefault(PaletteRGB.create(SwatchRGB.from(parseColorHexRGB(options.neutralColor))));
-    accentPalette.withDefault(PaletteRGB.create(SwatchRGB.from(parseColorHexRGB(options.accentColor))));
+    
+    let accentSwatch = SwatchRGB.from(parseColorHexRGB(options.accentColor));
+    
+    accentColor.withDefault(accentSwatch);
+    accentPalette.withDefault(PaletteRGB.create(accentSwatch));
     strokeWidth.withDefault(options.outlineWidth);
     
     controlCornerRadius.withDefault(options.cornerRadius);

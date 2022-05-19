@@ -78,12 +78,6 @@
         <None Include="..\AElemental.Theme\Styles\input\_search-wrapper.scss">
           <Link>Components\AeInput\_search-wrapper.scss</Link>
         </None>
-        <None Include="..\AElemental.Theme\Styles\layout\_layout.scss">
-          <Link>Components\AeLayout\_layout.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\layout\_layoutV2.scss">
-          <Link>Components\AeLayout\_layoutV2.scss</Link>
-        </None>
         <None Include="..\AElemental.Theme\Styles\list\_list.scss">
           <Link>Components\AeList\_list.scss</Link>
         </None>
