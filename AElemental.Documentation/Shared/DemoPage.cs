@@ -11,7 +11,7 @@ namespace AElemental.Documentation.Shared
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("initHighlight");
+            // await JSRuntime.InvokeVoidAsync("initHighlight");
         }
     }
 }
