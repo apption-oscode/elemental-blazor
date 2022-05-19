@@ -10,8 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@fontsource/open-sans": "^4.5.6",
-    "@microsoft/fast-colors": "^5.3.0",
-    "@microsoft/fast-components": "^2.30.6",
+    "carbon-web-components": "^1.21.0",
     "normalize.css": "^8.0.1",
     "remixicon": "^2.5.0"
   },

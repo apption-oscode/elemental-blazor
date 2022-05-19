@@ -60,9 +60,6 @@
         <None Include="..\AElemental.Theme\Styles\flex\_flex.scss">
           <Link>Components\AeFlex\_flex.scss</Link>
         </None>
-        <None Include="..\AElemental.Theme\Styles\icon\_icon.scss">
-          <Link>Components\AeIcon\_icon.scss</Link>
-        </None>
         <None Include="..\AElemental.Theme\Styles\ie-not-supported\_ie-not-supported.scss">
           <Link>Components\AeIENotSupported\_ie-not-supported.scss</Link>
         </None>

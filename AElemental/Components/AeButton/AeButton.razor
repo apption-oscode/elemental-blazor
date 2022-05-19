@@ -18,42 +18,25 @@
 @inherits HtmlElement
 @inject NavigationManager NavigationManager
 
-<ae-button @onclick="HandleClick"
-           @attributes="@InputAttributes"
-           disabled="@Disabled"
-           appearance="@ButtonAppearance.ToString().ToLower()">
+<bx-btn
+    @attributes="@InputAttributes"
+    disabled="@Disabled"
+    kind="@Kind">
     @ChildContent
-</ae-button>
+</bx-btn>
 
 @code {
-
-    [Parameter]
-    [Obsolete("Use the 'href' attribute or OnClickEvent instead")]
-    public string? To { get; set; }
 
     [Parameter]
     public bool Disabled { get; set; }
 
     [Parameter]
-    public Appearance ButtonAppearance { get; set; } = Appearance.Neutral;
+    public string Kind { get; set; } = ButtonAppearance.Primary;
+
+    [Parameter]
+    public string Size { get; set; } = ButtonSize.Regular;
 
     [Parameter]
     public EventCallback<MouseEventArgs> OnClickEvent { get; set; }
 
-    private async Task HandleClick(MouseEventArgs args)
-    {
-        if (Disabled)
-        {
-            return;
-        }
-
-        if (!string.IsNullOrWhiteSpace(To))
-        {
-            NavigationManager.NavigateTo(To);
-        }
-        else
-        {
-            await OnClickEvent.InvokeAsync(args);
-        }
-    }
 }

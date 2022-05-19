@@ -3,9 +3,19 @@
 @inherits DemoPage
 
 <AeFlex Vertical class="button-page-container">
-    <DemoSection Path="./Samples/Buttons/Examples/BasicButtons.razor">
+    <DemoSection Path="./Samples/Buttons/Examples/ButtonsDefault.razor">
         <AeFlex style="gap: .5rem;">
-            <AElemental.Documentation.Samples.Buttons.Examples.BasicButtons/>
+            <AElemental.Documentation.Samples.Buttons.Examples.ButtonsDefault/>
+        </AeFlex>
+    </DemoSection>
+    <DemoSection Path="./Samples/Buttons/Examples/ButtonSize.razor">
+            <AeFlex style="gap: .5rem;">
+                <AElemental.Documentation.Samples.Buttons.Examples.ButtonSize/>
+            </AeFlex>
+        </DemoSection>
+    <DemoSection Path="./Samples/Buttons/Examples/DisabledButtons.razor">
+        <AeFlex style="gap: .5rem;">
+            <AElemental.Documentation.Samples.Buttons.Examples.DisabledButtons/>
         </AeFlex>
     </DemoSection>
     <DemoSection Path="./Samples/Buttons/Examples/NavigationButtons.razor">
@@ -13,16 +23,7 @@
             <AElemental.Documentation.Samples.Buttons.Examples.NavigationButtons/>
         </AeFlex>
     </DemoSection>
-    <DemoSection Path="./Samples/Buttons/Examples/DisabledButtons.razor">
-        <AeFlex style="gap: .5rem;">
-            <AElemental.Documentation.Samples.Buttons.Examples.DisabledButtons/>
-        </AeFlex>
-    </DemoSection>
     <DemoSection Path="./Samples/Buttons/Examples/OnClickButtons.razor">
         <AElemental.Documentation.Samples.Buttons.Examples.OnClickButtons/>
     </DemoSection>
 </AeFlex>
-
-@code {
-
-}
