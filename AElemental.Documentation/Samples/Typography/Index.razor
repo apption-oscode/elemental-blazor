@@ -1,16 +1,13 @@
-﻿@page "/content"
-@page "/content/typography"
+﻿@page "/components/typography"
 @inherits DemoPage
 
-<AeFlex Vertical class="typography-page-container">
-    <DemoSection Path="./Samples/Typography/Examples/Headers.razor">
-        <AeFlex Vertical>
-            <AElemental.Documentation.Samples.Typography.Examples.Headers />
-        </AeFlex>
-    </DemoSection>
-    <DemoSection Path="./Samples/Typography/Examples/TextExamples.razor">
-        <AeFlex Vertical>
-            <AElemental.Documentation.Samples.Typography.Examples.TextExamples />
-        </AeFlex>
-    </DemoSection>
-</AeFlex>
+<DemoSection Path="./Samples/Typography/Examples/Headers.razor">
+    <AeFlex Vertical>
+        <AElemental.Documentation.Samples.Typography.Examples.Headers />
+    </AeFlex>
+</DemoSection>
+<DemoSection Path="./Samples/Typography/Examples/TextExamples.razor">
+    <AeFlex Vertical>
+        <AElemental.Documentation.Samples.Typography.Examples.TextExamples />
+    </AeFlex>
+</DemoSection>

@@ -33,6 +33,34 @@ else if (Variant == "a")
 {
     <a style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</a>
 }
+else if (Variant == "span")
+{
+    <span style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</span>
+}
+else if (Variant == "ul")
+{
+    <ul style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</ul>
+}
+else if (Variant == "ol")
+{
+    <ol style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</ol>
+}
+else if (Variant == "li")
+{
+    <li style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</li>
+}
+else if (Variant == "dl")
+{
+    <dl style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</dl>
+}
+else if (Variant == "dt")
+{
+    <dt style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</dt>
+}
+else if (Variant == "dd")
+{
+    <dd style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</dd>
+}
 else
 {
     <div style="@_style" class="@_classname" @attributes="@InputAttributesWithoutClassOrStyle">@ChildContent</div>

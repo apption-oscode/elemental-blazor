@@ -133,9 +133,6 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
-        <None Include="..\AElemental.Theme\Styles\typography\_typography.scss">
-          <Link>Components\AeTypography\_typography.scss</Link>
-        </None>
         <None Include="wwwroot\js\third-party\jquery.min.js" />
         <None Include="wwwroot\js\third-party\shepherd.min.js">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
