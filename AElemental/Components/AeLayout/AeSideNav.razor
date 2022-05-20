@@ -1,12 +1,16 @@
 @namespace AElemental.Components
 
+@inject NavigationManager _navigationManager
+
 <bx-side-nav aria-label="Side navigation" expanded style="@_style">
     <bx-side-nav-items>
         @foreach (var item in Links ?? Enumerable.Empty<AeLayoutNavLink>())
         {
             if (item.SubLinks != null && item.SubLinks.Any())
             {
-                <bx-side-nav-menu title="@item.Name">
+                <bx-side-nav-menu title="@item.Name" 
+                                  active="@(_currentUrl?.Trim('/').StartsWith(item.Url?.Trim('/') ?? ""))" 
+                                  expanded="@(_currentUrl?.Trim('/').StartsWith(item.Url?.Trim('/') ?? ""))">
                     @if (item.Icon != null)
                     {
                         <AeIcon slot="title-icon" RxIconName="@item.Icon"/>
@@ -19,7 +23,7 @@
                         }
                         else
                         {
-                            <bx-side-nav-menu-item href="@subItem.Url">
+                            <bx-side-nav-menu-item href="@subItem.Url" active="@(subItem.Url?.Trim('/') == _currentUrl?.Trim('/'))">
                                 @subItem.Name
                             </bx-side-nav-menu-item>
                         }
@@ -56,14 +60,26 @@
     public IEnumerable<AeLayoutNavLink>? Links { get; set; }
     
     private string? _style;
+    private string? _currentUrl;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        _currentUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        
         _style = new AeStyleBuilder()
             .AddStyle("margin-top", Layout!.TopMargin)
             .AddStyle("height", $"calc(100% - {Layout!.TopMargin})")
             .AddStyle("z-index", "7999")
             .NullIfEmpty();
+
+        _currentUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
     }
+    
+    
 }
