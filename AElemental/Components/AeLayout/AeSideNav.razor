@@ -1,0 +1,71 @@
+@namespace AElemental.Components
+
+<bx-side-nav aria-label="Side navigation" expanded style="@_sidenavStyle">
+    <bx-side-nav-items>
+        @foreach (var item in SidebarLinks ?? Enumerable.Empty<AeLayoutNavLink>())
+        {
+            if (item.SubLinks != null && item.SubLinks.Any())
+            {
+                <bx-side-nav-menu title="@item.Name">
+                    @if (item.Icon != null)
+                    {
+                        <AeIcon slot="title-icon" RxIconName="@item.Icon"/>
+                    }
+                    @foreach (var subItem in item.SubLinks)
+                    {
+                        if (subItem.CustomRender != null)
+                        {
+                            @subItem.CustomRender
+                        }
+                        else
+                        {
+                            <bx-side-nav-menu-item href="@subItem.Url">
+                                @subItem.Name
+                            </bx-side-nav-menu-item>
+                        }
+                    }
+                </bx-side-nav-menu>
+            }
+            else
+            {
+                @if (item.CustomRender != null)
+                {
+                    @item.CustomRender
+                }
+                else
+                {
+                    <bx-side-nav-link href="@item.Url">
+                        @if (item.Icon != null)
+                        {
+                            <AeIcon slot="title-icon" RxIconName="@item.Icon"/>
+                        }
+                        @item.Name
+                    </bx-side-nav-link>
+                }
+            }
+        }
+    </bx-side-nav-items>
+</bx-side-nav>
+
+@code {
+
+    [CascadingParameter]
+    private AeLayout? Layout { get; set; }
+
+    [Parameter]
+    public IEnumerable<AeLayoutNavLink>? SidebarLinks { get; set; }
+    
+    private string? _sidenavStyle;
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _sidenavStyle = new AeStyleBuilder()
+            .AddStyle("margin-top", Layout!.TopMargin)
+            .AddStyle("height", $"calc(100% - {Layout!.TopMargin})")
+            .AddStyle("z-index", "7999")
+            .NullIfEmpty();
+    }
+
+}

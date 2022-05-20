@@ -15,81 +15,24 @@ limitations under the License.
 *@
 
 @namespace AElemental.Components
+@using System.Reflection
+@using Microsoft.Net.Http.Headers
 @inherits HtmlElement
 
 <ae-layout style="@_layoutStyle">
-    <bx-header aria-label="AElemental Name">
-        <bx-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></bx-header-menu-button>
-        <bx-header-name href="javascript:void 0">
-            @HeaderName
-        </bx-header-name>
-        <bx-header-nav menu-bar-label="AElemental">
-            <bx-header-nav-item href="javascript:void 0">Components</bx-header-nav-item>
-            <bx-header-nav-item href="javascript:void 0">Github</bx-header-nav-item>
-            <bx-header-menu menu-label="About Us" trigger-content="About Us">
-                <bx-header-menu-item href="javascript:void 0">Dev Blog</bx-header-menu-item>
-                <bx-header-menu-item href="javascript:void 0">Datahunter</bx-header-menu-item>
-                <bx-header-menu-item href="javascript:void 0">Apption</bx-header-menu-item>
-            </bx-header-menu>
-        </bx-header-nav>
-    </bx-header>
-    @if (_hasSidenav)
-    {
-        <bx-side-nav aria-label="Side navigation" expanded style="@_sidenavStyle">
-            <bx-side-nav-items>
-                @foreach (var item in SideNavLinks)
-                {
-                    if (item.SubLinks != null && item.SubLinks.Any())
-                    {
-                        <bx-side-nav-menu title="@item.Name">
-                            @if (item.Icon != null)
-                            {
-                                <AeIcon slot="title-icon" RxIconName="@item.Icon"/>
-                            }
-                            @foreach (var subItem in item.SubLinks)
-                            {
-                                <bx-side-nav-menu-item href="@subItem.Url">
-                                    @subItem.Name
-                                </bx-side-nav-menu-item>
-                            }
-                        </bx-side-nav-menu>
-                    }
-                    else
-                    {
-                        <bx-side-nav-link href="@item.Url">
-                            @if (item.Icon != null)
-                            {
-                                <AeIcon slot="title-icon" RxIconName="@item.Icon"/>
-                            }
-                            @item.Name
-                        </bx-side-nav-link>
-                    }
-                }
-                @* <bx-side-nav-menu title="L0 menu"> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @* </bx-side-nav-menu> *@
-                @* <bx-side-nav-menu title="L0 menu"> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @*     <bx-side-nav-menu-item active aria-current="page" href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @* </bx-side-nav-menu> *@
-                @* <bx-side-nav-menu title="L0 menu"> *@
-                @*     <AeIcon slot="title-icon" RxIconName="home-smile"/> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @*     <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item> *@
-                @* </bx-side-nav-menu> *@
-                @* <bx-side-nav-divider></bx-side-nav-divider> *@
-                @* <bx-side-nav-link href="javascript:void(0)">L0 link</bx-side-nav-link> *@
-                @* <bx-side-nav-link href="javascript:void(0)">L0 link</bx-side-nav-link> *@
-            </bx-side-nav-items>
-        </bx-side-nav>
-    }
-    <main style="@_mainStyle">
-        @ChildContent
-    </main>
+    <CascadingValue Value="@this">
+        @if (TopBar != null)
+        {
+                @TopBar
+        }
+        @if (SideBar != null)
+        {
+                @SideBar
+        }
+        <main style="@_mainStyle">
+                @ChildContent
+        </main>
+    </CascadingValue>
 </ae-layout>
 
 @code {
@@ -98,20 +41,20 @@ limitations under the License.
 
     private string? _layoutStyle;
     private string? _mainStyle;
-    private string? _sidenavStyle;
-    private string? _headerStyle;
+
 
     [Parameter]
-    public RenderFragment? HeaderName { get; set; }
-
+    public RenderFragment? TopBar { get; set; }
+    
     [Parameter]
-    public RenderFragment? HeaderMenu { get; set; }
-
+    public RenderFragment? SideBar { get; set; }
+    
     [Parameter]
-    public List<AeSideNavLink>? SideNavLinks { get; set; }
+    public string TopMargin { get; set; } = "3rem";
+    
+    [Parameter]
+    public string SideMargin { get; set; } = "16rem";
 
-
-    private bool _hasSidenav => SideNavLinks != null && SideNavLinks.Any();
 
     protected override void OnParametersSet()
     {
@@ -123,24 +66,12 @@ limitations under the License.
             .NullIfEmpty();
 
         _mainStyle = new AeStyleBuilder()
-            .AddStyle("margin-left", "16rem", when: _hasSidenav)
-            .NullIfEmpty();
-
-        @if (_hasSidenav)
-        {
-            _sidenavStyle = new AeStyleBuilder()
-                .AddStyle("margin-top", "3rem")
-                .AddStyle("height", "calc(100% - 3rem)")
-                .AddStyle("z-index", "7999")
-                .NullIfEmpty();
-        }
-
-        _headerStyle = new AeStyleBuilder()
+            .AddStyle("margin-left", SideMargin, when: SideBar != null)
+            .AddStyle("margin-top", TopMargin, when: TopBar != null)
             .NullIfEmpty();
 
         _classname = new AeCssBuilder()
             .AddClassFromAttributes(InputAttributes)
             .NullIfEmpty();
     }
-
 }

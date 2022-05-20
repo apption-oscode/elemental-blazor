@@ -1,0 +1,29 @@
+@namespace AElemental.Components
+
+<bx-header aria-label="AElemental Name">
+    <bx-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></bx-header-menu-button>
+    @if (HeaderName != null)
+    {
+        <bx-header-name href="/">
+            @HeaderName
+        </bx-header-name>
+    }
+    <bx-header-nav menu-bar-label="AElemental">
+        <bx-header-nav-item href="javascript:void 0">Components</bx-header-nav-item>
+        <bx-header-nav-item href="javascript:void 0">Github</bx-header-nav-item>
+        <bx-header-menu menu-label="About Us" trigger-content="About Us">
+            <bx-header-menu-item href="javascript:void 0">Dev Blog</bx-header-menu-item>
+            <bx-header-menu-item href="javascript:void 0">Datahunter</bx-header-menu-item>
+            <bx-header-menu-item href="javascript:void 0">Apption</bx-header-menu-item>
+        </bx-header-menu>
+    </bx-header-nav>
+</bx-header>
+
+@code {
+
+    [Parameter]
+    public RenderFragment? HeaderName { get; set; }
+
+    private string? _style;
+
+}

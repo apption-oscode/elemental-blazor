@@ -24,10 +24,17 @@
 @*     </Body> *@
 @* </AeLayout> *@
 
-<AeLayout SideNavLinks="_sideNavLinks">
-    <HeaderName>
-        <img style="height: 100%;" src="/_content/AElemental.Documentation/img/AElemental_128x128.png" alt="AElemental Logo" />
-    </HeaderName>
+<AeLayout SideNavLinks="_sideNavLinks" TopNavLinks="_topNavLinks">
+    <TopBar>
+        <AeTopNav>
+            <HeaderName>
+                <img style="height: 100%;" src="/_content/AElemental.Documentation/img/AElemental_128x128.png" alt="AElemental Logo"/>
+            </HeaderName>
+        </AeTopNav>
+    </TopBar>
+    <SideBar>
+        <AeSideNav SidebarLinks="_sideNavLinks" />
+    </SideBar>
     <ChildContent>
         @Body
     </ChildContent>
@@ -35,30 +42,61 @@
 
 @code {
 
-    private readonly List<AeSideNavLink> _sideNavLinks = new()
+    private readonly List<AeLayoutNavLink> _sideNavLinks = new()
     {
-        new AeSideNavLink
+        new AeLayoutNavLink
         {
             Name = "Getting Started",
             Url = "/getting-started",
             Icon = "terminal-box"
         },
-        new AeSideNavLink
+        new AeLayoutNavLink
         {
             Name = "Components",
             Url = "/components",
             Icon = "collage",
-            SubLinks = new List<AeSideNavLink>
+            SubLinks = new List<AeLayoutNavLink>
             {
-                new AeSideNavLink
+                new()
                 {
                     Name = "Button",
                     Url = "/components/buttons",
                 },
-                new AeSideNavLink
+                new()
                 {
                     Name = "Checkbox",
                     Url = "/components/checkbox",
+                },
+            }
+        },
+    };
+
+    private readonly List<AeLayoutNavLink> _topNavLinks = new()
+    {
+        new AeLayoutNavLink
+        {
+            Name = "Github",
+            Url = "https://github.com/apption-oscode/elemental-blazor",
+        },
+        new AeLayoutNavLink
+        {
+            Name = "About Us",
+            SubLinks = new List<AeLayoutNavLink>
+            {
+                new()
+                {
+                    Name = "Dev Blog",
+                    Url = "https://devblog.apption.com",
+                },
+                new()
+                {
+                    Name = "Datahunter",
+                    Url = "https://datahunter.ai",
+                },
+                new()
+                {
+                    Name = "Apption",
+                    Url = "https://apption.com",
                 },
             }
         },

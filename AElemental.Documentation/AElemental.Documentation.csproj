@@ -51,4 +51,15 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayout.razor" />
+    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutSidebarBottom.razor" />
+    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutWithCustomIcon.razor" />
+    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutWithStayCollapse.razor" />
+    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutWithTopBar.razor" />
+    <_ContentIncludedByDefault Remove="Samples\Layout\Index.razor" />
+    <_ContentIncludedByDefault Remove="Samples\LayoutWithSidebar\Examples\BasicLayoutWithSidebar.razor" />
+    <_ContentIncludedByDefault Remove="Samples\LayoutWithSidebar\Index.razor" />
+  </ItemGroup>
+
 </Project>
