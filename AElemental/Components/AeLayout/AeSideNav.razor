@@ -1,8 +1,8 @@
 @namespace AElemental.Components
 
-<bx-side-nav aria-label="Side navigation" expanded style="@_sidenavStyle">
+<bx-side-nav aria-label="Side navigation" expanded style="@_style">
     <bx-side-nav-items>
-        @foreach (var item in SidebarLinks ?? Enumerable.Empty<AeLayoutNavLink>())
+        @foreach (var item in Links ?? Enumerable.Empty<AeLayoutNavLink>())
         {
             if (item.SubLinks != null && item.SubLinks.Any())
             {
@@ -53,19 +53,17 @@
     private AeLayout? Layout { get; set; }
 
     [Parameter]
-    public IEnumerable<AeLayoutNavLink>? SidebarLinks { get; set; }
+    public IEnumerable<AeLayoutNavLink>? Links { get; set; }
     
-    private string? _sidenavStyle;
-
+    private string? _style;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        _sidenavStyle = new AeStyleBuilder()
+        _style = new AeStyleBuilder()
             .AddStyle("margin-top", Layout!.TopMargin)
             .AddStyle("height", $"calc(100% - {Layout!.TopMargin})")
             .AddStyle("z-index", "7999")
             .NullIfEmpty();
     }
-
 }

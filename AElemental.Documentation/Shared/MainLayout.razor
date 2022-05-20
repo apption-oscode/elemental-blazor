@@ -26,14 +26,14 @@
 
 <AeLayout SideNavLinks="_sideNavLinks" TopNavLinks="_topNavLinks">
     <TopBar>
-        <AeTopNav>
-            <HeaderName>
+        <AeTopNav Links="_topNavLinks" AriaLabel="AElemental">
+            <Brand>
                 <img style="height: 100%;" src="/_content/AElemental.Documentation/img/AElemental_128x128.png" alt="AElemental Logo"/>
-            </HeaderName>
+            </Brand>
         </AeTopNav>
     </TopBar>
     <SideBar>
-        <AeSideNav SidebarLinks="_sideNavLinks" />
+        <AeSideNav Links="_sideNavLinks" />
     </SideBar>
     <ChildContent>
         @Body

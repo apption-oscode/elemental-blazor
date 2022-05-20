@@ -1,28 +1,63 @@
 @namespace AElemental.Components
 
-<bx-header aria-label="AElemental Name">
+<bx-header aria-label="@AriaLabel">
     <bx-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></bx-header-menu-button>
-    @if (HeaderName != null)
+    @if (Brand != null)
     {
-        <bx-header-name href="/">
-            @HeaderName
+        <bx-header-name href="@BrandUrl">
+            @Brand
         </bx-header-name>
     }
-    <bx-header-nav menu-bar-label="AElemental">
-        <bx-header-nav-item href="javascript:void 0">Components</bx-header-nav-item>
-        <bx-header-nav-item href="javascript:void 0">Github</bx-header-nav-item>
-        <bx-header-menu menu-label="About Us" trigger-content="About Us">
-            <bx-header-menu-item href="javascript:void 0">Dev Blog</bx-header-menu-item>
-            <bx-header-menu-item href="javascript:void 0">Datahunter</bx-header-menu-item>
-            <bx-header-menu-item href="javascript:void 0">Apption</bx-header-menu-item>
-        </bx-header-menu>
+    <bx-header-nav menu-bar-label="@AriaLabel">
+        @foreach (var item in Links ?? Enumerable.Empty<AeLayoutNavLink>())
+        {
+            if (item.SubLinks != null && item.SubLinks.Any())
+            {
+                <bx-header-menu menu-label="@item.Name" trigger-content="@item.Name">
+                    @foreach (var subItem in item.SubLinks)
+                    {
+                        if (subItem.CustomRender != null)
+                        {
+                            @subItem.CustomRender
+                        }
+                        else
+                        {
+                            <bx-header-menu-item href="@subItem.Url">@subItem.Name</bx-header-menu-item>
+                        }
+                    }
+                </bx-header-menu>
+            }
+            else
+            {
+                if (item.CustomRender != null)
+                {
+                    @item.CustomRender
+                }
+                else
+                {
+                    <bx-header-nav-item href="@item.Url">@item.Name</bx-header-nav-item>
+                }
+            }
+        }
     </bx-header-nav>
 </bx-header>
 
 @code {
 
     [Parameter]
-    public RenderFragment? HeaderName { get; set; }
+    public RenderFragment? Brand { get; set; }
+
+    [Parameter]
+    public string BrandUrl { get; set; } = "/";
+    
+    [Parameter]
+    public string? AriaLabel { get; set; }
+    
+    [Parameter]
+    public IEnumerable<AeLayoutNavLink>? Links { get; set; }
+    
+    [Parameter]
+    public bool RightSide { get; set; }
 
     private string? _style;
 
