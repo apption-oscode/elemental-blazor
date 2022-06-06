@@ -8,13 +8,12 @@
     Title: Indeterminate Checkbox
     Description: A checkbox that has the indeterminate state. Represents a checkbox that is partially checked or unchecked.
 *@
-<AeCheckbox @bind-Checked="@_checked" Indeterminate="@_indeterminate">
-    Toggle Checked (@_checked)
-</AeCheckbox>
+<AeCheckbox @bind-Checked="@_checked" 
+            Indeterminate="@_indeterminate" 
+            LabelText="@($"Toggle checked: {_checked}")" />
 
-<AeCheckbox @bind-Checked="@_indeterminate">
-    Toggle Indeterminate (@_indeterminate)
-</AeCheckbox>
+<AeCheckbox @bind-Checked="@_indeterminate"
+            LabelText="@($"Toggle Indeterminate: {_indeterminate}")" />
 
 @code {
     private bool _checked;

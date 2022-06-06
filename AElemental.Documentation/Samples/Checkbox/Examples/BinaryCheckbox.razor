@@ -9,7 +9,7 @@
   Description: A checkbox that has two binary states.
 *@
 
-<AeCheckbox @bind-Checked="_isChecked">Is checked: @_isChecked</AeCheckbox>
+<AeCheckbox @bind-Checked="_isChecked" LabelText="@($"Is checked: {_isChecked}")" />
 
 @code {
     private bool _isChecked;

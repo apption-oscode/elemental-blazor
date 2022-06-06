@@ -1,42 +1,58 @@
 ﻿@inherits HtmlElement
 
-@inject IJSRuntime _jsRuntime;
-
 @namespace AElemental.Components
 
-<ae-checkbox @onclick="OnClick"
-             checked="@Checked"
-             @ref="@_checkboxElement">
-    @ChildContent
+<ae-checkbox 
+    style="@_style"
+    class="@_class"
+    label-text="@LabelText"
+    checked="@Checked"
+    disabled="@Disabled"
+    indeterminate="@Indeterminate"
+    @onclick="OnClick"
+>
 </ae-checkbox>
 
 @code {
 
     [Parameter]
     public bool Checked { get; set; }
-
+    
     [Parameter]
     public bool Indeterminate { get; set; }
-
+    
+    [Parameter]
+    public bool Disabled { get; set; }
+    
+    [Parameter]
+    public string LabelText { get; set; }
+    
     [Parameter]
     public EventCallback<bool> CheckedChanged { get; set; }
-
-    private ElementReference _checkboxElement;
-    private IJSObjectReference? _module;
-
-    private async Task OnClick()
+    
+    private string? _style;
+    private string? _class;
+    
+    protected override void OnParametersSet()
     {
-        Checked = !Checked;
-        Indeterminate = false;
-        await CheckedChanged.InvokeAsync(Checked);
+        base.OnParametersSet();
+        
+        _style = new AeStyleBuilder()
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();
+
+        _class = new AeCssClassBuilder()
+            .AddClassFromAttributes(InputAttributes)
+            .NullIfEmpty();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private async Task OnClick(MouseEventArgs e)
     {
-        await base.OnAfterRenderAsync(firstRender);
-
-        _module = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/AElemental.Blazor/Components/AeCheckbox/AeCheckbox.razor.js");
-        await _module.InvokeVoidAsync("setIndeterminate", _checkboxElement, Indeterminate);
+        if (e.Detail > 0)
+        {
+            Checked = !Checked;
+            Indeterminate = false;
+            await CheckedChanged.InvokeAsync(Checked);
+        }
     }
-
 }
