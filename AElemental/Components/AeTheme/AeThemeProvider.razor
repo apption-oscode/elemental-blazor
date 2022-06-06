@@ -1,5 +1,6 @@
 @namespace AElemental.Components
 @using System.Reflection
+@using AElemental.Theme
 @inherits HtmlElement
 
 
@@ -19,6 +20,7 @@
 
         var aelementalThemeValues = typeof(AeTheme).GetProperties()
             .Where(p => p.CustomAttributes.Any(a => a.AttributeType == typeof(CssVariableAttribute)))
+            .DistinctBy(p => ((CssVariableAttribute) p.GetCustomAttribute(typeof(CssVariableAttribute))!).CssVariable)
             .ToDictionary(p => ((CssVariableAttribute) p.GetCustomAttribute(typeof(CssVariableAttribute))!).CssVariable,
                 p => (string) p.GetValue(AeTheme)!);
         

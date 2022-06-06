@@ -6964,6 +6964,32 @@ let AeButton = class AeButton extends BXButton {
                 .bx--btn {
                     border-radius: var(--ae-corner-radius, 0);
                 }
+                .bx--btn--primary {
+                    background-color: var(--ae-primary, #0f62fe);
+                    color: var(--ae-text-button, #fff);
+                }
+                .bx--btn--primary:hover {
+                    background-color: var(--ae-hover-primary, #0353e9);
+                    color: var(--ae-text-button,#fff);
+                }
+                
+                .bx--btn--secondary {
+                    background-color: var(--ae-secondary, #39393);
+                    color: var(--ae-text-button, #fff);
+                }
+                .bx--btn--secondary:hover {
+                    background-color: var(--ae-hover-secondary, #4c4c4c);
+                    color: var(--ae-text-button,#fff);
+                }
+                
+                .bx--btn--tertiary {
+                    border-color: var(--ae-tertiary, #0f62fe);
+                    color: var(--ae-tertiary, #0f62fe);
+                }
+                .bx--btn--tertiary:hover {
+                    background-color: var(--ae-hover-tertiary, #4c4c4c);
+                    color: var(--ae-text-button,#fff);
+                }
             `
         ];
     }
@@ -6971,4 +6997,3 @@ let AeButton = class AeButton extends BXButton {
 AeButton = __decorate([
     n$1('ae-btn')
 ], AeButton);
-// customElements.define('ae-btn', AeButton);
