@@ -19,9 +19,9 @@
         base.OnParametersSet();
 
         var aelementalThemeValues = typeof(AeTheme).GetProperties()
-            .Where(p => p.CustomAttributes.Any(a => a.AttributeType == typeof(CssVariableAttribute)))
-            .DistinctBy(p => ((CssVariableAttribute) p.GetCustomAttribute(typeof(CssVariableAttribute))!).CssVariable)
-            .ToDictionary(p => ((CssVariableAttribute) p.GetCustomAttribute(typeof(CssVariableAttribute))!).CssVariable,
+            .Where(p => p.CustomAttributes.Any(a => a.AttributeType == typeof(AeCssVariableAttribute)))
+            .DistinctBy(p => ((AeCssVariableAttribute) p.GetCustomAttribute(typeof(AeCssVariableAttribute))!).AeCssVariable)
+            .ToDictionary(p => ((AeCssVariableAttribute) p.GetCustomAttribute(typeof(AeCssVariableAttribute))!).AeCssVariable,
                 p => (string) p.GetValue(AeTheme)!);
         
         

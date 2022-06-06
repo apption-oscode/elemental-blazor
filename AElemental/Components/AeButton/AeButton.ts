@@ -39,7 +39,7 @@ class AeButton extends BXButton {
                 
                 .bx--btn--ghost {
                     border-color: var(--ae-ghost, #0f62fe);
-                    color: var(--ae-tertiary, #0f62fe);
+                    color: var(--ae-text-link, #0f62fe);
                 }
                 .bx--btn--ghost:hover {
                     background-color: var(--ae-hover-ghost, #4c4c4c);
