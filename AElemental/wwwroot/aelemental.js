@@ -6956,7 +6956,7 @@ const n$1=n=>e=>"function"==typeof e?((n,e)=>(window.customElements.define(n,e),
  * SPDX-License-Identifier: BSD-3-Clause
  */console.warn("The main 'lit-element' module entrypoint is deprecated. Please update your imports to use the 'lit' package: 'lit' and 'lit/decorators.ts' or import from 'lit-element/lit-element.ts'. See https://lit.dev/msg/deprecated-import-path for more information.");
 
-let AEButton = class AEButton extends BXButton {
+let AeButton = class AeButton extends BXButton {
     static get styles() {
         return [
             super.styles,
@@ -6968,7 +6968,7 @@ let AEButton = class AEButton extends BXButton {
         ];
     }
 };
-AEButton = __decorate([
+AeButton = __decorate([
     n$1('ae-btn')
-], AEButton);
-customElements.define('ae-btn', AEButton);
+], AeButton);
+// customElements.define('ae-btn', AeButton);

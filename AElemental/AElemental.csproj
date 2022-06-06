@@ -45,101 +45,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\AElemental.Theme\Styles\card\_card.scss">
-          <Link>Components\AeCard\_card.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\collapse\_collapse.scss">
-          <Link>Components\AeCollapse\_collapse.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\column\_column.scss">
-          <Link>Components\AeColumn\_column.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\dropdown\_dropdown.scss">
-          <Link>Components\AeDropdown\_dropdown.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\flex\_flex.scss">
-          <Link>Components\AeFlex\_flex.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\ie-not-supported\_ie-not-supported.scss">
-          <Link>Components\AeIENotSupported\_ie-not-supported.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\input\_index.scss">
-          <Link>Components\AeInput\_index.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\input\_input-wrapper.scss">
-          <Link>Components\AeInput\_input-wrapper.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\input\_input.scss">
-          <Link>Components\AeInput\_input.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\input\_search-wrapper.scss">
-          <Link>Components\AeInput\_search-wrapper.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\list\_list.scss">
-          <Link>Components\AeList\_list.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\menu\_menu.scss">
-          <Link>Components\AeMenu\_menu.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\modal\_error-modal.scss">
-          <Link>Components\AeModal\_error-modal.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\modal\_modal.scss">
-          <Link>Components\AeModal\_modal.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\model-form\_model-form.scss">
-          <Link>Components\AeModelForm\_model-form.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\navbar\_navbar.scss">
-          <Link>Components\AeNavbar\_navbar.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\pageoutline\_pageoutline.scss">
-          <Link>Components\AePageOutline\_pageoutline.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\progress\_progress.scss">
-          <Link>Components\AeProgress\_progress.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\row\_row.scss">
-          <Link>Components\AeRow\_row.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\spinner\_spinner.scss">
-          <Link>Components\AeSpinner\_spinner.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\steps\_steps.scss">
-          <Link>Components\AeSteps\_steps.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\table\_table.scss">
-          <Link>Components\AeTable\_table.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\tabs\_document-tabs.scss">
-          <Link>Components\AeTabs\_document-tabs.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\tabs\_index.scss">
-          <Link>Components\AeTabs\_index.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\tabs\_tabs.scss">
-          <Link>Components\AeTabs\_tabs.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\toggle\_toggle.scss">
-          <Link>Components\AeToggle\_toggle.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\tooltip\_tooltip.scss">
-          <Link>Components\AeTooltip\_tooltip.scss</Link>
-        </None>
-        <None Include="..\AElemental.Theme\Styles\treeview\_treeview.scss">
-          <Link>Components\AeTreeView\_treeview.scss</Link>
-        </None>
-
-    </ItemGroup>
-    <ItemGroup>
         <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" />
         <None Include="wwwroot\js\third-party\jquery.min.js" />
         <None Include="wwwroot\js\third-party\shepherd.min.js">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
+
     <ItemGroup>
-      <TypeScriptCompile Include="button.ts" />
+      <TypeScriptCompile Include="Components\AeButton\AeButton.ts" />
     </ItemGroup>
 </Project>
 

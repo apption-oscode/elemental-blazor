@@ -41,13 +41,14 @@
     [Parameter]
     public EventCallback<MouseEventArgs> OnClickEvent { get; set; }
 
-    private string _style;
+    private string? _style;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         
         _style = new AeStyleBuilder()
+            .AddStyle("display", "inline-flex")
             .AddStyle("border-radius", "var(--ae-corner-radius)")
             .AddStyleFromAttributes(InputAttributes)
             .NullIfEmpty();
