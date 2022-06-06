@@ -6,26 +6,21 @@ public partial class AeTheme
     public string AeCornerRadius { get; set; } = "4px";
 
     
-    
 
-
-
-    
     [AeCssVariable]
-    public string AeHoverUi { get; set; } = "#f7fafc";
+    public string AeHoverUi { get; set; } = AeColors.Slate100;
 
     
     [AeCssVariable]
-    public string AeText { get; set; } = "#4a5568";
+    public string AeText { get; set; } = AeColors.Slate900;
     
     [AeCssVariable]
-    public string AeTextButton { get; set; } = "#fff";
+    public string AeTextButton { get; set; } = AeColors.White;
     
     [AeCssVariable]
-    public string AeTextLink { get; set; } = "#4299e1";
+    public string AeTextLink { get; set; } = AeColors.Blue600;
     [AeCssVariable]
-    public string AeHoverTextLink { get; set; } = "#4299e1";
-    
+    public string AeHoverTextLink { get; set; } = AeColors.Blue700;
     
     // [CssVariable("--cds-inverse-01")]
     // public string InverseText { get; set; } = "#fff";

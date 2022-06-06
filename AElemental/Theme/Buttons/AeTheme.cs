@@ -3,33 +3,22 @@ namespace AElemental.Theme;
 public partial class AeTheme
 {
     [AeCssVariable]
-    public string AePrimary { get; set; } = "#2d3748";
+    public string AePrimary { get; set; } = AeColors.Slate700;
     [AeCssVariable]
-    public string AeHoverPrimary { get; set; } = "#4a5568";
-    
-    
-    [AeCssVariable]
-    public string AeSecondary { get; set; } = "#718096";
-    [AeCssVariable]
-    public string AeHoverSecondary { get; set; } = "#4a5568";
-    
+    public string AePrimaryAccent { get; set; } = AeColors.Slate600;
     
     [AeCssVariable]
-    public string AeTertiary { get; set; } = "#2d3748";
+    public string AeSecondary { get; set; } = AeColors.Slate500;
     [AeCssVariable]
-    public string AeHoverTertiary { get; set; } = "#2d3748";
-    
+    public string AeSecondaryAccent { get; set; } = AeColors.Slate600;
     
     [AeCssVariable]
-    public string AeGhost { get; set; } = "#2d3748";
+    public string AeTertiary { get; set; } = AeColors.Slate700;
     [AeCssVariable]
-    public string AeHoverGhost { get; set; } = "#2d3748";
+    public string AeTertiaryAccent { get; set; } = AeColors.Slate700;
     
-    
-    // [CssVariable("--ae-danger")]
-    // public string Danger { get; set; } = "#2d3748";
-    // [CssVariable("--ae-danger-tertiary")]
-    // public string DangerTertiary { get; set; } = "#2d3748";
-    // [CssVariable("--ae-danger-ghost")]
-    // public string DangerGhost { get; set; } = "#2d3748";
+    [AeCssVariable]
+    public string AeDanger { get; set; } = AeColors.Red600;
+    [AeCssVariable]
+    public string AeDangerAccent { get; set; } = AeColors.Red700;
 }

@@ -15,8 +15,8 @@ class AeButton extends BXButton {
                     color: var(--ae-text-button, #fff);
                 }
                 .bx--btn--primary:hover {
-                    background-color: var(--ae-hover-primary, #0353e9);
-                    color: var(--ae-text-button,#fff);
+                    background-color: var(--ae-primary-accent, #0353e9);
+                    color: var(--ae-text-button, #fff);
                 }
                 
                 .bx--btn--secondary {
@@ -24,8 +24,8 @@ class AeButton extends BXButton {
                     color: var(--ae-text-button, #fff);
                 }
                 .bx--btn--secondary:hover {
-                    background-color: var(--ae-hover-secondary, #4c4c4c);
-                    color: var(--ae-text-button,#fff);
+                    background-color: var(--ae-secondary-accent, #4c4c4c);
+                    color: var(--ae-text-button, #fff);
                 }
                 
                 .bx--btn--tertiary {
@@ -33,18 +33,42 @@ class AeButton extends BXButton {
                     color: var(--ae-tertiary, #0f62fe);
                 }
                 .bx--btn--tertiary:hover {
-                    background-color: var(--ae-hover-tertiary, #4c4c4c);
-                    color: var(--ae-text-button,#fff);
+                    background-color: var(--ae-tertiary-accent, #4c4c4c);
+                    color: var(--ae-text-button, #fff);
                 }
                 
                 .bx--btn--ghost {
-                    border-color: var(--ae-ghost, #0f62fe);
                     color: var(--ae-text-link, #0f62fe);
                 }
                 .bx--btn--ghost:hover {
-                    background-color: var(--ae-hover-ghost, #4c4c4c);
-                    color: var(--ae-text-button,#fff);
+                    background-color: var(--ae-hover-ui, #4c4c4c);
+                    color: var(--ae-hover-text-link, #fff); 
                 }
+                
+                .bx--btn--danger {
+                    background-color: var(--ae-danger, #39393);
+                    color: var(--ae-text-button, #fff);
+                }
+                .bx--btn--danger:hover {
+                    background-color: var(--ae-danger-accent, #4c4c4c);
+                    color: var(--ae-text-button, #fff);
+                }
+                .bx--btn--danger--ghost {
+                    color: var(--ae-danger, #fff);
+                }
+                .bx--btn--danger--ghost:hover {
+                    background-color: var(--ae-danger-accent, #4c4c4c);
+                    color: var(--ae-text-button, #fff);
+                }
+                .bx--btn--danger--tertiary {
+                    border-color: var(--ae-danger, #4c4c4c);
+                    color: var(--ae-danger, #fff);
+                }
+                .bx--btn--danger--tertiary:hover {
+                    background-color: var(--ae-danger-accent, #4c4c4c);
+                    color: var(--ae-text-button, #fff);
+                }
+                
             `
         ];
     }
