@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "watch": "sass --watch theme.scss:wwwroot/aelemental.css --load-path=node_modules",
-    "scss": "sass theme.scss:wwwroot/aelemental.css --load-path=node_modules"
+    "watch": "rollup --watch --config rollup.config.js"
   },
   "author": "Apption Corporation",
   "license": "ISC",
