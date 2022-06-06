@@ -148,6 +148,20 @@ public struct AeStyleBuilder
         additionalAttributes == null ? this :
         additionalAttributes.TryGetValue("style", out var c) ? AddRaw(c.ToString()) : this;
 
+    /// <summary>
+    /// Adds a dictionary mapping of additional in-line styles to the builder
+    /// </summary>
+    /// <param name="additionalStyles"></param>
+    /// <returns>StyleBuilder</returns>
+    public AeStyleBuilder AddStylesFromDictionary(IReadOnlyDictionary<string, string> additionalStyles)
+    {
+        foreach (var (prop, value) in additionalStyles)
+        {
+            AddRaw($"{prop}: {value};");
+        }
+
+        return this;
+    }
 
     /// <summary>
     /// Finalize the completed Style as a string.

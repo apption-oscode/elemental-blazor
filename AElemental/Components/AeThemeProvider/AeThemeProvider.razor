@@ -1,4 +1,5 @@
 @namespace AElemental.Components
+@using System.Reflection
 @inherits HtmlElement
 
 
@@ -15,9 +16,15 @@
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+
+        var aelementalThemeValues = typeof(AeTheme).GetProperties()
+            .Where(p => p.CustomAttributes.Any(a => a.AttributeType == typeof(CssVariableAttribute)))
+            .ToDictionary(p => ((CssVariableAttribute) p.GetCustomAttribute(typeof(CssVariableAttribute))!).CssVariable,
+                p => (string) p.GetValue(AeTheme)!);
+        
         
         _style = new AeStyleBuilder()
-            .AddStyle("--ae-corner-radius", AeTheme.CornerRadius)
+            .AddStylesFromDictionary(aelementalThemeValues)
             .AddStyleFromAttributes(InputAttributes)
             .NullIfEmpty();
     }
