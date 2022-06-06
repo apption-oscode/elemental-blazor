@@ -207,10 +207,10 @@ public static class BuilderExtensions
     /// Used to convert a CssBuilder into a null when it is empty.
     /// Usage: class=null causes the attribute to be excluded when rendered.
     /// </summary>
-    /// <param name="builder"></param>
+    /// <param name="classBuilder"></param>
     /// <returns>string</returns>
-    public static string NullIfEmpty(this AeCssBuilder builder) =>
-        string.IsNullOrEmpty(builder.ToString()) ? null : builder.ToString();
+    public static string NullIfEmpty(this AeCssClassBuilder classBuilder) =>
+        string.IsNullOrEmpty(classBuilder.ToString()) ? null : classBuilder.ToString();
 
     /// <summary>
     /// Used to convert a StyleBuilder into a null when it is empty.

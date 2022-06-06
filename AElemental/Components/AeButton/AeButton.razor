@@ -20,7 +20,8 @@
 
 <ae-btn
     style="@_style"
-    class="@_inputClass"
+    class="@_class"
+    size="@Size"
     @attributes="@InputAttributesWithoutClassOrStyle"
     disabled="@Disabled"
     kind="@Kind">
@@ -42,7 +43,8 @@
     public EventCallback<MouseEventArgs> OnClickEvent { get; set; }
 
     private string? _style;
-
+    private string? _class;
+    
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -50,6 +52,10 @@
         _style = new AeStyleBuilder()
             .AddStyle("display", "inline-flex")
             .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();
+
+        _class = new AeCssClassBuilder()
+            .AddClassFromAttributes(InputAttributes)
             .NullIfEmpty();
     }
 

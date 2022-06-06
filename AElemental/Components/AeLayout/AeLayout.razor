@@ -70,7 +70,7 @@ limitations under the License.
             .AddStyle("margin-top", TopMargin, when: TopBar != null)
             .NullIfEmpty();
 
-        _classname = new AeCssBuilder()
+        _classname = new AeCssClassBuilder()
             .AddClassFromAttributes(InputAttributes)
             .NullIfEmpty();
     }

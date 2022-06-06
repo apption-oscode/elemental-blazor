@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AElemental.Code;
 
-public struct AeCssBuilder
+public struct AeCssClassBuilder
 {
     private string stringBuffer;
         private string prefix;
@@ -13,7 +13,7 @@ public struct AeCssBuilder
         /// </summary>
         /// <param name="value"></param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder SetPrefix(string value)
+        public AeCssClassBuilder SetPrefix(string value)
         {
             prefix = value;
             return this;
@@ -24,20 +24,20 @@ public struct AeCssBuilder
         /// Call Build() to return the completed CSS Classes as a string. 
         /// </summary>
         /// <param name="value"></param>
-        public static AeCssBuilder Default(string value) => new AeCssBuilder(value);
+        public static AeCssClassBuilder Default(string value) => new AeCssClassBuilder(value);
 
         /// <summary>
         /// Creates an Empty AeCssBuilder used to define conditional CSS classes used in a component.
         /// Call Build() to return the completed CSS Classes as a string. 
         /// </summary>
-        public static AeCssBuilder Empty() => new AeCssBuilder();
+        public static AeCssClassBuilder Empty() => new AeCssClassBuilder();
 
         /// <summary>
         /// Creates a AeCssBuilder used to define conditional CSS classes used in a component.
         /// Call Build() to return the completed CSS Classes as a string. 
         /// </summary>
         /// <param name="value"></param>
-        public AeCssBuilder(string value)
+        public AeCssClassBuilder(string value)
         {
             stringBuffer = value;
             prefix = string.Empty;
@@ -48,7 +48,7 @@ public struct AeCssBuilder
         /// </summary>
         /// <param name="value"></param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddValue(string value)
+        public AeCssClassBuilder AddValue(string value)
         {
             stringBuffer += value;
             return this;
@@ -59,7 +59,7 @@ public struct AeCssBuilder
         /// </summary>
         /// <param name="value">CSS Class to add</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClass(string value) => AddValue(" " + prefix + value);
+        public AeCssClassBuilder AddClass(string value) => AddValue(" " + prefix + value);
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.
@@ -67,7 +67,7 @@ public struct AeCssBuilder
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClass(string value, bool when = true) => when ? this.AddClass(value) : this;
+        public AeCssClassBuilder AddClass(string value, bool when = true) => when ? this.AddClass(value) : this;
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.
@@ -75,7 +75,7 @@ public struct AeCssBuilder
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClass(string value, Func<bool> when = null) => this.AddClass(value, when());
+        public AeCssClassBuilder AddClass(string value, Func<bool> when = null) => this.AddClass(value, when());
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.
@@ -83,7 +83,7 @@ public struct AeCssBuilder
         /// <param name="value">Function that returns a CSS Class to conditionally add.</param>
         /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClass(Func<string> value, bool when = true) => when ? this.AddClass(value()) : this;
+        public AeCssClassBuilder AddClass(Func<string> value, bool when = true) => when ? this.AddClass(value()) : this;
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.
@@ -91,7 +91,7 @@ public struct AeCssBuilder
         /// <param name="value">Function that returns a CSS Class to conditionally add.</param>
         /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClass(Func<string> value, Func<bool> when = null) => this.AddClass(value, when());
+        public AeCssClassBuilder AddClass(Func<string> value, Func<bool> when = null) => this.AddClass(value, when());
 
         /// <summary>
         /// Adds a conditional nested AeCssBuilder to the builder with space separator.
@@ -99,7 +99,7 @@ public struct AeCssBuilder
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClass(AeCssBuilder builder, bool when = true) => when ? this.AddClass(builder.Build()) : this;
+        public AeCssClassBuilder AddClass(AeCssClassBuilder classBuilder, bool when = true) => when ? this.AddClass(classBuilder.Build()) : this;
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.
@@ -107,7 +107,7 @@ public struct AeCssBuilder
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClass(AeCssBuilder builder, Func<bool> when = null) => this.AddClass(builder, when());
+        public AeCssClassBuilder AddClass(AeCssClassBuilder classBuilder, Func<bool> when = null) => this.AddClass(classBuilder, when());
 
         /// <summary>
         /// Adds a conditional CSS Class when it exists in a dictionary to the builder with space separator.
@@ -115,7 +115,7 @@ public struct AeCssBuilder
         /// </summary>
         /// <param name="additionalAttributes">Additional Attribute splat parameters</param>
         /// <returns>AeCssBuilder</returns>
-        public AeCssBuilder AddClassFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
+        public AeCssClassBuilder AddClassFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
             additionalAttributes == null ? this :
             additionalAttributes.TryGetValue("class", out var c) && c != null ? AddClass(c.ToString()) : this;
 

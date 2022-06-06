@@ -43,7 +43,7 @@
             .AddStyleFromAttributes(InputAttributes)
             .NullIfEmpty();  
         
-        _classname = new AeCssBuilder()
+        _classname = new AeCssClassBuilder()
             .AddClass($"ri-{RxIconName}-{RxStyle}", when: UseRemixIconLibrary)
             .AddClass($"{RxIconName}", when: UseRemixIconLibrary && !string.IsNullOrEmpty(RxIconName))
             .AddClassFromAttributes(InputAttributes)
