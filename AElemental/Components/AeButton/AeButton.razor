@@ -18,12 +18,14 @@
 @inherits HtmlElement
 @inject NavigationManager NavigationManager
 
-<bx-btn
-    @attributes="@InputAttributes"
+<ae-btn
+    style="@_style"
+    class="@_inputClass"
+    @attributes="@InputAttributesWithoutClassOrStyle"
     disabled="@Disabled"
     kind="@Kind">
     @ChildContent
-</bx-btn>
+</ae-btn>
 
 @code {
 
@@ -38,5 +40,17 @@
 
     [Parameter]
     public EventCallback<MouseEventArgs> OnClickEvent { get; set; }
+
+    private string _style;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        
+        _style = new AeStyleBuilder()
+            .AddStyle("border-radius", "var(--ae-corner-radius)")
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();
+    }
 
 }

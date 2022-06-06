@@ -138,6 +138,9 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
+    <ItemGroup>
+      <TypeScriptCompile Include="button.ts" />
+    </ItemGroup>
 </Project>
 
 

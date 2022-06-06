@@ -1,0 +1,26 @@
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/theme' as theme;
+@use './aelemental-theme' as aelementalTheme;
+
+
+
+$primary-color: #00bcd4;
+$corner-radius: 4px;
+
+
+$primary-hover-color: darken($primary-color, 5%);
+
+:root {
+
+  
+  $carbon--theme: aelementalTheme.$aelemental;
+  
+  @include theme.theme($carbon--theme);
+  
+  --ae-corner-radius: #{$corner-radius};
+  
+  
+  //--cds-interactive-01: #{$primary-color};
+  //--cds-hover-primary: #{$primary-hover-color};
+
+}

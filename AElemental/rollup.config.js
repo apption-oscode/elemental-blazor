@@ -1,8 +1,16 @@
 import {nodeResolve} from '@rollup/plugin-node-resolve';
-import css from "rollup-plugin-import-css";
+// import scss from "rollup-plugin-scss";
+import typescript from '@rollup/plugin-typescript';
 
 export default {
-    input: 'main.js',
+    input: 'main.ts',
     output: { file: "./wwwroot/aelemental.js", format: "esm" },
-    plugins: [nodeResolve(), css()]
+    plugins: [
+        typescript(),
+        nodeResolve(), 
+        // scss({
+        //     output: "./wwwroot/aelemental.css",
+        //     outputStyle: "compressed"
+        // })
+    ]
 };
