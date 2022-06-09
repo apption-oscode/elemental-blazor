@@ -13,6 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
+[![Gitter](https://badges.gitter.im/aelemental/community.svg)](https://gitter.im/aelemental/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Elemental Framework for Blazor
 
