@@ -1,19 +1,20 @@
 {
-  "name": "elemental",
-  "version": "1.0.0",
-  "description": "Elemental Javascript Bundle",
+  "name": "aelemental",
+  "version": "2.0.0",
+  "description": "AElemental Blazor Web Component Library",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "rollup --config rollup.config.js"
   },
-  "Op": null,
-  "author": "",
+  "author": "Apption Corporation",
   "license": "ISC",
   "dependencies": {
-    "glob": "^7.2.3",
-    "terser-webpack-plugin": "^5.3.3",
-    "webpack": "^5.73.0"
+    "@fontsource/open-sans": "^4.5.6",
+    "@microsoft/fast-components": "^2.25.3"
   },
   "devDependencies": {
-    "webpack-cli": "^4.9.2"
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "rollup": "^2.70.0",
+    "rollup-plugin-import-css": "^3.0.3"
   }
 }
