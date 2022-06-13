@@ -54,13 +54,13 @@
         {
             Name = "Components",
             Url = "/components",
-            Icon = "collage",
+            Icon = "stack",
             SubLinks = new List<AeLayoutNavLink>
             {
                 new()
                 {
                     Name = "Button",
-                    Url = "/components/buttons",
+                    Url = "/components/button",
                 },
                 new()
                 {
@@ -77,8 +77,110 @@
                     Name = "Typography",
                     Url = "/components/typography",
                 },
+                new()
+                {
+                    Name = "Menu",
+                    Url = "components/menu",
+                },
+                new()
+                {
+                    Name = "Select",
+                    Url = "components/select",
+                },
+                new ()
+                {
+                    Name = "Icon",
+                    Url = "components/icon"
+                },
+                new ()
+                {
+                    Name = "Progress",
+                    Url = "components/progress"
+                },
+                new ()
+                {
+                    Name = "Tooltip",
+                    Url = "components/tooltip"
+                }
+            }.OrderBy(i => i.Name)
+        },
+        new AeLayoutNavLink
+        {
+            Name = "Layouts",
+            Url = "/layouts",
+            Icon = "layout-3",
+            SubLinks = new List<AeLayoutNavLink>
+            {
+                new ()
+                {
+                    Name = "Grid",
+                    Url = "/layouts/grid"
+                },
+                new ()
+                {
+                    Name = "Paper",
+                    Url = "/layouts/paper"
+                },
+                new ()
+                {
+                    Name = "Layout",
+                    Url = "/layouts/layout"
+                },
+                new ()
+                {
+                    Name = "Stepper",
+                    Url = "/layouts/stepper"
+                }
+            }.OrderBy(i => i.Name)
+        },
+        new AeLayoutNavLink
+        {
+            Name = "Forms",
+            Url = "/forms",
+            Icon = "article",
+            SubLinks = new List<AeLayoutNavLink>
+            {
+                new ()
+                {
+                    Name = "Model Form",
+                    Url = "/form/model-form"
+                },
+                new ()
+                {
+                    Name = "Input",
+                    Url = "/form/input"
+                }
             }
         },
+        new AeLayoutNavLink()
+        {
+            Name = "Table",
+            Url = "/table",
+            Icon = "table",
+            SubLinks = new List<AeLayoutNavLink>
+            {
+                new ()
+                {
+                    Name = "Default",
+                    Url = "/table/default"
+                },
+                new ()
+                {
+                    Name = "Expandable",
+                    Url = "/table/expandable"
+                },
+                new ()
+                {
+                    Name = "Sortable",
+                    Url = "/table/sortable"
+                },
+                new ()
+                {
+                    Name = "Paginated",
+                    Url = "/table/paginated"
+                }
+            }
+        }
     };
 
     private readonly List<AeLayoutNavLink> _topNavLinks = new()

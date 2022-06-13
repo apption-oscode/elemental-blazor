@@ -24,7 +24,6 @@
             .ToDictionary(p => ((AeCssVariableAttribute) p.GetCustomAttribute(typeof(AeCssVariableAttribute))!).AeCssVariable,
                 p => (string) p.GetValue(AeTheme)!);
         
-        
         _style = new AeStyleBuilder()
             .AddStylesFromDictionary(aelementalThemeValues)
             .AddStyleFromAttributes(InputAttributes)
