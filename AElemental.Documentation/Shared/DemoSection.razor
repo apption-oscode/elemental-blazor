@@ -25,9 +25,9 @@
                 @if (file.AdditionalCode?.Count > 0)
                 {
                     <AeTypography style="margin-top: .75rem;" Variant="h4">C#</AeTypography>
-                    <AeCodeSnippet type="multi">
+                    <AeCode LineType="@AeCode.LineTypes.Multiline">
                         @(string.Join(System.Environment.NewLine, file.AdditionalCode).Trim())
-                    </AeCodeSnippet>
+                    </AeCode>
                     @* <div class="code-wrapper"> *@
                     @*     <pre style="margin: 0"><code class="language-csharp">@(string.Join(System.Environment.NewLine, file.AdditionalCode))</code></pre> *@
                     @* </div> *@
@@ -36,9 +36,9 @@
                 @if (file.Html.Count > 0)
                 {
                     <AeTypography style="margin-top: 0;" Variant="h4">Markup</AeTypography>
-                    <AeCodeSnippet type="multi">
+                    <AeCode LineType="@AeCode.LineTypes.Multiline">
                         @(string.Join(System.Environment.NewLine, file.Html).Trim())
-                    </AeCodeSnippet>
+                    </AeCode>
                     @* <div class="code-wrapper"> *@
                     @*     <pre style="margin: 0"><code class="language-html">@(string.Join(System.Environment.NewLine, file.Html))</code></pre> *@
                     @* </div> *@
@@ -46,9 +46,9 @@
                 @if (file.Code.Count > 0)
                 {
                     <AeTypography style="margin-top: .75rem;" Variant="h4">C#</AeTypography>
-                    <AeCodeSnippet type="multi">
+                    <AeCode LineType="@AeCode.LineTypes.Multiline">>
                         @(string.Join(System.Environment.NewLine, file.Code).Trim())
-                    </AeCodeSnippet>
+                    </AeCode>
                     @* <div class="code-wrapper"> *@
                     @*     <pre style="margin: 0"><code class="language-csharp">@(string.Join(System.Environment.NewLine, file.Code))</code></pre> *@
                     @* </div> *@
@@ -56,9 +56,9 @@
                 @if (file.Scss?.Count > 0)
                 {
                     <AeTypography style="margin-top: .75rem;" Variant="h4">SCSS</AeTypography>
-                    <AeCodeSnippet type="multi">
+                    <AeCode LineType="@AeCode.LineTypes.Multiline">>
                         @(string.Join(System.Environment.NewLine, file.Scss).Trim())
-                    </AeCodeSnippet>
+                    </AeCode>
                     @* <div class="code-wrapper"> *@
                     @*     <pre style="margin: 0"><code class="language-scss">@(string.Join(System.Environment.NewLine, file.Scss))</code></pre> *@
                     @* </div> *@

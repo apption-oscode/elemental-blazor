@@ -1,38 +1,24 @@
-﻿@page "/components/icons"
+﻿@page "/components/icon"
 @inherits DemoPage
 
-<AeFlex Vertical class="icon-page-container">
-    <AeTypography>Icons source: <a href="https://remixicon.com/">REMIX ICON</a></AeTypography>
-    <AeTypography>
-        Include the following line to <i>&lt;head&gt;</i>
-    </AeTypography>
-    <div class="code-wrapper">
-        <pre style="margin: 0"><code class="language-html">
-        @(@"<link href=""_content/Blazor.AElemental/css/third-party/remixicon.css"" rel=""stylesheet"">")
-    </code></pre>
-    </div>
-    <DemoSection Path="./Samples/Icons/Examples/BasicIcons.razor">
-        <AeFlex Vertical>
-            <AElemental.Documentation.Samples.Icons.Examples.BasicIcons/>
-        </AeFlex>
-    </DemoSection>
-    <DemoSection Path="./Samples/Icons/Examples/StylingIcons.razor">
-        <AeFlex>
-            <AElemental.Documentation.Samples.Icons.Examples.StylingIcons/>
-        </AeFlex>
-    </DemoSection>
-    <DemoSection Path="./Samples/Icons/Examples/SizingIcons.razor">
-        <AeFlex>
-            <AElemental.Documentation.Samples.Icons.Examples.SizingIcons/>
-        </AeFlex>
-    </DemoSection>
-    <DemoSection Path="./Samples/Icons/Examples/ColoringIcons.razor">
-        <AeFlex>
-            <AElemental.Documentation.Samples.Icons.Examples.ColoringIcons/>
-        </AeFlex>
-    </DemoSection>
-</AeFlex>
+<AeTypography Variant="h2">Icons</AeTypography>
 
-@code {
+<AeTypography>
+    By default AElemental works with the <AeTypography Variant="a" href="https://remixicon.com">Remix Icon</AeTypography> library. In order to use a different icon library, you can set the <AeCode>UseRemixIconLibrary</AeCode> static property to false and then use the <AeCode>style</AeCode> property to set the icon name.
+</AeTypography>
+<AeTypography>You will need to include the stylesheet on your page, the common method is to add the following line to your <AeCode>_Hosts.cshtml</AeCode> or <AeCode>index.html</AeCode></AeTypography>
 
-}
+<AeCode LineType="@AeCode.LineTypes.Single">@(@"<link href=""~/_content/AElemental.Blazor/css/third-party/remixicon.css"" rel=""stylesheet"">")</AeCode>
+
+<DemoSection Path="./Samples/Icons/Examples/BasicIcons.razor">
+    <AElemental.Documentation.Samples.Icons.Examples.BasicIcons/>
+</DemoSection>
+<DemoSection Path="./Samples/Icons/Examples/StylingIcons.razor">
+    <AElemental.Documentation.Samples.Icons.Examples.StylingIcons/>
+</DemoSection>
+<DemoSection Path="./Samples/Icons/Examples/SizingIcons.razor">
+    <AElemental.Documentation.Samples.Icons.Examples.SizingIcons/>
+</DemoSection>
+<DemoSection Path="./Samples/Icons/Examples/ColoringIcons.razor">
+    <AElemental.Documentation.Samples.Icons.Examples.ColoringIcons/>
+</DemoSection>

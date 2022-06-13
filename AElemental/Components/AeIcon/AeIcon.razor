@@ -46,6 +46,7 @@
         _classname = new AeCssClassBuilder()
             .AddClass($"ri-{RxIconName}-{RxStyle}", when: UseRemixIconLibrary)
             .AddClass($"{RxIconName}", when: UseRemixIconLibrary && !string.IsNullOrEmpty(RxIconName))
+            .AddClass($"{RxSize}", when: UseRemixIconLibrary && !string.IsNullOrEmpty(RxSize))
             .AddClassFromAttributes(InputAttributes)
             .SetPrefix("ae-")
             .AddClass("icon")

@@ -1,0 +1,13 @@
+@inherits HtmlElement
+@namespace AElemental.Components
+
+<bx-code-snippet @attributes="@InputAttributes" type="@LineType"> 
+    @ChildContent
+</bx-code-snippet>
+
+@code {
+
+    [Parameter]
+    public string LineType { get; set; } = LineTypes.Default;
+
+}
