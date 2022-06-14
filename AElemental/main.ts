@@ -4,6 +4,9 @@
 
 import 'carbon-web-components/es/components/ui-shell/index.js';
 import 'carbon-web-components/es/components/code-snippet/index.js';
+import 'carbon-web-components/es/components/dropdown/index.js';
 
 import './Components/AeButton/AeButton';
 import './Components/AeCheckbox/AeCheckbox';
+import './Components/AeDropdown/AeDropdown';
+

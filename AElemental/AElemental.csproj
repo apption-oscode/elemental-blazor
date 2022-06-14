@@ -55,6 +55,7 @@
     <ItemGroup>
       <TypeScriptCompile Include="Components\AeButton\AeButton.ts" />
       <TypeScriptCompile Include="Components\AeCheckbox\AeCheckbox.ts" />
+      <TypeScriptCompile Include="Components\AeDropdown\AeDropdown.ts" />
     </ItemGroup>
 </Project>
 

@@ -1,0 +1,22 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Dropdown
+    Description: Single option dropdown selector 
+*@
+
+<AeTypography>Selected item: @_selectedItem</AeTypography>
+
+<AeDropdown @bind-Value="_selectedItem">
+    <AeDropdownItem Value="foo">Foo</AeDropdownItem>
+    <AeDropdownItem Value="bar">Bar</AeDropdownItem>
+    <AeDropdownItem Value="baz">Baz</AeDropdownItem>
+</AeDropdown>
+
+@code {
+    private string _selectedItem;
+}

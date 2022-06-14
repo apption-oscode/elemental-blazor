@@ -17,19 +17,12 @@
 @namespace AElemental.Components
 @inherits HtmlElement
 
-
-
-    
-<bx-dropdown @onaedropdownselected="@HandleAeDropdownSelected" style="@_style" class="@_class" value="@Value">
-    @ChildContent
-</bx-dropdown>
-
+  <bx-dropdown-item style="@_style" class="@_class" value="@Value">@ChildContent</bx-dropdown-item>
 
 @code {
     [Parameter]
     public string Value { get; set; }
-    [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
+
     
     private string? _style;
     private string? _class;
@@ -45,10 +38,5 @@
         _class = new AeCssClassBuilder()
             .AddClassFromAttributes(InputAttributes)
             .NullIfEmpty();
-    }
-    
-    private async Task HandleAeDropdownSelected(AeDropdownSelectedEventArgs eventArgs)
-    {
-        await ValueChanged.InvokeAsync(eventArgs.Value);
     }
 }
