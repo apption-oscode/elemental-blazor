@@ -5,13 +5,11 @@
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    Title: Dropdown
-    Description: Single option dropdown selector 
+    Title: Disabled Dropdown
+    Description: Disabled dropdown 
 *@
 
-<AeTypography>Selected item: @_selectedItem</AeTypography>
-
-<AeDropdown @bind-Value="_selectedItem" LabelText="Dropdown Title" HelperText="Optional Helper Text">
+<AeDropdown @bind-Value="_selectedItem" LabelText="Dropdown Title" HelperText="Optional Helper Text" Disabled>
     <AeDropdownItem Value="foo">Foo</AeDropdownItem>
     <AeDropdownItem Value="bar">Bar</AeDropdownItem>
     <AeDropdownItem Value="baz">Baz</AeDropdownItem>

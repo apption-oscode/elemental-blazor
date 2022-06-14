@@ -46,7 +46,7 @@
                 @if (file.Code.Count > 0)
                 {
                     <AeTypography style="margin-top: .75rem;" Variant="h4">C#</AeTypography>
-                    <AeCode LineType="@AeCode.LineTypes.Multiline">>
+                    <AeCode LineType="@AeCode.LineTypes.Multiline">
                         @(string.Join(System.Environment.NewLine, file.Code).Trim())
                     </AeCode>
                     @* <div class="code-wrapper"> *@
@@ -56,7 +56,7 @@
                 @if (file.Scss?.Count > 0)
                 {
                     <AeTypography style="margin-top: .75rem;" Variant="h4">SCSS</AeTypography>
-                    <AeCode LineType="@AeCode.LineTypes.Multiline">>
+                    <AeCode LineType="@AeCode.LineTypes.Multiline">
                         @(string.Join(System.Environment.NewLine, file.Scss).Trim())
                     </AeCode>
                     @* <div class="code-wrapper"> *@
