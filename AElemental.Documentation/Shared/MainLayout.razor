@@ -9,21 +9,6 @@
 @inherits LayoutComponentBase
 @using AElemental.Code
 
-@* <AeLayout Links="_navLinks"> *@
-@*     <Brand> *@
-@*         <AeFlex> *@
-@*             <img src="/_content/AElemental.Documentation/img/AElemental_128x128.png" style="max-height: 50px; padding-right:4px;" /> *@
-@*             <AeTypography Variant="h2">AElemental</AeTypography> *@
-@*         </AeFlex> *@
-@*     </Brand> *@
-@*     <Body> *@
-@*         <AeTypography Variant="h1" style="text-align: center;">AElemental</AeTypography> *@
-@*         <AeFlex Vertical style="width: 840px; padding: 0rem 2rem 5rem; margin: auto;"> *@
-@*             @Body *@
-@*         </AeFlex> *@
-@*     </Body> *@
-@* </AeLayout> *@
-
 <AeLayout SideNavLinks="_sideNavLinks" TopNavLinks="_topNavLinks">
     <TopBar>
         <AeTopNav Links="_topNavLinks" AriaLabel="AElemental">
@@ -94,8 +79,8 @@
                 },
                 new ()
                 {
-                    Name = "Progress",
-                    Url = "components/progress"
+                    Name = "Progress Indicator",
+                    Url = "components/progress-indicator"
                 },
                 new ()
                 {

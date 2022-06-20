@@ -1,0 +1,35 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace AElemental.Components
+
+@inherits HtmlElement
+
+<bx-progress-indicator
+    vertical="@Vertical"
+    style="@_style"
+    class="@_class"
+    @attributes="@InputAttributesWithoutClassOrStyle">
+    @ChildContent
+</bx-progress-indicator>
+
+@code {
+
+    [Parameter]
+    public bool Vertical { get; set; }
+
+    private string? _style;
+    private string? _class;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        _style = new AeStyleBuilder()
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();
+
+        _class = new AeCssClassBuilder()
+            .AddClassFromAttributes(InputAttributes)
+            .NullIfEmpty();
+    }
+
+}

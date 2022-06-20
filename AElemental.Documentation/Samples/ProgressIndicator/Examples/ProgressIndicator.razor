@@ -1,0 +1,30 @@
+﻿@*
+  Copyright (c) 2020 Apption Corporation
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  Title: Progress Indicator
+  Description: Progress indicator is a visual representation of a users progress through a set of steps. They guide the user through a number of steps in order to complete a specified process. Use progress indicators to keep the user on track when completing a specific task. By dividing the end goal into smaller, sub-tasks, it increases the percentage of completeness as each task is completed.
+*@
+
+<AeTypography>Clicked: @_labelClicked</AeTypography>
+<AeProgressIndicator>
+    <AeProgressStep @onclick="@(() => SetLabel("First Label"))" Label="First Label" SecondaryLabel="Secondary label" State="@AeProgressStep.States.Invalid"/>
+    <AeProgressStep @onclick="@(() => SetLabel("Second Label"))" Label="Second Label" SecondaryLabel="Secondary label" State="@AeProgressStep.States.Complete"/>
+    <AeProgressStep @onclick="@(() => SetLabel("Third Label"))" Label="Third Label" SecondaryLabel="Secondary label" State="@AeProgressStep.States.Current"/>
+    <AeProgressStep @onclick="@(() => SetLabel("Fourth Label"))" Label="Fourth Label" SecondaryLabel="Secondary label" Disabled/>
+    <AeProgressStep @onclick="@(() => SetLabel("Fifth Label"))" Label="Fifth Label" SecondaryLabel="Secondary label"/>
+</AeProgressIndicator>
+
+@code {
+
+    private string _labelClicked;
+
+    private void SetLabel(string label)
+    {
+        _labelClicked = label;
+    }
+
+}
