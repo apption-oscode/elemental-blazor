@@ -16,174 +16,43 @@
 
 @namespace AElemental.Components
 @inherits HtmlElement
-@inject IJSRuntime JSRuntime
-@implements IDisposable
-@typeparam T
 
-
-
-<div tabindex="0" @onblur="HandleBlur" class="@_wrapperClassname" @attributes="InputAttributesWithoutClass" ae-id="@_id">
-    <span @onclick="SelectClicked">
-        @_labelFragment
-    </span>
-    
-    <div class="ae content-wrapper">
-        @foreach (var item in Items)
-        {
-            <div class="ae button-wrapper" @onclick="() => HandleItemClick(item)">
-                @if (_Selected.Contains(item))
-                {
-                    <i class="far fa-check-square check" ></i>
-                }
-                else
-                {
-                    <i class="far fa-square check"></i>
-                }
-                <div class="ae dropdown-item">
-                    @Renderer(item)
-                </div>
-            </div>
-        }
-        <AeButton @onclick="HandleClear">Clear</AeButton>
-    </div>
-</div>
+<bx-select
+    style="@_style"
+    class="@_class"
+    helper-text="@HelperText"
+    label-text="@LabelText"
+    placeholder="@Placeholder">
+    @ChildContent
+</bx-select>
 
 @code {
-  //BUG: sometimes clicking outside the dropdown does not work as expected (visibility doesn't toggle)
 
-  [Parameter]
-  public string Label { get; set; }
-  [Parameter]
-  public RenderFragment LabelRenderFragment { get; set; }
-  [Parameter]
-  public EventCallback<AeSelectChange<T>> OnChange { get; set; }
-  [Parameter]
-  public IEnumerable<T> Items { get; set; }
-  [Parameter] 
-  public Func<T, RenderFragment> Renderer { get; set; }
+    [Parameter]
+    public bool Disabled { get; set; }
 
-  private string _wrapperClassname => $"ae dropdown-wrapper {_inputClass}";
-  private string _id = $"ae-{Guid.NewGuid().ToString()}";
-  private bool _open = false;
-  private List<T> _Selected = new List<T>(); //all items currently check odd
-  private List<T> _Changed = new List<T>(); //items newly selected/ deselected
-  private System.Collections.Concurrent.ConcurrentDictionary<T, bool> _NewSelection = new System.Collections.Concurrent.ConcurrentDictionary<T, bool>(); //whether an item is selected or deselected
+    [Parameter]
+    public string? HelperText { get; set; }
 
-  private RenderFragment _labelFragment;
+    [Parameter]
+    public string? LabelText { get; set; }
 
-  private async Task HandleBlur()
-  {
-        if (_open)
-        {
-            await HandleClose();
-        }
-        _open = false;
-        System.Console.WriteLine(_open);
-  }
+    [Parameter]
+    public string? Placeholder { get; set; }
 
-  protected override void OnParametersSet()
-  {
-      if(Renderer is null)
-      {
-          Renderer = new Func<T, RenderFragment>(item =>
-          {
-          return @<AeTypography>@item</AeTypography>;
-            });
-        }
+    private string? _style;
+    private string? _class;
 
-        if(Label != null)
-        {
-            _labelFragment = @<AeButton>
-                                @Label
-                                <AeIcon Icon="fas fa-caret-down" />
-                                </AeButton>
-    ;
-      }
-      else
-      {
-          _labelFragment = LabelRenderFragment;
-      }
-  }
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
 
-  private async Task HandleClose()
-  {
-      var changed = new AeSelectChange<T>();
-      changed.AddedItems = _Changed.Where(t => _NewSelection[t]).ToList();
-      changed.RemovedItems = _Changed.Where(t => !_NewSelection[t]).ToList();
-      await OnChange.InvokeAsync(changed);
+        _style = new AeStyleBuilder()
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();
 
-  }
-
-  private void HandleClear()
-  {
-      foreach (T item in _Selected)
-      {
-          _Changed.Add(item);
-          _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
-      }
-      _Selected.Clear();
-      StateHasChanged();
-  }
-
-  private void HandleItemClick(T item)
-  {
-      if (_Selected.Contains(item))
-      {
-          if (!_Changed.Contains(item))
-          {
-              _Changed.Add(item);
-          }
-          _NewSelection.AddOrUpdate(item, false, (key, oldValue) => false);
-          _Selected.Remove(item);
-      }
-      else
-      {
-          if (!_Changed.Contains(item))
-          {
-              _Changed.Add(item);
-          }
-          _NewSelection.AddOrUpdate(item, true, (key, oldValue) => true);
-          _Selected.Add(item);
-      }
-  }
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-      if (firstRender)
-      {
-          await JSRuntime.InvokeVoidAsync("aedropdown.initialize", _id);
-      }
-  }
-
-  private async Task SelectClicked()
-  {
-      ToggleVisiblity();
-      if (_open)
-      {
-          await HandleClose();
-      } else
-      {
-          _Changed.Clear();
-          _NewSelection.Clear();
-      }
-      _open = !_open;
-      System.Console.WriteLine(_open);
-  }
-
-  private void ToggleVisiblity()
-  {
-      InvokeAsync(async () =>
-      {
-          await JSRuntime.InvokeVoidAsync("aedropdown.toggleVisibility", _id);
-      });
-  }
-
-
-  public void Dispose()
-  {
-      InvokeAsync(async () =>
-      {
-          await JSRuntime.InvokeVoidAsync("aedropdown.dispose", _id);
-      });
-  }
+        _class = new AeCssClassBuilder()
+            .AddClassFromAttributes(InputAttributes)
+            .NullIfEmpty();
+    }
 }

@@ -1,0 +1,44 @@
+﻿@*
+    Copyright (c) 2020 Apption Corporation
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+    Title: Select Component
+    Description: The select component allows users to choose one option from a list. It is used in forms for users to submit data.
+*@
+
+<AeTypography>Selection: @_selectValue</AeTypography>
+
+<AeSelect
+    HelperText="Optional helper text"
+    LabelText="Select"
+    Placeholder="Optional placeholder text">
+    
+    <AeSelectItemGroup Label="Category 1">
+        <AeSelectItem Value="all">All</AeSelectItem>
+        <AeSelectItem Value="cloudFoundry">Cloud Foundry</AeSelectItem>
+    </AeSelectItemGroup>
+
+    <AeSelectItemGroup Label="Category Disabled" Disabled>
+        <AeSelectItem Value="1">Option 1</AeSelectItem>
+        <AeSelectItem Value="2">Option 2</AeSelectItem>
+    </AeSelectItemGroup>
+
+    <AeSelectItemGroup Label="Category 2">
+        <AeSelectItem Value="staging">Staging</AeSelectItem>
+        <AeSelectItem Value="dea">DEA</AeSelectItem>
+        <AeSelectItem Value="router">Router</AeSelectItem>
+    </AeSelectItemGroup>
+</AeSelect>
+
+@code {
+
+    private string _selectValue;
+    
+    private void OnSelectValueChanged(string value)
+    {
+        _selectValue = value;
+    }
+}
