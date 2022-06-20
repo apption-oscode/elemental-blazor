@@ -12,6 +12,7 @@
 <AeTypography>Selection: @_selectValue</AeTypography>
 
 <AeSelect
+    @bind-Value="_selectValue"
     HelperText="Optional helper text"
     LabelText="Select"
     Placeholder="Optional placeholder text">
@@ -34,11 +35,5 @@
 </AeSelect>
 
 @code {
-
     private string _selectValue;
-    
-    private void OnSelectValueChanged(string value)
-    {
-        _selectValue = value;
-    }
 }

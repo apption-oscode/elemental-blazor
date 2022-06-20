@@ -11,4 +11,5 @@ import 'carbon-web-components/es/components/select/index.js';
 import './Components/AeButton/AeButton';
 import './Components/AeCheckbox/AeCheckbox';
 import './Components/AeDropdown/AeDropdown'; 
+import './Components/AeSelect/AeSelect'; 
 

@@ -4,7 +4,7 @@ using System;
 namespace AElemental.Components;
 
 
-public class AeDropdownSelectedEventArgs : EventArgs
+public class AeSelectSelectedEventArgs : EventArgs
 {
-    public string? Value { get; set; }
+    public string Value { get; set; }
 }

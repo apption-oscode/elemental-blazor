@@ -10217,3 +10217,13 @@ Blazor.registerCustomEventType('aedropdownselected', {
         };
     }
 });
+
+// @ts-ignore
+Blazor.registerCustomEventType('aeselectselected', {
+    browserEventName: 'bx-select-selected',
+    createEventArgs: (event) => {
+        return {
+            value: event.detail.value
+        };
+    }
+});

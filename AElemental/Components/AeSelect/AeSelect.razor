@@ -18,6 +18,8 @@
 @inherits HtmlElement
 
 <bx-select
+    @onaeselectselected="@HandleAeSelectSelected"
+    value="@Value"
     style="@_style"
     class="@_class"
     helper-text="@HelperText"
@@ -27,6 +29,10 @@
 </bx-select>
 
 @code {
+    [Parameter]
+    public string? Value { get; set; }
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
 
     [Parameter]
     public bool Disabled { get; set; }
@@ -54,5 +60,10 @@
         _class = new AeCssClassBuilder()
             .AddClassFromAttributes(InputAttributes)
             .NullIfEmpty();
+    }
+    
+    private async Task HandleAeSelectSelected(AeSelectSelectedEventArgs eventArgs)
+    {
+        await ValueChanged.InvokeAsync(eventArgs.Value);
     }
 }
