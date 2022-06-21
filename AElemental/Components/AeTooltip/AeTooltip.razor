@@ -1,21 +1,35 @@
-﻿@*
-    Copyright (c) 2020 Apption Corporation
-
-    This Source Code Form is subject to the terms of the Mozilla Public
-    License, v. 2.0. If a copy of the MPL was not distributed with this
-    file, You can obtain one at http://mozilla.org/MPL/2.0/.
-*@
-
-@namespace AElemental.Components
+﻿@namespace AElemental.Components
 @inherits HtmlElement
 
-<div class="@_classname">
-    <span class="hover-text">@Text</span>
-    @ChildContent
-</div>
+ <div data-floating-menu-container style="position: relative; padding: 3rem; display: flex; flex-direction: column; align-items: center;">
+    <bx-tooltip>
+      <bx-tooltip-body>
+        <p>
+          This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed
+          please use a modal instead.
+        </p>
+        <bx-tooltip-footer> <a href="#" class="bx--link">Learn More</a><bx-btn kind="primary">Create</bx-btn> </bx-tooltip-footer>
+      </bx-tooltip-body>
+    </bx-tooltip>
+  </div>
 
 @code {
-  [Parameter] public string Text { get; set; }
 
-  private string _classname => $"ae tooltip {_inputClass}";
+    private string? _style;
+    private string? _class;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        _style = new AeStyleBuilder()
+            .AddStyle("position", "relative")
+            .AddStyleFromAttributes(InputAttributes)
+            .NullIfEmpty();
+
+        _class = new AeCssClassBuilder()
+            .AddClassFromAttributes(InputAttributes)
+            .NullIfEmpty();
+    }
+
 }
