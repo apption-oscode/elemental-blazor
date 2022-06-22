@@ -1,19 +1,34 @@
 ﻿@namespace AElemental.Components
 @inherits HtmlElement
 
- <div data-floating-menu-container style="position: relative; padding: 3rem; display: flex; flex-direction: column; align-items: center;">
+<div data-floating-menu-container style="position: relative">
     <bx-tooltip>
-      <bx-tooltip-body>
-        <p>
-          This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed
-          please use a modal instead.
-        </p>
-        <bx-tooltip-footer> <a href="#" class="bx--link">Learn More</a><bx-btn kind="primary">Create</bx-btn> </bx-tooltip-footer>
-      </bx-tooltip-body>
+        <bx-tooltip-body direction="@Direction" alignment="@Alignment" style="@_style" class="@_class">
+            @if (ChildContent != null)
+            {
+                @ChildContent
+            }
+            @if (Footer != null)
+            {
+
+                <bx-tooltip-footer>@Footer</bx-tooltip-footer>
+            }
+        </bx-tooltip-body>
     </bx-tooltip>
-  </div>
+</div>
 
 @code {
+    [Parameter]
+    public string ZIndex { get; set; } = "10000";
+
+    [Parameter]
+    public string Alignment { get; set; } = Alignments.Center;
+
+    [Parameter]
+    public string Direction { get; set; } = Directions.Top;
+
+    [Parameter]
+    public RenderFragment? Footer { get; set; }
 
     private string? _style;
     private string? _class;
@@ -23,7 +38,7 @@
         base.OnParametersSet();
 
         _style = new AeStyleBuilder()
-            .AddStyle("position", "relative")
+            .AddStyle("z-index", ZIndex)
             .AddStyleFromAttributes(InputAttributes)
             .NullIfEmpty();
 
