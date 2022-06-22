@@ -23,32 +23,31 @@ namespace AElemental.Code
 {
     public class HtmlElement : ComponentBase
     {
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        [Parameter] public RenderFragment? ChildContent { get; set; }
+
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> InputAttributes { get; set; }
-        public Dictionary<string, object> InputAttributesWithoutClass { get; set; }
-        protected string _inputClass => InputAttributes != null && InputAttributes.ContainsKey("class") ? InputAttributes["class"] as string : "";
+        public Dictionary<string, object>? InputAttributes { get; set; }
 
-        public Dictionary<string, object> InputAttributesWithoutClassOrStyle { get; set; }
-        protected string _inputStyle => InputAttributes != null && InputAttributes.ContainsKey("style") ? InputAttributes["style"] as string : "";
+        protected Dictionary<string, object>? InputAttributesWithoutClass { get; set; }
 
-        [Inject]
-        IHostEnvironment Environment {  get; set; }
+        protected string? _inputClass => InputAttributes != null && InputAttributes.ContainsKey("class")
+            ? InputAttributes["class"] as string
+            : "";
+
+        protected Dictionary<string, object>? InputAttributesWithoutClassOrStyle { get; set; }
+
+        protected string? _inputStyle => InputAttributes != null && InputAttributes.ContainsKey("style")
+            ? InputAttributes["style"] as string
+            : "";
+
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            if (Environment.IsDevelopment())
-            {
-                if(InputAttributes == null)
-                {
-                    InputAttributes = new Dictionary<string, object>();
-                }
+            InputAttributes ??= new Dictionary<string, object>();
 
-                InputAttributes?.Add("ae-debug-component-name", this.GetType().Name);
-            }
+            InputAttributes?.Add("ae-component-name", GetType().Name);
 
             InputAttributesWithoutClass = InputAttributes?
                 .Keys
@@ -58,8 +57,7 @@ namespace AElemental.Code
             InputAttributesWithoutClassOrStyle = InputAttributesWithoutClass?
                 .Keys
                 .Where(k => k != "style")
-                .ToDictionary(_ => _, _ => InputAttributes[_]);
-
+                .ToDictionary(_ => _, _ => InputAttributes![_]);
         }
     }
 }
