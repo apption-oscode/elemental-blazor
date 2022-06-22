@@ -12,45 +12,6 @@
     <Content Update="Samples\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="Samples\CodeSnippet\Examples\CodeSnippetDefault.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\CodeSnippet\Examples\DisabledButtons.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\CodeSnippet\Examples\NavigationButtons.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\CodeSnippet\Examples\OnClickButtons.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\CodeSnippet\Examples\ButtonSize.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\CodeSnippet\Index.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\ProgressIndicator\Examples\BasicProgress.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\ProgressIndicator\Examples\ChangingProgress.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\ProgressIndicator\Examples\DisplayPercent.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\ProgressIndicator\Index.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\Select\Examples\BasicDropdown.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\Select\Examples\BasicMultiSelect.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Samples\Select\Index.razor">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -70,17 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Samples\ModelForm\Examples\BasicForm.razor" />
-    <Content Remove="Samples\ModelForm\Examples\CustomLabels.razor" />
-    <Content Remove="Samples\ModelForm\Examples\FlexForm.razor" />
-    <Content Remove="Samples\ModelForm\Examples\FlexFormWithCategory.razor" />
-    <Content Remove="Samples\ModelForm\Examples\FormWithCategories.razor" />
-    <Content Remove="Samples\ModelForm\Examples\InteractiveDropdowns.razor" />
-    <Content Remove="Samples\ModelForm\Examples\InteractiveForm.razor" />
-    <Content Remove="Samples\Tooltip\Examples\TooltipDirections.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AElemental\AElemental.csproj" />
   </ItemGroup>
 
@@ -90,16 +40,4 @@
       <Pack>true</Pack>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayout.razor" />
-    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutSidebarBottom.razor" />
-    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutWithCustomIcon.razor" />
-    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutWithStayCollapse.razor" />
-    <_ContentIncludedByDefault Remove="Samples\Layout\Examples\BasicLayoutWithTopBar.razor" />
-    <_ContentIncludedByDefault Remove="Samples\Layout\Index.razor" />
-    <_ContentIncludedByDefault Remove="Samples\LayoutWithSidebar\Examples\BasicLayoutWithSidebar.razor" />
-    <_ContentIncludedByDefault Remove="Samples\LayoutWithSidebar\Index.razor" />
-  </ItemGroup>
-
 </Project>

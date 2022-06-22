@@ -29,7 +29,7 @@ limitations under the License.
         {
                 @SideBar
         }
-        <main style="@_mainStyle">
+        <main data-floating-menu-container style="@_mainStyle">
                 @ChildContent
         </main>
     </CascadingValue>
@@ -66,6 +66,7 @@ limitations under the License.
             .NullIfEmpty();
 
         _mainStyle = new AeStyleBuilder()
+            .AddStyle("position", "relative")
             .AddStyle("margin-left", SideMargin, when: SideBar != null)
             .AddStyle("margin-top", TopMargin, when: TopBar != null)
             .NullIfEmpty();

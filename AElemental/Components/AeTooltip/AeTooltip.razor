@@ -1,23 +1,21 @@
 ﻿@namespace AElemental.Components
 @inherits HtmlElement
 
-<div data-floating-menu-container style="position: relative">
-    <bx-tooltip>
-        <bx-tooltip-body direction="@Direction" alignment="@Alignment" style="@_style" class="@_class">
-            @if (ChildContent != null)
-            {
-                @ChildContent
-            }
-            @if (Footer != null)
-            {
-
-                <bx-tooltip-footer>@Footer</bx-tooltip-footer>
-            }
-        </bx-tooltip-body>
-    </bx-tooltip>
-</div>
+<bx-tooltip>
+    <bx-tooltip-body direction="@Direction" alignment="@Alignment" style="@_style" class="@_class">
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        }
+        @if (Footer != null)
+        {
+            <bx-tooltip-footer>@Footer</bx-tooltip-footer>
+        }
+    </bx-tooltip-body>
+</bx-tooltip>
 
 @code {
+
     [Parameter]
     public string ZIndex { get; set; } = "10000";
 
