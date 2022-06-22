@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2020 Apption Corporation
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,17 +26,17 @@ namespace AElemental.Code
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object>? InputAttributes { get; set; }
+        public Dictionary<string, object> InputAttributes { get; set; } = new();
 
         protected Dictionary<string, object>? InputAttributesWithoutClass { get; set; }
 
-        protected string? _inputClass => InputAttributes != null && InputAttributes.ContainsKey("class")
+        protected string? _inputClass => InputAttributes.ContainsKey("class")
             ? InputAttributes["class"] as string
             : "";
 
         protected Dictionary<string, object>? InputAttributesWithoutClassOrStyle { get; set; }
 
-        protected string? _inputStyle => InputAttributes != null && InputAttributes.ContainsKey("style")
+        protected string? _inputStyle => InputAttributes.ContainsKey("style")
             ? InputAttributes["style"] as string
             : "";
 
@@ -45,11 +45,9 @@ namespace AElemental.Code
         {
             base.OnInitialized();
 
-            InputAttributes ??= new Dictionary<string, object>();
+            InputAttributes.Add("ae-component-name", GetType().Name);
 
-            InputAttributes?.Add("ae-component-name", GetType().Name);
-
-            InputAttributesWithoutClass = InputAttributes?
+            InputAttributesWithoutClass = InputAttributes
                 .Keys
                 .Where(k => k != "class")
                 .ToDictionary(_ => _, _ => InputAttributes[_]);
@@ -57,7 +55,7 @@ namespace AElemental.Code
             InputAttributesWithoutClassOrStyle = InputAttributesWithoutClass?
                 .Keys
                 .Where(k => k != "style")
-                .ToDictionary(_ => _, _ => InputAttributes![_]);
+                .ToDictionary(_ => _, _ => InputAttributes[_]);
         }
     }
 }
