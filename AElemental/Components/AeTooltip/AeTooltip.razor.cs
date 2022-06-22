@@ -20,6 +20,7 @@ public partial class AeTooltip
     public struct States
     {
         // There should be four states open, closed, siyad, and undecided
-        public const string o
+        public const string Open = "open";
+        
     }
 }
